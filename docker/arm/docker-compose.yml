@@ -1,0 +1,165 @@
+---
+services:
+  server:
+    image: codeberg.org/forgejo/forgejo:7.0.4
+    container_name: forgejo
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=mysql
+      - GITEA__database__HOST=db:3306
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=gitea
+      - GITEA__database__PASSWD=$GITEA__database__PASSWD
+    restart: always
+    networks:
+      - gitea_main
+    volumes:
+      - /home/ubuntu/forgejo/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3002:3000"
+      - "23:22"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_USER=gitea
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=gitea
+    networks:
+      - gitea_main
+    volumes:
+      - /home/ubuntu/forgejo/mysql:/var/lib/mysql
+
+  gotify:
+    image: docker.mafyuh.xyz/gotify/server-arm7:2.4.0
+    container_name: gotify
+    ports:
+      - 9008:80
+    volumes:
+      - /docker/appdata/gotify:/app/data
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+      - GOTIFY_DEFAULTUSER_NAME=$GOTIFY_DEFAULTUSER_NAME
+      - GOTIFY_DEFAULTUSER_PASS=$GOTIFY_DEFAULTUSER_PASS
+    networks:
+      - gitea_main
+
+  nginx-proxy-manager:
+    image: docker.mafyuh.xyz/jc21/nginx-proxy-manager:2.11.2
+    container_name: nginx-proxy-manager
+    ports:
+      - 80:80
+      - 81:81
+      - 443:443
+    volumes:
+      - /docker/appdata/nginx/data:/data
+      - /docker/appdata/nginx/letsencrypt:/etc/letsencrypt
+    restart: unless-stopped
+    networks:
+      - gitea_main
+
+  uptime-kuma:
+    image: docker.mafyuh.xyz/louislam/uptime-kuma:1.23.13
+    container_name: uptime-kuma
+    ports:
+      - 3001:3001
+    volumes:
+      - /docker/appdata/kuma:/app/data
+    restart: unless-stopped
+    networks:
+      - gitea_main
+
+  jellyseerr:
+    image: docker.mafyuh.xyz/fallenbagel/jellyseerr:1.9.2
+    container_name: jellyseerr
+    ports:
+      - 5055:5055
+    volumes:
+      - /docker/appdata/jellyseerr:/app/config
+    environment:
+      - TZ=America/New_York
+      - LOG_LEVEL=debug
+    restart: unless-stopped
+    networks:
+      - gitea_main
+
+  linkstack:
+    image: docker.mafyuh.xyz/linkstackorg/linkstack@sha256:ad2ec7ffa69f4b04367313d1b95566bb00955b9670eb5467fd4fab39dd1f53c1
+    container_name: linkstack
+    ports:
+      - 8005:80
+      - 8006:443
+    volumes:
+      - linkstack:/htdocs
+    environment:
+      - HTTP_SERVER_NAME=$HTTP_SERVER_NAME
+      - HTTPS_SERVER_NAME=$HTTP_SERVER_NAME
+      - SERVER_ADMIN=$SERVER_ADMIN
+    restart: unless-stopped
+    networks:
+      - gitea_main
+  n8n:
+    image: ghcr.io/n8n-io/n8n:1.47.0
+    container_name: n8n
+    ports:
+      - 5678:5678
+    volumes:
+      - n8n_data:/home/node/.n8n
+    environment:
+      - GENERIC_TIMEZONE=America/New_York
+      - TZ=America/New_York
+      - WEBHOOK_URL=$WEBHOOK_URL
+    restart: unless-stopped
+    networks:
+      - gitea_main
+
+  vaultwarden:
+    image: docker.mafyuh.xyz/vaultwarden/server:1.30.5
+    container_name: vaultwarden
+    ports:
+      - 8989:80
+    volumes:
+      - /home/ubuntu/vw-data/:/data
+    environment:
+      - DOMAIN=$VWDOMAIN
+      - SIGNUPS_ALLOWED=false
+    restart: unless-stopped
+    networks:
+      gitea_main:
+        ipv4_address: 172.25.0.25
+
+  syncthing:
+    image: ghcr.io/linuxserver/syncthing@sha256:6e70dd0cc0ddb038a8f58cf0945d6659b13c984f11d708407469bf16d520574c
+    container_name: syncthing
+    hostname: ARM #optional
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Etc/UTC
+    volumes:
+      - /home/ubuntu/syncthing/config:/config
+      - /docker/appdata/:/docker/appdata/
+      - /home/ubuntu/:/home/ubuntu/
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped
+
+
+networks:
+  gitea_main:
+    external: true
+
+volumes:
+  linkstack:
+  n8n_data:

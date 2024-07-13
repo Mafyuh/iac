@@ -1,0 +1,162 @@
+---
+services:
+  bazarr:
+    image: ghcr.io/linuxserver/bazarr@sha256:6fb83511c0dca70a400fde79cb45ed59c4f66ea30dcba8c6f9274f01d77e5aef
+    container_name: bazarr
+    ports:
+      - "6767:6767"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/bazarr:/config
+      - /data/media:/data/media
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+  lidarr:
+    image: ghcr.io/linuxserver/lidarr@sha256:a7d0282dcdbf5b11306cc4054c11b42252106b5e8494375231322822d31ac9f6
+    container_name: lidarr
+    ports:
+      - "8686:8686"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/lidarr:/config
+      - /data:/data
+      - /docker/appdata/lidarr-extended:/custom-services.d
+      - /docker/appdata/lidarr-extended1:/custom-cont-init.d
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+  prowlarr:
+    image: ghcr.io/linuxserver/prowlarr@sha256:237e9a72c11c5350bf22e355759436ecd4fd660e820d5b556d9a9e436f25f6b9
+    container_name: prowlarr
+    ports:
+      - "9696:9696"
+    volumes:
+      - /docker/appdata/prowlarr:/config
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+  radarr:
+    image: ghcr.io/linuxserver/radarr@sha256:40f10a3d826f6c231d338738c3c86bf0d23a9546f20f8b1b504c6c579b79992c
+    container_name: radarr
+    ports:
+      - "7878:7878"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/radarr:/config
+      - /data:/data
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr@sha256:275467ba17d990bbc6301dec3cc76b042969836749de39067818759d0f3b407f
+    container_name: sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/sonarr:/config
+      - /data:/data
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:0.15.3
+    restart: unless-stopped
+    volumes:
+      - /docker/appdata/homarr/configs:/app/data/configs
+      - /docker/appdata/homarr/icons:/app/public/icons
+      - /docker/appdata/homarr/data:/data
+    ports:
+      - '7575:7575'
+    environment:
+      - AUTH_PROVIDER=oidc
+      - AUTH_OIDC_URI=${AUTH_OIDC_URI}
+      - AUTH_OIDC_CLIENT_SECRET=${AUTH_OIDC_CLIENT_SECRET}
+      - AUTH_OIDC_CLIENT_ID=${AUTH_OIDC_CLIENT_ID}
+      - AUTH_OIDC_CLIENT_NAME=authentik
+      - BASE_URL=${BASE_URL}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - AUTH_OIDC_ADMIN_GROUP=${AUTH_OIDC_ADMIN_GROUP}
+
+  doplarr:
+    image: ghcr.io/linuxserver/doplarr@sha256:20981fa1a4087d5369b9eaf756ab179352e05fe914b88c36f468ee3cd9a1ce98
+    container_name: doplarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - DISCORD__TOKEN=${DISCORD__TOKEN}
+      - RADARR__API=${RADARR__API}
+      - RADARR__URL=${RADARR__URL}
+      - SONARR__API=${SONARR__API}
+      - SONARR__URL=${SONARR__URL}
+      - DISCORD__MAX_RESULTS=${DISCORD__MAX_RESULTS}
+      - DISCORD__REQUESTED_MSG_STYLE=${DISCORD__REQUESTED_MSG_STYLE}
+      - SONARR__QUALITY_PROFILE=${SONARR__QUALITY_PROFILE}
+      - RADARR__QUALITY_PROFILE=${RADARR__QUALITY_PROFILE}
+      - SONARR__ROOTFOLDER=${SONARR__ROOTFOLDER}
+      - RADARR__ROOTFOLDER=${RADARR__ROOTFOLDER}
+      - PARTIAL_SEASONS=${PARTIAL_SEASONS}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - JAVA_OPTS=${JAVA_OPTS}
+    volumes:
+      - /docker/appdata/doplarr/config:/config
+    restart: unless-stopped
+
+  jfa-go:
+    image: docker.mafyuh.xyz/hrfee/jfa-go
+    container_name: jfa-go
+    ports:
+      - 8056:8056
+    volumes:
+      - /docker/appdata/jfa-go/config:/data
+      - /etc/localtime:/etc/localtime:ro
+
+  cadvisor:
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    ports:
+      - 9999:8080
+    container_name: cadvisor
+    privileged: true
+    devices:
+      - /dev/kmsg
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+
+  syncthing:
+    image: ghcr.io/linuxserver/syncthing@sha256:6e70dd0cc0ddb038a8f58cf0945d6659b13c984f11d708407469bf16d520574c
+    container_name: syncthing
+    hostname: ARRS
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /docker/appdata/syncthing/config:/config
+      - /docker/appdata/:/docker/appdata/
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped
+
+networks:
+  default:
+    name: arrs_default

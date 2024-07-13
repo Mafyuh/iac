@@ -1,0 +1,15 @@
+services:
+  portainer:
+    image: docker.mafyuh.xyz/portainer/portainer-ee@sha256:0aa305da72738d9f90a209bf74bdc74172004690fa298f52d5f92dd065f26aea
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data"
+    restart: always
+
+volumes:
+  portainer_data:

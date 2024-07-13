@@ -1,0 +1,36 @@
+---
+services:
+  adguardhome:
+    image: docker.mafyuh.xyz/adguard/adguardhome:v0.107.51
+    container_name: adguardhome
+    restart: unless-stopped
+    volumes:
+      - /home/mafyuh/adguard/work:/opt/adguardhome/work
+      - /home/mafyuh/adguard/conf:/opt/adguardhome/conf
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 80:80/tcp
+      - 443:443/tcp
+      - 443:443/udp
+      - 3000:3000/tcp
+      - 853:853/tcp
+      - 784:784/udp
+      - 853:853/udp
+      - 8853:8853/udp
+      - 5443:5443/tcp
+      - 5443:5443/udp
+
+  adguardhome-sync:
+    image: ghcr.io/linuxserver/adguardhome-sync@sha256:67962a0e15bf1a41e4bc0083d93d7e0268ad6431482c337ef49d5f2673c36c71
+    container_name: adguardhome-sync
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - CONFIGFILE=/config/adguardhome-sync.yaml
+    volumes:
+      - /home/mafyuh/adguard/sync:/config
+    ports:
+      - 8080:8080
+    restart: unless-stopped

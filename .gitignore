@@ -34,3 +34,9 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+## Docker
+.env
+
+## Kubernetes
+/kubernetes/cluster/apps/staging
+

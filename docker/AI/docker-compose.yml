@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  ollama:
+    image: docker.mafyuh.xyz/ollama/ollama:0.1.45
+    container_name: ollama
+    restart: unless-stopped
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:0.3.5
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - 3000:8080
+    volumes:
+      - open-webui:/app/backend/data
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  mindsdb:
+    image: docker.mafyuh.xyz/mindsdb/mindsdb:v24.6.3.1
+    container_name: mindsdb
+    ports:
+      - 47334:47334
+      - 47335:47335
+    volumes:
+      - /home/mafyuh/mindsdb:/root/mindsdb
+    restart: unless-stopped
+
+volumes:
+  ollama:
+    external: true
+  open-webui:
+    external: true

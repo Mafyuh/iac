@@ -1,0 +1,24 @@
+---
+- name: Reset and Pull Git Repository
+  hosts: all
+  tasks:
+    - name: Change to Auto-Homelab directory
+      shell: cd ~/Auto-Homelab
+      args:
+        chdir: "/home/{{ ansible_user }}"
+      environment:
+        HOME: "/home/{{ ansible_user }}"
+
+    - name: Git Pull
+      shell: git pull
+      args:
+        chdir: "/home/{{ ansible_user }}/Auto-Homelab"
+      environment:
+        HOME: "/home/{{ ansible_user }}"
+
+    - name: Git Reset
+      shell: git reset --hard origin/main
+      args:
+        chdir: "/home/{{ ansible_user }}/Auto-Homelab"
+      environment:
+        HOME: "/home/{{ ansible_user }}"

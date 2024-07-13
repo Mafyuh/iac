@@ -1,0 +1,30 @@
+name: Lint on PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lint:
+    name: Lint YAML files
+    runs-on: docker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
+
+      - name: Install yamllint
+        run: | 
+          npm install -g yaml-lint
+
+      - name: Show yamllint version
+        run: | 
+          yamllint --version
+
+      - name: Lint .yml files
+        run: | 
+          yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" ./**/*.yml

@@ -1,0 +1,107 @@
+name: 'Add Application'
+description: 'Track the process of adding a new application'
+title: 'Add Application: [Application Name]'
+labels: 
+  - addition
+assignees: ''
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Application Details                
+
+  - type: input
+    id: application-name
+    attributes:
+      label: Application Name
+      description: Name of the application to be added
+      placeholder: Name of the application
+
+  - type: textarea
+    id: application-description
+    attributes:
+      label: Application Description
+      description: Provide a brief description of the application and its purpose
+      placeholder: Description of the application
+
+  - type: checkboxes
+    id: application-reason
+    attributes:
+      label: Reason for Addition
+      description: Please select one or more reasons for adding the application
+      options:
+        - label: New functionality
+        - label: Performance improvement
+        - label: Security enhancement
+        - label: Replacing another application
+          description: Provide the name of the application being replaced, if applicable
+        - label: Other (please specify)
+          description: Provide additional details
+
+  - type: dropdown
+    id: folder-added
+    attributes:
+      label: Folder Added To
+      description: Select the folder where the application was added
+      options:
+        - ag-backup
+        - ag-main
+        - AI
+        - arm
+        - arrs
+        - authentik
+        - cf
+        - downloaders
+        - jellyfin
+        - kasm
+        - netboot
+        - nexus
+        - pages
+        - portainer
+        - twingate
+        - whisper
+        - New Folder
+
+  - type: input
+    id: new-folder-name
+    attributes:
+      label: New Folder Name
+      description: If you created a new folder, provide the name of the new folder
+      placeholder: Name of the new folder
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Steps to Add                
+
+  - type: checkboxes
+    id: steps-to-add
+    attributes:
+      label: Steps to Add
+      description: Please check off each step as it is completed
+      options:
+        - label: Add Configuration Files
+          description: Create and add configuration files for the new application
+        - label: Update Wiki
+          description: Create or update the Wiki page for the new application and update any relevant architecture diagrams or flowcharts
+        - label: Update README(s)
+          description: Add the new application to the main table and any other relevant sections
+        - label: Add to CD Platform Logic
+          description: Add necessary logic to the CD platform for the new application
+        - label: Testing and Validation
+          description: Ensure the application is tested and validated in the environment
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Commit IDs for Completed Steps        
+
+  - type: textarea
+    id: commit-ids
+    attributes:
+      label: Commit IDs
+      description: Enter the commit IDs for the completed steps above
+      placeholder: Enter commit IDs separated by commas

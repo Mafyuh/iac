@@ -1,0 +1,14 @@
+---
+services:
+  kasm:
+    image: ghcr.io/linuxserver/kasm@sha256:95c8d5d0f588cb3982da344c34b6acbebb5f428176947a923e5cc0cec4710f4d
+    container_name: kasm
+    privileged: true
+    environment:
+      - KASM_PORT=443
+    volumes:
+      - /docker/appdata/kasm:/opt
+    ports:
+      - 3000:3000
+      - 443:443
+    restart: unless-stopped

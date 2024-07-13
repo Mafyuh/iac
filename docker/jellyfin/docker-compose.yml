@@ -1,0 +1,53 @@
+---
+services:
+  jellyfin:
+    image: ghcr.io/linuxserver/jellyfin@sha256:a363aa018edee61bcee46be5f8dbd0db2a317b2bc0f95121a46e522d798c2a63
+    container_name: jellyfin
+    devices:
+      - /dev/dri/renderD129:/dev/dri/renderD129
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DOCKER_MODS=linuxserver/mods:jellyfin-opencl-intel
+    volumes:
+      - /home/mafyuh/jellyfin/config:/config
+      - /mnt/thePoolShare/Media:/Media
+      - /home/mafyuh/jellyfin/transcodes:/transcodes
+      - /home/mafyuh/jellyfin/cache:/nvmecache
+      - /home/mafyuh/jellyfin/metadata:/nvmemetadata
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+
+  makemkv:
+    image: docker.mafyuh.xyz/jlesage/makemkv@sha256:7af8a5d70006cbf0fc5ea54971779bc8b35f976dd844db173f5bc28ae97876b7
+    container_name: makemkv
+    ports:
+      - 5800:5800
+    volumes:
+      - /docker/appdata/makemkv:/config:rw
+      - /home/mafyuh/makemkv/storage:/storage:rw
+      - /mnt/thePoolShare/Media/BR:/output:rw
+    devices:
+      - /dev/sr0:/dev/sr0
+    privileged: true
+
+  syncthing:
+    image: ghcr.io/linuxserver/syncthing@sha256:6e70dd0cc0ddb038a8f58cf0945d6659b13c984f11d708407469bf16d520574c
+    container_name: syncthing
+    hostname: JF
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /docker/appdata/syncthing/config:/config
+      - /docker/appdata/:/docker/appdata/
+      - /home/mafyuh/jellyfin/:/home/mafyuh/jellyfin/
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped

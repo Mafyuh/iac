@@ -1,0 +1,38 @@
+services:
+  twingate-famous-alligator:
+    image: docker.mafyuh.xyz/twingate/connector@sha256:d916c024a0c568442fc4c5a3a081fc9543338a807591a3403b9bec941ed6deeb
+    container_name: twingate-famous-alligator
+    restart: always
+    environment:
+      - TWINGATE_NETWORK=$TWINGATE_NETWORK
+      - TWINGATE_ACCESS_TOKEN=$TWINGATE_ACCESS_TOKEN
+      - TWINGATE_REFRESH_TOKEN=$TWINGATE_REFRESH_TOKEN
+      - TWINGATE_LABEL_HOSTNAME=${HOSTNAME}
+      - TWINGATE_LABEL_DEPLOYED_BY=docker
+    sysctls:
+      - net.ipv4.ping_group_range=0 2147483647
+
+  docker-in-docker:
+    image: docker:dind
+    container_name: 'docker_dind'
+    privileged: 'true'
+    command: ['dockerd', '-H', 'tcp://0.0.0.0:2375', '--tls=false']
+    restart: 'unless-stopped'
+
+  gitea:
+    image: 'code.forgejo.org/forgejo/runner:3.5.0'
+    links:
+      - docker-in-docker
+    depends_on:
+      docker-in-docker:
+        condition: service_started
+    container_name: 'runner'
+    environment:
+      DOCKER_HOST: tcp://docker-in-docker:2375
+    # User without root privileges, but with access to `/data`.
+    user: 1000:1000
+    volumes:
+      - /home/mafyuh/data:/data
+    restart: 'unless-stopped'
+
+    command: '/bin/sh -c "sleep 5; forgejo-runner daemon"'
