@@ -1,6 +1,6 @@
 services:
   twingate-famous-alligator:
-    image: docker.mafyuh.xyz/twingate/connector@sha256:d916c024a0c568442fc4c5a3a081fc9543338a807591a3403b9bec941ed6deeb
+    image: docker.mafyuh.xyz/twingate/connector@sha256:749a50d21a69221e6737013e358e52c234d32b4dc9c9d905b383d802082e2807
     container_name: twingate-famous-alligator
     restart: always
     environment:
