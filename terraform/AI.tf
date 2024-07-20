@@ -65,6 +65,7 @@ resource "proxmox_virtual_environment_vm" "AI" {
             initialization[0].user_account[0].keys,
             initialization[0].user_account[0].password,
             initialization[0].user_account[0].username,
+            initialization[0].user_data_file_id
         ]
     }
 

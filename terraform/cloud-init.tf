@@ -61,8 +61,7 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
         - systemctl enable qemu-guest-agent
         - systemctl start qemu-guest-agent
         - curl -fsSL https://get.docker.com | sudo sh
-        - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/IaC-Homelab.git /home/mafyuh/IaC-Homelab'
-        - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/Auto-Homelab.git /home/mafyuh/Auto-Homelab'
+        - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
         - su - mafyuh -c 'git config --global user.name "Mafyuh"'
         - su - mafyuh -c 'git config --global user.email "matt@mafyuh.com"'
         - echo "done" > /tmp/cloud-config.done
