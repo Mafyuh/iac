@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   sabnzbd:
-    image: ghcr.io/linuxserver/sabnzbd@sha256:4fb40ea724abc25cf9496cdbc8e528aa0882132737e49c5e712c264284fa7b94
+    image: ghcr.io/linuxserver/sabnzbd@sha256:31ea64a7ce1e9a5ff8187f9b7c905eaa1d0a79d49b04724e47059c67407157eb
     container_name: sabnzbd
     environment:
       - PUID=1000
@@ -32,7 +32,7 @@ services:
       - VPN_USER=mafyuh+pmp
       - VPN_PASS=
       - STRICT_PORT_FORWARD=yes
-      - LAN_NETWORK=10.0.0.0/24,10.69.69.0/24
+      - LAN_NETWORK=$LAN_NETWORK
       - ENABLE_PRIVOXY=yes
       - PUID=1000
       - PGID=1000
@@ -48,7 +48,7 @@ services:
     restart: unless-stopped
 
   flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:v3.3.20
+    image: ghcr.io/flaresolverr/flaresolverr:v3.3.21
     container_name: flaresolverr
     ports:
       - '8191:8191'
@@ -72,7 +72,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
 
   node-exporter:
-    image: docker.mafyuh.xyz/prom/node-exporter:v1.8.1
+    image: docker.mafyuh.xyz/prom/node-exporter:v1.8.2
     container_name: monitoring_node_exporter
     restart: unless-stopped
     ports:

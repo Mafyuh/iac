@@ -3,7 +3,7 @@ version: "3.4"
 
 services:
   postgresql:
-    image: docker.io/library/postgres:12-alpine
+    image: docker.io/library/postgres:16-alpine
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
@@ -32,7 +32,7 @@ services:
     volumes:
       - redis:/data
   server:
-    image: ghcr.io/goauthentik/server@sha256:a2e592a08eb3c9e3435aa4e6585d60cc1eb54850da9d1498d56a131bbfbe03ff
+    image: ghcr.io/goauthentik/server@sha256:f79b6cf35b29a8591136afb633ddd46da303e9cd2ca82c7cdfbd020a780e15e8
     restart: unless-stopped
     command: server
     environment:
@@ -53,7 +53,7 @@ services:
       - postgresql
       - redis
   worker:
-    image: ghcr.io/goauthentik/server@sha256:a2e592a08eb3c9e3435aa4e6585d60cc1eb54850da9d1498d56a131bbfbe03ff
+    image: ghcr.io/goauthentik/server@sha256:f79b6cf35b29a8591136afb633ddd46da303e9cd2ca82c7cdfbd020a780e15e8
     restart: unless-stopped
     command: worker
     environment:
@@ -79,15 +79,6 @@ services:
     depends_on:
       - postgresql
       - redis
-  authentik_ldap:
-        image: ghcr.io/goauthentik/ldap@sha256:7f317da9b736dec3e53b71b7face1787d4f15aee00e80d003e5ff3b2d49ee382
-        ports:
-            - 389:3389
-            - 636:6636
-        environment:
-            AUTHENTIK_HOST: ${AUTH_HOST}
-            AUTHENTIK_INSECURE: "true"
-            AUTHENTIK_TOKEN: ${AUTH_TOKEN}
 
 volumes:
   database:

@@ -1,7 +1,7 @@
 ---
 services:
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin@sha256:a363aa018edee61bcee46be5f8dbd0db2a317b2bc0f95121a46e522d798c2a63
+    image: ghcr.io/linuxserver/jellyfin@sha256:6844dff8f5b130a19625c3ad051c63597480bc0b9da77b5bd10f58aa719dab91
     container_name: jellyfin
     devices:
       - /dev/dri/renderD129:/dev/dri/renderD129
@@ -13,6 +13,7 @@ services:
     volumes:
       - /home/mafyuh/jellyfin/config:/config
       - /mnt/thePoolShare/Media:/Media
+      - /mnt/thePoolShare/Media/Youtube:/Media/Youtube:ro
       - /home/mafyuh/jellyfin/transcodes:/transcodes
       - /home/mafyuh/jellyfin/cache:/nvmecache
       - /home/mafyuh/jellyfin/metadata:/nvmemetadata
@@ -21,7 +22,7 @@ services:
     restart: unless-stopped
 
   makemkv:
-    image: docker.mafyuh.xyz/jlesage/makemkv@sha256:7af8a5d70006cbf0fc5ea54971779bc8b35f976dd844db173f5bc28ae97876b7
+    image: docker.mafyuh.xyz/jlesage/makemkv@sha256:39dccc4f82dc76668a78543ac7392a43b6bc6c069e1a3e47e8c058c6cb5f09b0
     container_name: makemkv
     ports:
       - 5800:5800
@@ -34,7 +35,7 @@ services:
     privileged: true
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:6e70dd0cc0ddb038a8f58cf0945d6659b13c984f11d708407469bf16d520574c
+    image: ghcr.io/linuxserver/syncthing@sha256:6fb87abe19730aad01b6511d660a0664be424986ae662b85eb76f0ce585c4890
     container_name: syncthing
     hostname: JF
     environment:

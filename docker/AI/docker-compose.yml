@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   ollama:
-    image: docker.mafyuh.xyz/ollama/ollama:0.1.45
+    image: docker.mafyuh.xyz/ollama/ollama:0.2.6
     container_name: ollama
     restart: unless-stopped
     volumes:
@@ -18,7 +18,7 @@ services:
               capabilities: [gpu]
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:0.3.5
+    image: ghcr.io/open-webui/open-webui:v0.3.10
     container_name: open-webui
     restart: unless-stopped
     ports:
@@ -29,7 +29,7 @@ services:
       - host.docker.internal:host-gateway
 
   mindsdb:
-    image: docker.mafyuh.xyz/mindsdb/mindsdb:v24.6.3.1
+    image: docker.mafyuh.xyz/mindsdb/mindsdb:v24.7.3.0
     container_name: mindsdb
     ports:
       - 47334:47334
