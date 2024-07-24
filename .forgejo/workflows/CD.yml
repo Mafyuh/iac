@@ -22,7 +22,7 @@ jobs:
           fi
           folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
           echo "Modified folders: $folders"
-          echo "::set-output name=folders::$folders"          
+          echo "::set-output name=folders::$folders"
 
       - name: Set condition for deployment
         id: set-condition
@@ -35,14 +35,17 @@ jobs:
             echo "::set-output name=continue::true"
           fi
 
-    if: steps.set-condition.outputs.continue == 'true'
+  conditional-deploy:
+    if: needs.deploy.outputs.continue == 'true'
+    runs-on: ubuntu-22.04
+    needs: deploy
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Deploy to hosts
         run: |
-          IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
+          IFS=' ' read -r -a folder_array <<< "${{ needs.deploy.outputs.folders }}"
           for folder in "${folder_array[@]}"; do
             case $folder in
               arrs)
@@ -110,4 +113,4 @@ jobs:
             echo "Absolute End: $(echo "$logs" | jq -r '.range.absolute_end')"
             echo "Content:"
             echo "$(echo "$logs" | jq -r '.content')"
-          done          
+          done
