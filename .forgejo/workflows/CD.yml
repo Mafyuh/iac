@@ -20,7 +20,7 @@ jobs:
           if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
             git fetch --unshallow
           fi
-          folders=$(git diff --name-only HEAD~1 HEAD | grep '^iac/docker/' | cut -d/ -f3 | sort | uniq)
+          folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f3 | sort | uniq)
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
 
