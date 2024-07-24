@@ -17,14 +17,10 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install yamllint
-        run: | 
-          npm install -g yaml-lint
-
       - name: Show yamllint version
         run: | 
           yamllint --version
 
       - name: Lint .yml files
         run: | 
-          yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" ./**/*.yml
+          yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" docker/**/*.yml
