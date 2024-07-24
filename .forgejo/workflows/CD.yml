@@ -20,9 +20,25 @@ jobs:
           if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
             git fetch --unshallow
           fi
-          folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f3 | sort | uniq)
+          folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
           echo "Modified folders: $folders"
-          echo "::set-output name=folders::$folders"
+          echo "::set-output name=folders::$folders"          
+
+      - name: Set condition for deployment
+        id: set-condition
+        run: |
+          if [ -z "${{ steps.detect-changes.outputs.folders }}" ]; then
+            echo "No relevant changes detected."
+            echo "::set-output name=continue::false"
+          else
+            echo "Relevant changes detected."
+            echo "::set-output name=continue::true"
+          fi
+
+    if: steps.set-condition.outputs.continue == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Deploy to hosts
         run: |
@@ -94,4 +110,4 @@ jobs:
             echo "Absolute End: $(echo "$logs" | jq -r '.range.absolute_end')"
             echo "Content:"
             echo "$(echo "$logs" | jq -r '.content')"
-          done
+          done          
