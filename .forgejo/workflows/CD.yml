@@ -20,7 +20,7 @@ jobs:
           if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
             git fetch --unshallow
           fi
-          folders=$(git diff --name-only HEAD~1 HEAD | cut -d/ -f1 | sort | uniq)
+          folders=$(git diff --name-only HEAD~1 HEAD | grep '^iac/docker/' | cut -d/ -f3 | sort | uniq)
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
 
@@ -83,8 +83,8 @@ jobs:
               -d "{\"extra_vars\": {\"target_host\": \"$target_host\", \"folder\": \"$folder\"}}" \
               "https://awx.mafyuh.xyz/api/v2/job_templates/13/launch/"
 
-            sleep 45  # Delay for 45 seconds before fetching logs
-
+            sleep 45  
+            
             job_id=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/job_templates/13/jobs/?order_by=-id | jq -r '.results[0].id')
             logs=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/jobs/$job_id/stdout/?format=json)
             echo "AWX Job Logs for folder: $folder"
