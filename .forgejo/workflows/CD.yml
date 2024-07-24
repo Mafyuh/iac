@@ -37,7 +37,7 @@ jobs:
 
   conditional-deploy:
     if: needs.deploy.outputs.continue == 'true'
-    runs-on: ubuntu-22.04
+    runs-on: docker
     needs: deploy
     steps:
       - name: Checkout repository
