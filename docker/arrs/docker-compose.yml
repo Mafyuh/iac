@@ -31,7 +31,7 @@ services:
       - PGID=1000
 
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr@sha256:7c3e7840c726828643131583514b66f38e7af29021d5a7b05ed8ed5c8ec0b596
+    image: ghcr.io/linuxserver/prowlarr@sha256:9a98da4fb506278ce92c2fdbb4e08a38418dd1456e3dd8b3a1f00a42a8ec4fb0
     container_name: prowlarr
     ports:
       - "9696:9696"
@@ -91,7 +91,7 @@ services:
       - AUTH_OIDC_ADMIN_GROUP=${AUTH_OIDC_ADMIN_GROUP}
 
   doplarr:
-    image: ghcr.io/linuxserver/doplarr@sha256:b71ea85a718b4ed924f132c6a5e62ddef68a7f43ba137f4f30900067532a5d9a
+    image: ghcr.io/linuxserver/doplarr@sha256:9e1cfedf824d00bb0f269bcb3836b13cdbb74747bef062f9021be6f0f63dde7a
     container_name: doplarr
     environment:
       - PUID=1000
