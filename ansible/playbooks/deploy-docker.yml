@@ -2,7 +2,7 @@
 - name: Deploy application
   hosts: "{{ target_host }}"
   vars:
-    repo_path: "/home/{{ ansible_user }}/iac/{{ folder }}"
+    repo_path: "/home/{{ ansible_user }}/iac/docker/{{ folder }}"
   tasks:
     - name: Ensure the repository is up-to-date
       shell: git pull
