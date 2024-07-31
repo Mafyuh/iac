@@ -69,7 +69,7 @@ services:
     privileged: true
     devices:
       - /dev/kmsg
-    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    image: gcr.io/cadvisor/cadvisor:v0.50.0
 
   node-exporter:
     image: docker.mafyuh.xyz/prom/node-exporter:v1.8.2

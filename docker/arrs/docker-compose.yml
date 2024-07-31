@@ -137,7 +137,7 @@ services:
     privileged: true
     devices:
       - /dev/kmsg
-    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    image: gcr.io/cadvisor/cadvisor:v0.50.0
 
   syncthing:
     image: ghcr.io/linuxserver/syncthing@sha256:6fb87abe19730aad01b6511d660a0664be424986ae662b85eb76f0ce585c4890
