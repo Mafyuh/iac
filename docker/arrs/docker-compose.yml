@@ -1,7 +1,7 @@
 ---
 services:
   bazarr:
-    image: ghcr.io/linuxserver/bazarr@sha256:25f0d19ba9226fdf15aec0fc7fa134ba89fc6f77f09d7bd45b33c5960c47821e
+    image: ghcr.io/linuxserver/bazarr@sha256:e70de8a714ac57395d45052392001ec433b8f48aa1c204f13dae312cbcbe43af
     container_name: bazarr
     ports:
       - "6767:6767"
@@ -43,7 +43,7 @@ services:
       - PGID=1000
 
   radarr:
-    image: ghcr.io/linuxserver/radarr@sha256:2a02b311cefb344cd0caf74a443b9d6318daf15bda5280a3bc732381db983dc3
+    image: ghcr.io/linuxserver/radarr@sha256:9d6f0548fd805edb30108fdd06d0fc5a4436c9bd708b57bd4119d7aefa815fe4
     container_name: radarr
     ports:
       - "7878:7878"
