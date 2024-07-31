@@ -29,7 +29,7 @@ services:
       - host.docker.internal:host-gateway
 
   mindsdb:
-    image: mindsdb/mindsdb:v24.7.3.0
+    image: mindsdb/mindsdb:v24.7.5.0
     container_name: mindsdb
     ports:
       - 47334:47334
