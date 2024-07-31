@@ -16,6 +16,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 14
+      
+      - name: Install yamllint
+        run: | 
+          npm install -g yaml-lint
 
       - name: Show yamllint version
         run: | 
