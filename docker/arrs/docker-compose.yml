@@ -15,7 +15,7 @@ services:
       - PGID=1000
 
   lidarr:
-    image: ghcr.io/linuxserver/lidarr@sha256:3c093803236a9f694f805392a5d6461b550f70b3f9cf4be0bc73b3428e3dbe90
+    image: ghcr.io/linuxserver/lidarr@sha256:5855582eee07024c2584c01aaf955901303162bf00de183a1fbf2e9b81041695
     container_name: lidarr
     ports:
       - "8686:8686"
@@ -31,7 +31,7 @@ services:
       - PGID=1000
 
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr@sha256:9a98da4fb506278ce92c2fdbb4e08a38418dd1456e3dd8b3a1f00a42a8ec4fb0
+    image: ghcr.io/linuxserver/prowlarr@sha256:7fe57565907f4f776d43c15b2e020a0e4a62fe1e04e80e25b85a3ae4ca49e5d0
     container_name: prowlarr
     ports:
       - "9696:9696"
