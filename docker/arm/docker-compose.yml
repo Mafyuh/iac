@@ -1,7 +1,7 @@
 ---
 services:
   server:
-    image: codeberg.org/forgejo/forgejo:7.0.5
+    image: codeberg.org/forgejo/forgejo:8.0.0
     container_name: forgejo
     environment:
       - USER_UID=1000
@@ -107,7 +107,7 @@ services:
     networks:
       - gitea_main
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.51.0
+    image: ghcr.io/n8n-io/n8n:1.52.2
     container_name: n8n
     ports:
       - 5678:5678
@@ -137,7 +137,7 @@ services:
         ipv4_address: 172.25.0.25
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:6fb87abe19730aad01b6511d660a0664be424986ae662b85eb76f0ce585c4890
+    image: ghcr.io/linuxserver/syncthing@sha256:84e9cd99d247d6ef31fc8c1a6967f068a8352a530095bb402bf3bb298aa10696
     container_name: syncthing
     hostname: ARM #optional
     environment:
