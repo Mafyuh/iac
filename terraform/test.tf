@@ -1,10 +1,10 @@
-resource "proxmox_virtual_environment_vm" "Kasm" {
+resource "proxmox_virtual_environment_vm" "test" {
 
     # VM General Settings
     node_name    = "pve2"
-    vm_id        = 333
-    name         = "Kasm"
-    description  = "kasm"
+    vm_id        = 335
+    name         = "test"
+    description  = "test"
     tags         = ["tofu", "ubuntu-22", "iac-repo"]
     started      = true
 
@@ -13,7 +13,7 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
     }
 
     clone {
-        vm_id = 8101
+        vm_id = 9636
     }
     
     # VM CPU Settings
@@ -36,16 +36,15 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
 
     # VM Disk Settings
     disk {
-        datastore_id = "local-lvm"
-        size         = 100
+        datastore_id = "Fast500Gb"
+        size         = 10
         interface    = "scsi0"
     }
 
     initialization {
         ip_config {
             ipv4 {
-                address = var.kasm_ip
-                gateway = var.vlan_gateway
+                address = "dhcp"
             }
         }
 
