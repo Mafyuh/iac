@@ -30,8 +30,6 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
         - su - mafyuh -c 'git config --global user.name "Mafyuh"'
         - su - mafyuh -c 'git config --global user.email "matt@mafyuh.com"'
-        - su - mafyuh -c 'echo "alias dcu=\'docker compose up -d\'" >> /home/mafyuh/.bashrc
-        - su - mafyuh -c 'echo "alias dcd=\'docker compose down\'" >> /home/mafyuh/.bashrc
         - echo "done" > /tmp/cloud-config.done
     EOF
 
@@ -67,8 +65,6 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
         - su - mafyuh -c 'git config --global user.name "Mafyuh"'
         - su - mafyuh -c 'git config --global user.email "matt@mafyuh.com"'
-        - su - mafyuh -c 'echo "alias dcu=\'docker compose up -d\'" >> /home/mafyuh/.bashrc
-        - su - mafyuh -c 'echo "alias dcd=\'docker compose down\'" >> /home/mafyuh/.bashrc
         - echo "done" > /tmp/cloud-config.done
     EOF
 

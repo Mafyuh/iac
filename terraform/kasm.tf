@@ -5,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
     vm_id        = 333
     name         = "Kasm"
     description  = "kasm"
-    tags         = ["tofu", "ubuntu-22", "auto-homelab-repo"]
+    tags         = ["tofu", "ubuntu-22", "iac-repo"]
     started      = true
 
     agent {
