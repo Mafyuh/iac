@@ -3,7 +3,7 @@
 
 <div align="center">
 
-# IaC-Homelab
+# IaC
 
 Infrastructure as Code (IaC) for my homelab using OpenTofu. 
 

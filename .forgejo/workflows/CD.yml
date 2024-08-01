@@ -6,7 +6,7 @@ on:
 jobs:
   deploy:
     if: github.event.pull_request.merged == true
-    runs-on: ubuntu-22.04
+    runs-on: docker
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -14,15 +14,19 @@ jobs:
       - name: Fetch all history for git diff
         run: git fetch --depth=2
 
+      - name: Install jq
+        run: |
+          apt-get update && apt-get install -y jq
+
       - name: Detect modified folders
         id: detect-changes
         run: |
           if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
             git fetch --unshallow
           fi
-          folders=$(git diff --name-only HEAD~1 HEAD | cut -d/ -f1 | sort | uniq)
+          folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
           echo "Modified folders: $folders"
-          echo "::set-output name=folders::$folders"
+          echo "::set-output name=folders::$folders"          
 
       - name: Deploy to hosts
         run: |

@@ -1,7 +1,7 @@
 ---
 services:
   bazarr:
-    image: ghcr.io/linuxserver/bazarr@sha256:6fb83511c0dca70a400fde79cb45ed59c4f66ea30dcba8c6f9274f01d77e5aef
+    image: ghcr.io/linuxserver/bazarr@sha256:e70de8a714ac57395d45052392001ec433b8f48aa1c204f13dae312cbcbe43af
     container_name: bazarr
     ports:
       - "6767:6767"
@@ -15,7 +15,7 @@ services:
       - PGID=1000
 
   lidarr:
-    image: ghcr.io/linuxserver/lidarr@sha256:a7d0282dcdbf5b11306cc4054c11b42252106b5e8494375231322822d31ac9f6
+    image: ghcr.io/linuxserver/lidarr@sha256:5855582eee07024c2584c01aaf955901303162bf00de183a1fbf2e9b81041695
     container_name: lidarr
     ports:
       - "8686:8686"
@@ -31,7 +31,7 @@ services:
       - PGID=1000
 
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr@sha256:237e9a72c11c5350bf22e355759436ecd4fd660e820d5b556d9a9e436f25f6b9
+    image: ghcr.io/linuxserver/prowlarr@sha256:7fe57565907f4f776d43c15b2e020a0e4a62fe1e04e80e25b85a3ae4ca49e5d0
     container_name: prowlarr
     ports:
       - "9696:9696"
@@ -43,7 +43,7 @@ services:
       - PGID=1000
 
   radarr:
-    image: ghcr.io/linuxserver/radarr@sha256:40f10a3d826f6c231d338738c3c86bf0d23a9546f20f8b1b504c6c579b79992c
+    image: ghcr.io/linuxserver/radarr@sha256:9d6f0548fd805edb30108fdd06d0fc5a4436c9bd708b57bd4119d7aefa815fe4
     container_name: radarr
     ports:
       - "7878:7878"
@@ -57,7 +57,7 @@ services:
       - PGID=1000
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr@sha256:275467ba17d990bbc6301dec3cc76b042969836749de39067818759d0f3b407f
+    image: ghcr.io/linuxserver/sonarr@sha256:fbee5770f688e4f89dd073534feda11251bfde0e0a4e6ac74dd8c33bb856b505
     container_name: sonarr
     ports:
       - "8989:8989"
@@ -91,7 +91,7 @@ services:
       - AUTH_OIDC_ADMIN_GROUP=${AUTH_OIDC_ADMIN_GROUP}
 
   doplarr:
-    image: ghcr.io/linuxserver/doplarr@sha256:20981fa1a4087d5369b9eaf756ab179352e05fe914b88c36f468ee3cd9a1ce98
+    image: ghcr.io/linuxserver/doplarr@sha256:9e1cfedf824d00bb0f269bcb3836b13cdbb74747bef062f9021be6f0f63dde7a
     container_name: doplarr
     environment:
       - PUID=1000
@@ -140,7 +140,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:6e70dd0cc0ddb038a8f58cf0945d6659b13c984f11d708407469bf16d520574c
+    image: ghcr.io/linuxserver/syncthing@sha256:84e9cd99d247d6ef31fc8c1a6967f068a8352a530095bb402bf3bb298aa10696
     container_name: syncthing
     hostname: ARRS
     environment:
@@ -155,6 +155,21 @@ services:
       - 22000:22000/tcp
       - 22000:22000/udp
       - 21027:21027/udp
+    restart: unless-stopped
+
+  code-server:
+    image: ghcr.io/linuxserver/code-server@sha256:1eb6671a1bc500028e1d7a44eccbfdffbb2d802840c6d7f9e83cc87e1003da94
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SUDO_PASSWORD=$SUDO_PASSWORD
+      - PROXY_DOMAIN=$PROXY_DOMAIN
+    volumes:
+      - /docker/appdata/code-server/config:/config
+    ports:
+      - 8443:8443
     restart: unless-stopped
 
 networks:

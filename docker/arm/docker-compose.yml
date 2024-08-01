@@ -1,7 +1,7 @@
 ---
 services:
   server:
-    image: codeberg.org/forgejo/forgejo:7.0.4
+    image: codeberg.org/forgejo/forgejo:8.0.0
     container_name: forgejo
     environment:
       - USER_UID=1000
@@ -38,7 +38,7 @@ services:
       - /home/ubuntu/forgejo/mysql:/var/lib/mysql
 
   gotify:
-    image: docker.mafyuh.xyz/gotify/server-arm7:2.4.0
+    image: docker.mafyuh.xyz/gotify/server-arm7:2.5.0
     container_name: gotify
     ports:
       - 9008:80
@@ -53,7 +53,7 @@ services:
       - gitea_main
 
   nginx-proxy-manager:
-    image: docker.mafyuh.xyz/jc21/nginx-proxy-manager:2.11.2
+    image: docker.mafyuh.xyz/jc21/nginx-proxy-manager:2.11.3
     container_name: nginx-proxy-manager
     ports:
       - 80:80
@@ -107,7 +107,7 @@ services:
     networks:
       - gitea_main
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.47.0
+    image: ghcr.io/n8n-io/n8n:1.52.2
     container_name: n8n
     ports:
       - 5678:5678
@@ -122,7 +122,7 @@ services:
       - gitea_main
 
   vaultwarden:
-    image: docker.mafyuh.xyz/vaultwarden/server:1.30.5
+    image: docker.mafyuh.xyz/vaultwarden/server:1.31.0
     container_name: vaultwarden
     ports:
       - 8989:80
@@ -137,7 +137,7 @@ services:
         ipv4_address: 172.25.0.25
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:6e70dd0cc0ddb038a8f58cf0945d6659b13c984f11d708407469bf16d520574c
+    image: ghcr.io/linuxserver/syncthing@sha256:84e9cd99d247d6ef31fc8c1a6967f068a8352a530095bb402bf3bb298aa10696
     container_name: syncthing
     hostname: ARM #optional
     environment:

@@ -1,17 +1,15 @@
-[![Yamllint](https://git.mafyuh.dev/mafyuh/Auto-Homelab/badges/workflows/yamllint.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/Auto-Homelab/actions)
-[![Yamllint](https://git.mafyuh.dev/mafyuh/Auto-Homelab/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/Auto-Homelab/actions)
+[![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/yamllint.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
+[![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
 [![Renovate](https://git.mafyuh.dev/renovatebot/renovate/badges/workflows/renovate.yml/badge.svg)](https://git.mafyuh.dev/renovatebot/renovate/actions)
-[![Pulls](https://git.mafyuh.dev/mafyuh/Auto-Homelab/badges/pulls.svg)](https://git.mafyuh.dev/mafyuh/Auto-Homelab/pulls)
+[![Pulls](https://git.mafyuh.dev/mafyuh/iac/badges/pulls.svg)](https://git.mafyuh.dev/mafyuh/iac/pulls)
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
 <div align="center">
-
-# Auto-Homelab
 
 Homelab docker-compose environment defined in code. Using Forgejo Actions and Renovate bot for CI, AWX Tower and Forgejo Actions for CD. This is how I keep my Homelab UTD.
 
 </div>
 <p align="center">
-  <a href="https://git.mafyuh.dev/mafyuh/Auto-Homelab/wiki">Wiki</a> | 
+  <a href="https://git.mafyuh.dev/mafyuh/iac/wiki">Wiki</a> | 
   <a href="https://loganmarchione.com/2022/10/how-to-run-renovate-on-a-self-hosted-gitea-and-drone-instance/">How to Setup</a> |
   <a href="https://mafyuh.com">Blog</a> |
   <a href="https://www.youtube.com/watch?v=5CkCr9U_Q1Y">Inspiration</a> |
@@ -306,7 +304,3 @@ graph TD
 
 
 ```
-
-## To-Do
-
-[View Project Board](https://git.mafyuh.dev/mafyuh/Auto-Homelab/projects/1)

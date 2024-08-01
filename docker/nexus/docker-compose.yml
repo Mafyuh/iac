@@ -1,7 +1,7 @@
 ---
 services:
   nexus:
-    image: docker.mafyuh.xyz/sonatype/nexus3:3.69.0
+    image: docker.mafyuh.xyz/sonatype/nexus3:3.70.1
     container_name: nexus
     restart: unless-stopped
     ports:
