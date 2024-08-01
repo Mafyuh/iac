@@ -14,6 +14,10 @@ jobs:
       - name: Fetch all history for git diff
         run: git fetch --depth=2
 
+      - name: Install jq
+        run: |
+          apt-get update && apt-get install -y jq
+
       - name: Detect modified folders
         id: detect-changes
         run: |
@@ -85,10 +89,13 @@ jobs:
 
             sleep 45  # Delay for 45 seconds before fetching logs
 
-            job_id=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" "https://awx.mafyuh.xyz/api/v2/job_templates/13/jobs/?order_by=-id" | grep -oP '"id":\s*\K[0-9]+')
-            logs=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" "https://awx.mafyuh.xyz/api/v2/jobs/$job_id/stdout/?format=json")
-
+            job_id=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/job_templates/13/jobs/?order_by=-id | jq -r '.results[0].id')
+            logs=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/jobs/$job_id/stdout/?format=json)
             echo "AWX Job Logs for folder: $folder"
+            echo "Range:"
+            echo "Start: $(echo "$logs" | jq -r '.range.start')"
+            echo "End: $(echo "$logs" | jq -r '.range.end')"
+            echo "Absolute End: $(echo "$logs" | jq -r '.range.absolute_end')"
             echo "Content:"
-            echo "$logs" | grep -oP '"content":\s*"\K[^"]+' | sed 's/\\n/\n/g'
+            echo "$(echo "$logs" | jq -r '.content')"
           done

@@ -3,7 +3,7 @@ Currently migrating [Auto-Homelab](https://git.mafyuh.dev/mafyuh/Auto-Homelab), 
 
 ToDo
 - [ ] Update Readme
-- [ ] Migrate all containers to use this repo (DB migrations)
+- [x] Migrate all containers to use this repo (DB migrations)
 - [x] Get OpenTofu migrated to this repo
 - [ ] Get Kubernetes repo migrated over
 - [ ] Re-bootstrap Flux
