@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Add alias for docker compose up -d in .bashrc
+      lineinfile:
+        path: "/home/{{ ansible_user }}/.bashrc"
+        line: "alias dcu='docker compose up -d'"
+        state: present
+
+    - name: Add alias for docker compose down in .bashrc
+      lineinfile:
+        path: "/home/{{ ansible_user }}/.bashrc"
+        line: "alias dcd='docker compose down'"
+        state: present
