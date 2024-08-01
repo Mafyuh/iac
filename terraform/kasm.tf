@@ -44,7 +44,8 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
     initialization {
         ip_config {
             ipv4 {
-                address = "dhcp"
+                address = var.kasm_ip
+                gateway = var.vlan_gateway
             }
         }
 
