@@ -30,7 +30,7 @@ source "proxmox-clone" "ubuntu-server-jammy" {
     insecure_skip_tls_verify = true
     
     # VM General Settings
-    node = "prox"
+    node = "pve2"
     clone_vm_id = "8101"
     vm_id = "9636"
     vm_name = "ubuntu-server-jammy"
@@ -45,7 +45,7 @@ source "proxmox-clone" "ubuntu-server-jammy" {
     disks {
         disk_size = "5G"
         format = "raw"
-        storage_pool = "Fast2Tb"
+        storage_pool = "Fast500Gb"
         type = "virtio"
     }
 
@@ -61,23 +61,20 @@ source "proxmox-clone" "ubuntu-server-jammy" {
         model = "virtio"
         bridge = "vmbr0"
         firewall = "false"
-    } 
-
-    # VM Cloud-Init Settings
-    cloud_init = true
-    cloud_init_storage_pool = "local-lvm"
+    }
+    
 
     ssh_username = "mafyuh"
     ssh_private_key_file = "~/.ssh/id_rsa"
 }
 
-# Build Definition to create the VM Template
+
 build {
 
     name = "ubuntu-server-jammy"
     sources = ["source.proxmox-clone.ubuntu-server-jammy"]
 
-    # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
+    
     provisioner "shell" {
         inline = [
             "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done",
@@ -93,13 +90,13 @@ build {
         ]
     }
 
-    # Provisioning the VM Template for Cloud-Init Integration in Proxmox #2
+    
     provisioner "file" {
-        source = "ubuntu-noble/files/pve.cfg"
+        source = "files/pve.cfg"
         destination = "/tmp/pve.cfg"
     }
 
-    # Provisioning the VM Template for Cloud-Init Integration in Proxmox #3
+    
     provisioner "shell" {
         inline = [ "sudo cp /tmp/pve.cfg /etc/cloud/cloud.cfg.d/pve.cfg" ]
     }
@@ -110,6 +107,9 @@ build {
             "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common qemu-guest-agent net-tools",
             "curl -fsSL https://get.docker.com | sudo sh",
             "echo \"alias dcu='docker compose up -d'\" >> ~/.bashrc",
+            "echo \"alias dcd='docker compose down'\" >> ~/.bashrc",
+            "git config --global user.name \"Mafyuh\"",
+            "git config --global user.email \"matt@mafyuh.com\"",
             "sudo apt-get -y update"
         ]
     }
