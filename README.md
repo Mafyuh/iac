@@ -7,7 +7,7 @@
 
 # iac
 
-Currently migrating [iac](https://git.mafyuh.dev/mafyuh/iac), [Iac-Homelab](https://git.mafyuh.dev/mafyuh/IaC-Homelab), [ansible-playbooks](https://git.mafyuh.dev/mafyuh/ansible-playbooks) and [kub](https://git.mafyuh.dev/mafyuh/kub) repos into this one.
+Currently migrating [Auto-Homelab](https://git.mafyuh.dev/mafyuh/Auto-Homelab), [Iac-Homelab](https://git.mafyuh.dev/mafyuh/IaC-Homelab), [ansible-playbooks](https://git.mafyuh.dev/mafyuh/ansible-playbooks) and [kub](https://git.mafyuh.dev/mafyuh/kub) repos into this one.
 
 This is my homelab, defined in code.
 </div>
