@@ -62,7 +62,9 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
 
 provisioner "remote-exec" {
   inline = [
-    "sudo bash /home/mafyuh/iac/docker/scripts/kasm.sh"
+    "cd /home/mafyuh/iac/docker/kasm",
+    "git pull",
+    "docker compose up -d"
   ]
   connection {
     type        = "ssh"
