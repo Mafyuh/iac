@@ -2,6 +2,10 @@ data "local_file" "ssh_public_key" {
   filename = "/home/mafyuh/.ssh/main_key.pub"
 }
 
+data "local_file" "ssh_public_key_2" {
+  filename = "/home/mafyuh/.ssh/id_rsa.pub"
+}
+
 resource "proxmox_virtual_environment_file" "cloud_config" {
   content_type = "snippets"
   datastore_id = "Slow4tb"
@@ -19,6 +23,7 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
         shell: /bin/bash
         ssh_authorized_keys:
           - ${trimspace(data.local_file.ssh_public_key.content)}
+          - ${trimspace(data.local_file.ssh_public_key_2.content)}
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
         - apt update
@@ -30,8 +35,6 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
         - su - mafyuh -c 'git config --global user.name "Mafyuh"'
         - su - mafyuh -c 'git config --global user.email "matt@mafyuh.com"'
-        - su - mafyuh -c 'echo "alias dcu=\'docker compose up -d\'" >> /home/mafyuh/.bashrc
-        - su - mafyuh -c 'echo "alias dcd=\'docker compose down\'" >> /home/mafyuh/.bashrc
         - echo "done" > /tmp/cloud-config.done
     EOF
 
@@ -56,19 +59,15 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
         shell: /bin/bash
         ssh_authorized_keys:
           - ${trimspace(data.local_file.ssh_public_key.content)}
+          - ${trimspace(data.local_file.ssh_public_key_2.content)}
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
         - apt update
-        - apt install -y qemu-guest-agent net-tools nfs-common
         - timedatectl set-timezone America/New_York
         - systemctl enable qemu-guest-agent
         - systemctl start qemu-guest-agent
-        - curl -fsSL https://get.docker.com | sudo sh
+        - apt upgrade -y
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
-        - su - mafyuh -c 'git config --global user.name "Mafyuh"'
-        - su - mafyuh -c 'git config --global user.email "matt@mafyuh.com"'
-        - su - mafyuh -c 'echo "alias dcu=\'docker compose up -d\'" >> /home/mafyuh/.bashrc
-        - su - mafyuh -c 'echo "alias dcd=\'docker compose down\'" >> /home/mafyuh/.bashrc
         - echo "done" > /tmp/cloud-config.done
     EOF
 

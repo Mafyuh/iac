@@ -45,3 +45,11 @@ variable "init_username" {
 variable "init_password" {
         type = string
 }
+
+variable "kasm_ip" {
+        type = string
+}
+
+variable "kasm_ssh_ip" {
+        type = string
+}
