@@ -31,10 +31,13 @@ source "proxmox-clone" "ubuntu-server-jammy" {
     
     # VM General Settings
     node = "pve2"
+
+    ## See https://git.mafyuh.dev/mafyuh/iac/src/branch/main/terraform/ubuntu22-template2.tf
     clone_vm_id = "8101"
-    vm_id = "9636"
+
+    vm_id = "9999"
     vm_name = "ubuntu-server-jammy"
-    template_description = "Ubuntu Server jammy Image"
+    template_description = "Custom Ubuntu Server see https://git.mafyuh.dev/mafyuh/iac/src/branch/main/packer/ubuntu-jammy/ubuntu-jammy.pkr.hcl"
 
     # VM System Settings
     qemu_agent = true
@@ -43,7 +46,7 @@ source "proxmox-clone" "ubuntu-server-jammy" {
     scsi_controller = "virtio-scsi-pci"
 
     disks {
-        disk_size = "5G"
+        disk_size = "4G"
         format = "raw"
         storage_pool = "Fast500Gb"
         type = "virtio"
@@ -65,6 +68,7 @@ source "proxmox-clone" "ubuntu-server-jammy" {
     
 
     ssh_username = "mafyuh"
+    # WSL Filesystem
     ssh_private_key_file = "~/.ssh/id_rsa"
 }
 
@@ -74,7 +78,7 @@ build {
     name = "ubuntu-server-jammy"
     sources = ["source.proxmox-clone.ubuntu-server-jammy"]
 
-    
+    ## Cleanup for re-template
     provisioner "shell" {
         inline = [
             "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done",
@@ -101,7 +105,7 @@ build {
         inline = [ "sudo cp /tmp/pve.cfg /etc/cloud/cloud.cfg.d/pve.cfg" ]
     }
 
-    # Provisioning the VM Template with Docker Installation #4
+    # Install Commonly Used Things - add alias's - set git config
     provisioner "shell" {
         inline = [
             "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common qemu-guest-agent net-tools",

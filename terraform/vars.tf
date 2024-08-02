@@ -49,3 +49,7 @@ variable "init_password" {
 variable "kasm_ip" {
         type = string
 }
+
+variable "kasm_ssh_ip" {
+        type = string
+}

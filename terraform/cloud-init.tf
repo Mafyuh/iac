@@ -63,7 +63,6 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
         - apt update
-        - apt install -y qemu-guest-agent
         - timedatectl set-timezone America/New_York
         - systemctl enable qemu-guest-agent
         - systemctl start qemu-guest-agent
