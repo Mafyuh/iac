@@ -3,5 +3,8 @@
 # Navigate to the directory
 cd /home/mafyuh/iac/docker/kasm
 
-# Run the command
+# Pull the latest changes 
+git pull
+
+# Run docker compose up -d
 dcu
