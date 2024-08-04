@@ -4,3 +4,15 @@ services:
     restart: unless-stopped
     image: docker.mafyuh.xyz/cloudflare/cloudflared@sha256:f6e9fff347602b8e70f1765127abc96f3b8d1af4cc46185913a043edab75ae5b
     command: tunnel --no-autoupdate run --token $CF_TOKEN
+
+  wallos:
+    container_name: wallos
+    image: bellamy/wallos:2.20.1
+    ports:
+      - "8282:80/tcp"
+    environment:
+      TZ: 'America/New_York'
+    volumes:
+      - '/home/mafyuh/wallos/db:/var/www/html/db'
+      - '/home/mafyuh/wallos/logos:/var/www/html/images/uploads/logos'
+    restart: unless-stopped
