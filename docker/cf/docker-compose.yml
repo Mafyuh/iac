@@ -2,7 +2,7 @@
 services:
   cf-tunnel:
     restart: unless-stopped
-    image: docker.mafyuh.xyz/cloudflare/cloudflared@sha256:f6e9fff347602b8e70f1765127abc96f3b8d1af4cc46185913a043edab75ae5b
+    image: docker.mafyuh.xyz/cloudflare/cloudflared@sha256:31fc2956d49179f7fd230b030e702e40ade7ccc361d0f1079e4a56bc888678f9
     command: tunnel --no-autoupdate run --token $CF_TOKEN
 
   wallos:
