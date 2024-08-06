@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   ollama:
-    image: ollama/ollama:0.3.3
+    image: ollama/ollama:0.3.4
     container_name: ollama
     restart: unless-stopped
     volumes:
@@ -29,7 +29,7 @@ services:
       - host.docker.internal:host-gateway
 
   mindsdb:
-    image: mindsdb/mindsdb:v24.7.5.0
+    image: mindsdb/mindsdb:v24.8.1.0
     container_name: mindsdb
     ports:
       - 47334:47334
