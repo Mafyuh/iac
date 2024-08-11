@@ -7,7 +7,7 @@ services:
 
   wallos:
     container_name: wallos
-    image: bellamy/wallos:2.22.0
+    image: bellamy/wallos:2.22.1
     ports:
       - "8282:80/tcp"
     environment:
