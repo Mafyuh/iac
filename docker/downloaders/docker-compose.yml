@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
 
   arch-qbittorrentvpn:
-    image: docker.mafyuh.xyz/binhex/arch-qbittorrentvpn:4.6.5-1-03
+    image: binhex/arch-qbittorrentvpn:4.6.5-1-03
     container_name: qbittorrentvpn
     volumes:
       - '/docker/appdata/qbitty:/config'
@@ -55,25 +55,3 @@ services:
     environment:
       - LOG_LEVEL=info
     restart: unless-stopped
-
-  cadvisor:
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
-    ports:
-      - 9999:8080
-    container_name: cadvisor
-    privileged: true
-    devices:
-      - /dev/kmsg
-    image: gcr.io/cadvisor/cadvisor:v0.50.0
-
-  node-exporter:
-    image: docker.mafyuh.xyz/prom/node-exporter:v1.8.2
-    container_name: monitoring_node_exporter
-    restart: unless-stopped
-    ports:
-      - 9100:9100
