@@ -116,7 +116,7 @@ services:
     restart: unless-stopped
 
   jfa-go:
-    image: docker.mafyuh.xyz/hrfee/jfa-go
+    image: hrfee/jfa-go
     container_name: jfa-go
     ports:
       - 8056:8056

@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
 
   makemkv:
-    image: docker.mafyuh.xyz/jlesage/makemkv@sha256:39dccc4f82dc76668a78543ac7392a43b6bc6c069e1a3e47e8c058c6cb5f09b0
+    image: jlesage/makemkv@sha256:39dccc4f82dc76668a78543ac7392a43b6bc6c069e1a3e47e8c058c6cb5f09b0
     container_name: makemkv
     ports:
       - 5800:5800
