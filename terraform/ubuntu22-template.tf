@@ -8,7 +8,7 @@ resource "proxmox_virtual_environment_vm" "Ubuntu-22-Template" {
 
   disk {
     datastore_id = "Fast2Tb"
-    file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image_22.id
+    file_id      = "local:iso/jammy-server-cloudimg-amd64.img"
     interface    = "scsi0"
     size         = 4
   }
@@ -37,12 +37,4 @@ vga {
         type = "serial0"
     }
 
-}
-
-
-resource "proxmox_virtual_environment_download_file" "ubuntu_cloud_image_22" {
-  content_type = "iso"
-  datastore_id = "local"
-  node_name    = "prox"
-  url          = "https://cloud-images.ubuntu.com/jammy/20240720/jammy-server-cloudimg-amd64.img"
 }
