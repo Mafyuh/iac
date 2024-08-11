@@ -27,4 +27,7 @@ ToDo
 - [x] Get OpenTofu migrated to this repo
 - [ ] Get Kubernetes repo migrated over
 - [ ] Re-bootstrap Flux
+- [ ] Add n8n automations
+- [ ] Fix all ansible playbooks
+- [ ] Migrate containers to kubernetes
 
