@@ -5,8 +5,8 @@ resource "proxmox_virtual_environment_vm" "AI" {
     vm_id        = 322
     name         = "AI"
     machine = "q35"
-    description  = "Ollama, Open Webui, mindsdb"
-    tags         = ["tofu", "ubuntu-22", "auto-homelab-repo"]
+    description  = "Stable-Diffusion"
+    tags         = ["tofu", "ubuntu-22", "iac-repo"]
     started      = true
 
     agent {
@@ -14,7 +14,7 @@ resource "proxmox_virtual_environment_vm" "AI" {
     }
 
     clone {
-        vm_id = 8101
+        vm_id = 9999
     }
     
     # VM CPU Settings
