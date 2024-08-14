@@ -20,14 +20,6 @@ This is my homelab, defined in code.
 
 </div>
 
-ToDo
-- [ ] Update Readme
-- [ ] Update Issue Templates
-- [x] Migrate all containers to use this repo
-- [x] Get OpenTofu migrated to this repo
-- [ ] Get Kubernetes repo migrated over
-- [ ] Re-bootstrap Flux
-- [ ] Add n8n automations
-- [ ] Fix all ansible playbooks
-- [ ] Migrate containers to kubernetes
+## To-Do
+See [Project Board](https://git.mafyuh.dev/mafyuh/iac/projects/2)
 
