@@ -28,16 +28,6 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
 
-  mindsdb:
-    image: mindsdb/mindsdb:v24.8.1.1
-    container_name: mindsdb
-    ports:
-      - 47334:47334
-      - 47335:47335
-    volumes:
-      - /home/mafyuh/mindsdb:/root/mindsdb
-    restart: unless-stopped
-
 volumes:
   ollama:
     external: true
