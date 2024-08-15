@@ -107,7 +107,7 @@ services:
     networks:
       - gitea_main
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.54.1
+    image: ghcr.io/n8n-io/n8n:1.55.1
     container_name: n8n
     ports:
       - 5678:5678
