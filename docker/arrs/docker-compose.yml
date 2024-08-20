@@ -43,7 +43,7 @@ services:
       - PGID=1000
 
   radarr:
-    image: ghcr.io/linuxserver/radarr@sha256:71e29caebf16da4701fc7a6c04d5f34c6b01753549900edf4ecfa585263ea1d4
+    image: ghcr.io/linuxserver/radarr@sha256:b034531ff81d3e5e1f9fd70c969746040b40e6484c88981ea5d0dee732c10bc3
     container_name: radarr
     ports:
       - "7878:7878"
@@ -91,7 +91,7 @@ services:
       - AUTH_OIDC_ADMIN_GROUP=${AUTH_OIDC_ADMIN_GROUP}
 
   doplarr:
-    image: ghcr.io/linuxserver/doplarr@sha256:9e1cfedf824d00bb0f269bcb3836b13cdbb74747bef062f9021be6f0f63dde7a
+    image: ghcr.io/linuxserver/doplarr@sha256:6959cd770bc89c2eaa61e07b13673051d66e6edae09f4a7e7c7846fdfa4dafc6
     container_name: doplarr
     environment:
       - PUID=1000
@@ -140,7 +140,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:v0.50.0
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:2c1ecba88add0cf239914553cc911193a78c668012bf8e55044c1bbff6b2db18
+    image: ghcr.io/linuxserver/syncthing@sha256:d6502d919f49f16a80689ce92c211f945f1d64a34c0d3f23ecc27a2a4d1dd0ac
     container_name: syncthing
     hostname: ARRS
     environment:
@@ -158,7 +158,7 @@ services:
     restart: unless-stopped
 
   code-server:
-    image: ghcr.io/linuxserver/code-server@sha256:5cdea3284e9263e1dc6abf374e4057c32840c4d5e02af2ca515499f7c1cc75bb
+    image: ghcr.io/linuxserver/code-server@sha256:4914ed4bc7e7342ef9d9cc30abda9cbcd486d79eac37db4bbe70df91135a1ef3
     container_name: code-server
     environment:
       - PUID=1000
