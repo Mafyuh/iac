@@ -2,17 +2,17 @@ resource "proxmox_virtual_environment_vm" "Runner" {
 
     # VM General Settings
     node_name    = "prox"
-    vm_id        = 207
+    vm_id        = 952
     name         = "Runner"
-    description  = "Forgejo Runner"
-    tags         = ["tofu", "ubuntu-22", "auto-homelab-repo", "infrastructure"]
+    description  = "Forgejo Runner for iac"
+    tags         = ["tofu", "ubuntu-22", "iac-repo", "infrastructure"]
 
     agent {
       enabled = true # read 'Qemu guest agent' section, change to true only when ready
     }
 
     clone {
-        vm_id = 8000
+        vm_id = 8100
     }
     
     # VM CPU Settings
@@ -35,7 +35,7 @@ resource "proxmox_virtual_environment_vm" "Runner" {
     # VM Disk Settings
     disk {
         datastore_id = "Fast2Tb"
-        size         = 60
+        size         = 40
         interface    = "scsi0"
     }
 

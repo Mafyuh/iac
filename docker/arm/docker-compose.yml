@@ -168,6 +168,7 @@ services:
       - db-data:/var/lib/postgresql/data
 
   wiki:
+    container_name: wiki
     image: ghcr.io/requarks/wiki:2.5.303
     depends_on:
       - wiki-db
