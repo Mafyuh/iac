@@ -166,6 +166,8 @@ services:
     restart: unless-stopped
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - gitea_main
 
   wiki:
     container_name: wiki
@@ -182,6 +184,8 @@ services:
     restart: unless-stopped
     ports:
       - "1234:3000"
+    networks:
+      - gitea_main
 
 networks:
   gitea_main:
