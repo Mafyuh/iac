@@ -2,7 +2,7 @@
 services:
   cf-tunnel:
     restart: unless-stopped
-    image: cloudflare/cloudflared@sha256:31fc2956d49179f7fd230b030e702e40ade7ccc361d0f1079e4a56bc888678f9
+    image: cloudflare/cloudflared@sha256:5c23f47be85b92930b348c390c84d802f3c0370d5e5278075e73096c4bbfd94b
     command: tunnel --no-autoupdate run --token $CF_TOKEN
 
   wallos:
