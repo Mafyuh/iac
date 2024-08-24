@@ -57,7 +57,7 @@ services:
       - PGID=1000
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr@sha256:bffa87787eacff9023df4400f521c159566d14b5a280caec8b54196071e6038e
+    image: ghcr.io/linuxserver/sonarr@sha256:0777b308a414000505651059a95af373ded6aba8ce5a40b50d7aad333dc912e2
     container_name: sonarr
     ports:
       - "8989:8989"
@@ -140,7 +140,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:v0.50.0
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:d6502d919f49f16a80689ce92c211f945f1d64a34c0d3f23ecc27a2a4d1dd0ac
+    image: ghcr.io/linuxserver/syncthing@sha256:d5481de808a1de5a13b814a922b1f6de5fcde64c1ca95b0a065218b56570fae3
     container_name: syncthing
     hostname: ARRS
     environment:
