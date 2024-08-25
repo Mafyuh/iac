@@ -6,6 +6,7 @@ resource "proxmox_virtual_environment_vm" "K3s-Master" {
     name         = "K3s-Master"
     description  = "Kubernetes master"
     tags         = ["tofu", "ubuntu-22", "auto-homelab-repo", "infrastructure"]
+    started      = false
 
     agent {
       enabled = true # read 'Qemu guest agent' section, change to true only when ready
