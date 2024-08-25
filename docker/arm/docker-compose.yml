@@ -107,7 +107,7 @@ services:
     networks:
       - gitea_main
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.55.3
+    image: ghcr.io/n8n-io/n8n:1.56.1
     container_name: n8n
     ports:
       - 5678:5678
@@ -137,7 +137,7 @@ services:
         ipv4_address: 172.25.0.25
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:d6502d919f49f16a80689ce92c211f945f1d64a34c0d3f23ecc27a2a4d1dd0ac
+    image: ghcr.io/linuxserver/syncthing@sha256:d5481de808a1de5a13b814a922b1f6de5fcde64c1ca95b0a065218b56570fae3
     container_name: syncthing
     hostname: ARM #optional
     environment:
@@ -154,7 +154,38 @@ services:
       - 22000:22000/udp
       - 21027:21027/udp
     restart: unless-stopped
+  
+  wiki-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: $DB_PASS
+      POSTGRES_USER: wikijs
+    logging:
+      driver: "none"
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - gitea_main
 
+  wiki:
+    container_name: wiki
+    image: ghcr.io/requarks/wiki:2.5.303
+    depends_on:
+      - wiki-db
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: wiki-db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: $DB_PASS
+      DB_NAME: wiki
+    restart: unless-stopped
+    ports:
+      - "1234:3000"
+    networks:
+      - gitea_main
 
 networks:
   gitea_main:
@@ -163,3 +194,4 @@ networks:
 volumes:
   linkstack:
   n8n_data:
+  db-data:
