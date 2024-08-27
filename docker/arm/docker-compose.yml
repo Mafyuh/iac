@@ -193,6 +193,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 8089:8080
+    networks:
+      - gitea_main
 
 networks:
   gitea_main:
