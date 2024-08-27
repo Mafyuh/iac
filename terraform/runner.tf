@@ -1,65 +1,70 @@
 resource "proxmox_virtual_environment_vm" "Runner" {
 
-    # VM General Settings
-    node_name    = "prox"
-    vm_id        = 952
-    name         = "Runner"
-    description  = "Forgejo Runner for iac"
-    tags         = ["tofu", "ubuntu-22", "iac-repo", "infrastructure"]
+  # VM General Settings
+  node_name    = "prox"
+  vm_id        = 952
+  name         = "Runner"
+  description  = "Forgejo Runner for iac"
+  tags         = ["tofu", "ubuntu-22", "iac-repo", "infrastructure"]
 
-    agent {
-      enabled = true # read 'Qemu guest agent' section, change to true only when ready
+  agent {
+    enabled = true
+  }
+
+  clone {
+    vm_id = 8100
+  }
+  
+  # VM CPU Settings
+  cpu {
+    cores        = 2
+    type         = "host"
+    architecture = "x86_64"
+    flags        = []
+  }
+  
+  # VM Memory Settings
+  memory {
+    dedicated = 2048
+  }
+
+  # VM Network Settings
+  network_device {
+    bridge       = "vmbr0"
+    model        = "virtio"
+  }
+
+  # VM Disk Settings
+  disk {
+    datastore_id = "Fast2Tb"
+    size         = 40
+    interface    = "scsi0"
+    file_format  = "raw"
+    path_in_datastore = "vm-952-disk-0" 
+  }
+
+  vga {
+    type = "serial0"
+  }
+
+  initialization {
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
     }
 
-    clone {
-        vm_id = 8100
-    }
-    
-    # VM CPU Settings
-    cpu {
-        cores = 2
-        type  = "host"
-        architecture = "x86_64"
-    }
-    
-    # VM Memory Settings
-    memory {
-        dedicated = 2048
-    }
+    user_data_file_id = "Slow4tb:snippets/cloud-config.yaml"
+  }
 
-    # VM Network Settings
-    network_device {
-        bridge  = "vmbr0"
-    }
-
-    # VM Disk Settings
-    disk {
-        datastore_id = "Fast2Tb"
-        size         = 40
-        interface    = "scsi0"
-    }
-
-    vga {
-        type = "serial0"
-    }
-
-    initialization {
-        ip_config {
-            ipv4 {
-                address = "dhcp"
-            }
-        }
-
-        user_account {}
-    }
-
-    lifecycle {
-        ignore_changes = [
-            initialization[0].user_account[0].keys,
-            initialization[0].user_account[0].password,
-            initialization[0].user_account[0].username,
-            initialization[0].user_data_file_id
-        ]
-    }
+  lifecycle {
+    ignore_changes = [
+      initialization[0].user_account,
+      initialization[0].user_data_file_id,
+      cpu[0].flags,
+      disk[0].file_format, 
+      disk[0].path_in_datastore,
+    ]
+  }
 
 }
