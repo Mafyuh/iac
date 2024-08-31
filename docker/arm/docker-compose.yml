@@ -130,7 +130,7 @@ services:
       - /home/ubuntu/vw-data/:/data
     environment:
       - DOMAIN=$VWDOMAIN
-      - SIGNUPS_ALLOWED=true
+      - SIGNUPS_ALLOWED=false
     restart: unless-stopped
     networks:
       gitea_main:
