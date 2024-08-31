@@ -1,7 +1,7 @@
 ---
 services:
   server:
-    image: codeberg.org/forgejo/forgejo:8.0.1
+    image: codeberg.org/forgejo/forgejo:8.0.2
     container_name: forgejo
     environment:
       - USER_UID=1000
@@ -130,7 +130,7 @@ services:
       - /home/ubuntu/vw-data/:/data
     environment:
       - DOMAIN=$VWDOMAIN
-      - SIGNUPS_ALLOWED=false
+      - SIGNUPS_ALLOWED=true
     restart: unless-stopped
     networks:
       gitea_main:
@@ -184,16 +184,6 @@ services:
     restart: unless-stopped
     ports:
       - "1234:3000"
-    networks:
-      - gitea_main
-  
-  dozzle:
-    container_name: dozzle
-    image: amir20/dozzle@sha256:83aab3fa5d8b863e5b0083e5a5f1d147af87d60c697f918d3c07e9179895558b
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 8089:8080
     networks:
       - gitea_main
 
