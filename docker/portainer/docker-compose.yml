@@ -12,15 +12,15 @@ services:
     restart: always
 
   vikunja:
-    image: vikunja/vikunja
+    image: vikunja/vikunja@sha256:c31c7d6cad49038ab8a7d1414845d4c45539b43dd6ddd082bcd148e6fcd7b01c
     environment:
-      VIKUNJA_SERVICE_PUBLICURL: http://<the public ip or host where Vikunja is reachable>
+      VIKUNJA_SERVICE_PUBLICURL: $VIKUNJA_SERVICE_PUBLICURL
       VIKUNJA_DATABASE_HOST: db
-      VIKUNJA_DATABASE_PASSWORD: changeme
+      VIKUNJA_DATABASE_PASSWORD: $VIKUNJA_DATABASE_PASSWORD
       VIKUNJA_DATABASE_TYPE: mysql
       VIKUNJA_DATABASE_USER: vikunja
       VIKUNJA_DATABASE_DATABASE: vikunja
-      VIKUNJA_SERVICE_JWTSECRET: <a super secure random secret>
+      VIKUNJA_SERVICE_JWTSECRET: $VIKUNJA_SERVICE_JWTSECRET
     ports:
       - 3456:3456
     volumes:
@@ -33,9 +33,9 @@ services:
     image: mariadb:10
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-      MYSQL_ROOT_PASSWORD: supersecret
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_USER: vikunja
-      MYSQL_PASSWORD: changeme
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_DATABASE: vikunja
     volumes:
       - /home/mafyuh/vikunja/db:/var/lib/mysql
