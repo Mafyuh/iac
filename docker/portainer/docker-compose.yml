@@ -11,5 +11,19 @@ services:
       - "portainer_data:/data"
     restart: always
 
+  vikunja:
+    image: vikunja/vikunja@sha256:c31c7d6cad49038ab8a7d1414845d4c45539b43dd6ddd082bcd148e6fcd7b01c
+    environment:
+      VIKUNJA_SERVICE_PUBLICURL: $VIKUNJA_SERVICE_PUBLICURL
+      VIKUNJA_DATABASE_TYPE: sqlite
+      VIKUNJA_SERVICE_JWTSECRET: $VIKUNJA_SERVICE_JWTSECRET
+      VIKUNJA_DATABASE_PATH: /db/vikunja.db
+    ports:
+      - 3456:3456
+    volumes:
+      - /home/mafyuh/vikunja/files:/app/vikunja/files
+      - /home/mafyuh/vikunja/db:/db
+    restart: unless-stopped
+
 volumes:
   portainer_data:
