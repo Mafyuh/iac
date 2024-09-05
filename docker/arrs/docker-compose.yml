@@ -78,6 +78,7 @@ services:
       - /docker/appdata/homarr/configs:/app/data/configs
       - /docker/appdata/homarr/icons:/app/public/icons
       - /docker/appdata/homarr/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - '7575:7575'
     environment:
