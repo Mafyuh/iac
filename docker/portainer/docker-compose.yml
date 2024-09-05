@@ -15,35 +15,15 @@ services:
     image: vikunja/vikunja@sha256:c31c7d6cad49038ab8a7d1414845d4c45539b43dd6ddd082bcd148e6fcd7b01c
     environment:
       VIKUNJA_SERVICE_PUBLICURL: $VIKUNJA_SERVICE_PUBLICURL
-      VIKUNJA_DATABASE_HOST: db
-      VIKUNJA_DATABASE_PASSWORD: $VIKUNJA_DATABASE_PASSWORD
-      VIKUNJA_DATABASE_TYPE: mysql
-      VIKUNJA_DATABASE_USER: vikunja
-      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_DATABASE_TYPE: sqlite
       VIKUNJA_SERVICE_JWTSECRET: $VIKUNJA_SERVICE_JWTSECRET
+      VIKUNJA_DATABASE_PATH: /db/vikunja.db
     ports:
       - 3456:3456
     volumes:
       - /home/mafyuh/vikunja/files:/app/vikunja/files
-    depends_on:
-      db:
-        condition: service_healthy
+      - /home/mafyuh/vikunja/db:/db
     restart: unless-stopped
-  db:
-    image: mariadb:10
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_USER: vikunja
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-      MYSQL_DATABASE: vikunja
-    volumes:
-      - /home/mafyuh/vikunja/db:/var/lib/mysql
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD"]
-      interval: 2s
-      start_period: 30s
 
 volumes:
   portainer_data:
