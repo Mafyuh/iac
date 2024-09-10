@@ -1,7 +1,7 @@
 ---
 services:
   server:
-    image: codeberg.org/forgejo/forgejo:8.0.2
+    image: codeberg.org/forgejo/forgejo:8.0.3
     container_name: forgejo
     environment:
       - USER_UID=1000
@@ -69,6 +69,8 @@ services:
   uptime-kuma:
     image: louislam/uptime-kuma:1.23.13
     container_name: uptime-kuma
+    environment:
+      - UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN=true
     ports:
       - 3001:3001
     volumes:
@@ -107,7 +109,7 @@ services:
     networks:
       - gitea_main
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.57.0
+    image: ghcr.io/n8n-io/n8n:1.58.1
     container_name: n8n
     ports:
       - 5678:5678

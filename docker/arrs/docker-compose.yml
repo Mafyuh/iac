@@ -43,7 +43,7 @@ services:
       - PGID=1000
 
   radarr:
-    image: ghcr.io/linuxserver/radarr@sha256:47acec85a0d92d107096088aebe83d1d0a434def34e5bac317fff18ca28741ae
+    image: ghcr.io/linuxserver/radarr@sha256:5ab12592e768d04d94bc04877bee194f372ea3946abc6de689311f4d8559ee2f
     container_name: radarr
     ports:
       - "7878:7878"
@@ -57,7 +57,7 @@ services:
       - PGID=1000
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr@sha256:879f5f35b05566f71296bad0f3704709103568a6b4f42f5959543f5322728723
+    image: ghcr.io/linuxserver/sonarr@sha256:138998077a802c18b76c26636301fcd5517b7bfaf75db025d457199176078a12
     container_name: sonarr
     ports:
       - "8989:8989"
@@ -78,6 +78,7 @@ services:
       - /docker/appdata/homarr/configs:/app/data/configs
       - /docker/appdata/homarr/icons:/app/public/icons
       - /docker/appdata/homarr/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - '7575:7575'
     environment:
@@ -90,8 +91,21 @@ services:
       - NEXTAUTH_URL=${NEXTAUTH_URL}
       - AUTH_OIDC_ADMIN_GROUP=${AUTH_OIDC_ADMIN_GROUP}
 
+  homarr-iframes:
+    image: ghcr.io/diogovalentte/homarr-iframes:v0.1.19
+    container_name: homarr-iframes
+    ports:
+      - "8081:8080"
+    environment:
+      - VIKUNJA_TOKEN=$VIKUNJA_TOKEN
+      - INTERNAL_VIKUNJA_ADDRESS=$INTERNAL_VIKUNJA_ADDRESS
+      - VIKUNJA_ADDRESS=$VIKUNJA_ADDRESS
+      - UPTIMEKUMA_ADDRESS=$UPTIMEKUMA_ADDRESS
+      - TZ=$TZ
+
+
   doplarr:
-    image: ghcr.io/linuxserver/doplarr@sha256:85c50e8af09ce227b2c121e1e7d4d9d0ff7f943beea024a9b4e5f3e9ad14a06c
+    image: ghcr.io/linuxserver/doplarr@sha256:8c46c09457f5b14859dbc26958a6ff665df34bd189d3c9b959861d9fdbc8bc52
     container_name: doplarr
     environment:
       - PUID=1000
@@ -115,29 +129,15 @@ services:
       - /docker/appdata/doplarr/config:/config
     restart: unless-stopped
 
-  jfa-go:
-    image: hrfee/jfa-go
-    container_name: jfa-go
+  pinchflat:
+    image: ghcr.io/kieraneglin/pinchflat@sha256:16dca569fa5f890f60d3b04f0cd25d2af7ccd960ad635ae8ba1e514619df189f
+    environment:
+      - TZ=America/New_York
     ports:
-      - 8056:8056
+      - "8945:8945"
     volumes:
-      - /docker/appdata/jfa-go/config:/data
-      - /etc/localtime:/etc/localtime:ro
-
-  cadvisor:
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
-    ports:
-      - 9999:8080
-    container_name: cadvisor
-    privileged: true
-    devices:
-      - /dev/kmsg
-    image: gcr.io/cadvisor/cadvisor:v0.50.0
+      - /docker/appdata/pinchflat/config:/config
+      - /data/media/Youtube/downloads:/downloads
 
   syncthing:
     image: ghcr.io/linuxserver/syncthing@sha256:d5481de808a1de5a13b814a922b1f6de5fcde64c1ca95b0a065218b56570fae3
@@ -155,21 +155,6 @@ services:
       - 22000:22000/tcp
       - 22000:22000/udp
       - 21027:21027/udp
-    restart: unless-stopped
-
-  code-server:
-    image: ghcr.io/linuxserver/code-server@sha256:71a3e3fba62f01a82f04a3f38b7ebe45f0d44dab63bc17ef279cf62af2c217cb
-    container_name: code-server
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - SUDO_PASSWORD=$SUDO_PASSWORD
-      - PROXY_DOMAIN=$PROXY_DOMAIN
-    volumes:
-      - /docker/appdata/code-server/config:/config
-    ports:
-      - 8443:8443
     restart: unless-stopped
 
 networks:
