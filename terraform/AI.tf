@@ -7,7 +7,7 @@ resource "proxmox_virtual_environment_vm" "AI" {
     machine = "q35"
     description  = "Stable-Diffusion"
     tags         = ["tofu", "ubuntu-22", "iac-repo"]
-    started      = true
+    started      = false
 
     agent {
       enabled = true 

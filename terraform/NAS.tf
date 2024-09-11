@@ -66,6 +66,8 @@ resource "proxmox_virtual_environment_vm" "TrueNAS" {
   timeout_shutdown_vm     = 1800
   timeout_start_vm        = 1800
   timeout_stop_vm         = 300
+  
+  # I do not consider this import done. Alot of things need updating on here (4 HDD's are connected)
 
   lifecycle {
     ignore_changes = [
