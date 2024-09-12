@@ -130,7 +130,7 @@ services:
     restart: unless-stopped
 
   pinchflat:
-    image: ghcr.io/kieraneglin/pinchflat@sha256:16dca569fa5f890f60d3b04f0cd25d2af7ccd960ad635ae8ba1e514619df189f
+    image: ghcr.io/kieraneglin/pinchflat@sha256:2642214c8e04c5092f4c983ac7fe7804e1acadd5a9677d5101d0bb49c4185f14
     environment:
       - TZ=America/New_York
     ports:
