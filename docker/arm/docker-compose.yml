@@ -109,7 +109,7 @@ services:
     networks:
       - gitea_main
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.58.1
+    image: ghcr.io/n8n-io/n8n:1.59.0
     container_name: n8n
     ports:
       - 5678:5678
@@ -139,7 +139,7 @@ services:
         ipv4_address: 172.25.0.25
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:2339cd2967d886ef16d9ba3c332060330915b53111aa022eba7313a1136f0a4a
+    image: ghcr.io/linuxserver/syncthing@sha256:cd9ec0abcab9eb51a5f1d2fd19cad2d5e84e479e6589d809121614080b37c4f2
     container_name: syncthing
     hostname: ARM #optional
     environment:
