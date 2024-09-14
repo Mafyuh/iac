@@ -31,7 +31,7 @@ services:
       - PGID=1000
 
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr@sha256:9dd32e2270d174b07bd33a1f54e2b79e03ad944df62ed93efa08f4a381adc9a1
+    image: ghcr.io/linuxserver/prowlarr@sha256:c1318191d5211ac7462c754422eafe350ed0de61c4160065a420896068ec1ccc
     container_name: prowlarr
     ports:
       - "9696:9696"
@@ -140,7 +140,7 @@ services:
       - /data/media/Youtube/downloads:/downloads
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:2339cd2967d886ef16d9ba3c332060330915b53111aa022eba7313a1136f0a4a
+    image: ghcr.io/linuxserver/syncthing@sha256:cd9ec0abcab9eb51a5f1d2fd19cad2d5e84e479e6589d809121614080b37c4f2
     container_name: syncthing
     hostname: ARRS
     environment:
