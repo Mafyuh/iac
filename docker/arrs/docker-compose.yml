@@ -15,7 +15,7 @@ services:
       - PGID=1000
 
   lidarr:
-    image: ghcr.io/linuxserver/lidarr@sha256:a77af413426b8509fad2d02f5b89104a5766ee6ebb13497d73993e74f6cfa0a8
+    image: ghcr.io/linuxserver/lidarr@sha256:1a543b03bbb76a6683bbbe77e4366917f0e7eae67f2e5e6c005dd40344ec7008
     container_name: lidarr
     ports:
       - "8686:8686"
@@ -31,7 +31,7 @@ services:
       - PGID=1000
 
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr@sha256:9dd32e2270d174b07bd33a1f54e2b79e03ad944df62ed93efa08f4a381adc9a1
+    image: ghcr.io/linuxserver/prowlarr@sha256:c1318191d5211ac7462c754422eafe350ed0de61c4160065a420896068ec1ccc
     container_name: prowlarr
     ports:
       - "9696:9696"
@@ -57,7 +57,7 @@ services:
       - PGID=1000
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr@sha256:138998077a802c18b76c26636301fcd5517b7bfaf75db025d457199176078a12
+    image: ghcr.io/linuxserver/sonarr@sha256:28cc44346fc87805b52a4376a89edc12cf082a5530cffee800a6c05dee482734
     container_name: sonarr
     ports:
       - "8989:8989"
@@ -130,7 +130,7 @@ services:
     restart: unless-stopped
 
   pinchflat:
-    image: ghcr.io/kieraneglin/pinchflat@sha256:16dca569fa5f890f60d3b04f0cd25d2af7ccd960ad635ae8ba1e514619df189f
+    image: ghcr.io/kieraneglin/pinchflat@sha256:2642214c8e04c5092f4c983ac7fe7804e1acadd5a9677d5101d0bb49c4185f14
     environment:
       - TZ=America/New_York
     ports:
@@ -140,7 +140,7 @@ services:
       - /data/media/Youtube/downloads:/downloads
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:2339cd2967d886ef16d9ba3c332060330915b53111aa022eba7313a1136f0a4a
+    image: ghcr.io/linuxserver/syncthing@sha256:cd9ec0abcab9eb51a5f1d2fd19cad2d5e84e479e6589d809121614080b37c4f2
     container_name: syncthing
     hostname: ARRS
     environment:
