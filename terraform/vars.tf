@@ -53,3 +53,7 @@ variable "kasm_ip" {
 variable "kasm_ssh_ip" {
         type = string
 }
+
+variable "ubu_ip_address" {
+        type = string
+}
