@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
   
   fail2ban:
-    image: crazymax/fail2ban:latest
+    image: crazymax/fail2ban:1.1.0
     container_name: fail2ban_docker-pi
     network_mode: "host"
     cap_add:
