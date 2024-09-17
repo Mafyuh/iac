@@ -33,6 +33,9 @@ jobs:
           IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
           for folder in "${folder_array[@]}"; do
             case $folder in
+              actual)
+                target_host="ubu.lan"
+                ;;
               arrs)
                 target_host="arrs.lan"
                 ;;
@@ -60,11 +63,14 @@ jobs:
               netboot)
                 target_host="netboot.lan"
                 ;;
-              nexus)
-                target_host="nexus.lan"
+              nexterm)
+                target_host="ubu.lan"
                 ;;
-              pages)
-                target_host="pages.lan"
+              npm)
+                target_host="npm.lan"
+                ;;  
+              paperless)
+                target_host="ubu.lan"
                 ;;
               portainer)
                 target_host="port.lan"
