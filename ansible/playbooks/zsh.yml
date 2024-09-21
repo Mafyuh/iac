@@ -7,7 +7,6 @@
     user: "{{ ansible_user }}"
 
   tasks:
-
     - name: Install necessary packages
       apt:
         name:
@@ -17,10 +16,34 @@
         state: present
         update_cache: yes
 
-    - name: Change default shell to Zsh
-      user:
-        name: "{{ user }}"
-        shell: /bin/zsh
+    - name: Pre-create basic .zshrc to avoid the zsh-newuser-install prompt
+      copy:
+        dest: "/home/{{ user }}/.zshrc"
+        content: |
+          # Basic .zshrc to prevent zsh-newuser-install prompt
+          # Path to your Oh My Zsh installation.
+          export ZSH="$HOME/.oh-my-zsh"
+          export PATH=$PATH:$HOME/.local/bin
+
+          # Set theme
+          ZSH_THEME="robbyrussell"
+
+          # Plugins
+          plugins=(git ubuntu copypath copyfile dirhistory zsh-interactive-cd docker docker-compose opentofu zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use)
+
+          source $ZSH/oh-my-zsh.sh
+
+          # Set up Oh My Posh
+          eval "$(oh-my-posh init zsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/sonicboom_dark.omp.json)"
+
+          # Custom aliases
+          alias dcd="docker compose down"
+          alias dcu="docker compose up -d"
+
+          # Display system information
+          neofetch
+        owner: "{{ user }}"
+        mode: '0644'
 
     - name: Install Oh My Zsh (unattended)
       shell: |
@@ -72,30 +95,7 @@
         owner: "{{ user }}"
         mode: '0755'
 
-    - name: Set up custom .zshrc
-      copy:
-        dest: "/home/{{ user }}/.zshrc"
-        content: |
-          # Path to your Oh My Zsh installation.
-          export ZSH="$HOME/.oh-my-zsh"
-          export PATH=$PATH:$HOME/.local/bin
-
-          # Set theme
-          ZSH_THEME="robbyrussell"
-
-          # Plugins
-          plugins=(git ubuntu copypath copyfile dirhistory zsh-interactive-cd docker docker-compose opentofu zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use)
-
-          source $ZSH/oh-my-zsh.sh
-
-          # Set up Oh My Posh
-          eval "$(oh-my-posh init zsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/sonicboom_dark.omp.json)"
-
-          # Custom aliases
-          alias dcd="docker compose down"
-          alias dcu="docker compose up -d"
-
-          # Display system information
-          neofetch
-        owner: "{{ user }}"
-        mode: '0644'
+    - name: Change default shell to Zsh (after setting up .zshrc)
+      user:
+        name: "{{ user }}"
+        shell: /bin/zsh
