@@ -94,27 +94,38 @@ build {
         ]
     }
 
-    
     provisioner "file" {
         source = "files/pve.cfg"
         destination = "/tmp/pve.cfg"
     }
 
-    
     provisioner "shell" {
         inline = [ "sudo cp /tmp/pve.cfg /etc/cloud/cloud.cfg.d/pve.cfg" ]
     }
 
-    # Install Commonly Used Things - add alias's - set git config
+    # Install commonly used things - add alias's - set git config
     provisioner "shell" {
         inline = [
-            "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common qemu-guest-agent net-tools",
+            "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common qemu-guest-agent net-tools zsh neofetch fzf",
+            "sudo chsh -s $(which zsh) mafyuh",
             "curl -fsSL https://get.docker.com | sudo sh",
-            "echo \"alias dcu='docker compose up -d'\" >> ~/.bashrc",
-            "echo \"alias dcd='docker compose down'\" >> ~/.bashrc",
+            "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" --unattended",
+            "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting",
+            "git clone https://github.com/zsh-users/zsh-autosuggestions.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions",
+            "git clone https://github.com/zsh-users/zsh-history-substring-search.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search",
+            "git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/you-should-use",
+            "mkdir -p /home/mafyuh/.local/bin",
+            "curl -fsSL https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -o /home/mafyuh/.local/bin/oh-my-posh",
+            "sudo chmod +x /home/mafyuh/.local/bin/oh-my-posh",
             "git config --global user.name \"Mafyuh\"",
             "git config --global user.email \"matt@mafyuh.com\"",
             "sudo apt-get -y update"
         ]
     }
+
+    provisioner "file" {
+        source = "files/.zshrc"
+        destination = "~/.zshrc"
+    }
+
 }
