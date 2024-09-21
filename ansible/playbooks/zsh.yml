@@ -1,7 +1,7 @@
 ---
 - name: Configure Zsh, Neofetch, FZF, and custom .zshrc
   hosts: all
-  become: true
+  become: false
   vars:
     zsh_custom: "{{ ansible_env.HOME }}/.oh-my-zsh/custom"
     user: "{{ ansible_user }}"
@@ -48,9 +48,11 @@
     - name: Install Oh My Zsh (unattended)
       shell: |
         RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      environment:
+        HOME: "/home/{{ ansible_user }}"
       args:
-        chdir: "/home/{{ user }}"
-        creates: "/home/{{ user }}/.oh-my-zsh"
+        chdir: "/home/{{ ansible_user }}"
+        creates: "/home/{{ ansible_user }}/.oh-my-zsh"
 
     - name: Clone zsh-syntax-highlighting plugin
       git:
