@@ -1,7 +1,7 @@
 ---
 - name: Configure Zsh, Neofetch, FZF, and custom .zshrc
   hosts: all
-  become: false
+  become: true
   vars:
     zsh_custom: "{{ ansible_env.HOME }}/.oh-my-zsh/custom"
     user: "{{ ansible_user }}"
