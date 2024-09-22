@@ -1,0 +1,115 @@
+---
+- name: Configure Zsh, Neofetch, FZF, and custom .zshrc
+  hosts: all
+  become: true
+  vars:
+    zsh_custom: "{{ ansible_env.HOME }}/.oh-my-zsh/custom"
+    user: "{{ ansible_user }}"
+
+  tasks:
+    - name: Install necessary packages
+      apt:
+        name:
+          - zsh
+          - neofetch
+          - fzf
+        state: present
+        update_cache: yes
+
+    - name: Pre-create basic .zshrc
+      copy:
+        dest: "/home/{{ user }}/.zshrc"
+        content: |
+          # Path to your Oh My Zsh installation.
+          export ZSH="$HOME/.oh-my-zsh"
+          export PATH=$PATH:$HOME/.local/bin
+
+          # Set theme
+          ZSH_THEME="robbyrussell"
+
+          # Plugins
+          plugins=(git ubuntu copypath copyfile dirhistory zsh-interactive-cd docker docker-compose opentofu zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use)
+
+          source $ZSH/oh-my-zsh.sh
+
+          # Set up Oh My Posh
+          eval "$(oh-my-posh init zsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/sonicboom_dark.omp.json)"
+
+          # Custom aliases
+          alias dcd="docker compose down"
+          alias dcu="docker compose up -d"
+
+          # Display system information
+          neofetch
+        owner: "{{ user }}"
+        mode: '0644'
+
+    - name: Download Oh My Zsh installation script
+      get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /tmp/install_ohmyzsh.sh
+
+    - name: Run Oh My Zsh installation script
+      command: sh /tmp/install_ohmyzsh.sh --unattended
+      register: ohmyzsh_result
+      failed_when: "'FAILED' in ohmyzsh_result.stderr"
+      args:
+        chdir: "/home/{{ user }}"
+      environment:
+        HOME: "/home/{{ user }}"
+        RUNZSH: "no"
+
+    - name: Ensure custom plugins directory exists
+      file:
+        path: "{{ zsh_custom }}/plugins"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+
+    - name: Clone zsh-syntax-highlighting plugin
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+        update: yes
+
+    - name: Clone zsh-autosuggestions plugin
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+        update: yes
+
+    - name: Clone zsh-history-substring-search plugin
+      git:
+        repo: https://github.com/zsh-users/zsh-history-substring-search.git
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
+        update: yes
+
+    - name: Clone you-should-use plugin
+      git:
+        repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/you-should-use"
+        update: yes
+
+    - name: Ensure .local/bin directory exists
+      file:
+        path: "/home/{{ user }}/.local/bin"
+        state: directory
+        owner: "{{ user }}"
+        mode: '0755'
+
+    - name: Download Oh My Posh binary
+      get_url:
+        url: https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64
+        dest: "/home/{{ user }}/.local/bin/oh-my-posh"
+        mode: '0755'
+
+    - name: Ensure ownership of .local/bin/oh-my-posh
+      file:
+        path: "/home/{{ user }}/.local/bin/oh-my-posh"
+        owner: "{{ user }}"
+        mode: '0755'
+
+    - name: Change default shell to Zsh (after setting up .zshrc)
+      user:
+        name: "{{ user }}"
+        shell: /bin/zsh
