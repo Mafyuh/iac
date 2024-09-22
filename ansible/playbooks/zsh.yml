@@ -16,7 +16,7 @@
         state: present
         update_cache: yes
 
-    - name: Pre-create basic .zshrc to avoid the zsh-newuser-install prompt
+    - name: Pre-create basic .zshrc
       copy:
         dest: "/home/{{ user }}/.zshrc"
         content: |
@@ -45,14 +45,19 @@
         owner: "{{ user }}"
         mode: '0644'
 
-    - name: Install Oh My Zsh (unattended)
-      shell: |
-        RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-      environment:
-        HOME: "/home/{{ user }}"
+    - name: Download Oh My Zsh installation script
+      get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /tmp/install_ohmyzsh.sh
+
+    - name: Run Oh My Zsh installation script
+      command: sh /tmp/install_ohmyzsh.sh --unattended
+      register: ohmyzsh_result
+      failed_when: "'FAILED' in ohmyzsh_result.stderr"
       args:
         chdir: "/home/{{ user }}"
-        creates: "/home/{{ user }}/.oh-my-zsh"
+      environment:
+        HOME: "/home/{{ user }}"
 
     - name: Ensure custom plugins directory exists
       file:
@@ -64,25 +69,25 @@
     - name: Clone zsh-syntax-highlighting plugin
       git:
         repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+        dest: "{{ zsh_custom }}/plugins/zsh-syntax-highlighting"
         update: yes
 
     - name: Clone zsh-autosuggestions plugin
       git:
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
-        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+        dest: "{{ zsh_custom }}/plugins/zsh-autosuggestions"
         update: yes
 
     - name: Clone zsh-history-substring-search plugin
       git:
         repo: https://github.com/zsh-users/zsh-history-substring-search.git
-        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
+        dest: "{{ zsh_custom }}/plugins/zsh-history-substring-search"
         update: yes
 
     - name: Clone you-should-use plugin
       git:
         repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
-        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/you-should-use"
+        dest: "{{ zsh_custom }}/plugins/you-should-use"
         update: yes
 
     - name: Ensure .local/bin directory exists
