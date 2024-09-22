@@ -130,7 +130,7 @@ services:
 
   translate:
     container_name: whisper-libretranslate
-    image: libretranslate/libretranslate:v1.6.0-cuda
+    image: libretranslate/libretranslate:v1.6.1-cuda
     env_file:
       - .env
     networks:
