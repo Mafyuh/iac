@@ -51,7 +51,7 @@
       environment:
         HOME: "/home/mafyuh"
       args:
-        chdir: "/home/mafyuh}"
+        chdir: "/home/mafyuh"
         creates: "/home/mafyuh/.oh-my-zsh"
 
     - name: Clone zsh-syntax-highlighting plugin
