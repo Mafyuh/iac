@@ -49,34 +49,41 @@
       shell: |
         RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       environment:
-        HOME: "/home/mafyuh"
+        HOME: "/home/{{ user }}"
       args:
-        chdir: "/home/mafyuh"
-        creates: "/home/mafyuh/.oh-my-zsh"
+        chdir: "/home/{{ user }}"
+        creates: "/home/{{ user }}/.oh-my-zsh"
+
+    - name: Ensure custom plugins directory exists
+      file:
+        path: "{{ zsh_custom }}/plugins"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
 
     - name: Clone zsh-syntax-highlighting plugin
       git:
         repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
         dest: "{{ zsh_custom }}/plugins/zsh-syntax-highlighting"
-        update: no
+        update: yes
 
     - name: Clone zsh-autosuggestions plugin
       git:
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
         dest: "{{ zsh_custom }}/plugins/zsh-autosuggestions"
-        update: no
+        update: yes
 
     - name: Clone zsh-history-substring-search plugin
       git:
         repo: https://github.com/zsh-users/zsh-history-substring-search.git
         dest: "{{ zsh_custom }}/plugins/zsh-history-substring-search"
-        update: no
+        update: yes
 
-    - name: Clone zsh-you-should-use plugin
+    - name: Clone you-should-use plugin
       git:
         repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
         dest: "{{ zsh_custom }}/plugins/you-should-use"
-        update: no
+        update: yes
 
     - name: Ensure .local/bin directory exists
       file:
