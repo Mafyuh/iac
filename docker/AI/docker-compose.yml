@@ -1,10 +1,10 @@
-version: "3.8"
-
 services:
   ollama:
     image: ollama/ollama:0.3.11
     container_name: ollama
     restart: unless-stopped
+    networks:
+      - ai-stack
     volumes:
       - ollama:/root/.ollama
     ports:
@@ -21,6 +21,28 @@ services:
     image: ghcr.io/open-webui/open-webui:v0.3.23
     container_name: open-webui
     restart: unless-stopped
+    networks:
+      - ai-stack
+    environment:
+      - ENABLE_RAG_WEB_SEARCH=True
+      - RAG_WEB_SEARCH_ENGINE=searxng
+      - RAG_WEB_SEARCH_RESULT_COUNT=3
+      - RAG_WEB_SEARCH_CONCURRENT_REQUESTS=10
+      - SEARXNG_QUERY_URL=http://searxng:8080/search?q=<query>
+      - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
+      - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+      - OPENID_PROVIDER_URL=${OPENID_PROVIDER_URL}
+      - OAUTH_PROVIDER_NAME=${OAUTH_PROVIDER_NAME}
+      - OAUTH_USERNAME_CLAIM=name
+      - OAUTH_EMAIL_CLAIM=email
+      - OAUTH_SCOPES=${OAUTH_SCOPES}
+      - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=True
+      - ENABLE_OAUTH_SIGNUP=True
+      - ENABLE_SIGNUP=True
+      - WEBUI_AUTH=False
+      - ENABLE_LOGIN_FORM=True
+      - ENABLE_IMAGE_GENERATION=True
+      - COMFYUI_BASE_URL=http://stable-diffusion-webui:7860
     ports:
       - 3000:8080
     volumes:
@@ -28,8 +50,156 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
 
+  searxng:
+    image: searxng/searxng@sha256:efc99f666dd360bb5f606b401cff5baad6cdbb3095fd061b3eb34e0c1a12e54a
+    container_name: searxng
+    networks:
+      - ai-stack
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/appdata/searxng:/etc/searxng
+    depends_on:
+      - ollama
+      - open-webui
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+
+  stable-diffusion-download:
+    build: /docker/appdata/stable-diffusion-webui-docker/services/download/
+    image: comfy-download
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/appdata/stable-diffusion-webui-docker/data:/data
+
+  stable-diffusion-webui:
+    build: /docker/appdata/stable-diffusion-webui-docker/services/comfy/
+    image: comfy-ui
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - CLI_ARGS=
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/appdata/stable-diffusion-webui-docker/data:/data
+      - /docker/appdata/stable-diffusion-webui-docker/output:/output
+    stop_signal: SIGKILL
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [compute, utility]
+    restart: unless-stopped
+    networks:
+      - ai-stack
+    ports:
+      - "7860:7860"
+
+  mongo:
+    image: mongo
+    env_file:
+      - .env
+    networks:
+      - ai-stack
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/appdata/whisper/db_data:/data/db
+      - /docker/appdata/whisper/db_data/logs/:/var/log/mongodb/
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER:-whisper}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASS:-whisper}
+    command: ['--logpath', '/var/log/mongodb/mongod.log']
+    ports:
+      - "27017:27017"
+
+  translate:
+    container_name: whisper-libretranslate
+    image: libretranslate/libretranslate:v1.6.0-cuda
+    env_file:
+      - .env
+    networks:
+      - ai-stack
+    restart: "no"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/appdata/whisper/libretranslate/data:/home/libretranslate/.local/share
+      - /docker/appdata/whisper/libretranslate/cache:/home/libretranslate/.local/cache
+    user: root
+    tty: true
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - LT_DISABLE_WEB_UI=True
+      - LT_LOAD_ONLY=${LT_LOAD_ONLY:-en,fr,es}
+      - LT_UPDATE_MODELS=True
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+    ports:
+      - "5000:5000"
+
+  whisper:
+    container_name: whisper
+    pull_policy: always
+    image: pluja/whishper:v3.1.4-gpu
+    env_file:
+      - .env
+    networks:
+      - ai-stack
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/appdata/whisper/uploads:/app/uploads
+      - /docker/appdata/whisper/logs:/var/log/whishper
+      - /docker/appdata/whisper/models:/app/models
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - PUBLIC_INTERNAL_API_HOST=http://127.0.0.1:80
+      - PUBLIC_API_HOST=${WHISHPER_HOST:-}
+      - PUBLIC_WHISHPER_PROFILE=gpu
+      - WHISPER_MODELS_DIR=/app/models
+      - UPLOAD_DIR=/app/uploads
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+    ports:
+      - "8090:80"
+
+networks:
+  ai-stack:
+    external: true
+
 volumes:
   ollama:
     external: true
   open-webui:
-    external: true
+    
