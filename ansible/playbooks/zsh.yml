@@ -49,10 +49,10 @@
       shell: |
         RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       environment:
-        HOME: "/home/{{ ansible_user }}"
+        HOME: "/home/mafyuh"
       args:
-        chdir: "/home/{{ ansible_user }}"
-        creates: "/home/{{ ansible_user }}/.oh-my-zsh"
+        chdir: "/home/mafyuh}"
+        creates: "/home/mafyuh/.oh-my-zsh"
 
     - name: Clone zsh-syntax-highlighting plugin
       git:
