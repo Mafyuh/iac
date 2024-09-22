@@ -64,25 +64,25 @@
     - name: Clone zsh-syntax-highlighting plugin
       git:
         repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-        dest: "{{ zsh_custom }}/plugins/zsh-syntax-highlighting"
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
         update: yes
 
     - name: Clone zsh-autosuggestions plugin
       git:
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
-        dest: "{{ zsh_custom }}/plugins/zsh-autosuggestions"
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
         update: yes
 
     - name: Clone zsh-history-substring-search plugin
       git:
         repo: https://github.com/zsh-users/zsh-history-substring-search.git
-        dest: "{{ zsh_custom }}/plugins/zsh-history-substring-search"
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
         update: yes
 
     - name: Clone you-should-use plugin
       git:
         repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
-        dest: "{{ zsh_custom }}/plugins/you-should-use"
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/you-should-use"
         update: yes
 
     - name: Ensure .local/bin directory exists
