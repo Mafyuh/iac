@@ -1,0 +1,11 @@
+---
+- name: Prune unused Docker images
+  hosts: all
+  become: true
+  tasks:
+    - name: Prune unused Docker images
+      docker_image:
+        name: all
+        state: absent
+        force: yes
+        prune: yes
