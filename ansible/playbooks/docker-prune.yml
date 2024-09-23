@@ -3,9 +3,7 @@
   hosts: all
   become: true
   tasks:
-    - name: Prune unused Docker images
-      docker_image:
-        name: all
-        state: absent
-        force: yes
-        prune: yes
+    - name: Prune unused Docker images using shell
+      shell: docker image prune -f
+      args:
+        warn: false
