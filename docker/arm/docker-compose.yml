@@ -168,6 +168,8 @@ services:
     restart: always
     volumes:
       - /docker/appdata/linkwarden/pgdata:/var/lib/postgresql/data
+    networks:
+      - gitea_main
   linkwarden:
     env_file: .env
     environment:
