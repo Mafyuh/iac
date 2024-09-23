@@ -5,5 +5,3 @@
   tasks:
     - name: Prune unused Docker images using shell
       shell: docker image prune -f
-      args:
-        warn: false
