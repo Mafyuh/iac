@@ -12,7 +12,7 @@ services:
     restart: always
 
   vikunja:
-    image: vikunja/vikunja@sha256:c400bdcb2ae4a78fccb9b463d01f96d1b2cfaef3484a4dd5c2a26e55eadc2d7a
+    image: vikunja/vikunja@sha256:c93c58841215592c51a40fa978da25efadd1fff2460b42443c344132f322eef1
     environment:
       VIKUNJA_SERVICE_PUBLICURL: $VIKUNJA_SERVICE_PUBLICURL
       VIKUNJA_DATABASE_TYPE: sqlite
