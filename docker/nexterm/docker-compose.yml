@@ -7,5 +7,13 @@ services:
     volumes:
       - nexterm:/app/data
     image: germannewsmaker/nexterm:1.0.2-OPEN-PREVIEW
+
+  it-tools:
+    container_name: it-tools
+    ports:
+      - 8090:80
+    image: corentinth/it-tools@sha256:c191615f23eb6a18b8faca4dba15fc11caefea250ce3a8e29d249757544092eb
+    restart: unless-stopped
+
 volumes:
   nexterm:
