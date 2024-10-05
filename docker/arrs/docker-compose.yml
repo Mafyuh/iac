@@ -140,7 +140,7 @@ services:
       - /data/media/Youtube/downloads:/downloads
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:0141ef2c1ad754d6c93b92c0aa71648bf8c08b97ed80bf943091ad24332fcbb5
+    image: ghcr.io/linuxserver/syncthing@sha256:057914bc48ed5626caf45c29aaff0b20c309a5000123a0c64d547eaf70d60680
     container_name: syncthing
     hostname: ARRS
     environment:
