@@ -15,7 +15,7 @@
         var: git_pull_output.stdout_lines
 
     - name: Restart services
-      command: docker compose up -d
+      command: docker compose up -d --remove-orphans
       args:
         chdir: "{{ repo_path }}"
       register: docker_compose_output
