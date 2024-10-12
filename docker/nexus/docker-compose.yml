@@ -1,7 +1,7 @@
 ---
 services:
   nexus:
-    image: sonatype/nexus3:3.70.3
+    image: sonatype/nexus3:3.73.0
     container_name: nexus
     restart: unless-stopped
     ports:
