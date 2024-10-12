@@ -1,9 +1,9 @@
 data "local_file" "ssh_public_key" {
-  filename = "~/.ssh/main_key.pub"
+  filename = "/home/mafyuh/.ssh/main_key.pub"
 }
 
 data "local_file" "ssh_public_key_2" {
-  filename = "~/.ssh/id_rsa.pub"
+  filename = "/home/mafyuh/.ssh/id_rsa.pub"
 }
 
 resource "proxmox_virtual_environment_file" "cloud_config" {
