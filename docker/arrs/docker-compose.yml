@@ -158,6 +158,7 @@ services:
       - PROXY_DOMAIN=$PROXY_DOMAIN
     volumes:
       - /docker/appdata/code-server/config:/config
+      - /home/mafyuh/.ssh:/home/mafyuh/.ssh
     ports:
       - 8443:8443
     restart: unless-stopped
