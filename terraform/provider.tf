@@ -17,7 +17,7 @@ terraform {
     skip_s3_checksum            = true
     skip_metadata_api_check     = true
     endpoints = {
-      s3 = "https://id8kdbgzbggf.compat.objectstorage.us-ashburn-1.oraclecloud.com"
+      s3 = var.s3_endpoint
     }
   }
 }

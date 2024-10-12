@@ -61,3 +61,7 @@ variable "ubu_ip_address" {
 variable "pve2_ip_address" {
         type = string
 }
+
+variable "s3_endpoint" {
+        type = string
+}
