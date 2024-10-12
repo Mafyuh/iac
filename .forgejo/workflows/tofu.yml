@@ -1,0 +1,32 @@
+name: Terraform Apply
+
+on:
+  push:
+    paths:
+      - 'terraform/**'
+
+jobs:
+  terraform:
+    runs-on: docker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download OpenTofu Installer
+        run: |
+          curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
+          chmod +x install-opentofu.sh
+
+      - name: Inspect and Install OpenTofu
+        run: ./install-opentofu.sh --install-method deb
+
+      - name: Clean up Installer Script
+        run: rm -f install-opentofu.sh
+
+      - name: Initialize OpenTofu
+        run: opentofu init
+        working-directory: ./terraform
+
+      - name: Apply OpenTofu
+        run: opentofu apply -auto-approve
+        working-directory: ./terraform
