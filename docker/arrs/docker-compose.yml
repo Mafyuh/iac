@@ -148,7 +148,7 @@ services:
     restart: unless-stopped
 
   code-server:
-    image: ghcr.io/linuxserver/code-server@sha256:71a3e3fba62f01a82f04a3f38b7ebe45f0d44dab63bc17ef279cf62af2c217cb
+    image: ghcr.io/linuxserver/code-server@sha256:e2e68493b65e367b8eefc31345bb776cea50a145b8af43ee19f057300c92b1c1
     container_name: code-server
     environment:
       - PUID=1000
