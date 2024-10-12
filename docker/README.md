@@ -59,11 +59,6 @@ Homelab docker-compose environment defined in code. Using Forgejo Actions and Re
         <td>How I expose some of these services</td>
     </tr>
     <tr>
-        <td><img vertical-align=baseline width="32" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Codeberg_logo.svg/1200px-Codeberg_logo.svg.png"></td>
-        <td><a href="https://codeberg.org/Codeberg/pages-server">Codeberg Pages</a></td>
-        <td>Github Pages for Gitea installs. hosts https://mafyuh.co</td>
-    </tr>
-    <tr>
         <td><img vertical-align=baseline width="32" src="https://raw.githubusercontent.com/kiranshila/Doplarr/main/logos/logo.svg"></td>
         <td><a href="https://github.com/kiranshila/Doplarr">Doplarr</a></td>
         <td>Allows my users to request content through Discord if they choose</td>
