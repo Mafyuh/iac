@@ -7,7 +7,7 @@ on:
 
 jobs:
   terraform:
-    runs-on: docker
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,9 +24,9 @@ jobs:
         run: rm -f install-opentofu.sh
 
       - name: Initialize OpenTofu
-        run: opentofu init
+        run: tofu init
         working-directory: ./terraform
 
       - name: Apply OpenTofu
-        run: opentofu apply -auto-approve
+        run: tofu apply -input=false
         working-directory: ./terraform
