@@ -187,7 +187,7 @@ services:
       - postgres
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:0141ef2c1ad754d6c93b92c0aa71648bf8c08b97ed80bf943091ad24332fcbb5
+    image: ghcr.io/linuxserver/syncthing@sha256:605814503be631f59ad34db4d4f79119ffe6f01fd0a8d5736c668e0939f81c47
     container_name: syncthing
     hostname: ARM #optional
     environment:
