@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.3.12
+    image: ollama/ollama:0.3.13
     container_name: ollama
     restart: unless-stopped
     networks:
