@@ -1,7 +1,7 @@
 services:
   actual_server:
     container_name: actual
-    image: ghcr.io/actualbudget/actual-server:24.9.0
+    image: ghcr.io/actualbudget/actual-server:24.10.1
     ports:
       - '5006:5006'
     environment:
