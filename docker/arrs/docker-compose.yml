@@ -128,17 +128,7 @@ services:
     volumes:
       - /docker/appdata/doplarr/config:/config
     restart: unless-stopped
-
-  pinchflat:
-    image: ghcr.io/kieraneglin/pinchflat@sha256:2642214c8e04c5092f4c983ac7fe7804e1acadd5a9677d5101d0bb49c4185f14
-    environment:
-      - TZ=America/New_York
-    ports:
-      - "8945:8945"
-    volumes:
-      - /docker/appdata/pinchflat/config:/config
-      - /data/media/Youtube/downloads:/downloads
-
+    
   syncthing:
     image: ghcr.io/linuxserver/syncthing@sha256:605814503be631f59ad34db4d4f79119ffe6f01fd0a8d5736c668e0939f81c47
     container_name: syncthing
