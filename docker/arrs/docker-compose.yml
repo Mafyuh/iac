@@ -128,7 +128,7 @@ services:
     volumes:
       - /docker/appdata/doplarr/config:/config
     restart: unless-stopped
-    
+
   syncthing:
     image: ghcr.io/linuxserver/syncthing@sha256:605814503be631f59ad34db4d4f79119ffe6f01fd0a8d5736c668e0939f81c47
     container_name: syncthing
@@ -145,6 +145,21 @@ services:
       - 22000:22000/tcp
       - 22000:22000/udp
       - 21027:21027/udp
+    restart: unless-stopped
+
+  code-server:
+    image: ghcr.io/linuxserver/code-server@sha256:71a3e3fba62f01a82f04a3f38b7ebe45f0d44dab63bc17ef279cf62af2c217cb
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SUDO_PASSWORD=$SUDO_PASSWORD
+      - PROXY_DOMAIN=$PROXY_DOMAIN
+    volumes:
+      - /docker/appdata/code-server/config:/config
+    ports:
+      - 8443:8443
     restart: unless-stopped
 
 networks:
