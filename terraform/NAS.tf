@@ -10,6 +10,11 @@ resource "proxmox_virtual_environment_vm" "TrueNAS" {
     "debian",
     "infrastructure",
   ]
+
+  agent {
+    enabled = true
+    type    = "virtio"
+  }
   
   # CPU Settings
   cpu {

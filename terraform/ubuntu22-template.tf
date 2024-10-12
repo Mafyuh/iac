@@ -37,4 +37,11 @@ vga {
         type = "serial0"
     }
 
+cpu {
+        cores = 2
+        type  = "host"
+        architecture = "x86_64"
+    }
 }
+
+

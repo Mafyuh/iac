@@ -1,26 +1,46 @@
 terraform {
-
-    required_providers {
-        proxmox = {
-            source = "bpg/proxmox"
-            version = ">= 0.60.1"
-        }
+  required_providers {
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = ">= 0.65.0"
     }
+  }
+
+  backend "s3" {
+    bucket                      = "BigBuckets"
+    region                      = "us-ashburn-1"
+    key                         = "tf.tfstate"
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    use_path_style              = true
+    skip_s3_checksum            = true
+    skip_metadata_api_check     = true
+    endpoints = {
+      s3 = "https://id8kdbgzbggf.compat.objectstorage.us-ashburn-1.oraclecloud.com"
+    }
+  }
 }
 
 provider "proxmox" {
-  endpoint  = var.virtual_environment_endpoint
-  password  = var.ssh_password
-  username  =  "root@pam"
-  insecure  = true
-  
+  endpoint = var.virtual_environment_endpoint
+  password = var.ssh_password
+  username = "root@pam"
+  insecure = true
+
   ssh {
     agent = true
-    username  = "root"
-    password  = var.ssh_password
+    username = "root"
+    password = var.ssh_password
+
     node {
-        name    = "prox"
-        address = var.prox_ip_address
+      name    = "prox"
+      address = var.prox_ip_address
+    }
+
+    node {
+      name    = "pve2"
+      address = var.pve2_ip_address
     }
   }
 }

@@ -59,18 +59,4 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
       initialization[0].user_data_file_id
     ]
   }
-
-provisioner "remote-exec" {
-  inline = [
-    "cd /home/mafyuh/iac/docker/kasm",
-    "git pull",
-    "docker compose up -d"
-  ]
-  connection {
-    type        = "ssh"
-    user        = "mafyuh"
-    private_key = file("/home/mafyuh/.ssh/id_rsa")
-    host        = var.kasm_ssh_ip
-  }
-}
 }
