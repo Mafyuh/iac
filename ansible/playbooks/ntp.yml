@@ -1,0 +1,33 @@
+---
+- name: Configure systemd-timesyncd to use router NTP server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure systemd-timesyncd is installed
+      apt:
+        name: systemd-timesyncd
+        state: present
+        update_cache: yes
+
+    - name: Configure timesyncd to use the router's NTP server
+      lineinfile:
+        path: /etc/systemd/timesyncd.conf
+        regexp: '^NTP='
+        line: 'NTP=10.0.0.1'
+        insertafter: '^\[Time\]'
+        state: present
+
+    - name: Restart systemd-timesyncd to apply changes
+      systemd:
+        name: systemd-timesyncd
+        state: restarted
+        enabled: yes
+
+    - name: Verify the NTP configuration
+      command: timedatectl status
+      register: timesync_status
+
+    - name: Show the status of time synchronization
+      debug:
+        msg: "{{ timesync_status.stdout }}"
