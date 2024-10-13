@@ -9,16 +9,16 @@ jobs:
   deploy:
     runs-on: docker
     container:
-      image: ubuntu:24.04
+      image: sitespeedio/node:ubuntu-22-04-nodejs-20.15.1
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 14
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          
       - name: Get Secrets from Bitwarden
         id: bitwarden-secrets
         uses: https://github.com/bitwarden/sm-action@v2
