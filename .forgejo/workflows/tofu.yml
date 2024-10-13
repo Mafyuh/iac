@@ -22,6 +22,8 @@ jobs:
           base_url: https://vault.bitwarden.com
           secrets: |
             c65f8886-f6fb-4c17-bc79-b208000604bf > arrbuntu_ip_address
+            2dae51bd-bd65-474c-971c-b20800f22afa > aws_access_key_id
+            287c852d-f2b5-467d-bfc4-b20800f25f52 > aws_secret_access_key
             a54974b8-c6b3-4df7-9042-b20800064050 > downloaders_ip_address
             dacbeafa-c671-4b9c-9334-b2080006f75b > init_password
             9ceabbd0-6492-4674-9bab-b2080006e333 > init_username
@@ -38,13 +40,7 @@ jobs:
             a4ed343a-bb92-4beb-a421-b2080005bf98 > virtual_environment_endpoint
             af0ed579-05f8-405f-b0f3-b208000620ca > vlan_gateway
 
-      - name: Set AWS Credentials
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-        run: |
-          echo "AWS Credentials Set"
+      
 
 
       - name: Setup OpenTofu
@@ -55,6 +51,8 @@ jobs:
         run: |
           tofu init \
             -var "arrbuntu_ip_address=${{ steps.bitwarden-secrets.outputs.arrbuntu_ip_address }}" \
+            -var "aws_access_key_id=${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}" \
+            -var "aws_secret_access_key=${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}" \
             -var "downloaders_ip_address=${{ steps.bitwarden-secrets.outputs.downloaders_ip_address }}" \
             -var "init_password=${{ steps.bitwarden-secrets.outputs.init_password }}" \
             -var "init_username=${{ steps.bitwarden-secrets.outputs.init_username }}" \
