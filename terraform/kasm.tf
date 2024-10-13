@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
   # VM Disk Settings
   disk {
     datastore_id = "local-lvm"
-    size         = 153
+    size         = 152
     interface    = "scsi0"
   }
 
