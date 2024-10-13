@@ -45,12 +45,11 @@ jobs:
             echo "${secret} = \"${{ steps.bitwarden-secrets.outputs[secret] }}\"" >> ./terraform/terraform.tfvars
           done
 
-      - name: Configure AWS Credentials
-        uses: https://github.com/aws-actions/configure-aws-credentials@master
-        env:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.MY_AWS_REGION }}
+      - name: Set AWS Credentials
+        run: |
+          echo "[default]" > ~/.aws/credentials
+          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+          echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
 
       - name: Setup OpenTofu
         uses: https://github.com/opentofu/setup-opentofu@v1
