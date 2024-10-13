@@ -38,12 +38,35 @@ jobs:
             a4ed343a-bb92-4beb-a421-b2080005bf98 > virtual_environment_endpoint
             af0ed579-05f8-405f-b0f3-b208000620ca > vlan_gateway
 
+
       - name: Write secrets to terraform.tfvars
+        working-directory: ./terraform
         run: |
-          SECRETS=("arrbuntu_ip_address" "downloaders_ip_address" "init_password" "kasm_ip" "kasm_ssh_ip" "npm_ip_address" "prox_ip_address" "pve2_ip_address" "s3_endpoint" "ssh_password" "ssh_username" "ubu_ip_address" "virtual_environment_api" "virtual_environment_endpoint" "vlan_gateway")
+          SECRETS=(
+            "arrbuntu_ip_address" 
+            "downloaders_ip_address" 
+            "init_password" 
+            "kasm_ip" 
+            "kasm_ssh_ip" 
+            "npm_ip_address" 
+            "prox_ip_address" 
+            "pve2_ip_address" 
+            "s3_endpoint" 
+            "ssh_password" 
+            "ssh_username" 
+            "ubu_ip_address" 
+            "virtual_environment_api" 
+            "virtual_environment_endpoint" 
+            "vlan_gateway"
+          )
+          # Clear previous terraform.tfvars if it exists
+          > terraform.tfvars 
+          
           for secret in "${SECRETS[@]}"; do
-            echo "${secret} = \"${{ steps.bitwarden-secrets.outputs[secret] }}\"" >> ./terraform/terraform.tfvars
+            value="${{ steps.bitwarden-secrets.outputs[secret] }}"
+            echo "${secret} = \"${value}\"" >> terraform.tfvars
           done
+
 
       - name: Create AWS Credentials Directory
         run: mkdir -p ~/.aws
