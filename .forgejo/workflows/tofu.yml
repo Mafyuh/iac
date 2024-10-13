@@ -1,4 +1,4 @@
-name: Terraform Apply
+name: OpenTofu Automation
 
 on:
   push:
@@ -6,27 +6,64 @@ on:
       - 'terraform/**'
 
 jobs:
-  terraform:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download OpenTofu Installer
+      - name: Get Secrets from Bitwarden
+        id: bitwarden-secrets
+        uses: https://github.com/bitwarden/sm-action@v2
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          base_url: https://vault.bitwarden.com
+          secrets: |
+            c65f8886-f6fb-4c17-bc79-b208000604bf > arrbuntu_ip_address
+            a54974b8-c6b3-4df7-9042-b20800064050 > downloaders_ip_address
+            dacbeafa-c671-4b9c-9334-b2080006f75b > init_password
+            9ceabbd0-6492-4674-9bab-b2080006e333 > init_username
+            0bc3c1a3-fc48-48ce-85c5-b2080007136a > kasm_ip
+            63ca1819-5090-4e30-9dba-b20800072718 > kasm_ssh_ip
+            47ef68aa-32a9-45b0-835d-b2080006ce38 > npm_ip_address
+            d0c7f3ec-8277-4b1b-9a1b-b2080006b842 > prox_ip_address
+            17ab7869-c7a1-4ece-8c64-b20800075213 > pve2_ip_address
+            f8f85ab2-5f6d-46a7-9e06-b20800076d26 > s3_endpoint
+            68f1d77d-4e96-498a-9464-b208000679a4 > ssh_password
+            d0762ced-73de-4f30-aa1c-b20800069536 > ssh_username
+            d8017351-7a11-42e6-9e8d-b208000739b8 > ubu_ip_address
+            1d250f4a-ae18-4e19-934c-b2080005e132 > virtual_environment_api
+            a4ed343a-bb92-4beb-a421-b2080005bf98 > virtual_environment_endpoint
+            af0ed579-05f8-405f-b0f3-b208000620ca > vlan_gateway
+
+      - name: Write secrets to terraform.tfvars
         run: |
-          curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
-          chmod +x install-opentofu.sh
+          SECRETS=("arrbuntu_ip_address" "downloaders_ip_address" "init_password" "kasm_ip" "kasm_ssh_ip" "npm_ip_address" "prox_ip_address" "pve2_ip_address" "s3_endpoint" "ssh_password" "ssh_username" "ubu_ip_address" "virtual_environment_api" "virtual_environment_endpoint" "vlan_gateway")
+          for secret in "${SECRETS[@]}"; do
+            echo "${secret} = \"${{ steps.bitwarden-secrets.outputs[secret] }}\"" >> ./terraform/terraform.tfvars
+          done
 
-      - name: Inspect and Install OpenTofu
-        run: ./install-opentofu.sh --install-method deb
+      - name: Configure AWS Credentials
+        uses: https://github.com/aws-actions/configure-aws-credentials@v2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Clean up Installer Script
-        run: rm -f install-opentofu.sh
+      - name: Setup OpenTofu
+        uses: https://github.com/opentofu/setup-opentofu@v1
 
-      - name: Initialize OpenTofu
+      - name: Run OpenTofu Init
         run: tofu init
-        working-directory: ./terraform
 
-      - name: Apply OpenTofu
-        run: tofu apply -input=false
-        working-directory: ./terraform
+      - name: Run OpenTofu Plan
+        id: plan
+        run: tofu plan -no-color
+
+      - name: Display Plan Output
+        run: |
+          echo "Plan output:"
+          echo "${{ steps.plan.outputs.stdout }}"
+
+      - name: Apply the Plan
+        if: success()
+        run: tofu apply -auto-approve
