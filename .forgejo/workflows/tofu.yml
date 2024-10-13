@@ -70,7 +70,7 @@ jobs:
 
       - name: Run OpenTofu Init
         working-directory: ./terraform
-        run: tofu init
+        run: tofu init -var-file=secrets.tfvars
 
       - name: Run OpenTofu Plan
         id: plan
