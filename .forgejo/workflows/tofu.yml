@@ -47,8 +47,9 @@ jobs:
           echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
           echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
 
+
       - name: Setup OpenTofu
-        uses: https://github.com/opentofu/setup-opentofu@v1
+        uses: https://github.com/opentofu/setup-opentofu@v1.0.4
 
       - name: Run OpenTofu Init
         working-directory: ./terraform
@@ -69,7 +70,8 @@ jobs:
             -var "ubu_ip_address=${{ steps.bitwarden-secrets.outputs.ubu_ip_address }}" \
             -var "virtual_environment_api=${{ steps.bitwarden-secrets.outputs.virtual_environment_api }}" \
             -var "virtual_environment_endpoint=${{ steps.bitwarden-secrets.outputs.virtual_environment_endpoint }}" \
-            -var "vlan_gateway=${{ steps.bitwarden-secrets.outputs.vlan_gateway }}"
+            -var "vlan_gateway=${{ steps.bitwarden-secrets.outputs.vlan_gateway }}" \
+            -var "AWS_EC2_METADATA_DISABLED=true"
 
 
       - name: Run OpenTofu Plan
