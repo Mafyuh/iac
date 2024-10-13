@@ -46,7 +46,7 @@ jobs:
           done
 
       - name: Configure AWS Credentials
-        uses: https://github.com/aws-actions/configure-aws-credentials@v4
+        uses: https://github.com/aws-actions/configure-aws-credentials@master
         env:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
