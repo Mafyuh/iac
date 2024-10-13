@@ -41,7 +41,29 @@ jobs:
             af0ed579-05f8-405f-b0f3-b208000620ca > vlan_gateway
 
       
-
+      - name: Create tfvars file
+        working-directory: ./terraform
+        run: |
+          cat <<EOF > terraform.tfvars
+          arrbuntu_ip_address = "${{ steps.bitwarden-secrets.outputs.arrbuntu_ip_address }}"
+          aws_access_key_id = "${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}"
+          aws_secret_access_key = "${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}"
+          downloaders_ip_address = "${{ steps.bitwarden-secrets.outputs.downloaders_ip_address }}"
+          init_password = "${{ steps.bitwarden-secrets.outputs.init_password }}"
+          init_username = "${{ steps.bitwarden-secrets.outputs.init_username }}"
+          kasm_ip = "${{ steps.bitwarden-secrets.outputs.kasm_ip }}"
+          kasm_ssh_ip = "${{ steps.bitwarden-secrets.outputs.kasm_ssh_ip }}"
+          npm_ip_address = "${{ steps.bitwarden-secrets.outputs.npm_ip_address }}"
+          prox_ip_address = "${{ steps.bitwarden-secrets.outputs.prox_ip_address }}"
+          pve2_ip_address = "${{ steps.bitwarden-secrets.outputs.pve2_ip_address }}"
+          s3_endpoint = "${{ steps.bitwarden-secrets.outputs.s3_endpoint }}"
+          ssh_password = "${{ steps.bitwarden-secrets.outputs.ssh_password }}"
+          ssh_username = "${{ steps.bitwarden-secrets.outputs.ssh_username }}"
+          ubu_ip_address = "${{ steps.bitwarden-secrets.outputs.ubu_ip_address }}"
+          virtual_environment_api = "${{ steps.bitwarden-secrets.outputs.virtual_environment_api }}"
+          virtual_environment_endpoint = "${{ steps.bitwarden-secrets.outputs.virtual_environment_endpoint }}"
+          vlan_gateway = "${{ steps.bitwarden-secrets.outputs.vlan_gateway }}"
+          EOF
 
       - name: Setup OpenTofu
         uses: https://github.com/opentofu/setup-opentofu@v1.0.4
@@ -49,25 +71,7 @@ jobs:
       - name: Run OpenTofu Init
         working-directory: ./terraform
         run: |
-          tofu init \
-            -var "arrbuntu_ip_address=${{ steps.bitwarden-secrets.outputs.arrbuntu_ip_address }}" \
-            -var "aws_access_key_id=${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}" \
-            -var "aws_secret_access_key=${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}" \
-            -var "downloaders_ip_address=${{ steps.bitwarden-secrets.outputs.downloaders_ip_address }}" \
-            -var "init_password=${{ steps.bitwarden-secrets.outputs.init_password }}" \
-            -var "init_username=${{ steps.bitwarden-secrets.outputs.init_username }}" \
-            -var "kasm_ip=${{ steps.bitwarden-secrets.outputs.kasm_ip }}" \
-            -var "kasm_ssh_ip=${{ steps.bitwarden-secrets.outputs.kasm_ssh_ip }}" \
-            -var "npm_ip_address=${{ steps.bitwarden-secrets.outputs.npm_ip_address }}" \
-            -var "prox_ip_address=${{ steps.bitwarden-secrets.outputs.prox_ip_address }}" \
-            -var "pve2_ip_address=${{ steps.bitwarden-secrets.outputs.pve2_ip_address }}" \
-            -var "s3_endpoint=${{ steps.bitwarden-secrets.outputs.s3_endpoint }}" \
-            -var "ssh_password=${{ steps.bitwarden-secrets.outputs.ssh_password }}" \
-            -var "ssh_username=${{ steps.bitwarden-secrets.outputs.ssh_username }}" \
-            -var "ubu_ip_address=${{ steps.bitwarden-secrets.outputs.ubu_ip_address }}" \
-            -var "virtual_environment_api=${{ steps.bitwarden-secrets.outputs.virtual_environment_api }}" \
-            -var "virtual_environment_endpoint=${{ steps.bitwarden-secrets.outputs.virtual_environment_endpoint }}" \
-            -var "vlan_gateway=${{ steps.bitwarden-secrets.outputs.vlan_gateway }}"
+          tofu init -var-file=terraform.tfvars
 
 
       - name: Run OpenTofu Plan
