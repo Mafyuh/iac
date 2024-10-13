@@ -38,17 +38,13 @@ jobs:
             a4ed343a-bb92-4beb-a421-b2080005bf98 > virtual_environment_endpoint
             af0ed579-05f8-405f-b0f3-b208000620ca > vlan_gateway
 
-      - name: Create AWS Credentials Directory
-        run: mkdir -p ~/.aws
-
       - name: Set AWS Credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
-          echo "[default]" > ~/.aws/credentials
-          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-          echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-
-      - name: Set Environment Variables
-        run: echo "AWS_EC2_METADATA_DISABLED=true" >> $GITHUB_ENV
+          echo "AWS Credentials Set"
 
 
       - name: Setup OpenTofu
