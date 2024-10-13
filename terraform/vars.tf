@@ -18,10 +18,6 @@ variable "downloaders_ip_address" {
         type = string
 }
 
-variable "whisper_ip_address" {
-        type = string
-}
-
 variable "ssh_password" {
         type = string
 }
