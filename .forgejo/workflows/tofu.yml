@@ -38,24 +38,26 @@ jobs:
             a4ed343a-bb92-4beb-a421-b2080005bf98 > virtual_environment_endpoint
             af0ed579-05f8-405f-b0f3-b208000620ca > vlan_gateway
 
-      - name: Write secrets to secrets.tfvars
+      - name: Set Environment Variables
+        env:
+          arrbuntu_ip_address: ${{ steps.bitwarden-secrets.outputs.arrbuntu_ip_address }}
+          downloaders_ip_address: ${{ steps.bitwarden-secrets.outputs.downloaders_ip_address }}
+          init_password: ${{ steps.bitwarden-secrets.outputs.init_password }}
+          init_username: ${{ steps.bitwarden-secrets.outputs.init_username }}
+          kasm_ip: ${{ steps.bitwarden-secrets.outputs.kasm_ip }}
+          kasm_ssh_ip: ${{ steps.bitwarden-secrets.outputs.kasm_ssh_ip }}
+          npm_ip_address: ${{ steps.bitwarden-secrets.outputs.npm_ip_address }}
+          prox_ip_address: ${{ steps.bitwarden-secrets.outputs.prox_ip_address }}
+          pve2_ip_address: ${{ steps.bitwarden-secrets.outputs.pve2_ip_address }}
+          s3_endpoint: ${{ steps.bitwarden-secrets.outputs.s3_endpoint }}
+          ssh_password: ${{ steps.bitwarden-secrets.outputs.ssh_password }}
+          ssh_username: ${{ steps.bitwarden-secrets.outputs.ssh_username }}
+          ubu_ip_address: ${{ steps.bitwarden-secrets.outputs.ubu_ip_address }}
+          virtual_environment_api: ${{ steps.bitwarden-secrets.outputs.virtual_environment_api }}
+          virtual_environment_endpoint: ${{ steps.bitwarden-secrets.outputs.virtual_environment_endpoint }}
+          vlan_gateway: ${{ steps.bitwarden-secrets.outputs.vlan_gateway }}
         run: |
-          rm -f ./terraform/secrets.tfvars
-          echo "arrbuntu_ip_address = \"${{ steps.bitwarden-secrets.outputs.arrbuntu_ip_address }}\"" >> ./terraform/secrets.tfvars
-          echo "downloaders_ip_address = \"${{ steps.bitwarden-secrets.outputs.downloaders_ip_address }}\"" >> ./terraform/secrets.tfvars
-          echo "init_password = \"${{ steps.bitwarden-secrets.outputs.init_password }}\"" >> ./terraform/secrets.tfvars
-          echo "kasm_ip = \"${{ steps.bitwarden-secrets.outputs.kasm_ip }}\"" >> ./terraform/secrets.tfvars
-          echo "kasm_ssh_ip = \"${{ steps.bitwarden-secrets.outputs.kasm_ssh_ip }}\"" >> ./terraform/secrets.tfvars
-          echo "npm_ip_address = \"${{ steps.bitwarden-secrets.outputs.npm_ip_address }}\"" >> ./terraform/secrets.tfvars
-          echo "prox_ip_address = \"${{ steps.bitwarden-secrets.outputs.prox_ip_address }}\"" >> ./terraform/secrets.tfvars
-          echo "pve2_ip_address = \"${{ steps.bitwarden-secrets.outputs.pve2_ip_address }}\"" >> ./terraform/secrets.tfvars
-          echo "s3_endpoint = \"${{ steps.bitwarden-secrets.outputs.s3_endpoint }}\"" >> ./terraform/secrets.tfvars
-          echo "ssh_password = \"${{ steps.bitwarden-secrets.outputs.ssh_password }}\"" >> ./terraform/secrets.tfvars
-          echo "ssh_username = \"${{ steps.bitwarden-secrets.outputs.ssh_username }}\"" >> ./terraform/secrets.tfvars
-          echo "ubu_ip_address = \"${{ steps.bitwarden-secrets.outputs.ubu_ip_address }}\"" >> ./terraform/secrets.tfvars
-          echo "virtual_environment_api = \"${{ steps.bitwarden-secrets.outputs.virtual_environment_api }}\"" >> ./terraform/secrets.tfvars
-          echo "virtual_environment_endpoint = \"${{ steps.bitwarden-secrets.outputs.virtual_environment_endpoint }}\"" >> ./terraform/secrets.tfvars
-          echo "vlan_gateway = \"${{ steps.bitwarden-secrets.outputs.vlan_gateway }}\"" >> ./terraform/secrets.tfvars
+          echo "Environment variables are set"
 
       - name: Create AWS Credentials Directory
         run: mkdir -p ~/.aws
