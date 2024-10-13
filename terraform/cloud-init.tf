@@ -19,7 +19,7 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
           - docker
         shell: /bin/bash
         ssh_authorized_keys:
-          - ${trimspace(local.ssh_public_key)}
+          - ${trimspace(local.ssh_public_key_1)}
           - ${trimspace(local.ssh_public_key_2)}
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
