@@ -25,9 +25,7 @@ jobs:
 
       - name: Setup OpenTofu
         uses: https://github.com/opentofu/setup-opentofu@v1
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          
+
       - name: Run OpenTofu Init
         working-directory: ./terraform
         run: tofu init
