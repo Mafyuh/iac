@@ -58,11 +58,13 @@ jobs:
         uses: https://github.com/opentofu/setup-opentofu@v1
 
       - name: Run OpenTofu Init
-        run: tofu init -chdir=./terraform
+        working-directory: ./terraform
+        run: tofu init
 
       - name: Run OpenTofu Plan
         id: plan
-        run: tofu plan -no-color -chdir=./terraform
+        working-directory: ./terraform
+        run: tofu plan -no-color
 
       - name: Display Plan Output
         run: |
@@ -71,4 +73,5 @@ jobs:
 
       - name: Apply the Plan
         if: success()
-        run: tofu apply -auto-approve -chdir=./terraform
+        working-directory: ./terraform
+        run: tofu apply -auto-approve
