@@ -10,12 +10,9 @@
         state: present
         update_cache: yes
 
-    - name: Configure timesyncd to use the router's NTP server using ini_file
-      ini_file:
-        path: /etc/systemd/timesyncd.conf
-        section: Time
-        option: NTP
-        value: '10.0.0.1'
+    - name: Configure timesyncd to use the router's NTP server
+      shell: sed -i '/^NTP=/c\NTP=10.0.0.1' /etc/systemd/timesyncd.conf
+
 
     - name: Restart systemd-timesyncd to apply changes
       systemd:
