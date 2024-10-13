@@ -45,6 +45,9 @@ jobs:
             echo "${secret} = \"${{ steps.bitwarden-secrets.outputs[secret] }}\"" >> ./terraform/terraform.tfvars
           done
 
+      - name: Create AWS Credentials Directory
+        run: mkdir -p ~/.aws
+
       - name: Set AWS Credentials
         run: |
           echo "[default]" > ~/.aws/credentials
