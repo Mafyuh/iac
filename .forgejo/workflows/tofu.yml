@@ -40,6 +40,7 @@ jobs:
 
       - name: Write secrets to secrets.tfvars
         run: |
+          rm -f ./terraform/secrets.tfvars
           echo "arrbuntu_ip_address = \"${{ steps.bitwarden-secrets.outputs.arrbuntu_ip_address }}\"" >> ./terraform/secrets.tfvars
           echo "downloaders_ip_address = \"${{ steps.bitwarden-secrets.outputs.downloaders_ip_address }}\"" >> ./terraform/secrets.tfvars
           echo "init_password = \"${{ steps.bitwarden-secrets.outputs.init_password }}\"" >> ./terraform/secrets.tfvars
