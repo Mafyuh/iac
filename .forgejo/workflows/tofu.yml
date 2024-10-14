@@ -2,6 +2,8 @@ name: OpenTofu Automation
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'terraform/**'
 
