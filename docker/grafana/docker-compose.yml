@@ -34,8 +34,6 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.50.0
     container_name: cadvisor
-    # ports:
-    #   - 8080:8080
     volumes:
       - /:/rootfs:ro
       - /run:/run:ro
@@ -45,6 +43,64 @@ services:
     devices:
       - /dev/kmsg
     privileged: true
+    restart: unless-stopped
+
+  sonarr-exporter:
+    image: ghcr.io/onedr0p/exportarr:v2.0
+    container_name: sonarr-exporter
+    command: ["sonarr"]
+    environment:
+      PORT: 9707
+      URL: $SONARR_URL 
+      APIKEY: $SONARR_API
+    ports:
+      - "9707:9707"
+    restart: unless-stopped
+  radarr-exporter:
+    image: ghcr.io/onedr0p/exportarr:v2.0
+    container_name: radarr-exporter
+    command: ["radarr"]
+    environment:
+      PORT: 9708
+      URL: $RADARR_URL 
+      APIKEY: $RADARR_API
+    ports:
+      - "9708:9708"
+    restart: unless-stopped
+  prowlarr-exporter:
+    image: ghcr.io/onedr0p/exportarr:v2.0
+    container_name: prowlarr-exporter
+    command: ["prowlarr"]
+    environment:
+      PORT: 9710
+      URL: $PROWLARR_URL
+      APIKEY: $PROWLARR_API
+      PROWLARR__BACKFILL: true 
+      PROWLARR__BACKFILL_SINCE_DATE: "2023-03-01"
+    ports:
+     - "9710:9710"
+    restart: unless-stopped
+  sabnzbd-exporter:
+    image: ghcr.io/onedr0p/exportarr:v2.0
+    container_name: sabnzbd-exporter
+    command: ["sabnzbd"]
+    environment:
+      PORT: 9711
+      URL: $SAB_URL 
+      APIKEY: $SAB_API
+    ports:
+     - "9711:9711"
+    restart: unless-stopped
+  bazarr-exporter:
+    image: ghcr.io/onedr0p/exportarr:v2.0
+    container_name: bazarr-exporter
+    command: ["bazarr"]
+    environment:
+      PORT: 9712
+      URL: $BAZARR_URL
+      APIKEY: $BAZARR_API
+    ports:
+      - "9712:9712"
     restart: unless-stopped
 
 volumes:
