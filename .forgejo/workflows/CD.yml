@@ -54,6 +54,9 @@ jobs:
               cf)
                 target_host="cf.lan"
                 ;;
+              exporters)
+                target_host="all"
+                ;;
               jellyfin)
                 target_host="jf.lan"
                 ;;
