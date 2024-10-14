@@ -4,9 +4,8 @@
   become: true
 
   tasks:
-    - name: Set the timezone to America/New_York
-      timezone:
-        name: America/New_York
+    - name: set timezone
+      shell: timedatectl set-timezone America/New_York
 
     - name: Ensure systemd-timesyncd is installed
       apt:
