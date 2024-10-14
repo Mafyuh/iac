@@ -22,6 +22,11 @@ services:
     volumes:
       - /docker/appdata/grafana:/etc/grafana/provisioning/datasources
 
+  snmp-exporter:
+    image: prom/snmp-exporter:v0.26.0
+    volumes:
+      - /docker/appdata/snmp_generator/snmp.yml:/etc/snmp_exporter/snmp.yml
+
   node_exporter:
     image: quay.io/prometheus/node-exporter:v1.8.2
     container_name: node_exporter
