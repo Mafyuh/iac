@@ -17,7 +17,7 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
     
     # VM CPU Settings
     cpu {
-        cores = 2
+        cores = 4
         type  = "host"
         architecture = "x86_64"
     }
