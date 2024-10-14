@@ -8,7 +8,7 @@
       apt:
         name: systemd-timesyncd
         state: present
-        update_cache: yes
+        update_cache: no
 
     - name: Configure timesyncd to use the router's NTP server
       shell: sed -i '/^NTP=/c\NTP=10.0.0.1' /etc/systemd/timesyncd.conf
