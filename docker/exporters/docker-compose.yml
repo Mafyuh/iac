@@ -12,7 +12,7 @@ services:
       - /:/host:ro,rslave
   
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.50.0
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: cadvisor
     ports:
       - 9101:8080
