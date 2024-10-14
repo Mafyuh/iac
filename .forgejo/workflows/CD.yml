@@ -2,6 +2,8 @@ name: Deploy to Hosts
 on:
   pull_request:
     types: [closed]
+    paths:
+      - 'docker/**'
 
 jobs:
   deploy:
@@ -80,9 +82,6 @@ jobs:
                 ;;
               twingate)
                 target_host="twingate.lan"
-                ;;
-              whisper)
-                target_host="whisper.lan"
                 ;;
               # Add cases for other folders/hosts
               *)
