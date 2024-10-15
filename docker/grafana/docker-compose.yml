@@ -53,6 +53,7 @@ services:
 
   snmp-exporter:
     image: prom/snmp-exporter:v0.26.0
+    container_name: snmp-exporter
     volumes:
       - /docker/appdata/snmp:/etc/snmp_exporter
     command: --config.file=/etc/snmp-exporter/snmp.yml
