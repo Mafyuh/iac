@@ -22,6 +22,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=mafyuh
       - GF_SECURITY_ADMIN_PASSWORD=$GF_SECURITY_ADMIN_PASSWORD
+    user: "1000"
     volumes:
       - /docker/appdata/grafana:/var/lib/grafana
     networks:
