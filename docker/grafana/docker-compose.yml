@@ -98,6 +98,8 @@ services:
     ports:
       - "9707:9707"
     restart: unless-stopped
+    networks:
+      - grafana
   radarr-exporter:
     image: ghcr.io/onedr0p/exportarr:v2.0
     container_name: radarr-exporter
@@ -109,6 +111,8 @@ services:
     ports:
       - "9708:9708"
     restart: unless-stopped
+    networks:
+      - grafana
   prowlarr-exporter:
     image: ghcr.io/onedr0p/exportarr:v2.0
     container_name: prowlarr-exporter
@@ -121,6 +125,8 @@ services:
     ports:
      - "9710:9710"
     restart: unless-stopped
+    networks:
+      - grafana
   sabnzbd-exporter:
     image: ghcr.io/onedr0p/exportarr:v2.0
     container_name: sabnzbd-exporter
@@ -132,6 +138,8 @@ services:
     ports:
      - "9711:9711"
     restart: unless-stopped
+    networks:
+      - grafana
   bazarr-exporter:
     image: ghcr.io/onedr0p/exportarr:v2.0
     container_name: bazarr-exporter
@@ -143,6 +151,8 @@ services:
     ports:
       - "9712:9712"
     restart: unless-stopped
+    networks:
+      - grafana
 
 networks:
   grafana:
