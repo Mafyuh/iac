@@ -51,6 +51,18 @@ services:
     networks:
       - grafana
 
+  alertmanager:
+    image: prom/alertmanager:v0.27.0
+    restart: unless-stopped
+    volumes:
+      - /docker/appdata/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - 9093:9093
+    networks:
+      - grafana
+
+
+  ## Exporters
   snmp-exporter:
     image: prom/snmp-exporter:v0.26.0
     container_name: snmp-exporter
@@ -150,6 +162,15 @@ services:
       APIKEY: $BAZARR_API
     ports:
       - "9712:9712"
+    restart: unless-stopped
+    networks:
+      - grafana
+
+  speedtest-exporter:
+    image: ghcr.io/miguelndecarvalho/speedtest-exporter:v3.5.4
+    container_name: speedtest-exporter
+    ports:
+      - 9798:9798
     restart: unless-stopped
     networks:
       - grafana
