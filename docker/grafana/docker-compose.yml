@@ -186,6 +186,20 @@ services:
     networks:
       - grafana
 
+  graphite-exporter:
+    command: --graphite.mapping-config=/tmp/graphite_mapping.conf
+    image: prom/graphite-exporter
+    container_name: graphite-exporter
+    volumes:
+      - /docker/appdata/graphite-exporter/graphite_mapping.conf:/tmp/graphite_mapping.conf
+    ports:
+      - 9109:9109/udp
+      - 9109:9109
+      - 9108:9108
+    networks:
+      - grafana
+
+
 networks:
   grafana:
 
