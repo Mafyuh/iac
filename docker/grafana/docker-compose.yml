@@ -22,6 +22,16 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=mafyuh
       - GF_SECURITY_ADMIN_PASSWORD=$GF_SECURITY_ADMIN_PASSWORD
+      - GF_AUTH_GENERIC_OAUTH_ENABLED=true
+      - GF_AUTH_GENERIC_OAUTH_NAME=authentik
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=$GF_AUTH_GENERIC_OAUTH_CLIENT_ID
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET=$GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+      - GF_AUTH_GENERIC_OAUTH_SCOPES="openid profile email"
+      - GF_AUTH_GENERIC_OAUTH_AUTH_URL=$AUTHENTIK_URL/application/o/authorize/
+      - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=$AUTHENTIK_URL/application/o/token/
+      - GF_AUTH_GENERIC_OAUTH_API_URL=$AUTHENTIK_URL/application/o/userinfo/
+      - GF_AUTH_SIGNOUT_REDIRECT_URL=$AUTHENTIK_URL/application/o/grafana/end-session/
+      - GF_AUTH_OAUTH_AUTO_LOGIN=true
     user: "1000"
     volumes:
       - /docker/appdata/grafana:/var/lib/grafana
