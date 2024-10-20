@@ -183,6 +183,8 @@ services:
       - /docker/appdata/blackbox/config:/config
     ports:
       - 9115:9115
+    networks:
+      - grafana
 
 networks:
   grafana:
