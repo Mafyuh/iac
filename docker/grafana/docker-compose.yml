@@ -175,6 +175,15 @@ services:
     networks:
       - grafana
 
+  blackbox-exporter:
+        command: --config.file=/config/blackbox.yml
+        image: quay.io/prometheus/blackbox-exporter:v0.25.0
+        volumes:
+            - /docker/appdata/blackbox/config:/config
+        container_name: blackbox_exporter
+        ports:
+            - 9115:9115
+
 networks:
   grafana:
 
