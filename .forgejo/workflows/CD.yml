@@ -57,6 +57,9 @@ jobs:
               exporters)
                 target_host="all"
                 ;;
+              grafana)
+                target_host="ubu.lan"
+                ;;
               jellyfin)
                 target_host="jf.lan"
                 ;;
