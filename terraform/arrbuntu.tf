@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "Arrbuntu" {
     # VM Disk Settings
     disk {
         datastore_id = "Fast2Tb"
-        size         = 120
+        size         = 350
         interface    = "scsi0"
     }
 

@@ -42,9 +42,6 @@ jobs:
               arm)
                 target_host="arm.lan"
                 ;;
-              downloaders)
-                target_host="downloaders.lan"
-                ;;
               AI)
                 target_host="ai.lan"
                 ;;
