@@ -1,6 +1,4 @@
 ---
-version: "3.4"
-
 services:
   postgresql:
     image: docker.io/library/postgres:16-alpine
@@ -79,6 +77,16 @@ services:
     depends_on:
       - postgresql
       - redis
+  
+  authentik_ldap:
+        image: ghcr.io/goauthentik/ldap:2024.10.0
+        ports:
+            - 389:3389
+            - 636:6636
+        environment:
+            AUTHENTIK_HOST: ${AUTH_HOST}
+            AUTHENTIK_INSECURE: "true"
+            AUTHENTIK_TOKEN: ${AUTH_TOKEN}
 
 volumes:
   database:
