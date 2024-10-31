@@ -44,3 +44,6 @@ terraform.rc
 
 ## Packer
 credentials.pkr.hcl
+
+## Testing
+/docker/health

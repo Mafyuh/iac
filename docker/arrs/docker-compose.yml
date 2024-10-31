@@ -147,6 +147,7 @@ services:
       - 21027:21027/udp
     restart: unless-stopped
 
+  ## Should move this to Ubu
   code-server:
     image: ghcr.io/linuxserver/code-server@sha256:78cb3a72f7ecfa67feab0475656516330e7931b6dee7c8313a545654b0fc2985
     container_name: code-server
@@ -158,9 +159,64 @@ services:
       - PROXY_DOMAIN=$PROXY_DOMAIN
     volumes:
       - /docker/appdata/code-server/config:/config
-      - /home/mafyuh/.ssh:/home/mafyuh/.ssh
     ports:
       - 8443:8443
+    restart: unless-stopped
+  ## Downloaders
+  sabnzbd:
+    image: ghcr.io/linuxserver/sabnzbd@sha256:293517b90ef929178387f07c074c1f88d96d94eac3c1d95944ba2891527c1396
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/sabnzbd:/config
+      - /data/usenet:/data/usenet:rw
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  arch-qbittorrentvpn:
+    image: binhex/arch-qbittorrentvpn:4.6.5-1-03
+    container_name: qbittorrentvpn
+    volumes:
+      - '/docker/appdata/qbitty:/config'
+      - '/data/torrents/:/data/torrents'
+      - '/etc/localtime:/etc/localtime:ro'
+    ports:
+      - '49550:49550'
+      - '49551:8118'
+    environment:
+      - VPN_ENABLED=yes
+      - VPN_PROV=protonvpn
+      - VPN_CLIENT=wireguard
+      - VPN_USER=mafyuh+pmp
+      - VPN_PASS=
+      - STRICT_PORT_FORWARD=yes
+      - LAN_NETWORK=$LAN_NETWORK
+      - ENABLE_PRIVOXY=yes
+      - PUID=1000
+      - PGID=1000
+      - WEBUI_PORT=49550
+      - UMASK=1000
+      - DEBUG=false
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    privileged: true
+    network_mode: bridge
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:v3.3.21
+    container_name: flaresolverr
+    ports:
+      - '8191:8191'
+    environment:
+      - LOG_LEVEL=info
     restart: unless-stopped
 
 networks:
