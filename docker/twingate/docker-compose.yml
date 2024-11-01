@@ -20,7 +20,7 @@ services:
     restart: 'unless-stopped'
 
   gitea:
-    image: 'code.forgejo.org/forgejo/runner:4.0.0'
+    image: 'code.forgejo.org/forgejo/runner:4.0.1'
     links:
       - docker-in-docker
     depends_on:
