@@ -24,14 +24,9 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
         - apt update
-        - apt install -y qemu-guest-agent net-tools nfs-common
+        - apt upgrade -y
         - timedatectl set-timezone America/New_York
-        - systemctl enable qemu-guest-agent
-        - systemctl start qemu-guest-agent
-        - curl -fsSL https://get.docker.com | sudo sh
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
-        - su - mafyuh -c 'git config --global user.name "Mafyuh"'
-        - su - mafyuh -c 'git config --global user.email "matt@mafyuh.com"'
         - echo "done" > /tmp/cloud-config.done
     EOF
 
@@ -60,10 +55,8 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
         - apt update
-        - timedatectl set-timezone America/New_York
-        - systemctl enable qemu-guest-agent
-        - systemctl start qemu-guest-agent
         - apt upgrade -y
+        - timedatectl set-timezone America/New_York
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
         - echo "done" > /tmp/cloud-config.done
     EOF

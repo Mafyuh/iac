@@ -21,7 +21,7 @@ variable "proxmox_api_token_secret" {
 }
 
 # Resource Definiation for the VM Template
-source "proxmox-clone" "ubuntu-server-jammy" {
+source "proxmox-clone" "ubuntu-server-noble" {
  
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
@@ -32,12 +32,12 @@ source "proxmox-clone" "ubuntu-server-jammy" {
     # VM General Settings
     node = "pve2"
 
-    ## See https://git.mafyuh.dev/mafyuh/iac/src/branch/main/terraform/ubuntu22-template2.tf
-    clone_vm_id = "8101"
+    
+    clone_vm_id = "8102"
 
-    vm_id = "9999"
-    vm_name = "ubuntu-server-jammy"
-    template_description = "Custom Ubuntu Server see https://git.mafyuh.dev/mafyuh/iac/src/branch/main/packer/ubuntu-jammy/ubuntu-jammy.pkr.hcl"
+    vm_id = "9997"
+    vm_name = "ubuntu-noble-template"
+    template_description = "Ubuntu Server Noble"
 
     # VM System Settings
     qemu_agent = true
@@ -46,7 +46,7 @@ source "proxmox-clone" "ubuntu-server-jammy" {
     scsi_controller = "virtio-scsi-pci"
 
     disks {
-        disk_size = "4G"
+        disk_size = "5G"
         format = "raw"
         storage_pool = "Fast500Gb"
         type = "virtio"
@@ -75,8 +75,8 @@ source "proxmox-clone" "ubuntu-server-jammy" {
 
 build {
 
-    name = "ubuntu-server-jammy"
-    sources = ["source.proxmox-clone.ubuntu-server-jammy"]
+    name = "ubuntu-server-noble"
+    sources = ["source.proxmox-clone.ubuntu-server-noble"]
 
     ## Cleanup for re-template
     provisioner "shell" {
@@ -88,6 +88,8 @@ build {
             "sudo apt -y clean",
             "sudo apt -y autoclean",
             "sudo cloud-init clean",
+            "sudo rm -f /var/lib/dbus/machine-id",
+            "sudo rm -f /var/lib/systemd/random-seed",
             "sudo rm -f /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg",
             "sudo rm -f /etc/netplan/00-installer-config.yaml",
             "sudo sync"
@@ -103,20 +105,31 @@ build {
         inline = [ "sudo cp /tmp/pve.cfg /etc/cloud/cloud.cfg.d/pve.cfg" ]
     }
 
-    # Install commonly used things - add alias's - set git config
+    
     provisioner "shell" {
         inline = [
-            "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common qemu-guest-agent net-tools zsh neofetch fzf",
+            # Install packages and add repositories
+            "sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch",
+            "sudo apt-get update",
+            "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common net-tools zsh fastfetch fzf",
+            # Change default shell to zsh
             "sudo chsh -s $(which zsh) mafyuh",
+            # Install Docker
             "curl -fsSL https://get.docker.com | sudo sh",
+            # Install Oh My Zsh and plugins
             "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" --unattended",
             "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting",
             "git clone https://github.com/zsh-users/zsh-autosuggestions.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions",
             "git clone https://github.com/zsh-users/zsh-history-substring-search.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search",
             "git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/you-should-use",
+            # Install Oh My Posh
             "mkdir -p /home/mafyuh/.local/bin",
             "curl -fsSL https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -o /home/mafyuh/.local/bin/oh-my-posh",
             "sudo chmod +x /home/mafyuh/.local/bin/oh-my-posh",
+            # Download posh theme locally
+            "mkdir -p /home/mafyuh/.oh-my-posh/themes",
+            "curl -fsSL https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/sonicboom_dark.omp.json -o /home/mafyuh/.oh-my-posh/themes/sonicboom_dark.omp.json",
+            # Setup Git
             "git config --global user.name \"Mafyuh\"",
             "git config --global user.email \"matt@mafyuh.com\"",
             "sudo apt-get -y update"

@@ -1,16 +1,18 @@
-resource "proxmox_virtual_environment_vm" "Ubuntu-22-Template2" {
-  name      = "ubuntu-22"
+resource "proxmox_virtual_environment_vm" "Ubuntu-Noble-Base" {
+  name      = "ubuntu-noble-base"
   node_name = "pve2"
-  vm_id     = 8101
-  tags      = ["tofu", "ubuntu-22"]
+  vm_id     = 8102
+  tags      = ["tofu", "ubuntu24"]
   template  = true
   started   = false
 
   disk {
     datastore_id = "local-lvm"
-    file_id      = "local:iso/jammy-server-cloudimg-amd64.img"
+    # See https://www.reddit.com/r/Proxmox/comments/1058ko7/comment/j3s4vli/ for how to inject qemu into base image
+    # virt-customize -a noble-server-cloudimg-amd64.img --install qemu-guest-agent
+    file_id      = "local:iso/noble-server-cloudimg-amd64.img"
     interface    = "scsi0"
-    size         = 4
+    size         = 5
   }
 
   agent {
@@ -23,8 +25,6 @@ resource "proxmox_virtual_environment_vm" "Ubuntu-22-Template2" {
         address = "dhcp"
       }
     }
-
-  user_data_file_id = proxmox_virtual_environment_file.cloud_config2.id
 }
 
 serial_device {}

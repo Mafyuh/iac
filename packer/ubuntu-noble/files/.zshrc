@@ -10,12 +10,12 @@ plugins=(git ubuntu copypath copyfile dirhistory zsh-interactive-cd docker docke
 
 source $ZSH/oh-my-zsh.sh
 
-# Set up Oh My Posh
-eval "$(oh-my-posh init zsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/sonicboom_dark.omp.json)"
+# Set up Oh My Posh Theme
+eval "$(oh-my-posh init zsh --config /home/mafyuh/.oh-my-posh/themes/sonicboom_dark.omp.json)"
 
 # Custom aliases
 alias dcd="docker compose down"
 alias dcu="docker compose up -d"
 
 # Display system information
-neofetch
+fastfetch
