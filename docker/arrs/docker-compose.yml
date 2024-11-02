@@ -72,7 +72,7 @@ services:
 
   homarr:
     container_name: homarr
-    image: ghcr.io/ajnart/homarr:0.15.6
+    image: ghcr.io/ajnart/homarr:0.15.7
     restart: unless-stopped
     volumes:
       - /docker/appdata/homarr/configs:/app/data/configs
