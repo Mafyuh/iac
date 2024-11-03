@@ -5,6 +5,19 @@ services:
     image: cloudflare/cloudflared@sha256:119c1712ba89bfb32a404ef6b949284519a99f3de5c1202f483a6800fd1c638e
     command: tunnel --no-autoupdate run --token $CF_TOKEN
 
+  twingate-famous-alligator:
+    image: twingate/connector@sha256:f5aded82f662144c56c87e4238ea4a20abcc525edc5ad7cdecdac187cf274520
+    container_name: twingate-famous-alligator
+    restart: always
+    environment:
+      - TWINGATE_NETWORK=$TWINGATE_NETWORK
+      - TWINGATE_ACCESS_TOKEN=$TWINGATE_ACCESS_TOKEN
+      - TWINGATE_REFRESH_TOKEN=$TWINGATE_REFRESH_TOKEN
+      - TWINGATE_LABEL_HOSTNAME=${HOSTNAME}
+      - TWINGATE_LABEL_DEPLOYED_BY=docker
+    sysctls:
+      - net.ipv4.ping_group_range=0 2147483647
+
   wallos:
     container_name: wallos
     image: bellamy/wallos:2.33.1
