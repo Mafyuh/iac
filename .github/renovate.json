@@ -6,27 +6,16 @@
   "dependencyDashboardTitle": ":robot: Renovate Dashboard",
   "regexManagers": [
     {
-      "description": "Process Docker YML files",
+      "description": "Process files",
       "fileMatch": [
-        "docker/.+\\.y?ml$"
+        "docker/.+\\.y?ml$",
+        "terraform/.+\\tf.$"
       ],
       "matchStrings": [
-        "version: (?<currentValue>\\S+)"
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
-      "datasourceTemplate": "docker",
-      "currentValueTemplate": "{{{ currentValue }}}"
-    },
-    {
-      "description": "Process Terraform modules",
-      "fileMatch": [
-        "terraform/.+\\.tf$"
-      ],
-      "matchStrings": [
-        "source\\s*=\\s*\"(?<depName>[^@]+)@(?<currentValue>\\S+)\""
-      ],
-      "datasourceTemplate": "terraform",
-      "versioningTemplate": "semver",
-      "currentValueTemplate": "{{{ currentValue }}}"
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }
