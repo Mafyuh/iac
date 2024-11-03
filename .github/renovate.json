@@ -1,18 +1,31 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:base"
   ],
   "dependencyDashboardTitle": ":robot: Renovate Dashboard",
   "regexManagers": [
     {
+      "description": "Process Docker YML files",
       "fileMatch": [
-        "ansible/.+\\.ya?ml$",
-        "docker/.+\\.ya?ml$",
-        "kubernetes/.+\\.ya?ml$",
-        "packer/.+\\.hcl$",
+        "docker/.+\\.y?ml$"
+      ],
+      "matchStrings": [
+        "version: (?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "docker",
+      "currentValueTemplate": "{{{ currentValue }}}"
+    },
+    {
+      "description": "Process Terraform files",
+      "fileMatch": [
         "terraform/.+\\.tf$"
-      ]
+      ],
+      "matchStrings": [
+        "source\\s*=\\s*\"(?<depName>[^\"]+):(?!/)\\S+@(?<currentValue>\\S+)\""
+      ],
+      "datasourceTemplate": "terraform",
+      "currentValueTemplate": "{{{ currentValue }}}"
     }
   ]
 }
