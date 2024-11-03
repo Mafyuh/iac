@@ -17,14 +17,15 @@
       "currentValueTemplate": "{{{ currentValue }}}"
     },
     {
-      "description": "Process Terraform files",
+      "description": "Process Terraform modules",
       "fileMatch": [
         "terraform/.+\\.tf$"
       ],
       "matchStrings": [
-        "source\\s*=\\s*\"(?<depName>[^\"]+):(?!/)\\S+@(?<currentValue>\\S+)\""
+        "source\\s*=\\s*\"(?<depName>[^@]+)@(?<currentValue>\\S+)\""
       ],
       "datasourceTemplate": "terraform",
+      "versioningTemplate": "semver",
       "currentValueTemplate": "{{{ currentValue }}}"
     }
   ]
