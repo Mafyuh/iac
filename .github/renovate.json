@@ -3,5 +3,16 @@
   "extends": [
     "config:recommended"
   ],
-  "dependencyDashboardTitle": ":robot: Renovate Dashboard"
+  "dependencyDashboardTitle": ":robot: Renovate Dashboard",
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "ansible/.+\\.ya?ml$",
+        "docker/.+\\.ya?ml$",
+        "kubernetes/.+\\.ya?ml$",
+        "packer/.+\\.hcl$",
+        "terraform/.+\\.tf$"
+      ]
+    }
+  ]
 }
