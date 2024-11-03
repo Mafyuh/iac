@@ -1,5 +1,6 @@
 [![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/yamllint.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
 [![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
+[![Tofu](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/tofu.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
 [![Renovate](https://git.mafyuh.dev/renovatebot/renovate/badges/workflows/renovate.yml/badge.svg)](https://git.mafyuh.dev/renovatebot/renovate/actions)
 [![Pulls](https://git.mafyuh.dev/mafyuh/iac/badges/pulls.svg)](https://git.mafyuh.dev/mafyuh/iac/pulls)
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
