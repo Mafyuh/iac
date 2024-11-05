@@ -172,7 +172,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/sabnzbd:/config
+      - /docker/appdata/sab:/config
       - /data/usenet:/data/usenet:rw
     ports:
       - 8080:8080
