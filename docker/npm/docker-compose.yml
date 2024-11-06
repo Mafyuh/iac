@@ -38,7 +38,7 @@ services:
   
   cf-tunnel:
     restart: unless-stopped
-    image: cloudflare/cloudflared@sha256:119c1712ba89bfb32a404ef6b949284519a99f3de5c1202f483a6800fd1c638e
+    image: cloudflare/cloudflared@sha256:3f25f0d97e284adf7d0fe298c6be29b84750880df2c1fe4f94cfa90dbd3c4cfa
     command: tunnel --no-autoupdate run --token $CF_TOKEN
 
   twingate-famous-alligator:
