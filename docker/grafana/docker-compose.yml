@@ -31,7 +31,7 @@ services:
       - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=$AUTHENTIK_URL/application/o/token/
       - GF_AUTH_GENERIC_OAUTH_API_URL=$AUTHENTIK_URL/application/o/userinfo/
       - GF_AUTH_SIGNOUT_REDIRECT_URL=$AUTHENTIK_URL/application/o/grafana/end-session/
-      - GF_AUTH_OAUTH_AUTO_LOGIN=true
+      - GF_AUTH_OAUTH_AUTO_LOGIN=false
       - GF_SERVER_ROOT_URL=$GF_SERVER_ROOT_URL 
     user: "1000"
     volumes:
