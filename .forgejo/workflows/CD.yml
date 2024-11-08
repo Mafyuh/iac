@@ -48,8 +48,8 @@ jobs:
               authentik)
                 target_host="auth.lan"
                 ;;
-              cf)
-                target_host="npm.lan"
+              ag-main)
+                target_host="dns.lan"
                 ;;
               exporters)
                 target_host="all"
@@ -80,9 +80,6 @@ jobs:
                 ;;
               runner)
                 target_host="runner.lan"
-                ;;
-              twingate)
-                target_host="npm.lan"
                 ;;
               # Add cases for other folders/hosts
               *)
