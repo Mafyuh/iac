@@ -49,7 +49,7 @@ jobs:
                 target_host="auth.lan"
                 ;;
               cf)
-                target_host="cf.lan"
+                target_host="npm.lan"
                 ;;
               exporters)
                 target_host="all"
@@ -82,7 +82,7 @@ jobs:
                 target_host="runner.lan"
                 ;;
               twingate)
-                target_host="twingate.lan"
+                target_host="npm.lan"
                 ;;
               # Add cases for other folders/hosts
               *)
