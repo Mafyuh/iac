@@ -16,7 +16,6 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
       - name: mafyuh
         groups:
           - sudo
-          - docker
         shell: /bin/bash
         ssh_authorized_keys:
           - ${trimspace(local.ssh_public_key_1)}
@@ -25,6 +24,7 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
     runcmd:
         - apt update
         - apt upgrade -y
+        - usermod -aG docker mafyuh
         - timedatectl set-timezone America/New_York
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
         - echo "done" > /tmp/cloud-config.done
@@ -47,7 +47,6 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
       - name: mafyuh
         groups:
           - sudo
-          - docker
         shell: /bin/bash
         ssh_authorized_keys:
           - ${trimspace(local.ssh_public_key_1)}
@@ -56,6 +55,7 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
     runcmd:
         - apt update
         - apt upgrade -y
+        - usermod -aG docker mafyuh
         - timedatectl set-timezone America/New_York
         - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
         - echo "done" > /tmp/cloud-config.done

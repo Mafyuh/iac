@@ -106,16 +106,28 @@ build {
     }
 
     
+    provisioner "file" {
+        source = "files/daemon.json"
+        destination = "/tmp/daemon.json"
+    }
+
+    
     provisioner "shell" {
         inline = [
             # Install packages and add repositories
-            "sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch",
+            "wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.29.0/fastfetch-linux-amd64.deb",
+            "sudo dpkg -i fastfetch-linux-amd64.deb",
+            "rm -f fastfetch-linux-amd64.deb",
             "sudo apt-get update",
-            "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common net-tools zsh fastfetch fzf",
+            "sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common net-tools zsh fzf",
             # Change default shell to zsh
             "sudo chsh -s $(which zsh) mafyuh",
-            # Install Docker
+            # Install Docker & Loki Plugin
             "curl -fsSL https://get.docker.com | sudo sh",
+            "sudo docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions",
+            "sudo mv /tmp/daemon.json /etc/docker/daemon.json",
+            # Set DNS
+            "sudo mkdir -p /etc/systemd/resolved.conf.d && echo '[Resolve]\nDNS=10.0.0.40' | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf",
             # Install Oh My Zsh and plugins
             "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" --unattended",
             "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting",
@@ -132,7 +144,7 @@ build {
             # Setup Git
             "git config --global user.name \"Mafyuh\"",
             "git config --global user.email \"matt@mafyuh.com\"",
-            "sudo apt-get -y update"
+            "sudo apt-get -y upgrade"
         ]
     }
 

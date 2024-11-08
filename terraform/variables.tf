@@ -91,3 +91,15 @@ variable "ssh_password" {
   type        = string
   sensitive   = true
 }
+
+variable "grafana_auth" {
+  description = "Service Account token"
+  type        = string
+  sensitive   = true
+}
+
+variable "grafana_url" {
+  description = "Grafana Url"
+  type        = string
+  sensitive   = true
+}
