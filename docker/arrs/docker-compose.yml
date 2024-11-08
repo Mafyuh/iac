@@ -92,7 +92,7 @@ services:
       - AUTH_OIDC_ADMIN_GROUP=${AUTH_OIDC_ADMIN_GROUP}
 
   homarr-iframes:
-    image: ghcr.io/diogovalentte/homarr-iframes:v1.0.0
+    image: ghcr.io/diogovalentte/homarr-iframes:v1.0.1
     container_name: homarr-iframes
     ports:
       - "8081:8080"
