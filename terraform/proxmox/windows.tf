@@ -3,7 +3,7 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
   node_name = "pve2"
   vm_id     = 250
   tags      = ["tofu"]
-  started   = false
+  started   = true
   bios      = "ovmf"
   machine   = "q35"
 
@@ -38,9 +38,13 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
     tpm_state {
         datastore_id = "Fast500Gb"
         version = "v2.0"
-}
+    }
 
     operating_system {
         type = "win11"
-}
+    }
+
+    audio_device {
+        enabled = true
+    }
 }
