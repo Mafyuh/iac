@@ -91,7 +91,7 @@ jobs:
             curl -X POST -k -H "Content-Type: application/json" \
               -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" \
               -d "{\"extra_vars\": {\"target_host\": \"$target_host\", \"folder\": \"$folder\"}}" \
-              "https://awx.mafyuh.xyz/api/v2/job_templates/13/launch/"
+              "https://awx.mafyuh.xyz/api/v2/job_templates/13/launch/" > /dev/null 2>&1
 
             sleep 45  
 
