@@ -93,11 +93,20 @@ jobs:
               -d "{\"extra_vars\": {\"target_host\": \"$target_host\", \"folder\": \"$folder\"}}" \
               "https://awx.mafyuh.xyz/api/v2/job_templates/13/launch/"
 
-            sleep 45  # Delay for 45 seconds before fetching logs
+            sleep 45  
 
             job_id=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/job_templates/13/jobs/?order_by=-id | jq -r '.results[0].id')
-            logs=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/jobs/$job_id/stdout/?format=json)
+            logs=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/jobs/$job_id/stdout/?format=txt)
+
             echo "AWX Job Logs for folder: $folder"
             echo "Content:"
-            echo "$(echo "$logs" | jq -r '.content')"
+            echo "$logs"
+
+            # Check for 'failed=' in the play recap
+            if echo "$logs" | grep -q "failed=[1-9]"; then
+              echo "Detected failed steps in AWX job. Failing Actions run."
+              exit 1
+            else
+              echo "No failures detected in AWX job."
+            fi
           done
