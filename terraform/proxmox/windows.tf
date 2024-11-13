@@ -47,4 +47,9 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
     audio_device {
         enabled = true
     }
+
+    vga {
+        memory = 16
+        type = "qxl"
+    }
 }
