@@ -84,7 +84,7 @@ jobs:
               # Add cases for other folders/hosts
               *)
                 echo "Unknown folder: $folder"
-                continue
+                exit 1
                 ;;
             esac
             echo "Triggering AWX Job with target host: $target_host and folder: $folder"
@@ -92,6 +92,7 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" \
               -d "{\"extra_vars\": {\"target_host\": \"$target_host\", \"folder\": \"$folder\"}}" \
               "https://awx.mafyuh.xyz/api/v2/job_templates/13/launch/" > /dev/null 2>&1
+            echo "AWX Job Triggered, waiting for logs..."
 
             sleep 45  
 
