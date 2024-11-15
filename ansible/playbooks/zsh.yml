@@ -7,11 +7,17 @@
     user: "{{ ansible_user }}"
 
   tasks:
+    - name: Add the Fastfetch PPA repository
+      ansible.builtin.apt_repository:
+        repo: ppa:zhangsongcui3371/fastfetch
+        state: present
+        update_cache: yes
+
     - name: Install necessary packages
       apt:
         name:
           - zsh
-          - neofetch
+          - fastfetch
           - fzf
         state: present
         update_cache: yes
@@ -20,7 +26,6 @@
       copy:
         dest: "/home/{{ user }}/.zshrc"
         content: |
-          # Path to your Oh My Zsh installation.
           export ZSH="$HOME/.oh-my-zsh"
           export PATH=$PATH:$HOME/.local/bin
 
@@ -38,9 +43,11 @@
           # Custom aliases
           alias dcd="docker compose down"
           alias dcu="docker compose up -d"
+          alias update="sudo apt update && sudo apt upgrade -y"
+          
 
           # Display system information
-          neofetch
+          fastfetch
         owner: "{{ user }}"
         mode: '0644'
 
