@@ -17,14 +17,14 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
   
   # VM CPU Settings
   cpu {
-    cores = 4
+    cores = 6
     type  = "host"
     architecture = "x86_64"
   }
   
   # VM Memory Settings
   memory {
-    dedicated = 4096
+    dedicated = 16384
   }
 
   # VM Network Settings
