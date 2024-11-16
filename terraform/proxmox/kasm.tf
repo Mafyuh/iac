@@ -6,7 +6,8 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
   description  = "kasm"
   tags         = ["tofu", "ubuntu-22", "iac-repo"]
   started      = true
-
+  machine      = "q35"
+  
   agent {
     enabled = true 
   }
