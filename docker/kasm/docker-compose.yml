@@ -12,3 +12,16 @@ services:
       - 3000:3000
       - 443:443
     restart: unless-stopped
+
+  minio:
+    command: server /data --console-address ":9001"
+    image: minio/minio@sha256:ac591851803a79aee64bc37f66d77c56b0a4b6e12d9e5356380f4105510f2332
+    environment:
+      - MINIO_ROOT_PASSWORD=$MINIO_ROOT_PASSWORD
+      - MINIO_ROOT_USER=mafyuh
+    volumes:
+      - /docker/appdata/minio/data:/data
+    container_name: minio
+    ports:
+      - 9001:9001
+      - 9000:9000
