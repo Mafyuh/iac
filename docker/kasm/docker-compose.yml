@@ -12,6 +12,13 @@ services:
       - 3000:3000
       - 443:443
     restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   minio:
     command: server /data --console-address ":9001"
