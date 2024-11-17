@@ -6,6 +6,8 @@ services:
     privileged: true
     environment:
       - KASM_PORT=443
+      - DOCKER_HUB_USERNAME=$DOCKER_HUB_USERNAME
+      - DOCKER_HUB_PASSWORD=$DOCKER_HUB_PASSWORD
     volumes:
       - /docker/appdata/kasm:/opt
     ports:
