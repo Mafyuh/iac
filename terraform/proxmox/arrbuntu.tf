@@ -17,14 +17,14 @@ resource "proxmox_virtual_environment_vm" "Arrbuntu" {
     
     # VM CPU Settings
     cpu {
-        cores = 2
+        cores = 4
         type  = "host"
         architecture = "x86_64"
     }
     
     # VM Memory Settings
     memory {
-        dedicated = 6144
+        dedicated = 8192
     }
 
     # VM Network Settings
