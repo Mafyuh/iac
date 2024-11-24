@@ -42,6 +42,7 @@ services:
     volumes:
       - /home/mafyuh/media:/media
       - /home/mafyuh/custom-templates:/templates
+      - /home/mafyuh/custom.css:/web/dist/custom.css
     env_file:
       - .env
     ports:
