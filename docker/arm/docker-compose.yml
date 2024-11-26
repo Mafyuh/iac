@@ -133,7 +133,7 @@ services:
     networks:
       - gitea_main
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.69.0
+    image: ghcr.io/n8n-io/n8n:1.69.2
     container_name: n8n
     ports:
       - 5678:5678
