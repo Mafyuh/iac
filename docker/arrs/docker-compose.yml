@@ -152,7 +152,7 @@ services:
     restart: unless-stopped
   ## Downloaders
   sabnzbd:
-    image: ghcr.io/linuxserver/sabnzbd@sha256:1bd04442a6cb35fc8f4a18c474ba93d6600026dcbd364d0577e63cc6cdebfd87
+    image: ghcr.io/linuxserver/sabnzbd@sha256:1d31c01bb765cfbbe916b418b336223b07541e50065e6b4284f5ffb8ea452d12
     container_name: sabnzbd
     environment:
       - PUID=1000
