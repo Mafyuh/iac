@@ -26,7 +26,7 @@ jobs:
           fi
           folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
           echo "Modified folders: $folders"
-          echo "::set-output name=folders::$folders"          
+          echo "::set-output name=folders::$folders"
 
       - name: Deploy to hosts
         run: |
@@ -71,7 +71,7 @@ jobs:
                 ;;
               npm)
                 target_host="npm.lan"
-                ;;  
+                ;;
               paperless)
                 target_host="ubu.lan"
                 ;;
@@ -124,3 +124,4 @@ jobs:
                 sleep 15
               fi
             done
+          done
