@@ -8,11 +8,13 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/bazarr:/config
-      - /data/media:/data/media
+      - nas:/data/media
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
+    security_opt:
+      - apparmor:unconfined
 
   lidarr:
     image: ghcr.io/linuxserver/lidarr@sha256:5c1f7a05944a1ceea242481801bbc5f908a4cc66e95ae0153b5a59f2d6224b17
@@ -23,12 +25,15 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/lidarr:/config
       - /data:/data
+      - nas:/data/media
       - /docker/appdata/lidarr-extended:/custom-services.d
       - /docker/appdata/lidarr-extended1:/custom-cont-init.d
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
+    security_opt:
+      - apparmor:unconfined
 
   prowlarr:
     image: ghcr.io/linuxserver/prowlarr@sha256:2ae64259bfca88972deec4cffa3750a454224283515854408e35af480f167cd7
@@ -51,10 +56,13 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/radarr:/config
       - /data:/data
+      - nas:/data/media
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
+    security_opt:
+      - apparmor:unconfined
 
   sonarr:
     image: ghcr.io/linuxserver/sonarr@sha256:f1b771bf5f911ddb11aa86170ae27fab5ccde7d4671edcde6a3b264af8662945
@@ -65,10 +73,13 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sonarr:/config
       - /data:/data
+      - nas:/data/media
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
+    security_opt:
+      - apparmor:unconfined
 
   homarr:
     container_name: homarr
@@ -210,3 +221,11 @@ services:
 networks:
   default:
     name: arrs_default
+
+volumes:
+  nas:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=nas.lan,vers=4,rw
+      device: ":/mnt/thePool/thePoolShare/Media"
