@@ -94,20 +94,33 @@ jobs:
               "https://awx.mafyuh.xyz/api/v2/job_templates/13/launch/" > /dev/null 2>&1
             echo "AWX Job Triggered, waiting for logs..."
 
-            sleep 45  
+            # Wait for job completion and check logs
+            while true; do
+              # Fetch the most recent job ID
+              job_id=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" \
+                https://awx.mafyuh.xyz/api/v2/job_templates/13/jobs/?order_by=-id | jq -r '.results[0].id')
+              
+              # Fetch the logs for the current job
+              logs=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" \
+                https://awx.mafyuh.xyz/api/v2/jobs/$job_id/stdout/?format=txt)
 
-            job_id=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/job_templates/13/jobs/?order_by=-id | jq -r '.results[0].id')
-            logs=$(curl -s -H "Authorization: Bearer ${{ secrets.AWX_API_TOKEN }}" https://awx.mafyuh.xyz/api/v2/jobs/$job_id/stdout/?format=txt)
+              # Check if the logs contain the play recap
+              if echo "$logs" | grep -q "ok=.* changed=.* unreachable=.* failed=.* skipped=.* rescued=.* ignored=.*"; then
+                echo "AWX job completed. Displaying logs:"
+                echo "$logs"
+                
+                # Check for failed tasks in the play recap
+                if echo "$logs" | grep -q "failed=[1-9]"; then
+                  echo "Detected failed steps in AWX job. Failing Actions run."
+                  exit 1
+                else
+                  echo "No failures detected in AWX job."
+                fi
 
-            echo "AWX Job Logs for folder: $folder"
-            echo "Content:"
-            echo "$logs"
-
-            # Check for 'failed=' in the play recap
-            if echo "$logs" | grep -q "failed=[1-9]"; then
-              echo "Detected failed steps in AWX job. Failing Actions run."
-              exit 1
-            else
-              echo "No failures detected in AWX job."
-            fi
-          done
+                # Exit loop as the job is complete
+                break
+              else
+                echo "AWX job still running. Waiting before checking again..."
+                sleep 15
+              fi
+            done
