@@ -1,0 +1,93 @@
+name: Ansible Deploy to Hosts
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch all history for git diff
+        run: git fetch --depth=2
+
+      - name: Detect modified folders
+        id: detect-changes
+        run: |
+          if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
+            git fetch --unshallow
+          fi
+          folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
+          echo "Modified folders: $folders"
+          echo "::set-output name=folders::$folders"
+
+      - name: Deploy to hosts
+        run: |
+          IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
+          for folder in "${folder_array[@]}"; do
+            case $folder in
+              actual)
+                target_host="ubu.lan"
+                ;;
+              arrs)
+                target_host="arrs.lan"
+                ;;
+              arm)
+                target_host="arm.lan"
+                ;;
+              AI)
+                target_host="ai.lan"
+                ;;
+              authentik)
+                target_host="auth.lan"
+                ;;
+              ag-main)
+                target_host="dns.lan"
+                ;;
+              exporters)
+                target_host="all"
+                ;;
+              grafana)
+                target_host="ubu.lan"
+                ;;
+              jellyfin)
+                target_host="jf.lan"
+                ;;
+              kasm)
+                target_host="kasm.lan"
+                ;;
+              netboot)
+                target_host="netboot.lan"
+                ;;
+              nexterm)
+                target_host="ubu.lan"
+                ;;
+              npm)
+                target_host="npm.lan"
+                ;;
+              paperless)
+                target_host="ubu.lan"
+                ;;
+              portainer)
+                target_host="port.lan"
+                ;;
+              runner)
+                target_host="runner.lan"
+                ;;
+              # Add cases for other folders/hosts
+              *)
+                echo "Unknown folder: $folder"
+                exit 1
+                ;;
+            esac
+            echo "Deploying to $target_host for folder $folder"
+      
+      - name: Run Ansible Playbook
+        uses: docker://mafyuh/ansible-bws:v1.0.0
+        with:
+          args: ansible-playbook -i hosts.ini /playbooks/deploy-docker.yml --extra-vars "target_host=$target_host folder=$folder"
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
