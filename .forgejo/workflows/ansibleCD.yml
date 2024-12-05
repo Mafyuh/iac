@@ -84,7 +84,8 @@ jobs:
                 ;;
             esac
             echo "Deploying to $target_host for folder $folder"
-      
+          done
+
       - name: Run Ansible Playbook
         uses: docker://mafyuh/ansible-bws:v1.0.1
         with:
