@@ -87,7 +87,7 @@ jobs:
           done
 
       - name: Run Ansible Playbook
-        uses: docker://mafyuh/ansible-bws:v1.0.1
+        uses: docker://mafyuh/ansible-bws:v1.0.3
         with:
           args: ansible-playbook -i hosts.ini /playbooks/deploy-docker.yml --extra-vars "target_host=$target_host folder=$folder"
         env:
