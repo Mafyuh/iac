@@ -110,6 +110,7 @@ jobs:
             fb62a8d1-6dd5-4fab-aff4-b23e0021e215 > npm_host
             90a16954-45df-49ad-9f45-b23e002273c5 > runner_host
             a5b6fa4b-4643-4f85-988b-b23e00245e2f > ubu_host
+            26b06759-9791-42d7-a076-b23e0063c4dd > ssh_private_key
 
   
       - name: Create hosts.ini file
@@ -128,11 +129,21 @@ jobs:
           ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }} ansible_user=mafyuh
           EOF
 
+      - name: Create Private key
+        run: |
+          cat <<EOF > /root/.ssh/id_rsa
+          ${{ steps.bitwarden-secrets.outputs.ssh_private_key }}
+          EOF
+      
+      - name: Set permissions for private key
+        run: |
+          chmod 600 /root/.ssh/id_rsa
+
+
       - name: Run Ansible Playbook
         uses: docker://mafyuh/ansible-bws:v1.0.4
         with:
           args: ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }}"
         env:
           BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ANSIBLE_CONFIG: ansible/ansible.cfg
