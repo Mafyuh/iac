@@ -116,16 +116,16 @@ jobs:
         run: |
           cat <<EOF > ansible/hosts.ini
           [iac]
-          arrs.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arrs_host }}
-          ai.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ai_host }}
+          arrs.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arrs_host }} ansible_user=mafyuh
+          ai.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ai_host }} ansible_user=mafyuh
           arm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arm_host }} ansible_user=ubuntu ansible_port=2424
-          auth.lan ansible_host=${{ steps.bitwarden-secrets.outputs.auth_host }}
-          jf.lan ansible_host=${{ steps.bitwarden-secrets.outputs.jf_host }}
-          kasm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.kasm_host }}
-          netboot.lan ansible_host=${{ steps.bitwarden-secrets.outputs.netboot_host }}
-          npm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.npm_host }}
-          runner.lan ansible_host=${{ steps.bitwarden-secrets.outputs.runner_host }}
-          ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }}
+          auth.lan ansible_host=${{ steps.bitwarden-secrets.outputs.auth_host }} ansible_user=mafyuh
+          jf.lan ansible_host=${{ steps.bitwarden-secrets.outputs.jf_host }} ansible_user=mafyuh
+          kasm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.kasm_host }} ansible_user=mafyuh
+          netboot.lan ansible_host=${{ steps.bitwarden-secrets.outputs.netboot_host }} ansible_user=mafyuh
+          npm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.npm_host }} ansible_user=mafyuh
+          runner.lan ansible_host=${{ steps.bitwarden-secrets.outputs.runner_host }} ansible_user=mafyuh
+          ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }} ansible_user=mafyuh
           EOF
 
       - name: Run Ansible Playbook
