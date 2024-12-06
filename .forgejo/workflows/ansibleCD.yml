@@ -26,7 +26,7 @@ jobs:
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
 
-      - name: Deploy to hosts
+      - name: Map Folder to Host
         shell: bash
         run: |
           IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
@@ -134,3 +134,4 @@ jobs:
         env:
           BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ANSIBLE_CONFIG: ansible/ansible.cfg
