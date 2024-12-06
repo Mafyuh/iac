@@ -90,7 +90,7 @@ jobs:
 
       - name: Get Secrets from Bitwarden
         id: bitwarden-secrets
-        uses: bitwarden/sm-action@v2
+        uses: https://github.com/bitwarden/sm-action@v2
         with:
           access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           base_url: https://vault.bitwarden.com
