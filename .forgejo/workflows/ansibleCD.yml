@@ -8,7 +8,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: docker
     container:
-      image: ubuntu:24.04
+      image: mafyuh/ansible-bws:v1.0.4
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
