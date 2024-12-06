@@ -27,6 +27,7 @@ jobs:
           echo "::set-output name=folders::$folders"
 
       - name: Deploy to hosts
+        shell: bash
         run: |
           IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
           for folder in "${folder_array[@]}"; do
@@ -86,6 +87,7 @@ jobs:
                 ;;
             esac
             echo "Deploying to $target_host for folder $folder"
+
             echo "target_host=$target_host" >> $GITHUB_ENV
             echo "folder=$folder" >> $GITHUB_ENV
           done
