@@ -149,6 +149,12 @@ jobs:
           eval $(ssh-agent -s)
           ssh-add /root/.ssh/id_rsa
 
+      - name: Debug SSH Key Content
+        run: |
+          echo "SSH Key Content:"
+          echo "${{ steps.bitwarden-secrets.outputs.ssh_private_key }}"
+
+
       - name: Run Ansible Playbook
         uses: docker://mafyuh/ansible-bws:v1.0.5
         with:
