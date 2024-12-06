@@ -11,11 +11,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug Repository Contents
-        run: |
-          pwd
-          ls -R
-
       - name: Fetch all history for git diff
         run: git fetch --depth=2
 
@@ -89,12 +84,49 @@ jobs:
                 ;;
             esac
             echo "Deploying to $target_host for folder $folder"
+            echo "target_host=$target_host" >> $GITHUB_ENV
+            echo "folder=$folder" >> $GITHUB_ENV
           done
+
+      - name: Get Secrets from Bitwarden
+        id: bitwarden-secrets
+        uses: bitwarden/sm-action@v2
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          base_url: https://vault.bitwarden.com
+          secrets: |
+            267abc49-f755-4c88-a2a8-b23d00503e31 > arrs_host
+            e74d1f67-c909-4a2e-b6fc-b23e001dfa4a > ai_host
+            6f9cef86-eb39-4e05-8c5b-b23e001e6170 > arm_host
+            52512c15-b474-42c3-9835-b23e001edf35 > auth_host
+            903364d9-1b29-4b7f-aa66-b23e001f7327 > jf_host
+            e4c5d8be-b91f-41ab-8071-b23e00203340 > kasm_host
+            566329f5-5af3-4bcd-b187-b23e00216134 > netboot_host
+            fb62a8d1-6dd5-4fab-aff4-b23e0021e215 > npm_host
+            90a16954-45df-49ad-9f45-b23e002273c5 > runner_host
+            a5b6fa4b-4643-4f85-988b-b23e00245e2f > ubu_host
+
+  
+      - name: Create hosts.ini file
+        run: |
+          cat <<EOF > ansible/hosts.ini
+          [iac]
+          arrs.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arrs_host }}
+          ai.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ai_host }}
+          arm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arm_host }} ansible_user=ubuntu ansible_port=2424
+          auth.lan ansible_host=${{ steps.bitwarden-secrets.outputs.auth_host }}
+          jf.lan ansible_host=${{ steps.bitwarden-secrets.outputs.jf_host }}
+          kasm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.kasm_host }}
+          netboot.lan ansible_host=${{ steps.bitwarden-secrets.outputs.netboot_host }}
+          npm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.npm_host }}
+          runner.lan ansible_host=${{ steps.bitwarden-secrets.outputs.runner_host }}
+          ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }}
+          EOF
 
       - name: Run Ansible Playbook
         uses: docker://mafyuh/ansible-bws:v1.0.3
         with:
-          args: ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml --extra-vars "target_host=${{ steps.detect-changes.outputs.target_host }} folder=${{ steps.detect-changes.outputs.folders }}"
+          args: ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }}"
         env:
           BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
