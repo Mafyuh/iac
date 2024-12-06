@@ -142,7 +142,7 @@ jobs:
       
       - name: Set permissions for private key
         run: |
-          chmod 600 /root/.ssh/id_rsa
+          chmod 700 /root/.ssh/id_rsa
 
       - name: Set up SSH agent
         run: |
