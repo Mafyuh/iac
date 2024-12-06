@@ -139,6 +139,10 @@ jobs:
         run: |
           chmod 600 /root/.ssh/id_rsa
 
+      - name: Set up SSH agent
+        run: |
+          eval $(ssh-agent -s)
+          ssh-add /root/.ssh/id_rsa
 
       - name: Run Ansible Playbook
         uses: docker://mafyuh/ansible-bws:v1.0.4
