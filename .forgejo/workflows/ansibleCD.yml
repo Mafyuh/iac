@@ -7,8 +7,6 @@ jobs:
   deploy:
     if: github.event.pull_request.merged == true
     runs-on: docker
-    container:
-      image: node:22
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -126,7 +124,7 @@ jobs:
           EOF
 
       - name: Run Ansible Playbook
-        uses: docker://mafyuh/ansible-bws:v1.0.3
+        uses: docker://mafyuh/ansible-bws:v1.0.4
         with:
           args: ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }}"
         env:
