@@ -129,6 +129,11 @@ jobs:
           ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }} ansible_user=mafyuh
           EOF
 
+      - name: Ensure SSH directory exists
+        run: |
+          mkdir -p /root/.ssh
+          chmod 700 /root/.ssh
+
       - name: Create Private key
         run: |
           cat <<EOF > /root/.ssh/id_rsa
