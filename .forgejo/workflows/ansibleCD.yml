@@ -11,6 +11,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Debug Repository Contents
+        run: |
+          pwd
+          ls -R
+
       - name: Fetch all history for git diff
         run: git fetch --depth=2
 
