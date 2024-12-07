@@ -151,9 +151,10 @@ jobs:
 
 
       - name: Run Ansible Playbook
-        uses: docker://mafyuh/ansible-bws:v1.0.5
-        with:
-          args: ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }}"
         env:
           BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
           ANSIBLE_CONFIG: ansible/ansible.cfg
+        run: |
+          ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml \
+            --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }}"
+
