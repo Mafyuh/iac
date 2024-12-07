@@ -2,7 +2,7 @@ resource "proxmox_virtual_environment_vm" "Plausible" {
 
     # VM General Settings
     node_name    = "prox"
-    vm_id        = 102
+    vm_id        = 103
     name         = "Plausible"
     description  = "Plausible"
     tags         = ["tofu", "ubuntu24", "iac-repo", "infrastructure"]
