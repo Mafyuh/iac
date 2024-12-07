@@ -1,31 +1,30 @@
-resource "proxmox_virtual_environment_vm" "K3s-Master3" {
+resource "proxmox_virtual_environment_vm" "Plausible" {
 
     # VM General Settings
     node_name    = "prox"
-    vm_id        = 330
-    name         = "K3s-Master3"
-    description  = "Kubernetes master"
-    tags         = ["tofu", "ubuntu-22", "auto-homelab-repo", "infrastructure"]
-    started      = false
+    vm_id        = 102
+    name         = "Plausible"
+    description  = "Plausible"
+    tags         = ["tofu", "ubuntu24", "iac-repo", "infrastructure"]
 
     agent {
       enabled = true # read 'Qemu guest agent' section, change to true only when ready
     }
 
     clone {
-        vm_id = 8000
+        vm_id = 9996
     }
     
     # VM CPU Settings
     cpu {
-        cores = 4
+        cores = 2
         type  = "host"
         architecture = "x86_64"
     }
     
     # VM Memory Settings
     memory {
-        dedicated = 8192
+        dedicated = 2048
     }
 
     # VM Network Settings
@@ -37,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "K3s-Master3" {
     # VM Disk Settings
     disk {
         datastore_id = "Fast2Tb"
-        size         = 100
+        size         = 30
         interface    = "scsi0"
     }
 
@@ -52,7 +51,7 @@ resource "proxmox_virtual_environment_vm" "K3s-Master3" {
             }
         }
 
-        user_account {}
+        user_data_file_id = proxmox_virtual_environment_file.cloud_config.id
     }
 
     lifecycle {
