@@ -17,14 +17,14 @@ resource "proxmox_virtual_environment_vm" "Plausible" {
     
     # VM CPU Settings
     cpu {
-        cores = 2
+        cores = 3
         type  = "host"
         architecture = "x86_64"
     }
     
     # VM Memory Settings
     memory {
-        dedicated = 2048
+        dedicated = 4196
     }
 
     # VM Network Settings
