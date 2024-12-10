@@ -80,7 +80,7 @@ services:
       - redis
   
   authentik_ldap:
-        image: ghcr.io/goauthentik/ldap:2024.10.4
+        image: ghcr.io/goauthentik/ldap:2024.10.5
         ports:
             - 389:3389
             - 636:6636
