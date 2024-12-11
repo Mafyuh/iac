@@ -8,23 +8,25 @@ jobs:
   lint:
     name: Lint YAML files
     runs-on: docker
+    container:
+      image: cytopia/yamllint:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 14
-      
-      - name: Install yamllint
-        run: | 
-          npm install -g yaml-lint
+      - name: Get modified YAML files
+        id: get_changed_files
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.(yml)$' || true)
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
-      - name: Show yamllint version
-        run: | 
-          yamllint --version
+      - name: Run yamllint on modified files
+        if: env.CHANGED_FILES != ''
+        run: |
+          yamllint $CHANGED_FILES
+        env:
+          CHANGED_FILES: ${{ env.CHANGED_FILES }}
 
-      - name: Lint .yml files
-        run: | 
-          yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" docker/**/*.yml
+      - name: Skip linting if no YAML files are changed
+        if: env.CHANGED_FILES == ''
+        run: echo "No YAML files changed in this PR. Skipping lint."
