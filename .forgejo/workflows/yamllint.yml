@@ -9,7 +9,7 @@ jobs:
     name: Lint YAML files
     runs-on: docker
     container:
-      image: cytopia/yamllint:latest
+      image: mafyuh/node-yamllint:v1.0.0
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
