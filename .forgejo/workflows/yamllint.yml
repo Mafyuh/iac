@@ -21,8 +21,9 @@ jobs:
 
       - name: Lint .yml files
         run: | 
-          lint_output=$(find docker -name "*.yml" yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \;)
+          lint_output=$(find docker -name "*.yml" -exec yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \;)
           
+          # Check if there are any issues
           if [[ -n "$lint_output" ]]; then
             echo "$lint_output"
             exit 1
