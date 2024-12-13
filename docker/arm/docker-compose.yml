@@ -65,7 +65,7 @@ services:
     restart: unless-stopped
     networks:
       - gitea_main
-  
+
   fail2ban:
     image: crazymax/fail2ban:1.1.0
     container_name: fail2ban
@@ -204,7 +204,7 @@ services:
       - 22000:22000/udp
       - 21027:21027/udp
     restart: unless-stopped
-  
+
   wiki-db:
     image: postgres:15-alpine
     environment:

@@ -11,7 +11,7 @@ services:
       - /docker/appdata/nginx/data:/data
       - /docker/appdata/nginx/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
-  
+
   fail2ban:
     image: crazymax/fail2ban:1.1.0
     container_name: fail2ban_docker-pi
@@ -35,7 +35,7 @@ services:
       - SSMTP_PASSWORD=$SSMTP_PASSWORD
       - SSMTP_TLS=YES
     restart: always
-  
+
   cf-tunnel:
     restart: unless-stopped
     image: cloudflare/cloudflared@sha256:055932e8581b57a65f08f6232762d000a8ec6e0709fe783b47090490457f9091

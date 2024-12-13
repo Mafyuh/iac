@@ -32,7 +32,7 @@ services:
       - GF_AUTH_GENERIC_OAUTH_API_URL=$AUTHENTIK_URL/application/o/userinfo/
       - GF_AUTH_SIGNOUT_REDIRECT_URL=$AUTHENTIK_URL/application/o/grafana/end-session/
       - GF_AUTH_OAUTH_AUTO_LOGIN=false
-      - GF_SERVER_ROOT_URL=$GF_SERVER_ROOT_URL 
+      - GF_SERVER_ROOT_URL=$GF_SERVER_ROOT_URL
     user: "1000"
     volumes:
       - /docker/appdata/grafana:/var/lib/grafana
@@ -93,7 +93,7 @@ services:
       - /:/host:ro,rslave
     networks:
       - grafana
-  
+
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.51.0
     container_name: cadvisor
@@ -116,7 +116,7 @@ services:
     command: ["sonarr"]
     environment:
       PORT: 9707
-      URL: $SONARR_URL 
+      URL: $SONARR_URL
       APIKEY: $SONARR_API
     ports:
       - "9707:9707"
@@ -129,7 +129,7 @@ services:
     command: ["radarr"]
     environment:
       PORT: 9708
-      URL: $RADARR_URL 
+      URL: $RADARR_URL
       APIKEY: $RADARR_API
     ports:
       - "9708:9708"
@@ -144,9 +144,9 @@ services:
       PORT: 9710
       URL: $PROWLARR_URL
       APIKEY: $PROWLARR_API
-      PROWLARR__BACKFILL: true 
+      PROWLARR__BACKFILL: true
     ports:
-     - "9710:9710"
+      - "9710:9710"
     restart: unless-stopped
     networks:
       - grafana
@@ -156,10 +156,10 @@ services:
     command: ["sabnzbd"]
     environment:
       PORT: 9711
-      URL: $SAB_URL 
+      URL: $SAB_URL
       APIKEY: $SAB_API
     ports:
-     - "9711:9711"
+      - "9711:9711"
     restart: unless-stopped
     networks:
       - grafana

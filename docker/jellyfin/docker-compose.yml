@@ -57,7 +57,7 @@ services:
       - 22000:22000/udp
       - 21027:21027/udp
     restart: unless-stopped
-  
+
   jellystat-db:
     image: postgres:15.2
     environment:
@@ -65,7 +65,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
-    - /docker/appdata/jellystat/postgres-data:/var/lib/postgresql/data
+      - /docker/appdata/jellystat/postgres-data:/var/lib/postgresql/data
+
   jellystat:
     image: cyfershepard/jellystat:1.1.1
     environment:
@@ -75,7 +76,7 @@ services:
       POSTGRES_PORT: 5432
       JWT_SECRET: $JWT_SECRET
     ports:
-      - "3000:3000" 
+      - "3000:3000"
     volumes:
       - /docker/appdata/jellystat/backup-data:/app/backend/backup-data
     depends_on:
