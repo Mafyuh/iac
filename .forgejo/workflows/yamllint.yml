@@ -15,7 +15,11 @@ jobs:
       - name: Get modified YAML files
         id: get_changed_files
         run: |
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.(yml)$' || true)
+          if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.(yml)$' || true)
+          else
+            CHANGED_FILES=$(git diff --name-only $(git hash-object -t tree /dev/null) HEAD | grep -E '\.(yml)$' || true)
+          fi
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV          
 
       - name: Run yamllint on modified files
