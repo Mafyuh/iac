@@ -18,7 +18,7 @@ jobs:
       - name: Get modified YAML files
         id: get_changed_files
         run: |
-          BASE_BRANCH=$(git merge-base HEAD origin/${{ github.event.pull_request.base.ref }})
+          BASE_BRANCH=$(git rev-parse --abbrev-ref origin/HEAD)
           CHANGED_FILES=$(git diff --name-only $BASE_BRANCH HEAD | grep -E '\.(yml)$' || true)
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
