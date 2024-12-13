@@ -12,20 +12,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Fetch all branches
+        run: git fetch --all
+
       - name: Get modified YAML files
         id: get_changed_files
         run: |
-          if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
-            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.(yml)$' || true)
-          else
-            CHANGED_FILES=$(git diff --name-only $(git hash-object -t tree /dev/null) HEAD | grep -E '\.(yml)$' || true)
-          fi
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV          
+          BASE_BRANCH=$(git merge-base HEAD origin/${{ github.event.pull_request.base.ref }})
+          CHANGED_FILES=$(git diff --name-only $BASE_BRANCH HEAD | grep -E '\.(yml)$' || true)
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+
+      - name: Debug changed files
+        run: echo "Changed files: ${{ env.CHANGED_FILES }}"
 
       - name: Run yamllint on modified files
         if: env.CHANGED_FILES != ''
         run: |
-          yamllint $CHANGED_FILES          
+          yamllint $CHANGED_FILES
         env:
           CHANGED_FILES: ${{ env.CHANGED_FILES }}
 
