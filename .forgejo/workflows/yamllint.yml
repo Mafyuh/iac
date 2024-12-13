@@ -25,4 +25,4 @@ jobs:
 
       - name: Lint .yml files
         run: | 
-          yamllint -d docker/**/*.yml
+          yamllint -v -d docker/**/*.yml
