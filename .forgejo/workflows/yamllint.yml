@@ -1,5 +1,3 @@
-name: Lint on PR
-
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -17,13 +15,13 @@ jobs:
       - name: Get modified YAML files
         id: get_changed_files
         run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.(yml)$' || true)
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.(yml)$' || true)
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV          
 
       - name: Run yamllint on modified files
         if: env.CHANGED_FILES != ''
         run: |
-          yamllint $CHANGED_FILES
+          yamllint $CHANGED_FILES          
         env:
           CHANGED_FILES: ${{ env.CHANGED_FILES }}
 
