@@ -21,4 +21,4 @@ jobs:
 
       - name: Lint .yml files
         run: | 
-          find docker -name "*.yml" -exec yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \;
+          find docker -name "*.yml" -exec yamllint -c --strict -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \;
