@@ -1,3 +1,5 @@
+name: Lint on PR
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -12,26 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Fetch all branches
-        run: git fetch --all
-
-      - name: Get modified YAML files
-        id: get_changed_files
+      - name: Debug Repository Contents
         run: |
-          BASE_BRANCH=$(git rev-parse --abbrev-ref origin/HEAD)
-          CHANGED_FILES=$(git diff --name-only $BASE_BRANCH HEAD | grep -E '\.(yml)$' || true)
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+          pwd
+          ls -R
 
-      - name: Debug changed files
-        run: echo "Changed files: ${{ env.CHANGED_FILES }}"
+      - name: Show yamllint version
+        run: | 
+          yamllint --version
 
-      - name: Run yamllint on modified files
-        if: env.CHANGED_FILES != ''
-        run: |
-          yamllint $CHANGED_FILES
-        env:
-          CHANGED_FILES: ${{ env.CHANGED_FILES }}
-
-      - name: Skip linting if no YAML files are changed
-        if: env.CHANGED_FILES == ''
-        run: echo "No YAML files changed in this PR. Skipping lint."
+      - name: Lint .yml files
+        run: | 
+          yamllint -d docker/**/*.yml
