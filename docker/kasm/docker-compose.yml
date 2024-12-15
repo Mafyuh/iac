@@ -37,7 +37,7 @@ services:
 
   couchdb-obsidian-livesync:
     container_name: obsidian-livesync
-    image: couchdb:3.3.3
+    image: couchdb:3.4.2
     environment:
       - PUID=1000
       - PGID=1000
