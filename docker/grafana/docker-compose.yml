@@ -52,7 +52,7 @@ services:
       - grafana
 
   promtail:
-    image: grafana/promtail:3.3.1
+    image: grafana/promtail:3.3.2
     container_name: promtail
     volumes:
       - /var/log:/var/log
