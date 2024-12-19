@@ -9,7 +9,7 @@ services:
       - DOCKER_HUB_USERNAME=$DOCKER_HUB_USERNAME
       - DOCKER_HUB_PASSWORD=$DOCKER_HUB_PASSWORD
     volumes:
-      - /docker/appdata/kasm:/opt
+      - /docker/appdata/kasm2:/opt
     ports:
       - 3000:3000
       - 443:443
