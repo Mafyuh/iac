@@ -83,7 +83,7 @@ services:
 
   homarr:
     container_name: homarr
-    image: ghcr.io/ajnart/homarr:0.15.9
+    image: ghcr.io/ajnart/homarr:0.15.10
     restart: unless-stopped
     volumes:
       - /docker/appdata/homarr/configs:/app/data/configs
