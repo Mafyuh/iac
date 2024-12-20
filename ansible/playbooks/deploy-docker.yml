@@ -23,6 +23,11 @@
 
     - name: Display container states
       debug:
-        msg: >
-          Container {{ item.Name }} - {{ item.Status }}
+        msg: |
+          Container {{ item.Names[0] }}
+          - State: {{ item.State }}
+          - Status: {{ item.Status }}
+          - Ports: {{ item.Ports }}
+          - Networks: {{ item.Networks | join(', ') }}
       with_items: "{{ docker_compose_output.containers }}"
+
