@@ -1,0 +1,21 @@
+---
+- name: Count Docker containers on all hosts
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Count running Docker containers on each host
+      shell: "docker ps -q | wc -l"
+      register: container_count
+      changed_when: false
+
+    - name: Display count for each host
+      debug:
+        msg: "Host {{ inventory_hostname }} has {{ container_count.stdout }} running Docker containers"
+
+    - name: Aggregate total count
+      run_once: true
+      delegate_to: localhost
+      vars:
+        container_counts: "{{ hostvars | map(attribute='container_count.stdout') | map('int') | list }}"
+      debug:
+        msg: "Total running Docker containers across all hosts: {{ container_counts | sum }}"
