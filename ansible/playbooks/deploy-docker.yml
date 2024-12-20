@@ -19,15 +19,11 @@
         project_src: "{{ repo_path }}"
         state: present
         remove_orphans: true
-      register: docker_compose_output
 
-    - name: Display container states
-      debug:
-        msg: |
-          Container {{ item.Names[0] }}
-          - State: {{ item.State }}
-          - Status: {{ item.Status }}
-          - Ports: {{ item.Ports }}
-          - Networks: {{ item.Networks | join(', ') }}
-      with_items: "{{ docker_compose_output.containers }}"
+    - name: Run Docker Command		
+      command: docker compose ps		
+      register: docker_output		
 
+    - name: Display Docker Output		
+      debug:		
+        var: docker_output.stdout_lines
