@@ -1,6 +1,6 @@
 services:
   portainer:
-    image: portainer/portainer-ee@sha256:7270f8fc038005ba12d8a444303776357f54307764cfebfcd97ba892b69a3168
+    image: portainer/portainer-ee@sha256:4f19aeddcb00e71412e312c39c184883033c48bfda66b88353c3cd5c36d65242
     container_name: portainer
     command: -H unix:///var/run/docker.sock
     ports:
