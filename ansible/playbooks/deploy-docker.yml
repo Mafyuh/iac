@@ -21,6 +21,8 @@
         remove_orphans: true
       register: docker_compose_output
 
-    - name: Display docker compose output
-      ansible.builtin.debug:
-        var: docker_compose_output
+    - name: Display container states
+      debug:
+        msg: >
+          Container {{ item.Name }} - {{ item.Status }}
+      with_items: "{{ docker_compose_output.containers }}"
