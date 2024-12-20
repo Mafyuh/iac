@@ -21,7 +21,9 @@
         remove_orphans: true
 
     - name: Run Docker Command		
-      command: docker compose ps		
+      command: docker compose ps
+      args:
+        chdir: "{{ repo_path }}"
       register: docker_output		
 
     - name: Display Docker Output		
