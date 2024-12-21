@@ -2,8 +2,6 @@ name: Ansible Deploy to Hosts
 on:
   pull_request:
     types: [closed]
-    paths:
-      - 'docker/**'
   workflow_dispatch:
 
 jobs:
