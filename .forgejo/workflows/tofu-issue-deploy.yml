@@ -18,8 +18,18 @@ jobs:
           ISSUE_BODY="${{ github.event.issue.body }}"
           echo "ISSUE_BODY=$ISSUE_BODY"
 
+          # Check if 'VM Name' is in the body
+          echo "$ISSUE_BODY" | grep 'VM Name'  # This should print the line with 'VM Name'
+
+          # Extract the value for VM_NAME
           VM_NAME=$(echo "$ISSUE_BODY" | grep -A 1 'VM Name' | tail -n 1 | xargs)
-          echo "VM_NAME=$VM_NAME"
+          echo "Extracted VM_NAME: '$VM_NAME'"  # Debugging extracted value
+
+          if [ -z "$VM_NAME" ]; then
+            echo "Error: VM_NAME is empty. Check the formatting of the input."
+          else
+            echo "VM_NAME=$VM_NAME"  # Display the value if extracted correctly
+          fi
 
           VM_ID=$(echo "$ISSUE_BODY" | grep 'VM ID:' | cut -d':' -f2 | xargs)
           RAM=$(echo "$ISSUE_BODY" | grep 'RAM:' | cut -d':' -f2 | xargs)
