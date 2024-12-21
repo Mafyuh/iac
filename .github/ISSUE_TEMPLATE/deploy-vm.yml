@@ -2,7 +2,7 @@ name: Deploy Virtual Machine
 description: Provide details to deploy a new virtual machine.
 title: "[VM Deployment] <VM Name>"
 labels:
-  - deploy-vm
+  - opentofu
 assignees:
   - mafyuh
 body:
