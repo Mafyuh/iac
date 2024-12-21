@@ -28,6 +28,9 @@ jobs:
           DISK_SIZE=$(echo "$ISSUE_BODY" | grep 'Disk Size:' | cut -d':' -f2 | xargs)
           CLONE_VM_ID=$(echo "$ISSUE_BODY" | grep 'Clone VM ID:' | cut -d':' -f2 | xargs)
 
+          echo "NODE_NAME=$NODE_NAME"
+          echo "ISSUE_BODY=$ISSUE_BODY"
+
           # Determine user_data_file_id
           if [ "$NODE_NAME" == "prox" ]; then
             USER_DATA_FILE_ID="proxmox_virtual_environment_file.cloud_config.id"
