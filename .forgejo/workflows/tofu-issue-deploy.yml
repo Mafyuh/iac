@@ -19,6 +19,7 @@ jobs:
           echo "ISSUE_BODY=$ISSUE_BODY"
 
           VM_NAME=$(echo "$ISSUE_BODY" | awk '/VM Name/{getline; print $0}' | xargs)
+          echo "Extracted VM_NAME: '$VM_NAME'"
 
           VM_ID=$(echo "$ISSUE_BODY" | grep 'VM ID:' | cut -d':' -f2 | xargs)
           RAM=$(echo "$ISSUE_BODY" | grep 'RAM:' | cut -d':' -f2 | xargs)
