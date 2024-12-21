@@ -18,7 +18,7 @@ body:
   - type: input
     id: vm_id
     attributes:
-      label: VM ID
+      label: VM UID
       placeholder: Enter the VM ID
       description: The unique numeric ID for the VM (e.g., 103).
     validations:
@@ -92,6 +92,6 @@ body:
     attributes:
       label: Clone VM ID
       placeholder: Enter the VM ID to clone from
-      description: The VM ID to use as the clone source (e.g., 9996).
+      description: VM to CLone from, Prox = 9996, Pve2 = 9997.
     validations:
       required: true
