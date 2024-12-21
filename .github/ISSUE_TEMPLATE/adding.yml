@@ -3,8 +3,6 @@ description: Steps to add a new Docker container to the repository
 title: "[Add Container] <Container Name>"
 labels:
   - docker
-assignees:
-  - @mafyuh
 body:
   - type: markdown
     attributes:
