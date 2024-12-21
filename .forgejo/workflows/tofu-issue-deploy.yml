@@ -18,7 +18,7 @@ jobs:
           ISSUE_BODY="${{ github.event.issue.body }}"
           echo "ISSUE_BODY=$ISSUE_BODY"
 
-          VM_NAME=$(echo "$ISSUE_BODY" | grep 'VM Name' | cut -d':' -f2 | xargs)
+          VM_NAME=$(echo "$ISSUE_BODY" | grep -A 1 'VM Name' | tail -n 1 | xargs)
           echo "VM_NAME=$VM_NAME"
 
           VM_ID=$(echo "$ISSUE_BODY" | grep 'VM ID:' | cut -d':' -f2 | xargs)
