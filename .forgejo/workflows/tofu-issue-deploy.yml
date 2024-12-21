@@ -18,7 +18,7 @@ jobs:
           ISSUE_BODY="${{ github.event.issue.body }}"
           echo "ISSUE_BODY=$ISSUE_BODY"
 
-          VM_NAME=$(echo "$ISSUE_BODY" | awk '/VM Name/{getline; print $0}' | xargs)
+          VM_NAME=$(echo "$ISSUE_BODY" | grep -A 1 'VM Name' | tail -n 1 | xargs)
           echo "Extracted VM_NAME: '$VM_NAME'"
 
           VM_ID=$(echo "$ISSUE_BODY" | grep 'VM ID:' | cut -d':' -f2 | xargs)
