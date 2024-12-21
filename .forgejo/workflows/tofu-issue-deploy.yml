@@ -105,7 +105,7 @@ jobs:
           git push
 
       - name: Trigger Terraform Apply Workflow
-        uses: actions/github-script@v6
+        uses: https://github.com/actions/github-script@v6
         with:
           script: |
             github.rest.actions.createWorkflowDispatch({
