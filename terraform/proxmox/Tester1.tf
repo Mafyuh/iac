@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_vm" "Tester1" {
 
     network_device {
         bridge  = "vmbr0"
-        vlan_id = "null"
+        vlan_id = null
     }
 
     disk {
