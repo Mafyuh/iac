@@ -14,6 +14,15 @@ body:
       description: The name of the virtual machine (e.g., Plausible).
     validations:
       required: true
+  
+  - type: input
+    id: description
+    attributes:
+      label: Description
+      placeholder: Enter the VM Description
+      description: Enter the VM Description
+    validations:
+      required: true
 
   - type: input
     id: vm_id
@@ -67,7 +76,7 @@ body:
       placeholder: Enter the VLAN ID
       description: The VLAN ID for the network device (e.g., 1).
     validations:
-      required: true
+      required: false
 
   - type: input
     id: datastore

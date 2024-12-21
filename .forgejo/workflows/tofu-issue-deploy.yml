@@ -26,6 +26,7 @@ jobs:
           DATASTORE=$(echo "$ISSUE_BODY" | grep -A 2 'Datastore ID' | tail -n 1 | xargs)
           DISK_SIZE=$(echo "$ISSUE_BODY" | grep -A 2 'Disk Size' | tail -n 1 | xargs)
           CLONE_VM_ID=$(echo "$ISSUE_BODY" | grep -A 2 'Clone VM ID' | tail -n 1 | xargs)
+          DESCRIPTION=$(echo "$ISSUE_BODY" | grep -A 2 'Description' | tail -n 1 | xargs)
 
           # Determine user_data_file_id
           if [ "$NODE_NAME" == "prox" ]; then
@@ -59,6 +60,7 @@ jobs:
               cpu {
                   cores = "${{ env.CPUS }}"
                   type  = "${{ env.SCPU_TYPE }}"
+                  architecture = "x86_64"
               }
 
               memory {
@@ -67,12 +69,15 @@ jobs:
 
               network_device {
                   bridge  = "vmbr0"
+                  {{- if env.VLAN_ID }}
                   vlan_id = "${{ env.VLAN_ID }}"
+                  {{- end }}
               }
 
               disk {
                   datastore_id = "${{ env.DATASTORE }}"
                   size         = "${{ env.DISK_SIZE }}"
+                  interface    = "scsi0"
               }
 
               clone {
@@ -88,6 +93,15 @@ jobs:
 
                   user_data_file_id = ${{ env.USER_DATA_FILE_ID }}
               }
+
+              lifecycle {
+              ignore_changes = [
+                initialization[0].user_account[0].keys,
+                initialization[0].user_account[0].password,
+                initialization[0].user_account[0].username,
+                initialization[0].user_data_file_id
+              ]
+            }
           }
           EOF
 
