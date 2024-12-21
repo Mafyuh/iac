@@ -17,7 +17,7 @@ jobs:
           echo "Extracting issue details..."
           ISSUE_BODY="${{ github.event.issue.body }}"
           VM_NAME=$(echo "$ISSUE_BODY" | grep -A 2 'VM Name' | tail -n 1 | xargs)
-          VM_ID=$(echo "$ISSUE_BODY" | grep -A 2 'VM ID' | tail -n 1 | xargs)
+          VM_ID=$(echo "$ISSUE_BODY" | grep -A 2 'VM ID' | grep -v 'Clone VM ID' | tail -n 1 | xargs)
           RAM=$(echo "$ISSUE_BODY" | grep -A 2 'RAM' | tail -n 1 | xargs)
           CPUS=$(echo "$ISSUE_BODY" | grep -A 2 'CPU Cores' | tail -n 1 | xargs)
           SCPU_TYPE=$(echo "$ISSUE_BODY" | grep -A 2 'CPU Type' | tail -n 1 | xargs)
@@ -100,3 +100,15 @@ jobs:
           git add terraform/proxmox/$VM_NAME.tf
           git commit -m "Add VM $VM_NAME configuration"
           git push
+
+
+      - name: Trigger Terraform Apply Workflow
+        uses: https://github.com/actions/github-script@v6
+        with:
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "tofu.yml",
+              ref: "main"
+            })            
