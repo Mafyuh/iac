@@ -16,20 +16,16 @@ jobs:
         run: |
           echo "Extracting issue details..."
           ISSUE_BODY="${{ github.event.issue.body }}"
-          echo "ISSUE_BODY=$ISSUE_BODY"
-
           VM_NAME=$(echo "$ISSUE_BODY" | grep -A 2 'VM Name' | tail -n 1 | xargs)
-          echo "Extracted VM_NAME: '$VM_NAME'"
-
-          VM_ID=$(echo "$ISSUE_BODY" | grep 'VM ID:' | cut -d':' -f2 | xargs)
-          RAM=$(echo "$ISSUE_BODY" | grep 'RAM:' | cut -d':' -f2 | xargs)
-          CPUS=$(echo "$ISSUE_BODY" | grep 'CPU Cores:' | cut -d':' -f2 | xargs)
-          SCPU_TYPE=$(echo "$ISSUE_BODY" | grep 'CPU Type:' | cut -d':' -f2 | xargs)
-          NODE_NAME=$(echo "$ISSUE_BODY" | grep 'Node Name:' | cut -d':' -f2 | xargs)
-          VLAN_ID=$(echo "$ISSUE_BODY" | grep 'VLAN ID:' | cut -d':' -f2 | xargs)
-          DATASTORE=$(echo "$ISSUE_BODY" | grep 'Datastore ID:' | cut -d':' -f2 | xargs)
-          DISK_SIZE=$(echo "$ISSUE_BODY" | grep 'Disk Size:' | cut -d':' -f2 | xargs)
-          CLONE_VM_ID=$(echo "$ISSUE_BODY" | grep 'Clone VM ID:' | cut -d':' -f2 | xargs)
+          VM_ID=$(echo "$ISSUE_BODY" | grep -A 2 'VM ID' | tail -n 1 | xargs)
+          RAM=$(echo "$ISSUE_BODY" | grep -A 2 'RAM' | tail -n 1 | xargs)
+          CPUS=$(echo "$ISSUE_BODY" | grep -A 2 'CPU Cores' | tail -n 1 | xargs)
+          SCPU_TYPE=$(echo "$ISSUE_BODY" | grep -A 2 'CPU Type' | tail -n 1 | xargs)
+          NODE_NAME=$(echo "$ISSUE_BODY" | grep -A 2 'Node Name' | tail -n 1 | xargs)
+          VLAN_ID=$(echo "$ISSUE_BODY" | grep -A 2 'VLAN ID' | tail -n 1 | xargs)
+          DATASTORE=$(echo "$ISSUE_BODY" | grep -A 2 'Datastore ID' | tail -n 1 | xargs)
+          DISK_SIZE=$(echo "$ISSUE_BODY" | grep -A 2 'Disk Size' | tail -n 1 | xargs)
+          CLONE_VM_ID=$(echo "$ISSUE_BODY" | grep -A 2 'Clone VM ID' | tail -n 1 | xargs)
 
           echo "NODE_NAME=$NODE_NAME"
 
@@ -55,7 +51,7 @@ jobs:
 
       - name: Generate Terraform File
         run: |
-          cat <<EOF > terraform/proxmox/$VM_ID.tf
+          cat <<EOF > terraform/proxmox/$VM_NAME.tf
           resource "proxmox_virtual_environment_vm" "$VM_NAME" {
               node_name    = "${{ env.NODE_NAME }}"
               vm_id        = "${{ env.VM_ID }}"
@@ -104,14 +100,3 @@ jobs:
           git add terraform/proxmox/$VM_ID.tf
           git commit -m "Add VM $VM_NAME configuration"
           git push
-
-      - name: Trigger Terraform Apply Workflow
-        uses: https://github.com/actions/github-script@v6
-        with:
-          script: |
-            github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: "tofu.yml",
-              ref: "main"
-            })
