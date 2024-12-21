@@ -27,6 +27,7 @@ jobs:
           DISK_SIZE=$(echo "$ISSUE_BODY" | grep -A 2 'Disk Size' | tail -n 1 | xargs)
           CLONE_VM_ID=$(echo "$ISSUE_BODY" | grep -A 2 'Clone VM ID' | tail -n 1 | xargs)
           DESCRIPTION=$(echo "$ISSUE_BODY" | grep -A 2 'Description' | tail -n 1 | xargs)
+          GATEWAY=$(echo "$ISSUE_BODY" | grep -A 2 'Gateway' | tail -n 1 | xargs)
 
           # Determine user_data_file_id
           if [ "$NODE_NAME" == "prox" ]; then
@@ -47,6 +48,8 @@ jobs:
           echo "DISK_SIZE=$DISK_SIZE" >> $GITHUB_ENV
           echo "CLONE_VM_ID=$CLONE_VM_ID" >> $GITHUB_ENV
           echo "USER_DATA_FILE_ID=$USER_DATA_FILE_ID" >> $GITHUB_ENV
+          echo "DESCRIPTION=$DESCRIPTION" >> $GITHUB_ENV
+          echo "GATEWAY=$GATEWAY" >> $GITHUB_ENV
 
       - name: Generate Terraform File
         run: |
@@ -55,7 +58,7 @@ jobs:
               node_name    = "${{ env.NODE_NAME }}"
               vm_id        = "${{ env.VM_ID }}"
               name         = "${{ env.VM_NAME }}"
-              description  = "${{ env.VM_NAME }}"
+              description  = "${{ env.DESCRIPTION }}"
 
               cpu {
                   cores = "${{ env.CPUS }}"
@@ -86,6 +89,7 @@ jobs:
                   ip_config {
                       ipv4 {
                           address = "dhcp"
+                          gateway = ${{ env.GATEWAY }}
                       }
                   }
 

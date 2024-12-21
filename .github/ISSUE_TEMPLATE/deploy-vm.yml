@@ -16,7 +16,7 @@ body:
     attributes:
       label: VM Name
       placeholder: Enter the name of the VM
-      description: The name of the virtual machine (e.g., `Plausible`).
+      description: The name of the virtual machine (e.g., Plausible).
     validations:
       required: true
   
@@ -75,20 +75,11 @@ body:
       required: true
 
   - type: input
-    id: vlan_id
-    attributes:
-      label: VLAN ID
-      placeholder: Enter the VLAN ID
-      description: The VLAN ID for the network device (e.g., 1 or `null`).
-    validations:
-      required: true
-
-  - type: input
     id: datastore
     attributes:
       label: Datastore ID
       placeholder: Enter the datastore ID
-      description: Specify the datastore where the VM disk is located (e.g., `Fast2Tb`).
+      description: Specify the datastore where the VM disk is located (e.g., Fast2Tb).
     validations:
       required: true
 
@@ -107,5 +98,29 @@ body:
       label: Clone VM ID
       placeholder: Enter the VM ID to clone from
       description: VM to CLone from, Prox = 9996, Pve2 = 9997.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Ones that vary below
+
+
+  - type: input
+    id: vlan_id
+    attributes:
+      label: VLAN ID
+      placeholder: Enter the VLAN ID
+      description: The VLAN ID for the network device (e.g., 1 or null).
+    validations:
+      required: true
+
+  - type: input
+    id: gateway
+    attributes:
+      label: Gateway
+      placeholder: Enter the Gateway Variable
+      description: The gateway variable (e.g., var.vlan_gateway or null).
     validations:
       required: true
