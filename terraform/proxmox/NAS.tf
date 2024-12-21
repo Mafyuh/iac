@@ -87,7 +87,6 @@ resource "proxmox_virtual_environment_vm" "TrueNAS" {
       timeout_clone,
       timeout_create,
       timeout_migrate,
-      timeout_move_disk,
       timeout_reboot,
       timeout_shutdown_vm,
       timeout_start_vm,
