@@ -69,9 +69,7 @@ jobs:
 
               network_device {
                   bridge  = "vmbr0"
-                  {{- if env.VLAN_ID }}
                   vlan_id = "${{ env.VLAN_ID }}"
-                  {{- end }}
               }
 
               disk {
@@ -88,6 +86,7 @@ jobs:
                   ip_config {
                       ipv4 {
                           address = "dhcp"
+                          vlan_gateway
                       }
                   }
 

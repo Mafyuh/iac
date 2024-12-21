@@ -1,17 +1,22 @@
 name: Deploy Virtual Machine
 description: Provide details to deploy a new virtual machine.
-title: "[VM Deployment] <VM Name>"
+title: ":computer: [VM Deployment] <put VM Name here>"
 labels:
   - opentofu
 assignees:
   - mafyuh
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Quickly create Virtual Machines and let Actions take care of provisoning. Use `null` for any values you dont want
+
   - type: input
     id: vm_name
     attributes:
       label: VM Name
       placeholder: Enter the name of the VM
-      description: The name of the virtual machine (e.g., Plausible).
+      description: The name of the virtual machine (e.g., `Plausible`).
     validations:
       required: true
   
@@ -56,7 +61,7 @@ body:
     attributes:
       label: CPU Type
       placeholder: Enter the CPU type
-      description: The type of CPU to use (e.g., host).
+      description: The type of CPU to use (e.g., `host`).
     validations:
       required: true
 
@@ -65,7 +70,7 @@ body:
     attributes:
       label: Node Name
       placeholder: Enter the node name
-      description: The Proxmox node name (e.g., prox or pve2).
+      description: The Proxmox node name (e.g., `prox`` or `pve2`).
     validations:
       required: true
 
@@ -74,16 +79,16 @@ body:
     attributes:
       label: VLAN ID
       placeholder: Enter the VLAN ID
-      description: The VLAN ID for the network device (e.g., 1).
+      description: The VLAN ID for the network device (e.g., 1 or `null`).
     validations:
-      required: false
+      required: true
 
   - type: input
     id: datastore
     attributes:
       label: Datastore ID
       placeholder: Enter the datastore ID
-      description: Specify the datastore where the VM disk is located (e.g., Fast2Tb).
+      description: Specify the datastore where the VM disk is located (e.g., `Fast2Tb`).
     validations:
       required: true
 
