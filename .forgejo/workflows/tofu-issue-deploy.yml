@@ -16,6 +16,8 @@ jobs:
         run: |
           echo "Extracting issue details..."
           ISSUE_BODY="${{ github.event.issue.body }}"
+          echo "ISSUE_BODY=$ISSUE_BODY"
+
           VM_NAME=$(echo "$ISSUE_BODY" | grep 'VM Name:' | cut -d':' -f2 | xargs)
           VM_ID=$(echo "$ISSUE_BODY" | grep 'VM ID:' | cut -d':' -f2 | xargs)
           RAM=$(echo "$ISSUE_BODY" | grep 'RAM:' | cut -d':' -f2 | xargs)
@@ -23,13 +25,11 @@ jobs:
           SCPU_TYPE=$(echo "$ISSUE_BODY" | grep 'CPU Type:' | cut -d':' -f2 | xargs)
           NODE_NAME=$(echo "$ISSUE_BODY" | grep 'Node Name:' | cut -d':' -f2 | xargs)
           VLAN_ID=$(echo "$ISSUE_BODY" | grep 'VLAN ID:' | cut -d':' -f2 | xargs)
-          IP_METHOD=$(echo "$ISSUE_BODY" | grep 'IP Configuration Method:' | cut -d':' -f2 | xargs)
           DATASTORE=$(echo "$ISSUE_BODY" | grep 'Datastore ID:' | cut -d':' -f2 | xargs)
           DISK_SIZE=$(echo "$ISSUE_BODY" | grep 'Disk Size:' | cut -d':' -f2 | xargs)
           CLONE_VM_ID=$(echo "$ISSUE_BODY" | grep 'Clone VM ID:' | cut -d':' -f2 | xargs)
 
           echo "NODE_NAME=$NODE_NAME"
-          echo "ISSUE_BODY=$ISSUE_BODY"
 
           # Determine user_data_file_id
           if [ "$NODE_NAME" == "prox" ]; then
