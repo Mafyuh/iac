@@ -1,0 +1,97 @@
+name: Deploy Virtual Machine
+description: Provide details to deploy a new virtual machine.
+title: "[VM Deployment] <VM Name>"
+labels:
+  - deploy-vm
+assignees:
+  - mafyuh
+body:
+  - type: input
+    id: vm_name
+    attributes:
+      label: VM Name
+      placeholder: Enter the name of the VM
+      description: The name of the virtual machine (e.g., Plausible).
+    validations:
+      required: true
+
+  - type: input
+    id: vm_id
+    attributes:
+      label: VM ID
+      placeholder: Enter the VM ID
+      description: The unique numeric ID for the VM (e.g., 103).
+    validations:
+      required: true
+
+  - type: input
+    id: ram
+    attributes:
+      label: RAM (MB)
+      placeholder: Enter the amount of RAM in MB
+      description: The amount of RAM allocated to the VM (e.g., 4196).
+    validations:
+      required: true
+
+  - type: input
+    id: cpus
+    attributes:
+      label: CPU Cores
+      placeholder: Enter the number of CPU cores
+      description: The number of CPU cores allocated to the VM (e.g., 3).
+    validations:
+      required: true
+
+  - type: input
+    id: scpu_type
+    attributes:
+      label: CPU Type
+      placeholder: Enter the CPU type
+      description: The type of CPU to use (e.g., host).
+    validations:
+      required: true
+
+  - type: input
+    id: node_name
+    attributes:
+      label: Node Name
+      placeholder: Enter the node name
+      description: The Proxmox node name (e.g., prox or pve2).
+    validations:
+      required: true
+
+  - type: input
+    id: vlan_id
+    attributes:
+      label: VLAN ID
+      placeholder: Enter the VLAN ID
+      description: The VLAN ID for the network device (e.g., 1).
+    validations:
+      required: true
+
+  - type: input
+    id: datastore
+    attributes:
+      label: Datastore ID
+      placeholder: Enter the datastore ID
+      description: Specify the datastore where the VM disk is located (e.g., Fast2Tb).
+    validations:
+      required: true
+
+  - type: input
+    id: disk_size
+    attributes:
+      label: Disk Size (GB)
+      placeholder: Enter the size of the disk in GB
+      description: The size of the VM disk in GB (e.g., 30).
+    validations:
+      required: true
+
+  - type: input
+    id: clone_vm_id
+    attributes:
+      label: Clone VM ID
+      placeholder: Enter the VM ID to clone from
+      description: The VM ID to use as the clone source (e.g., 9996).
+    validations:
+      required: true

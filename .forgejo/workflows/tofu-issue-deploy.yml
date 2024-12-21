@@ -1,0 +1,114 @@
+name: Handle VM Deployment Issue
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-issue:
+    if: contains(github.event.issue.labels.*.name, 'deploy-vm')
+    runs-on: docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract Issue Details
+        id: extract
+        run: |
+          echo "Extracting issue details..."
+          ISSUE_BODY="${{ github.event.issue.body }}"
+          VM_NAME=$(echo "$ISSUE_BODY" | grep 'VM Name:' | cut -d':' -f2 | xargs)
+          VM_ID=$(echo "$ISSUE_BODY" | grep 'VM ID:' | cut -d':' -f2 | xargs)
+          RAM=$(echo "$ISSUE_BODY" | grep 'RAM:' | cut -d':' -f2 | xargs)
+          CPUS=$(echo "$ISSUE_BODY" | grep 'CPU Cores:' | cut -d':' -f2 | xargs)
+          SCPU_TYPE=$(echo "$ISSUE_BODY" | grep 'CPU Type:' | cut -d':' -f2 | xargs)
+          NODE_NAME=$(echo "$ISSUE_BODY" | grep 'Node Name:' | cut -d':' -f2 | xargs)
+          VLAN_ID=$(echo "$ISSUE_BODY" | grep 'VLAN ID:' | cut -d':' -f2 | xargs)
+          IP_METHOD=$(echo "$ISSUE_BODY" | grep 'IP Configuration Method:' | cut -d':' -f2 | xargs)
+          DATASTORE=$(echo "$ISSUE_BODY" | grep 'Datastore ID:' | cut -d':' -f2 | xargs)
+          DISK_SIZE=$(echo "$ISSUE_BODY" | grep 'Disk Size:' | cut -d':' -f2 | xargs)
+          CLONE_VM_ID=$(echo "$ISSUE_BODY" | grep 'Clone VM ID:' | cut -d':' -f2 | xargs)
+
+          # Determine user_data_file_id
+          if [ "$NODE_NAME" == "prox" ]; then
+            USER_DATA_FILE_ID="proxmox_virtual_environment_file.cloud_config.id"
+          else
+            USER_DATA_FILE_ID="proxmox_virtual_environment_file.cloud_config2.id"
+          fi
+
+          echo "VM_NAME=$VM_NAME" >> $GITHUB_ENV
+          echo "VM_ID=$VM_ID" >> $GITHUB_ENV
+          echo "RAM=$RAM" >> $GITHUB_ENV
+          echo "CPUS=$CPUS" >> $GITHUB_ENV
+          echo "SCPU_TYPE=$SCPU_TYPE" >> $GITHUB_ENV
+          echo "NODE_NAME=$NODE_NAME" >> $GITHUB_ENV
+          echo "VLAN_ID=$VLAN_ID" >> $GITHUB_ENV
+          echo "IP_METHOD=$IP_METHOD" >> $GITHUB_ENV
+          echo "DATASTORE=$DATASTORE" >> $GITHUB_ENV
+          echo "DISK_SIZE=$DISK_SIZE" >> $GITHUB_ENV
+          echo "CLONE_VM_ID=$CLONE_VM_ID" >> $GITHUB_ENV
+          echo "USER_DATA_FILE_ID=$USER_DATA_FILE_ID" >> $GITHUB_ENV
+
+      - name: Generate Terraform File
+        run: |
+          cat <<EOF > terraform/proxmox/$VM_ID.tf
+          resource "proxmox_virtual_environment_vm" "$VM_NAME" {
+              node_name    = "${{ env.NODE_NAME }}"
+              vm_id        = "${{ env.VM_ID }}"
+              name         = "${{ env.VM_NAME }}"
+              description  = "${{ env.VM_NAME }}"
+
+              cpu {
+                  cores = "${{ env.CPUS }}"
+                  type  = "${{ env.SCPU_TYPE }}"
+              }
+
+              memory {
+                  dedicated = "${{ env.RAM }}"
+              }
+
+              network_device {
+                  bridge  = "vmbr0"
+                  vlan_id = "${{ env.VLAN_ID }}"
+              }
+
+              disk {
+                  datastore_id = "${{ env.DATASTORE }}"
+                  size         = "${{ env.DISK_SIZE }}"
+              }
+
+              clone {
+                  vm_id = "${{ env.CLONE_VM_ID }}"
+              }
+
+              initialization {
+                  ip_config {
+                      ipv4 {
+                          address = "dhcp"
+                      }
+                  }
+
+                  user_data_file_id = ${{ env.USER_DATA_FILE_ID }}
+              }
+          }
+          EOF
+
+      - name: Commit and Push Terraform File
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add terraform/proxmox/$VM_ID.tf
+          git commit -m "Add VM $VM_NAME configuration"
+          git push
+
+      - name: Trigger Terraform Apply Workflow
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "tofu.yml",
+              ref: "main"
+            })
