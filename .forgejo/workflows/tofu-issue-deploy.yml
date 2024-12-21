@@ -97,6 +97,6 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add terraform/proxmox/$VM_ID.tf
+          git add terraform/proxmox/$VM_NAME.tf
           git commit -m "Add VM $VM_NAME configuration"
           git push
