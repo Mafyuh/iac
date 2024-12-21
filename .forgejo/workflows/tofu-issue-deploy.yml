@@ -69,7 +69,7 @@ jobs:
 
               network_device {
                   bridge  = "vmbr0"
-                  vlan_id = "${{ env.VLAN_ID }}"
+                  vlan_id = ${{ env.VLAN_ID }}
               }
 
               disk {
