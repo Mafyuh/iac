@@ -33,7 +33,6 @@ resource "proxmox_virtual_environment_vm" "Tester1" {
         ip_config {
             ipv4 {
                 address = "dhcp"
-                vlan_gateway
             }
         }
 
