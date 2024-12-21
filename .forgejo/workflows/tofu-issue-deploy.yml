@@ -5,7 +5,7 @@ on:
 
 jobs:
   process-issue:
-    if: contains(github.event.issue.labels.*.name, 'deploy-vm')
+    if: contains(github.event.issue.labels.*.name, 'opentofu')
     runs-on: docker
     steps:
       - name: Checkout repository
