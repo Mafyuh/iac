@@ -1,107 +1,29 @@
-name: 'Add Application'
-description: 'Track the process of adding a new application'
-title: 'Add Application: [Application Name]'
-labels: 
-  - addition
-assignees: ''
-
+name: Add Docker Container
+description: Steps to add a new Docker container to the repository
+title: "[Add Container] <Container Name>"
+labels:
+  - docker
+assignees:
+  - @mafyuh
 body:
   - type: markdown
     attributes:
       value: |
-        ## Application Details                
-
-  - type: input
-    id: application-name
+        Follow the checklist below to add a new Docker container.
+  - type: checklist
     attributes:
-      label: Application Name
-      description: Name of the application to be added
-      placeholder: Name of the application
-
-  - type: textarea
-    id: application-description
-    attributes:
-      label: Application Description
-      description: Provide a brief description of the application and its purpose
-      placeholder: Description of the application
-
-  - type: checkboxes
-    id: application-reason
-    attributes:
-      label: Reason for Addition
-      description: Please select one or more reasons for adding the application
+      label: Steps
       options:
-        - label: New functionality
-        - label: Performance improvement
-        - label: Security enhancement
-        - label: Replacing another application
-          description: Provide the name of the application being replaced, if applicable
-        - label: Other (please specify)
-          description: Provide additional details
-
-  - type: dropdown
-    id: folder-added
-    attributes:
-      label: Folder Added To
-      description: Select the folder where the application was added
-      options:
-        - ag-backup
-        - ag-main
-        - AI
-        - arm
-        - arrs
-        - authentik
-        - cf
-        - downloaders
-        - jellyfin
-        - kasm
-        - netboot
-        - nexus
-        - pages
-        - portainer
-        - twingate
-        - whisper
-        - New Folder
-
-  - type: input
-    id: new-folder-name
-    attributes:
-      label: New Folder Name
-      description: If you created a new folder, provide the name of the new folder
-      placeholder: Name of the new folder
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        ## Steps to Add                
-
-  - type: checkboxes
-    id: steps-to-add
-    attributes:
-      label: Steps to Add
-      description: Please check off each step as it is completed
-      options:
-        - label: Add Configuration Files
-          description: Create and add configuration files for the new application
-        - label: Update Wiki
-          description: Create or update the Wiki page for the new application and update any relevant architecture diagrams or flowcharts
-        - label: Update README(s)
-          description: Add the new application to the main table and any other relevant sections
-        - label: Add to CD Platform Logic
-          description: Add necessary logic to the CD platform for the new application
-        - label: Testing and Validation
-          description: Ensure the application is tested and validated in the environment
-
-  - type: markdown
-    attributes:
-      value: |
-        ## Commit IDs for Completed Steps        
-
-  - type: textarea
-    id: commit-ids
-    attributes:
-      label: Commit IDs
-      description: Enter the commit IDs for the completed steps above
-      placeholder: Enter commit IDs separated by commas
+        - label: Add the Docker Composeand any necessary env variables to the `.env` file.
+        - label: If a new folder is created for the Docker Compose file, map the host in the Ansible workflow file:
+          description: |
+            Update the mapping at:
+            [AnsibleCD.yml#L30](https://git.mafyuh.dev/mafyuh/iac/src/commit/22285723f6e5804b8737d6c8e9ea6915617c2271/.forgejo/workflows/ansibleCD.yml#L30).
+        - label: Add the server IP to Bitwarden secrets. Give the Actions user access to secret
+          description: |
+            Navigate to [BWS](https://vault.bitwarden.com/#/sm/305f1e91-cd2b-411c-8acf-b1a3004a82b2) and add the server IP.
+        - label: Map the server IP in AnsibleCD workflow file:
+          description: |
+            Update the IP at:
+            - [Line 96](https://git.mafyuh.dev/mafyuh/iac/src/branch/main/.forgejo/workflows/ansibleCD.yml#L96)
+            - [Line 116](https://git.mafyuh.dev/mafyuh/iac/src/branch/main/.forgejo/workflows/ansibleCD.yml#L116)
