@@ -86,7 +86,6 @@ jobs:
                   ip_config {
                       ipv4 {
                           address = "dhcp"
-                          vlan_gateway
                       }
                   }
 
