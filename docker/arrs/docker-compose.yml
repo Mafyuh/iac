@@ -104,7 +104,7 @@ services:
 
 
   doplarr:
-    image: ghcr.io/linuxserver/doplarr@sha256:3e76434dae5e1ec73c9cc6719c04342f1ec9432794d6fa6e27561d295cad9f24
+    image: ghcr.io/linuxserver/doplarr@sha256:8217bc80dd0a559af89ec8f93f6b2fdfbe303389c9fa8ff23a888add0fa77444
     container_name: doplarr
     environment:
       - PUID=1000
