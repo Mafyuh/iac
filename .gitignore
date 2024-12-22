@@ -47,3 +47,6 @@ credentials.pkr.hcl
 
 ## Testing
 /docker/health
+
+# Plausible
+compose.override.yml
