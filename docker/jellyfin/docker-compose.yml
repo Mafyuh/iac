@@ -68,7 +68,7 @@ services:
       - /docker/appdata/jellystat/postgres-data:/var/lib/postgresql/data
 
   jellystat:
-    image: cyfershepard/jellystat:1.1.1
+    image: cyfershepard/jellystat:1.1.2
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
