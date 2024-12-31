@@ -1,0 +1,7 @@
+- hosts: "*"
+  become: false
+  tasks:
+    - name: Log into DockerHub
+      docker_login:
+        username: mafyuh
+        password: test
