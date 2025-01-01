@@ -22,7 +22,7 @@
         dest: "{{ repo_path }}/.env"
         content: |
           {% for key, secret_id in env_variables.items() %}
-          {{ key }}={{ lookup('community.general.bws', secret_id, base_url='https://vault.bitwarden.com', access_token=lookup('env', 'BW_ACCESS_TOKEN')) }}
+          {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id) }}
           {% endfor %}
 
     - name: Verify .env file content
