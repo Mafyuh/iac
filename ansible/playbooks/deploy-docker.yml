@@ -3,7 +3,7 @@
   hosts: "{{ target_host }}"
   vars:
     repo_path: "/home/{{ ansible_user }}/iac/docker/{{ folder }}"
-    secrets_mapping_file: "/home/{{ ansible_user }}/iac/secret-mapping.yml"
+    secrets_mapping_file: "/home/{{ ansible_user }}/iac/secret-mappings.yml"
   tasks:
     - name: Read secret mapping
       ansible.builtin.slurp:
