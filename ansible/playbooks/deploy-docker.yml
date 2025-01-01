@@ -17,27 +17,17 @@
     - name: Generate .env content
       vars:
         env_variables: "{{ secret_mapping[target_host]['env_variables'] | default({}) }}"
-      ansible.builtin.shell: |
-        #!/bin/bash
-        echo "Generating .env for {{ target_host }} at {{ repo_path }}/.env"
-        for var in "${!env_variables[@]}"; do
-          secret_id="${env_variables[$var]}"
-          if [ -n "$secret_id" ]; then
-            value=$(bws secret get "$secret_id" | jq -r '.value')
-            echo "$var=$value"
-          else
-            echo "$var="
-          fi
-        done
-      args:
-        executable: /bin/bash
+      ansible.builtin.template:
+        src: env_template.j2
+        dest: "{{ repo_path }}/.env"
+
+    - name: Verify .env file content
+      ansible.builtin.shell: cat "{{ repo_path }}/.env"
       register: env_file_content
 
-    - name: Write .env file to target host
-      ansible.builtin.copy:
-        dest: "{{ repo_path }}/.env"
-        content: "{{ env_file_content.stdout }}"
-        mode: '0644'
+    - name: Display .env content
+      ansible.builtin.debug:
+        var: env_file_content.stdout_lines
 
     - name: Ensure the repository is up-to-date
       ansible.builtin.shell: git pull
