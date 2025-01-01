@@ -22,16 +22,8 @@
         dest: "{{ repo_path }}/.env"
         content: |
           {% for key, secret_id in env_variables.items() %}
-            {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id, access_token=bw_access_token) }}
+          {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id, access_token=bw_access_token) }}
           {% endfor %}
-
-    - name: Verify .env file content
-      ansible.builtin.shell: cat "{{ repo_path }}/.env"
-      register: env_file_content
-
-    - name: Display .env content
-      ansible.builtin.debug:
-        var: env_file_content.stdout_lines
 
     - name: Ensure the repository is up-to-date
       ansible.builtin.shell: git pull
