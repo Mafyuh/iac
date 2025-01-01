@@ -14,12 +14,14 @@
       ansible.builtin.set_fact:
         secret_mapping: "{{ secret_mapping_content['content'] | b64decode | from_yaml }}"
 
-    - name: Generate .env content
-      vars:
-        env_variables: "{{ secret_mapping[target_host]['env_variables'] | default({}) }}"
-      ansible.builtin.template:
-        src: env_template.j2
+    - name: Write .env file to target host
+      ansible.builtin.copy:
         dest: "{{ repo_path }}/.env"
+        content: |
+          {% for key, secret_id in env_variables.items() %}
+          {{ key }}={{ lookup('community.general.bws', secret_id, base_url='https://vault.bitwarden.com', access_token=bw_access_token) }}
+          {% endfor %}
+
 
     - name: Verify .env file content
       ansible.builtin.shell: cat "{{ repo_path }}/.env"

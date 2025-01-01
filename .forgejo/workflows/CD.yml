@@ -156,5 +156,5 @@ jobs:
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
           ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml \
-            --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }}"
+            --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }} bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
 
