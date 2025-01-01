@@ -190,7 +190,7 @@ services:
   syncthing:
     image: ghcr.io/linuxserver/syncthing@sha256:1f55fa811ad3903c4b421129966e0eea4b21d53d2471158288dc4a353e273a0a
     container_name: syncthing
-    hostname: ARM #optional
+    hostname: ARM
     environment:
       - PUID=0
       - PGID=0
