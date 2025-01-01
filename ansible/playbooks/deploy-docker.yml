@@ -1,4 +1,3 @@
----
 - name: Deploy application
   hosts: "{{ target_host }}"
   vars:
@@ -14,14 +13,17 @@
       ansible.builtin.set_fact:
         secret_mapping: "{{ secret_mapping_content['content'] | b64decode | from_yaml }}"
 
+    - name: Set env_variables
+      ansible.builtin.set_fact:
+        env_variables: "{{ secret_mapping[target_host]['env_variables'] | default({}) }}"
+
     - name: Write .env file to target host
       ansible.builtin.copy:
         dest: "{{ repo_path }}/.env"
         content: |
           {% for key, secret_id in env_variables.items() %}
-          {{ key }}={{ lookup('community.general.bws', secret_id, base_url='https://vault.bitwarden.com', access_token=bw_access_token) }}
+          {{ key }}={{ lookup('community.general.bws', secret_id, base_url='https://vault.bitwarden.com', access_token=lookup('env', 'BW_ACCESS_TOKEN')) }}
           {% endfor %}
-
 
     - name: Verify .env file content
       ansible.builtin.shell: cat "{{ repo_path }}/.env"
