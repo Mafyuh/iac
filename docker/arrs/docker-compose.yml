@@ -115,15 +115,15 @@ services:
       - RADARR__URL=${RADARR__URL}
       - SONARR__API=${SONARR__API}
       - SONARR__URL=${SONARR__URL}
-      - DISCORD__MAX_RESULTS=${DISCORD__MAX_RESULTS}
-      - DISCORD__REQUESTED_MSG_STYLE=${DISCORD__REQUESTED_MSG_STYLE}
-      - SONARR__QUALITY_PROFILE=${SONARR__QUALITY_PROFILE}
-      - RADARR__QUALITY_PROFILE=${RADARR__QUALITY_PROFILE}
-      - SONARR__ROOTFOLDER=${SONARR__ROOTFOLDER}
-      - RADARR__ROOTFOLDER=${RADARR__ROOTFOLDER}
-      - PARTIAL_SEASONS=${PARTIAL_SEASONS}
-      - LOG_LEVEL=${LOG_LEVEL}
-      - JAVA_OPTS=${JAVA_OPTS}
+      - DISCORD__MAX_RESULTS=25
+      - DISCORD__REQUESTED_MSG_STYLE=plain
+      - SONARR__QUALITY_PROFILE=WEB-DL (1080p)
+      - RADARR__QUALITY_PROFILE=Requests
+      - SONARR__ROOTFOLDER=/data/media/TV
+      - RADARR__ROOTFOLDER=/data/media/Requests
+      - PARTIAL_SEASONS=true
+      - LOG_LEVEL=info
+      - JAVA_OPTS=
     volumes:
       - /docker/appdata/doplarr/config:/config
     restart: unless-stopped
