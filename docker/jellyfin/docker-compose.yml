@@ -1,7 +1,7 @@
 ---
 services:
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin@sha256:d2cb750aa51a2f19c33e43699fe8230fb2a69ccdcf36d70c9f283bf4ac17043e
+    image: ghcr.io/linuxserver/jellyfin@sha256:d53c3a6808d009b0bb695623245fd806f8a582923817a5bf18a161f53458a72c
     container_name: jellyfin
     devices:
       - /dev/dri/renderD129:/dev/dri/renderD129
