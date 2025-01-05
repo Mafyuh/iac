@@ -14,7 +14,7 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
   disk {
     datastore_id = "Fast500Gb"
     interface    = "scsi0"
-    size         = 450
+    size         = 50
   }
 
    cpu {
