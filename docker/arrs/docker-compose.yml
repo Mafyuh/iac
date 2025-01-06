@@ -218,6 +218,15 @@ services:
       - LOG_LEVEL=info
     restart: unless-stopped
 
+  kiwix:
+    command: '"*.zim"'
+    image: ghcr.io/kiwix/kiwix-serve:3.7.0
+    ports:
+      - '8080:8080'
+    volumes:
+      - '/docker/appdata/wiki:/data'
+
+
 networks:
   default:
     name: arrs_default
