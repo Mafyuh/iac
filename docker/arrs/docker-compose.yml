@@ -222,7 +222,7 @@ services:
     command: '"*.zim"'
     image: ghcr.io/kiwix/kiwix-serve:3.7.0
     ports:
-      - '8080:8080'
+      - '8090:8080'
     volumes:
       - '/docker/appdata/wiki:/data'
 
