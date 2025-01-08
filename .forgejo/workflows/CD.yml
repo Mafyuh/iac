@@ -72,6 +72,9 @@ jobs:
               npm)
                 target_host="npm.lan"
                 ;;
+              plex)
+                target_host="plex.lan"
+                ;;
               paperless)
                 target_host="ubu.lan"
                 ;;

@@ -1,0 +1,22 @@
+services:
+  plex:
+    image: ghcr.io/linuxserver/plex@sha256:dda062ebde8c619a656f7ed6e6da7885ca7e114536c1e76b1de3e32a57d3597b
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+    volumes:
+      - /docker/appdata/plex/library:/config
+      - nas:/data/media
+    restart: unless-stopped
+
+volumes:
+  nas:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=nas.lan,vers=4,rw
+      device: ":/mnt/thePool/thePoolShare/Media"
