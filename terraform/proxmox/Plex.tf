@@ -33,7 +33,6 @@ resource "proxmox_virtual_environment_vm" "Plex" {
         ip_config {
             ipv4 {
                 address = "dhcp"
-                gateway = var.vlan_gateway
             }
         }
 
