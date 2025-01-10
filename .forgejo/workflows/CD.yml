@@ -111,6 +111,7 @@ jobs:
             e4c5d8be-b91f-41ab-8071-b23e00203340 > kasm_host
             566329f5-5af3-4bcd-b187-b23e00216134 > netboot_host
             fb62a8d1-6dd5-4fab-aff4-b23e0021e215 > npm_host
+            fe0a2fa5-8e2b-4b4f-ac68-b26100315b20 > plex_host
             90a16954-45df-49ad-9f45-b23e002273c5 > runner_host
             a5b6fa4b-4643-4f85-988b-b23e00245e2f > ubu_host
             26b06759-9791-42d7-a076-b23e0063c4dd > ssh_private_key
@@ -128,6 +129,7 @@ jobs:
           kasm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.kasm_host }} ansible_user=mafyuh
           netboot.lan ansible_host=${{ steps.bitwarden-secrets.outputs.netboot_host }} ansible_user=mafyuh
           npm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.npm_host }} ansible_user=mafyuh
+          plex.lan ansible_host=${{ steps.bitwarden-secrets.outputs.plex_host }} ansible_user=mafyuh ansible_port=2009
           runner.lan ansible_host=${{ steps.bitwarden-secrets.outputs.runner_host }} ansible_user=mafyuh
           ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }} ansible_user=mafyuh
           EOF

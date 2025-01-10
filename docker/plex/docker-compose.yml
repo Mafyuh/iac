@@ -8,15 +8,21 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - VERSION=docker
+      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /docker/appdata/plex/library:/config
       - nas:/data/media
     restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
 
 volumes:
   nas:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=nas.lan,vers=4,rw
+      o: addr=nas.lan,vers=4,ro
       device: ":/mnt/thePool/thePoolShare/Media"

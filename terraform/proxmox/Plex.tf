@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_vm" "Plex" {
 
     network_device {
         bridge  = "vmbr0"
-        vlan_id = 1
+        vlan_id = 23
     }
 
     disk {
@@ -27,6 +27,11 @@ resource "proxmox_virtual_environment_vm" "Plex" {
 
     clone {
         vm_id = "9996"
+    }
+
+    vga {
+        memory = 16
+        type = "serial0"
     }
 
     initialization {

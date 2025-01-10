@@ -3,9 +3,9 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
   node_name = "pve2"
   vm_id     = 250
   tags      = ["tofu"]
-  started   = true
+  started   = false
   bios      = "ovmf"
-  machine   = "q35"
+  machine   = "pc-q35-9.0"
 
   agent {
       enabled = true
