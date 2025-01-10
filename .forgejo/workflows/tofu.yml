@@ -76,6 +76,9 @@ jobs:
 
       - name: Run OpenTofu Init
         working-directory: ./terraform
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
         run: |
           tofu init -var-file=terraform.tfvars
 
@@ -83,14 +86,15 @@ jobs:
       - name: Run OpenTofu Plan
         id: plan
         working-directory: ./terraform
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
         run: tofu plan -no-color
-
-      - name: Display Plan Output
-        run: |
-          echo "Plan output:"
-          echo "${{ steps.plan.outputs.stdout }}"
 
       - name: Apply the Plan
         if: success()
         working-directory: ./terraform
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
         run: tofu apply -auto-approve
