@@ -65,7 +65,7 @@ services:
       - apparmor:unconfined
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr@sha256:f0a375411bebbd7fe5657019b355a1457821dee9720e54853f5ada24fa0f696b
+    image: ghcr.io/linuxserver/sonarr@sha256:ca71add37a9cdbb914c7bd5b06f98bf5d2062848c8de6ac3ee09e69a4c170b27
     container_name: sonarr
     ports:
       - "8989:8989"
