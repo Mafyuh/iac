@@ -87,5 +87,5 @@ jobs:
 
       - name: Run the selected playbook
         run: |
-          ansible-playbook ./ansible/playbooks/${{ github.event.inputs.playbook }} \
+          ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/${{ github.event.inputs.playbook }} \
             --extra-vars "bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
