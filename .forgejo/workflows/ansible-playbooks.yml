@@ -86,6 +86,9 @@ jobs:
           ssh-add /root/.ssh/id_rsa
 
       - name: Run the selected playbook
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
+          ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
           ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/${{ github.event.inputs.playbook }} \
             --extra-vars "bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
