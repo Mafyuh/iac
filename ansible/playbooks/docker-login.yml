@@ -1,7 +1,7 @@
 - hosts: "*"
   become: false
   vars:
-    docker_password: "{{ lookup('community.general.bitwarden', '3726555b-0ffc-442b-b66a-b257016f6ab9', access_token=lookup('env', 'BW_ACCESS_TOKEN')) }}"
+    docker_password: "{{ lookup('bitwarden.secrets.lookup', '3726555b-0ffc-442b-b66a-b257016f6ab9', access_token=bw_access_token) }}"
   tasks:
     - name: Log into DockerHub
       docker_login:
