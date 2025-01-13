@@ -2,8 +2,18 @@
   hosts: "{{ target_host }}"
   vars:
     repo_path: "/home/{{ ansible_user }}/iac/docker/{{ folder }}"
-    secrets_mapping_file: "/home/{{ ansible_user }}/iac/secret-mappings.yml"
+    secrets_mapping_file: "/home/{{ ansible_user }}/iac/docker/secret-mappings.yml"
   tasks:
+    - name: Ensure the repository is up-to-date
+      ansible.builtin.shell: git pull
+      args:
+        chdir: "{{ repo_path }}"
+      register: git_pull_output
+
+    - name: Display git pull output
+      ansible.builtin.debug:
+        var: git_pull_output.stdout_lines
+
     - name: Read secret mapping
       ansible.builtin.slurp:
         src: "{{ secrets_mapping_file }}"
@@ -24,16 +34,6 @@
           {% for key, secret_id in env_variables.items() %}
           {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id, access_token=bw_access_token) }}
           {% endfor %}
-
-    - name: Ensure the repository is up-to-date
-      ansible.builtin.shell: git pull
-      args:
-        chdir: "{{ repo_path }}"
-      register: git_pull_output
-
-    - name: Display git pull output
-      ansible.builtin.debug:
-        var: git_pull_output.stdout_lines
 
     - name: Restart services using Docker Compose
       community.docker.docker_compose_v2:

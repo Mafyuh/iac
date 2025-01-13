@@ -104,6 +104,7 @@ jobs:
           base_url: https://vault.bitwarden.com
           secrets: |
             267abc49-f755-4c88-a2a8-b23d00503e31 > arrs_host
+            d9924181-b061-44e0-b7b9-b264004791eb > ag_main_host
             e74d1f67-c909-4a2e-b6fc-b23e001dfa4a > ai_host
             6f9cef86-eb39-4e05-8c5b-b23e001e6170 > arm_host
             52512c15-b474-42c3-9835-b23e001edf35 > auth_host
@@ -121,6 +122,7 @@ jobs:
         run: |
           cat <<EOF > ansible/hosts.ini
           [iac]
+          dns.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ag_main_host }} ansible_user=mafyuh
           arrs.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arrs_host }} ansible_user=mafyuh
           ai.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ai_host }} ansible_user=mafyuh ansible_port=2424
           arm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arm_host }} ansible_user=ubuntu ansible_port=2424

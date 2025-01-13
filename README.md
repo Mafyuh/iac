@@ -1,5 +1,6 @@
 [![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/yamllint.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
-[![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
+[![CD](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
+[![Ansible](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/ansible-playbooks.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
 [![Tofu](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/tofu.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
 [![Renovate](https://git.mafyuh.dev/renovatebot/renovate/badges/workflows/renovate.yml/badge.svg)](https://git.mafyuh.dev/renovatebot/renovate/actions)
 [![Pulls](https://git.mafyuh.dev/mafyuh/iac/badges/pulls.svg)](https://git.mafyuh.dev/mafyuh/iac/pulls)
