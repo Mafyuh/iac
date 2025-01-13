@@ -163,5 +163,23 @@ jobs:
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
           ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml \
-            --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }} bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
+            --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }} bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}" | tee ansible_output.txt
+
+      - name: Post Ansible Output as PR Comment
+        if: github.event.pull_request.merged == true
+        uses: https://github.com/actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const output = fs.readFileSync('ansible_output.txt', 'utf8');
+            const prNumber = context.payload.pull_request.number;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: `### Ansible Deployment Output\n\`\`\`\n${output}\n\`\`\``
+            });
+
 
