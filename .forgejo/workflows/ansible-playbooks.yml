@@ -1,6 +1,9 @@
 name: Run Ansible Playbook
 
 on:
+  schedule:
+    # Runs weekly at 3:00 AM every Monday (UTC)
+    - cron: "0 3 * * 1"
   workflow_dispatch:
     inputs:
       playbook:
@@ -8,14 +11,14 @@ on:
         required: true
         type: choice
         options:
-          - apt.yml
           - docker-count.yml
           - docker-login.yml
-          - docker-prune.yml
           - git-pull-reset.yml
-          - main-reboot-required.yml
+          - maint-reboot-required.yml
           - ntp.yml
           - zsh.yml
+          - weekly/docker-prune.yml
+          - weekly/apt.yml
 
 jobs:
   run-playbook:
@@ -85,10 +88,20 @@ jobs:
           eval $(ssh-agent -s)
           ssh-add /root/.ssh/id_rsa
 
-      - name: Run the selected playbook
+      - name: Run Playbooks
         env:
           BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
-          ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/${{ github.event.inputs.playbook }} \
-            --extra-vars "bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
+          if [ -z "${{ github.event.inputs.playbook }}" ]; then
+            echo "Running all playbooks in ansible/playbooks/weekly..."
+            for playbook in ansible/playbooks/weekly/*.yml; do
+              echo "Running $playbook..."
+              ansible-playbook -i ansible/hosts.ini $playbook \
+                --extra-vars "bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
+            done
+          else
+            echo "Running selected playbook: ${{ github.event.inputs.playbook }}"
+            ansible-playbook -i ansible/hosts.ini ansible/playbooks/${{ github.event.inputs.playbook }} \
+              --extra-vars "bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
+          fi
