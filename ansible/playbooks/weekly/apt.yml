@@ -1,7 +1,17 @@
-- hosts: "*"
+---
+- name: Weekly System Update
+  hosts: all
   become: true
   tasks:
-    - name: apt
+    - name: Update apt cache
       apt:
         update_cache: yes
-        upgrade: 'yes'
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+
+    - name: Remove unnecessary packages
+      apt:
+        autoremove: yes
+        purge: yes
