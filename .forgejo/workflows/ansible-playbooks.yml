@@ -2,8 +2,7 @@ name: Run Ansible Playbook
 
 on:
   schedule:
-    # Runs weekly at 3:00 AM every Monday (UTC)
-    - cron: "0 3 * * 1"
+    - cron: "0 5 * * 2"
   workflow_dispatch:
     inputs:
       playbook:
