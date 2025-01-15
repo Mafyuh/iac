@@ -6,7 +6,7 @@ services:
       - redisdata:/data
 
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.14.1
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.14.3
     restart: unless-stopped
     depends_on:
       - broker
