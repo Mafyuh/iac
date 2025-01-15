@@ -17,7 +17,7 @@ services:
       - apparmor:unconfined
 
   lidarr:
-    image: ghcr.io/linuxserver/lidarr@sha256:1fc9bb408cadf0479febc0696d90621a72482e902432f6bf8770529d50f8f833
+    image: ghcr.io/linuxserver/lidarr@sha256:24a9bff8d50bf818d564198da43361d0576dfca8e51269b7ad3b922bd0f8da2f
     container_name: lidarr
     ports:
       - "8686:8686"
