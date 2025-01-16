@@ -104,7 +104,7 @@ services:
       - gitea_main
 
   jellyseerr:
-    image: fallenbagel/jellyseerr:2.2.3
+    image: fallenbagel/jellyseerr:2.3.0
     container_name: jellyseerr
     ports:
       - 5055:5055
