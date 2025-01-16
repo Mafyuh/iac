@@ -39,7 +39,7 @@ services:
       - host.docker.internal:host-gateway
 
   searxng:
-    image: searxng/searxng@sha256:9728c0ca684f4899427023a46516d1976d95594165d7f3a94695d45fe4d74cba
+    image: searxng/searxng@sha256:e25cfa2023fe97353495ff39afca1b1e9e50b365cf031cc0dd490321737d8775
     container_name: searxng
     networks:
       - ai-stack
