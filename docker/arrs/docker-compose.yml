@@ -36,7 +36,7 @@ services:
       - apparmor:unconfined
 
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr@sha256:ae3abf37d442c6aed1125f7ce9d9cb7f56e64db576071f54b259da58487627a5
+    image: ghcr.io/linuxserver/prowlarr@sha256:b242bc98897d8fa65db7b72f5dbde04b161a092d3cce2321b8c7e62c9321820d
     container_name: prowlarr
     ports:
       - "9696:9696"
