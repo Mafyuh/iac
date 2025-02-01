@@ -30,7 +30,7 @@ services:
     volumes:
       - redis:/data
   server:
-    image: ghcr.io/goauthentik/server:2024.12.2
+    image: ghcr.io/goauthentik/server:2024.12.3
     restart: unless-stopped
     command: server
     environment:
@@ -52,7 +52,7 @@ services:
       - postgresql
       - redis
   worker:
-    image: ghcr.io/goauthentik/server:2024.12.2
+    image: ghcr.io/goauthentik/server:2024.12.3
     restart: unless-stopped
     command: worker
     environment:
