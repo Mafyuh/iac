@@ -23,7 +23,7 @@ jobs:
   run-playbook:
     runs-on: docker
     container:
-      image: mafyuh/ansible-bws:v1.1.0
+      image: mafyuh/ansible-bws:v1.1.1
 
     steps:
       - name: Checkout Repository

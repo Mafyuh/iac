@@ -12,7 +12,7 @@ jobs:
   deploy:
     runs-on: docker
     container:
-      image: mafyuh/ansible-bws:v1.1.0
+      image: mafyuh/ansible-bws:v1.1.1
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
