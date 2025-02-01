@@ -44,8 +44,8 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
   initialization {
     ip_config {
       ipv4 {
-        address = var.kasm_ip
-        gateway = var.vlan_gateway
+        address = data.bitwarden-secrets_secret.kasm_ip.value
+        gateway = data.bitwarden-secrets_secret.vlan_gateway.value
       }
     }
 

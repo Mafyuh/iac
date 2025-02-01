@@ -23,53 +23,32 @@ jobs:
           access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           base_url: https://vault.bitwarden.com
           secrets: |
-            c65f8886-f6fb-4c17-bc79-b208000604bf > arrbuntu_ip_address
             2dae51bd-bd65-474c-971c-b20800f22afa > aws_access_key_id
             287c852d-f2b5-467d-bfc4-b20800f25f52 > aws_secret_access_key
-            a54974b8-c6b3-4df7-9042-b20800064050 > downloaders_ip_address
             3b222376-ccd9-4f44-a4b4-b222001af68a > grafana_auth
             030fbb6a-3b6d-40dc-9c26-b222001b0fb6 > grafana_url
-            dacbeafa-c671-4b9c-9334-b2080006f75b > init_password
-            9ceabbd0-6492-4674-9bab-b2080006e333 > init_username
-            0bc3c1a3-fc48-48ce-85c5-b2080007136a > kasm_ip
-            63ca1819-5090-4e30-9dba-b20800072718 > kasm_ssh_ip
-            47ef68aa-32a9-45b0-835d-b2080006ce38 > npm_ip_address
-            d0c7f3ec-8277-4b1b-9a1b-b2080006b842 > prox_ip_address
-            17ab7869-c7a1-4ece-8c64-b20800075213 > pve2_ip_address
             f8f85ab2-5f6d-46a7-9e06-b20800076d26 > s3_endpoint
-            68f1d77d-4e96-498a-9464-b208000679a4 > ssh_password
-            d0762ced-73de-4f30-aa1c-b20800069536 > ssh_username
-            d8017351-7a11-42e6-9e8d-b208000739b8 > ubu_ip_address
-            1d250f4a-ae18-4e19-934c-b2080005e132 > virtual_environment_api
-            a4ed343a-bb92-4beb-a421-b2080005bf98 > virtual_environment_endpoint
-            af0ed579-05f8-405f-b0f3-b208000620ca > vlan_gateway
+            b6dac092-df23-4e28-8449-b2770059096d > kube_config
 
       
       - name: Create tfvars file
         working-directory: ./terraform
         run: |
           cat <<EOF > terraform.tfvars
-          arrbuntu_ip_address = "${{ steps.bitwarden-secrets.outputs.arrbuntu_ip_address }}"
           aws_access_key_id = "${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}"
           aws_secret_access_key = "${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}"
-          downloaders_ip_address = "${{ steps.bitwarden-secrets.outputs.downloaders_ip_address }}"
           grafana_auth = "${{ steps.bitwarden-secrets.outputs.grafana_auth }}"
           grafana_url = "${{ steps.bitwarden-secrets.outputs.grafana_url }}"
-          init_password = "${{ steps.bitwarden-secrets.outputs.init_password }}"
-          init_username = "${{ steps.bitwarden-secrets.outputs.init_username }}"
-          kasm_ip = "${{ steps.bitwarden-secrets.outputs.kasm_ip }}"
-          kasm_ssh_ip = "${{ steps.bitwarden-secrets.outputs.kasm_ssh_ip }}"
-          npm_ip_address = "${{ steps.bitwarden-secrets.outputs.npm_ip_address }}"
-          prox_ip_address = "${{ steps.bitwarden-secrets.outputs.prox_ip_address }}"
-          pve2_ip_address = "${{ steps.bitwarden-secrets.outputs.pve2_ip_address }}"
           s3_endpoint = "${{ steps.bitwarden-secrets.outputs.s3_endpoint }}"
-          ssh_password = "${{ steps.bitwarden-secrets.outputs.ssh_password }}"
-          ssh_username = "${{ steps.bitwarden-secrets.outputs.ssh_username }}"
-          ubu_ip_address = "${{ steps.bitwarden-secrets.outputs.ubu_ip_address }}"
-          virtual_environment_api = "${{ steps.bitwarden-secrets.outputs.virtual_environment_api }}"
-          virtual_environment_endpoint = "${{ steps.bitwarden-secrets.outputs.virtual_environment_endpoint }}"
-          vlan_gateway = "${{ steps.bitwarden-secrets.outputs.vlan_gateway }}"
           EOF
+
+      - name: Make Kube directory
+        run: |
+          mkdir ~/.kube
+
+      - name: Create Kube Config
+        run: |
+          printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
 
       - name: Setup OpenTofu
         uses: https://github.com/opentofu/setup-opentofu@v1.0.5

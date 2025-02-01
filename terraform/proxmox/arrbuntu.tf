@@ -8,7 +8,7 @@ resource "proxmox_virtual_environment_vm" "Arrbuntu" {
     tags         = ["tofu", "ubuntu-22", "auto-homelab-repo", "infrastructure"]
 
     agent {
-      enabled = true # read 'Qemu guest agent' section, change to true only when ready
+      enabled = true 
     }
 
     clone {
@@ -47,8 +47,8 @@ resource "proxmox_virtual_environment_vm" "Arrbuntu" {
     initialization {
         ip_config {
             ipv4 {
-                address = var.arrbuntu_ip_address
-                gateway = var.vlan_gateway
+                address = data.bitwarden-secrets_secret.arrbuntu_ip.value
+                gateway = data.bitwarden-secrets_secret.vlan_gateway.value
             }
         }
 

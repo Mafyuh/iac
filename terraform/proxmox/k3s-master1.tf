@@ -1,30 +1,31 @@
-resource "proxmox_virtual_environment_vm" "NPM" {
+resource "proxmox_virtual_environment_vm" "K3s-Master1" {
 
     # VM General Settings
     node_name    = "prox"
-    vm_id        = 204
-    name         = "Nginx-Proxy-Manager"
-    description  = "Nginx Proxy Manager"
-    tags         = ["tofu", "ubuntu24", "auto-homelab-repo", "infrastructure"]
+    vm_id        = 329
+    name         = "K3s-Master1"
+    description  = "Kubernetes master"
+    tags         = ["tofu", "debian", "infrastructure", "k3s"]
+    started      = true
 
     agent {
       enabled = true # read 'Qemu guest agent' section, change to true only when ready
     }
 
     clone {
-        vm_id = 8002
+        vm_id = 9998
     }
     
     # VM CPU Settings
     cpu {
-        cores = 2
+        cores = 4
         type  = "host"
         architecture = "x86_64"
     }
     
     # VM Memory Settings
     memory {
-        dedicated = 2048
+        dedicated = 8192
     }
 
     # VM Network Settings
@@ -36,8 +37,8 @@ resource "proxmox_virtual_environment_vm" "NPM" {
     # VM Disk Settings
     disk {
         datastore_id = "Fast2Tb"
-        size         = 40
-        interface    = "scsi0"
+        size         = 300
+        interface    = "virtio0"
     }
 
     vga {
@@ -47,12 +48,11 @@ resource "proxmox_virtual_environment_vm" "NPM" {
     initialization {
         ip_config {
             ipv4 {
-                address = data.bitwarden-secrets_secret.npm_ip_address.value
-                gateway = data.bitwarden-secrets_secret.vlan_gateway.value
+                address = "dhcp"
             }
         }
 
-        user_account {}
+        user_data_file_id = proxmox_virtual_environment_file.cloud_config.id
     }
 
     lifecycle {

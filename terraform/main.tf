@@ -24,51 +24,53 @@ terraform {
       source  = "bpg/proxmox"
       version = "0.70.0"
     }
+    bitwarden-secrets = {
+      source  = "sebastiaan-dev/bitwarden-secrets"
+      version = "0.1.2"
+    }
+    flux = {
+      source  = "fluxcd/flux"
+      version = "1.4.0"
+    }
   }
 }
 
+provider "bitwarden-secrets" {
+  access_token = var.access_token
+}
+
+
 provider "proxmox" {
-  endpoint = var.virtual_environment_endpoint
-  password = var.ssh_password
+  endpoint = data.bitwarden-secrets_secret.virtual_environment_endpoint.value
+  password = data.bitwarden-secrets_secret.ssh_password.value
   username = "root@pam"
   insecure = true
 
   ssh {
     agent = true
     username = "root"
-    password = var.ssh_password
+    password = data.bitwarden-secrets_secret.ssh_password.value
 
     node {
       name    = "prox"
-      address = var.prox_ip_address
+      address = data.bitwarden-secrets_secret.prox_ip_address.value
     }
 
     node {
       name    = "pve2"
-      address = var.pve2_ip_address
+      address = data.bitwarden-secrets_secret.pve2_ip_address.value
     }
   }
 }
 
 module "proxmox" {
   source = "./proxmox"
+  
+  providers = {
+    proxmox = proxmox
+  }
+}
 
-  virtual_environment_endpoint = var.virtual_environment_endpoint
-  virtual_environment_api = var.virtual_environment_api
-  arrbuntu_ip_address = var.arrbuntu_ip_address
-  vlan_gateway = var.vlan_gateway
-  downloaders_ip_address = var.downloaders_ip_address
-  ssh_password = var.ssh_password
-  ssh_username = var.ssh_username
-  prox_ip_address = var.prox_ip_address
-  npm_ip_address = var.npm_ip_address
-  init_username = var.init_username
-  init_password = var.init_password
-  kasm_ip = var.kasm_ip
-  kasm_ssh_ip = var.kasm_ssh_ip
-  ubu_ip_address = var.ubu_ip_address
-  pve2_ip_address = var.pve2_ip_address
-  s3_endpoint = var.s3_endpoint
-  aws_secret_access_key = var.aws_secret_access_key
-  aws_access_key_id = var.aws_access_key_id
+module "flux" {
+  source = "./flux"
 }
