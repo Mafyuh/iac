@@ -50,3 +50,5 @@ credentials.pkr.hcl
 
 # Plausible
 compose.override.yml
+# SOPS
+*.decrypted~*

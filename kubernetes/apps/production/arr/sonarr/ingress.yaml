@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr
+  namespace: arr
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "sonarr.local.mafyuh.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: headless-sonarr
+                port:
+                  number: 8989
+  tls:
+    - hosts:
+        - "sonarr.local.mafyuh.com"
+      secretName: local-mafyuh-com-production-tls

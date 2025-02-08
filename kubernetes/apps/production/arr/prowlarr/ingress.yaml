@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr
+  namespace: arr
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "prowlarr.local.mafyuh.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: headless-prowlarr
+                port:
+                  number: 9696
+  tls:
+    - hosts:
+        - "prowlarr.local.mafyuh.com"
+      secretName: local-mafyuh-com-production-tls

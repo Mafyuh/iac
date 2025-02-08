@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: radarr
+    namespace: arr
+    labels:
+        app: radarr
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: radarr
+    template:
+        metadata:
+            labels:
+                app: radarr
+        spec:
+            securityContext:
+                runAsUser: 65534
+                runAsGroup: 65534
+                fsGroup: 65534
+                fsGroupChangePolicy: OnRootMismatch
+            containers:
+                - name: radarr
+                  image: ghcr.io/onedr0p/radarr:rolling@sha256:32d0e8d46f5619069d88445936670ffbca5a3aab7ed2e94e77a834ed85df81bb
+                  imagePullPolicy: IfNotPresent
+                  resources:
+                    requests:
+                        memory: 512Mi
+                        cpu: 100m
+                    limits:
+                        memory: 2Gi
+                        cpu: 500m
+                  volumeMounts:
+                    - mountPath: /config
+                      name: radarr-config
+                    - mountPath: /data
+                      name: nas
+            volumes:
+                - name: nas
+                  nfs:
+                    path: /mnt/thePool/thePoolShare
+                    server: 10.0.0.10
+                - name: radarr-config
+                  persistentVolumeClaim:
+                    claimName: radarr-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-config
+  namespace: arr
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+  storageClassName: longhorn

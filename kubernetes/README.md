@@ -1,1 +1,0 @@
-See https://git.mafyuh.dev/mafyuh/kub for Kubernetes until migration

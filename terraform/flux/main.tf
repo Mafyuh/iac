@@ -7,7 +7,7 @@ provider "flux" {
     config_path = "~/.kube/config"
   }
   git = {
-    url = "https://git.mafyuh.dev/mafyuh/k3s"
+    url = "https://git.mafyuh.dev/mafyuh/iac"
     http = {
         username = "mafyuh"
         password = data.bitwarden-secrets_secret.git_flux_password.value
@@ -16,5 +16,9 @@ provider "flux" {
 }
 
 resource "flux_bootstrap_git" "flux" {
-  path               = "cluster/production"
+  path               = "kubernetes/cluster/production"
+
+  lifecycle {
+    ignore_changes = all
+  }
 }

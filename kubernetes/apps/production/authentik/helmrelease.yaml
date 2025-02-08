@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authentik
+      version: "2024.12.3"
+      sourceRef:
+        kind: HelmRepository
+        name: authentik-chart
+        namespace: flux-system
+      interval: 15m
+  install:
+    remediation:
+      retries: 5
+  valuesFrom:
+    - kind: ConfigMap
+      name: authentik-values
