@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: "longhorn.local.mafyuh.com"
+    - host: "longhorn.local.mafyuh.dev"
       http:
         paths:
           - pathType: Prefix
@@ -23,5 +23,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - longhorn.local.mafyuh.com
-      secretName: local-mafyuh-com-production-tls
+        - longhorn.local.mafyuh.dev
+      secretName: local-mafyuh-dev-production-tls

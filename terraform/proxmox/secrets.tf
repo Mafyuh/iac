@@ -17,3 +17,15 @@ data "bitwarden-secrets_secret" "ubu_ip" {
 data "bitwarden-secrets_secret" "arrbuntu_ip" {
   id = "c65f8886-f6fb-4c17-bc79-b208000604bf"
 }
+
+data "bitwarden-secrets_secret" "k3s_master1_ip" {
+  id = "528104e1-2186-4d57-ae86-b27e01263972"
+}
+
+data "bitwarden-secrets_secret" "k3s_master2_ip" {
+  id = "71051171-a582-45e7-a239-b27e01269ef2"
+}
+
+data "bitwarden-secrets_secret" "k3s_master3_ip" {
+  id = "b48234d4-1b52-43e2-bab9-b27e0126bfdb"
+}

@@ -107,10 +107,11 @@ build {
 
     
     provisioner "shell" {
-        inline = [
-            "sudo apt-get update",
-            "sudo apt-get -y upgrade"
-        ]
+    inline = [
+        "sudo apt-get update",
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y open-iscsi nfs-common cryptsetup",
+        "sudo mkdir -p /etc/systemd/resolved.conf.d && echo '[Resolve]\nDNS=1.1.1.1' | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf",
+        "sudo apt-get -y upgrade"
+    ]
     }
-
 }

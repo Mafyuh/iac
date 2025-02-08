@@ -2,10 +2,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: local-mafyuh-com
+  name: local-mafyuh-dev
   namespace: cert-manager
 spec:
-  secretName: local-mafyuh-com-production-tls
+  secretName: local-mafyuh-dev-production-tls
   secretTemplate:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
@@ -13,7 +13,7 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "*.local.mafyuh.com"
+  commonName: "*.local.mafyuh.dev"
   dnsNames:
-  - "local.mafyuh.com"
-  - "*.local.mafyuh.com"
+  - "local.mafyuh.dev"
+  - "*.local.mafyuh.dev"
