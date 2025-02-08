@@ -10,7 +10,9 @@
       "description": "Process files",
       "fileMatch": [
         "docker/.+\\.y?ml$",
-        "terraform/.+\\tf.$"
+        "terraform/.+\\tf.$",
+        "kubernetes/.+\\.ya?ml$",
+        "packer/.+\\.hcl$"
       ],
       "matchStrings": [
         "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
