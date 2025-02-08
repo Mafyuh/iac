@@ -148,7 +148,7 @@ services:
 
   ## Should move this to Ubu
   code-server:
-    image: ghcr.io/linuxserver/code-server@sha256:1c0c8d975186fd58ab2dbb50f0370c29ca1dcb6abe93b18c613104e9f44262b3
+    image: ghcr.io/linuxserver/code-server@sha256:11f009e81643d28f4527e3aa23f64bcd672be5ec2046be46c84755c82b5ad471
     container_name: code-server
     environment:
       - PUID=1000
