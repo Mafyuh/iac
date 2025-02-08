@@ -75,7 +75,7 @@ services:
 
   ## Exporters
   snmp-exporter:
-    image: prom/snmp-exporter:v0.27.0
+    image: prom/snmp-exporter:v0.28.0
     container_name: snmp-exporter
     volumes:
       - /docker/appdata/snmp:/etc/snmp_exporter
