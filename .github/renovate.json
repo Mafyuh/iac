@@ -1,11 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "dependencyDashboardTitle": ":robot: Renovate Dashboard",
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "description": "Process files",
       "fileMatch": [
         "docker/.+\\.y?ml$",
