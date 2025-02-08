@@ -3,7 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: local-mafyuh-com
-  namespace: default
+  namespace: cert-manager
 spec:
   secretName: local-mafyuh-com-production-tls
   secretTemplate:
