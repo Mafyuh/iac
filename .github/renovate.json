@@ -4,21 +4,29 @@
     "config:recommended"
   ],
   "dependencyDashboardTitle": ":robot: Renovate Dashboard",
+  "enabledManagers": ["regex", "helm-releases", "dockerfile"],
   "customManagers": [
     {
       "customType": "regex",
       "description": "Process files",
       "fileMatch": [
-        "docker/.+\\.y?ml$",
-        "terraform/.+\\tf.$",
-        "kubernetes/.+\\.ya?ml$",
-        "packer/.+\\.hcl$"
+        "docker/.*\\.ya?ml$",
+        "terraform/.*\\.tf$",
+        "kubernetes/.*\\.ya?ml$",
+        "packer/.*\\.hcl$"
       ],
       "matchStrings": [
         "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "managers": ["regex", "helm-releases", "dockerfile"],
+      "fileMatch": ["kubernetes/.*\\.ya?ml$"],
+      "description": "Ensure all Kubernetes YAML files are included"
     }
   ]
 }
