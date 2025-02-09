@@ -52,7 +52,7 @@ metadata:
   namespace: arr
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
