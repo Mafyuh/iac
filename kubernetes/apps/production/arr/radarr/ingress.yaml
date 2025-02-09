@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: "radarr.local.mafyuh.com"
+    - host: "radarr.local.mafyuh.dev"
       http:
         paths:
           - path: /
@@ -18,5 +18,5 @@ spec:
                   number: 7878
   tls:
     - hosts:
-        - "radarr.local.mafyuh.com"
-      secretName: local-mafyuh-com-production-tls
+        - "radarr.local.mafyuh.dev"
+      secretName: local-mafyuh-dev-production-tls

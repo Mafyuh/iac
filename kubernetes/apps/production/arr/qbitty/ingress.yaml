@@ -3,13 +3,10 @@ kind: Ingress
 metadata:
   name: qbitty
   namespace: arr
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/proxy-body-size: 0
 spec:
   ingressClassName: nginx
   rules:
-    - host: "qbitty.local.mafyuh.com"
+    - host: "qbitty.local.mafyuh.dev"
       http:
         paths:
           - path: /
@@ -21,5 +18,5 @@ spec:
                   number: 8080
   tls:
     - hosts:
-        - "qbitty.local.mafyuh.com"
-      secretName: local-mafyuh-com-production-tls
+        - "qbitty.local.mafyuh.dev"
+      secretName: local-mafyuh-dev-production-tls
