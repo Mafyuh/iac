@@ -1,5 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "kubernetes": {		
+    "fileMatch": ["\\.yaml$"]		
+  },
   "dependencyDashboardTitle": ":robot: Renovate Dashboard"
 }
