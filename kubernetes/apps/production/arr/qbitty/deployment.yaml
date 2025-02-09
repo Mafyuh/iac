@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: qbitty
-          image: ghcr.io/hotio/qbittorrent@sha256:3c32e5d21f5e83558a71767dfdf7f39fe5379548829be4723270cda61f08fd56
+          image: ghcr.io/hotio/qbittorrent@sha256:170e632840122025ebbb4b4a1f88522ed46f79ce0c935784700b9ad31dd6184e
           imagePullPolicy: IfNotPresent
           env:
             - name: VPN_ENABLED
