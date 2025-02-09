@@ -6,6 +6,7 @@ resources:
   - prowlarr/
   - qbitty/
   - radarr/
+  - recyclarr/
   - sabnzbd/
   - sonarr/
   - namespace.yaml
