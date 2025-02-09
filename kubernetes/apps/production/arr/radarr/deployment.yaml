@@ -33,7 +33,7 @@ spec:
                         cpu: 500m
                   volumeMounts:
                     - mountPath: /config
-                      name: radarr-config
+                      name: radarr
                     - mountPath: /data
                       name: nas
             volumes:
@@ -41,14 +41,14 @@ spec:
                   nfs:
                     path: /mnt/thePool/thePoolShare
                     server: 10.0.0.10
-                - name: radarr-config
+                - name: radarr
                   persistentVolumeClaim:
-                    claimName: radarr-config
+                    claimName: radarr
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: radarr-config
+  name: radarr
   namespace: arr
 spec:
   accessModes:
