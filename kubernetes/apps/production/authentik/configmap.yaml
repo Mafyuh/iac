@@ -4,7 +4,7 @@ metadata:
     name: authentik-values
     namespace: authentik
 data:
-    values.yaml: ENC[AES256_GCM,data:Mpt0UVY+mvdnlSYbcwgJlX8FYKmofQAFptaBlYEwizLX8C7YKGYQw17+krMid7h1q7X8IrNjeJmRi3z+GJ8DFJzVjC3I3fMcue1Do6tBmKB5fUrpaPBbKCSjqU5xZksQbYOLDJ/A75lUotOVFVngosgQ14Df7NtH3QzuDTfTx7M28NBP6KkHjUFZQcvz1VZ0uHAoRX49WNqjlFBSm8NTegTKITYBPAwYWdS8OVq8tt8iCbX9oRwy1cMFgFErNDFg7Dt3dZwnGRZQ2IKrgNg0kimoUNOlSE4mHI4qDd9jAlsPsEjJwENah/kT8ESLs18k+ZloAVEdp5CN1tj8AFOE7AMGNrNb4ZxXhHqsS9xx7IsvUL8RSbB4Fhq5q/mfoKcc4aoimxOOEacpKvjMxEIOVlezJytnWU49cYWKFLoHBx4u0cbwzlWQJnson/9Luu5IFu9XUZFrRvT/xhAKs9/maMYc81WNZBariWp1QtJFXQ3qTbHxDn91f2i1gf7FCHCMVEbFxbhasun0ZdfwxPBP3fDAIiPlEB7QXvRybivcitZSVTCfaErWm606FT9wl4t5rKZ8xpL3Dwn/7a3PUYr1T/33U0uGg8XAILAssfdA6INqei1IQjop/kYyuUzTZ8f8d2b5AT2/1V+HfLVAG8SxB+V+LUUyfxtpOa87xGxf3qo8nUPNBDs9DFQ1q7YqB3Y4RZmBXlMwJqK39FLqCo2hdSt4Q638fJR1bs/OByI2pQ0dSAIJGhgKUTDoaQ3uub3jKiCO1PE7L0PctiMPOuqXSca4htThQxLapkxv667yXavWBIchAPWvenMWPSiaRroy/LTIQf4iYjYUJLlld1/hK4DHvNOXblnlDfT7+LNsriQwp2DOOXEtCfmz7oWvfbW3nBP93Q==,iv:1C4KSl2aHvpZWz2fDFpGhSnndUY4l7dRpgLFUlXOW7U=,tag:Qtu7o275YOxf15Iencn6FQ==,type:str]
+    values.yaml: ENC[AES256_GCM,data:1pECnJzNH0M8TtMbBLUQSJOawWz7S1d93Ee3oiseeN12Z/TDYBP7ks12VjQmmAk2yUn53AODWFu4SZxyEXUIapAMbeUR9EuoV64dNZyHbMjb/va2Na1M1LuveGiKlAS2vWy47TXgfr7mgEmUPzdSOOzgsqIPeuhqKraWP3iJBZnODSxtNQrya+YCS1f8tFhqr1+sBSRkR9LBTqTPyI1nWbN3dIns8KK6JtMHiFfOSd+y++WA50yRBXIbhJy3ddfoPYYVK1VK7eCPDTqvUZJA1p8fk9/plmslacrgmkyxwUljPxi7nfwAr73bLUEgjP+Euw/izHZgoFBKvNYl7ya7bS9Vd99a33ggoXyO5/KQV78W048Icya667hhi58O2oeairEfvYQIENOQhUFHXStgwe4qomRvuF1sLACLlN0njyJcoFSkfOdHE/x1Z2Y0UsWPvlfBvBjxJtsUXOkfwvmhE7iIxpWVWajkPn/XzDTjvkTKcyt63ntDWU9ckn0plZUYEJN2cHvI6YU0mKw45XeGih226lzm4A5G/2sN0CxraPSVxu7z6yKRY27WVj47Umg35Kv6T1UFdl3VICuh8AqCaW2llU/OWIfaPjNpU5mkoVA+wwmrDZyXN4xcFZTmGfbu0QAwmkPv2mMyUNcT+PjYdGIMadt4iyRe4W5DGL3Uviquuy/6R1hs3vtODE7b7ZPBIUD7IQhAetiPbwzyiLDSCyn3PiMRGFs7ckP5GFHmmIZr6qAld9yIVLP7TlR5VqMQ+OpfAN7rpnxTMpMS5IOnr1H1KROOI98HBhKhcZIHASlPgAeYXaF+M/th0eMg375l834Z9BP2oDiH4kueEXYPsMksSMTXGwqzodRkq7cBni22FP3dmQKYTrXdSpfvVxmbBJkt,iv:8ws5V6CnynEsYs7fxYyNDR+FSKZ+N9c/+0O9yF4mGZw=,tag:9ztyJSTPEyAu6g791MRf5g==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -20,8 +20,8 @@ sops:
             RndrQ2JxZnMxZlBIM3RHS0E1WTlZQzQK7oTkv/PG3poAdYnqXnzX3j5ZUgMa3GFB
             aQtceF96jKRltwPrnUgZZ5EadTaLyGAD30fqvUJ9/oP6NLe7kmsTWg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-09T03:04:29Z"
-    mac: ENC[AES256_GCM,data:AGtENyNYiYcM/VeITcjsHOk0Q1nFnXBoXTMKGpmOwz/J4zVVC6lD3kNkO9i5daixTMhdutNczAINsoIMHtXzrVQ0MpvpnFU8+U7c1zQFYLr1EelPrVixFRMe02N+CRXve3R3qJxRxmY/Y7LIx/Sl0ZKONsNFd4czxEOQXvFQJIY=,iv:kkn5CDssJkCVYF05LuFm+qKpDqbc6qC9sZqRIxN5sAg=,tag:MBFupfSQbeO60bWG1utKdg==,type:str]
+    lastmodified: "2025-02-09T03:16:09Z"
+    mac: ENC[AES256_GCM,data:LGtREZQiJh9NbZ6gz2L45/zJzp/a0zsk7EkDtdp/MtMGmwIAdCG7Sn5oLvbwuUHjNs+4xVmyGc3JzjD+dScOPdy6PaEw3+Nk3Mo5oyfK0NjywjQN7cG7B1j9XeaxJ4Y7te8pipGi/gSxYvcwkVnQZQmqSKfYAnNPLIJx9yD9q/I=,iv:5Zpk0t9+aX3C4tiIulEnvTJoIL37zSCzgrT9qj0GS1A=,tag:y0bNIzRjuVhCEznzkx9Dtg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData|secret_key|password|hosts)$
     version: 3.9.4
