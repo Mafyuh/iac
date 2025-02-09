@@ -4,11 +4,10 @@
     "config:recommended"
   ],
   "dependencyDashboardTitle": ":robot: Renovate Dashboard",
-  "enabledManagers": ["regex", "helm-releases", "dockerfile"],
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Process files",
+      "description": "Process custom dependency definitions in various files",
       "fileMatch": [
         "docker/.*\\.ya?ml$",
         "terraform/.*\\.tf$",
@@ -24,7 +23,7 @@
   ],
   "packageRules": [
     {
-      "managers": ["regex", "helm-releases", "dockerfile"],
+      "managers": ["regex", "docker-compose", "kustomize", "helm-values", "helm-requirements"],
       "fileMatch": ["kubernetes/.*\\.ya?ml$"],
       "description": "Ensure all Kubernetes YAML files are included"
     }
