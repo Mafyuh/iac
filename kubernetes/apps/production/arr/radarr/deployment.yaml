@@ -22,7 +22,7 @@ spec:
                 fsGroupChangePolicy: OnRootMismatch
             containers:
                 - name: radarr
-                  image: ghcr.io/onedr0p/radarr:rolling@sha256:32d0e8d46f5619069d88445936670ffbca5a3aab7ed2e94e77a834ed85df81bb
+                  image: ghcr.io/onedr0p/radarr:rolling@sha256:f63ab1d9875d81f1b6d7cd69427749451d2fab981e39ffb8d9071c2e21041170
                   imagePullPolicy: IfNotPresent
                   resources:
                     requests:
