@@ -1,31 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "dependencyDashboardTitle": ":robot: Renovate Dashboard",
-  "customManagers": [
-    {
-      "customType": "regex",
-      "description": "Process custom dependency definitions in various files",
-      "fileMatch": [
-        "docker/.*\\.ya?ml$",
-        "terraform/.*\\.tf$",
-        "kubernetes/.*\\.ya?ml$",
-        "packer/.*\\.hcl$"
-      ],
-      "matchStrings": [
-        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
-      ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    }
-  ],
-  "packageRules": [
-    {
-      "managers": ["regex", "docker-compose", "kustomize", "helm-values", "helm-requirements"],
-      "fileMatch": ["kubernetes/.*\\.ya?ml$"],
-      "description": "Ensure all Kubernetes YAML files are included"
-    }
-  ]
+  "extends": ["config:recommended"],
+  "dependencyDashboardTitle": ":robot: Renovate Dashboard"
 }
