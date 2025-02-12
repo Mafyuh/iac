@@ -13,7 +13,7 @@
     {
       "fileMatch": ["^kubernetes/[^/]+/helrelease\\.ya?ml$"],
       "matchStrings": [
-        "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*[^\\n]+\\n\\s*version:\\s*\"?(?<version>[^\"]+)\"?"
+        "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*(?<depName>[^\\n]+)\\n\\s*version:\\s*\"?(?<currentValue>[^\"]+)\"?"
       ],
       "datasourceTemplate": "helm",
       "versioningTemplate": "semver"
