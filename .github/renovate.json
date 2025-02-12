@@ -10,14 +10,13 @@
   },
   "helmv3": {
     "fileMatch": [
-      "^kubernetes/[^/]+/helmrelease\\.ya?ml$"
+      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ]
   },
-  "customManagers": [
+  "regexManagers": [
     {
-      "customType": "regex",
       "fileMatch": [
-        "^kubernetes/[^/]+/helmrelease\\.ya?ml$"
+        "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
       ],
       "matchStrings": [
         "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*(?<depName>\\S+)\\s*\\n\\s*version:\\s*\"?(?<currentValue>[^\"]+)\"?"
