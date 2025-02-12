@@ -15,6 +15,7 @@
   },
   "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
         "^kubernetes/[^/]+/helmrelease\\.ya?ml$"
       ],
