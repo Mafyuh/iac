@@ -6,7 +6,7 @@
   },
   "helmv3": {
     "fileMatch": [
-      "(^|/)kubernetes/.+\\.ya?ml$"
+      "^kubernetes/[^/]+/helrelease\\.ya?ml$"
     ]
   },
   "dependencyDashboardTitle": ":robot: Renovate Dashboard"
