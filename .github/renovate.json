@@ -1,17 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": [
+    "config:recommended"
+  ],
   "kubernetes": {
-    "fileMatch": ["(^|/)kubernetes/.+\\.ya?ml$"]
+    "fileMatch": [
+      "(^|/)kubernetes/.+\\.ya?ml$"
+    ]
   },
   "helmv3": {
     "fileMatch": [
       "^kubernetes/[^/]+/helrelease\\.ya?ml$"
     ]
   },
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["^kubernetes/[^/]+/helrelease\\.ya?ml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^kubernetes/[^/]+/helrelease\\.ya?ml$"
+      ],
       "matchStrings": [
         "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*(?<depName>[^\\n]+)\\n\\s*version:\\s*\"?(?<currentValue>[^\"]+)\"?"
       ],
