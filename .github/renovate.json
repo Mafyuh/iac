@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "packageRules": [
     {
@@ -24,6 +24,11 @@
     }
   ],
   "helmv3": {
+    "registryAliases": {
+      "authentik": "https://charts.goauthentik.io",
+      "ingress-nginx": "https://kubernetes.github.io/ingress-nginx",
+      "reflector": "https://emberstack.github.io/helm-charts"
+    },
     "fileMatch": [
       "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ]
