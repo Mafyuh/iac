@@ -33,6 +33,11 @@
       "(^|/)kubernetes/.+\\.ya?ml$"
     ]
   },
+  "flux": {
+    "fileMatch": [
+      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
+    ]
+  },
   "regexManagers": [
     {
       "fileMatch": [
