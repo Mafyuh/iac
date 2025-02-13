@@ -10,9 +10,9 @@
   },
   "helmv3": {
     "registryAliases": {
-      "authentik": "https://charts.goauthentik.io",
-      "ingress-nginx": "https://kubernetes.github.io/ingress-nginx",
-      "reflector": "https://emberstack.github.io/helm-charts"
+      "authentik-chart": "https://charts.goauthentik.io",
+      "ingress-nginx-repo": "https://kubernetes.github.io/ingress-nginx",
+      "reflector-repo": "https://emberstack.github.io/helm-charts"
     },
     "fileMatch": [
       "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
