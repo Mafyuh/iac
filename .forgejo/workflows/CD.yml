@@ -2,8 +2,6 @@ name: Ansible Deploy to Hosts
 on:
   pull_request:
     types: [closed]
-    paths:
-      - 'docker/**'
   workflow_dispatch:
 
 jobs:
@@ -29,6 +27,11 @@ jobs:
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
 
+          if [ -z "$folders" ]; then
+            echo "No changes in docker folder. Exiting."
+            exit 0
+          fi
+          
       - name: Map Folder to Host
         shell: bash
         run: |
