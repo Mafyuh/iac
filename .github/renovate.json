@@ -23,6 +23,16 @@
       "registryUrls": ["https://charts.goauthentik.io"]
     }
   ],
+  "helmv3": {
+    "fileMatch": [
+      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
+    ]
+  },
+  "kubernetes": {
+    "fileMatch": [
+      "(^|/)kubernetes/.+\\.ya?ml$"
+    ]
+  },
   "regexManagers": [
     {
       "fileMatch": [
