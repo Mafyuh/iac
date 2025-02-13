@@ -19,7 +19,7 @@
         "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
       ],
       "matchStrings": [
-        "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*(?<depName>\\S+)\\s*\\n\\s*version:\\s*\"?(?<currentValue>[^\"]+)\"?"
+        "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*(?<depName>\\S+)\\s*\\n\\s*version:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.\\-]+)[\"']?"
       ],
       "datasourceTemplate": "helm",
       "versioningTemplate": "semver"
