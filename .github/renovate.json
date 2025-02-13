@@ -11,27 +11,12 @@
   "helmv3": {
     "fileMatch": [
       "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
-    ],
-    "packageRules": [
-      {
-        "matchPaths": ["**/kubernetes/apps/**/helmrelease.yaml"],
-        "matchPackageNames": ["ingress-nginx"],
-        "versioning": "semver",
-        "registryUrls": ["https://kubernetes.github.io/ingress-nginx"]
-      },
-      {
-        "matchPaths": ["**/kubernetes/apps/**/helmrelease.yaml"],
-        "matchPackageNames": ["reflector"],
-        "versioning": "semver",
-        "registryUrls": ["https://emberstack.github.io/helm-charts"]
-      },
-      {
-        "matchPaths": ["**/kubernetes/apps/**/helmrelease.yaml"],
-        "matchPackageNames": ["authentik"],
-        "versioning": "semver",
-        "registryUrls": ["https://charts.goauthentik.io"]
-      }
     ]
+  },
+  "registryAliases": {
+    "ingress-nginx": "https://kubernetes.github.io/ingress-nginx",
+    "reflector": "https://emberstack.github.io/helm-charts",
+    "authentik": "https://charts.goauthentik.io"
   },
   "kubernetes": {
     "fileMatch": [
