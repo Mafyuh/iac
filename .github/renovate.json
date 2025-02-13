@@ -6,31 +6,21 @@
   "packageRules": [
     {
       "matchPaths": ["**/kubernetes/apps/**/helmrelease.yaml"],
-      "matchPackageNames": ["ingress-nginx", "reflector", "authentik"],
+      "matchPackageNames": ["ingress-nginx"],
       "versioning": "semver",
-      "registryUrls": [
-        "https://kubernetes.github.io/ingress-nginx",
-        "https://emberstack.github.io/helm-charts",
-        "https://charts.goauthentik.io"
-      ]
+      "registryUrls": ["https://kubernetes.github.io/ingress-nginx"]
     },
     {
-      "matchPaths": ["**/kubernetes/apps/production/reflector/helmrelease.yaml"],
+      "matchPaths": ["**/kubernetes/apps/**/helmrelease.yaml"],
       "matchPackageNames": ["reflector"],
       "versioning": "semver",
       "registryUrls": ["https://emberstack.github.io/helm-charts"]
     },
     {
-      "matchPaths": ["**/kubernetes/apps/production/authentik/helmrelease.yaml"],
+      "matchPaths": ["**/kubernetes/apps/**/helmrelease.yaml"],
       "matchPackageNames": ["authentik"],
       "versioning": "semver",
       "registryUrls": ["https://charts.goauthentik.io"]
-    },
-    {
-      "matchPaths": ["**/kubernetes/apps/production/ingress-nginx/helmrelease.yaml"],
-      "matchPackageNames": ["ingress-nginx"],
-      "versioning": "semver",
-      "registryUrls": ["https://kubernetes.github.io/ingress-nginx"]
     }
   ],
   "regexManagers": [
