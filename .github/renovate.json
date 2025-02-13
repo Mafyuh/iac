@@ -6,6 +6,11 @@
   "flux": {
     "fileMatch": [
       "(^|/)kubernetes/.+\\.ya?ml$"
+    ]
+  },
+  "helmv3": {
+    "fileMatch": [
+      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ],
     "packageRules": [
       {
@@ -26,11 +31,6 @@
         "versioning": "semver",
         "registryUrls": ["https://charts.goauthentik.io"]
       }
-    ]
-  },
-  "helmv3": {
-    "fileMatch": [
-      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ]
   },
   "kubernetes": {
