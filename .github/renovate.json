@@ -13,6 +13,11 @@
       "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ]
   },
+  "helm-requirements": {
+    "fileMatch": [
+      "(^|/)kubernetes/apps/.+/helmrepo\\.ya?ml$"
+    ]
+  },
   "regexManagers": [
     {
       "fileMatch": [
