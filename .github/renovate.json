@@ -13,11 +13,20 @@
       "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ]
   },
-  "registryAliases": {
-    "ingress-nginx": "https://kubernetes.github.io/ingress-nginx",
-    "reflector": "https://emberstack.github.io/helm-charts",
-    "authentik": "https://charts.goauthentik.io"
+  "packageRules": [
+  {
+    "matchPackageNames": ["authentik"],
+    "registryUrls": ["https://charts.goauthentik.io"]
   },
+  {
+    "matchPackageNames": ["ingress-nginx"],
+    "registryUrls": ["https://kubernetes.github.io/ingress-nginx"]
+  },
+  {
+    "matchPackageNames": ["reflector"],
+    "registryUrls": ["https://emberstack.github.io/helm-charts"]
+  }
+],
   "kubernetes": {
     "fileMatch": [
       "(^|/)kubernetes/.+\\.ya?ml$"
