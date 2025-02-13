@@ -18,7 +18,7 @@
       "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ]
   },
-  "helm-values": {
+  "flux": {
     "fileMatch": [
       "(^|/)kubernetes/apps/.+/helmrepo\\.ya?ml$"
     ]
