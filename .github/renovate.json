@@ -4,6 +4,11 @@
     "config:recommended"
   ],
   "flux": {
+    "registryAliases": {
+      "authentik": "https://charts.goauthentik.io",
+      "ingress-nginx": "https://kubernetes.github.io/ingress-nginx",
+      "reflector": "https://emberstack.github.io/helm-charts"
+    },
     "fileMatch": [
       "(^|/)kubernetes/.+\\.ya?ml$"
     ]
