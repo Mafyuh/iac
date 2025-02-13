@@ -20,7 +20,7 @@
   },
   "flux": {
     "fileMatch": [
-      "(^|/)kubernetes/apps/.+/helmrepo\\.ya?ml$"
+      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
     ]
   },
   "regexManagers": [
