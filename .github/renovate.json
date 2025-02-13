@@ -1,12 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "kubernetes": {
-    "fileMatch": [
-      "(^|/)kubernetes/.+\\.ya?ml$"
-    ]
+  "extends": ["config:recommended"],
+  "flux": {
+    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
   "helmv3": {
     "registryAliases": {
@@ -14,20 +10,11 @@
       "ingress-nginx": "https://kubernetes.github.io/ingress-nginx",
       "reflector": "https://emberstack.github.io/helm-charts"
     },
-    "fileMatch": [
-      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
-    ]
-  },
-  "helm-requirements": {
-    "fileMatch": [
-      "(^|/)kubernetes/apps/.+/helmrepo\\.ya?ml$"
-    ]
+    "fileMatch": ["kubernetes/apps/.+/helmrelease\\.ya?ml$"]
   },
   "regexManagers": [
     {
-      "fileMatch": [
-        "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
-      ],
+      "fileMatch": ["kubernetes/apps/.+/helmrelease\\.ya?ml$"],
       "matchStrings": [
         "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*(?<depName>\\S+)\\s*\\n\\s*version:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.\\-]+)[\"']?"
       ],
