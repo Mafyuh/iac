@@ -17,6 +17,7 @@ provider "flux" {
 
 resource "flux_bootstrap_git" "flux" {
   path               = "kubernetes/cluster/production"
+  version            = "v2.4.0"
 
   lifecycle {
     ignore_changes = all

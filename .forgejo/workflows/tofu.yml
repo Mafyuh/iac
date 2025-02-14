@@ -69,7 +69,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
-        run: tofu plan -no-color
+        run: tofu plan -no-color -parallelism=1 -out=tfplan
 
       - name: Apply the Plan
         if: success()
@@ -77,4 +77,4 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
-        run: tofu apply -auto-approve
+        run: tofu apply tfplan -auto-approve
