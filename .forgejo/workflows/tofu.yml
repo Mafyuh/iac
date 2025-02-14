@@ -30,6 +30,7 @@ jobs:
             030fbb6a-3b6d-40dc-9c26-b222001b0fb6 > grafana_url
             f8f85ab2-5f6d-46a7-9e06-b20800076d26 > s3_endpoint
             b6dac092-df23-4e28-8449-b2770059096d > kube_config
+            4dff237e-93ad-4eda-a776-b28400653181 > bws_access_token
 
       
       - name: Create tfvars file
@@ -41,6 +42,7 @@ jobs:
           grafana_auth = "${{ steps.bitwarden-secrets.outputs.grafana_auth }}"
           grafana_url = "${{ steps.bitwarden-secrets.outputs.grafana_url }}"
           s3_endpoint = "${{ steps.bitwarden-secrets.outputs.s3_endpoint }}"
+          access_token = "${{ steps.bitwarden-secrets.outputs.bws_access_token }}"
           EOF
 
       - name: Make Kube directory
@@ -50,10 +52,6 @@ jobs:
       - name: Create Kube Config
         run: |
           printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
-
-      - name: Verify kubectl and Cluster Connection
-        run: |
-          kubectl get nodes
 
       - name: Setup OpenTofu
         uses: https://github.com/opentofu/setup-opentofu@v1.0.5
@@ -74,7 +72,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
           TF_LOG: DEBUG
-        run: tofu plan -no-color -parallelism=1 -out=tfplan < /dev/null
+        run: tofu plan -parallelism=1 -out=tfplan
 
       - name: Apply the Plan
         if: success()
