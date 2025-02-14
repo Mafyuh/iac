@@ -36,70 +36,81 @@ jobs:
         shell: bash
         run: |
           IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
+          hosts=""
+          folders=""
+
           for folder in "${folder_array[@]}"; do
             case $folder in
               actual)
-                target_host="ubu.lan"
+                host="ubu.lan"
                 ;;
               arrs)
-                target_host="arrs.lan"
+                host="arrs.lan"
                 ;;
               arm)
-                target_host="arm.lan"
+                host="arm.lan"
                 ;;
               AI)
-                target_host="ai.lan"
+                host="ai.lan"
                 ;;
               authentik)
-                target_host="auth.lan"
+                host="auth.lan"
                 ;;
               ag-main)
-                target_host="dns.lan"
+                host="dns.lan"
                 ;;
               exporters)
-                target_host="all"
+                host="all"
                 ;;
               grafana)
-                target_host="ubu.lan"
+                host="ubu.lan"
                 ;;
               jellyfin)
-                target_host="jf.lan"
+                host="jf.lan"
                 ;;
               kasm)
-                target_host="kasm.lan"
+                host="kasm.lan"
                 ;;
               netboot)
-                target_host="netboot.lan"
+                host="netboot.lan"
                 ;;
               nexterm)
-                target_host="ubu.lan"
+                host="ubu.lan"
                 ;;
               npm)
-                target_host="npm.lan"
+                host="npm.lan"
                 ;;
               plex)
-                target_host="plex.lan"
+                host="plex.lan"
                 ;;
               paperless)
-                target_host="ubu.lan"
+                host="ubu.lan"
                 ;;
               portainer)
-                target_host="port.lan"
+                host="port.lan"
                 ;;
               runner)
-                target_host="runner.lan"
+                host="runner.lan"
                 ;;
-              # Add cases for other folders/hosts
               *)
                 echo "Unknown folder: $folder"
                 exit 1
                 ;;
             esac
-            echo "Deploying to $target_host for folder $folder"
 
-            echo "target_host=$target_host" >> $GITHUB_ENV
-            echo "folder=$folder" >> $GITHUB_ENV
+            if [ -z "$hosts" ]; then
+              hosts="$host"
+              folders="$folder"
+            else
+              hosts="$hosts,$host"
+              folders="$folders,$folder"
+            fi
           done
+
+          echo "Deploying to hosts: $hosts for folders: $folders"
+
+          echo "target_host=$hosts" >> $GITHUB_ENV
+          echo "folder=$folders" >> $GITHUB_ENV
 
       - name: Get Secrets from Bitwarden
         id: bitwarden-secrets

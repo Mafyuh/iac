@@ -1,7 +1,7 @@
 - name: Deploy application
-  hosts: "{{ target_host }}"
+  hosts: "{{ target_host.split(',') | join(',') }}"
   vars:
-    repo_path: "/home/{{ ansible_user }}/iac/docker/{{ folder }}"
+    repo_path: "/home/{{ ansible_user }}/iac/docker/{{ folder.split(',') | join(',') }}"
     secrets_mapping_file: "/home/{{ ansible_user }}/iac/docker/secret-mappings.yml"
   tasks:
     - name: Ensure the repository is up-to-date
