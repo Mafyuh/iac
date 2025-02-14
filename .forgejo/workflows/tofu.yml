@@ -51,6 +51,10 @@ jobs:
         run: |
           printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
 
+      - name: Verify kubectl and Cluster Connection
+        run: |
+          kubectl get nodes
+
       - name: Setup OpenTofu
         uses: https://github.com/opentofu/setup-opentofu@v1.0.5
 
