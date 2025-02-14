@@ -24,7 +24,7 @@ services:
 
   minio:
     command: server /data --console-address ":9001"
-    image: minio/minio@sha256:a62e44a7db506b8ed114a44e67b4996c4f1ecca981d9c6e40aa2581334999313
+    image: minio/minio@sha256:640c22768ed5dbc92eacc14502a1b06a1c708fa60431345c78dfc22917062e93
     environment:
       - MINIO_ROOT_PASSWORD=$MINIO_ROOT_PASSWORD
       - MINIO_ROOT_USER=mafyuh
