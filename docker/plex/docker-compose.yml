@@ -1,6 +1,6 @@
 services:
   plex:
-    image: ghcr.io/linuxserver/plex@sha256:a0a83cc0f305e92d3885fb2b414c7299606427358bb2f0b38d20e0c3e3eeb094
+    image: ghcr.io/linuxserver/plex@sha256:76d2cf7acc05bba64356dc47fa8d061135519f380c86d0a9a46a48c6bb37102e
     container_name: plex
     network_mode: host
     environment:
