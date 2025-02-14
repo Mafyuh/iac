@@ -23,7 +23,7 @@ services:
       - apparmor:unconfined
 
   makemkv:
-    image: jlesage/makemkv@sha256:ca6d9778b679ea2a51a10592a7756f93acca4f7a7142d787e9959921cd6bc547
+    image: jlesage/makemkv@sha256:c0fa01dabfd36bc72cec432e695132b6c78ae9403bb134e82c452935d3681766
     container_name: makemkv
     ports:
       - 5800:5800
