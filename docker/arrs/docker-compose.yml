@@ -129,7 +129,7 @@ services:
     restart: unless-stopped
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:c04574ea8538099697d9668a1e3667b9dd91a17f6e4fc3fb6fbe8e52d8ce91ec
+    image: ghcr.io/linuxserver/syncthing@sha256:c112da0ec1025ac250ef5272186eb6d6cf1f2777747288c8c526b4a894b8b1b3
     container_name: syncthing
     hostname: ARRS
     environment:
