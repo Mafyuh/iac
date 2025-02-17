@@ -16,16 +16,6 @@ spec:
                 name: headless-radarr
                 port:
                   number: 7878
-    - host: "radarr.${PUBLIC_DOMAIN}"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: headless-radarr
-                port:
-                  number: 7878
   tls:
     - hosts:
         - "radarr.local.mafyuh.dev"
