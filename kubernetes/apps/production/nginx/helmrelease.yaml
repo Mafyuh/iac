@@ -20,5 +20,6 @@ spec:
       config:
         annotations-risk-level: "Critical"
         enable-annotation-validation: false
+        strict-validate-path-type: false
         service:
           type: LoadBalancer
