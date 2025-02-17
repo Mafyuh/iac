@@ -3,19 +3,20 @@ kind: Ingress
 metadata:
   name: radarr
   namespace: arr
-  annotations:
-    nginx.ingress.kubernetes.io/auth-url: |-
-        http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
-    nginx.ingress.kubernetes.io/auth-signin: |-
-        /outpost.goauthentik.io/start?rd=$escaped_request_uri
-    nginx.ingress.kubernetes.io/auth-response-headers: |-
-        Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid
-    nginx.ingress.kubernetes.io/auth-snippet: |
-        proxy_set_header X-Forwarded-Host $http_host;
 spec:
   ingressClassName: nginx
   rules:
     - host: "radarr.local.mafyuh.dev"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: headless-radarr
+                port:
+                  number: 7878
+    - host: "radarr.${PUBLIC_DOMAIN}"
       http:
         paths:
           - path: /
