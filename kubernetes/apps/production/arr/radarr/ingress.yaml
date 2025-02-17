@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: |-
         http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
     nginx.ingress.kubernetes.io/auth-signin: |-
-        https://radarr.local.mafyuh.dev/outpost.goauthentik.io/start?rd=$escaped_request_uri
+        /outpost.goauthentik.io/start?rd=$escaped_request_uri
     nginx.ingress.kubernetes.io/auth-response-headers: |-
         Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid
     nginx.ingress.kubernetes.io/auth-snippet: |
@@ -18,13 +18,6 @@ spec:
     - host: "radarr.local.mafyuh.dev"
       http:
         paths:
-          - path: /outpost.goauthentik.io
-            pathType: Prefix
-            backend:
-              service:
-                name: authentik-server
-                port:
-                  number: 80
           - path: /
             pathType: Prefix
             backend:
