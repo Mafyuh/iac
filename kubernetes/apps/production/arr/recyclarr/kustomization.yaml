@@ -4,6 +4,7 @@ resources:
   - helmrelease.yaml
 configMapGenerator:
   - name: recyclarr-config
+    namespace: arr  
     files:
       - recyclarr.yml=./recyclarr.yml
 generatorOptions:
