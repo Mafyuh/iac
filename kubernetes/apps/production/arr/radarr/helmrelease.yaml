@@ -45,13 +45,6 @@ spec:
               globalMounts:
                 - path: /config
 
-        pod:
-          securityContext:
-            runAsUser: 65534
-            runAsGroup: &group 65534
-            fsGroup: *group
-            fsGroupChangePolicy: "OnRootMismatch"
-
         containers:
           app:
             image:
@@ -69,12 +62,6 @@ spec:
             probes:
               liveness:
                 enabled: false
-
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                  - ALL
 
             resources:
               requests:
