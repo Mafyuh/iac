@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
 configMapGenerator:
-  - name: recyclarr-cm
+  - name: recyclarr-config
     files:
       - recyclarr.yml=./recyclarr.yml
 generatorOptions:
