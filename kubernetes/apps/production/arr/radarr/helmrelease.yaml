@@ -46,6 +46,11 @@ spec:
                 - path: /config
         
         pod:
+          securityContext:
+            runAsUser: 1026
+            runAsGroup: &group 100
+            fsGroup: *group
+            fsGroupChangePolicy: "OnRootMismatch"
           dnsPolicy: None
           dnsConfig:
             nameservers:
