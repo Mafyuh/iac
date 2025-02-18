@@ -56,7 +56,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/sonarr
-              tag: 5.18.4.9674
+              tag: 4.0.13.2932
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
