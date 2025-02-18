@@ -38,7 +38,7 @@ spec:
 
         statefulset:
           volumeClaimTemplates:
-            - name: config
+            - name: radarr-config
               accessMode: ReadWriteOnce
               size: 3Gi
               storageClass: longhorn
