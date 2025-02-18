@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app reloader
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: reloader
+      version: 1.2.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: stakater
+        namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    fullnameOverride: *app
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 64M
+      limits:
+        cpu: 15m
+        memory: 64M

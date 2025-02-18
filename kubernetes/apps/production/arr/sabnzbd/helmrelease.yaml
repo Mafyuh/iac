@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app radarr
+  name: &app sabnzbd
   namespace: arr
 spec:
   interval: 15m
@@ -28,7 +28,7 @@ spec:
       namespace: arr
 
     controllers:
-      radarr:
+      sabnzbd:
         enabled: true
         type: statefulset
         annotations:
@@ -40,7 +40,7 @@ spec:
           volumeClaimTemplates:
             - name: config
               accessMode: ReadWriteMany
-              size: 3Gi
+              size: 500Mi
               storageClass: longhorn
               globalMounts:
                 - path: /config
@@ -55,16 +55,12 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/radarr
-              tag: 5.18.4.9674
+              repository: ghcr.io/onedr0p/sabnzbd
+              tag: 4.4.1
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
-              RADARR__INSTANCE_NAME: *app
-              RADARR__PORT: &port 7878
-              RADARR__APPLICATION_URL: "https://radarr.${LOCAL_DOMAIN}"
-              RADARR__THEME: dark
-              RADARR__LOG_LEVEL: info
+              SABNZBD__PORT: &port 8080
 
             probes:
               liveness:
@@ -78,15 +74,15 @@ spec:
 
             resources:
               requests:
-                cpu: 25m
-                memory: 100Mi
+                cpu: 20m
+                memory: 200Mi
               limits:
-                memory: 250Mi
+                memory: 4000Mi
 
     service:
       app:
         primary: true
-        controller: radarr
+        controller: sabnzbd
         ports:
           http:
             port: *port
@@ -96,7 +92,7 @@ spec:
         enabled: true
         className: nginx
         hosts:
-          - host: "radarr.${LOCAL_DOMAIN}"
+          - host: "sabnzbd.${LOCAL_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -105,7 +101,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "radarr.${LOCAL_DOMAIN}"
+              - "sabnzbd.${LOCAL_DOMAIN}"
             secretName: local-mafyuh-dev-production-tls
 
     persistence:

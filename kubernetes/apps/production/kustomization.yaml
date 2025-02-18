@@ -7,3 +7,4 @@ resources:
   - longhorn/
   - nginx/
   - reflector/
+  - reloader/

@@ -4,4 +4,3 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
-  - qbitty-secrets.yaml

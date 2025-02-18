@@ -1,0 +1,96 @@
+sonarr:
+  series:
+    base_url: https://sonarr.local.mafyuh.dev
+    api_key: !secret SONARR_API_KEY
+
+    delete_old_custom_formats: true
+    replace_existing_custom_formats: true
+
+    include:
+      - template: sonarr-v4-custom-formats-web-1080p
+      - template: sonarr-v4-quality-profile-web-1080p
+
+    # quality_profiles:
+    #   - name: WEB-DL (1080p)
+    #     reset_unmatched_scores:
+    #       enabled: true
+    #     upgrade:
+    #       allowed: true
+    #       until_quality: WEBDL-1080p
+    #       until_score: 10000
+    #     min_format_score: 1
+    #     qualities:
+    #       - WEBDL-1080p
+    #       - WEBRip-1080p
+    #       - HDTV-1080p
+
+    custom_formats:
+      - trash_ids:
+          - 32b367365729d530ca1c124a0b180c64 # Bad Dual Groups
+          - ed38b889b31be83fda192888e2286d83 # BR-DISK
+          - e1a997ddb54e3ecbfe06341ad323c458 # Obfuscated
+          - dc98083864ea246d05a42df0d05f81cc # x265 (720/1080p)
+          - 1b3994c551cbb92a2c781af061f4ab44 # Scene
+        assign_scores_to:
+          - name: WEB-DL (1080p)
+            score: -10000
+
+radarr:
+  radarr_main:
+    base_url: https://radarr.local.mafyuh.dev
+    api_key: !secret RADARR_API_KEY
+
+    # Custom Format Configuration
+    delete_old_custom_formats: true
+    replace_existing_custom_formats: true
+
+    include:
+      - template: radarr-quality-definition-movie
+      - template: radarr-quality-profile-hd-bluray-web
+      - template: radarr-custom-formats-hd-bluray-web
+      - template: radarr-quality-definition-movie
+      - template: radarr-quality-profile-uhd-bluray-web
+      - template: radarr-custom-formats-uhd-bluray-web
+
+    # quality_profiles:
+    #   - name: HD Bluray + WEB
+    #     min_format_score: 0
+    #     reset_unmatched_scores:
+    #       enabled: true
+    #     qualities:
+    #       - WEBDL-1080p
+    #       - Bluray-1080p
+    #   - name: UHD Bluray + WEB
+    #     reset_unmatched_scores:
+    #       enabled: true
+    #     qualities:
+    #       - WEBDL-2160p
+    #       - Bluray-2160p
+    #       - WEBDL-1080p  # Ensuring `until_quality` exists in the list
+
+    custom_formats:
+      - trash_ids:
+          - b6832f586342ef70d9c128d40c07b872 # Bad Dual Groups
+          - 90cedc1fea7ea5d11298bebd3d1d3223 # EVO (no WEBDL)
+          - ae9b7c9ebde1f3bd336a8cbd1ec4c5e5 # No-RlsGroup
+          - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
+          - 5c44f52a8714fdd79bb4d98e2673be1f # Retags
+          - f537cf427b64c38c8e36298f657e4828 # Scene
+        assign_scores_to:
+          - name: HD Bluray + WEB
+      - trash_ids:
+          - eecf3a857724171f968a66cb5719e152 # IMAX
+          - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX ENHANCED
+          - c53085ddbd027d9624b320627748612f # DV HDR10+
+          - e23edd2482476e595fb990b12e7c609c # DV HDR10
+          - 58d6a88f13e2db7f5059c41047876f00 # DV
+          - 55d53828b9d81cbe20b02efd00aa0efd # DV HLG
+          - a3e19f8f627608af0211acd02bf89735 # DV SDR
+          - b974a6cd08c1066250f1f177d7aa1225 # HDR10+
+          - dfb86d5941bc9075d6af23b09c2aeecd # HDR10
+          - e61e28db95d22bedcadf030b8f156d96 # HDR
+          - 2a4d9069cc1fe3242ff9bdaebed239bb # HDR Undefined
+          - 08d6d8834ad9ec87b1dc7ec8148e7a1f # PQ
+          - 9364dd386c9b4a1100dde8264690add7 # HLG
+        assign_scores_to:
+          - name: UHD Bluray + WEB
