@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app reloader
+  namespace: default
 spec:
   interval: 15m
   chart:
