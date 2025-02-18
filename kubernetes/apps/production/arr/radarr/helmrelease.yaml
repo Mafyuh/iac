@@ -39,7 +39,7 @@ spec:
         statefulset:
           volumeClaimTemplates:
             - name: config
-              accessMode: ReadWriteMany
+              accessMode: ReadWriteOnce
               size: 3Gi
               storageClass: longhorn
               globalMounts:
@@ -64,7 +64,7 @@ spec:
               RADARR__PORT: &port 7878
               RADARR__APPLICATION_URL: "https://radarr.${LOCAL_DOMAIN}"
               RADARR__THEME: dark
-              RADARR__LOG_LEVEL: info
+              RADARR__LOG_LEVEL: debug
 
             probes:
               liveness:
