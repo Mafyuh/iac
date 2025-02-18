@@ -39,7 +39,7 @@ spec:
         statefulset:
           volumeClaimTemplates:
             - name: config
-              accessMode: ReadWriteMany
+              accessMode: ReadWriteOnce
               size: 3Gi
               storageClass: longhorn
               globalMounts:
@@ -65,8 +65,8 @@ spec:
 
             resources:
               requests:
-                cpu: 100m
-                memory: 200Mi
+                cpu: 200m
+                memory: 300Mi
               limits:
                 memory: 512Mi
 
