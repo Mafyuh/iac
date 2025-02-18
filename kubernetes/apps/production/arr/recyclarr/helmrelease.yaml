@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app recyclarr
+  namespace: arr
 spec:
   interval: 15m
   chart:
@@ -78,7 +79,7 @@ spec:
                 memory: 36Mi
               limits:
                 memory: 200Mi
-                
+
     persistence:
       config-file:
         type: configMap
