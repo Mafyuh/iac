@@ -64,7 +64,7 @@ spec:
               RADARR__PORT: &port 7878
               RADARR__APPLICATION_URL: "https://radarr.${LOCAL_DOMAIN}"
               RADARR__THEME: dark
-              RADARR__LOG_LEVEL: debug
+              RADARR__LOG_LEVEL: info
 
             probes:
               liveness:
