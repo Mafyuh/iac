@@ -66,7 +66,7 @@ spec:
             env:
               TZ: "${TZ}"
               PROWLARR__INSTANCE_NAME: *app
-              PROWLARR__PORT: &port 7878
+              PROWLARR__PORT: &port 9696
               PROWLARR__APPLICATION_URL: "https://prowlarr.${LOCAL_DOMAIN}"
               PROWLARR__THEME: dark
               PROWLARR__LOG_LEVEL: info
