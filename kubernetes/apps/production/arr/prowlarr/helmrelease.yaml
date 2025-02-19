@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app sonarr
+  name: &app prowlarr
   namespace: arr
 spec:
   interval: 15m
@@ -28,7 +28,7 @@ spec:
       namespace: arr
 
     controllers:
-      sonarr:
+      prowlarr:
         enabled: true
         type: statefulset
         annotations:
@@ -38,13 +38,13 @@ spec:
 
         statefulset:
           volumeClaimTemplates:
-            - name: sonarr-config
+            - name: prowlarr-config
               accessMode: ReadWriteOnce
               size: 3Gi
               storageClass: longhorn
               globalMounts:
                 - path: /config
-
+        
         pod:
           securityContext:
             runAsUser: 1000
@@ -60,16 +60,16 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sonarr
-              tag: 4.0.13.2932
+              repository: ghcr.io/onedr0p/prowlarr
+              tag: 1.30.2.4939
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
-              SONARR__INSTANCE_NAME: *app
-              SONARR__PORT: &port 8989
-              SONARR__APPLICATION_URL: "https://sonarr.${LOCAL_DOMAIN}"
-              SONARR__THEME: dark
-              SONARR__LOG_LEVEL: info
+              PROWLARR__INSTANCE_NAME: *app
+              PROWLARR__PORT: &port 7878
+              PROWLARR__APPLICATION_URL: "https://prowlarr.${LOCAL_DOMAIN}"
+              PROWLARR__THEME: dark
+              PROWLARR__LOG_LEVEL: info
 
             probes:
               liveness:
@@ -83,15 +83,15 @@ spec:
 
             resources:
               requests:
-                cpu: 100m
-                memory: 200Mi
+                cpu: 50m
+                memory: 150Mi
               limits:
                 memory: 512Mi
 
     service:
       app:
         primary: true
-        controller: sonarr
+        controller: prowlarr
         ports:
           http:
             port: *port
@@ -101,7 +101,7 @@ spec:
         enabled: true
         className: nginx
         hosts:
-          - host: "sonarr.${LOCAL_DOMAIN}"
+          - host: "prowlarr.${LOCAL_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -110,7 +110,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "sonarr.${LOCAL_DOMAIN}"
+              - "prowlarr.${LOCAL_DOMAIN}"
             secretName: local-mafyuh-dev-production-tls
 
     persistence:

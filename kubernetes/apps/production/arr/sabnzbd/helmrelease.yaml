@@ -38,8 +38,8 @@ spec:
 
         statefulset:
           volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteMany
+            - name: sabnzbd-config
+              accessMode: ReadWriteOnce
               size: 500Mi
               storageClass: longhorn
               globalMounts:
@@ -47,8 +47,8 @@ spec:
 
         pod:
           securityContext:
-            runAsUser: 65534
-            runAsGroup: &group 65534
+            runAsUser: 1000
+            runAsGroup: &group 1000
             fsGroup: *group
             fsGroupChangePolicy: "OnRootMismatch"
 
@@ -61,6 +61,12 @@ spec:
             env:
               TZ: "${TZ}"
               SABNZBD__PORT: &port 8080
+              SABNZBD__HOST_WHITELIST_ENTRIES: >-
+                {{ .Release.Name }},
+                {{ .Release.Name }}.arr,
+                {{ .Release.Name }}.arr.svc,
+                {{ .Release.Name }}.arr.svc.cluster.local,
+                sab.${LOCAL_DOMAIN}
 
             probes:
               liveness:
@@ -92,7 +98,7 @@ spec:
         enabled: true
         className: nginx
         hosts:
-          - host: "sabnzbd.${LOCAL_DOMAIN}"
+          - host: "sab.${LOCAL_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -101,7 +107,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "sabnzbd.${LOCAL_DOMAIN}"
+              - "sab.${LOCAL_DOMAIN}"
             secretName: local-mafyuh-dev-production-tls
 
     persistence:
@@ -112,3 +118,10 @@ spec:
         path: /mnt/thePool/thePoolShare
         globalMounts:
           - path: /data
+      
+      incomplete:
+        enabled: true
+        type: emptyDir
+        sizeLimit: 100Gi
+        globalMounts:
+          - path: /incomplete
