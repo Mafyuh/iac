@@ -47,8 +47,8 @@ spec:
         
         pod:
           securityContext:
-            runAsUser: 1026
-            runAsGroup: &group 100
+            runAsUser: 1000
+            runAsGroup: &group 1000
             fsGroup: *group
             fsGroupChangePolicy: "OnRootMismatch"
           dnsPolicy: None
@@ -77,8 +77,8 @@ spec:
 
             resources:
               requests:
-                cpu: 200m
-                memory: 300Mi
+                cpu: 50m
+                memory: 150Mi
               limits:
                 memory: 512Mi
 
