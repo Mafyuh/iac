@@ -4,6 +4,7 @@ resources:
   - bazarr/
   - flaresolverr/
   - prowlarr/
+  - jellyseerr/
   - qbitty/
   - radarr/
   - recyclarr/
