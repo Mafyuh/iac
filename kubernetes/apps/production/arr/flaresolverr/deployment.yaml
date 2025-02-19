@@ -31,3 +31,9 @@ spec:
             limits:
               memory: "300Mi"
               cpu: "200m"
+      dnsPolicy: None
+      dnsConfig:
+        nameservers:
+          - 10.43.0.10
+          - 1.1.1.1
+          - 8.8.8.8
