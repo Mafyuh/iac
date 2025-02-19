@@ -1,0 +1,111 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app jellyseerr
+  namespace: arr
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    controllers:
+      jellyseerr:
+        enabled: true
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        replicas: 1
+
+        statefulset:
+          volumeClaimTemplates:
+            - name: jellyseerr-config
+              accessMode: ReadWriteOnce
+              size: 3Gi
+              storageClass: longhorn
+              globalMounts:
+                - path: /config
+        
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: &group 1000
+            fsGroup: *group
+            fsGroupChangePolicy: "OnRootMismatch"
+          dnsPolicy: None
+          dnsConfig:
+            nameservers:
+              - 10.43.0.10
+              - 1.1.1.1
+              - 8.8.8.8
+
+        containers:
+          app:
+            image:
+              repository: fallenbagel/jellyseerr
+              tag: 2.3.0
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              LOG_LEVEL: info
+
+            probes:
+              liveness:
+                enabled: false
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 150Mi
+              limits:
+                memory: 512Mi
+
+    service:
+      app:
+        primary: true
+        controller: jellyseerr
+        ports:
+          http:
+            port: 5055
+
+    ingress:
+      internal:
+        enabled: true
+        className: nginx
+        hosts:
+          - host: "request.${LOCAL_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - "request.${LOCAL_DOMAIN}"
+            secretName: local-mafyuh-dev-production-tls
