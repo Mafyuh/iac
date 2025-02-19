@@ -38,7 +38,7 @@ spec:
 
         statefulset:
           volumeClaimTemplates:
-            - name: config
+            - name: sonarr-config
               accessMode: ReadWriteOnce
               size: 3Gi
               storageClass: longhorn
