@@ -45,6 +45,12 @@ spec:
               globalMounts:
                 - path: /config
 
+        pod:
+          securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+
         containers:
           app:
             image:
