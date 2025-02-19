@@ -54,8 +54,10 @@ spec:
 
         containers:
           app:
-            image: ghcr.io/hotio/qbittorrent@sha256:d97080a8a978d7705297dc44bcd6c599b3b47631fec8dcfc0cb7039279d05b02
-            pullPolicy: IfNotPresent
+            image:
+              repository: ghcr.io/hotio/qbittorrent
+              tag: release-5.0.4
+              pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
               WEBUI_PORT: &port 8080
