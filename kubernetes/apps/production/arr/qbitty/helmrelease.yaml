@@ -133,4 +133,5 @@ spec:
         name: qbitty-wireguard
         defaultMode: 0400
         globalMounts:
-          - path: /config/wireguard/
+          - path: /config/wireguard/wg0.conf
+            subPath: wg0.conf
