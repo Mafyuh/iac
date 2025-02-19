@@ -37,6 +37,14 @@
       "registryUrls": [
         "https://emberstack.github.io/helm-charts"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "app-template"
+      ],
+      "registryUrls": [
+        "https://bjw-s.github.io/helm-charts"
+      ]
     }
   ],
   "kubernetes": {
