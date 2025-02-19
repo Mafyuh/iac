@@ -39,7 +39,7 @@ spec:
         statefulset:
           volumeClaimTemplates:
             - name: config
-              accessMode: ReadWriteMany
+              accessMode: ReadWriteOnce
               size: 3Gi
               storageClass: longhorn
               globalMounts:
@@ -47,8 +47,8 @@ spec:
 
         pod:
           securityContext:
-            runAsUser: 65534
-            runAsGroup: &group 65534
+            runAsUser: 1000
+            runAsGroup: &group 1000
             fsGroup: *group
             fsGroupChangePolicy: "OnRootMismatch"
 
