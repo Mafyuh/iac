@@ -40,10 +40,10 @@ spec:
           volumeClaimTemplates:
             - name: jellyseerr-config
               accessMode: ReadWriteOnce
-              size: 3Gi
+              size: 2Gi
               storageClass: longhorn
               globalMounts:
-                - path: /config
+                - path: /app/config
         
         pod:
           securityContext:
