@@ -18,3 +18,4 @@ spec:
               selector:
                 dnsZones:
                     - local.mafyuh.dev
+                    - mafyuh.dev

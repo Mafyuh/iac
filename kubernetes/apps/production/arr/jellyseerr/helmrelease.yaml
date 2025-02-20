@@ -80,10 +80,10 @@ spec:
 
             resources:
               requests:
-                cpu: 50m
-                memory: 150Mi
+                cpu: 20m
+                memory: 50Mi
               limits:
-                memory: 512Mi
+                memory: 128Mi
 
     service:
       app:
@@ -98,7 +98,7 @@ spec:
         enabled: true
         className: nginx
         hosts:
-          - host: "request.${LOCAL_DOMAIN}"
+          - host: "request.${PUBLIC_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -107,5 +107,5 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "request.${LOCAL_DOMAIN}"
-            secretName: local-mafyuh-dev-production-tls
+              - "request.${PUBLIC_DOMAIN}"
+            secretName: mafyuh-dev-production-tls
