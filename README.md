@@ -23,7 +23,7 @@ This is my homelab infrastructure, defined in code.
 
 </div>
 
-## 📖 Overview
+## 📖 **Overview**
 This repository contains the IaC ([Infrastructure as Code](https://en.wikipedia.org/wiki/Infrastructure_as_code)) configuration for my homelab.  
 
 Most of my homelab runs on **Proxmox**, with VMs managed and maintained using [OpenTofu](https://opentofu.org/). All VMs are cloned from templates I created with [Packer](https://www.packer.io/).  
@@ -38,17 +38,25 @@ To automate infrastructure updates, I use **Forgejo Actions**, which trigger wor
 - **[Yamllint](https://github.com/adrienverge/yamllint)** ensures configuration files are properly structured.
 - **[Ansible](https://github.com/ansible/ansible)** is used to execute playbooks on all of my VMs, automating management and configurations
 
-### Security & Networking
+### 🔒 **Security & Networking**
 For Secret management I use [Bitwarden Secrets](https://bitwarden.com/products/secrets-manager/) and their various [integrations](https://bitwarden.com/help/ansible-integration/) into the tools used.
 > Kubernetes is using SOPS with Age encryption until migration over to Bitwarden Secrets.
 
 I use **Oracle Cloud** for their [Always-Free](https://www.oracle.com/cloud/free/) VM's and deploy Docker services that require uptime here (Uptime Kuma, this website). [Twingate](https://www.twingate.com/) is used to connect my home network to the various VPS's securely using [Zero Trust architecture](https://en.wikipedia.org/wiki/Zero_trust_architecture).
 
-I use **Cloudflare** for my DNS provider with **Cloudflare Tunnels** to expose some of the services to the world. **Cloudflare Access** is used to restrict the access to some of the services, this is paired with **Fail2Ban** looking through all my reverse proxy logs for malicious actors who made it through Access and banning them via **Cloudflare WAF**.
+I use **Cloudflare** for my DNS provider with **Cloudflare Tunnels** to expose some of the services to the world. **Cloudflare Access** is used to restrict the access to some of the services, this is paired with **Fail2Ban** looking through all my reverse proxy logs for malicious actors who made it through **Access** and banning them via **Cloudflare WAF**.
 
 For my home network I use **PfSense** with VLAN segmentation and strict firewall rules to isolate public-facing machines, ensuring they can only communicate with the necessary services and nothing else.
 
-## 🧑‍💻 Getting Started
+### **📊 Monitoring & Observability**  
+I use a combination of **Grafana, Loki, and Prometheus** with various exporters to collect and visualize system metrics, logs, and alerts. This helps maintain visibility into my infrastructure and detect issues proactively.  
+
+- **Prometheus** – Metrics collection and alerting  
+- **Loki** – Centralized logging for containers and VMs  
+- **Grafana** – Dashboarding and visualization  
+- **Exporters** – Node Exporter, cAdvisor, Blackbox Exporter, etc.  
+
+## 🧑‍💻 **Getting Started**
 This repo is not structured like a project you can easily replicate. Although if you are new to any of the tools used I encourage you to read through the directories that make up each tool to see how I am using them.
 
 Over time I will try to add more detailed instructions in each directories README.
@@ -62,7 +70,7 @@ Some good references for how I learned this stuff (other than RTM)
 - [Docker](https://www.youtube.com/watch?v=eGz9DS-aIeY)
 - [Ansible](https://www.youtube.com/watch?v=goclfp6a2IQ)
 
-## 🖥️ Hardware
+## 🖥️ **Hardware**
 
 | Name        | Device         | CPU             | RAM          | Storage                                      | Purpose                          |
 |------------|--------------|----------------|-------------|--------------------------------|--------------------------------|
@@ -71,6 +79,6 @@ Some good references for how I learned this stuff (other than RTM)
 | PVE Node 2 | Custom        | Intel i7-8700K | 64 GB DDR4  | 1x2TB NVMe                    | More VMs                        |
 
 
-## To-Do
+## 📌 **To-Do**
 See [Project Board](https://git.mafyuh.dev/mafyuh/iac/projects/2)
 
