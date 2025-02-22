@@ -36,6 +36,7 @@ To automate infrastructure updates, I use **Forgejo Actions**, which trigger wor
 - **[Docker CD Workflow](https://git.mafyuh.dev/mafyuh/iac/src/branch/main/.forgejo/workflows/CD.yml)** handles Continuous Deployment for Docker services.   
 - **[Renovate](https://github.com/renovatebot/renovate)** keeps services updated by opening PRs for new versions.  
 - **[Yamllint](https://github.com/adrienverge/yamllint)** ensures configuration files are properly structured.
+- **[Ansible](https://github.com/ansible/ansible)** is used to execute playbooks on all of my VMs, automating management and configurations
 
 For Secret management I use [Bitwarden Secrets](https://bitwarden.com/products/secrets-manager/) and their various integrations into the tools used.
 > Kubernetes is using SOPS with Age encryption until migration over to Bitwarden Secrets.
