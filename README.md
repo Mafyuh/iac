@@ -1,7 +1,7 @@
-[![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/yamllint.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
-[![CD](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
-[![Ansible](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/ansible-playbooks.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
-[![Tofu](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/tofu.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions)
+[![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/yamllint.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=yamllint.yml)
+[![CD](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=CD.yml)
+[![Ansible](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/ansible-playbooks.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=ansible-playbooks.yml)
+[![Tofu](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/tofu.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=tofu.yml)
 [![Renovate](https://git.mafyuh.dev/renovatebot/renovate/badges/workflows/renovate.yml/badge.svg)](https://git.mafyuh.dev/renovatebot/renovate/actions)
 [![Pulls](https://git.mafyuh.dev/mafyuh/iac/badges/pulls.svg)](https://git.mafyuh.dev/mafyuh/iac/pulls)
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
@@ -72,11 +72,11 @@ Some good references for how I learned this stuff (other than RTM)
 
 ## 🖥️ **Hardware**
 
-| Name        | Device         | CPU             | RAM          | Storage                                      | Purpose                          |
-|------------|--------------|----------------|-------------|--------------------------------|--------------------------------|
-| Arc-Ripper | Optiplex 3050 | Intel i5-6500  | 32 GB DDR4  | 1TB NVMe                      | Jellyfin Server, Blu-ray Ripper |
-| PVE Node 1 | Custom        | Intel i7-9700K | 64 GB DDR4  | NVMe for boot and VMs, 4x4TB HDD RaidZ10 | Main node with most VMs, NAS   |
-| PVE Node 2 | Custom        | Intel i7-8700K | 64 GB DDR4  | 1x2TB NVMe                    | More VMs                        |
+| Name        | Device         | CPU             | RAM          | Storage                                      | GPU       | Purpose                          |
+|-------------|----------------|-----------------|--------------|----------------------------------------------|-----------|----------------------------------|
+| Arc-Ripper  | Optiplex 3050  | Intel i5-6500   | 32 GB DDR4   | 1TB NVMe                                     | Arc A310      | Jellyfin Server, Blu-ray Ripper |
+| PVE Node 1  | Custom         | Intel i7-9700K  | 64 GB DDR4   | NVMe for boot and VMs, 4x4TB HDD RaidZ10     | Nvidia 1660 6GB      | Main node with most VMs, NAS    |
+| PVE Node 2  | Custom         | Intel i7-8700K  | 64 GB DDR4   | 1x2TB NVMe                                   | Nvidia 1060 GB      | More VMs                         |
 
 
 ## 📌 **To-Do**

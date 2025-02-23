@@ -9,7 +9,7 @@
 
     - name: Upgrade all packages
       apt:
-        upgrade: dist
+        upgrade: yes
 
     - name: Remove unnecessary packages
       apt:
