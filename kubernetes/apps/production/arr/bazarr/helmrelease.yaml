@@ -1,0 +1,123 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app bazarr
+  namespace: arr
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    controllers:
+      bazarr:
+        enabled: true
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        replicas: 1
+
+        statefulset:
+          volumeClaimTemplates:
+            - name: bazarr-config
+              accessMode: ReadWriteOnce
+              size: 1Gi
+              storageClass: longhorn
+              globalMounts:
+                - path: /config
+        
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: &group 1000
+            fsGroup: *group
+            fsGroupChangePolicy: "OnRootMismatch"
+          dnsPolicy: None
+          dnsConfig:
+            nameservers:
+              - 10.43.0.10
+              - 1.1.1.1
+              - 8.8.8.8
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/bazarr
+              tag: 1.5.1
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              BAZARR__INSTANCE_NAME: *app
+              BAZARR__PORT: &port 6767
+              BAZARR__APPLICATION_URL: "https://bazarr.${LOCAL_DOMAIN}"
+              BAZARR__LOG_LEVEL: info
+
+            probes:
+              liveness:
+                enabled: false
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+            resources:
+              requests:
+                cpu: 100m
+                memory: 150Mi
+              limits:
+                memory: 256Mi
+
+    service:
+      app:
+        primary: true
+        controller: bazarr
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      internal:
+        enabled: true
+        className: nginx
+        hosts:
+          - host: "bazarr.${LOCAL_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - "bazarr.${LOCAL_DOMAIN}"
+            secretName: local-mafyuh-dev-production-tls
+
+    persistence:
+      data:
+        enabled: true
+        type: nfs
+        server: "${NAS_IP}"
+        path: /mnt/thePool/thePoolShare
+        globalMounts:
+          - path: /data
