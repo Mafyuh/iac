@@ -62,7 +62,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/prowlarr
-              tag: 1.30.2.4939
+              tag: 1.31.2.4975
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
