@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "ignorePaths": [
+    "kubernetes/cluster/production/flux-system/gotk-components.yaml"
+  ],
   "flux": {
     "fileMatch": [
       "(^|/)kubernetes/.+\\.ya?ml$"
