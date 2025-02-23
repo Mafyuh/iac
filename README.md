@@ -7,7 +7,7 @@
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
 <div align="center">
 
-# iac (wip)
+# IaC (wip)
 
 This is my homelab infrastructure, defined in code.
 
