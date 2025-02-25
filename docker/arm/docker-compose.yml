@@ -186,25 +186,6 @@ services:
     depends_on:
       - postgres
 
-  syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:c112da0ec1025ac250ef5272186eb6d6cf1f2777747288c8c526b4a894b8b1b3
-    container_name: syncthing
-    hostname: ARM
-    environment:
-      - PUID=0
-      - PGID=0
-      - TZ=Etc/UTC
-    volumes:
-      - /home/ubuntu/syncthing/config:/config
-      - /docker/appdata/:/docker/appdata/
-      - /home/ubuntu/:/home/ubuntu/
-    ports:
-      - 8384:8384
-      - 22000:22000/tcp
-      - 22000:22000/udp
-      - 21027:21027/udp
-    restart: unless-stopped
-
   wiki-db:
     image: postgres:15-alpine
     environment:
