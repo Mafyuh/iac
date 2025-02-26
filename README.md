@@ -76,7 +76,7 @@ Some good references for how I learned this stuff (other than RTM)
 |-------------|----------------|-----------------|--------------|----------------------------------------------|-----------|----------------------------------|
 | Arc-Ripper  | Optiplex 3050  | Intel i5-6500   | 32 GB DDR4   | 1TB NVMe                                     | Arc A310      | Jellyfin Server, Blu-ray Ripper |
 | PVE Node 1  | Custom         | Intel i7-9700K  | 64 GB DDR4   | NVMe for boot and VMs, 4x4TB HDD RaidZ10     | Nvidia 1660 6GB      | Main node with most VMs, NAS    |
-| PVE Node 2  | Custom         | Intel i7-8700K  | 64 GB DDR4   | 1x2TB NVMe                                   | Nvidia 1060 GB      | More VMs                         |
+| PVE Node 2  | Custom         | Intel i7-8700K  | 64 GB DDR4   | 1x2TB NVMe                                   | Nvidia 1060 6GB      | More VMs                         |
 
 
 ## 📌 **To-Do**
