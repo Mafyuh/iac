@@ -44,9 +44,6 @@ jobs:
               actual)
                 host="ubu.lan"
                 ;;
-              arrs)
-                host="arrs.lan"
-                ;;
               arm)
                 host="arm.lan"
                 ;;
