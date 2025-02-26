@@ -66,6 +66,16 @@
       ],
       "datasourceTemplate": "helm",
       "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["(^|/)terraform/flux/main\\.tf$"],
+      "matchStrings": [
+        "resource\\s+\"flux_bootstrap_git\"\\s+\"[^\"]+\"\\s+\\{[^}]*?version\\s+=\\s+\"(?<currentValue>[0-9\\.]+)\""
+      ],
+      "datasourceTemplate": "github-releases",
+      "packageNameTemplate": "fluxcd/flux2",
+      "versioningTemplate": "semver"
     }
   ],
   "dependencyDashboardTitle": ":robot: Renovate Dashboard"
