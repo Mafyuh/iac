@@ -7,76 +7,13 @@
     "kubernetes/cluster/production/flux-system/gotk-components.yaml"
   ],
   "flux": {
-    "fileMatch": [
-      "(^|/)kubernetes/.+\\.ya?ml$"
-    ]
+    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
   },
-  "helmv3": {
-    "fileMatch": [
-      "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
-    ]
+  "helm-values": {
+    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
   },
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "authentik"
-      ],
-      "registryUrls": [
-        "https://charts.goauthentik.io"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "ingress-nginx"
-      ],
-      "registryUrls": [
-        "https://kubernetes.github.io/ingress-nginx"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "reflector"
-      ],
-      "registryUrls": [
-        "https://emberstack.github.io/helm-charts"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "app-template"
-      ],
-      "registryUrls": [
-        "https://bjw-s.github.io/helm-charts"
-      ]
-    }
-  ],
   "kubernetes": {
-    "fileMatch": [
-      "(^|/)kubernetes/.+\\.ya?ml$"
-    ]
+    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
   },
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "(^|/)kubernetes/apps/.+/helmrelease\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "chart:\\s*\\n\\s*spec:\\s*\\n\\s*chart:\\s*(?<depName>\\S+)\\s*\\n\\s*version:\\s*[\"']?(?<currentValue>[0-9a-zA-Z\\.\\-]+)[\"']?"
-      ],
-      "datasourceTemplate": "helm",
-      "versioningTemplate": "semver"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": ["(^|/)terraform/flux/main\\.tf$"],
-      "matchStrings": [
-        "resource\\s+\"flux_bootstrap_git\"\\s+\"[^\"]+\"\\s+\\{[^}]*?version\\s+=\\s+\"(?<currentValue>[0-9\\.]+)\""
-      ],
-      "datasourceTemplate": "github-releases",
-      "packageNameTemplate": "fluxcd/flux2",
-      "versioningTemplate": "semver"
-    }
-  ],
   "dependencyDashboardTitle": ":robot: Renovate Dashboard"
 }
