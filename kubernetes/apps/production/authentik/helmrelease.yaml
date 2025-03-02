@@ -1,0 +1,84 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app authentik
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authentik
+      version: 2025.2.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    global:
+      podAnnotations:
+        secret.reloader.stakater.com/reload: *app
+    server:
+      name: server
+      replicas: 1
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - "auth.${PUBLIC_DOMAIN}"
+        paths: ["/"]
+        pathType: Prefix
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: authentik-media-pvc
+        - name: custom-css
+          configMap:
+            name: authentik-custom-css
+      volumeMounts:
+        - name: custom-css
+          mountPath: /web/dist/custom.css
+          subPath: custom.css
+        - name: media
+          mountPath: /media
+      resources:
+        requests:
+          cpu: 200m
+        limits:
+          cpu: "2"
+    worker:
+      replicas: 1
+      resources:
+        requests:
+          cpu: 20m
+          memory: 600Mi
+        limits:
+          memory: 1024Mi
+    authentik:
+      log_level: info
+      error_reporting:
+        enabled: true
+      email:
+        from: noreply@mafyuh.io
+        host: smtp.protonmail.ch
+        port: 587
+        username: noreply@mafyuh.io
+        password: ${AUTH_SMTP_PASS}
+        use_ssl: false
+        use_tls: true
+        timeout: 30
+      secret_key: ${AUTH_SECRET_KEY}
+      postgresql:
+        password: ${AUTH_PG_PASS}
+    postgresql:
+      enabled: true
+      auth:
+        password: ${AUTH_PG_PASS}
+    redis:
+      enabled: true
