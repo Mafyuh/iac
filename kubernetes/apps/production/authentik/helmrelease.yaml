@@ -12,7 +12,7 @@ spec:
       interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: authentik
+        name: authentik-chart
         namespace: flux-system
   install:
     remediation:
