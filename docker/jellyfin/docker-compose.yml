@@ -59,7 +59,7 @@ services:
     restart: unless-stopped
 
   jellystat-db:
-    image: postgres:15.2
+    image: postgres:15.12
     environment:
       POSTGRES_DB: 'jfstat'
       POSTGRES_USER: postgres
