@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: https://git.mafyuh.dev/mafyuh/iac
+  url: https://github.com/mafyuh/iac
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
