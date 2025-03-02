@@ -21,9 +21,7 @@ on:
 
 jobs:
   run-playbook:
-    runs-on: docker
-    container:
-      image: mafyuh/ansible-bws:v1.1.1
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Repository
@@ -31,7 +29,7 @@ jobs:
 
       - name: Get Secrets from Bitwarden
         id: bitwarden-secrets
-        uses: https://github.com/bitwarden/sm-action@v2
+        uses: bitwarden/sm-action@v2
         with:
           access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           base_url: https://vault.bitwarden.com

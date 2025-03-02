@@ -10,16 +10,15 @@ on:
 
 jobs:
   deploy:
-    runs-on: docker
-    container:
-      image: mafyuh/ansible-bws:v1.1.1
+    runs-on: self-hosted
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Get Secrets from Bitwarden
         id: bitwarden-secrets
-        uses: https://github.com/bitwarden/sm-action@v2
+        uses: bitwarden/sm-action@v2
         with:
           access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           base_url: https://vault.bitwarden.com
@@ -54,7 +53,7 @@ jobs:
           printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
 
       - name: Setup OpenTofu
-        uses: https://github.com/opentofu/setup-opentofu@v1.0.5
+        uses: opentofu/setup-opentofu@v1.0.5
 
       - name: Run OpenTofu Init
         working-directory: ./terraform

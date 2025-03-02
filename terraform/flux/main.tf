@@ -7,9 +7,9 @@ provider "flux" {
     config_path = "~/.kube/config"
   }
   git = {
-    url = "https://git.mafyuh.dev/mafyuh/iac"
+    url = "https://github.com/mafyuh/iac"
     http = {
-        username = "mafyuh"
+        username = "Mafyuh"
         password = data.bitwarden-secrets_secret.git_flux_password.value
     }
   }

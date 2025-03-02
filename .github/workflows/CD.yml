@@ -7,9 +7,7 @@ on:
 jobs:
   deploy:
     if: github.event.pull_request.merged == true
-    runs-on: docker
-    container:
-      image: mafyuh/ansible-bws:v1.1.1
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -111,7 +109,7 @@ jobs:
 
       - name: Get Secrets from Bitwarden
         id: bitwarden-secrets
-        uses: https://github.com/bitwarden/sm-action@v2
+        uses: bitwarden/sm-action@v2
         with:
           access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           base_url: https://vault.bitwarden.com
@@ -180,7 +178,7 @@ jobs:
 
       - name: Post Ansible Output as PR Comment
         if: github.event.pull_request.merged == true
-        uses: https://github.com/actions/github-script@v7
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

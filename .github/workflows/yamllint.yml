@@ -7,9 +7,7 @@ on:
 jobs:
   lint:
     name: Lint YAML files
-    runs-on: docker
-    container:
-      image: mafyuh/node-yamllint:v1.0.0
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
