@@ -1,6 +1,6 @@
 services:
   plausible_db:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data

@@ -163,7 +163,7 @@ services:
         ipv4_address: 172.25.0.25
   ## Linkwarden
   postgres:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     env_file: .env
     restart: always
     volumes:
@@ -187,7 +187,7 @@ services:
       - postgres
 
   wiki-db:
-    image: postgres:15-alpine
+    image: postgres:17-alpine
     environment:
       POSTGRES_DB: wiki
       POSTGRES_PASSWORD: $DB_PASS
