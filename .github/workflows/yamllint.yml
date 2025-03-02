@@ -16,13 +16,10 @@ jobs:
       - name: Check yamllint version
         run: yamllint --version
 
-      - name: Lint .yml files
-        run: | 
-          lint_output=$(find docker -name "*.yml" -exec yamllint --strict -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \;)
-          
-          # Check if there are any warnings or errors in the output
-          echo "$lint_output"
-          if echo "$lint_output" | grep -q -E "error|warning"; then
+      - name: Lint YAML files
+        run: |
+          find docker -name "*.yml" -exec ~/.local/bin/yamllint --strict -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \; | tee lint_output.txt
+          if grep -q -E "error|warning" lint_output.txt; then
             echo "YAML linting failed due to errors or warnings."
             exit 1
           fi
