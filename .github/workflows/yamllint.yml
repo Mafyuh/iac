@@ -9,13 +9,12 @@ jobs:
     name: Lint YAML files
     runs-on: self-hosted
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
+      - name: Add yamllint to PATH
+        run: echo "~/.local/bin" >> $GITHUB_PATH
 
-      - name: Show yamllint version
-        run: | 
-          yamllint --version
+      - name: Check yamllint version
+        run: yamllint --version
 
       - name: Lint .yml files
         run: | 
