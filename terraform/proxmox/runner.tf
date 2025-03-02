@@ -12,7 +12,7 @@ resource "proxmox_virtual_environment_vm" "Runner" {
   }
 
   clone {
-    vm_id = 8100
+    vm_id = 9996
   }
   
   # VM CPU Settings
@@ -37,7 +37,7 @@ resource "proxmox_virtual_environment_vm" "Runner" {
   # VM Disk Settings
   disk {
     datastore_id = "Fast2Tb"
-    size         = 40
+    size         = 50
     interface    = "scsi0"
     file_format  = "raw"
     path_in_datastore = "vm-952-disk-0" 
