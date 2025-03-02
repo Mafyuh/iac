@@ -36,10 +36,6 @@ jobs:
         working-directory: ./terraform
         run: |
           cat <<EOF > terraform.tfvars
-          aws_access_key_id = "${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}"
-          aws_secret_access_key = "${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}"
-          grafana_auth = "${{ steps.bitwarden-secrets.outputs.grafana_auth }}"
-          grafana_url = "${{ steps.bitwarden-secrets.outputs.grafana_url }}"
           s3_endpoint = "${{ steps.bitwarden-secrets.outputs.s3_endpoint }}"
           access_token = "${{ steps.bitwarden-secrets.outputs.bws_access_token }}"
           EOF
@@ -66,6 +62,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
+          BWS_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}
         run: tofu plan -parallelism=1 -out=tfplan
 
       - name: Apply the Plan
@@ -74,4 +71,5 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.bitwarden-secrets.outputs.aws_access_key_id }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.bitwarden-secrets.outputs.aws_secret_access_key }}
+          BWS_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}
         run: tofu apply tfplan
