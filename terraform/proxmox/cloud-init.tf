@@ -26,7 +26,7 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
         - apt upgrade -y
         - usermod -aG docker mafyuh
         - timedatectl set-timezone America/New_York
-        - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
+        - su - mafyuh -c 'git clone https://github.com/mafyuh/iac.git /home/mafyuh/iac'
         - echo "done" > /tmp/cloud-config.done
     EOF
 
@@ -57,7 +57,7 @@ resource "proxmox_virtual_environment_file" "cloud_config2" {
         - apt upgrade -y
         - usermod -aG docker mafyuh
         - timedatectl set-timezone America/New_York
-        - su - mafyuh -c 'git clone https://git.mafyuh.dev/mafyuh/iac.git /home/mafyuh/iac'
+        - su - mafyuh -c 'git clone https://github.com/mafyuh/iac.git /home/mafyuh/iac'
         - echo "done" > /tmp/cloud-config.done
     EOF
 

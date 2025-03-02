@@ -1,9 +1,7 @@
-[![Yamllint](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/yamllint.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=yamllint.yml)
-[![CD](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/CD.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=CD.yml)
-[![Ansible](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/ansible-playbooks.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=ansible-playbooks.yml)
-[![Tofu](https://git.mafyuh.dev/mafyuh/iac/badges/workflows/tofu.yml/badge.svg)](https://git.mafyuh.dev/mafyuh/iac/actions?workflow=tofu.yml)
-[![Renovate](https://git.mafyuh.dev/renovatebot/renovate/badges/workflows/renovate.yml/badge.svg)](https://git.mafyuh.dev/renovatebot/renovate/actions)
-[![Pulls](https://git.mafyuh.dev/mafyuh/iac/badges/pulls.svg)](https://git.mafyuh.dev/mafyuh/iac/pulls)
+[![Yamllint](https://github.com/Mafyuh/iac/actions/workflows/yamllint.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/yamllint.yml)
+[![CD](https://github.com/Mafyuh/iac/actions/workflows/CD.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/CD.yml)
+[![Ansible](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml)
+[![Tofu](https://github.com/Mafyuh/iac/actions/workflows/tofu.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/tofu.yml)
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
 <div align="center">
 
@@ -19,7 +17,7 @@ This is my homelab infrastructure, defined in code.
 
 | Hypervisor | OS | Tools | Firewall | Misc. Automations |
 |---|---|---|---|---|
-| [![Proxmox](https://img.shields.io/badge/-Proxmox-%23c9d1d9?logo=Proxmox)](https://www.proxmox.com) | [![Debian](https://img.shields.io/badge/Debian-%23c9d1d9?&logo=debian&logoColor=black)](https://www.debian.org/) [![Ubuntu](https://img.shields.io/badge/Ubuntu-%23c9d1d9?&logo=ubuntu&logoColor=red)](https://releases.ubuntu.com/noble/) | [![Forgejo](https://img.shields.io/badge/-Forgejo-%23c9d1d9?logo=forgejo&logoColor=orange)](https://forgejo.org/) [![Docker](https://img.shields.io/badge/-Docker-%23c9d1d9?logo=docker)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/-Kubernetes-%23c9d1d9?logo=kubernetes)](https://k3s.io/) [![Renovate](https://img.shields.io/badge/-Renovate-%23c9d1d9?logo=renovate&logoColor=blue)](https://github.com/renovatebot/renovate) [![OpenTofu](https://img.shields.io/badge/-OpenTofu-%23c9d1d9?logo=opentofu)](https://opentofu.org/) [![Packer](https://img.shields.io/badge/-Packer-%23c9d1d9?logo=packer)](https://www.packer.io/) [![Ansible](https://img.shields.io/badge/-Ansible-%23c9d1d9?logo=ansible&logoColor=red)](https://www.ansible.com/) | [![pfSense](https://img.shields.io/badge/-pfSense-%23c9d1d9?logo=pfsense&logoColor=blue)](https://www.pfsense.org/) | [![n8n](https://img.shields.io/badge/-n8n-%23c9d1d9?logo=n8n)](https://n8n.io/) [![Actions](https://img.shields.io/badge/-Actions-%23c9d1d9?logo=forgejo&logoColor=orange)](https://forgejo.org/docs/latest/user/actions/)
+| [![Proxmox](https://img.shields.io/badge/-Proxmox-%23c9d1d9?logo=Proxmox)](https://www.proxmox.com) | [![Debian](https://img.shields.io/badge/Debian-%23c9d1d9?&logo=debian&logoColor=black)](https://www.debian.org/) [![Ubuntu](https://img.shields.io/badge/Ubuntu-%23c9d1d9?&logo=ubuntu&logoColor=red)](https://releases.ubuntu.com/noble/) | [![Docker](https://img.shields.io/badge/-Docker-%23c9d1d9?logo=docker)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/-Kubernetes-%23c9d1d9?logo=kubernetes)](https://k3s.io/) [![Renovate](https://img.shields.io/badge/-Renovate-%23c9d1d9?logo=renovate&logoColor=blue)](https://github.com/renovatebot/renovate) [![OpenTofu](https://img.shields.io/badge/-OpenTofu-%23c9d1d9?logo=opentofu)](https://opentofu.org/) [![Packer](https://img.shields.io/badge/-Packer-%23c9d1d9?logo=packer)](https://www.packer.io/) [![Ansible](https://img.shields.io/badge/-Ansible-%23c9d1d9?logo=ansible&logoColor=red)](https://www.ansible.com/) | [![pfSense](https://img.shields.io/badge/-pfSense-%23c9d1d9?logo=pfsense&logoColor=blue)](https://www.pfsense.org/) | [![n8n](https://img.shields.io/badge/-n8n-%23c9d1d9?logo=n8n)](https://n8n.io/) [![Actions](https://img.shields.io/badge/-Actions-%23c9d1d9?logo=github&logoColor=black)](https://github.com/features/actions)
 
 </div>
 
@@ -30,10 +28,10 @@ Most of my homelab runs on **Proxmox**, with VMs managed and maintained using [O
 
 All services are **containerized**, either managed with **Docker Compose** or **orchestrated with Kubernetes ([K3s](https://k3s.io/))**. Over time, I’ve been migrating everything to Kubernetes using **[GitOps](https://en.wikipedia.org/wiki/DevOps) practices**, which is my long-term goal.  
 
-To automate infrastructure updates, I use **Forgejo Actions**, which trigger workflows upon changes to this repo. This ensures seamless deployment and maintenance across my homelab:  
+To automate infrastructure updates, I use **Github Actions**, which trigger workflows upon changes to this repo. This ensures seamless deployment and maintenance across my homelab:  
 
 - **[Flux](https://fluxcd.io/)** manages Continuous Deployment (CD) for Kubernetes, bootstrapped via [OpenTofu](https://git.mafyuh.dev/mafyuh/iac/src/branch/main/terraform/flux/main.tf).
-- **[Docker CD Workflow](https://git.mafyuh.dev/mafyuh/iac/src/branch/main/.forgejo/workflows/CD.yml)** handles Continuous Deployment for Docker services.   
+- **[Docker CD Workflow](https://github.com/Mafyuh/iac/blob/main/.github/workflows/CD.yml)** handles Continuous Deployment for Docker services.   
 - **[Renovate](https://github.com/renovatebot/renovate)** keeps services updated by opening PRs for new versions.  
 - **[Yamllint](https://github.com/adrienverge/yamllint)** ensures configuration files are properly structured.
 - **[Ansible](https://github.com/ansible/ansible)** is used to execute playbooks on all of my VMs, automating management and configurations
