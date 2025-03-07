@@ -63,7 +63,7 @@ services:
       - grafana
 
   alertmanager:
-    image: prom/alertmanager:v0.28.0
+    image: prom/alertmanager:v0.28.1
     restart: unless-stopped
     volumes:
       - /docker/appdata/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
