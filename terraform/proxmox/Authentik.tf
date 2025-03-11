@@ -3,6 +3,7 @@ resource "proxmox_virtual_environment_vm" "Authentik" {
     vm_id        = "125"
     name         = "Authentik"
     description  = "authentik"
+    started      = "false"
 
     cpu {
         cores = "2"

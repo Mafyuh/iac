@@ -1,4 +1,4 @@
-name: Ansible Deploy to Hosts
+name: Docker CD
 on:
   pull_request:
     types: [closed]

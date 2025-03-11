@@ -1,4 +1,4 @@
-name: Run Ansible Playbook
+name: Ansible Playbooks
 
 on:
   schedule:

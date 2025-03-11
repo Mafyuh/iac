@@ -30,7 +30,7 @@ All services are **containerized**, either managed with **Docker Compose** or **
 
 To automate infrastructure updates, I use **Github Actions**, which trigger workflows upon changes to this repo. This ensures seamless deployment and maintenance across my homelab:  
 
-- **[Flux](https://fluxcd.io/)** manages Continuous Deployment (CD) for Kubernetes, bootstrapped via [OpenTofu](https://git.mafyuh.dev/mafyuh/iac/src/branch/main/terraform/flux/main.tf).
+- **[Flux](https://fluxcd.io/)** manages Continuous Deployment (CD) for Kubernetes, bootstrapped via [OpenTofu](https://github.com/Mafyuh/iac/blob/main/terraform/flux/main.tf).
 - **[Docker CD Workflow](https://github.com/Mafyuh/iac/blob/main/.github/workflows/CD.yml)** handles Continuous Deployment for Docker services.   
 - **[Renovate](https://github.com/renovatebot/renovate)** keeps services updated by opening PRs for new versions.  
 - **[Yamllint](https://github.com/adrienverge/yamllint)** ensures configuration files are properly structured.

@@ -37,7 +37,7 @@ resource "proxmox_virtual_environment_vm" "K3s-Master2" {
     # VM Disk Settings
     disk {
         datastore_id = "Fast500Gb"
-        size         = 100
+        size         = 300
         interface    = "virtio0"
     }
 
