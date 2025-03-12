@@ -1,0 +1,66 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 69.8.2
+      interval: 60m
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  values:
+    crds:
+      enabled: true
+    alertmanager:
+      enabled: false
+    kubeApiServer:
+      enabled: true
+    kubelet:
+      enabled: true
+    kubeStateMetrics:
+      enabled: true
+    nodeExporter:
+      enabled: true
+    grafana:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - "grafana.${PUBLIC_DOMAIN}"
+        path: /
+        tls:
+          - secretName: mafyuh-dev-production-tls
+            hosts:
+              - "grafana.${PUBLIC_DOMAIN}"
+      adminPassword: "${GRAF_ADMIN_PASS}"
+    prometheus:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - "prometheus.${LOCAL_DOMAIN}"
+        pathType: Prefix
+        tls:
+          - secretName: local-mafyuh-dev-production-tls
+            hosts:
+              - "prometheus.${LOCAL_DOMAIN}"
+      prometheusSpec:
+        replicas: 1
+        retention: 14d
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: longhorn
+              resources:
+                requests:
+                  storage: 10Gi

@@ -6,5 +6,6 @@ resources:
   - cert-manager/
   - longhorn/
   - nginx/
+  - prometheus/
   - reflector/
   - reloader/

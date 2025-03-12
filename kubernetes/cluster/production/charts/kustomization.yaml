@@ -4,3 +4,4 @@ resources:
 - bjw-s-chart.yaml
 - authentik-chart.yaml
 - reloader-chart.yaml
+- prometheus-community.yaml
