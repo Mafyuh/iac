@@ -5,3 +5,4 @@ resources:
 - authentik-chart.yaml
 - reloader-chart.yaml
 - prometheus-community.yaml
+- grafana-charts.yaml

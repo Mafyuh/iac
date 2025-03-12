@@ -4,6 +4,7 @@ resources:
   - arr/
   - authentik/
   - cert-manager/
+  - loki/
   - longhorn/
   - nginx/
   - prometheus/
