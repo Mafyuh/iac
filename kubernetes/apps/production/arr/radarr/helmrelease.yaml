@@ -30,20 +30,11 @@ spec:
     controllers:
       radarr:
         enabled: true
-        type: statefulset
+        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
 
         replicas: 1
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: radarr-config
-              accessMode: ReadWriteOnce
-              size: 3Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
         
         pod:
           securityContext:
@@ -114,6 +105,15 @@ spec:
             secretName: local-mafyuh-dev-production-tls
 
     persistence:
+      config:
+        enabled: true
+        type: pvc
+        accessMode: ReadWriteOnce
+        size: 3Gi
+        storageClass: longhorn
+        globalMounts:
+          - path: /config
+
       data:
         enabled: true
         type: nfs
