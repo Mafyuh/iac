@@ -17,21 +17,12 @@ spec:
   values:
     loki:
       enabled: true
-      isDefault: true
-      url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
-      readinessProbe:
-        httpGet:
-          path: /ready
-          port: http-metrics
-        initialDelaySeconds: 45
-      livenessProbe:
-        httpGet:
-          path: /ready
-          port: http-metrics
-        initialDelaySeconds: 45
-      datasource:
-        jsonData: "{}"
-        uid: ""
+      nodeSelector:
+        kubernetes.io/hostname: master1
+      service:
+        type: NodePort
+        nodePort: 3100
+        port: 3100
 
 
     promtail:

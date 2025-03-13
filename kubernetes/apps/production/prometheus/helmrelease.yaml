@@ -29,6 +29,7 @@ spec:
       enabled: true
     grafana:
       enabled: true
+      replicas: 1
       ingress:
         enabled: true
         ingressClassName: nginx
