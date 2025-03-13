@@ -16,13 +16,7 @@ spec:
         namespace: flux-system
   values:
     loki:
-      enabled: true
-      nodeSelector:
-        kubernetes.io/hostname: master1
-      service:
-        type: LoadBalancer
-        port: 3100
-
+      enabled: false
 
     promtail:
       enabled: true
