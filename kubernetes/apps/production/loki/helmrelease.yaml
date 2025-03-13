@@ -20,8 +20,7 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: master1
       service:
-        type: NodePort
-        nodePort: 3100
+        type: LoadBalancer
         port: 3100
 
 
