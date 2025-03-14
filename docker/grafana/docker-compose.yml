@@ -211,7 +211,7 @@ services:
       - grafana
 
   cluster-metrics-api:
-    image: mafyuh/metrics-server:1.0.1
+    image: mafyuh/metrics-server:1.0.2
     build: .
     ports:
       - "5000:5000"
