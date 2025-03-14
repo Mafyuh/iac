@@ -42,6 +42,10 @@ jobs:
           access_token = "${{ steps.bitwarden-secrets.outputs.bws_access_token }}"
           EOF
 
+      - name: Make Kube directory
+        run: |
+          mkdir ~/.kube
+
       - name: Create Kube Config
         run: |
           printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
