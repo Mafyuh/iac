@@ -2,7 +2,13 @@
 [![CD](https://github.com/Mafyuh/iac/actions/workflows/CD.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/CD.yml)
 [![Ansible](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml)
 [![Tofu](https://github.com/Mafyuh/iac/actions/workflows/tofu.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/tofu.yml)
+
+[![Nodes](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_node_count&style=flat-square&label=Nodes&color=blue)](https://github.com/your-repo)
+[![Running Pods](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_pods_running&style=flat-square&label=Running%20Pods&color=blue)](https://github.com/your-repo)
+[![Uptime](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_uptime_days&style=flat-square&label=Uptime&color=blue)](https://github.com/your-repo)
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
+
+
 <div align="center">
 
 # iac (wip)
@@ -12,6 +18,8 @@ This is my homelab infrastructure, defined in code.
 </div>
 
 ---
+
+
 
 <div align="center">
 
@@ -78,5 +86,5 @@ Some good references for how I learned this stuff (other than RTM)
 
 
 ## 📌 **To-Do**
-See [Project Board](https://git.mafyuh.dev/mafyuh/iac/projects/2)
+See [Project Board](https://github.com/users/Mafyuh/projects/1)
 
