@@ -155,6 +155,7 @@ jobs:
 
       - name: Create Private key
         run: |
+          mkdir -p ~/.ssh
           cat <<EOF > ~/.ssh/id_rsa
           ${{ steps.bitwarden-secrets.outputs.ssh_private_key }}
           EOF
