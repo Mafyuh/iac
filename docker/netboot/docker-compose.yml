@@ -1,7 +1,7 @@
 ---
 services:
   netbootxyz:
-    image: ghcr.io/linuxserver/netbootxyz@sha256:f1c8e790d9b11ff31937c97c4de33c0d8c741441d81da43c6990559b6ce1da49
+    image: ghcr.io/linuxserver/netbootxyz@sha256:706593b16c81b40ffca557b845925aea94911c91ad483b539c3b31373e4d12ea
     container_name: netboot
     environment:
       - PUID=1000
