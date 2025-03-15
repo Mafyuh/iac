@@ -17,7 +17,7 @@ jobs:
 
       - name: Lint YAML files
         run: |
-          find docker -name "*.yml" -exec ~/.local/bin/yamllint --strict -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \; | tee lint_output.txt
+          find docker -name "*.yml" --strict -d "{extends: relaxed, rules: {line-length: {max: 120}}}" {} \; | tee lint_output.txt
           if grep -q -E "error|warning" lint_output.txt; then
             echo "YAML linting failed due to errors or warnings."
             exit 1
