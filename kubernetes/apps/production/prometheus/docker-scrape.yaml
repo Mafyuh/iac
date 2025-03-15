@@ -6,6 +6,7 @@ metadata:
 data:
   additional-scrape-configs.yaml: |
     - job_name: 'node_exporter'
+      scrape_interval: 15s
       static_configs:
         - targets: ['10.69.69.150:9100']
         - targets: ['10.0.0.15:9100']
@@ -14,6 +15,7 @@ data:
         - targets: ['10.69.69.2:9100']
 
     - job_name: 'cadvisor'
+      scrape_interval: 15s
       static_configs:
         - targets: ['10.69.69.150:9101']
         - targets: ['10.0.0.15:9101']
