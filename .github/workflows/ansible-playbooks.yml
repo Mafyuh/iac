@@ -22,6 +22,8 @@ on:
 jobs:
   run-playbook:
     runs-on: self-hosted
+    container:
+      image: mafyuh/ansible-bws:v1.1.1
 
     steps:
       - name: Checkout Repository

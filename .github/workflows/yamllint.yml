@@ -8,10 +8,9 @@ jobs:
   lint:
     name: Lint YAML files
     runs-on: self-hosted
+    container:
+      image: mafyuh/node-yamllint:v1.0.0
     steps:
-
-      - name: Add yamllint to PATH
-        run: echo "~/.local/bin" >> $GITHUB_PATH
 
       - name: Check yamllint version
         run: yamllint --version
