@@ -14,6 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set Git safe directory
+        run: git config --global --add safe.directory /__w/iac/iac
+      
+
       - name: Fetch all history for git diff
         run: git fetch --depth=2
 
