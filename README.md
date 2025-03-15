@@ -30,7 +30,7 @@ This is my homelab infrastructure, defined in code.
 
 | Hypervisor | OS | Tools | Firewall | Misc. Automations |
 |---|---|---|---|---|
-| [![Proxmox](https://img.shields.io/badge/-Proxmox-%23c9d1d9?logo=Proxmox)](https://www.proxmox.com) | [![Debian](https://img.shields.io/badge/Debian-%23c9d1d9?&logo=debian&logoColor=black)](https://www.debian.org/) [![Ubuntu](https://img.shields.io/badge/Ubuntu-%23c9d1d9?&logo=ubuntu&logoColor=red)](https://releases.ubuntu.com/noble/) | [![Docker](https://img.shields.io/badge/-Docker-%23c9d1d9?logo=docker)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/-Kubernetes-%23c9d1d9?logo=kubernetes)](https://k3s.io/) [![Renovate](https://img.shields.io/badge/-Renovate-%23c9d1d9?logo=renovate&logoColor=blue)](https://github.com/renovatebot/renovate) [![OpenTofu](https://img.shields.io/badge/-OpenTofu-%23c9d1d9?logo=opentofu)](https://opentofu.org/) [![Packer](https://img.shields.io/badge/-Packer-%23c9d1d9?logo=packer)](https://www.packer.io/) [![Ansible](https://img.shields.io/badge/-Ansible-%23c9d1d9?logo=ansible&logoColor=red)](https://www.ansible.com/) | [![pfSense](https://img.shields.io/badge/-pfSense-%23c9d1d9?logo=pfsense&logoColor=blue)](https://www.pfsense.org/) | [![n8n](https://img.shields.io/badge/-n8n-%23c9d1d9?logo=n8n)](https://n8n.io/) [![Actions](https://img.shields.io/badge/-Actions-%23c9d1d9?logo=github&logoColor=black)](https://github.com/features/actions)
+| [![Proxmox](https://img.shields.io/badge/-Proxmox-%23c9d1d9?logo=Proxmox)](https://www.proxmox.com) | [![Debian](https://img.shields.io/badge/Debian-%23c9d1d9?&logo=debian&logoColor=black)](https://www.debian.org/) [![Ubuntu](https://img.shields.io/badge/Ubuntu-%23c9d1d9?&logo=ubuntu&logoColor=red)](https://releases.ubuntu.com/noble/) [![Arch](https://img.shields.io/badge/Arch-%23c9d1d9?&logo=archlinux)](https://archlinux.org/)| [![Docker](https://img.shields.io/badge/-Docker-%23c9d1d9?logo=docker)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/-Kubernetes-%23c9d1d9?logo=kubernetes)](https://k3s.io/) [![Renovate](https://img.shields.io/badge/-Renovate-%23c9d1d9?logo=renovate&logoColor=blue)](https://github.com/renovatebot/renovate) [![OpenTofu](https://img.shields.io/badge/-OpenTofu-%23c9d1d9?logo=opentofu)](https://opentofu.org/) [![Packer](https://img.shields.io/badge/-Packer-%23c9d1d9?logo=packer)](https://www.packer.io/) [![Ansible](https://img.shields.io/badge/-Ansible-%23c9d1d9?logo=ansible&logoColor=red)](https://www.ansible.com/) | [![pfSense](https://img.shields.io/badge/-pfSense-%23c9d1d9?logo=pfsense&logoColor=blue)](https://www.pfsense.org/) | [![n8n](https://img.shields.io/badge/-n8n-%23c9d1d9?logo=n8n)](https://n8n.io/) [![Actions](https://img.shields.io/badge/-Actions-%23c9d1d9?logo=github&logoColor=black)](https://github.com/features/actions)
 
 </div>
 
@@ -55,7 +55,7 @@ For Secret management I use [Bitwarden Secrets](https://bitwarden.com/products/s
 
 I use **Oracle Cloud** for their [Always-Free](https://www.oracle.com/cloud/free/) VM's and deploy Docker services that require uptime here (Uptime Kuma, this website). [Twingate](https://www.twingate.com/) is used to connect my home network to the various VPS's securely using [Zero Trust architecture](https://en.wikipedia.org/wiki/Zero_trust_architecture).
 
-I use **Cloudflare** for my DNS provider with **Cloudflare Tunnels** to expose some of the services to the world. **Cloudflare Access** is used to restrict the access to some of the services, this is paired with **Fail2Ban** looking through all my reverse proxy logs for malicious actors who made it through **Access** and banning them via **Cloudflare WAF**.
+I use [**Cloudflare**](https://www.cloudflare.com/) for my DNS provider with [**Cloudflare Tunnels**](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) to expose some of the services to the world. [**Cloudflare Access**](https://www.cloudflare.com/access/) is used to restrict the access to some of the services, this is paired with [**Fail2Ban**](https://www.fail2ban.org/) looking through all my reverse proxy logs for malicious actors who made it through [**Access**](https://www.cloudflare.com/access/) and banning them via [**Cloudflare WAF**](https://www.cloudflare.com/web-application-firewall/).
 
 For my home network I use **PfSense** with VLAN segmentation and strict firewall rules to isolate public-facing machines, ensuring they can only communicate with the necessary services and nothing else.
 
@@ -83,11 +83,38 @@ Some good references for how I learned this stuff (other than RTM)
 
 ## 🖥️ **Hardware**
 
-| Name        | Device         | CPU             | RAM          | Storage                                      | GPU       | Purpose                          |
-|-------------|----------------|-----------------|--------------|----------------------------------------------|-----------|----------------------------------|
-| Arc-Ripper  | Optiplex 3050  | Intel i5-6500   | 32 GB DDR4   | 1TB NVMe                                     | Arc A310      | Jellyfin Server, Blu-ray Ripper |
-| PVE Node 1  | Custom         | Intel i7-9700K  | 64 GB DDR4   | NVMe for boot and VMs, 4x4TB HDD RaidZ10     | Nvidia 1660 6GB      | Main node with most VMs, NAS    |
-| PVE Node 2  | Custom         | Intel i7-8700K  | 64 GB DDR4   | 1x2TB NVMe                                   | Nvidia 1060 6GB      | More VMs                         |
+<details>
+  <summary><strong>Servers</strong></summary>
+
+| Name        | Device         | CPU             | RAM          | Storage                                      | GPU               | Purpose                          |
+|-------------|--------------|-----------------|--------------|----------------------------------------------|-------------------|----------------------------------|
+| **Arc-Ripper**  | Optiplex 3050  | Intel i5-6500   | 32 GB DDR4   | 1TB NVMe                                     | Arc A310          | Jellyfin Server, Blu-ray Ripper |
+| **PVE Node 1**  | Custom         | Intel i7-9700K  | 64 GB DDR4   | NVMe for boot and VMs, 4×4TB HDD (RaidZ10)   | Nvidia 1660 6GB   | Main node with most VMs, NAS    |
+| **PVE Node 2**  | Custom         | Intel i7-8700K  | 64 GB DDR4   | 1×2TB NVMe                                   | Nvidia 1060 6GB   | More VMs                         |
+
+</details>  
+
+<details>
+  <summary><strong>Personal</strong></summary>
+  
+  | Name | Device | CPU | RAM | Storage | GPU | Purpose |
+  |------|--------|-----|-----|---------|-----|---------|
+  |Gaming PC|Custom|Intel i7-13700k|64GB DDR5|10TB NVMe|Nvidia RTX 3080     |Main Machine         |
+  |Laptop|HP 15-eh1097nr|AMD Ryzen 7 5700U     |32GB DDR4     |1TB NVMe|Integrated     |On the go/bed machine         |
+
+</details>
+
+<details>
+  <summary><strong>Networking</strong></summary>
+  
+  | Name            | Device        | Purpose             |
+  |-----------------|---------------|---------------------|
+  | TP-Link Deco 6E | Deco 6E       | Wi-Fi Mesh Network, setup in AP mode  |
+  | pfSense Box     | [Custom](https://a.co/d/bN9r3bk)     | Router/Firewall     |
+
+</details>
+
+
 
 
 ## 📌 **To-Do**
