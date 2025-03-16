@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - nexterm:/app/data
-    image: germannewsmaker/nexterm:1.0.2-OPEN-PREVIEW
+    image: germannewsmaker/nexterm:1.0.3-OPEN-PREVIEW
 
   it-tools:
     container_name: it-tools
