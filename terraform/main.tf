@@ -32,6 +32,10 @@ terraform {
       source  = "fluxcd/flux"
       version = "1.5.1"
     }
+    oci = {
+      source  = "oracle/oci"
+      version = "6.30.0"
+    }
   }
 }
 
@@ -73,4 +77,8 @@ module "proxmox" {
 
 module "flux" {
   source = "./flux"
+}
+
+module "oci" {
+  source = "./oracle"
 }

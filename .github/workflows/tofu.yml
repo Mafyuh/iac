@@ -32,6 +32,7 @@ jobs:
             f8f85ab2-5f6d-46a7-9e06-b20800076d26 > s3_endpoint
             b6dac092-df23-4e28-8449-b2770059096d > kube_config
             4dff237e-93ad-4eda-a776-b28400653181 > bws_access_token
+            efd2db8f-4cb2-4031-ac2d-b2a500447bf4 > oci_private_key
 
       
       - name: Create tfvars file
@@ -46,9 +47,17 @@ jobs:
         run: |
           mkdir -p ~/.kube
 
+      - name: Make Oci directory
+        run: |
+          mkdir -p ~/.oci
+
       - name: Create Kube Config
         run: |
           printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
+
+      - name: Create OCI Private Key
+        run: |
+          printf "%s" "${{ steps.bitwarden-secrets.outputs.oci_private_key }}" > ~/.oci/oci.pem
 
       - name: Setup OpenTofu
         uses: opentofu/setup-opentofu@v1.0.5
