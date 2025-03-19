@@ -47,17 +47,16 @@ jobs:
         run: |
           mkdir -p ~/.kube
 
-      - name: Make Oci directory
+      - name: Create OCI Private Key
         run: |
           mkdir -p ~/.oci
+          printf "%s" "${{ steps.bitwarden-secrets.outputs.oci_private_key }}" > ~/.oci/oci.pem
+          chmod 600 ~/.oci/oci.pem
+        
 
       - name: Create Kube Config
         run: |
           printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
-
-      - name: Create OCI Private Key
-        run: |
-          printf "%s" "${{ steps.bitwarden-secrets.outputs.oci_private_key }}" > ~/.oci/oci.pem
 
       - name: Setup OpenTofu
         uses: opentofu/setup-opentofu@v1.0.5
