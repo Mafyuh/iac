@@ -49,7 +49,7 @@ spec:
           app:
             image:
               repository: ghcr.io/hotio/qbittorrent
-              tag: latest@sha256:c1574de2ab1c98d7bef3e9af6a351053115c830cd35a073c35be3ba992c0a7a2
+              tag: latest@sha256:3d76fe7aff54e39b82093dab6f0fd71108db7419f257ea5014cc92a5ea04a9ad
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
