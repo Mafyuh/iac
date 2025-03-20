@@ -53,6 +53,7 @@ jobs:
           echo "${{ steps.bitwarden-secrets.outputs.oci_private_key }}" | sed 's/\\n/\n/g' > ~/.oci/oci.pem
           chmod 600 ~/.oci/oci.pem
 
+
         
 
       - name: Create Kube Config
