@@ -9,3 +9,7 @@ data "bitwarden-secrets_secret" "user_ocid" {
 data "bitwarden-secrets_secret" "fingerprint" {
   id = "b15c13d7-ba84-4716-b46e-b2a5002ad2de"
 }
+
+data "bitwarden-secrets_secret" "oci_private_key" {
+  id = "efd2db8f-4cb2-4031-ac2d-b2a500447bf4"
+}

@@ -47,15 +47,6 @@ jobs:
         run: |
           mkdir -p ~/.kube
 
-      - name: Create OCI Private Key
-        run: |
-          mkdir -p ~/.oci
-          printf '%b' "${{ steps.bitwarden-secrets.outputs.oci_private_key }}" > ~/.oci/oci.pem
-          chmod 600 ~/.oci/oci.pem
-
-
-        
-
       - name: Create Kube Config
         run: |
           printf "%s" "${{ steps.bitwarden-secrets.outputs.kube_config }}" > ~/.kube/config
