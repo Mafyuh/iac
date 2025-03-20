@@ -50,7 +50,7 @@ jobs:
       - name: Create OCI Private Key
         run: |
           mkdir -p ~/.oci
-          echo "${{ steps.bitwarden-secrets.outputs.oci_private_key }}" | sed 's/\\n/\n/g' > ~/.oci/oci.pem
+          printf '%b' "${{ steps.bitwarden-secrets.outputs.oci_private_key }}" > ~/.oci/oci.pem
           chmod 600 ~/.oci/oci.pem
 
 
