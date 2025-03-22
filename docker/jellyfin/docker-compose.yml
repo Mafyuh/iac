@@ -40,7 +40,7 @@ services:
       - apparmor:unconfined
 
   syncthing:
-    image: ghcr.io/linuxserver/syncthing@sha256:c112da0ec1025ac250ef5272186eb6d6cf1f2777747288c8c526b4a894b8b1b3
+    image: ghcr.io/linuxserver/syncthing@sha256:bbdb4582d1d2e0751add972b652790885f3b02d65d3871aa6618ca5d652e5489
     container_name: syncthing
     hostname: JF
     environment:
