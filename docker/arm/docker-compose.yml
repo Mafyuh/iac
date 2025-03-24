@@ -188,7 +188,7 @@ services:
 
   wiki:
     container_name: wiki
-    image: ghcr.io/requarks/wiki:2.5.306
+    image: ghcr.io/requarks/wiki:2.5.307
     depends_on:
       - wiki-db
     environment:
