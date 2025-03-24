@@ -8,6 +8,8 @@ jobs:
   deploy:
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
+    container:
+      image: mafyuh/ansible-bws:v1.1.1
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
