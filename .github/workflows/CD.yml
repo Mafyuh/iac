@@ -155,19 +155,19 @@ jobs:
 
       - name: Create Private key
         run: |
-          mkdir -p ~/.ssh
-          cat <<EOF > ~/.ssh/id_rsa
+          mkdir -p /root/.ssh/id_rsa
+          cat <<EOF > /root/.ssh/id_rsa
           ${{ steps.bitwarden-secrets.outputs.ssh_private_key }}
           EOF
       
       - name: Set permissions for private key
         run: |
-          chmod 600 ~/.ssh/id_rsa
+          chmod 600 /root/.ssh/id_rsa
 
       - name: Set up SSH agent
         run: |
           eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_rsa
+          ssh-add /root/.ssh/id_rsa
 
 
       - name: Run Ansible Playbook
