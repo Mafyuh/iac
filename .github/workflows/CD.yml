@@ -40,11 +40,6 @@ jobs:
           folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
-
-          if [ -z "$folders" ]; then
-            echo "No changes in docker folder. Exiting."
-            exit 0
-          fi
           
       - name: Map Folder to Host
         shell: bash
