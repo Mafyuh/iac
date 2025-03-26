@@ -171,7 +171,7 @@ jobs:
 
       - name: Run Ansible Playbook
         env:
-          BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
+          BWS_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
           ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml \
