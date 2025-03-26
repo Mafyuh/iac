@@ -85,7 +85,7 @@ jobs:
 
       - name: Run Playbooks
         env:
-          BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
+          BWS_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
           if [ -z "${{ github.event.inputs.playbook }}" ]; then
