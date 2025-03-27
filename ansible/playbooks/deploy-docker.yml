@@ -34,6 +34,7 @@
           {% for key, secret_id in env_variables.items() %}
           {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id) }}
           {% endfor %}
+      ignore_errors: true
 
     - name: Restart services using Docker Compose
       community.docker.docker_compose_v2:
