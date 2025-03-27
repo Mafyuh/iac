@@ -32,7 +32,7 @@
         dest: "{{ repo_path }}/.env"
         content: |
           {% for key, secret_id in env_variables.items() %}
-          {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id, access_token=bw_access_token) }}
+          {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id, access_token=bws_access_token) }}
           {% endfor %}
 
     - name: Restart services using Docker Compose
