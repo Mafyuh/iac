@@ -173,7 +173,7 @@ jobs:
         env:
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
-          ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml \
+          ansible-playbook -vvvv -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml \
             --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }} bws_access_token=${{ secrets.BW_ACCESS_TOKEN }}" | tee ansible_output.txt
           if grep -q 'unreachable=1\|failed=[1-9]' ansible_output.txt; then
             echo "Ansible reported failures or unreachable hosts."
