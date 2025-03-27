@@ -14,14 +14,6 @@ services:
       - 3000:3000
       - 443:443
     restart: unless-stopped
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
   couchdb-obsidian-livesync:
     container_name: obsidian-livesync
     image: couchdb:3.4.3

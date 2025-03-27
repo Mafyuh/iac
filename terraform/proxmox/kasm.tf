@@ -1,7 +1,7 @@
-resource "proxmox_virtual_environment_vm" "Kasm" {
+resource "proxmox_virtual_environment_vm" "Kasm2" {
   # VM General Settings
   node_name    = "pve2"
-  vm_id        = 333
+  vm_id        = 102
   name         = "Kasm"
   description  = "kasm"
   tags         = ["tofu", "ubuntu-22", "iac-repo"]
@@ -13,7 +13,7 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
   }
 
   clone {
-    vm_id = 9999
+    vm_id = 9997
   }
   
   # VM CPU Settings
@@ -25,7 +25,7 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
   
   # VM Memory Settings
   memory {
-    dedicated = 16384
+    dedicated = 8092
   }
 
   # VM Network Settings
@@ -44,8 +44,7 @@ resource "proxmox_virtual_environment_vm" "Kasm" {
   initialization {
     ip_config {
       ipv4 {
-        address = data.bitwarden-secrets_secret.kasm_ip.value
-        gateway = data.bitwarden-secrets_secret.vlan_gateway.value
+        address = "dhcp"
       }
     }
 
