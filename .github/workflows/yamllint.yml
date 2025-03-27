@@ -16,9 +16,11 @@ jobs:
         run: yamllint --version
 
       - name: Lint YAML files
+        shell: bash
         run: |
-          yamllint -c <(echo "{extends: relaxed, rules: {line-length: {max: 120}}}") $(find docker -name "*.yml") | tee lint_output.txt
+          echo "{extends: relaxed, rules: {line-length: {max: 120}}}" > yamllint-config.yml
+          yamllint -c yamllint-config.yml $(find docker -name "*.yml") | tee lint_output.txt
           if grep -q -E "error|warning" lint_output.txt; then
             echo "YAML linting failed due to errors or warnings."
             exit 1
-          fi      
+          fi
