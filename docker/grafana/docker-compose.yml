@@ -111,7 +111,7 @@ services:
       - grafana
 
   sonarr-exporter:
-    image: ghcr.io/onedr0p/exportarr:v2.0
+    image: ghcr.io/onedr0p/exportarr:v2.1
     container_name: sonarr-exporter
     command: ["sonarr"]
     environment:
@@ -124,7 +124,7 @@ services:
     networks:
       - grafana
   radarr-exporter:
-    image: ghcr.io/onedr0p/exportarr:v2.0
+    image: ghcr.io/onedr0p/exportarr:v2.1
     container_name: radarr-exporter
     command: ["radarr"]
     environment:
@@ -137,7 +137,7 @@ services:
     networks:
       - grafana
   prowlarr-exporter:
-    image: ghcr.io/onedr0p/exportarr:v2.0
+    image: ghcr.io/onedr0p/exportarr:v2.1
     container_name: prowlarr-exporter
     command: ["prowlarr"]
     environment:
@@ -151,7 +151,7 @@ services:
     networks:
       - grafana
   sabnzbd-exporter:
-    image: ghcr.io/onedr0p/exportarr:v2.0
+    image: ghcr.io/onedr0p/exportarr:v2.1
     container_name: sabnzbd-exporter
     command: ["sabnzbd"]
     environment:
@@ -164,7 +164,7 @@ services:
     networks:
       - grafana
   bazarr-exporter:
-    image: ghcr.io/onedr0p/exportarr:v2.0
+    image: ghcr.io/onedr0p/exportarr:v2.1
     container_name: bazarr-exporter
     command: ["bazarr"]
     environment:
