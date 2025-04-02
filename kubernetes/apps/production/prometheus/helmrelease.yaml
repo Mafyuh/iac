@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 70.3.0
+      version: 70.4.1
       interval: 60m
       sourceRef:
         kind: HelmRepository
