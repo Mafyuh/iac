@@ -30,6 +30,10 @@ spec:
     grafana:
       enabled: true
       replicas: 1
+      forceDeployDashboards: false
+      defaultDashboardsEnabled: true
+      defaultDashboardsTimezone: browser
+      defaultDashboardsEditable: true
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -43,6 +47,16 @@ spec:
             hosts:
               - "grafana.${PUBLIC_DOMAIN}"
       adminPassword: "${GRAF_ADMIN_PASS}"
+      persistence:
+        enabled: true
+        type: sts
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
+        finalizers:
+          - kubernetes.io/pvc-protection
+
     prometheus:
       ingress:
         enabled: true
