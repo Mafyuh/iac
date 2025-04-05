@@ -32,7 +32,7 @@ spec:
       replicas: 1
       forceDeployDashboards: false
       defaultDashboardsEnabled: true
-      defaultDashboardsTimezone: browser
+      defaultDashboardsTimezone: America/New_York
       defaultDashboardsEditable: true
       ingress:
         enabled: true
