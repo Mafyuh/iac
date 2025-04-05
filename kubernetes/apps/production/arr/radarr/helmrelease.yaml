@@ -139,8 +139,7 @@ spec:
     monitoring:
       serviceMonitor:
         enabled: true
-        labels:
-          release: prometheus
+        interval: 30s
 
 
     persistence:
