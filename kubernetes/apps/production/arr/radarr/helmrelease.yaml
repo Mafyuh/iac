@@ -74,6 +74,27 @@ spec:
               limits:
                 memory: 512Mi
 
+          metrics:
+            dependsOn: app
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.1.0
+            env:
+              PORT: &metricsPort 9707
+              URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.cluster.local:7878"
+              APIKEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: recyclarr-secrets
+                    key: RADARR_API_KEY
+            args: ["radarr"]
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 125Mi
+
     service:
       app:
         primary: true
@@ -81,6 +102,12 @@ spec:
         ports:
           http:
             port: *port
+      metrics:
+        nameOverride: metrics
+        controller: radarr
+        ports:
+          metrics:
+            port: *metricsPort
 
     ingress:
       internal:
@@ -99,6 +126,11 @@ spec:
                 service:
                   identifier: app
                   port: http
+              - path: /metrics
+                pathType: Prefix
+                service:
+                  identifier: metrics
+                  port: metrics
         tls:
           - hosts:
               - "radarr.${LOCAL_DOMAIN}"
