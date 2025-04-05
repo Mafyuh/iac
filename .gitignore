@@ -47,7 +47,7 @@ credentials.pkr.hcl
 
 ## Testing
 /docker/health
-
+/kubernetes/apps/production/prometheus/docker-scrape-template.yaml
 # Plausible
 compose.override.yml
 # SOPS
