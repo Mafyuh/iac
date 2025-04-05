@@ -71,7 +71,8 @@ spec:
             hosts:
               - "prometheus.${LOCAL_DOMAIN}"
       prometheusSpec:
-        additionalScrapeConfigs:
+        additionalScrapeConfigsSecret:
+          enabled: true
           name: prometheus-additional-config
           key: additional-scrape-configs.yaml
         replicas: 1

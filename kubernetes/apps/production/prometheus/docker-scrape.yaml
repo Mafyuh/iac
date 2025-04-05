@@ -1,24 +1,8 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: prometheus-additional-config
   namespace: default
+type: Opaque
 data:
-  additional-scrape-configs.yaml: |
-    - job_name: 'node_exporter'
-      scrape_interval: 15s
-      static_configs:
-        - targets: ['10.69.69.150:9100']
-        - targets: ['10.0.0.15:9100']
-        - targets: ['10.0.0.40:9100']
-        - targets: ['10.69.69.127:9100']
-        - targets: ['10.69.69.2:9100']
-
-    - job_name: 'cadvisor'
-      scrape_interval: 15s
-      static_configs:
-        - targets: ['10.69.69.150:9101']
-        - targets: ['10.0.0.15:9101']
-        - targets: ['10.0.0.40:9101']
-        - targets: ['10.69.69.127:9101']
-        - targets: ['10.69.69.2:9101']
+  additional-scrape-configs.yaml: LSBqb2JfbmFtZTogJ25vZGVfZXhwb3J0ZXInCiAgc2NyYXBlX2ludGVydmFsOiAxNXMKICBzdGF0aWNfY29uZmlnczoKICAgIC0gdGFyZ2V0czogWycxMC42OS42OS4xNTA6OTEwMCddCiAgICAtIHRhcmdldHM6IFsnMTAuMC4wLjE1OjkxMDAnXQogICAgLSB0YXJnZXRzOiBbJzEwLjAuMC40MDo5MTAwJ10KICAgIC0gdGFyZ2V0czogWycxMC42OS42OS4xMjc6OTEwMCddCiAgICAtIHRhcmdldHM6IFsnMTAuNjkuNjkuMjo5MTAwJ10KCi0gam9iX25hbWU6ICdjYWR2aXNvcicKICBzY3JhcGVfaW50ZXJ2YWw6IDE1cwogIHN0YXRpY19jb25maWdzOgogICAgLSB0YXJnZXRzOiBbJzEwLjY5LjY5LjE1MDo5MTAxJ10KICAgIC0gdGFyZ2V0czogWycxMC4wLjAuMTU6OTEwMSddCiAgICAtIHRhcmdldHM6IFsnMTAuMC4wLjQwOjkxMDEnXQogICAgLSB0YXJnZXRzOiBbJzEwLjY5LjY5LjEyNzo5MTAxJ10KICAgIC0gdGFyZ2V0czogWycxMC42OS42OS4yOjkxMDEnXQ==
