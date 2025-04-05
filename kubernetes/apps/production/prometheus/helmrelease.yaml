@@ -74,6 +74,9 @@ spec:
             hosts:
               - "prometheus.${LOCAL_DOMAIN}"
       prometheusSpec:
+        serviceMonitorSelector:
+          matchLabels:
+            release: prometheus
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         additionalScrapeConfigsSecret:

@@ -139,6 +139,8 @@ spec:
     monitoring:
       serviceMonitor:
         enabled: true
+        labels:
+          release: prometheus
 
 
     persistence:
