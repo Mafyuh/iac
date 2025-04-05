@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: speedtest-exporter
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: speedtest-exporter
+      version: 5.4.2
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  values:
+    service:
+      main:
+        ports:
+          http:
+            enabled: false
+          metrics:
+            enabled: true
+            protocol: TCP
+            port: 9798
+    
+    metrics:
+      enabled: true
