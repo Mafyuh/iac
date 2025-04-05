@@ -7,18 +7,42 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: speedtest-exporter
-      version: 5.4.2
+      chart: app-template
+      version: 3.7.3
       interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/miguelndecarvalho/speedtest-exporter
-      tag: v3.5.4
-    env:
-      TZ: America/New_York
-    metrics:
-      enabled: true
+    controllers:
+      speedtestExporter:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/miguelndecarvalho/speedtest-exporter
+              tag: v3.5.4
+            env:
+              TZ: America/New_York
+            resources:
+              requests:
+                cpu: 15m
+                memory: 50M
+              limits:
+                memory: 100M
+    service:
+      app:
+        controller: speedtestExporter
+        ports:
+          http:
+            port: 9798
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: speedtest-exporter
+        endpoints:
+        - port: http
+          scheme: http
+          path: /metrics
+          interval: 30m
+          scrapeTimeout: 3m
