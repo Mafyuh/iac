@@ -28,8 +28,8 @@ spec:
     metrics:
       enabled: true
       serviceMonitor:
-        interval: 60m
-        scrapeTimeout: 1m
+        interval: 1m
+        scrapeTimeout: 30s
         enpoints:
           - port: metrics
             path: /metrics
