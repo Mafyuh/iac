@@ -140,7 +140,7 @@ spec:
       enabled: {}
       interval:
         value: 30s
-      serviceName: *app
+      serviceName: "{{ include 'app-template.fullname' . }}"
       endpoints:
       - port: http
         path: /metrics
