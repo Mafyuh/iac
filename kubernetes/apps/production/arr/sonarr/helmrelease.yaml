@@ -46,7 +46,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sonarr
+              repository: ghcr.io/home-operations/sonarr
               tag: 4.0.14.2938
               pullPolicy: IfNotPresent
             env:

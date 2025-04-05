@@ -46,8 +46,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/prowlarr
-              tag: 1.32.2.4987
+              repository: ghcr.io/home-operations/prowlarr
+              tag: 1.33.1.4997
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
