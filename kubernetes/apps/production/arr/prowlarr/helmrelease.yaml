@@ -104,7 +104,7 @@ spec:
             port: *port
       metrics:
         nameOverride: metrics
-        controller: radarr
+        controller: prowlarr
         ports:
           metrics:
             port: *metricsPort
