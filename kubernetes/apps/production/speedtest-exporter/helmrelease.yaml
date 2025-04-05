@@ -15,21 +15,10 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   values:
-    service:
-      main:
-        ports:
-          http:
-            enabled: false
-          metrics:
-            enabled: true
-            protocol: TCP
-            port: 9798
-    
+    image:
+      repository: ghcr.io/miguelndecarvalho/speedtest-exporter
+      tag: v3.5.4
+    env:
+      TZ: America/New_York
     metrics:
       enabled: true
-      serviceMonitor:
-        interval: 1m
-        scrapeTimeout: 30s
-        enpoints:
-          - port: metrics
-            path: /metrics
