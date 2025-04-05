@@ -18,6 +18,7 @@ spec:
     global:
       podAnnotations:
         secret.reloader.stakater.com/reload: prometheus
+    namespaceOverride: "monitoring"
     crds:
       enabled: true
     alertmanager:
