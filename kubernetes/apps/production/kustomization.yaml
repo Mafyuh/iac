@@ -10,3 +10,4 @@ resources:
   - prometheus/
   - reflector/
   - reloader/
+  - speedtest-exporter/
