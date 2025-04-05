@@ -30,20 +30,11 @@ spec:
     controllers:
       sonarr:
         enabled: true
-        type: statefulset
+        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
 
         replicas: 1
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: sonarr-config
-              accessMode: ReadWriteOnce
-              size: 3Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
 
         pod:
           securityContext:
@@ -82,6 +73,27 @@ spec:
                 memory: 200Mi
               limits:
                 memory: 512Mi
+          
+          metrics:
+            dependsOn: app
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.1.0
+            env:
+              PORT: &metricsPort 9707
+              URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local:7878"
+              APIKEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: recyclarr-secrets
+                    key: SONARR_API_KEY
+            args: ["sonarr"]
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 125Mi
 
     service:
       app:
@@ -90,6 +102,23 @@ spec:
         ports:
           http:
             port: *port
+      metrics:
+        nameOverride: metrics
+        controller: sonarr
+        ports:
+          metrics:
+            port: *metricsPort
+    
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}-metrics'
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
 
     ingress:
       internal:
@@ -108,12 +137,26 @@ spec:
                 service:
                   identifier: app
                   port: http
+              - path: /metrics
+                pathType: Prefix
+                service:
+                  identifier: metrics
+                  port: metrics
         tls:
           - hosts:
               - "sonarr.${LOCAL_DOMAIN}"
             secretName: local-mafyuh-dev-production-tls
 
     persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 3Gi
+        storageClass: longhorn
+        globalMounts:
+          - path: /config
+
       data:
         enabled: true
         type: nfs
