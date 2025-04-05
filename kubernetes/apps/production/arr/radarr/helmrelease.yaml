@@ -138,13 +138,6 @@ spec:
 
     serviceMonitor:
       enabled: true
-      interval: 30s
-      serviceName: "{{ .Release.Name }}-metrics"
-      endpoints:
-        - port: metrics
-          path: /metrics
-          interval: 30s
-          scrapeTimeout: 10s
 
     persistence:
       config:
