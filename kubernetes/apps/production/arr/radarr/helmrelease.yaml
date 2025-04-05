@@ -137,9 +137,15 @@ spec:
             secretName: local-mafyuh-dev-production-tls
 
     serviceMonitor:
-      enabled: true
+      enabled: {}
       interval:
         value: 30s
+      serviceName: *app
+      endpoints:
+      - port: http
+        path: /metrics
+        interval: 30s
+        scrapeTimeout: 10s
 
     persistence:
       config:
