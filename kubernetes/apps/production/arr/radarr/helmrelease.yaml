@@ -1,99 +1,70 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: &app radarr
-  namespace: arr
-spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+controllers:
+  radarr:
+    enabled: true
+    type: deployment
+    annotations:
+      reloader.stakater.com/auto: "true"
 
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    remediation:
-      retries: 3
+    replicas: 1
+    
+    pod:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: &group 1000
+        fsGroup: *group
+        fsGroupChangePolicy: "OnRootMismatch"
 
-  values:
-    global:
-      fullnameOverride: *app
-      namespace: arr
+    containers:
+      app:
+        image:
+          repository: ghcr.io/onedr0p/radarr
+          tag: 5.20.1.9773
+          pullPolicy: IfNotPresent
+        env:
+          TZ: "${TZ}"
+          RADARR__INSTANCE_NAME: *app
+          RADARR__PORT: &port 7878
+          RADARR__APPLICATION_URL: "https://radarr.${LOCAL_DOMAIN}"
+          RADARR__THEME: dark
+          RADARR__LOG_LEVEL: info
 
-    controllers:
-      radarr:
-        enabled: true
-        type: deployment
-        annotations:
-          reloader.stakater.com/auto: "true"
+        probes:
+          liveness:
+            enabled: false
 
-        replicas: 1
-        
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: &group 1000
-            fsGroup: *group
-            fsGroupChangePolicy: "OnRootMismatch"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
 
-        containers:
-          app:
-            image:
-              repository: ghcr.io/onedr0p/radarr
-              tag: 5.20.1.9773
-              pullPolicy: IfNotPresent
-            env:
-              TZ: "${TZ}"
-              RADARR__INSTANCE_NAME: *app
-              RADARR__PORT: &port 7878
-              RADARR__APPLICATION_URL: "https://radarr.${LOCAL_DOMAIN}"
-              RADARR__THEME: dark
-              RADARR__LOG_LEVEL: info
+        resources:
+          requests:
+            cpu: 50m
+            memory: 150Mi
+          limits:
+            memory: 512Mi
 
-            probes:
-              liveness:
-                enabled: false
-
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                  - ALL
-
-            resources:
-              requests:
-                cpu: 50m
-                memory: 150Mi
-              limits:
-                memory: 512Mi
-
-          metrics:
-            dependsOn: app
-            image:
-              repository: ghcr.io/onedr0p/exportarr
-              tag: v2.1.0
-            env:
-              PORT: &metricsPort 9707
-              URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.cluster.local:7878"
-              APIKEY:
-                valueFrom:
-                  secretKeyRef:
-                    name: recyclarr-secrets
-                    key: RADARR_API_KEY
-            args: ["radarr"]
-            resources:
-              requests:
-                cpu: 10m
-                memory: 100Mi
-              limits:
-                memory: 125Mi
+    metrics:
+      dependsOn: app
+      image:
+        repository: ghcr.io/onedr0p/exportarr
+        tag: v2.1.0
+      env:
+        PORT: &metricsPort 9707
+        URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.cluster.local:7878"
+        APIKEY:
+          valueFrom:
+            secretKeyRef:
+              name: recyclarr-secrets
+              key: RADARR_API_KEY
+      args: ["radarr"]
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+        limits:
+          memory: 125Mi
 
     service:
       app:
@@ -137,15 +108,14 @@ spec:
             secretName: local-mafyuh-dev-production-tls
 
     serviceMonitor:
-      enabled: {}
-      interval:
-        value: 30s
+      enabled: true
+      interval: 30s
       serviceName: "{{ include 'app-template.fullname' . }}"
       endpoints:
-      - port: http
-        path: /metrics
-        interval: 30s
-        scrapeTimeout: 10s
+        - port: http
+          path: /metrics
+          interval: 30s
+          scrapeTimeout: 10s
 
     persistence:
       config:
