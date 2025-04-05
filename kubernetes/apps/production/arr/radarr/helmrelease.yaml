@@ -138,7 +138,8 @@ spec:
 
     serviceMonitor:
       enabled: true
-      interval: 30s
+      interval:
+        value: 30s
 
     persistence:
       config:
