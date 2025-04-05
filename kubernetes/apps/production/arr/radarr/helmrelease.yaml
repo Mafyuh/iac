@@ -81,7 +81,7 @@ spec:
               tag: v2.1.0
             env:
               PORT: &metricsPort 9707
-              URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.cluster.local:7878"
+              URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local:7878"
               APIKEY:
                 valueFrom:
                   secretKeyRef:
@@ -135,11 +135,6 @@ spec:
           - hosts:
               - "radarr.${LOCAL_DOMAIN}"
             secretName: local-mafyuh-dev-production-tls
-
-    serviceMonitor:
-      enabled: true
-      labels:
-        release: prometheus
 
     persistence:
       config:
