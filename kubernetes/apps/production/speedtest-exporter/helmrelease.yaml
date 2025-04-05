@@ -30,3 +30,6 @@ spec:
       serviceMonitor:
         interval: 60m
         scrapeTimeout: 1m
+        enpoints:
+          - port: metrics
+            path: /metrics
