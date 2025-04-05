@@ -74,8 +74,8 @@ spec:
             hosts:
               - "prometheus.${LOCAL_DOMAIN}"
       prometheusSpec:
-        serviceMonitorSelectorNilUsesHelmValues: true
-        podMonitorSelectorNilUsesHelmValues: true
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
         additionalScrapeConfigsSecret:
           enabled: true
           name: prometheus-additional-config
