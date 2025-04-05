@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: prometheus
-  namespace: monitoring
+  namespace: default
 spec:
   interval: 15m
   chart:
@@ -18,7 +18,6 @@ spec:
     global:
       podAnnotations:
         secret.reloader.stakater.com/reload: prometheus
-    namespaceOverride: "monitoring"
     crds:
       enabled: true
     alertmanager:
