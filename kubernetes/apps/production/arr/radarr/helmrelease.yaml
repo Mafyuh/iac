@@ -136,6 +136,11 @@ spec:
               - "radarr.${LOCAL_DOMAIN}"
             secretName: local-mafyuh-dev-production-tls
 
+    monitoring:
+      serviceMonitor:
+        enabled: true
+
+
     persistence:
       config:
         enabled: true
