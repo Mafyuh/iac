@@ -30,21 +30,12 @@ spec:
     controllers:
       bazarr:
         enabled: true
-        type: statefulset
+        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
 
         replicas: 1
 
-        statefulset:
-          volumeClaimTemplates:
-            - name: bazarr-config
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
-        
         pod:
           securityContext:
             runAsUser: 1000
@@ -82,6 +73,27 @@ spec:
               limits:
                 memory: 256Mi
 
+          metrics:
+            dependsOn: app
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.1.0
+            env:
+              PORT: &metricsPort 9707
+              URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local:6767"
+              APIKEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: recyclarr-secrets
+                    key: BAZARR_API_KEY
+            args: ["bazarr"]
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 125Mi
+
     service:
       app:
         primary: true
@@ -89,6 +101,23 @@ spec:
         ports:
           http:
             port: *port
+      metrics:
+        nameOverride: metrics
+        controller: bazarr
+        ports:
+          metrics:
+            port: *metricsPort
+    
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}-metrics'
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
 
     ingress:
       internal:
@@ -107,12 +136,26 @@ spec:
                 service:
                   identifier: app
                   port: http
+              - path: /metrics
+                pathType: Prefix
+                service:
+                  identifier: metrics
+                  port: metrics
         tls:
           - hosts:
               - "bazarr.${LOCAL_DOMAIN}"
             secretName: local-mafyuh-dev-production-tls
 
     persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        globalMounts:
+          - path: /config
+
       data:
         enabled: true
         type: nfs
