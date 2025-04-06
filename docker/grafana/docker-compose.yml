@@ -40,6 +40,8 @@ services:
   speedtest-exporter:
     image: ghcr.io/miguelndecarvalho/speedtest-exporter:v3.5.4
     container_name: speedtest-exporter
+    environment:
+      - TZ=America/New_York
     ports:
       - 9798:9798
     restart: unless-stopped
