@@ -18,55 +18,6 @@ backend "s3" {
   }
 }
 
-terraform {
-  required_providers {
-    proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.74.1"
-    }
-    bitwarden-secrets = {
-      source  = "sebastiaan-dev/bitwarden-secrets"
-      version = "0.1.2"
-    }
-    flux = {
-      source  = "fluxcd/flux"
-      version = "1.5.1"
-    }
-    oci = {
-      source  = "oracle/oci"
-      version = "6.32.0"
-    }
-  }
-}
-
-provider "bitwarden-secrets" {
-  access_token = var.access_token
-}
-
-
-provider "proxmox" {
-  endpoint = data.bitwarden-secrets_secret.virtual_environment_endpoint.value
-  password = data.bitwarden-secrets_secret.ssh_password.value
-  username = "root@pam"
-  insecure = true
-
-  ssh {
-    agent = true
-    username = "root"
-    password = data.bitwarden-secrets_secret.ssh_password.value
-
-    node {
-      name    = "prox"
-      address = data.bitwarden-secrets_secret.prox_ip_address.value
-    }
-
-    node {
-      name    = "pve2"
-      address = data.bitwarden-secrets_secret.pve2_ip_address.value
-    }
-  }
-}
-
 module "proxmox" {
   source = "./proxmox"
   
@@ -81,4 +32,8 @@ module "flux" {
 
 module "oci" {
   source = "./oracle"
+}
+
+module "servarr" {
+  source = "./servarr"
 }

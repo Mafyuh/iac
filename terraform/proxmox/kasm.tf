@@ -41,6 +41,11 @@ resource "proxmox_virtual_environment_vm" "Kasm2" {
     interface    = "scsi0"
   }
 
+  vga {
+      memory = 16 
+      type   = "serial0"
+  }
+
   initialization {
     ip_config {
       ipv4 {
