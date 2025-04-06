@@ -5,8 +5,6 @@
 
 [![Running Pods](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_pods_running&label=Running%20Pods&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
 [![Uptime](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_uptime_days&label=Uptime&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
-[![CPU](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_cpu_usage&label=CPU&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
-[![Memory](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_memory_usage&label=Memory&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
 [![Nodes](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_node_count&label=Nodes&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
 
 [![Docker Containers](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/docker_containers_running&label=Running%20Containers&color=blue&logo=docker)](https://github.com/mafyuh/iac)
