@@ -37,3 +37,7 @@ module "oci" {
 module "servarr" {
   source = "./servarr"
 }
+
+module "cloudflare" {
+  source = "./cloudflare"
+}

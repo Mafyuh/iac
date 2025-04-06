@@ -29,7 +29,15 @@ terraform {
       source  = "oracle/oci"
       version = "6.32.0"
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "5.2.0"
+    }
   }
+}
+
+provider "cloudflare" {
+  api_token = data.bitwarden-secrets_secret.cloudflare_api_token.value
 }
 
 provider "bitwarden-secrets" {
