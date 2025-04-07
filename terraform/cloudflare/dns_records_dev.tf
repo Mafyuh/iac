@@ -1,19 +1,19 @@
 resource "cloudflare_dns_record" "dev_git" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "git.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_links" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "links.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_local_wildcard" {
@@ -22,7 +22,7 @@ resource "cloudflare_dns_record" "dev_local_wildcard" {
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_local" {
@@ -31,70 +31,70 @@ resource "cloudflare_dns_record" "dev_local" {
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_n8n" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "n8n.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_prowlarr" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "prowlarr.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_radarr" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "radarr.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_sonarr" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "sonarr.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_sync" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "sync.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_vault" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "vault.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_wiki" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "wiki.${var.dev_domain}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_docs" {
@@ -103,7 +103,7 @@ resource "cloudflare_dns_record" "dev_docs" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_domainconnect" {
@@ -112,7 +112,7 @@ resource "cloudflare_dns_record" "dev_domainconnect" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_home" {
@@ -121,7 +121,7 @@ resource "cloudflare_dns_record" "dev_home" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_wildcard" {
@@ -130,7 +130,7 @@ resource "cloudflare_dns_record" "dev_wildcard" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_root" {
@@ -139,7 +139,7 @@ resource "cloudflare_dns_record" "dev_root" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_prom_metrics" {
@@ -148,7 +148,7 @@ resource "cloudflare_dns_record" "dev_prom_metrics" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_protonmail2" {
@@ -157,7 +157,7 @@ resource "cloudflare_dns_record" "dev_protonmail2" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_protonmail3" {
@@ -166,7 +166,7 @@ resource "cloudflare_dns_record" "dev_protonmail3" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_protonmail_key" {
@@ -175,7 +175,7 @@ resource "cloudflare_dns_record" "dev_protonmail_key" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_stats" {
@@ -184,7 +184,7 @@ resource "cloudflare_dns_record" "dev_stats" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_mx_20" {
@@ -194,7 +194,7 @@ resource "cloudflare_dns_record" "dev_mx_20" {
   proxied  = false
   ttl      = 1
   type     = "MX"
-  zone_id  = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id  = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_mx_10" {
@@ -204,7 +204,7 @@ resource "cloudflare_dns_record" "dev_mx_10" {
   proxied  = false
   ttl      = 1
   type     = "MX"
-  zone_id  = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id  = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_dmarc" {
@@ -213,7 +213,7 @@ resource "cloudflare_dns_record" "dev_dmarc" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_spf" {
@@ -222,7 +222,7 @@ resource "cloudflare_dns_record" "dev_spf" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
 resource "cloudflare_dns_record" "dev_protonmail_verification" {
@@ -231,5 +231,5 @@ resource "cloudflare_dns_record" "dev_protonmail_verification" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
+  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }

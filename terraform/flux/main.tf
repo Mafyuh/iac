@@ -1,4 +1,4 @@
-data "bitwarden-secrets_secret" "git_flux_password" {
+data "bitwarden_secret" "git_flux_password" {
   id = "e507c0be-cc1e-4d5b-90a7-b2710067c651"
 }
 
@@ -10,7 +10,7 @@ provider "flux" {
     url = "https://github.com/mafyuh/iac"
     http = {
         username = "Mafyuh"
-        password = data.bitwarden-secrets_secret.git_flux_password.value
+        password = data.bitwarden_secret.git_flux_password.value
     }
   }
 }

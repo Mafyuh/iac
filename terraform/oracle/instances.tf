@@ -1,6 +1,6 @@
 resource "oci_core_instance" "VPS" {
   availability_domain = "nWCj:US-ASHBURN-AD-2"
-  compartment_id      = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id      = data.bitwarden_secret.compartment_id.value
   display_name        = "VPS"
   fault_domain        = "FAULT-DOMAIN-2"
   shape              = "VM.Standard.E2.1.Micro"
@@ -91,7 +91,7 @@ resource oci_core_instance arm {
     recovery_action = "RESTORE_INSTANCE"
   }
   availability_domain = "nWCj:US-ASHBURN-AD-1"
-  compartment_id = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id = data.bitwarden_secret.compartment_id.value
   create_vnic_details {
     assign_public_ip = "true"
     defined_tags = {

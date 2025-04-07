@@ -4,7 +4,7 @@ resource "cloudflare_dns_record" "xyz_wildcard" {
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_xyz_zone_id.value
+  zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
 }
 
 resource "cloudflare_dns_record" "outlook_autodiscover" {
@@ -13,7 +13,7 @@ resource "cloudflare_dns_record" "outlook_autodiscover" {
   proxied = false
   ttl     = 3600
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_xyz_zone_id.value
+  zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
 }
 
 resource "cloudflare_dns_record" "selector1" {
@@ -22,7 +22,7 @@ resource "cloudflare_dns_record" "selector1" {
   proxied = false
   ttl     = 3600
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_xyz_zone_id.value
+  zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
 }
 
 resource "cloudflare_dns_record" "selector2" {
@@ -31,7 +31,7 @@ resource "cloudflare_dns_record" "selector2" {
   proxied = false
   ttl     = 3600
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_xyz_zone_id.value
+  zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
 }
 
 resource "cloudflare_dns_record" "outlook_mx" {
@@ -41,7 +41,7 @@ resource "cloudflare_dns_record" "outlook_mx" {
   proxied  = false
   ttl      = 3600
   type     = "MX"
-  zone_id  = data.bitwarden-secrets_secret.cf_xyz_zone_id.value
+  zone_id  = data.bitwarden_secret.cf_xyz_zone_id.value
 }
 
 resource "cloudflare_dns_record" "xyz_spf_record" {
@@ -50,7 +50,7 @@ resource "cloudflare_dns_record" "xyz_spf_record" {
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_xyz_zone_id.value
+  zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
 }
 
 resource "cloudflare_dns_record" "xyz_verification" {
@@ -59,5 +59,5 @@ resource "cloudflare_dns_record" "xyz_verification" {
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_xyz_zone_id.value
+  zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
 }

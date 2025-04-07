@@ -1,6 +1,6 @@
 resource oci_core_subnet NEW {
   cidr_block     = "10.0.0.0/24"
-  compartment_id = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id = data.bitwarden_secret.compartment_id.value
   dhcp_options_id = oci_core_default_dhcp_options.NEW.id
   display_name    = "NEW"
   dns_label       = "subnet06052048"
@@ -15,7 +15,7 @@ resource oci_core_subnet NEW {
 
 resource oci_core_subnet subnet-20230309-0146 {
   cidr_block     = "10.0.0.0/24"
-  compartment_id = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/mafyuhh@gmail.com"
     "Oracle-Tags.CreatedOn" = "2023-03-09T06:52:16.324Z"

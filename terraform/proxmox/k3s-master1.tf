@@ -48,8 +48,8 @@ resource "proxmox_virtual_environment_vm" "K3s-Master1" {
     initialization {
         ip_config {
             ipv4 {
-                address = data.bitwarden-secrets_secret.k3s_master1_ip.value
-                gateway = data.bitwarden-secrets_secret.vlan_gateway.value
+                address = data.bitwarden_secret.k3s_master1_ip.value
+                gateway = data.bitwarden_secret.vlan_gateway.value
             }
         }
 

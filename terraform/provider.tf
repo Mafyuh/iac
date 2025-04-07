@@ -13,10 +13,6 @@ terraform {
       source  = "devopsarr/radarr"
       version = "2.3.2"
     }
-    bitwarden-secrets = {
-      source  = "sebastiaan-dev/bitwarden-secrets"
-      version = "0.1.2"
-    }
     proxmox = {
       source  = "bpg/proxmox"
       version = "0.74.1"
@@ -33,37 +29,44 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "5.2.0"
     }
+    bitwarden = {
+      source  = "maxlaverse/bitwarden"
+      version = "0.13.5"
+    }
   }
 }
 
 provider "cloudflare" {
-  api_token = data.bitwarden-secrets_secret.cloudflare_api_token.value
+  api_token = data.bitwarden_secret.cloudflare_api_token.value
 }
 
-provider "bitwarden-secrets" {
+provider "bitwarden" {
   access_token = var.access_token
+  experimental {
+    embedded_client = true
+  }
 }
 
 
 provider "proxmox" {
-  endpoint = data.bitwarden-secrets_secret.virtual_environment_endpoint.value
-  password = data.bitwarden-secrets_secret.ssh_password.value
+  endpoint = data.bitwarden_secret.virtual_environment_endpoint.value
+  password = data.bitwarden_secret.ssh_password.value
   username = "root@pam"
   insecure = true
 
   ssh {
     agent = true
     username = "root"
-    password = data.bitwarden-secrets_secret.ssh_password.value
+    password = data.bitwarden_secret.ssh_password.value
 
     node {
       name    = "prox"
-      address = data.bitwarden-secrets_secret.prox_ip_address.value
+      address = data.bitwarden_secret.prox_ip_address.value
     }
 
     node {
       name    = "pve2"
-      address = data.bitwarden-secrets_secret.pve2_ip_address.value
+      address = data.bitwarden_secret.pve2_ip_address.value
     }
   }
 }

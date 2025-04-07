@@ -1,5 +1,5 @@
 resource oci_core_internet_gateway Internet-Gateway-NEW {
-  compartment_id = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/admin@mafyuh.com"
     "Oracle-Tags.CreatedOn" = "2023-06-06T00:48:50.966Z"
@@ -10,7 +10,7 @@ resource oci_core_internet_gateway Internet-Gateway-NEW {
 }
 
 resource oci_core_internet_gateway Internet-Gateway-vcn-20230309-0146 {
-  compartment_id = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/mafyuhh@gmail.com"
     "Oracle-Tags.CreatedOn" = "2023-03-09T06:52:13.449Z"

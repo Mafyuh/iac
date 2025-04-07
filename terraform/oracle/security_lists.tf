@@ -1,5 +1,5 @@
 resource oci_core_default_security_list Default-Security-List-for-NEW {
-  compartment_id = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/admin@mafyuh.com"
     "Oracle-Tags.CreatedOn" = "2023-06-06T00:48:49.328Z"
@@ -56,7 +56,7 @@ resource oci_core_default_security_list Default-Security-List-for-NEW {
   ingress_security_rules {
     description = "NPM WEBUI"
     protocol    = "6"
-    source      = "${data.bitwarden-secrets_secret.homelab_ip.value}/32"
+    source      = "${data.bitwarden_secret.homelab_ip.value}/32"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     tcp_options {
@@ -67,7 +67,7 @@ resource oci_core_default_security_list Default-Security-List-for-NEW {
   ingress_security_rules {
     description = "SSH"
     protocol    = "6"
-    source      = "${data.bitwarden-secrets_secret.homelab_ip.value}/32"
+    source      = "${data.bitwarden_secret.homelab_ip.value}/32"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     tcp_options {
@@ -79,7 +79,7 @@ resource oci_core_default_security_list Default-Security-List-for-NEW {
 }
 
 resource oci_core_default_security_list Default-Security-List-for-vcn-20230309-0146 {
-  compartment_id = data.bitwarden-secrets_secret.compartment_id.value
+  compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/mafyuhh@gmail.com"
     "Oracle-Tags.CreatedOn" = "2023-03-09T06:52:11.494Z"
@@ -96,7 +96,7 @@ resource oci_core_default_security_list Default-Security-List-for-vcn-20230309-0
   ingress_security_rules {
     description = "SSH"
     protocol    = "6"
-    source      = "${data.bitwarden-secrets_secret.homelab_ip.value}/32"
+    source      = "${data.bitwarden_secret.homelab_ip.value}/32"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     tcp_options {
@@ -149,7 +149,7 @@ resource oci_core_default_security_list Default-Security-List-for-vcn-20230309-0
   ingress_security_rules {
     description = "NPM WEBUI"
     protocol    = "6"
-    source      = "${data.bitwarden-secrets_secret.homelab_ip.value}/32"
+    source      = "${data.bitwarden_secret.homelab_ip.value}/32"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     tcp_options {

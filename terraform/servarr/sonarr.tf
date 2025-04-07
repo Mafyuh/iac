@@ -15,7 +15,7 @@ resource "sonarr_delay_profile" "default" {
 #   host     = "sabnzbd.arr.svc.cluster.local"
 #   url_base = "/"
 #   port     = 8080
-#   api_key  = data.bitwarden-secrets_secret.sabnzbd_api_key.value
+#   api_key  = data.bitwarden_secret.sabnzbd_api_key.value
 # }
 
 # resource "sonarr_download_client_qbittorrent" "qbitty" {
@@ -28,7 +28,7 @@ resource "sonarr_delay_profile" "default" {
 #   port           = 8080
 #   first_and_last = false
 #   username       = "mafyuh"
-#   password       = data.bitwarden-secrets_secret.qbitty_password.value
+#   password       = data.bitwarden_secret.qbitty_password.value
 # }
 
 resource "sonarr_naming" "media_naming_configs" {

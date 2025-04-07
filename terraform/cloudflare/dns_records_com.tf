@@ -4,7 +4,7 @@ resource "cloudflare_dns_record" "local_com_wildcard" {
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_wildcard" {
@@ -13,7 +13,7 @@ resource "cloudflare_dns_record" "com_wildcard" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "mafyuh_com" {
@@ -22,7 +22,7 @@ resource "cloudflare_dns_record" "mafyuh_com" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_protonmail2" {
@@ -31,7 +31,7 @@ resource "cloudflare_dns_record" "com_protonmail2" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_protonmail3" {
@@ -40,7 +40,7 @@ resource "cloudflare_dns_record" "com_protonmail3" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_protonmail_key" {
@@ -49,7 +49,7 @@ resource "cloudflare_dns_record" "com_protonmail_key" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_protonmail_mx" {
@@ -59,7 +59,7 @@ resource "cloudflare_dns_record" "com_protonmail_mx" {
   proxied  = false
   ttl      = 1
   type     = "MX"
-  zone_id  = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id  = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_protonmail_mx_10" {
@@ -69,7 +69,7 @@ resource "cloudflare_dns_record" "com_protonmail_mx_10" {
   proxied  = false
   ttl      = 1
   type     = "MX"
-  zone_id  = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id  = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_protonmail_dkim" {
@@ -78,7 +78,7 @@ resource "cloudflare_dns_record" "com_protonmail_dkim" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_dmarc" {
@@ -87,7 +87,7 @@ resource "cloudflare_dns_record" "com_dmarc" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_github_pages" {
@@ -96,7 +96,7 @@ resource "cloudflare_dns_record" "com_github_pages" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_google_verification" {
@@ -105,7 +105,7 @@ resource "cloudflare_dns_record" "com_google_verification" {
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_ms_verification" {
@@ -114,7 +114,7 @@ resource "cloudflare_dns_record" "com_ms_verification" {
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_spf_record" {
@@ -123,7 +123,7 @@ resource "cloudflare_dns_record" "com_spf_record" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }
 
 resource "cloudflare_dns_record" "com_protonmail_verification" {
@@ -132,5 +132,5 @@ resource "cloudflare_dns_record" "com_protonmail_verification" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden-secrets_secret.cf_com_zone_id.value
+  zone_id = data.bitwarden_secret.cf_com_zone_id.value
 }

@@ -5,9 +5,9 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "5.2.0"
     }
-    bitwarden-secrets = {
-      source  = "sebastiaan-dev/bitwarden-secrets"
-      version = "0.1.2"
+    bitwarden = {
+      source  = "maxlaverse/bitwarden"
+      version = "0.13.5"
     }
   }
 }  
