@@ -46,8 +46,10 @@ terraform.rc
 credentials.pkr.hcl
 
 ## Testing
-/docker/health
 /kubernetes/apps/production/prometheus/docker-scrape-template.yaml
+/terraform/.bitwarden/device_identifier
+/docker/scalr-agent/docker-compose.yml
+/docker/Dockerfiles/scalr-agent/Dockerfile
 # Plausible
 compose.override.yml
 # SOPS

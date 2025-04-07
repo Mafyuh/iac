@@ -33,6 +33,10 @@ terraform {
       source  = "maxlaverse/bitwarden"
       version = "0.13.5"
     }
+    twingate = {
+      source  = "Twingate/twingate"
+      version = "3.0.16"
+    }
   }
 }
 
@@ -70,3 +74,12 @@ provider "proxmox" {
     }
   }
 }
+
+provider "twingate" {
+  api_token = data.bitwarden_secret.twingate_api_key.value
+  network   = "mafyuh"
+}
+
+# provider "github" {
+#   token = data.bitwarden_secret.github_token.value
+# }

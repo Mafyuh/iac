@@ -1,9 +1,9 @@
-resource "proxmox_virtual_environment_vm" "Authentik" {
+resource "proxmox_virtual_environment_vm" "tf_runner" {
     node_name    = "prox"
     vm_id        = "125"
-    name         = "Authentik"
-    description  = "authentik"
-    started      = "false"
+    name         = "tf-runner"
+    description  = "tf-runner"
+    started      = "true"
 
     cpu {
         cores = "2"
@@ -34,7 +34,6 @@ resource "proxmox_virtual_environment_vm" "Authentik" {
         ip_config {
             ipv4 {
                 address = "dhcp"
-                gateway = null
             }
         }
 

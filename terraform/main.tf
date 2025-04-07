@@ -17,6 +17,15 @@ backend "s3" {
     }
   }
 }
+# backend "remote" {
+#     hostname = "mafyuh.scalr.io"
+#     organization = "Environment-A"
+
+#     workspaces {
+#       name = "IaC"
+#     }
+#   }
+# }
 
 module "proxmox" {
   source = "./proxmox"
@@ -41,3 +50,11 @@ module "servarr" {
 module "cloudflare" {
   source = "./cloudflare"
 }
+
+module "twingate" {
+  source = "./twingate"
+}
+
+# module "github" {
+#   source = "./github"
+# }

@@ -1,10 +1,9 @@
-data "bitwarden_secret" "git_flux_password" {
-  id = "e507c0be-cc1e-4d5b-90a7-b2710067c651"
-}
-
 provider "flux" {
   kubernetes = {
-    config_path = "~/.kube/config"
+    host = data.bitwarden_secret.k3s_host_tf.value
+    client_certificate     = data.bitwarden_secret.cluster_client_certificate.value
+    client_key             = data.bitwarden_secret.cluster_client_key.value
+    cluster_ca_certificate = data.bitwarden_secret.cluster_ca_certificate.value
   }
   git = {
     url = "https://github.com/mafyuh/iac"
