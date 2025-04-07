@@ -30,6 +30,11 @@ resource "proxmox_virtual_environment_vm" "tf_runner" {
         vm_id = "9996"
     }
 
+    vga {
+      memory = 16 
+      type   = "serial0"
+  }
+
     initialization {
         ip_config {
             ipv4 {
