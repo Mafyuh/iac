@@ -47,7 +47,7 @@ resource "proxmox_virtual_environment_vm" "NPM" {
     initialization {
         ip_config {
             ipv4 {
-                address = data.bitwarden_secret.npm_ip_address.value
+                address = "10.69.69.200/24"
                 gateway = data.bitwarden_secret.vlan_gateway.value
             }
         }

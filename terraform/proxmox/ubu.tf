@@ -47,7 +47,7 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
     initialization {
         ip_config {
             ipv4 {
-                address = data.bitwarden_secret.ubu_ip.value
+                address = "10.69.69.2/24"
                 gateway = data.bitwarden_secret.vlan_gateway.value
             }
         }
