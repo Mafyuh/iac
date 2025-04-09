@@ -35,7 +35,7 @@ terraform {
     }
     twingate = {
       source  = "Twingate/twingate"
-      version = "3.0.16"
+      version = "3.0.17"
     }
     # pfsense = {
     #   source  = "marshallford/pfsense"
