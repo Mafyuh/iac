@@ -62,6 +62,10 @@ spec:
           cpu: "2"
     worker:
       replicas: 1
+      securityContext:
+        runAsUser: *user      
+        runAsGroup: *user
+        fsGroup: *user
       env:
         - name: TMPDIR
           value: /tmp
