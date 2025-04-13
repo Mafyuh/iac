@@ -37,6 +37,10 @@ terraform {
       source  = "Twingate/twingate"
       version = "3.0.16"
     }
+    authentik = {
+      source = "goauthentik/authentik"
+      version = "2025.2.0"
+    }
     # pfsense = {
     #   source  = "marshallford/pfsense"
     #   version = "0.15.0"

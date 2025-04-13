@@ -49,10 +49,16 @@ module "servarr" {
 
 module "cloudflare" {
   source = "./cloudflare"
+  domains = var.domains
 }
 
 module "twingate" {
   source = "./twingate"
+}
+
+module "authentik" {
+  source = "./authentik"
+  domains = var.domains
 }
 
 # module "pfsense" {

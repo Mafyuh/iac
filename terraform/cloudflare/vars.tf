@@ -1,21 +1,5 @@
-variable "xyz_domain" {
-  type        = string
-  default     = "mafyuh.xyz"
-}
-
-variable "com_domain" {
-  type        = string
-  default     = "mafyuh.com"
-}
-
-variable "dev_domain" {
-  type        = string
-  default     = "mafyuh.dev"
-}
-
-variable "io_domain" {
-  type        = string
-  default     = "mafyuh.io"
+variable "domains" {
+  type = map(string)
 }
 
 variable "npm_ip_address" {

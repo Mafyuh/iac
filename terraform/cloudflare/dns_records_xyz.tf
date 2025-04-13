@@ -1,6 +1,6 @@
 resource "cloudflare_dns_record" "xyz_wildcard" {
   content = "${var.npm_ip_address}"
-  name    = "*.${var.xyz_domain}"
+  name    = "*.${var.domains["xyz"]}"
   proxied = false
   ttl     = 1
   type    = "A"
@@ -9,7 +9,7 @@ resource "cloudflare_dns_record" "xyz_wildcard" {
 
 resource "cloudflare_dns_record" "outlook_autodiscover" {
   content = "autodiscover.outlook.com"
-  name    = "autodiscover.${var.xyz_domain}"
+  name    = "autodiscover.${var.domains["xyz"]}"
   proxied = false
   ttl     = 3600
   type    = "CNAME"
@@ -18,7 +18,7 @@ resource "cloudflare_dns_record" "outlook_autodiscover" {
 
 resource "cloudflare_dns_record" "selector1" {
   content = "selector1-mafyuh-xyz._domainkey.zg4dp.onmicrosoft.com"
-  name    = "selector1._domainkey.${var.xyz_domain}"
+  name    = "selector1._domainkey.${var.domains["xyz"]}"
   proxied = false
   ttl     = 3600
   type    = "CNAME"
@@ -27,7 +27,7 @@ resource "cloudflare_dns_record" "selector1" {
 
 resource "cloudflare_dns_record" "selector2" {
   content = "selector2-mafyuh-xyz._domainkey.zg4dp.onmicrosoft.com"
-  name    = "selector2._domainkey.${var.xyz_domain}"
+  name    = "selector2._domainkey.${var.domains["xyz"]}"
   proxied = false
   ttl     = 3600
   type    = "CNAME"
@@ -36,7 +36,7 @@ resource "cloudflare_dns_record" "selector2" {
 
 resource "cloudflare_dns_record" "outlook_mx" {
   content  = "mafyuh-xyz.mail.protection.outlook.com"
-  name     = "${var.xyz_domain}"
+  name     = "${var.domains["xyz"]}"
   priority = 0
   proxied  = false
   ttl      = 3600
@@ -46,7 +46,7 @@ resource "cloudflare_dns_record" "outlook_mx" {
 
 resource "cloudflare_dns_record" "xyz_spf_record" {
   content = "\"v=spf1 include:spf.protection.outlook.com -all\""
-  name    = "${var.xyz_domain}"
+  name    = "${var.domains["xyz"]}"
   proxied = false
   ttl     = 3600
   type    = "TXT"
@@ -55,7 +55,7 @@ resource "cloudflare_dns_record" "xyz_spf_record" {
 
 resource "cloudflare_dns_record" "xyz_verification" {
   content = "\"MS=ms45733080\""
-  name    = "${var.xyz_domain}"
+  name    = "${var.domains["xyz"]}"
   proxied = false
   ttl     = 3600
   type    = "TXT"

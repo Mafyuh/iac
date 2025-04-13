@@ -4,7 +4,7 @@
 
 # resource "cloudflare_zero_trust_access_application" "openwebui" {
 #   account_id                    = "e123cacbf24b8b0dbb0598d81be2e319"
-#   domain                        = "chat.${var.io_domain}"
+#   domain                        = "chat.${var.domains["io"]}"
 #   type                          = "self_hosted"
 #   allow_authenticate_via_warp   = false
 #   allowed_idps                  = [
@@ -13,7 +13,7 @@
 #   destinations = [
 #     {
 #       type       = "public"
-#       uri        = "chat.${var.io_domain}"
+#       uri        = "chat.${var.domains["io"]}"
 #     }
 #   ]
 #   enable_binding_cookie         = true
@@ -37,7 +37,7 @@
 #     }
 #   ]
 #   self_hosted_domains           = [
-#     "chat.${var.io_domain}"
+#     "chat.${var.domains["io"]}"
 #   ]
 #   service_auth_401_redirect     = false
 #   session_duration              = "336h"
