@@ -1,7 +1,7 @@
 ---
 services:
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:10.10.7
+    image: ghcr.io/linuxserver/jellyfin:2021.12.16
     container_name: jellyfin
     devices:
       - /dev/dri/renderD129:/dev/dri/renderD129
