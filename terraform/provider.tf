@@ -35,7 +35,7 @@ terraform {
     }
     twingate = {
       source  = "Twingate/twingate"
-      version = "3.0.17"
+      version = "3.0.18"
     }
     authentik = {
       source = "goauthentik/authentik"
