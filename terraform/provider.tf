@@ -61,13 +61,15 @@ provider "bitwarden" {
 
 
 provider "proxmox" {
-  endpoint = data.bitwarden_secret.virtual_environment_endpoint.value
+  endpoint = "https://prox.mafyuh.xyz/"
   password = data.bitwarden_secret.ssh_password.value
+  ## TODO: stop using root
   username = "root@pam"
-  insecure = true
+  insecure = false
 
   ssh {
     agent = true
+  ## TODO: stop using root
     username = "root"
     password = data.bitwarden_secret.ssh_password.value
 

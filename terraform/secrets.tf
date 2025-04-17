@@ -1,7 +1,3 @@
-data "bitwarden_secret" "virtual_environment_endpoint" {
-  id = "a4ed343a-bb92-4beb-a421-b2080005bf98"
-}
-
 data "bitwarden_secret" "virtual_environment_api" {
   id = "1d250f4a-ae18-4e19-934c-b2080005e132"
 }

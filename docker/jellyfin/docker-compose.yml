@@ -1,26 +1,27 @@
 ---
 services:
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:10.10.7
+    image: jellyfin/jellyfin:10.10.7
     container_name: jellyfin
+    user: 1000:1000
     devices:
       - /dev/dri/renderD129:/dev/dri/renderD129
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - DOCKER_MODS=linuxserver/mods:jellyfin-opencl-intel
     volumes:
-      - /home/mafyuh/jellyfin/config:/config
+      - /docker/appdata/jellyfin/config:/config
+      - /docker/appdata/jellyfin/cache:/nvmecache
+      - /docker/appdata/jellyfin/metadata:/nvmemetadata
+      - /docker/appdata/jellyfin/transcodes:/transcodes
       - nas:/Media
-      - /home/mafyuh/jellyfin/transcodes:/transcodes
-      - /home/mafyuh/jellyfin/cache:/nvmecache
-      - /home/mafyuh/jellyfin/metadata:/nvmemetadata
+    restart: 'unless-stopped'
+    group_add:
+      - "104"
     ports:
       - 8096:8096
-    restart: unless-stopped
-    security_opt:
-      - apparmor:unconfined
+    environment:
+      - JELLYFIN_DATA_DIR=/config/data
+      - JELLYFIN_CONFIG_DIR=/config
+      - JELLYFIN_LOG_DIR=/config/log
+      - JELLYFIN_CACHE_DIR=/nvmecache
 
   makemkv:
     image: jlesage/makemkv@sha256:f0ec9ad8ba70a57301fa0dc34b16d6df5e3d3dbd4f5fca356a8a0d2ac8577f2a
@@ -38,31 +39,6 @@ services:
     privileged: true
     security_opt:
       - apparmor:unconfined
-
-  jellystat-db:
-    image: postgres:15.2
-    environment:
-      POSTGRES_DB: 'jfstat'
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-    volumes:
-      - /docker/appdata/jellystat/postgres-data:/var/lib/postgresql/data
-
-  jellystat:
-    image: cyfershepard/jellystat:1.1.5
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_IP: jellystat-db
-      POSTGRES_PORT: 5432
-      JWT_SECRET: $JWT_SECRET
-    ports:
-      - "3000:3000"
-    volumes:
-      - /docker/appdata/jellystat/backup-data:/app/backend/backup-data
-    depends_on:
-      - jellystat-db
-    restart: unless-stopped
 
 volumes:
   nas:
