@@ -30,20 +30,11 @@ spec:
     controllers:
       jellyseerr:
         enabled: true
-        type: statefulset
+        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
 
         replicas: 1
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: jellyseerr-config
-              accessMode: ReadWriteOnce
-              size: 2Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /app/config
         
         pod:
           securityContext:
@@ -74,10 +65,10 @@ spec:
 
             resources:
               requests:
-                cpu: 20m
-                memory: 128Mi
-              limits:
+                cpu: 50m
                 memory: 256Mi
+              limits:
+                memory: 512Mi
 
     service:
       app:
@@ -103,3 +94,13 @@ spec:
           - hosts:
               - "request.${PUBLIC_DOMAIN}"
             secretName: mafyuh-dev-production-tls
+    
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 2Gi
+        storageClass: longhorn
+        globalMounts:
+          - path: /app/config
