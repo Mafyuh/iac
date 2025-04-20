@@ -50,6 +50,7 @@ credentials.pkr.hcl
 /terraform/.bitwarden/device_identifier
 /docker/scalr-agent/docker-compose.yml
 /docker/Dockerfiles/scalr-agent/Dockerfile
+/docker/wazuh/config/
 # Plausible
 compose.override.yml
 # SOPS
