@@ -66,7 +66,7 @@ provider "proxmox" {
   ## TODO: stop using root
   username = "root@pam"
   insecure = false
-
+  random_vm_ids = true
   ssh {
     agent = true
   ## TODO: stop using root

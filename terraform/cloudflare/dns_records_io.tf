@@ -35,7 +35,7 @@ resource "cloudflare_dns_record" "io_links" {
 }
 
 resource "cloudflare_dns_record" "io_local_wildcard" {
-  content = "10.69.69.80"
+  content = "10.69.69.200"
   name    = "*.local.${var.domains["io"]}"
   proxied = false
   ttl     = 1

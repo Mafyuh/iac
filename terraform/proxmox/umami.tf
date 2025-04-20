@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "Plausible" {
     node_name    = "prox"
     vm_id        = "7894"
-    name         = "Plausible"
+    name         = "umami"
     description  = "Website tracker"
 
     cpu {
@@ -39,6 +39,11 @@ resource "proxmox_virtual_environment_vm" "Plausible" {
 
         user_data_file_id = proxmox_virtual_environment_file.cloud_config.id
     }
+
+    vga {
+      memory = 16 
+      type   = "serial0"
+  }
 
     lifecycle {
     ignore_changes = [
