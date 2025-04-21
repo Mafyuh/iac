@@ -9,6 +9,9 @@ sonarr:
     include:
       - template: sonarr-v4-custom-formats-web-1080p
       - template: sonarr-v4-quality-profile-web-1080p
+      - template: sonarr-quality-definition-series
+      - template: sonarr-v4-quality-profile-web-2160p
+      - template: sonarr-v4-custom-formats-web-2160p
 
     # quality_profiles:
     #   - name: WEB-DL (1080p)
@@ -34,6 +37,11 @@ sonarr:
         assign_scores_to:
           - name: WEB-DL (1080p)
             score: -10000
+
+      - trash_ids:
+          - 9b27ab6498ec0f31a3353992e19434ca # DV (WEBDL)
+        assign_scores_to:
+          - name: WEB-2160p
 
 radarr:
   radarr_main:
