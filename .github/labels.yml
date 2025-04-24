@@ -1,0 +1,33 @@
+---
+## Stolen from https://github.com/chkpwd/iac/
+# Areas
+- name: area/docs
+  color: "0e8a16"
+- name: area/github
+  color: "0e8a16"
+- name: area/kubernetes
+  color: "0e8a16"
+- name: area/renovate
+  color: "0e8a16"
+- name: area/terraform
+  color: "0e8a16"
+- name: area/ansible
+  color: "0e8a16"
+- name: area/packer
+  color: "0e8a16"
+# Renovate
+- name: renovate/container
+  color: "027fa0"
+- name: renovate/github-action
+  color: "027fa0"
+- name: renovate/helm
+  color: "027fa0"
+# Semantic Types
+- name: type/digest
+  color: "ffeC19"
+- name: type/patch
+  color: "ffeC19"
+- name: type/minor
+  color: "ff9800"
+- name: type/major
+  color: "f6412d"

@@ -1,0 +1,40 @@
+---
+    ## Stolen from https://github.com/chkpwd/iac/
+    name: "Label Sync"
+    on:
+      workflow_dispatch:
+      push:
+        branches: ["main"]
+        paths: [".github/labels.yml"]
+      schedule:
+        - cron: "0 0 * * *"
+      pull_request_target:
+        branches: ["main"]
+    permissions:
+      issues: write
+    jobs:
+      label-sync:
+        name: Label Sync
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+            with:
+              sparse-checkout: .github/labels.yml
+          - name: Sync Labels
+            uses: EndBug/label-sync@v2
+            with:
+              config-file: .github/labels.yml
+              delete-other-labels: true
+      labeler:
+        name: Labeler
+        permissions:
+          contents: read
+          pull-requests: write
+        runs-on: ubuntu-latest
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        steps:
+          - name: Labeler
+            uses: actions/labeler@v5
+            with:
+              configuration-path: .github/labeler.yml
