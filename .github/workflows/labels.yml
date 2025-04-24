@@ -34,6 +34,11 @@
         runs-on: ubuntu-latest
         if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
         steps:
+          - name: Checkout PR branch
+            uses: actions/checkout@v4
+            with:
+              ref: ${{ github.event.pull_request.head.ref }}
+              sparse-checkout: .github
           - name: Labeler
             uses: actions/labeler@v5
             with:
