@@ -1,0 +1,11 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  packageRules: [
+    {
+      description: "Loose versioning",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["ghcr.io/hotio/qbittorrent"],
+      versioning: "loose",
+    },
+  ],
+}
