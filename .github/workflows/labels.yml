@@ -20,7 +20,7 @@
           - name: Checkout
             uses: actions/checkout@v4
             with:
-              sparse-checkout: .github/labels.yml
+              sparse-checkout: .github
           - name: Sync Labels
             uses: EndBug/label-sync@v2
             with:
