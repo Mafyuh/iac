@@ -9,6 +9,9 @@ area/github:
 area/kubernetes:
   - changed-files:
       - any-glob-to-any-file: "kubernetes/**/*"
+area/docker:
+  - changed-files:
+      - any-glob-to-any-file: "docker/**/*"
 area/terraform:
   - changed-files:
       - any-glob-to-any-file: "terraform/**/*"
