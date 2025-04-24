@@ -1,8 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    "./.renovate/labels.json5"
+    "config:recommended"
   ],
   "ignorePaths": [
     "kubernetes/cluster/production/flux-system/gotk-components.yaml"
@@ -16,5 +15,35 @@
   "kubernetes": {
     "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
   },
-  "dependencyDashboardTitle": ":robot: Renovate Dashboard"
+  "dependencyDashboardTitle": ":robot: Renovate Dashboard",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["type/major"]
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "labels": ["type/minor"]
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "labels": ["type/patch"]
+    },
+    {
+      "matchUpdateTypes": ["digest"],
+      "labels": ["type/digest"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "addLabels": ["renovate/container"]
+    },
+    {
+      "matchDatasources": ["helm"],
+      "addLabels": ["renovate/helm"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "addLabels": ["renovate/github-action"]
+    }
+  ]
 }
