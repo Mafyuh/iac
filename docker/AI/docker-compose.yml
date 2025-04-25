@@ -38,25 +38,6 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
 
-  searxng:
-    image: searxng/searxng@sha256:066ef8cc1ba15a9e402c9d686dd5ec03ebd1af7605f679b3e6999162454a3ba9
-    container_name: searxng
-    networks:
-      - ai-stack
-    environment:
-      - PUID=${PUID:-1000}
-      - PGID=${PGID:-1000}
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-      - /docker/appdata/searxng:/etc/searxng
-    depends_on:
-      - ollama
-      - open-webui
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
-
   stable-diffusion-download:
     build: /docker/appdata/stable-diffusion-webui-docker/services/download/
     image: comfy-download
@@ -97,9 +78,9 @@ services:
 
 networks:
   ai-stack:
-    external: true
+    external: false
 
 volumes:
   ollama:
-    external: true
+    external: false
   open-webui:
