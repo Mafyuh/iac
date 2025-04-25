@@ -1,0 +1,13 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  packageRules: [
+    {
+      "matchPackageNames": ["ollama/ollama"],
+      "customChangelogUrl": "https://github.com/ollama/ollama/releases"
+    },
+    {
+      "matchPackageNames": ["grafana/loki"],
+      "customChangelogUrl": "https://github.com/grafana/loki/releases"
+    }
+ ]
+}

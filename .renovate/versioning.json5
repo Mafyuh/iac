@@ -4,7 +4,7 @@
     {
       description: "Loose versioning",
       matchDatasources: ["docker"],
-      matchPackageNames: ["ghcr.io/hotio/qbittorrent"],
+      matchPackageNames: ["ghcr.io/linuxserver/kasm"],
       versioning: "loose",
     },
   ],
