@@ -4,14 +4,14 @@
   become: true
   tasks:
     - name: Update apt cache
-      apt:
-        update_cache: yes
+      ansible.builtin.apt:
+        update_cache: true
 
     - name: Upgrade all packages
-      apt:
-        upgrade: yes
+      ansible.builtin.apt:
+        upgrade: true
 
     - name: Remove unnecessary packages
-      apt:
-        autoremove: yes
-        purge: yes
+      ansible.builtin.apt:
+        autoremove: true
+        purge: true

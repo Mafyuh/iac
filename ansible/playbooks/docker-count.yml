@@ -4,12 +4,15 @@
   gather_facts: false
   tasks:
     - name: Count running Docker containers on each host
-      shell: "docker ps -q | wc -l"
+      ansible.builtin.shell: |
+        set -o pipefail
+        docker ps -q | wc -l
       register: container_count
       changed_when: false
 
+
     - name: Display count for each host
-      debug:
+      ansible.builtin.debug:
         msg: "Host {{ inventory_hostname }} has {{ container_count.stdout }} running Docker containers"
 
 - name: Aggregate total count
@@ -17,11 +20,11 @@
   gather_facts: false
   tasks:
     - name: Collect container counts from all hosts
-      set_fact:
+      ansible.builtin.set_fact:
         container_counts: >-
           {{ hostvars | dict2items | selectattr('value.container_count', 'defined') |
           map(attribute='value.container_count.stdout') | map('int') | list }}
 
     - name: Display total running Docker containers
-      debug:
+      ansible.builtin.debug:
         msg: "Total running Docker containers across all hosts: {{ container_counts | sum }}"

@@ -3,5 +3,6 @@
   hosts: all
   become: false
   tasks:
-    - name: Prune unused Docker images using shell
-      shell: docker image prune -f
+    - name: Prune unused Docker images
+      ansible.builtin.command: docker image prune -a -f
+      changed_when: false

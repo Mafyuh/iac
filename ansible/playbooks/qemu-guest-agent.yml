@@ -2,14 +2,14 @@
   hosts: "*"
   tasks:
     - name: Install qemu-guest-agent
-      apt:
+      ansible.builtin.apt:
         name: qemu-guest-agent
         state: present
         update_cache: true
       become: true
 
     - name: Start qemu-guest-agent service
-      systemd:
+      ansible.builtin.systemd:
         name: qemu-guest-agent
         state: started
       become: true

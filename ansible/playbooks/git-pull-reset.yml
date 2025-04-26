@@ -2,23 +2,13 @@
 - name: Reset and Pull Git Repository
   hosts: all
   tasks:
-    - name: Change to iac directory
-      shell: cd ~/iac
-      args:
-        chdir: "/home/{{ ansible_user }}"
-      environment:
-        HOME: "/home/{{ ansible_user }}"
-
-    - name: Git Pull
-      shell: git pull
-      args:
-        chdir: "/home/{{ ansible_user }}/iac"
-      environment:
-        HOME: "/home/{{ ansible_user }}"
-
-    - name: Git Reset
-      shell: git reset --hard origin/main
-      args:
-        chdir: "/home/{{ ansible_user }}/iac"
+    - name: Ensure repo is in clean state
+      ansible.builtin.git:
+        repo: 'https://github.com/mafyuh/iac.git'
+        dest: "/home/{{ ansible_user }}/iac"
+        version: main
+        force: true
+        update: true
+        accept_hostkey: true
       environment:
         HOME: "/home/{{ ansible_user }}"
