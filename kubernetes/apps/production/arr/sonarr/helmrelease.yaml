@@ -152,7 +152,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 3Gi
+        size: 4Gi
         storageClass: longhorn
         globalMounts:
           - path: /config
