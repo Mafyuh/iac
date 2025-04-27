@@ -1,0 +1,7 @@
+---
+- name: Setup Kopia on servers
+  hosts: all
+  become: true
+
+  roles:
+    - kopia

@@ -1,0 +1,15 @@
+---
+- name: Create kopia snapshots immediately
+  ansible.builtin.shell: |
+    kopia snapshot create {{ item.path }} --description="{{ item.description }}"
+  with_items: "{{ kopia_snapshots }}"
+  become: true
+
+- name: Setup kopia snapshot cron job
+  ansible.builtin.cron:
+    name: "Kopia snapshot {{ item.path }}"
+    minute: "0"
+    hour: "3"
+    user: root
+    job: "kopia snapshot create {{ item.path }} --description='Automated backup'"
+  with_items: "{{ kopia_snapshots }}"

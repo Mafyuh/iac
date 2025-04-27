@@ -1,0 +1,9 @@
+---
+kopia_server_url: "https://10.0.0.6:51515"
+kopia_server_cert_fingerprint: "eb136d1dd07343e3020284055405d07c11677dff9d15d8fa90338ede7892ca2c"
+
+kopia_snapshots:
+  - path: "/home"
+    description: "Home directory backup"
+  - path: "/docker"
+    description: "Docker directory backup"

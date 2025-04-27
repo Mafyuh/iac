@@ -1,0 +1,6 @@
+---
+- name: Connect to Kopia server
+  import_tasks: connect.yml
+
+- name: Create snapshots
+  import_tasks: snapshot.yml

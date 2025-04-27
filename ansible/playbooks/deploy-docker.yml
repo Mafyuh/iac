@@ -32,9 +32,8 @@
         dest: "{{ repo_path }}/.env"
         content: |
           {% for key, secret_id in env_variables.items() %}
-          {{ key }}={{ lookup('bitwarden.secrets.lookup', secret_id) }}
+          {{ key }}={{ lookup('community.general.bitwarden_secrets_manager', secret_id).value }}
           {% endfor %}
-      ignore_errors: true
 
     - name: Restart services using Docker Compose
       community.docker.docker_compose_v2:

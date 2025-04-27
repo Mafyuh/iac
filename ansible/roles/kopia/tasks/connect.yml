@@ -1,0 +1,13 @@
+---
+- name: Check if kopia is already connected
+  ansible.builtin.shell: |
+    kopia repository status
+  register: kopia_status
+  ignore_errors: true
+  changed_when: false
+
+- name: Connect kopia to server if not connected
+  ansible.builtin.shell: |
+    kopia repository connect server --url {{ kopia_server_url }} --server-cert-fingerprint {{ kopia_server_cert_fingerprint }}
+  when: kopia_status.rc != 0
+  become: true
