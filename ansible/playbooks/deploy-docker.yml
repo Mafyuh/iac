@@ -27,14 +27,25 @@
       ansible.builtin.set_fact:
         env_variables: "{{ secret_mapping[target_host]['env_variables'] | default({}) }}"
 
+    - name: Lookup secrets on the control machine
+      local_action: 
+        module: community.general.bitwarden_secrets_manager
+        secret_id: "{{ item }}"
+      loop: "{{ env_variables.values() }}"
+      register: secret_values
+
+    - name: Set env variables with secrets
+      ansible.builtin.set_fact:
+        env_variables_with_secrets: |
+          {% for key, secret_id in env_variables.items() %}
+            {{ key }}={{ secret_values.results[loop.index0].value }}
+          {% endfor %}
+
     - name: Write .env file to target host
       ansible.builtin.copy:
         dest: "{{ repo_path }}/.env"
-        content: |
-          {% for key, secret_id in env_variables.items() %}
-          {{ key }}={{ lookup('community.general.bitwarden_secrets_manager', secret_id).value }}
-          {% endfor %}
-
+        content: "{{ env_variables_with_secrets }}"
+    
     - name: Restart services using Docker Compose
       community.docker.docker_compose_v2:
         project_src: "{{ repo_path }}"
