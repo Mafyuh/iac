@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     unzip \
     git \
+    jq \
     nodejs \
     ca-certificates \
     libssl3 \

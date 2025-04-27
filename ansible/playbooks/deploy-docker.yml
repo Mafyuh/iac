@@ -29,7 +29,7 @@
 
     - name: Lookup secrets on the control machine
       local_action:
-        module: ansible.builtin.command
+        module: ansible.builtin.shell
         cmd: "bws secret get {{ item }} | jq -r '.value'"
       loop: "{{ env_variables.values() }}"
       register: bw_secret_output
