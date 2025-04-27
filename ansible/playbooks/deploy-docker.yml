@@ -28,18 +28,19 @@
         env_variables: "{{ secret_mapping[target_host]['env_variables'] | default({}) }}"
 
     - name: Lookup secrets on the control machine
-      local_action: 
-        module: community.general.bitwarden_secrets_manager
-        secret_id: "{{ item }}"
+      local_action:
+        module: ansible.builtin.command
+        cmd: "bws secret get {{ item }} | jq -r '.value'"
       loop: "{{ env_variables.values() }}"
-      register: secret_values
+      register: bw_secret_output
 
     - name: Set env variables with secrets
       ansible.builtin.set_fact:
         env_variables_with_secrets: |
-          {% for key, secret_id in env_variables.items() %}
-            {{ key }}={{ secret_values.results[loop.index0].value }}
+          {% for key, secret in env_variables.keys() | zip(bw_secret_output.results) %}
+          {{ key }}={{ secret.stdout }}
           {% endfor %}
+
 
     - name: Write .env file to target host
       ansible.builtin.copy:
