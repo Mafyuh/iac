@@ -1,0 +1,14 @@
+plugin: netbox.netbox.nb_inventory
+api_endpoint: https://netbox.mafyuh.xyz
+validate_certs: true
+config_context: false
+group_by:
+  - device_roles
+# query_filters:
+#   - role: network-edge-router
+# device_query_filters:
+#   - has_primary_ip: 'true'
+#   - tenant__n: internal
+token: "{{ lookup('community.general.bitwarden_secrets_manager', 'e379959b-fa31-48aa-b37a-b2ce004d36ad').value }}"
+compose:
+  ansible_port: 2424
