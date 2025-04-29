@@ -115,5 +115,3 @@ Some good references for how I learned this stuff (other than RTM)
 
 ## 📌 **To-Do**
 See [Project Board](https://github.com/users/Mafyuh/projects/1)
-
-.
