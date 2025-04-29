@@ -105,6 +105,17 @@ resource oci_core_default_security_list Default-Security-List-for-vcn-20230309-0
     }
   }
   ingress_security_rules {
+    description = "SSH"
+    protocol    = "6"
+    source      = "${data.bitwarden_secret.homelab_ip.value}/32"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "2424"
+      min = "2424"
+    }
+  }
+  ingress_security_rules {
     icmp_options {
       code = "4"
       type = "3"

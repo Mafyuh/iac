@@ -5,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "Runner" {
   vm_id        = 952
   name         = "Runner"
   description  = "Forgejo Runner for iac"
-  tags         = ["tofu", "ubuntu-22", "iac-repo", "infrastructure"]
+  tags         = ["tofu", "ubuntu-22", "iac-repo", "ansible"]
 
   agent {
     enabled = true
@@ -50,7 +50,8 @@ resource "proxmox_virtual_environment_vm" "Runner" {
   initialization {
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "10.0.0.206/24"
+        gateway = "10.0.0.1"
       }
     }
 

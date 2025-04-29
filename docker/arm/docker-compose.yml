@@ -15,7 +15,7 @@ services:
     networks:
       - gitea_main
     volumes:
-      - /home/ubuntu/forgejo/data:/data
+      - /home/mafyuh/forgejo/data:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
@@ -35,7 +35,7 @@ services:
     networks:
       - gitea_main
     volumes:
-      - /home/ubuntu/forgejo/mysql:/var/lib/mysql
+      - /home/mafyuh/forgejo/mysql:/var/lib/mysql
 
   gotify:
     image: gotify/server-arm7:2.6.3
@@ -139,7 +139,7 @@ services:
     ports:
       - 8989:80
     volumes:
-      - /home/ubuntu/vw-data/:/data
+      - /home/mafyuh/vw-data/:/data
     environment:
       - DOMAIN=$VWDOMAIN
       - SIGNUPS_ALLOWED=false

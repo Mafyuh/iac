@@ -5,10 +5,10 @@ resource "proxmox_virtual_environment_vm" "NPM" {
     vm_id        = 204
     name         = "Nginx-Proxy-Manager"
     description  = "Nginx Proxy Manager"
-    tags         = ["tofu", "ubuntu24", "auto-homelab-repo", "infrastructure"]
+    tags         = ["tofu", "ubuntu24", "infrastructure", "ansible"]
 
     agent {
-      enabled = true # read 'Qemu guest agent' section, change to true only when ready
+      enabled = true
     }
 
     clone {

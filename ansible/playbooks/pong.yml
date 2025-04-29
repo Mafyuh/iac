@@ -1,0 +1,12 @@
+---
+- name: Basic Ping Pong Playbook
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Ping the target
+      ping:
+
+    - name: Print Pong message
+      debug:
+        msg: "Pong"

@@ -1,40 +1,39 @@
-resource "proxmox_virtual_environment_vm" "Plausible" {
+resource "proxmox_virtual_environment_vm" "adguard" {
     node_name    = "prox"
-    vm_id        = "7894"
-    name         = "umami"
-    description  = "Website tracker"
+    name         = "adguard"
+    description  = "adguard server"
+    vm_id        = 122
     tags         = ["tofu", "ubuntu24", "ansible"]
 
     cpu {
-        cores = "3"
+        cores = "2"
         type  = "host"
         architecture = "x86_64"
     }
 
+    agent {
+        enabled = true
+    }
+
     memory {
-        dedicated = "4096"
+        dedicated = "2048"
     }
 
     network_device {
         bridge  = "vmbr0"
-        vlan_id = 1
     }
 
     disk {
         datastore_id = "Fast2Tb"
-        size         = "30"
+        size         = "23"
         interface    = "scsi0"
-    }
-
-    clone {
-        vm_id = "9996"
     }
 
     initialization {
         ip_config {
             ipv4 {
-                address = "10.69.69.199/24"
-                gateway = "10.69.69.1"
+                address = "10.0.0.40/24"
+                gateway = "10.0.0.1"
             }
         }
 

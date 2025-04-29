@@ -1,0 +1,20 @@
+## DOCS https://oci-ansible-collection.readthedocs.io/en/latest/collections/oracle/oci/oci_inventory.html#parameter-filters
+plugin: oracle.oci.oci
+config_file: ~/.oci/config
+config_profile: DEFAULT
+hostname_format_preferences:
+  - "display_name"
+
+# Define dynamic groups based on tags
+# keyed_groups:
+#   # Group based on the 'CreatedBy' tag under the 'Oracle-Tags' namespace
+#   - key: defined_tags.Oracle-Tags.CreatedBy
+#     prefix: created_by_
+
+#   # Group based on the 'CreatedOn' tag under the 'Oracle-Tags' namespace
+#   - key: defined_tags.Oracle-Tags.CreatedOn
+#     prefix: created_on_
+compose:
+  ansible_user: mafyuh
+  ansible_port: 2424
+  ansible_host: public_ip

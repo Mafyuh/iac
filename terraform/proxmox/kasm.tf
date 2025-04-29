@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "Kasm2" {
   vm_id        = 102
   name         = "Kasm"
   description  = "kasm"
-  tags         = ["tofu", "ubuntu-22", "iac-repo"]
+  tags         = ["tofu", "ubuntu-22", "iac-repo", "ansible"]
   started      = true
   machine      = "q35"
   
@@ -49,7 +49,8 @@ resource "proxmox_virtual_environment_vm" "Kasm2" {
   initialization {
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "10.69.69.189/24"
+        gateway = "10.69.69.1"
       }
     }
 

@@ -1,0 +1,15 @@
+## DOCS https://docs.ansible.com/ansible/latest/collections/community/general/proxmox_inventory.html
+plugin: community.general.proxmox
+url: https://prox.mafyuh.xyz
+user: root@pam
+password: "{{ lookup('community.general.bitwarden_secrets_manager', '38b0f0b7-bd99-4d60-bc83-b2cc00721daf').value }}"
+validate_certs: true
+want_proxmox_nodes_ansible_host: false
+qemu_extended_statuses: false
+want_facts: true
+exclude_nodes: true
+compose:
+  ansible_host: proxmox_ipconfig0["ip"].split('/')[0]
+  ansible_user: mafyuh
+filters:
+  - "proxmox_tags_parsed is defined and 'ansible' in proxmox_tags_parsed"

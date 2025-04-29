@@ -2,6 +2,7 @@ resource "proxmox_virtual_environment_vm" "wazuh" {
     node_name    = "prox"
     name         = "wazuh"
     description  = "wazuh server"
+    tags         = ["tofu", "ubuntu24", "ansible"]
 
     cpu {
         cores = "6"
@@ -31,8 +32,8 @@ resource "proxmox_virtual_environment_vm" "wazuh" {
     initialization {
         ip_config {
             ipv4 {
-                address = "dhcp"
-                gateway = null
+                address = "10.69.69.202/24"
+                gateway = "10.69.69.1"
             }
         }
 
