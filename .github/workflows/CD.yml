@@ -142,13 +142,11 @@ jobs:
           [iac]
           dns.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ag_main_host }} ansible_user=mafyuh
           ai.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ai_host }} ansible_user=mafyuh ansible_port=2424
-          arm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arm_host }} ansible_user=ubuntu ansible_port=2424
-          auth.lan ansible_host=${{ steps.bitwarden-secrets.outputs.auth_host }} ansible_user=mafyuh
+          arm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arm_host }} ansible_user=mafyuh ansible_port=2424
           jf.lan ansible_host=${{ steps.bitwarden-secrets.outputs.jf_host }} ansible_user=mafyuh
           kasm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.kasm_host }} ansible_user=mafyuh
           netboot.lan ansible_host=${{ steps.bitwarden-secrets.outputs.netboot_host }} ansible_user=mafyuh
           npm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.npm_host }} ansible_user=mafyuh
-          plex.lan ansible_host=${{ steps.bitwarden-secrets.outputs.plex_host }} ansible_user=mafyuh ansible_port=2009
           ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }} ansible_user=mafyuh
           EOF
 
