@@ -39,7 +39,14 @@ jobs:
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
           
+      - name: Override Target Host and Folder (Manual Run)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "target_host=${{ github.event.inputs.target_host }}" >> $GITHUB_ENV
+          echo "folder=${{ github.event.inputs.folder }}" >> $GITHUB_ENV
+
       - name: Map Folder to Host
+        if: github.event_name != 'workflow_dispatch'
         shell: bash
         run: |
           IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
@@ -48,46 +55,19 @@ jobs:
 
           for folder in "${folder_array[@]}"; do
             case $folder in
-              arm)
-                host="ARM"
-                ;;
-              AI)
-                host="Main-PC"
-                ;;
-              ag-main)
-                host="adguard"
-                ;;
-              exporters)
-                host="all"
-                ;;
-              grafana)
-                host="Ubu"
-                ;;
-              jellyfin)
-                host="Ark-Ripper"
-                ;;
-              kasm)
-                host="Kasm"
-                ;;
-              netbox)
-                host="netbox"
-                ;;
-              npm)
-                host="Nginx-Proxy-Manager"
-                ;;
-              paperless)
-                host="Ubu"
-                ;;
-              umami)
-                host="umami"
-                ;;
-              wazuh)
-                host="wazuh"
-                ;;
-              *)
-                echo "Unknown folder: $folder"
-                exit 1
-                ;;
+              arm) host="ARM" ;;
+              AI) host="Main-PC" ;;
+              ag-main) host="adguard" ;;
+              exporters) host="all" ;;
+              grafana) host="Ubu" ;;
+              jellyfin) host="Ark-Ripper" ;;
+              kasm) host="Kasm" ;;
+              netbox) host="netbox" ;;
+              npm) host="Nginx-Proxy-Manager" ;;
+              paperless) host="Ubu" ;;
+              umami) host="umami" ;;
+              wazuh) host="wazuh" ;;
+              *) echo "Unknown folder: $folder" && exit 1 ;;
             esac
 
             if [ -z "$hosts" ]; then
@@ -100,15 +80,9 @@ jobs:
           done
 
           echo "Deploying to hosts: $hosts for folders: $folders"
-
           echo "target_host=$hosts" >> $GITHUB_ENV
           echo "folder=$folders" >> $GITHUB_ENV
 
-      - name: Override Target Host and Folder (Manual Run)
-        if: github.event_name == 'workflow_dispatch'
-        run: |
-          echo "target_host=${{ github.event.inputs.target_host }}" >> $GITHUB_ENV
-          echo "folder=${{ github.event.inputs.folder }}" >> $GITHUB_ENV
         
 
       - name: Set up SSH agent
