@@ -1,8 +1,8 @@
 - name: Deploy application
   hosts: "{{ target_host }}"
   vars:
-    repo_path: "/home/{{ ansible_user }}/iac/docker/{{ folder }}"
-    secrets_mapping_file: "/home/{{ ansible_user }}/iac/docker/secret-mappings.yml"
+    repo_path: "/home/mafyuh/iac/docker/{{ folder }}"
+    secrets_mapping_file: "/home/mafyuh/iac/docker/secret-mappings.yml"
   tasks:
     - name: Ensure the repository is up-to-date
       ansible.builtin.shell: git pull
