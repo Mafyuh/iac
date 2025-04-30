@@ -50,44 +50,41 @@ jobs:
 
           for folder in "${folder_array[@]}"; do
             case $folder in
-              actual)
-                host="ubu.lan"
-                ;;
               arm)
-                host="arm.lan"
+                host="ARM"
                 ;;
               AI)
-                host="ai.lan"
+                host="Main-PC"
                 ;;
               ag-main)
-                host="dns.lan"
+                host="adguard"
                 ;;
               exporters)
                 host="all"
                 ;;
               grafana)
-                host="ubu.lan"
+                host="Ubu"
                 ;;
               jellyfin)
-                host="jf.lan"
+                host="Ark-Ripper"
                 ;;
               kasm)
-                host="kasm.lan"
+                host="Kasm"
                 ;;
-              netboot)
-                host="netboot.lan"
-                ;;
-              nexterm)
-                host="ubu.lan"
+              netbox)
+                host="netbox"
                 ;;
               npm)
-                host="npm.lan"
-                ;;
-              plex)
-                host="plex.lan"
+                host="Nginx-Proxy-Manager"
                 ;;
               paperless)
-                host="ubu.lan"
+                host="Ubu"
+                ;;
+              umami)
+                host="umami"
+                ;;
+              wazuh)
+                host="wazuh"
                 ;;
               *)
                 echo "Unknown folder: $folder"
@@ -123,32 +120,7 @@ jobs:
           access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           base_url: https://vault.bitwarden.com
           secrets: |
-            d9924181-b061-44e0-b7b9-b264004791eb > ag_main_host
-            e74d1f67-c909-4a2e-b6fc-b23e001dfa4a > ai_host
-            6f9cef86-eb39-4e05-8c5b-b23e001e6170 > arm_host
-            52512c15-b474-42c3-9835-b23e001edf35 > auth_host
-            903364d9-1b29-4b7f-aa66-b23e001f7327 > jf_host
-            e4c5d8be-b91f-41ab-8071-b23e00203340 > kasm_host
-            566329f5-5af3-4bcd-b187-b23e00216134 > netboot_host
-            fb62a8d1-6dd5-4fab-aff4-b23e0021e215 > npm_host
-            fe0a2fa5-8e2b-4b4f-ac68-b26100315b20 > plex_host
-            a5b6fa4b-4643-4f85-988b-b23e00245e2f > ubu_host
             26b06759-9791-42d7-a076-b23e0063c4dd > ssh_private_key
-
-  
-      - name: Create hosts.ini file
-        run: |
-          cat <<EOF > ansible/hosts.ini
-          [iac]
-          dns.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ag_main_host }} ansible_user=mafyuh
-          ai.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ai_host }} ansible_user=mafyuh ansible_port=2424
-          arm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arm_host }} ansible_user=mafyuh ansible_port=2424
-          jf.lan ansible_host=${{ steps.bitwarden-secrets.outputs.jf_host }} ansible_user=mafyuh
-          kasm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.kasm_host }} ansible_user=mafyuh
-          netboot.lan ansible_host=${{ steps.bitwarden-secrets.outputs.netboot_host }} ansible_user=mafyuh
-          npm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.npm_host }} ansible_user=mafyuh
-          ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }} ansible_user=mafyuh
-          EOF
 
       - name: Create Private key
         run: |
@@ -172,9 +144,17 @@ jobs:
           BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
-          ansible-playbook -i ansible/hosts.ini ./ansible/playbooks/deploy-docker.yml \
-            --extra-vars "target_host=${{ env.target_host }} folder=${{ env.folder }}" | tee ansible_output.txt
+          set -e
+          ansible-playbook \
+            -i inventories/netbox/netbox.inventory.yml \
+            -i inventories/oracle/inventory.oci.yml \
+            -i inventories/proxmox/inventory.proxmox.yml \
+            ./ansible/playbooks/deploy-docker.yml \
+            --extra-vars "target_host=${target_host} folder=${folder}" \
+            | tee ansible_output.txt
+          
           if grep -q 'unreachable=1\|failed=[1-9]' ansible_output.txt; then
             echo "Ansible reported failures or unreachable hosts."
             exit 1
           fi
+  
