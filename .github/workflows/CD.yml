@@ -20,7 +20,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     container:
-      image: mafyuh/ansible-bws:1.1.4
+      image: mafyuh/ansible-bws:1.1.5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
