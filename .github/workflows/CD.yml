@@ -144,9 +144,9 @@ jobs:
         run: |
           set -e
           ansible-playbook \
-            -i inventories/netbox/netbox.inventory.yml \
-            -i inventories/oracle/inventory.oci.yml \
-            -i inventories/proxmox/inventory.proxmox.yml \
+            -i ansible/inventories/netbox/netbox.inventory.yml \
+            -i ansible/inventories/oracle/inventory.oci.yml \
+            -i ansible/inventories/proxmox/inventory.proxmox.yml \
             ./ansible/playbooks/deploy-docker.yml \
             --extra-vars "target_host=${target_host} folder=${folder}" \
             | tee ansible_output.txt
