@@ -111,26 +111,6 @@ jobs:
           echo "folder=${{ github.event.inputs.folder }}" >> $GITHUB_ENV
         
 
-      - name: Get Secrets from Bitwarden
-        id: bitwarden-secrets
-        uses: bitwarden/sm-action@v2
-        with:
-          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
-          base_url: https://vault.bitwarden.com
-          secrets: |
-            26b06759-9791-42d7-a076-b23e0063c4dd > ssh_private_key
-
-      - name: Create Private key
-        run: |
-          mkdir -p ~/.ssh
-          cat <<EOF > ~/.ssh/id_rsa
-          ${{ steps.bitwarden-secrets.outputs.ssh_private_key }}
-          EOF
-      
-      - name: Set permissions for private key
-        run: |
-          chmod 600 ~/.ssh/id_rsa
-
       - name: Set up SSH agent
         run: |
           eval $(ssh-agent -s)
