@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
     inputs:
       target_host:
-        description: "Target host (ex. ubu.lan, plex.lan, all)"
+        description: "Target host (ex. Ubu, ARM, Main-PC)"
         required: true
         type: string
       folder:
-        description: "Folder to deploy (ex. jellyfin, plex, all)"
+        description: "Folder to deploy (ex. jellyfin, arm, all)"
         required: true
         type: string
 
