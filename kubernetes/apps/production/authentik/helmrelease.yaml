@@ -101,3 +101,8 @@ spec:
         password: ${AUTH_PG_PASS}
     redis:
       enabled: true
+      architecture: standalone
+      auth:
+        enabled: false
+      master:
+        resourcesPreset: "none"
