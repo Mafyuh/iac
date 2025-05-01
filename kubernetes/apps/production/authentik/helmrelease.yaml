@@ -65,12 +65,6 @@ spec:
       env:
         - name: TMPDIR
           value: /tmp
-      volumeMounts:
-        - name: tmp
-          mountPath: /tmp
-      volumes:
-        - name: tmp
-          emptyDir: {}
       resources:
         requests:
           cpu: 20m
