@@ -22,6 +22,10 @@
       addLabels: ["renovate/container"],
     },
     {
+      matchDatasources: ["terraform"],
+      addLabels: ["renovate/terraform"],
+    },
+    {
       matchDatasources: ["helm"],
       addLabels: ["renovate/helm"],
     },
