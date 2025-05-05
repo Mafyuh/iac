@@ -42,7 +42,7 @@ services:
     command: tunnel --no-autoupdate run --token $CF_TOKEN
 
   twingate-famous-alligator:
-    image: twingate/connector@sha256:158a02cf34073d131ceadb2f1bfbb852bb8bc56a73c647a68ba3f0958fa2cf98
+    image: twingate/connector@sha256:91846330c7728a01aafac65ad769c1937a5919dd8dcdd538ab97fbc3a838d5c4
     container_name: twingate-famous-alligator
     restart: always
     environment:
