@@ -56,7 +56,7 @@ jobs:
           for folder in "${folder_array[@]}"; do
             case $folder in
               arm) host="ARM" ;;
-              AI) host="Main-PC" ;;
+              AI) host="Main PC" ;;
               ag-main) host="adguard" ;;
               exporters) host="all" ;;
               grafana) host="Ubu" ;;
