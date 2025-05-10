@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://umami:umami@db:5432/umami
+      DATABASE_URL: postgresql://umami:$DB_PASS@db:5432/umami
       DATABASE_TYPE: postgresql
       APP_SECRET: $APP_SECRET
     depends_on:
@@ -23,7 +23,7 @@ services:
     environment:
       POSTGRES_DB: umami
       POSTGRES_USER: umami
-      POSTGRES_PASSWORD: umami
+      POSTGRES_PASSWORD: $DB_PASS
     volumes:
       - umami-db-data:/var/lib/postgresql/data
     restart: always
