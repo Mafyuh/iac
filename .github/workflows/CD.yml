@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       target_host:
-        description: "Target host (ex. Ubu, ARM, Main-PC)"
+        description: "Target host (ex. Ubu, ARM, Main)"
         required: true
         type: string
       folder:
@@ -56,7 +56,7 @@ jobs:
           for folder in "${folder_array[@]}"; do
             case $folder in
               arm) host="ARM" ;;
-              AI) host="Main PC" ;;
+              AI) host="Main" ;;
               ag-main) host="adguard" ;;
               exporters) host="all" ;;
               grafana) host="Ubu" ;;

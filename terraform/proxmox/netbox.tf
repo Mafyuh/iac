@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_vm" "netbox" {
   
   # VM CPU Settings
   cpu {
-    cores = 2
+    cores = 4
     type  = "host"
     architecture = "x86_64"
   }
