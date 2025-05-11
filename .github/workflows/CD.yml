@@ -65,6 +65,7 @@ jobs:
               netbox) host="netbox" ;;
               npm) host="Nginx-Proxy-Manager" ;;
               paperless) host="Ubu" ;;
+              semaphore) host="semaphore" ;;
               umami) host="umami" ;;
               wazuh) host="wazuh" ;;
               *) echo "Unknown folder: $folder" && exit 1 ;;
