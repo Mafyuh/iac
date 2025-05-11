@@ -38,7 +38,7 @@ resource "proxmox_virtual_environment_vm" "Plausible" {
             }
         }
 
-        user_data_file_id = proxmox_virtual_environment_file.cloud_config.id
+        user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
     }
 
     vga {

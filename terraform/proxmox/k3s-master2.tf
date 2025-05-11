@@ -53,7 +53,7 @@ resource "proxmox_virtual_environment_vm" "K3s-Master2" {
             }
         }
 
-        user_data_file_id = proxmox_virtual_environment_file.cloud_config2.id
+        user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
     }
 
     lifecycle {
