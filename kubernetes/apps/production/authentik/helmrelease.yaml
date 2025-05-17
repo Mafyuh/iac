@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2025.4.0
+      version: 2025.4.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
