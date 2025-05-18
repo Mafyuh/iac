@@ -4,8 +4,8 @@ validate_certs: true
 config_context: false
 group_by:
   - device_roles
-# query_filters:
-#   - role: network-edge-router
+query_filters:
+  - tag: ansible
 # device_query_filters:
 #   - has_primary_ip: 'true'
 #   - tenant__n: internal

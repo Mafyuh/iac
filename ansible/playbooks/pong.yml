@@ -5,8 +5,8 @@
 
   tasks:
     - name: Ping the target
-      ping:
+      ansible.builtin.ping:
 
     - name: Print Pong message
-      debug:
+      ansible.builtin.debug:
         msg: "Pong"
