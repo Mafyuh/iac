@@ -20,6 +20,11 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
+      - name: Pre-clean workspace directory
+        run: |
+          echo "Cleaning workspace at ${{ github.workspace }}"
+          sudo rm -rf ${{ github.workspace }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
