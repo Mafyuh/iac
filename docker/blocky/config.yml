@@ -1,0 +1,45 @@
+upstreams:
+  groups:
+    default:
+      - 1.1.1.1
+      - https://dns.google/dns-query
+      - https://dns.nextdns.io
+      - tcp-tls:dns.quad9.net
+  strategy: parallel_best
+  timeout: 2s
+
+startVerifyUpstream: true
+connectIPVersion: v4
+
+customDNS:
+  customTTL: 1h
+  mapping:
+    ubu.lan: 10.69.69.2
+
+blocking:
+  blackLists:
+    ads:
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/light.txt
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+  clientGroupsBlock:
+    default:
+      - ads
+  blockType: zeroIp
+  blockTTL: 1m
+  loading:
+    refreshPeriod: 6h
+    downloads:
+      timeout: 60s
+      attempts: 5
+      cooldown: 10s
+    concurrency: 16
+    strategy: fast
+    maxErrorsPerSource: 5
+
+prometheus:
+  enable: true
+  path: /metrics
+
+ports:
+  dns: 53
+  http: 4000
