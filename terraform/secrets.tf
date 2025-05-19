@@ -14,8 +14,12 @@ data "bitwarden_secret" "pve2_ip_address" {
   id = "17ab7869-c7a1-4ece-8c64-b20800075213"
 }
 
-data "bitwarden_secret" "cloudflare_api_token" {
-  id = "9b8fa79a-ed9d-4d17-9b73-b2b700663f46"
+# data "bitwarden_secret" "cloudflare_api_token" {
+#   id = "9b8fa79a-ed9d-4d17-9b73-b2b700663f46"
+# }
+
+data "bitwarden_secret" "cloudflare_api_key" {
+  id = "87e2b23c-f62d-4b6d-8a3a-b2e1018983ac"
 }
 
 # data "bitwarden_secret" "github_token" {

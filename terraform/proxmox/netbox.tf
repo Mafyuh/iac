@@ -1,66 +1,67 @@
-resource "proxmox_virtual_environment_vm" "netbox" {
-  # VM General Settings
-  node_name    = "pve2"
-  name         = "netbox"
-  description  = "netbox"
-  tags         = ["tofu", "ubuntu24", "iac-repo", "ansible"]
-  started      = true
-  
-  agent {
-    enabled = true 
+resource "proxmox_virtual_environment_container" "netbox" {
+  node_name   = "pve2"
+  start_on_boot = true
+  unprivileged = true
+
+  description = "netbox"
+
+  tags = []
+
+  operating_system {
+    type = "debian"
+    template_file_id = "SATA500:debian-12-standard_12.7-1_amd64.tar.zst"
   }
 
-  clone {
-    vm_id = 9997
+  disk {
+    datastore_id = "SATA500"
+    size         = 45
   }
-  
-  # VM CPU Settings
+
   cpu {
-    cores = 4
-    type  = "host"
-    architecture = "x86_64"
+    architecture = "amd64"
+    cores        = 4
+    units        = 1024
   }
-  
-  # VM Memory Settings
+
   memory {
     dedicated = 4096
+    swap      = 512
   }
 
-  # VM Network Settings
-  network_device {
-    bridge  = "vmbr0"
-    vlan_id = 1
-  }
-
-  # VM Disk Settings
-  disk {
-    datastore_id = "Fast500Gb"
-    size         = 40
-    interface    = "scsi0"
-  }
-
-  vga {
-      memory = 16 
-      type   = "serial0"
+  network_interface {
+    name        = "eth0"
+    bridge      = "vmbr0"
+    enabled     = true
+    firewall    = false
+    mac_address = "BC:24:11:76:53:DF"
+    mtu         = 0
+    rate_limit  = 0
+    vlan_id     = 10
   }
 
   initialization {
-    ip_config {
-      ipv4 {
-        address = "10.69.69.175/24"
-        gateway = "10.69.69.1"
-      }
+    hostname = "netbox"
+
+    dns {
+      servers = ["10.0.0.40"]
     }
 
-    user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+
+  console {
+    enabled   = true
+    tty_count = 2
+    type      = "tty"
   }
 
   lifecycle {
     ignore_changes = [
-      initialization[0].user_account[0].keys,
-      initialization[0].user_account[0].password,
-      initialization[0].user_account[0].username,
-      initialization[0].user_data_file_id
+      operating_system[0].template_file_id
     ]
-  }
+ }
 }

@@ -49,7 +49,9 @@ terraform {
 }
 
 provider "cloudflare" {
-  api_token = data.bitwarden_secret.cloudflare_api_token.value
+  # api_token = data.bitwarden_secret.cloudflare_api_token.value
+  api_key   = data.bitwarden_secret.cloudflare_api_key.value 
+  email     = "matt@mafyuh.dev"
 }
 
 provider "bitwarden" {
