@@ -59,6 +59,32 @@ services:
     networks:
       - grafana
 
+  prometheus-pve-exporter:
+    init: true
+    container_name: prometheus-pve-exporter
+    environment:
+      - PVE_USER=prometheus@pve
+      - PVE_PASSWORD=${PVE_PASSWORD}
+    ports:
+        - 9221:9221
+    # volumes:
+    #     - /docker/appdata/pve-exporter/pve.yml:/etc/prometheus/pve.yml
+    image: prompve/prometheus-pve-exporter:3.5.4
+    restart: unless-stopped
+  
+  # smokeping_prober:
+  #   image: quay.io/superq/smokeping-prober:v0.10.0
+  #   container_name: smokeping_prober
+  #   privileged: true
+  #   environment:
+  #     - GOMAXPROCS=1
+  #   ports:
+  #     - 9374:9374
+  #   restart: unless-stopped
+  #   command: google.com
+  #   networks:
+  #     - grafana
+
   cluster-metrics-api:
     image: mafyuh/metrics-server:1.0.4
     build: .
