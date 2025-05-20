@@ -36,9 +36,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "kasm.${var.domains["io"]}"
-        service        = "http://${var.npm_ip_address}:80"
+        service        = "https://10.69.69.189"
         origin_request = {
-          no_tls_verify            = false
+          no_tls_verify            = true
           origin_server_name       = ""
           disable_chunked_encoding = false
           http2_origin             = false
@@ -60,7 +60,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "stats.${var.domains["dev"]}"
-        service        = "http://${var.npm_ip_address}:80"
+        service        = "http://10.69.69.199:3000"
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
