@@ -1,3 +1,5 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -8,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.7.3
+      version: 4.0.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -105,7 +107,6 @@ spec:
           http:
             port: *port
       metrics:
-        nameOverride: metrics
         controller: sabnzbd
         ports:
           metrics:
