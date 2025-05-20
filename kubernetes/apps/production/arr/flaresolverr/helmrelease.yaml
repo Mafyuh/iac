@@ -32,7 +32,7 @@ spec:
     controllers:
       flaresolverr:
         enabled: true
-        type: statefulset
+        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
 

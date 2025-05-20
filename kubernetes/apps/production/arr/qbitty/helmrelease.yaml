@@ -1,3 +1,5 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -8,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.7.3
+      version: 4.0.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -30,20 +32,11 @@ spec:
     controllers:
       qbitty:
         enabled: true
-        type: statefulset
+        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
 
         replicas: 1
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: qbitty-config
-              accessMode: ReadWriteOnce
-              size: 500Mi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
 
         containers:
           app:
@@ -112,6 +105,15 @@ spec:
             secretName: local-mafyuh-dev-production-tls
 
     persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 500Mi
+        storageClass: longhorn
+        globalMounts:
+          - path: /config
+
       data:
         enabled: true
         type: nfs
