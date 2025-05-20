@@ -72,7 +72,7 @@ services:
       # - ./config/wazuh-indexer/roles_mapping.yml:/usr/share/wazuh-indexer/opensearch-security/roles_mapping.yml
 
   wazuh.dashboard:
-    image: wazuh/wazuh-dashboard:4.11.2
+    image: wazuh/wazuh-dashboard:4.12.0
     hostname: wazuh.dashboard
     restart: unless-stopped
     ports:
