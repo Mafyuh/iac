@@ -1,7 +1,7 @@
 ---
 services:
   kasm:
-    image: ghcr.io/linuxserver/kasm@sha256:8b51c5df24dd3510d5e8750a3b712915f0f12122e3accbac08b3bc91ea9cb1fa
+    image: ghcr.io/linuxserver/kasm@sha256:d5fdbd663c44cc740b2817f624ed27f0466aa6346ecbb2f90d5a845708c32975
     container_name: kasm
     privileged: true
     environment:
