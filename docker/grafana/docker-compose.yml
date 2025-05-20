@@ -65,13 +65,14 @@ services:
     environment:
       - PVE_USER=prometheus@pve
       - PVE_PASSWORD=${PVE_PASSWORD}
+      - PVE_VERIFY_SSL=false
     ports:
         - 9221:9221
     # volumes:
     #     - /docker/appdata/pve-exporter/pve.yml:/etc/prometheus/pve.yml
     image: prompve/prometheus-pve-exporter:3.5.4
     restart: unless-stopped
-  
+
   # smokeping_prober:
   #   image: quay.io/superq/smokeping-prober:v0.10.0
   #   container_name: smokeping_prober
