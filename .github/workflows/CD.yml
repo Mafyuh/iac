@@ -23,6 +23,7 @@ jobs:
       - name: Pre-clean workspace directory
         run: |
           echo "Cleaning workspace at ${{ github.workspace }}"
+          sudo chown -R $USER:$USER "${GITHUB_WORKSPACE}"
           sudo rm -rf "${GITHUB_WORKSPACE:?}/*"
 
       - name: Checkout repository
