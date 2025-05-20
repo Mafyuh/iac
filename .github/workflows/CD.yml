@@ -68,7 +68,6 @@ jobs:
               grafana) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;
               kasm) host="Kasm" ;;
-              netbox) host="netbox" ;;
               npm) host="Nginx-Proxy-Manager" ;;
               paperless) host="Ubu" ;;
               semaphore) host="semaphore" ;;

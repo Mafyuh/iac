@@ -22,7 +22,7 @@
       addLabels: ["renovate/container"],
     },
     {
-      matchDatasources: ["terraform"],
+      matchDatasources: ["deps"],
       addLabels: ["renovate/terraform"],
     },
     {

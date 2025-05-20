@@ -12,6 +12,10 @@
     {
       "matchPackageNames": ["ghcr.io/linuxserver/kasm"],
       "customChangelogUrl": "https://github.com/linuxserver/docker-kasm/releases"
+    },
+    {
+      "matchPackageNames": ["cloudflare/cloudflared"],
+      "customChangelogUrl": "https://github.com/cloudflare/cloudflared/blob/master/RELEASE_NOTES"
     }
  ]
 }
