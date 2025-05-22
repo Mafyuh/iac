@@ -1,0 +1,167 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app lidarr
+  namespace: arr
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.0.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    controllers:
+      lidarr:
+        enabled: true
+        type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        replicas: 1
+        
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: &group 1000
+            fsGroup: *group
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-operations/lidarr
+              tag: 2.12.0.4633
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              LIDARR__INSTANCE_NAME: *app
+              LIDARR__PORT: &port 8686
+              LIDARR__APPLICATION_URL: "https://lidarr.${LOCAL_DOMAIN}"
+              LIDARR__THEME: dark
+              LIDARR__LOG_LEVEL: info
+
+            probes:
+              liveness:
+                enabled: false
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 150Mi
+              limits:
+                memory: 512Mi
+
+          metrics:
+            dependsOn: app
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.2.0
+            env:
+              PORT: &metricsPort 9707
+              URL: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local:8686"
+              APIKEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: recyclarr-secrets
+                    key: LIDARR_API_KEY
+            args: ["lidarr"]
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 125Mi
+
+    service:
+      app:
+        primary: true
+        controller: lidarr
+        ports:
+          http:
+            port: *port
+      metrics:
+        controller: lidarr
+        ports:
+          metrics:
+            port: *metricsPort
+    
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}-metrics'
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
+
+    ingress:
+      internal:
+        enabled: true
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
+          nginx.ingress.kubernetes.io/auth-signin: /outpost.goauthentik.io/start?rd=$escaped_request_uri
+          nginx.ingress.kubernetes.io/auth-response-headers: Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Host $http_host;
+        hosts:
+          - host: "lidarr.${LOCAL_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+              - path: /metrics
+                pathType: Prefix
+                service:
+                  identifier: metrics
+                  port: metrics
+        tls:
+          - hosts:
+              - "lidarr.${LOCAL_DOMAIN}"
+            secretName: local-mafyuh-dev-production-tls
+
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        globalMounts:
+          - path: /config
+
+      data:
+        enabled: true
+        type: nfs
+        server: "${NAS_IP}"
+        path: /mnt/thePool/thePoolShare
+        globalMounts:
+          - path: /data
