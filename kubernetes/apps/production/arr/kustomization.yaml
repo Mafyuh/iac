@@ -5,6 +5,7 @@ resources:
   - flaresolverr/
   - prowlarr/
   - jellyseerr/
+  - lidarr/
   - qbitty/
   - radarr/
   - recyclarr/
