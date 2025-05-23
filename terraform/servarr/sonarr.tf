@@ -8,28 +8,28 @@ resource "sonarr_delay_profile" "default" {
   preferred_protocol        = "usenet"
 }
 
-# resource "sonarr_download_client_sabnzbd" "sabnzbd" {
-#   enable   = true
-#   priority = 1
-#   name     = "sabnzbd"
-#   host     = "sabnzbd.arr.svc.cluster.local"
-#   url_base = "/"
-#   port     = 8080
-#   api_key  = data.bitwarden_secret.sabnzbd_api_key.value
-# }
+resource "sonarr_download_client_sabnzbd" "sabnzbd" {
+  enable   = true
+  priority = 1
+  name     = "sabnzbd"
+  host     = "sabnzbd-app.arr.svc.cluster.local"
+  url_base = "/"
+  port     = 8080
+  api_key  = data.bitwarden_secret.sabnzbd_api_key.value
+}
 
-# resource "sonarr_download_client_qbittorrent" "qbitty" {
-#   enable         = true
-#   priority       = 1
-#   name           = "qbittorrent"
-#   host           = "qbitty.arr.svc.cluster.local"
-#   url_base       = "/"
-#   tv_category    = "tv-sonarr"
-#   port           = 8080
-#   first_and_last = false
-#   username       = "mafyuh"
-#   password       = data.bitwarden_secret.qbitty_password.value
-# }
+resource "sonarr_download_client_qbittorrent" "qbitty" {
+  enable         = true
+  priority       = 1
+  name           = "qbittorrent"
+  host           = "qbitty.arr.svc.cluster.local"
+  url_base       = "/"
+  tv_category    = "tv-sonarr"
+  port           = 8080
+  first_and_last = false
+  username       = "mafyuh"
+  password       = data.bitwarden_secret.qbitty_password.value
+}
 
 resource "sonarr_naming" "media_naming_configs" {
   rename_episodes            = true

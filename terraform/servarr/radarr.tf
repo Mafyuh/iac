@@ -17,7 +17,7 @@ resource "radarr_download_client_sabnzbd" "sabnzbd" {
   enable         = true
   priority       = 1
   name           = "SABnzbd"
-  host           = "sabnzbd.arr.svc.cluster.local"
+  host           = "sabnzbd-app.arr.svc.cluster.local"
   url_base       = "/"
   port           = 8080
   movie_category = "movies"
@@ -87,9 +87,9 @@ resource "radarr_root_folder" "marvel" {
   path = "/data/Media/Marvel"
 }
 
-resource "radarr_root_folder" "dc" {
-  path = "/data/Media/DC"
-}
+# resource "radarr_root_folder" "dc" {
+#   path = "/data/Media/DC"
+# }
 
 resource "radarr_root_folder" "kids" {
   path = "/data/Media/Kids"
@@ -99,9 +99,9 @@ resource "radarr_root_folder" "movies" {
   path = "/data/Media/Movies"
 }
 
-resource "radarr_root_folder" "requests" {
-  path = "/data/Media/Requests"
-}
+# resource "radarr_root_folder" "requests" {
+#   path = "/data/Media/Requests"
+# }
 
 resource "radarr_root_folder" "stand-up" {
   path = "/data/Media/Stand-Up"

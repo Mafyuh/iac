@@ -1,8 +1,8 @@
 resource "prowlarr_application_sonarr" "sonarr" {
   name                  = "sonarr"
   sync_level            = "fullSync"
-  base_url              = "http://sonarr.arr.svc.cluster.local:8989"
-  prowlarr_url          = "http://prowlarr.arr.svc.cluster.local:9696"
+  base_url              = "http://sonarr-app.arr.svc.cluster.local:8989"
+  prowlarr_url          = "http://prowlarr-app.arr.svc.cluster.local:9696"
   api_key               = data.bitwarden_secret.sonarr_api_key.value
   sync_categories       = [5000, 5010, 5030, 5040, 5045, 5050, 5090]
   anime_sync_categories = [5070]
@@ -11,8 +11,8 @@ resource "prowlarr_application_sonarr" "sonarr" {
 resource "prowlarr_application_radarr" "radarr" {
   name            = "Radarr"
   sync_level      = "fullSync"
-  base_url        = "http://radarr.arr.svc.cluster.local:7878"
-  prowlarr_url    = "http://prowlarr.arr.svc.cluster.local:9696"
+  base_url        = "http://radarr-app.arr.svc.cluster.local:7878"
+  prowlarr_url    = "http://prowlarr-app.arr.svc.cluster.local:9696"
   api_key         = data.bitwarden_secret.radarr_api_key.value
   sync_categories = [2000, 2010, 2020, 2030, 2040, 2045, 2050, 2060, 2070, 2080, 2090]
 }
