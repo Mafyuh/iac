@@ -44,7 +44,7 @@ spec:
             runAsGroup: *context
             fsGroup: *context
             fsGroupChangePolicy: "OnRootMismatch"
-          dnsPolicy: None
+          dnsPolicy: ClusterFirst
 
         containers:
           app:
