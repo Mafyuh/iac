@@ -1,6 +1,6 @@
 services:
   blocky:
-    image: spx01/blocky:v0.25
+    image: spx01/blocky:v0.26
     container_name: blocky
     restart: unless-stopped
     hostname: blocky
