@@ -38,13 +38,6 @@ spec:
 
         replicas: 1
 
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: &group 1000
-            fsGroup: *group
-            fsGroupChangePolicy: "OnRootMismatch"
-
         containers:
           app:
             image:
