@@ -31,7 +31,7 @@ resource "proxmox_virtual_environment_vm" "Kasm2" {
   # VM Network Settings
   network_device {
     bridge  = "vmbr0"
-    vlan_id = 1
+    vlan_id = 2
   }
 
   # VM Disk Settings

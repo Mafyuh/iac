@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_vm" "wazuh" {
 
     network_device {
         bridge  = "vmbr0"
-        vlan_id = 1
+        vlan_id = 2
     }
 
     disk {

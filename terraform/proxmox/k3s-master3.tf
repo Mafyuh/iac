@@ -31,7 +31,7 @@ resource "proxmox_virtual_environment_vm" "K3s-Master3" {
     # VM Network Settings
     network_device {
         bridge  = "vmbr0"
-        vlan_id = 1
+        vlan_id = 2
     }
 
     # VM Disk Settings
