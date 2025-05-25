@@ -63,7 +63,7 @@ jobs:
             case $folder in
               arm) host="ARM" ;;
               AI) host="Main" ;;
-              ag-main) host="adguard" ;;
+              blocky) host="blocky" ;;
               exporters) host="all" ;;
               grafana) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;
