@@ -105,8 +105,9 @@ Some good references for how I learned this stuff (other than RTM)
   
   | Name            | Device        | Purpose             |
   |-----------------|---------------|---------------------|
-  | TP-Link Deco 6E | Deco 6E       | Wi-Fi Mesh Network, setup in AP mode  |
-  | pfSense Box     | [Custom](https://a.co/d/bN9r3bk)     | Router/Firewall     |
+  | Switch | [Unifi Flex 2.5Gb PoE](https://store.ui.com/us/en/category/all-switching/products/usw-flex-2-5g-8-poe)      | Switch with PoE  |
+  | Router     | [Unifi Dream Router 7](https://store.ui.com/us/en/products/udr7)     | Router/Firewall     |
+  |AP|[U7 Pro XG](https://store.ui.com/us/en/category/all-wifi/products/u7-pro-xg)|AP|
 
 </details>
 
