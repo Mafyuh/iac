@@ -1,0 +1,15 @@
+
+services:
+  fivem:
+    container_name: FiveM
+    restart: on-failure
+    environment:
+        - LICENSE_KEY=$FIVEM_LICENSE_KEY
+    ports:
+        - 30120:30120
+        - 30120:30120/udp
+    volumes:
+        - ~/fivem:/config
+    tty: true
+    stdin_open: true
+    image: spritsail/fivem@sha256:ed0f2ca9a20903a93d511c5d2569169fa2d15bd72e3c8f2d35ab7bb6ee2fbc5c
