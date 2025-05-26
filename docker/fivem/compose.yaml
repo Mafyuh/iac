@@ -5,6 +5,11 @@ services:
     restart: on-failure
     environment:
         - LICENSE_KEY=$FIVEM_LICENSE_KEY
+        - NO_DEFAULT_CONFIG=1
+        - MYSQL_HOST=mysql
+        - MYSQL_USER=fivem
+        - MYSQL_PASSWORD=$MYSQL_PASSWORD
+        - MYSQL_DATABASE=fivem_db
     ports:
         - 30120:30120
         - 30120:30120/udp
@@ -15,3 +20,23 @@ services:
     tty: true
     stdin_open: true
     image: spritsail/fivem@sha256:ed0f2ca9a20903a93d511c5d2569169fa2d15bd72e3c8f2d35ab7bb6ee2fbc5c
+    depends_on:
+      - mysql
+
+  
+  mysql:
+    image: mysql:8.4.5
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: fivem_db
+      MYSQL_USER: fivem
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  mysql_data:
