@@ -97,7 +97,7 @@ services:
       - gitea_main
 
   vaultwarden:
-    image: vaultwarden/server:1.33.2
+    image: vaultwarden/server:1.34.1
     container_name: vaultwarden
     ports:
       - 8989:80
