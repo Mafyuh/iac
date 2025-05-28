@@ -9,9 +9,9 @@ resource "authentik_provider_oauth2" "cloudflare" {
   signing_key          = data.authentik_certificate_key_pair.generated.id
 
   property_mappings = [
-    "4b0c926e-abed-4c70-bd8d-2a32af2b0bba",
-    "079ca9d7-277b-4341-981c-61d5969cf211",
-    "f3ccb1f7-555a-4cbe-b4be-f38805d03b58",
+    authentik_property_mapping_provider_scope.openid.id,
+    authentik_property_mapping_provider_scope.email.id,
+    authentik_property_mapping_provider_scope.profile.id,
   ]
 
   allowed_redirect_uris = [

@@ -25,3 +25,7 @@ data "authentik_flow" "default-source-authentication" {
 data "authentik_certificate_key_pair" "generated" {
   name = "authentik Self-signed Certificate"
 }
+
+data "authentik_certificate_key_pair" "main" {
+  name = "Main"
+}

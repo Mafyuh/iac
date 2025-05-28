@@ -2,16 +2,28 @@ resource "authentik_outpost" "embedded_outpost" {
   name = "authentik Embedded Outpost"
   protocol_providers = [
     authentik_provider_proxy.bazarr.id,
-    48,
-    37,
-    9,
+    authentik_provider_proxy.lidarr.id,
     authentik_provider_proxy.grafana.id,
-    27,
-    16,
-    19,
-    18,
-    15,
+    authentik_provider_proxy.sonarr.id,
+    authentik_provider_proxy.prowlarr.id,
+    authentik_provider_proxy.sabnzbd.id,
+    authentik_provider_proxy.radarr.id,
     56,
   ]
-  service_connection = "9c001843-74cb-4548-ba03-a986c6a27abc"
+  service_connection = authentik_service_connection_kubernetes.local.id
+}
+
+resource "authentik_outpost" "ldap" {
+  name = "LDAP"
+  type = "ldap"
+  protocol_providers = [
+    authentik_provider_ldap.jellyfin.id,
+    authentik_provider_ldap.ldap.id,
+  ]
+  service_connection = authentik_service_connection_kubernetes.local.id
+}
+
+resource "authentik_service_connection_kubernetes" "local" {
+  name  = "Local Kubernetes Cluster"
+  local = true
 }
