@@ -45,10 +45,6 @@ terraform {
       source = "ubiquiti-community/unifi"
       version = "0.41.2"
     }
-    # pfsense = {
-    #   source  = "marshallford/pfsense"
-    #   version = "0.15.0"
-    # }
   }
 }
 

@@ -21,3 +21,9 @@ resource "authentik_application" "grafana" {
   meta_launch_url   = "https://grafana.${var.domains["dev"]}"
   protocol_provider = authentik_provider_proxy.grafana.id
 }
+
+resource "authentik_policy_binding" "grafana-access" {
+  target = authentik_application.grafana.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}

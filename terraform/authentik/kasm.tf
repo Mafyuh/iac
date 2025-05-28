@@ -25,3 +25,14 @@ resource "authentik_application" "kasm" {
   protocol_provider = authentik_provider_saml.kasm.id
 }
 
+resource "authentik_policy_binding" "kasm-access" {
+  target = authentik_application.kasm.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}
+
+resource "authentik_policy_binding" "kasm-group-access" {
+  target = authentik_application.kasm.uuid
+  group = authentik_group.jellyfin-ldap.id
+  order  = 0
+}

@@ -30,3 +30,9 @@ resource "authentik_application" "cloudflare" {
   meta_description   = "Cloudflare Access (Logs into Open WebUI, authentik)"
   meta_icon        = "/media/public/application-icons/cloudflare1.svg"
 }
+
+resource "authentik_policy_binding" "cloudflare-group-access" {
+  target = authentik_application.cloudflare.uuid
+  group = authentik_group.jellyfin-ldap.id
+  order  = 0
+}

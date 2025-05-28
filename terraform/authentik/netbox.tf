@@ -36,3 +36,9 @@ resource "authentik_application" "netbox" {
   protocol_provider = authentik_provider_oauth2.netbox.id
   meta_icon        = "/media/public/application-icons/netbox.png"
 }
+
+resource "authentik_policy_binding" "netbox-access" {
+  target = authentik_application.netbox.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}

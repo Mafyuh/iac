@@ -29,3 +29,9 @@ resource "authentik_application" "linkwarden" {
   meta_icon        = "/media/public/application-icons/linkwarden.png"
   meta_launch_url   = "https://links.${var.domains["dev"]}"
 }
+
+resource "authentik_policy_binding" "linkwarden-access" {
+  target = authentik_application.linkwarden.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}

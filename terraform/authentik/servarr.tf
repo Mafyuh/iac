@@ -18,6 +18,12 @@ resource "authentik_application" "prowlarr" {
   protocol_provider = authentik_provider_proxy.prowlarr.id
 }
 
+resource "authentik_policy_binding" "prowlarr-access" {
+  target = authentik_application.prowlarr.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}
+
 ## Radarr
 resource "authentik_provider_proxy" "radarr" {
   name               = "radarr"
@@ -39,6 +45,12 @@ resource "authentik_application" "radarr" {
   meta_icon         = "/media/public/application-icons/radarr-icon-462x512-bydv4e4f.png"
   meta_launch_url   = "https://radarr.local.${var.domains["dev"]}"
   protocol_provider = authentik_provider_proxy.radarr.id
+}
+
+resource "authentik_policy_binding" "radarr-access" {
+  target = authentik_application.radarr.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
 }
 
 ## Sonarr
@@ -64,6 +76,12 @@ resource "authentik_application" "sonarr" {
   protocol_provider = authentik_provider_proxy.sonarr.id
 }
 
+resource "authentik_policy_binding" "sonarr-access" {
+  target = authentik_application.sonarr.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}
+
 ## Sabnzbd
 resource "authentik_provider_proxy" "sabnzbd" {
   name               = "sabnzbd"
@@ -82,6 +100,12 @@ resource "authentik_application" "sabnzbd" {
   meta_icon         = "/media/public/application-icons/download2.png"
   meta_launch_url   = "https://sab.local.${var.domains["dev"]}"
   protocol_provider = authentik_provider_proxy.sabnzbd.id
+}
+
+resource "authentik_policy_binding" "sabnzbd-access" {
+  target = authentik_application.sabnzbd.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
 }
 
 ## Lidarr
@@ -104,6 +128,12 @@ resource "authentik_application" "lidarr" {
   protocol_provider = authentik_provider_proxy.lidarr.id
 }
 
+resource "authentik_policy_binding" "lidarr-access" {
+  target = authentik_application.lidarr.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}
+
 ## Bazarr
 resource "authentik_provider_proxy" "bazarr" {
   name               = "Bazarr"
@@ -124,3 +154,8 @@ resource "authentik_application" "bazarr" {
   protocol_provider = authentik_provider_proxy.bazarr.id
 }
 
+resource "authentik_policy_binding" "bazarr-access" {
+  target = authentik_application.bazarr.uuid
+  group = authentik_group.admin_group.id
+  order  = 0
+}

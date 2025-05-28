@@ -13,3 +13,9 @@ resource "authentik_application" "jellyfin" {
   meta_launch_url   = "https://jelly.${var.domains["io"]}/"
   protocol_provider = authentik_provider_ldap.jellyfin.id
 }
+
+resource "authentik_policy_binding" "jellyfin-group-access" {
+  target = authentik_application.jellyfin.uuid
+  group = authentik_group.jellyfin-ldap.id
+  order  = 0
+}
