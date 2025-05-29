@@ -19,7 +19,7 @@ services:
         - ~/txData:/txData
     tty: true
     stdin_open: true
-    image: spritsail/fivem@sha256:ed0f2ca9a20903a93d511c5d2569169fa2d15bd72e3c8f2d35ab7bb6ee2fbc5c
+    image: spritsail/fivem@sha256:0e9e625f064c54b8610be9aec35ae492bf585be13c7729d902498c7e58f34323
     depends_on:
       - mysql
 
