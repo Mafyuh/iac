@@ -132,9 +132,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "home.${var.domains["dev"]}"
-        service        = "http://10.0.0.45:8123"
+        service        = "https://${var.k3s_nginx_ip_address}:443"
         origin_request = {
-          no_tls_verify            = false
+          no_tls_verify            = true
           origin_server_name       = ""
           disable_chunked_encoding = false
           http2_origin             = false

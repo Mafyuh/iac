@@ -14,7 +14,8 @@ connectIPVersion: v4
 customDNS:
   customTTL: 1h
   mapping:
-    ubu.lan: 10.69.69.2
+    ubu.lan: 10.69.69.2 ## For Loki
+    nas.lan: 10.0.0.10  ## For NAS
 
 blocking:
   blackLists:

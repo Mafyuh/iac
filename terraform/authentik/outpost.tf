@@ -9,6 +9,7 @@ resource "authentik_outpost" "embedded_outpost" {
     authentik_provider_proxy.sabnzbd.id,
     authentik_provider_proxy.radarr.id,
     56,
+    68,
   ]
   service_connection = authentik_service_connection_kubernetes.local.id
 }
