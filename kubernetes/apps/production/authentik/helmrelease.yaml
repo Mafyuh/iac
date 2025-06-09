@@ -92,7 +92,7 @@ spec:
     postgresql:
       enabled: true
       image:
-        tag: 17.5
+        tag: 17.5.0
       auth:
         password: ${AUTH_PG_PASS}
     redis:
