@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2025.6.1
+      version: 2025.4.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -91,6 +91,8 @@ spec:
         password: ${AUTH_PG_PASS}
     postgresql:
       enabled: true
+      image:
+        tag: 17.5
       auth:
         password: ${AUTH_PG_PASS}
     redis:
