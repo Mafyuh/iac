@@ -6,7 +6,7 @@ authentik = {
     }
 bitwarden = {
       source  = "maxlaverse/bitwarden"
-      version = "0.13.6"
+      version = "0.14.0"
     }
   }
 }
