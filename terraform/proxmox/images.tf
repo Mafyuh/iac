@@ -6,6 +6,7 @@ resource "proxmox_virtual_environment_download_file" "ubuntu_plucky_cloud_image"
   url                = "https://cloud-images.ubuntu.com/plucky/20250508/plucky-server-cloudimg-amd64.img"
   checksum           = "7010bcc253919ca1b287cab7848eafc845038eb8837b3b88f4ce1df865767a43"
   checksum_algorithm = "sha256"
+  overwrite          = false
 }
 
 ## Need to run this on pve2 to inject qemu-guest-agent into the image
