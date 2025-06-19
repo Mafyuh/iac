@@ -50,7 +50,6 @@ spec:
             runAsGroup: *context
             fsGroup: *context
             fsGroupChangePolicy: "OnRootMismatch"
-          dnsPolicy: None
 
         containers:
           app:
