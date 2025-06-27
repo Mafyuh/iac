@@ -42,6 +42,13 @@
           {% endfor %}
 
 
+    - name: Backup existing .env file if exists
+      ansible.builtin.shell: |
+        if [ -f .env ]; then cp .env .env.bak.$(date +%Y-%m-%d-%H-%M-%S); fi
+      args:
+        chdir: "{{ repo_path }}"
+      ignore_errors: true
+
     - name: Write .env file to target host
       ansible.builtin.copy:
         dest: "{{ repo_path }}/.env"
