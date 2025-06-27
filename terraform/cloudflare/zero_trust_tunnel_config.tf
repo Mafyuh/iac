@@ -13,6 +13,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "netbox.${var.domains["dev"]}"
         service        = "https://10.20.10.102"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -37,6 +38,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "kasm.${var.domains["io"]}"
         service        = "https://10.69.69.189"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -61,6 +63,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "stats.${var.domains["dev"]}"
         service        = "http://10.69.69.199:3000"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -85,6 +88,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "auth.${var.domains["io"]}"
         service        = "https://${var.k3s_nginx_ip_address}:443"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -109,6 +113,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "prox.${var.domains["io"]}"
         service        = "https://10.0.0.30:8006"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -133,6 +138,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "home.${var.domains["dev"]}"
         service        = "https://${var.k3s_nginx_ip_address}:443"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -157,6 +163,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "chat.${var.domains["io"]}"
         service        = "http://10.0.0.25:3000"
+        path           = ""
         origin_request = {
           no_tls_verify            = false
           origin_server_name       = ""
@@ -181,6 +188,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "prom-metrics.${var.domains["dev"]}"
         service        = "http://10.69.69.2:5000"
+        path           = ""
         origin_request = {
           no_tls_verify            = false
           origin_server_name       = ""
@@ -205,6 +213,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "*.${var.domains["io"]}"
         service        = "https://${var.k3s_nginx_ip_address}:443"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -229,6 +238,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       {
         hostname       = "*.${var.domains["dev"]}"
         service        = "https://${var.k3s_nginx_ip_address}:443"
+        path           = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""

@@ -24,3 +24,7 @@ data "bitwarden_secret" "vps_oci_vm_ip" {
 data "bitwarden_secret" "cf_account_id" {
   id = "c37639ff-ffd3-41cc-b875-b2b7012859d7"
 }
+
+data "bitwarden_secret" "pbx_ip" {
+  id = "34c5c2f3-541f-41de-bb25-b309001f9253"
+}
