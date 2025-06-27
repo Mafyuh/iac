@@ -1,6 +1,6 @@
 services:
   netbox: &netbox
-    image: docker.io/netboxcommunity/netbox:v4.3.1
+    image: docker.io/netboxcommunity/netbox:v4.3.3
     restart: unless-stopped
     depends_on:
       - postgres
