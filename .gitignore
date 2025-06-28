@@ -56,3 +56,5 @@ docker-compose.override.yml
 docker/netbox/env/
 # SOPS
 *.decrypted~*
+
+terraform/proxmox/sssd.tf

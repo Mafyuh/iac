@@ -22,82 +22,40 @@ on:
 jobs:
   run-playbook:
     runs-on: self-hosted
-    container:
-      image: mafyuh/ansible-bws:1.1.5
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Get Secrets from Bitwarden
-        id: bitwarden-secrets
-        uses: bitwarden/sm-action@v2
-        with:
-          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
-          base_url: https://vault.bitwarden.com
-          secrets: |
-            d9924181-b061-44e0-b7b9-b264004791eb > ag_main_host
-            e74d1f67-c909-4a2e-b6fc-b23e001dfa4a > ai_host
-            6f9cef86-eb39-4e05-8c5b-b23e001e6170 > arm_host
-            903364d9-1b29-4b7f-aa66-b23e001f7327 > jf_host
-            e4c5d8be-b91f-41ab-8071-b23e00203340 > kasm_host
-            566329f5-5af3-4bcd-b187-b23e00216134 > netboot_host
-            fb62a8d1-6dd5-4fab-aff4-b23e0021e215 > npm_host
-            fe0a2fa5-8e2b-4b4f-ac68-b26100315b20 > plex_host
-            a5b6fa4b-4643-4f85-988b-b23e00245e2f > ubu_host
-            26b06759-9791-42d7-a076-b23e0063c4dd > ssh_private_key
-
-  
-      - name: Create hosts.ini file
-        run: |
-          cat <<EOF > ansible/hosts.ini
-          [iac]
-          ai.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ai_host }} ansible_user=mafyuh ansible_port=2424
-          arm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.arm_host }} ansible_user=ubuntu ansible_port=2424
-          dns.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ag_main_host }} ansible_user=mafyuh
-          jf.lan ansible_host=${{ steps.bitwarden-secrets.outputs.jf_host }} ansible_user=mafyuh
-          kasm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.kasm_host }} ansible_user=mafyuh
-          netboot.lan ansible_host=${{ steps.bitwarden-secrets.outputs.netboot_host }} ansible_user=mafyuh
-          npm.lan ansible_host=${{ steps.bitwarden-secrets.outputs.npm_host }} ansible_user=mafyuh
-          plex.lan ansible_host=${{ steps.bitwarden-secrets.outputs.plex_host }} ansible_user=mafyuh ansible_port=2009
-          ubu.lan ansible_host=${{ steps.bitwarden-secrets.outputs.ubu_host }} ansible_user=mafyuh
-          EOF
-
-      - name: Ensure SSH directory exists
-        run: |
-          mkdir -p /root/.ssh
-          chmod 700 /root/.ssh
-
-      - name: Create Private key
-        run: |
-          cat <<EOF > /root/.ssh/id_rsa
-          ${{ steps.bitwarden-secrets.outputs.ssh_private_key }}
-          EOF
-      
-      - name: Set permissions for private key
-        run: |
-          chmod 700 /root/.ssh/id_rsa
-
       - name: Set up SSH agent
         run: |
           eval $(ssh-agent -s)
-          ssh-add /root/.ssh/id_rsa
+          ssh-add ~/.ssh/id_rsa
 
       - name: Run Playbooks
         env:
-          BWS_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}
+          BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
           ANSIBLE_CONFIG: ansible/ansible.cfg
         run: |
           if [ -z "${{ github.event.inputs.playbook }}" ]; then
             echo "Running all playbooks in ansible/playbooks/weekly..."
             for playbook in ansible/playbooks/weekly/*.yml; do
               echo "Running $playbook..."
-              ansible-playbook -i ansible/hosts.ini "$playbook" \
-                --extra-vars "bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}" || echo "Playbook $playbook failed, continuing..."
+              ansible-playbook \
+                -i ansible/inventories/netbox/netbox.inventory.yml \
+                -i ansible/inventories/oracle/inventory.oci.yml \
+                -i ansible/inventories/proxmox/inventory.proxmox.yml \
+                "$playbook" \
+                --extra-vars "bw_access_token=${{ secrets.BWS_ACCESS_TOKEN }}" \
+                || echo "Playbook $playbook failed, continuing..."
             done
           else
             echo "Running selected playbook: ${{ github.event.inputs.playbook }}"
-            ansible-playbook -i ansible/hosts.ini "ansible/playbooks/${{ github.event.inputs.playbook }}" \
-              --extra-vars "bw_access_token=${{ secrets.BW_ACCESS_TOKEN }}"
+            ansible-playbook \
+              -i ansible/inventories/netbox/netbox.inventory.yml \
+              -i ansible/inventories/oracle/inventory.oci.yml \
+              -i ansible/inventories/proxmox/inventory.proxmox.yml \
+              "ansible/playbooks/${{ github.event.inputs.playbook }}" \
+              --extra-vars "bw_access_token=${{ secrets.BWS_ACCESS_TOKEN }}"
           fi
         
