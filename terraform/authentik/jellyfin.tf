@@ -1,6 +1,8 @@
 resource "authentik_provider_ldap" "jellyfin" {
   name               = "Jellyfin"
-  base_dn            = "DC=ldap,DC=mafyuh,DC=io"
+  certificate        = data.authentik_certificate_key_pair.main.id
+  base_dn            = "DC=ldap,DC=mafyuh,DC=io" ## This doesnt matter for authentik
+  tls_server_name     = "ldap.mafyuh.xyz"
   bind_flow          = data.authentik_flow.ldap-authentication-flow.id
   unbind_flow        = data.authentik_flow.default-invalidation-flow.id
 }

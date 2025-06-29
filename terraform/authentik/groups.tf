@@ -21,3 +21,8 @@ resource "authentik_group" "ldapsearch" {
   name = "ldapsearch"
   is_superuser = false
 }
+
+resource "authentik_group" "ldap-sudo" {
+  name = "ldap-sudo"
+  is_superuser = false
+}
