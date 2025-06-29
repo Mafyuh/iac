@@ -7,6 +7,15 @@ resource "cloudflare_dns_record" "xyz_wildcard" {
   zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
 }
 
+resource "cloudflare_dns_record" "xyz_ldap" {
+  content = "10.69.69.222"
+  name    = "ldap.${var.domains["xyz"]}"
+  proxied = false
+  ttl     = 1
+  type    = "A"
+  zone_id = data.bitwarden_secret.cf_xyz_zone_id.value
+}
+
 resource "cloudflare_dns_record" "outlook_autodiscover" {
   content = "autodiscover.outlook.com"
   name    = "autodiscover.${var.domains["xyz"]}"

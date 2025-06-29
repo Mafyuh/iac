@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "Ubuntu-plucky-Base" {
   name      = "ubuntu-plucky-base"
   node_name = "pve2"
-  tags      = ["tofu", "ubuntu25", "ansible", "packer"]
+  tags      = ["tofu", "ubuntu25", "packer"]
   template  = true
   started   = false
 
@@ -23,6 +23,7 @@ resource "proxmox_virtual_environment_vm" "Ubuntu-plucky-Base" {
         address = "dhcp"
       }
     }
+    user_data_file_id = proxmox_virtual_environment_file.cloud_init_qemu.id
 }
 
 serial_device {}

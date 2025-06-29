@@ -6,12 +6,12 @@ export PATH=$PATH:$HOME/.local/bin
 ZSH_THEME="robbyrussell"
 
 # Plugins
-plugins=(git ubuntu copypath copyfile dirhistory zsh-interactive-cd docker docker-compose opentofu zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use)
+plugins=(git ubuntu copypath copyfile dirhistory kubectl zsh-interactive-cd docker docker-compose opentofu zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use)
 
 source $ZSH/oh-my-zsh.sh
 
 # Set up Oh My Posh Theme
-eval "$(oh-my-posh init zsh --config /home/mafyuh/.oh-my-posh/themes/sonicboom_dark.omp.json)"
+eval "$(oh-my-posh init zsh --config $HOME/.oh-my-posh/themes/sonicboom_dark.omp.json)"
 
 # Custom aliases
 alias dcd="docker compose down"

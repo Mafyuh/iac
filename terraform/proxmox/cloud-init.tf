@@ -11,9 +11,35 @@ resource "proxmox_virtual_environment_file" "cloud_config_shared" {
   source_raw {
     data = <<-EOF
     #cloud-config
+    runcmd:
+      - apt update
+      - apt upgrade -y
+      - usermod -aG docker mafyuh
+      - timedatectl set-timezone America/New_York
+      - mkdir -p /etc/skel/.ssh
+      - echo "${trimspace(local.ssh_public_key_1)}" >> /etc/skel/.ssh/authorized_keys
+      - echo "${trimspace(local.ssh_public_key_2)}" >> /etc/skel/.ssh/authorized_keys
+      - chmod 700 /etc/skel/.ssh
+      - chmod 600 /etc/skel/.ssh/authorized_keys
+      - su - mafyuh -c 'git clone https://github.com/mafyuh/iac.git /home/mafyuh/iac'
+      - echo "done" > /tmp/cloud-config.done
+    EOF
+
+    file_name = "cloud-config.yaml"
+  }
+}
+
+resource "proxmox_virtual_environment_file" "cloud_init_qemu" {
+  content_type = "snippets"
+  datastore_id = "NAS"
+  node_name    = "prox"
+
+  source_raw {
+    data = <<-EOF
+    #cloud-config
     users:
       - default
-      - name: mafyuh
+      - name: packer
         groups:
           - sudo
         shell: /bin/bash
@@ -23,13 +49,12 @@ resource "proxmox_virtual_environment_file" "cloud_config_shared" {
         sudo: ALL=(ALL) NOPASSWD:ALL
     runcmd:
         - apt update
-        - apt upgrade -y
-        - usermod -aG docker mafyuh
+        - apt install -y qemu-guest-agent
+        - systemctl enable qemu-guest-agent
         - timedatectl set-timezone America/New_York
-        - su - mafyuh -c 'git clone https://github.com/mafyuh/iac.git /home/mafyuh/iac'
         - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "cloud-config.yaml"
+    file_name = "cloud-init-qemu.yaml"
   }
 }
