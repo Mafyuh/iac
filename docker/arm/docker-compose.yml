@@ -135,37 +135,37 @@ services:
     depends_on:
       - postgres
 ## Work wiki
-  wiki-db:
-    image: postgres:15-alpine
-    environment:
-      POSTGRES_DB: wiki
-      POSTGRES_PASSWORD: $DB_PASS
-      POSTGRES_USER: wikijs
-    logging:
-      driver: "none"
-    restart: unless-stopped
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - gitea_main
+  # wiki-db:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_DB: wiki
+  #     POSTGRES_PASSWORD: $DB_PASS
+  #     POSTGRES_USER: wikijs
+  #   logging:
+  #     driver: "none"
+  #   restart: unless-stopped
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+  #   networks:
+  #     - gitea_main
 
-  wiki:
-    container_name: wiki
-    image: ghcr.io/requarks/wiki:2.5.307
-    depends_on:
-      - wiki-db
-    environment:
-      DB_TYPE: postgres
-      DB_HOST: wiki-db
-      DB_PORT: 5432
-      DB_USER: wikijs
-      DB_PASS: $DB_PASS
-      DB_NAME: wiki
-    restart: unless-stopped
-    ports:
-      - "1234:3000"
-    networks:
-      - gitea_main
+  # wiki:
+  #   container_name: wiki
+  #   image: ghcr.io/requarks/wiki:2.5.307
+  #   depends_on:
+  #     - wiki-db
+  #   environment:
+  #     DB_TYPE: postgres
+  #     DB_HOST: wiki-db
+  #     DB_PORT: 5432
+  #     DB_USER: wikijs
+  #     DB_PASS: $DB_PASS
+  #     DB_NAME: wiki
+  #   restart: unless-stopped
+  #   ports:
+  #     - "1234:3000"
+  #   networks:
+  #     - gitea_main
 
 
 networks:
