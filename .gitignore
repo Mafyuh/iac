@@ -37,7 +37,7 @@ terraform.rc
 .terraform.lock.hcl
 
 ## Docker
-.env
+.env*
 
 ## Kubernetes
 /kubernetes/cluster/apps/staging
@@ -56,5 +56,3 @@ docker-compose.override.yml
 docker/netbox/env/
 # SOPS
 *.decrypted~*
-
-terraform/proxmox/sssd.tf
