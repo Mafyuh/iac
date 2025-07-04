@@ -26,7 +26,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:7
+    image: redis:8
     container_name: redis
     restart: unless-stopped
     ports:
