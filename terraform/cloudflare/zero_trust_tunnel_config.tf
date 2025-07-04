@@ -162,7 +162,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "chat.${var.domains["io"]}"
-        service        = "http://10.0.0.25:3000"
+        service        = "http://10.20.10.75:3000"
         path           = ""
         origin_request = {
           no_tls_verify            = false
