@@ -63,6 +63,7 @@ jobs:
             case $folder in
               arm) host="ARM" ;;
               AI) host="AI" ;;
+              databases) host="db-server" ;;
               blocky) host="blocky" ;;
               exporters) host="all" ;;
               grafana) host="Ubu" ;;

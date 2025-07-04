@@ -25,6 +25,7 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
 
     memory {
         dedicated = 8192
+        floating  = 2048
     }
 
     efi_disk {

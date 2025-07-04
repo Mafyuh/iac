@@ -1,10 +1,9 @@
-resource "proxmox_virtual_environment_vm" "AI" {
+resource "proxmox_virtual_environment_vm" "databases" {
 
     # VM General Settings
-    node_name    = "pve2"
-    name         = "AI"
-    description  = "AI Server"
-    machine      = "q35"
+    node_name    = "prox"
+    name         = "db-server"
+    description  = "Database Server"
     tags         = ["tofu", "ubuntu25", "ansible", "packer"]
 
     agent {
@@ -12,26 +11,19 @@ resource "proxmox_virtual_environment_vm" "AI" {
     }
 
     clone {
-        vm_id = 19001
+        vm_id = 19000
     }
     
     # VM CPU Settings
     cpu {
-        cores = 8
+        cores = 2
         type  = "host"
         architecture = "x86_64"
-    }
-
-    hostpci {
-        device = "hostpci0"
-        mapping = "gpu2" # 3080
-        pcie = true
     }
     
     # VM Memory Settings
     memory {
-        dedicated = 30720
-        floating = 6144
+        dedicated = 4096
     }
 
     # VM Network Settings
@@ -42,8 +34,8 @@ resource "proxmox_virtual_environment_vm" "AI" {
 
     # VM Disk Settings
     disk {
-        datastore_id = "Fast500Gb"
-        size         = 75 ## Need to increase
+        datastore_id = "Fast2Tb"
+        size         = 50
         interface    = "scsi0"
     }
 
@@ -54,7 +46,7 @@ resource "proxmox_virtual_environment_vm" "AI" {
     initialization {
         ip_config {
             ipv4 {
-                address = "10.20.10.75/24"
+                address = "10.20.10.100/24"
                 gateway = "10.20.10.1"
             }
         }
