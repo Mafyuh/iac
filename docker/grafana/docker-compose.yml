@@ -9,6 +9,7 @@ services:
     restart: unless-stopped
     volumes:
       - /docker/appdata/prometheus:/etc/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - prom_data:/prometheus
     networks:
       - grafana

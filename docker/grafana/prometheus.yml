@@ -1,0 +1,87 @@
+global:
+  scrape_interval:     15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['10.69.69.2:9100'] # Ubu
+      - targets: ['10.0.0.15:9100'] # Jellyfin
+      - targets: ['10.20.10.20:9100'] # Blocky
+      - targets: ['10.69.69.200:9100'] # NPM
+      - targets: ['10.69.69.189:9100'] # Kasm
+      - targets: ['10.69.69.202:9100'] # Wazuh
+      - targets: ['10.69.69.199:9100'] # Umami
+      - targets: ['10.20.10.75:9100'] # AI
+
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['10.69.69.2:9101'] # Ubu
+      - targets: ['10.0.0.15:9101'] # Jellyfin
+      - targets: ['10.20.10.20:9101'] # Blocky
+      - targets: ['10.69.69.200:9101'] # NPM
+      - targets: ['10.69.69.189:9101'] # Kasm
+      - targets: ['10.69.69.202:9101'] # Wazuh
+      - targets: ['10.69.69.199:9101'] # Umami
+      - targets: ['10.20.10.75:9101'] # AI
+
+  - job_name: 'speedtest-exporter'
+    scrape_interval: 1h
+    scrape_timeout: 1m
+    static_configs:
+      - targets: ['speedtest-exporter:9798']
+
+  - job_name: 'ping'
+    metrics_path: /probe
+    scrape_interval: 5s
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    file_sd_configs:
+      - files:
+          - pinghosts.yaml
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.*);(.*)'  # first is the url, thus unique for instance
+        target_label: instance
+        replacement: $1
+      - source_labels: [__address__]
+        regex: '(.*);(.*)'  # second is humanname to use in charts
+        target_label: humanname
+        replacement: $2
+      - source_labels: [instance]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: blackbox-exporter:9115  
+
+  - job_name: 'truenas'
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - graphite-exporter:9108
+
+  - job_name: 'blocky'
+    static_configs:
+      - targets: ['10.20.10.20:4000']
+
+  - job_name: 'pve'
+    static_configs:
+      - targets:
+        - 10.0.0.30  # Proxmox VE node.
+        - 10.0.0.3  # Proxmox VE node.
+    metrics_path: /pve
+    params:
+      module: [default]
+      cluster: ['1']
+      node: ['1']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 10.69.69.2:9221  # PVE exporter.
