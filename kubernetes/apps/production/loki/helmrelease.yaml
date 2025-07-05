@@ -26,6 +26,10 @@ spec:
         path_prefix: /tmp/loki
         replication_factor: 1
       storage:
+        bucketNames:
+          chunks: ""
+          ruler: ""
+          admin: ""
         filesystem:
           chunks_directory: /tmp/loki/chunks
           rules_directory: /tmp/loki/rules
