@@ -1,3 +1,5 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -51,7 +53,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
-            command:
+            args:
               - "-config.file=/etc/loki/loki-config.yml"
             probes:
               liveness:
@@ -102,3 +104,10 @@ spec:
         storageClass: longhorn
         globalMounts:
           - path: /etc/loki
+      
+      loki-config:
+        enabled: true
+        type: configMap
+        globalMounts:
+          - path: /etc/loki/loki-config.yml
+            subPath: loki-config.yml
