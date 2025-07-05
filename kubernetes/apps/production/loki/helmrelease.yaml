@@ -34,39 +34,39 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-    replicas: 1
+        replicas: 1
 
-    pod:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: &group 1000
-        fsGroup: *group
-        fsGroupChangePolicy: "OnRootMismatch"
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: &group 1000
+            fsGroup: *group
+            fsGroupChangePolicy: "OnRootMismatch"
 
-    containers:
-      loki:
-        image:
-          repository: grafana/loki
-          tag: 3.5.1
-          pullPolicy: IfNotPresent
-        env:
-          TZ: "${TZ}"
-        command:
-          - "-config.file=/etc/loki/loki-config.yml"
-        probes:
-          liveness:
-            enabled: false
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-              - ALL
-        resources:
-          requests:
-            cpu: 100m
-            memory: 150Mi
-          limits:
-            memory: 256Mi
+        containers:
+          loki:
+            image:
+              repository: grafana/loki
+              tag: 3.5.1
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+            command:
+              - "-config.file=/etc/loki/loki-config.yml"
+            probes:
+              liveness:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 100m
+                memory: 150Mi
+              limits:
+                memory: 256Mi
 
     service:
       app:
