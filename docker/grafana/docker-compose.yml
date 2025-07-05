@@ -1,18 +1,18 @@
 services:
-  prometheus:
-    image: prom/prometheus:v3.4.2
-    container_name: prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - 9090:9090
-    restart: unless-stopped
-    volumes:
-      - /docker/appdata/prometheus:/etc/prometheus
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - prom_data:/prometheus
-    networks:
-      - grafana
+  # prometheus:
+  #   image: prom/prometheus:v3.4.2
+  #   container_name: prometheus
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #   ports:
+  #     - 9090:9090
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /docker/appdata/prometheus:/etc/prometheus
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #     - prom_data:/prometheus
+  #   networks:
+  #     - grafana
 
   loki:
     image: grafana/loki:3.5.1

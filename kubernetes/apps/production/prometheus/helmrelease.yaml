@@ -118,7 +118,7 @@ spec:
             scrape_interval: 1h
             scrape_timeout: 1m
             static_configs:
-              - targets: ['speedtest-exporter:9798']
+              - targets: ['10.69.69.2:9798']
 
           - job_name: 'ping'
             metrics_path: /probe
@@ -140,14 +140,7 @@ spec:
               - source_labels: [instance]
                 target_label: __param_target
               - target_label: __address__
-                replacement: blackbox-exporter:9115  
-
-          - job_name: 'truenas'
-            scrape_interval: 15s
-            metrics_path: /metrics
-            static_configs:
-              - targets:
-                  - graphite-exporter:9108
+                replacement: 10.69.69.2:9115  
 
           - job_name: 'blocky'
             static_configs:

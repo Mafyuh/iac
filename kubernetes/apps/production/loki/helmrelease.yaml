@@ -17,6 +17,7 @@ spec:
   values:
     loki:
       enabled: true
+      url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
 
     promtail:
       enabled: true
