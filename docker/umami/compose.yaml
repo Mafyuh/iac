@@ -8,9 +8,6 @@ services:
       DATABASE_URL: postgresql://umami:$DB_PASS@10.20.10.100:5432/umami
       DATABASE_TYPE: postgresql
       APP_SECRET: $APP_SECRET
-    depends_on:
-      db:
-        condition: service_healthy
     init: true
     restart: always
     healthcheck:
