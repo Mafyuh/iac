@@ -7,4 +7,3 @@ resources:
   - helmrepo.yaml
   - issuers/letsencrypt.yaml
   - issuers/secret-cf-token.yaml
-  - namespace.yaml

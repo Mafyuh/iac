@@ -11,4 +11,3 @@ resources:
   - recyclarr/
   - sabnzbd/
   - sonarr/
-  - namespace.yaml

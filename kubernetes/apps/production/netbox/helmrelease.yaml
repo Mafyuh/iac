@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://github.com/netbox-community/netbox-chart/raw/refs/heads/main/charts/netbox/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app netbox
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: netbox
+      version: 6.0.47
+      interval: 60m
+      sourceRef:
+        kind: HelmRepository
+        name: netbox-chart
+        namespace: flux-system
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: networking
+
+    superuser:
+      name: mafyuh
+      email: admin@mafyuh.com
+      password: ${NETBOX_ADMIN_PASSWORD}
+
+    ingress:
+      enabled: true
+      className: nginx
+      hosts:
+        - host: "netbox.${PUBLIC_DOMAIN2}"
+          paths:
+            - /
+      tls:
+        - secretName: mafyuh-dev-production-tls
+          hosts:
+            - "netbox.${PUBLIC_DOMAIN2}"
+    
+    persistence:
+      enabled: true
+      storageClass: longhorn
+    
+    postgresql:
+      enabled: false
+    
+    externalDatabase:
+      host: ${MAIN_PG_DB_HOST}
+      port: 5432
+      database: netbox
+      username: netbox
+      password: ${NETBOX_ADMIN_PASSWORD}
+
+    valkey:
+      enabled: true
+      pdb:
+        create: false
+      replica:
+        replicaCount: 1

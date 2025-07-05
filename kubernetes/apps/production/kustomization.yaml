@@ -6,6 +6,7 @@ resources:
   - cert-manager/
   - loki/
   - longhorn/
+  - netbox/
   - nginx/
   - prometheus/
   - reflector/
