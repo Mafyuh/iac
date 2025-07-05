@@ -4,7 +4,7 @@
     {
       description: "Loose versioning",
       matchDatasources: ["docker"],
-      matchPackageNames: ["ghcr.io/linuxserver/kasm"],
+      matchPackageNames: ["ghcr.io/umami-software/umami"],
       versioning: "loose",
     },
   ],
