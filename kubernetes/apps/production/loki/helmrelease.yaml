@@ -108,6 +108,8 @@ spec:
       loki-config:
         enabled: true
         type: configMap
+        name: loki-config
+        defaultMode: 0400
         globalMounts:
           - path: /etc/loki/loki-config.yml
             subPath: loki-config.yml
