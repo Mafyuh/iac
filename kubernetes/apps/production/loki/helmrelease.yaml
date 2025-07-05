@@ -53,9 +53,6 @@ spec:
           TZ: "${TZ}"
         command:
           - "-config.file=/etc/loki/loki-config.yml"
-        volumeMounts:
-          - name: config
-            mountPath: /etc/loki
         probes:
           liveness:
             enabled: false
@@ -105,4 +102,3 @@ spec:
         storageClass: longhorn
         globalMounts:
           - path: /etc/loki
-            name: config
