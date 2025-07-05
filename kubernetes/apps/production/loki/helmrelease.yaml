@@ -44,7 +44,7 @@ spec:
         fsGroupChangePolicy: "OnRootMismatch"
 
     containers:
-      app:
+      loki:
         image:
           repository: grafana/loki
           tag: 3.5.1
