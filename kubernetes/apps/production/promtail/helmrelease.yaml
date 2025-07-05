@@ -16,3 +16,8 @@ spec:
         namespace: flux-system
   values:
     fullnameOverride: promtail
+    config:
+      clients:
+        - url: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
+    serviceMonitor:
+      enabled: true

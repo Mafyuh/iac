@@ -14,28 +14,28 @@ services:
   #   networks:
   #     - grafana
 
-  loki:
-    image: grafana/loki:3.5.1
-    container_name: loki
-    volumes:
-      - /docker/appdata/loki:/etc/loki
-    ports:
-      - "3100:3100"
-    restart: unless-stopped
-    command: -config.file=/etc/loki/loki-config.yml
-    networks:
-      - grafana
+  # loki:
+  #   image: grafana/loki:3.5.1
+  #   container_name: loki
+  #   volumes:
+  #     - /docker/appdata/loki:/etc/loki
+  #   ports:
+  #     - "3100:3100"
+  #   restart: unless-stopped
+  #   command: -config.file=/etc/loki/loki-config.yml
+  #   networks:
+  #     - grafana
 
-  promtail:
-    image: grafana/promtail:3.5.1
-    container_name: promtail
-    volumes:
-      - /var/log:/var/log
-      - /docker/appdata/promtail:/etc/promtail
-    restart: unless-stopped
-    command: -config.file=/etc/promtail/promtail-config.yml
-    networks:
-      - grafana
+  # promtail:
+  #   image: grafana/promtail:3.5.1
+  #   container_name: promtail
+  #   volumes:
+  #     - /var/log:/var/log
+  #     - /docker/appdata/promtail:/etc/promtail
+  #   restart: unless-stopped
+  #   command: -config.file=/etc/promtail/promtail-config.yml
+  #   networks:
+  #     - grafana
 
   ## Exporters
   speedtest-exporter:
