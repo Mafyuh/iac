@@ -25,6 +25,7 @@ spec:
       commonConfig:
         path_prefix: /tmp/loki
         replication_factor: 1
+
       storage:
         bucketNames:
           chunks: ""
@@ -33,12 +34,5 @@ spec:
         filesystem:
           chunks_directory: /tmp/loki/chunks
           rules_directory: /tmp/loki/rules
-      schemaConfig:
-        configs:
-          - from: 2020-10-24
-            store: tsdb
-            object_store: filesystem
-            schema: v13
-            index:
-              prefix: index_
-              period: 24h
+
+      useTestSchema: true
