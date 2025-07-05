@@ -112,7 +112,7 @@ services:
         ipv4_address: 172.25.0.25
   ## Linkwarden
   postgres:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     env_file: .env
     restart: always
     volumes:
