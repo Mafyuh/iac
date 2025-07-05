@@ -36,3 +36,18 @@ spec:
           rules_directory: /tmp/loki/rules
 
       useTestSchema: true
+
+      lokiCanary:
+      enabled: false
+
+      write:
+        replicas: 2
+
+      read:
+        replicas: 2
+
+      backend:
+        replicas: 2
+      
+      
+    
