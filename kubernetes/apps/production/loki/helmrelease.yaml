@@ -33,7 +33,7 @@ spec:
         filesystem:
           chunks_directory: /tmp/loki/chunks
           rules_directory: /tmp/loki/rules
-      schema_config:
+      schemaConfig:
         configs:
           - from: 2020-10-24
             store: tsdb
