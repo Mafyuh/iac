@@ -60,6 +60,23 @@ services:
     ports:
       - 5050:80
 
+  couchdb-obsidian-livesync:
+    container_name: obsidian-livesync
+    image: couchdb:3.4.3
+    environment:
+      - PUID=2003
+      - PGID=2003
+      - UMASK=0022
+      - TZ=America/New_York
+      - COUCHDB_USER=mafyuh
+      - COUCHDB_PASSWORD=$COUCHDB_PASSWORD
+    volumes:
+      - /docker/appdata/couchdb-obsidian-livesync/data:/opt/couchdb/data
+      - /docker/appdata/couchdb-obsidian-livesync/etc/local.d:/opt/couchdb/etc/local.d
+    ports:
+      - 5984:5984
+    restart: unless-stopped
+
 volumes:
   mysql_data:
   postgres_data:
