@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: reflector
-      version: 9.1.17
+      version: 9.1.19
       sourceRef:
         kind: HelmRepository
         name: reflector-repo
