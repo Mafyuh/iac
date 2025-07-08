@@ -36,8 +36,8 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
         }
       },
       {
-        hostname       = "netbox.${var.domains["dev"]}"
-        service        = "https://10.20.10.102"
+        hostname       = "couch.${var.domains["dev"]}"
+        service        = "http://10.20.10.100:5984"
         path           = ""
         origin_request = {
           no_tls_verify            = true
