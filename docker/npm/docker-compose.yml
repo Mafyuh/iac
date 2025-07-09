@@ -40,6 +40,7 @@ services:
     restart: unless-stopped
     image: cloudflare/cloudflared@sha256:803b17adb5326a38ce397b9c9f374289ad290ee5526d204b5879a1423b6f5c3e
     command: tunnel --no-autoupdate run --token $CF_TOKEN
+    container_name: cloudflared
 
   twingate-famous-alligator:
     image: twingate/connector@sha256:d2c6ddbff012fd4d7cc3f2b9c04f09be7c9d7d5689f7128c96082246ca9b7b8c
