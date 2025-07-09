@@ -7,8 +7,6 @@
 [![Uptime](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_uptime_days&label=Uptime&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
 [![Nodes](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_node_count&label=Nodes&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
 
-[![Docker Containers](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/docker_containers_running&label=Running%20Containers&color=blue&logo=docker)](https://github.com/mafyuh/iac)
-
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
 
 

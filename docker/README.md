@@ -1,6 +1,4 @@
 
-[![Docker Containers](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/docker_containers_running&label=Running%20Containers&color=blue&logo=docker)](https://github.com/mafyuh/iac)
-
 I used Docker exclusively for many years before learning Kubernetes, and I still rely on it regularly, especially for testing new images, since it's simple to get things running.
 
 When a containerized service proves useful and becomes part of my routine, I migrate it to Kubernetes—*if* it’s feasible to do so.
