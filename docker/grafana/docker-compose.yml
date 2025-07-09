@@ -88,7 +88,7 @@ services:
   #     - grafana
 
   cluster-metrics-api:
-    image: mafyuh/metrics-server:1.0.4
+    image: mafyuh/metrics-server:1.0.5
     build: .
     ports:
       - "5000:5000"
