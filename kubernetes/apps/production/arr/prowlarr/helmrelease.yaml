@@ -49,7 +49,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/prowlarr
-              tag: 2.0.0.5094
+              tag: 2.0.1.5101
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
