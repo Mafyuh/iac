@@ -6,6 +6,7 @@ resource "proxmox_virtual_environment_vm" "AI" {
     description  = "AI Server"
     machine      = "q35"
     tags         = ["tofu", "ubuntu25", "ansible", "packer"]
+    started      = false
 
     agent {
       enabled = true

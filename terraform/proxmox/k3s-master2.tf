@@ -5,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "K3s-Master2" {
     vm_id        = 321
     name         = "K3s-Master2"
     description  = "Kubernetes Master"
-    tags         = ["tofu", "debian", "k3s", "ansible"]
+    tags         = ["tofu", "debian", "k3s"]
     started      = true
 
     agent {
