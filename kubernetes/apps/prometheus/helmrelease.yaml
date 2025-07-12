@@ -92,7 +92,7 @@ spec:
                   storage: 30Gi
 
         additionalScrapeConfigs: |
-          - job_name: 'node_exporter'
+          - job_name: 'docker_node_exporter'
             static_configs:
               - targets: ['10.69.69.2:9100'] # Ubu
               - targets: ['10.0.0.15:9100'] # Jellyfin
@@ -140,7 +140,7 @@ spec:
               - source_labels: [instance]
                 target_label: __param_target
               - target_label: __address__
-                replacement: 10.69.69.2:9115  
+                replacement: blackbox-exporter-prometheus-blackbox-exporter:9115  
 
           - job_name: 'blocky'
             static_configs:
