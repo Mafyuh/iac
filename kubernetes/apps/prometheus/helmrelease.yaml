@@ -142,7 +142,7 @@ spec:
               - source_labels: [instance]
                 target_label: __param_target
               - target_label: __address__
-                replacement: blackbox-exporter-prometheus-blackbox-exporter.svc.monitoring.cluster.local:9115  
+                replacement: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115  
 
           - job_name: 'blocky'
             static_configs:
