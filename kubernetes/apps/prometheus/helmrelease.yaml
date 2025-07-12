@@ -125,9 +125,11 @@ spec:
             scrape_interval: 5s
             params:
               module: [http_2xx]  # Look for a HTTP 200 response.
-            file_sd_configs:
-              - files:
-                  - pinghosts.yaml
+            static_configs:
+              - targets:
+                  - https://google.com
+                  - https://github.com
+                  - https://apple.com
             relabel_configs:
               - source_labels: [__address__]
                 regex: '(.*);(.*)'  # first is the url, thus unique for instance
