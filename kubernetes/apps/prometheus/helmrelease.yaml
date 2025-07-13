@@ -18,10 +18,16 @@ spec:
     global:
       podAnnotations:
         secret.reloader.stakater.com/reload: prometheus
+    
+    defaultRules:
+      create: true
+      rules:
+        alertmanager: true
+
     crds:
       enabled: true
     alertmanager:
-      enabled: false
+      enabled: true
     kubeApiServer:
       enabled: true
     kubelet:
@@ -34,7 +40,7 @@ spec:
       enabled: true
       replicas: 1
       forceDeployDashboards: false
-      defaultDashboardsEnabled: true
+      defaultDashboardsEnabled: false
       defaultDashboardsTimezone: America/New_York
       defaultDashboardsEditable: true
       ingress:
