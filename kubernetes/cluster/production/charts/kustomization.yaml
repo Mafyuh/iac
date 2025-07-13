@@ -8,3 +8,5 @@ resources:
 - grafana-charts.yaml
 - k8s-at-home.yaml
 - netbox-chart.yaml
+- unpoller.yaml
+- twingate.yaml
