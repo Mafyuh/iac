@@ -127,9 +127,9 @@ spec:
               module: [http_2xx]  # Look for a HTTP 200 response.
             static_configs:
               - targets:
-                  - https://google.com
-                  - https://github.com
-                  - https://apple.com
+                  - http://www.google.com/;google.com
+                  - https://github.com/;github.com
+                  - https://www.apple.com/;apple.com
             relabel_configs:
               - source_labels: [__address__]
                 regex: '(.*);(.*)'  # first is the url, thus unique for instance
