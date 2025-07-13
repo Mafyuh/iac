@@ -81,6 +81,8 @@ spec:
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
+        configMaps:
+          - website-monitoring-targets
         replicas: 1
         retention: 14d
         storageSpec:
@@ -142,7 +144,37 @@ spec:
               - source_labels: [instance]
                 target_label: __param_target
               - target_label: __address__
-                replacement: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115  
+                replacement: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+
+          - job_name: 'website-monitoring-http'
+            metrics_path: /probe
+            params:
+              module: [http_2xx]
+            file_sd_configs:
+              - files:
+                - /etc/prometheus/configmaps/website-monitoring-targets/targets.yml
+            relabel_configs:
+              - source_labels: [__address__]
+                target_label: __param_target
+              - source_labels: [__param_target]
+                target_label: instance
+              - target_label: __address__
+                replacement: blackbox-exporter-prometheus-blackbox-exporter:9115
+          
+          - job_name: "website-monitoring-icmp"
+            metrics_path: /probe
+            params:
+              module: [icmp]
+            file_sd_configs:
+              - files:
+                - /etc/prometheus/configmaps/website-monitoring-targets/targets.yml
+            relabel_configs:
+              - source_labels: [__address__]
+                target_label: __param_target
+              - source_labels: [__param_target]
+                target_label: instance
+              - target_label: __address__
+                replacement: blackbox-exporter-prometheus-blackbox-exporter:9115
 
           - job_name: 'blocky'
             static_configs:
