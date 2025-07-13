@@ -20,24 +20,39 @@ spec:
         secret.reloader.stakater.com/reload: prometheus
     
     defaultRules:
-      create: true
+      create: false
       rules:
-        alertmanager: true
+        alertmanager: false
 
     crds:
       enabled: true
     alertmanager:
       enabled: true
-      alertmanagerSpec:
-        replicas: 1
-        alertmanagerConfiguration:
-          name: alertmanager
-          global:
-            resolveTimeout: 5m
-          receivers:
-            - name: 'n8n'
-              webhook_configs:
-                - url: ${N8N_GOTIFY_ALERTM}
+      config:
+        global:
+          resolve_timeout: 5m
+        route:
+          group_by: ["alertname", "job"]
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 6h
+          receiver: "n8n"
+          routes:
+            - receiver: "null"
+              match:
+                alertname: Watchdog
+            - receiver: "null"
+              match:
+                alertname: InfoInhibitor
+            - receiver: "n8n"
+              match:
+                severity: "critical"
+              continue: true
+        receivers:
+          - name: "null"
+          - name: "n8n"
+            webhook_configs:
+              - url: ${N8N_GOTIFY_ALERTM}
     kubeApiServer:
       enabled: true
     kubelet:
