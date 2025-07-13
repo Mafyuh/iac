@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - exporters/
+  - targets.yaml
