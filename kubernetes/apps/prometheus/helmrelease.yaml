@@ -20,9 +20,9 @@ spec:
         secret.reloader.stakater.com/reload: prometheus
     
     defaultRules:
-      create: false
+      create: true
       rules:
-        alertmanager: false
+        alertmanager: true
 
     crds:
       enabled: true
