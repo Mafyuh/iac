@@ -63,7 +63,7 @@ spec:
         receivers:
         - name: 'n8n'  
           webhook_configs:
-          - url: ${N8N_GOTIFY_ALERTM}
+            - url: ${N8N_GOTIFY_ALERTM}
     kubeApiServer:
       enabled: true
     kubelet:
