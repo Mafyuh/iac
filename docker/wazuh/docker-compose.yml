@@ -100,16 +100,15 @@ services:
       - wazuh.manager:wazuh.manager
 
   postfix:
-    image: juanluisbaptiste/postfix:1.7.3
+    image: eeacms/postfix:3.5-1.0
     hostname: wazuh-smtp
     restart: unless-stopped
     environment:
-      - SMTP_SERVER=smtp.protonmail.ch
-      - SMTP_PORT=587
-      - SMTP_USERNAME=noreply@mafyuh.dev
-      - SMTP_PASSWORD=$SMTP_PASSWORD
-      - SMTP_HOSTNAME=wazuh.mafyuh.xyz
-      - OVERWRITE_FROM=noreply@mafyuh.dev
+      - MTP_RELAY=smtp.protonmail.ch
+      - MTP_PORT=587
+      - MTP_USER=noreply@mafyuh.dev
+      - MTP_PASS=$SMTP_PASSWORD
+      - MTP_HOST=wazuh.mafyuh.xyz
 
 volumes:
   wazuh_api_configuration:
