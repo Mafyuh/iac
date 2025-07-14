@@ -4,3 +4,4 @@ resources:
   - helmrelease.yaml
   - exporters/
   - targets.yaml
+  - rules.yaml

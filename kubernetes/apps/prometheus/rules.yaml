@@ -1,0 +1,27 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: web.rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: web.rules
+      rules:
+        - alert: invalid_http_status_code
+          expr: probe_http_status_code != 200
+          for: 1m
+          labels:
+            severity: critical
+
+        - alert: certificate_validity_28_days
+          expr: (probe_ssl_earliest_cert_expiry - time ()) < ( 60 * 60 * 24 * 28 )
+          for: 1m
+          labels:
+            severity: warning
+
+        - alert: certificate_validity_10_days
+          expr: (probe_ssl_earliest_cert_expiry - time ()) < ( 60 * 60 * 24 * 10 )
+          for: 1m
+          labels:
+            severity: critical
