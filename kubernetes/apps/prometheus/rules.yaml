@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/prometheusrule_v1.json
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -13,13 +14,11 @@ spec:
           for: 1m
           labels:
             severity: critical
-
         - alert: certificate_validity_28_days
           expr: (probe_ssl_earliest_cert_expiry - time ()) < ( 60 * 60 * 24 * 28 )
           for: 1m
           labels:
             severity: warning
-
         - alert: certificate_validity_10_days
           expr: (probe_ssl_earliest_cert_expiry - time ()) < ( 60 * 60 * 24 * 10 )
           for: 1m
