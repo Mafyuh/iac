@@ -1,0 +1,83 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: graphite-exporter
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.1.2
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      graphite-exporter:
+        enabled: true
+        type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
+        replicas: 1
+
+        containers:
+          app:
+            image:
+              repository: prom/graphite-exporter
+              tag: v0.16.0
+              pullPolicy: IfNotPresent
+            args:
+              - "--graphite.mapping-config=/tmp/graphite_mapping.conf"
+            probes:
+              liveness:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 200m
+                memory: 256Mi
+
+    service:
+      graphite-exporter:
+        primary: true
+        controller: graphite-exporter
+        type: LoadBalancer
+        ports:
+          metrics:
+            port: 9108
+          graphite:
+            port: 9109
+            protocol: TCP
+          graphite-udp:
+            port: 9109
+            protocol: UDP
+
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: "graphite-exporter"
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+
+    persistence:
+      graphite-mapping:
+        enabled: true
+        type: configMap
+        name: graphite-mapping
+        globalMounts:
+          - path: /tmp/graphite_mapping.conf
+            subPath: graphite_mapping.conf
+            readOnly: true

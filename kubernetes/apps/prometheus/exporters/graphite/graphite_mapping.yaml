@@ -1,0 +1,295 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graphite-mapping
+  namespace: monitoring
+data:
+  graphite_mapping.conf: |
+    mappings:
+
+    ############################################
+    # cpu
+    #
+    # servers.HOST.cpu.1.percent.nice
+    # servers.HOST.cpu.0.cpu.idle
+    #
+    # Note: 'gauge' or 'cpu' part depends
+    # on 'Report CPU usage in percent' setting
+    ############################################
+
+    - match: "servers.*.cpu.*.*.*"
+      name: "cpu"
+      labels:
+        job: "truenas"
+        instance: "${1}"
+        cpu_id: "${2}"
+        stat_type: ${3}
+        state: ${4}
+
+    ######################################
+    # cputemp
+    #
+    # servers.HOST.cputemp.2.temperature
+    ######################################
+
+    - match: "servers.*.cputemp.*.*"
+      name: "cputemp_${3}"
+      labels:
+        job: "truenas"
+        instance: "${1}"
+        cpu_id: "${2}"
+
+    ###################################################
+    # CPU Aggregation
+    #
+    # servers.HOST.aggregation.cpu-sum.gauge.idle
+    # servers.HOST.aggregation.cpu-average.gauge.nice
+    # servers.HOST.aggregation.cpu-average.cpu.idle
+    #
+    # Note: 'gauge' or 'cpu' part depends
+    # on 'Report CPU usage in percent' setting
+    ###################################################
+
+    - match: servers.*.aggregation.*.gauge.*
+      name: aggregation_${2}
+      labels:
+        job: "truenas"
+        instance: "${1}"
+        state: ${3}
+        stat_type: gauge
+
+    - match: servers.*.aggregation.*.cpu.*
+      name: aggregation_${2}
+      labels:
+        job: "truenas"
+        instance: "${1}"
+        state: ${3}
+        stat_type: cpu
+
+
+    #####################################################
+    # Disk
+    # servers.HOST.disk.sda2.pending_operations
+    # servers.HOST.disk.sdc1.disk_ops.read
+    ######################################################
+    - match: "servers.*.disk.*.*"
+      name: "disk_${3}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        type: "disk"
+        disk: "${2}"
+
+    - match: "servers.*.disk.*.*.*"
+      name: "disk_${3}_${4}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        type: "disk"
+        disk: "${2}"
+
+    - match: "servers.*.disktemp.*.*"
+      name: "disktemp_${3}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        type: "disktemp"
+        disk: "${2}"
+
+    ############################################################
+    # df
+    # servers.HOST.df.var-lib-systemd-coredump.df_complex.free
+    ############################################################
+    - match: "servers.*.df.*.*.*"
+      name: "${3}_${4}"
+      labels:
+        instance: "${1}"
+        job: truenas
+        type: df
+        filesystem: "${2}"
+
+    ########################################
+    # Uptime
+    #
+    # servers.HOST.uptime.uptime
+    ########################################
+
+    - match: "servers.*.uptime.uptime"
+      name: "uptime"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    ########################################
+    # Memory
+    #
+    # servers.HOST.memory.memory.used
+    ########################################
+    - match: "servers.*.memory.*.*"
+      name: "${2}_${3}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    ########################################
+    # Swap
+    #
+    # servers.HOST.swap.swap.used
+    ########################################
+    - match: "servers.*.swap.*.*"
+      name: "${2}_${3}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    ####################################################
+    # processes_state
+    #
+    # servers.HOST.processes.ps_state.blocked
+    ####################################################
+    - match: "servers.*.processes.ps_state.*"
+      name: "processes_state"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        state: "${2}"
+
+    ####################################################
+    # processes_xxx
+    #
+    # servers.HOST.processes.fork_rate
+    ####################################################
+    - match: "servers.*.processes.*"
+      name: "processes_${2}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    #######################################
+    # zfs_arc
+    ######################################
+    - match: "servers.*.zfs_arc.*"
+      name: "zfs_arc_${2}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    - match: "servers.*.zfs_arc.*.*"
+      name: "zfs_arc_${2}_${3}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    - match: "servers.*.zfs_arc.*.*.*"
+      name: "zfs_arc_${2}_${3}_${4}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    #######################################
+    # rrdcached
+    ######################################
+    - match: "servers.*.rrdcached.*"
+      name: "rrdcached_${2}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    - match: "servers.*.rrdcached.*.*"
+      name: "rrdcached_${2}_${3}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+    - match: "servers.*.rrdcached.*.*.*"
+      name: "rrdcached_${2}_${3}_${4}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+
+
+    ##############################################
+    # nfsstat_nfsv4_ops
+    # servers.HOST.nfsstat.nfsv4_ops.nfsstat.nfsv4_op_write
+    # servers.HOST.nfsstat.nfsv3_ops.nfsstat.nfsv3_op_lookup
+    ##############################################
+    - match: servers.*.nfsstat.*.nfsstat.*
+      name: nfsstat_${2}
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        op: "$3"
+
+    ############################################################
+    # nfsstat_server
+    # servers.HOST.nfsstat.server.nfsstat.fh_stale
+    ###########################################################
+    - match: servers.*.nfsstat.server.nfsstat.*
+      name: nfsstat_server
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        stat: "${2}"
+
+    ##############################################
+    # Load
+    # servers.HOST.load.load.shortterm
+    # servers.HOST.load.load.midterm
+    # servers.HOST.load.load.longterm
+    #############################################
+    - match: "servers.*.load.load.*"
+      name: "load_average"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        period: "${2}"
+
+    ################################################################
+    # interface
+    # servers.HOST.interface.kube-dummy-if.if_dropped.rx
+    ################################################################
+    - match: servers.*.interface.*.*.*
+      name: interface_${3}
+      labels:
+        instance: ${1}
+        job: truenas
+        iface: ${2}
+        direction: ${4}
+
+
+    ####################
+    # Generic fallbacks
+    ####################
+
+    - match: "servers.*.*.*"
+      name: "${2}_${3}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        fallback_match: "1"
+        type: "${2}"
+
+    - match: "servers.*.*.*.*"
+      name: "${2}_${3}_${4}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        fallback_match: "2"
+        type: "${2}"
+
+    - match: "servers.*.*.*.*.*"
+      name: "${2}_${3}_${4}_${5}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        fallback_match: "3"
+        type: "${2}"
+
+    - match: "servers.*.*.*.*.*.*"
+      name: "${2}_${3}_${4}_${5}_${6}"
+      labels:
+        instance: "${1}"
+        job: "truenas"
+        type: "${2}"
+        fallback_match: "4"
+

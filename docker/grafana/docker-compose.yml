@@ -1,42 +1,4 @@
 services:
-  # prometheus:
-  #   image: prom/prometheus:v3.4.2
-  #   container_name: prometheus
-  #   command:
-  #     - '--config.file=/etc/prometheus/prometheus.yml'
-  #   ports:
-  #     - 9090:9090
-  #   restart: unless-stopped
-  #   volumes:
-  #     - /docker/appdata/prometheus:/etc/prometheus
-  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
-  #     - prom_data:/prometheus
-  #   networks:
-  #     - grafana
-
-  # loki:
-  #   image: grafana/loki:3.5.1
-  #   container_name: loki
-  #   volumes:
-  #     - /docker/appdata/loki:/etc/loki
-  #   ports:
-  #     - "3100:3100"
-  #   restart: unless-stopped
-  #   command: -config.file=/etc/loki/loki-config.yml
-  #   networks:
-  #     - grafana
-
-  # promtail:
-  #   image: grafana/promtail:3.5.1
-  #   container_name: promtail
-  #   volumes:
-  #     - /var/log:/var/log
-  #     - /docker/appdata/promtail:/etc/promtail
-  #   restart: unless-stopped
-  #   command: -config.file=/etc/promtail/promtail-config.yml
-  #   networks:
-  #     - grafana
-
   ## Exporters
   speedtest-exporter:
     image: ghcr.io/miguelndecarvalho/speedtest-exporter:v3.5.4
@@ -46,17 +8,6 @@ services:
     ports:
       - 9798:9798
     restart: unless-stopped
-    networks:
-      - grafana
-
-  blackbox-exporter:
-    command: --config.file=/config/blackbox.yml
-    container_name: blackbox-exporter
-    image: quay.io/prometheus/blackbox-exporter:v0.27.0
-    volumes:
-      - /docker/appdata/blackbox/config:/config
-    ports:
-      - 9115:9115
     networks:
       - grafana
 
