@@ -5,6 +5,7 @@ data "unifi_user_group" "default" {
 resource "unifi_wlan" "wifi" {
   name       = "BOP"
   security   = "wpapsk"
+  wlan_band  = "both"
 
   # enable WPA2/WPA3 support
   wpa3_support    = true

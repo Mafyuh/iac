@@ -20,6 +20,7 @@ resource "authentik_outpost" "ldap" {
   protocol_providers = [
     authentik_provider_ldap.jellyfin.id,
     authentik_provider_ldap.ldap.id,
+    70,
   ]
   service_connection = authentik_service_connection_kubernetes.local.id
 }

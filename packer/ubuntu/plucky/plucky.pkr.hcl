@@ -116,6 +116,11 @@ build {
     }
 
     provisioner "file" {
+        source = "ubuntu/files/sshd_config"
+        destination = "/tmp/sshd_config"
+    }
+
+    provisioner "file" {
         source = "ubuntu/files/sssd.conf"
         destination = "/tmp/sssd.conf"
     }
@@ -229,6 +234,11 @@ build {
     provisioner "file" {
         source = "ubuntu/files/daemon.json"
         destination = "/tmp/daemon.json"
+    }
+
+    provisioner "file" {
+        source = "ubuntu/files/sshd_config"
+        destination = "/tmp/sshd_config"
     }
 
     provisioner "file" {
