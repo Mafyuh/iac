@@ -58,3 +58,6 @@ spec:
         create: false
       replica:
         replicaCount: 1
+
+    housekeeping:
+      enabled: false

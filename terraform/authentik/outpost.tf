@@ -8,6 +8,7 @@ resource "authentik_outpost" "embedded_outpost" {
     authentik_provider_proxy.prowlarr.id,
     authentik_provider_proxy.sabnzbd.id,
     authentik_provider_proxy.radarr.id,
+    authentik_provider_proxy.k3s-dashboard.id,
     56,
     68,
   ]
