@@ -61,3 +61,6 @@ spec:
 
     housekeeping:
       enabled: false
+    
+    worker:
+      enabled: false
