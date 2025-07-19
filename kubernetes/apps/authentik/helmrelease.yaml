@@ -110,15 +110,12 @@ spec:
         use_ssl: false
         use_tls: true
         timeout: 30
+      redis:
+        host: "${AUTHENTIK_POSTGRESQL_HOST}"
       embeddedOutpost:
         enabled: true
       secret_key: ${AUTH_SECRET_KEY}
     postgresql:
       enabled: false
     redis:
-      enabled: true
-      architecture: standalone
-      auth:
-        enabled: false
-      master:
-        resourcesPreset: "none"
+      enabled: false
