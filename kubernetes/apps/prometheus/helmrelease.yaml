@@ -111,7 +111,8 @@ spec:
 
       prometheusSpec:
         additionalArgs:
-          - --web.enable-remote-write-receiver
+          - name: "web.enable-remote-write-receiver"
+            value: true
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         configMaps:
