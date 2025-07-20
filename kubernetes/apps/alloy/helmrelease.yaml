@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: alloy
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: alloy
+      version: 1.1.2
+      interval: 60m
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-chart
+        namespace: flux-system
+  values:
+    alloy:
+      mounts:
+        varlog: true
+      configMap:
+        create: false
+        name: alloy-config
+        key: logs.config.alloy
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: alloy-loki
+  namespace: monitoring
+type: Opaque
+stringData:
+  host: "http://loki.monitoring.svc.cluster.local:3100"

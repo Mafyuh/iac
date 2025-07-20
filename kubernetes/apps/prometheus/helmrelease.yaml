@@ -110,6 +110,8 @@ spec:
               - "prometheus.${LOCAL_DOMAIN}"
 
       prometheusSpec:
+        additionalArgs:
+          - --web.enable-remote-write-receiver
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         configMaps:
