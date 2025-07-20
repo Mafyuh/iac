@@ -61,11 +61,11 @@ jobs:
 
           for folder in "${folder_array[@]}"; do
             case $folder in
+              alloy) host="all" ;;
               arm) host="ARM" ;;
               AI) host="AI" ;;
               databases) host="db-server" ;;
               blocky) host="blocky" ;;
-              exporters) host="all" ;;
               grafana) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;
               kasm) host="Kasm" ;;

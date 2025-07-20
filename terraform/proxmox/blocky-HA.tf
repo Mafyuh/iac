@@ -13,7 +13,7 @@ resource "proxmox_virtual_environment_vm" "blockyHA" {
     description  = "blocky DNS server HA"
     tags         = ["tofu", "ubuntu25", "ansible", "packer"]
     migrate      = true
-    started      = false
+    started      = true
 
     agent {
       enabled = true
@@ -55,7 +55,7 @@ resource "proxmox_virtual_environment_vm" "blockyHA" {
     initialization {
         ip_config {
             ipv4 {
-                address = "10.20.10.21/24"
+                address = "10.20.10.20/24"
                 gateway = "10.20.10.1"
             }
         }
