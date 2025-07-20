@@ -116,16 +116,6 @@ build {
     }
 
     provisioner "file" {
-        source = "ubuntu/files/sshd_config"
-        destination = "/tmp/sshd_config"
-    }
-
-    provisioner "file" {
-        source = "ubuntu/files/sssd.conf"
-        destination = "/tmp/sssd.conf"
-    }
-
-    provisioner "file" {
         source = "ubuntu/files/setup-ubuntu.sh"
         destination = "/tmp/setup-ubuntu.sh"
     }
@@ -139,7 +129,6 @@ build {
     provisioner "shell" {
         inline = [
             "chmod +x /tmp/setup-ubuntu.sh",
-            "sed -i 's/PLACEHOLDER_PASSWORD/${var.ldap_password}/g' /tmp/sssd.conf",
             "/tmp/setup-ubuntu.sh"
         ]
     }
@@ -237,16 +226,6 @@ build {
     }
 
     provisioner "file" {
-        source = "ubuntu/files/sshd_config"
-        destination = "/tmp/sshd_config"
-    }
-
-    provisioner "file" {
-        source = "ubuntu/files/sssd.conf"
-        destination = "/tmp/sssd.conf"
-    }
-
-    provisioner "file" {
         source = "ubuntu/files/setup-ubuntu.sh"
         destination = "/tmp/setup-ubuntu.sh"
     }
@@ -260,7 +239,6 @@ build {
     provisioner "shell" {
         inline = [
             "chmod +x /tmp/setup-ubuntu.sh",
-            "sed -i 's/PLACEHOLDER_PASSWORD/${var.ldap_password}/g' /tmp/sssd.conf",
             "/tmp/setup-ubuntu.sh"
         ]
     }

@@ -14,9 +14,9 @@ rm -f fastfetch-linux-amd64.deb
 
 log "Updating APT and installing packages"
 sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common sssd ldap-utils net-tools zsh fzf
+sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common net-tools zsh fzf
 
-log "Changing default shell to zsh for user 'packer'"
+log "Changing default shell to zsh for user 'mafyuh'"
 sudo chsh -s "$(which zsh)" packer
 
 log "Installing Docker"
@@ -57,24 +57,6 @@ curl -fsSL https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/them
 log "Setting up Git config"
 git config --global user.name "Mafyuh"
 git config --global user.email "matt@mafyuh.com"
-
-log "Configuring SSSD and SSH"
-sudo mv /tmp/sssd.conf /etc/sssd/sssd.conf || echo "Missing /tmp/sssd.conf"
-sudo chmod 600 /etc/sssd/sssd.conf
-sudo chown root:root /etc/sssd/sssd.conf
-
-sudo systemctl enable sssd || echo "Failed to enable sssd"
-sudo systemctl start sssd || echo "Failed to start sssd"
-
-sudo mv /tmp/sshd_config /etc/ssh/sshd_config || echo "Missing /tmp/sshd_config"
-sudo chmod 600 /etc/ssh/sshd_config
-sudo chown root:root /etc/ssh/sshd_config
-
-echo '%ldap-sudo ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/ldap-sudo
-sudo chmod 440 /etc/sudoers.d/ldap-sudo
-
-log "Enabling PAM mkhomedir"
-echo 'session required pam_mkhomedir.so skel=/etc/skel umask=0022' | sudo tee -a /etc/pam.d/common-session
 
 log "Copying config files to /etc/skel"
 sudo cp "$HOME/.zshrc.pre-oh-my-zsh" /etc/skel/.zshrc || echo ".zshrc not found"
