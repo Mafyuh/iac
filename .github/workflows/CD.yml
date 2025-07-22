@@ -65,7 +65,7 @@ jobs:
               arm) host="ARM" ;;
               AI) host="AI" ;;
               databases) host="db-server" ;;
-              blocky) host="blocky" ;;
+              blocky) host="blocky-HA" ;;
               grafana) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;
               kasm) host="Kasm" ;;
