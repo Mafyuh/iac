@@ -5,7 +5,7 @@ resources:
   - arr/
   - authentik/
   - cert-manager/
-  - dashboard/
+  - headlamp/
   - loki/
   - longhorn/
   - netbox/

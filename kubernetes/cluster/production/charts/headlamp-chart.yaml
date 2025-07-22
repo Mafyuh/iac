@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: kubernetes-dashboard
+  name: headlamp-chart
   namespace: flux-system
 spec:
-  interval: 1h
-  url: https://kubernetes.github.io/dashboard/
+  interval: 2h
+  url: https://kubernetes-sigs.github.io/headlamp/

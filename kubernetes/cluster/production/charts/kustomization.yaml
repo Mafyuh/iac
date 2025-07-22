@@ -10,4 +10,4 @@ resources:
 - netbox-chart.yaml
 - unpoller.yaml
 - twingate.yaml
-- kub-dashboard.yaml
+- headlamp-chart.yaml
