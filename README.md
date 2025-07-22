@@ -49,17 +49,21 @@ To automate infrastructure updates, I use **Github Actions**, which trigger work
 For Secret management I use [Bitwarden Secrets](https://bitwarden.com/products/secrets-manager/) and their various [integrations](https://bitwarden.com/help/ansible-integration/) into the tools used.
 > Kubernetes is using SOPS with Age encryption until migration over to Bitwarden Secrets.
 
+**[GitGuardian](https://www.gitguardian.com/)** makes sure to alert me if I do accidentally push a secret
+
 I use **Oracle Cloud** for their [Always-Free](https://www.oracle.com/cloud/free/) VM's and deploy Docker services that require uptime here. [Twingate](https://www.twingate.com/) is used to connect my home network to the various VPS's securely using [Zero Trust architecture](https://en.wikipedia.org/wiki/Zero_trust_architecture).
 
 I use [**Cloudflare**](https://www.cloudflare.com/) for my DNS provider with [**Cloudflare Tunnels**](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) to expose some of the services to the world. [**Cloudflare Access**](https://www.cloudflare.com/access/) is used as Zero Trust for public websites, this is paired with [**Fail2Ban**](https://www.fail2ban.org/) looking through all my reverse proxy logs for malicious actors who made it through [**Access**](https://www.cloudflare.com/access/) and banning them via [**Cloudflare WAF**](https://www.cloudflare.com/web-application-firewall/).
 
+I also utilize Unifi’s IDS/IPS for intrusion detection on my home network, and use **[Wazuh](https://wazuh.com/)** as a SIEM to monitor and generate security alerts across all my hosts.
+
 ### **📊 Monitoring & Observability**  
-I use a combination of **Grafana, Loki, and Prometheus** with various exporters to collect and visualize system metrics, logs, and alerts. This helps maintain visibility into my infrastructure and detect issues proactively.  
+I use a combination of **Grafana, Loki, Alloy, and Prometheus** with various exporters to collect and visualize system metrics, logs, and alerts. This helps maintain visibility into my infrastructure and detect issues proactively.  
 
 - **Prometheus** – Metrics collection and alerting  
 - **Loki** – Centralized logging for containers and VMs  
 - **Grafana** – Dashboarding and visualization  
-- **Exporters** – Node Exporter, cAdvisor, Blackbox Exporter, etc.  
+- **Exporters** – Alloy, Blackbox Exporter, Speedtest Exporter, etc.  
 
 ## 🧑‍💻 **Getting Started**
 This repo is not structured like a project you can easily replicate. Although if you are new to any of the tools used I encourage you to read through the directories that make up each tool to see how I am using them.
