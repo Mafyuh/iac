@@ -11,3 +11,4 @@ resources:
 - unpoller.yaml
 - twingate.yaml
 - headlamp-chart.yaml
+- tf-controller.yaml
