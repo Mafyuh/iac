@@ -16,8 +16,12 @@ spec:
         name: headlamp-chart
         namespace: flux-system
   values:
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
     replicaCount: 1
     config:
+      pluginsDir: /build/plugins
+
       oidc:
         secret:
           create: false
@@ -46,7 +50,7 @@ spec:
         - secretName: mafyuh-dev-production-tls
           hosts:
             - k3s.${PUBLIC_DOMAIN}
-    
+
     initContainers:
       - command:
           - /bin/sh
@@ -79,10 +83,24 @@ spec:
             name: kubeconfig
             readOnly: false
 
+      - image: ghcr.io/headlamp-k8s/headlamp-plugin-flux:v0.4.0@sha256:8d14174a166e2ccb2080a9f745b2ce8e19587ff8a2f41753eb1294875e650474
+        command:
+          - /bin/sh
+          - -c
+          - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
+        name: headlamp-plugins
+        volumeMounts:
+          - mountPath: /build/plugins
+            name: headlamp-plugins
+
     volumeMounts:
       - mountPath: "/home/headlamp/.config/Headlamp/kubeconfigs/"
         name: kubeconfig
         readOnly: true
+      - mountPath: /build/plugins
+        name: headlamp-plugins
     volumes:
       - name: kubeconfig
+        emptyDir: {}
+      - name: headlamp-plugins
         emptyDir: {}
