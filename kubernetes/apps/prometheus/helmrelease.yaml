@@ -126,28 +126,6 @@ spec:
                   storage: 30Gi
 
         additionalScrapeConfigs: |
-          - job_name: 'docker_node_exporter'
-            static_configs:
-              - targets: ['10.69.69.2:9100'] # Ubu
-              - targets: ['10.0.0.15:9100'] # Jellyfin
-              - targets: ['10.20.10.20:9100'] # Blocky
-              - targets: ['10.69.69.200:9100'] # NPM
-              - targets: ['10.69.69.189:9100'] # Kasm
-              - targets: ['10.69.69.202:9100'] # Wazuh
-              - targets: ['10.69.69.199:9100'] # Umami
-              - targets: ['10.20.10.75:9100'] # AI
-
-          - job_name: 'cadvisor'
-            static_configs:
-              - targets: ['10.69.69.2:9101'] # Ubu
-              - targets: ['10.0.0.15:9101'] # Jellyfin
-              - targets: ['10.20.10.20:9101'] # Blocky
-              - targets: ['10.69.69.200:9101'] # NPM
-              - targets: ['10.69.69.189:9101'] # Kasm
-              - targets: ['10.69.69.202:9101'] # Wazuh
-              - targets: ['10.69.69.199:9101'] # Umami
-              - targets: ['10.20.10.75:9101'] # AI
-
           - job_name: 'speedtest-exporter'
             scrape_interval: 1h
             scrape_timeout: 1m
