@@ -47,7 +47,7 @@ services:
       - 8080:8080
 
   pgadmin:
-    image: dpage/pgadmin4:9.5.0
+    image: dpage/pgadmin4:9.6.0
     container_name: pgadmin
     restart: unless-stopped
     environment:
