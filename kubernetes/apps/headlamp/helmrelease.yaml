@@ -19,23 +19,8 @@ spec:
     podAnnotations:
       reloader.stakater.com/auto: "true"
     replicaCount: 1
-    pluginsManager:
-      enabled: true
-      configContent: |
-        plugins:
-          - name: cert-manager
-            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
-            version: 0.1.0
-          - name: flux
-            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
-            version: 0.2.0
-        installOptions:
-          parallel: true
-          maxConcurrent: 3
-      baseImage: node:lts-alpine
-      version: latest
-    persistentVolumeClaim:
-      enabled: false
+    config:
+      watchPlugins: true
 
     ingress:
       enabled: true
@@ -96,3 +81,17 @@ spec:
     volumes:
       - name: kubeconfig
         emptyDir: {}
+    
+    pluginsManager:
+      enabled: true
+      configContent: |
+        plugins:
+          - name: cert-manager
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
+            version: 0.1.0
+          - name: flux
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
+            version: 0.4.0
+          - name: kompose
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_kompose
+            version: 0.1.0-beta-1
