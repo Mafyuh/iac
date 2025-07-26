@@ -29,15 +29,13 @@ spec:
           - name: flux
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
             version: 0.2.0
-
-      # oidc:
-      #   secret:
-      #     create: false
-      #   clientID: "F0xxCXseO1lSK9iygiJaiFuI0JTuvhQnzRFVwFAa"
-      #   clientSecret: ${DASHBOARD_OIDC_SECRET}
-      #   issuerURL: "https://auth.${PUBLIC_DOMAIN2}/application/o/headlamp/"
-      #   scopes: "email profile"
-      #   useAccessToken: false
+        installOptions:
+          parallel: true
+          maxConcurrent: 3
+      baseImage: node:lts-alpine
+      version: latest
+    persistentVolumeClaim:
+      enabled: false
 
     ingress:
       enabled: true
