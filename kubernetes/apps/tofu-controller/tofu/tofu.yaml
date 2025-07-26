@@ -1,0 +1,30 @@
+# apiVersion: infra.contrib.fluxcd.io/v1alpha2
+# kind: Terraform
+# metadata:
+#   name: main-tofu
+#   namespace: tofu-controller
+# spec:
+#   interval: 12h
+#   approvePlan: auto
+#   backendConfig:
+#     customConfiguration: |
+#       backend "s3" {
+#         bucket   = "BigBuckets"
+#         key      = "tf.tfstate"
+#         region   = "us-ashburn-1"
+#         endpoints = {
+#           s3 = ""
+#         }
+
+#         skip_credentials_validation = true
+#         skip_requesting_account_id  = true
+#         skip_metadata_api_check     = true
+#         skip_region_validation      = true
+#         use_path_style              = true
+#         skip_s3_checksum            = true
+#       }
+#   path: /terraform
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system

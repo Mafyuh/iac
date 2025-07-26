@@ -14,4 +14,3 @@ resources:
   - reflector/
   - reloader/
   - twingate/
-  - tofu-controller/
