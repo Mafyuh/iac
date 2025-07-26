@@ -19,17 +19,25 @@ spec:
     podAnnotations:
       reloader.stakater.com/auto: "true"
     replicaCount: 1
-    config:
-      pluginsDir: /build/plugins
+    pluginsManager:
+      enabled: true
+      configContent: |
+        plugins:
+          - name: cert-manager
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
+            version: 0.1.0
+          - name: flux
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
+            version: 0.2.0
 
-      oidc:
-        secret:
-          create: false
-        clientID: "F0xxCXseO1lSK9iygiJaiFuI0JTuvhQnzRFVwFAa"
-        clientSecret: ${DASHBOARD_OIDC_SECRET}
-        issuerURL: "https://auth.${PUBLIC_DOMAIN2}/application/o/headlamp/"
-        scopes: "email profile"
-        useAccessToken: false
+      # oidc:
+      #   secret:
+      #     create: false
+      #   clientID: "F0xxCXseO1lSK9iygiJaiFuI0JTuvhQnzRFVwFAa"
+      #   clientSecret: ${DASHBOARD_OIDC_SECRET}
+      #   issuerURL: "https://auth.${PUBLIC_DOMAIN2}/application/o/headlamp/"
+      #   scopes: "email profile"
+      #   useAccessToken: false
 
     ingress:
       enabled: true
@@ -83,24 +91,10 @@ spec:
             name: kubeconfig
             readOnly: false
 
-      - image: ghcr.io/headlamp-k8s/headlamp-plugin-flux:v0.4.0@sha256:8d14174a166e2ccb2080a9f745b2ce8e19587ff8a2f41753eb1294875e650474
-        command:
-          - /bin/sh
-          - -c
-          - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
-        name: headlamp-plugins
-        volumeMounts:
-          - mountPath: /build/plugins
-            name: headlamp-plugins
-
     volumeMounts:
       - mountPath: "/home/headlamp/.config/Headlamp/kubeconfigs/"
         name: kubeconfig
         readOnly: true
-      - mountPath: /build/plugins
-        name: headlamp-plugins
     volumes:
       - name: kubeconfig
-        emptyDir: {}
-      - name: headlamp-plugins
         emptyDir: {}
