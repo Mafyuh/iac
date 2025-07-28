@@ -24,7 +24,7 @@ services:
       - JELLYFIN_CACHE_DIR=/nvmecache
 
   makemkv:
-    image: jlesage/makemkv:v25.07.1
+    image: jlesage/makemkv:v25.07.2
     container_name: makemkv
     ports:
       - 5800:5800
