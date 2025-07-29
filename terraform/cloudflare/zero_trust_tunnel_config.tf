@@ -212,7 +212,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "prom-metrics.${var.domains["dev"]}"
-        service        = "http://10.69.69.2:5000"
+        service        = "http://10.69.69.2:3000"
         path           = ""
         origin_request = {
           no_tls_verify            = false

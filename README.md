@@ -1,11 +1,13 @@
-[![Yamllint](https://github.com/Mafyuh/iac/actions/workflows/yamllint.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/yamllint.yml)
 [![CD](https://github.com/Mafyuh/iac/actions/workflows/CD.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/CD.yml)
 [![Ansible](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml)
-[![Tofu](https://github.com/Mafyuh/iac/actions/workflows/tofu.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/tofu.yml)
 
 [![Running Pods](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_pods_running&label=Running%20Pods&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
 [![Uptime](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_uptime_days&label=Uptime&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
 [![Nodes](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_node_count&label=Nodes&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
+[![Version](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/k3s_version&label=Version&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
+[![CPU](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cpu&label=CPU&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
+[![RAM](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/ram&label=RAM&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
+
 
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
 
