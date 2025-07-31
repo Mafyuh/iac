@@ -1,0 +1,98 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
+clusterName: optiplex-k8s
+endpoint: https://10.0.0.9:6443
+# renovate: depName=ghcr.io/siderolabs/installer datasource=docker
+talosVersion: v1.10.5
+# renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
+kubernetesVersion: v1.33.2
+additionalApiServerCertSans: &sans
+  - 127.0.0.1
+additionalMachineCertSans: *sans
+cniConfig:
+  name: flannel
+nodes:
+  - hostname: talos-1.mafyuh.com
+    ipAddress: 10.0.0.9
+    controlPlane: true
+    installDisk: /dev/sda
+    networkInterfaces:
+      - deviceSelector:
+          physical: true
+        dhcp: true
+        vip:
+          ip: &vip 10.0.0.150
+  - hostname: talos-2.mafyuh.com
+    ipAddress: 10.0.0.84
+    controlPlane: true
+    installDisk: /dev/sda
+    networkInterfaces:
+      - deviceSelector:
+          physical: true
+        dhcp: true
+        vip:
+          ip: *vip
+  - hostname: talos-3.mafyuh.com
+    ipAddress: 10.0.0.177
+    controlPlane: true
+    installDisk: /dev/sda
+    networkInterfaces:
+      - deviceSelector:
+          physical: true
+        dhcp: true
+        vip:
+          ip: *vip
+controlPlane:
+  schematic:
+    customization:
+      extraKernelArgs:
+        - intel_iommu=on
+        - iommu=pt
+        - apparmor=0
+        - init_on_free=0
+        - init_on_alloc=0
+        - mitigations=off
+        - security=none
+        - net.ifnames=1
+  patches:
+    # Disable search domain (DHCP is used)
+    - |-
+      machine:
+        network:
+          disableSearchDomain: true
+    # Enable host dns
+    - |-
+      machine:
+        features:
+          hostDNS:
+            enabled: true
+            resolveMemberNames: true
+            forwardKubeDNSToHost: false
+    # Configure cluster
+    - |-
+      cluster:
+        allowSchedulingOnControlPlanes: true
+        coreDNS:
+            disabled: true
+        proxy:
+          disabled: true
+        scheduler:
+          config:
+            apiVersion: kubescheduler.config.k8s.io/v1
+            kind: KubeSchedulerConfiguration
+            profiles:
+              - schedulerName: default-scheduler
+                pluginConfig:
+                  - name: PodTopologySpread
+                    args:
+                      defaultingType: List
+                      defaultConstraints:
+                        - maxSkew: 1
+                          topologyKey: kubernetes.io/hostname
+                          whenUnsatisfiable: ScheduleAnyway
+    # Configure etcd
+    - |-
+      cluster:
+        etcd:
+          advertisedSubnets:
+            - 10.0.0.0/24
