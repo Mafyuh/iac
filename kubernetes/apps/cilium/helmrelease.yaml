@@ -4,19 +4,89 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: cilium
+  namespace: kube-system
 spec:
   interval: 15m
   chart:
     spec:
       chart: cilium
       version: 1.17.6
-      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: cilium
-  valuesFrom:
-    - kind: ConfigMap
-      name: cilium-values
+        namespace: flux-system
   values:
-    operator:
-      tolerations: []
+    cni:
+      exclusive: false
+    autoDirectNodeRoutes: true
+    bpf:
+      masquerade: true
+    bgp:
+      enabled: false
+    endpointRoutes:
+      enabled: true
+    envoy:
+      enabled: false
+    hubble:
+      enabled: true
+      relay:
+        enabled: true
+        rollOutPods: true
+      ui:
+        enabled: true
+        rollOutPods: true
+    ipam:
+      mode: kubernetes
+    ipv4NativeRoutingCIDR: 10.0.0.0/24
+    kubeProxyReplacement: true
+    kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+    l2announcements:
+      enabled: true
+    loadBalancer:
+      algorithm: maglev
+      mode: dsr
+    localRedirectPolicy: true
+    rollOutCiliumPods: true
+    routingMode: native
+    securityContext:
+      capabilities:
+        ciliumAgent:
+          - CHOWN
+          - KILL
+          - NET_ADMIN
+          - NET_RAW
+          - IPC_LOCK
+          - SYS_ADMIN
+          - SYS_RESOURCE
+          - DAC_OVERRIDE
+          - FOWNER
+          - SETGID
+          - SETUID
+        cleanCiliumState:
+          - NET_ADMIN
+          - SYS_ADMIN
+          - SYS_RESOURCE
+    cgroup:
+      autoMount:
+        enabled: false
+      hostRoot: /sys/fs/cgroup
+    k8sServiceHost: localhost
+    k8sServicePort: 7445
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: custom-pool
+spec:
+  blocks:
+    - start: 10.0.0.210
+      stop: 10.0.0.220
+---
+# yaml-language-server: $schema=https://lds-schemas.pages.dev/cilium.io/ciliuml2announcementpolicy_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: default-policy
+spec:
+  loadBalancerIPs: true
+  interfaces: ["^enp.*"]

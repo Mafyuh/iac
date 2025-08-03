@@ -15,45 +15,74 @@ nodes:
   - hostname: talos-1.mafyuh.com
     ipAddress: 10.0.0.9
     controlPlane: true
-    installDisk: /dev/sda
+    installDisk: /dev/nvme0n1
     networkInterfaces:
       - deviceSelector:
           physical: true
         dhcp: true
         vip:
           ip: &vip 10.0.0.150
+    patches:
+      - |-
+        machine:
+          disks:
+          - device: /dev/sda
+            partitions:
+              - mountpoint: /var/lib/longhorn
   - hostname: talos-2.mafyuh.com
     ipAddress: 10.0.0.84
     controlPlane: true
-    installDisk: /dev/sda
+    installDisk: /dev/nvme0n1
     networkInterfaces:
       - deviceSelector:
           physical: true
         dhcp: true
         vip:
           ip: *vip
+    patches:
+      - |-
+        machine:
+          disks:
+          - device: /dev/sda
+            partitions:
+              - mountpoint: /var/lib/longhorn
   - hostname: talos-3.mafyuh.com
     ipAddress: 10.0.0.177
     controlPlane: true
-    installDisk: /dev/sda
+    installDisk: /dev/nvme0n1
     networkInterfaces:
       - deviceSelector:
           physical: true
         dhcp: true
         vip:
           ip: *vip
+    patches:
+      - |-
+        machine:
+          disks:
+          - device: /dev/sda
+            partitions:
+              - mountpoint: /var/lib/longhorn
 controlPlane:
   schematic:
     customization:
       extraKernelArgs:
-        - intel_iommu=on
-        - iommu=pt
-        - apparmor=0
-        - init_on_free=0
-        - init_on_alloc=0
-        - mitigations=off
-        - security=none
-        - net.ifnames=1
+        - -init_on_alloc                     
+        - -selinux                           
+        - apparmor=0                         
+        - init_on_alloc=0                    
+        - init_on_free=0                     
+        - intel_iommu=on                      # PCI Passthrough
+        - iommu=pt                            # PCI Passthrough
+        - mitigations=off                    
+        - security=none                      
+        - talos.auditd.disabled=1
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/iscsi-tools
+          - siderolabs/util-linux-tools
+          - siderolabs/i915
+          - siderolabs/intel-ucode
   patches:
     # Disable search domain (DHCP is used)
     - |-
@@ -68,12 +97,23 @@ controlPlane:
             enabled: true
             resolveMemberNames: true
             forwardKubeDNSToHost: false
+    # Mount longhorn in kubelet
+    - |-
+      machine:
+        kubelet:
+          extraMounts:
+            - destination: /var/lib/longhorn
+              type: bind
+              source: /var/lib/longhorn
+              options: ["bind", "rshared", "rw"]
+        sysctls:
+          vm.nr_hugepages: "1024"
     # Configure cluster
     - |-
       cluster:
         allowSchedulingOnControlPlanes: true
         coreDNS:
-            disabled: true
+            disabled: false
         proxy:
           disabled: true
         scheduler:

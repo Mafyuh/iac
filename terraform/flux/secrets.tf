@@ -13,7 +13,3 @@ data "bitwarden_secret" "cluster_client_certificate" {
 data "bitwarden_secret" "git_flux_password" {
   id = "e507c0be-cc1e-4d5b-90a7-b2710067c651"
 }
-
-data "bitwarden_secret" "k3s_host_tf" {
-  id = "a809c809-d8b9-4bc1-8e41-b2b800358229"
-}

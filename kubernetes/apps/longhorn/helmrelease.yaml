@@ -15,3 +15,6 @@ spec:
         namespace: flux-system
       version: 1.9.1
   interval: 1m0s
+  values:
+    defaultSettings:
+      defaultLonghornStaticStorageClass: longhorn

@@ -112,7 +112,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "auth.${var.domains["io"]}"
-        service        = "https://${var.k3s_nginx_ip_address}:443"
+        service        = "https://10.0.0.210:443"
         path           = ""
         origin_request = {
           no_tls_verify            = true
@@ -162,7 +162,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "home.${var.domains["dev"]}"
-        service        = "https://${var.k3s_nginx_ip_address}:443"
+        service        = "https://10.0.0.210:443"
         path           = ""
         origin_request = {
           no_tls_verify            = true
@@ -237,7 +237,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "*.${var.domains["io"]}"
-        service        = "https://${var.k3s_nginx_ip_address}:443"
+        service        = "https://10.0.0.210:443"
         path           = ""
         origin_request = {
           no_tls_verify            = true
@@ -262,7 +262,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "*.${var.domains["dev"]}"
-        service        = "https://${var.k3s_nginx_ip_address}:443"
+        service        = "https://10.0.0.210:443"
         path           = ""
         origin_request = {
           no_tls_verify            = true

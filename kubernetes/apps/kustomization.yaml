@@ -5,6 +5,7 @@ resources:
   - arr/
   - authentik/
   - cert-manager/
+  - cilium/
   - headlamp/
   - loki/
   - longhorn/

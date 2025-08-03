@@ -17,7 +17,7 @@ resource "cloudflare_dns_record" "dev_links" {
 }
 
 resource "cloudflare_dns_record" "dev_local_wildcard" {
-  content = "10.69.69.220"
+  content = "10.0.0.210"
   name    = "*.local.${var.domains["dev"]}"
   proxied = false
   ttl     = 1
@@ -26,7 +26,7 @@ resource "cloudflare_dns_record" "dev_local_wildcard" {
 }
 
 resource "cloudflare_dns_record" "dev_local" {
-  content = "10.69.69.220"
+  content = "10.0.0.220"
   name    = "local.${var.domains["dev"]}"
   proxied = false
   ttl     = 1
