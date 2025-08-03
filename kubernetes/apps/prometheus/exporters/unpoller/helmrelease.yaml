@@ -46,6 +46,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               UP_UNIFI_DEFAULT_PASS: ${UP_UNIFI_DEFAULT_PASS}
+              UP_UNIFI_DEFAULT_USER: "unifipoller"
               UP_UNIFI_DEFAULT_URL: "https://10.0.0.1"
               UP_INFLUXDB_DISABLE: true
         
