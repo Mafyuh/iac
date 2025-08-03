@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/kashalls/kromgo/main/config.schema.json
+metrics:
+  - name: cluster_node_count
+    query: count(kube_node_info)
+    title: Nodes
+    colors:
+      - {color: "green", min: 3, max: 10}
+      - {color: "orange", min: 2, max: 2}
+      - {color: "red", min: 0, max: 1}
+  - name: cluster_pods_running
+    query: count(kube_pod_status_phase{phase="Running"})
+    title: Pods
+    colors:
+      - {color: "green", min: 1, max: 9999}
+      - {color: "red", min: 0, max: 0}
+  - name: cluster_uptime_days
+    query: round(max(time() - node_boot_time_seconds{}) / 86400, 0.1)
+    title: Uptime
+    suffix: " days"
+    colors:
+      - {color: "green", min: 0, max: 99999}
+  - name: cluster_cpu_usage
+    query: round(cluster:node_cpu:ratio_rate5m * 100, 0.1)
+    title: CPU Usage
+    suffix: "%"
+    colors:
+      - {color: "green", min: 0, max: 35}
+      - {color: "orange", min: 36, max: 75}
+      - {color: "red", min: 76, max: 100}
+  - name: cluster_memory_usage
+    query: round((1 - (sum(:node_memory_MemAvailable_bytes:sum{}) / sum(node_memory_MemTotal_bytes{job="node-exporter"}))) * 100, 0.1)
+    title: RAM Usage
+    suffix: "%"
+    colors:
+      - {color: "green", min: 0, max: 35}
+      - {color: "orange", min: 36, max: 75}
+      - {color: "red", min: 76, max: 100}
+  - name: kubernetes_version
+    query: kubernetes_build_info
+    label: git_version
+    title: Git Version
