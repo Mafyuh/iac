@@ -47,7 +47,7 @@ spec:
             env:
               UP_UNIFI_DEFAULT_PASS: ${UP_UNIFI_DEFAULT_PASS}
               UP_UNIFI_DEFAULT_USER: "unifipoller"
-              UP_UNIFI_DEFAULT_URL: "https://10.0.0.1"
+              UP_UNIFI_DEFAULT_URL: "https://10.20.10.1"
               UP_INFLUXDB_DISABLE: true
         
             probes:
