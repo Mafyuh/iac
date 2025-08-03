@@ -80,7 +80,7 @@ spec:
         enabled: true
         className: nginx
         hosts:
-          - host: "kromgo.${PUBLIC_DOMAIN}"
+          - host: "{{ .Release.Name }}.mafyuh.dev"
             paths:
               - path: /
                 pathType: Prefix
@@ -89,7 +89,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "kromgo.${PUBLIC_DOMAIN}"
+              - "{{ .Release.Name }}.mafyuh.dev"
             secretName: mafyuh-dev-production-tls
     persistence:
       config-file:
