@@ -1,6 +1,6 @@
 provider "flux" {
   kubernetes = {
-    host = data.bitwarden_secret.k3s_host_tf.value
+    host = "https://10.0.0.150:6443"
     client_certificate     = data.bitwarden_secret.cluster_client_certificate.value
     client_key             = data.bitwarden_secret.cluster_client_key.value
     cluster_ca_certificate = data.bitwarden_secret.cluster_ca_certificate.value
