@@ -6,7 +6,6 @@ resources:
   - prowlarr/
   - jellyseerr/
   - lidarr/
-  - qbitty/
   - radarr/
   - recyclarr/
   - sabnzbd/

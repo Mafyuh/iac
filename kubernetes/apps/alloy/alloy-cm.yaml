@@ -240,23 +240,3 @@ data:
       targets = local.file_match.pods.targets
       forward_to = [loki.process.logs.receiver]
     }
-  syslog.config.alloy: |-
-    loki.write "default" {
-        endpoint {
-            url = "http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push"
-        }
-    }
-
-    local.file_match "node_logs" {
-        path_targets = [{
-          __path__  = "/var/log/syslog",
-          job       = "node/syslog",
-          node_name = env("HOSTNAME"),
-          cluster   = "cluster",
-      }]
-    }
-
-    loki.source.file "node_logs" {
-      targets    = local.file_match.node_logs.targets
-      forward_to = [loki.write.default.receiver]
-    }
