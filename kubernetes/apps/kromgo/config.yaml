@@ -40,3 +40,20 @@ metrics:
     query: kubernetes_build_info
     label: git_version
     title: Git Version
+
+  - name: flux_version
+    query: label_replace(flux_instance_info, "revision", "$1", "revision", "v(.+)@sha256:.+")
+    label: revision
+    title: Flux
+
+  - name: talos_version
+    query: label_replace(node_os_info{name="Talos"}, "version_id", "$1", "version_id", "v(.+)")
+    label: version_id
+    title: Talos
+
+  - name: cluster_alert_count
+    query: alertmanager_alerts{state="active"} - 1
+    colors:
+      - { color: "green", min: 0, max: 0 }
+      - { color: "red", min: 1, max: 9999 }
+    title: Alerts

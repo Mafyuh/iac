@@ -1,12 +1,16 @@
 [![CD](https://github.com/Mafyuh/iac/actions/workflows/CD.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/CD.yml)
 [![Ansible](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml)
 
-[![Running Pods](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_pods_running&label=Running%20Pods&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
-[![Uptime](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_uptime_days&label=Uptime&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
-[![Nodes](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cluster_node_count&label=Nodes&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
-[![Version](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/k3s_version&label=Version&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
-[![CPU](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/cpu&label=CPU&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
-[![RAM](https://img.shields.io/endpoint?url=https://prom-metrics.mafyuh.dev/ram&label=RAM&color=blue&logo=kubernetes)](https://github.com/mafyuh/iac)
+[![Pods](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_pods_running&&logo=kubernetes&color=blue)](https://kubernetes.io/)&nbsp;
+[![Nodes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_node_count&label=Nodes&logo=kubernetes&color=blue)](https://kubernetes.io/)&nbsp;
+[![Uptime](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_uptime_days&label=Uptime&logo=kubernetes&color=blue)](https://kubernetes.io/)&nbsp;
+[![CPU](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_cpu_usage&&logo=kubernetes&label=CPU&color=blue)](https://kubernetes.io/)&nbsp;
+[![RAM](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_memory_usage&&logo=kubernetes&label=RAM&color=blue)](https://kubernetes.io/)&nbsp;
+[![Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fkubernetes_version&label=Kubernetes&logo=kubernetes&color=blue)](https://kubernetes.io/)&nbsp;
+[![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Ftalos_version&&logo=talos&color=blue)](https://kubernetes.io/)&nbsp;
+[![Flux](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fflux_version&&logo=flux&color=blue)](https://kubernetes.io/)&nbsp;
+
+
 
 
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
@@ -28,7 +32,7 @@ This is my homelab infrastructure, defined in code.
 
 | Hypervisor | OS | Tools | Networking | Misc. Automations |
 |---|---|---|---|---|
-| [![Proxmox](https://img.shields.io/badge/-Proxmox-%23c9d1d9?logo=Proxmox)](https://www.proxmox.com) | [![Debian](https://img.shields.io/badge/Debian-%23c9d1d9?&logo=debian&logoColor=black)](https://www.debian.org/) [![Ubuntu](https://img.shields.io/badge/Ubuntu-%23c9d1d9?&logo=ubuntu&logoColor=red)](https://releases.ubuntu.com/noble/) [![Arch](https://img.shields.io/badge/Arch-%23c9d1d9?&logo=archlinux)](https://archlinux.org/)| [![Docker](https://img.shields.io/badge/-Docker-%23c9d1d9?logo=docker)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/-Kubernetes-%23c9d1d9?logo=kubernetes)](https://k3s.io/) [![Renovate](https://img.shields.io/badge/-Renovate-%23c9d1d9?logo=renovate&logoColor=blue)](https://github.com/renovatebot/renovate) [![OpenTofu](https://img.shields.io/badge/-OpenTofu-%23c9d1d9?logo=opentofu)](https://opentofu.org/) [![Packer](https://img.shields.io/badge/-Packer-%23c9d1d9?logo=packer)](https://www.packer.io/) [![Ansible](https://img.shields.io/badge/-Ansible-%23c9d1d9?logo=ansible&logoColor=red)](https://www.ansible.com/) [![Flux](https://img.shields.io/badge/-Flux-%23c9d1d9?logo=flux)](https://fluxcd.io/)| [![Unifi](https://img.shields.io/badge/-Ubiquiti-%23c9d1d9?logo=ubiquiti&logoColor=blue)](https://www.ui.com/) | [![n8n](https://img.shields.io/badge/-n8n-%23c9d1d9?logo=n8n)](https://n8n.io/) [![Actions](https://img.shields.io/badge/-Actions-%23c9d1d9?logo=github&logoColor=black)](https://github.com/features/actions)
+| [![Proxmox](https://img.shields.io/badge/-Proxmox-%23c9d1d9?logo=Proxmox)](https://www.proxmox.com) | [![Talos](https://img.shields.io/badge/Talos-%23c9d1d9?&logo=talos)](https://www.talos.dev/) [![Ubuntu](https://img.shields.io/badge/Ubuntu-%23c9d1d9?&logo=ubuntu&logoColor=red)](https://releases.ubuntu.com/noble/) [![Arch](https://img.shields.io/badge/Arch-%23c9d1d9?&logo=archlinux)](https://archlinux.org/)| [![Docker](https://img.shields.io/badge/-Docker-%23c9d1d9?logo=docker)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/-Kubernetes-%23c9d1d9?logo=kubernetes)](https://k3s.io/) [![Renovate](https://img.shields.io/badge/-Renovate-%23c9d1d9?logo=renovate&logoColor=blue)](https://github.com/renovatebot/renovate) [![OpenTofu](https://img.shields.io/badge/-OpenTofu-%23c9d1d9?logo=opentofu)](https://opentofu.org/) [![Packer](https://img.shields.io/badge/-Packer-%23c9d1d9?logo=packer)](https://www.packer.io/) [![Ansible](https://img.shields.io/badge/-Ansible-%23c9d1d9?logo=ansible&logoColor=red)](https://www.ansible.com/) [![Flux](https://img.shields.io/badge/-Flux-%23c9d1d9?logo=flux)](https://fluxcd.io/)| [![Unifi](https://img.shields.io/badge/-Unifi-%23c9d1d9?logo=ubiquiti&logoColor=blue)](https://www.ui.com/) | [![n8n](https://img.shields.io/badge/-n8n-%23c9d1d9?logo=n8n)](https://n8n.io/) [![Actions](https://img.shields.io/badge/-Actions-%23c9d1d9?logo=github&logoColor=black)](https://github.com/features/actions)
 
 </div>
 
@@ -37,7 +41,7 @@ This repository contains the IaC ([Infrastructure as Code](https://en.wikipedia.
 
 Most of my homelab runs on **Proxmox**, with VMs managed and maintained using [OpenTofu](https://opentofu.org/). All VMs are cloned from templates I created with [Packer](https://www.packer.io/).  
 
-All services are **containerized**, either managed with **Docker Compose** or **orchestrated with Kubernetes ([K3s](https://k3s.io/))**. Over time, I’ve been migrating everything to Kubernetes using **[GitOps](https://en.wikipedia.org/wiki/DevOps) practices**, which is my long-term goal.  
+All services are **containerized**, either managed with **Docker Compose** or **orchestrated with Kubernetes**. Over time, I’ve been migrating everything to Kubernetes using **[GitOps](https://en.wikipedia.org/wiki/DevOps) practices**, which is my long-term goal.  
 
 To automate infrastructure updates, I use **Github Actions**, which trigger workflows upon changes to this repo. This ensures seamless deployment and maintenance across my homelab:  
 
@@ -88,9 +92,15 @@ Some good references for how I learned this stuff (other than RTM)
 
 | Name        | Device         | CPU             | RAM          | Storage                                      | GPU               | Purpose                          |
 |-------------|--------------|-----------------|--------------|----------------------------------------------|-------------------|----------------------------------|
-| **Arc-Ripper**  | Optiplex 3050  | Intel i5-6500   | 32 GB DDR4   | 1TB NVMe                                     | Arc A310          | Jellyfin Server, Blu-ray Ripper |
+|**Talos-1**|Optiplex 7040 Micro |Intel i5-6500t |32GB DDR4 |1x1TB SATA SSD 128GB NVME |Integrated |k8s control-plane |
+|**Talos-2**|Optiplex 7040 Micro |Intel i5-6500t |32GB DDR4 |1x1TB SATA SSD 128GB NVME |Integrated |k8s control-plane |
+|**Talos-3**|Optiplex 7040 Micro |Intel i5-6500t |32GB DDR4 |1x1TB SATA SSD 128GB NVME |Integrated |k8s control-plane |
+| **Arc-Ripper**  | Optiplex 3050  | Intel i5-6500   | 32 GB DDR4   | 1TB NVMe | Arc A310 | Jellyfin Server, Blu-ray Ripper |
 | **PVE Node 1**  | Custom         | Intel i7-9700K  | 64 GB DDR4   | NVMe for boot and VMs, 4×4TB HDD (RaidZ10)   | Nvidia 1660 6GB   | Main node with most VMs, NAS    |
-| **PVE Node 2**  | Custom         | Intel i7-8700K  | 64 GB DDR4   | 1×2TB NVMe                                   | Nvidia 3080 10GB   | More VMs                         |
+| **PVE Node 2**  | Custom         | Intel i7-8700K  | 64 GB DDR4   | 1×2TB NVMe | Nvidia 3080 10GB   | More VMs                         |
+|**Pi** |Raspberry Pi 4 | |8GB |1TB m.2 SATA SSD w/ USB HAT |n/a |Home Assistant Server |
+|**Proxmox Backup Server** |[Mini-PC](https://www.amazon.com/FIREBAT-Computer-Expansible-Efficient-Business/dp/B0DZWP653T/ref=sr_1_4?s=pc&sr=1-4) |Intel N150 |8GB |2TB SATA |n/a |Backup Proxmox VM's |
+
 
 </details>  
 
