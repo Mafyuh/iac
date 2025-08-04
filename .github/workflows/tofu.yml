@@ -43,7 +43,7 @@ jobs:
           EOF
 
       - name: Setup OpenTofu
-        uses: opentofu/setup-opentofu@v1.0.5
+        uses: opentofu/setup-opentofu@v1.0.6
 
       - name: Run OpenTofu Init
         working-directory: ./terraform
