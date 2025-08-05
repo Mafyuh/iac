@@ -23,6 +23,39 @@ spec:
       create: true
       rules:
         alertmanager: true
+        etcd: true
+        configReloaders: true
+        general: true
+        k8sContainerCpuUsageSecondsTotal: true
+        k8sContainerMemoryCache: true
+        k8sContainerMemoryRss: true
+        k8sContainerMemorySwap: true
+        k8sContainerResource: true
+        k8sContainerMemoryWorkingSetBytes: true
+        k8sPodOwner: true
+        kubeApiserverAvailability: true
+        kubeApiserverBurnrate: true
+        kubeApiserverHistogram: true
+        kubeApiserverSlos: true
+        kubeControllerManager: false
+        kubelet: true
+        kubeProxy: false
+        kubePrometheusGeneral: true
+        kubePrometheusNodeRecording: true
+        kubernetesApps: true
+        kubernetesResources: true
+        kubernetesStorage: true
+        kubernetesSystem: true
+        kubeSchedulerAlerting: false
+        kubeSchedulerRecording: false
+        kubeStateMetrics: true
+        network: true
+        node: true
+        nodeExporterAlerting: true
+        nodeExporterRecording: true
+        prometheus: true
+        prometheusOperator: true
+        windows: true
 
     crds:
       enabled: true
@@ -68,6 +101,10 @@ spec:
       defaultDashboardsEnabled: false
       defaultDashboardsTimezone: America/New_York
       defaultDashboardsEditable: true
+      plugins:
+        - grafana-piechart-panel
+      env:
+        GF_SECURITY_DISABLE_SANITIZE_HTML: "true"
       ingress:
         enabled: true
         ingressClassName: nginx
