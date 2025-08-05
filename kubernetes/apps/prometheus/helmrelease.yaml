@@ -102,7 +102,7 @@ spec:
       defaultDashboardsTimezone: America/New_York
       defaultDashboardsEditable: true
       env:
-        GF_SECURITY_DISABLE_SANITIZE_HTML: "true"
+        GF_PANELS_DISABLE_SANITIZE_HTML: "true"
       ingress:
         enabled: true
         ingressClassName: nginx
