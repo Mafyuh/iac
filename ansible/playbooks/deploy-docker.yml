@@ -37,6 +37,7 @@
     - name: Set env variables with secrets
       ansible.builtin.set_fact:
         env_variables_with_secrets: |
+          HOST={{ target_host }}
           {% for key, secret in env_variables.keys() | zip(bw_secret_output.results) %}
           {{ key }}={{ secret.stdout }}
           {% endfor %}
