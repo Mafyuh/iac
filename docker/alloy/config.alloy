@@ -7,7 +7,7 @@
 
 loki.write "default" {
 	endpoint {
-		url = "http://10.69.69.221:3100/loki/api/v1/push"
+		url = "http://10.0.0.212:3100/loki/api/v1/push"
 	}
 	external_labels = {}
 }
