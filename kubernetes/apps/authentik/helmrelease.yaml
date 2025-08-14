@@ -85,7 +85,7 @@ spec:
         requests:
           cpu: 200m
         limits:
-          cpu: "2"
+          cpu: "500m"
     worker:
       replicas: 1
       env:
