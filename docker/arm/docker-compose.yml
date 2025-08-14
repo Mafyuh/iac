@@ -125,7 +125,7 @@ services:
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
     restart: always
     container_name: linkwarden
-    image: ghcr.io/linkwarden/linkwarden:v2.11.5
+    image: ghcr.io/linkwarden/linkwarden:v2.11.7
     networks:
       - gitea_main
     ports:
