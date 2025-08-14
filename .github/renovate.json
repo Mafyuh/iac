@@ -11,18 +11,22 @@
     "kubernetes/cluster/production/flux-system/gotk-components.yaml"
   ],
   "flux": {
-    "managerFilePatterns": [
-      "/^kubernetes/.+\\.ya?ml$/"
-    ]
+    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
   },
   "helm-values": {
-    "managerFilePatterns": [
-      "/^kubernetes/.+\\.ya?ml$/"
-    ]
+    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
   },
   "kubernetes": {
-    "managerFilePatterns": [
-      "/^kubernetes/.+\\.ya?ml$/"
-    ]
-  }
+    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
+  },
+  "regexManagers": [
+    {
+      "description": "Update Talos and Kubernetes versions in talconfig.yaml",
+      "fileMatch": ["^kubernetes/talos/talconfig\\.ya?ml$"],
+      "matchStrings": [
+        "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+talosVersion: (?<currentValue>.*)",
+        "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+kubernetesVersion: (?<currentValue>.*)"
+      ]
+    }
+  ]
 }
