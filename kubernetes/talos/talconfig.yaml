@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: optiplex-k8s
 endpoint: https://10.0.0.150:6443
-# renovate: depName=ghcr.io/siderolabs/installer datasource=docker
+# renovate: depName=siderolabs/talos datasource=github-releases
 talosVersion: v1.10.5
 # renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
 kubernetesVersion: v1.33.2
