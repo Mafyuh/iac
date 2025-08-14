@@ -11,26 +11,38 @@
     "kubernetes/cluster/production/flux-system/gotk-components.yaml"
   ],
   "flux": {
-    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
+    "managerFilePatterns": [
+      "/^kubernetes/.+\\.ya?ml$/"
+    ]
   },
   "helm-values": {
-    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
+    "managerFilePatterns": [
+      "/^kubernetes/.+\\.ya?ml$/"
+    ]
   },
   "kubernetes": {
-    "fileMatch": ["^kubernetes/.+\\.ya?ml$"]
+    "managerFilePatterns": [
+      "/^kubernetes/.+\\.ya?ml$/"
+    ]
   },
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "description": "Update Talos and Kubernetes versions in talconfig.yaml",
-      "fileMatch": ["^kubernetes/talos/talconfig\\.ya?ml$"],
+      "managerFilePatterns": [
+        "/^kubernetes/talos/talconfig\\.ya?ml$/"
+      ],
       "matchStrings": [
         "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+talosVersion: (?<currentValue>.*)",
         "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+kubernetesVersion: (?<currentValue>.*)"
       ]
     },
     {
+      "customType": "regex",
       "description": "Update Flux version in Terraform flux_bootstrap_git resource",
-      "fileMatch": ["^terraform/.+\\.tf$"],
+      "managerFilePatterns": [
+        "/^terraform/.+\\.tf$/"
+      ],
       "matchStrings": [
         "resource \"flux_bootstrap_git\" \"flux\" \\{[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
       ],
