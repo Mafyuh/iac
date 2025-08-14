@@ -136,3 +136,15 @@ controlPlane:
         etcd:
           advertisedSubnets:
             - 10.0.0.0/24
+    # Configure kube-controller-manager metrics
+    - |-
+      cluster:
+        controllerManager:
+          extraArgs:
+            bind-address: "0.0.0.0"
+    # Configure kube-scheduler metrics
+    - |-
+      cluster:
+        scheduler:
+          extraArgs:
+            bind-address: "0.0.0.0"
