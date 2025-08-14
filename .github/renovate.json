@@ -27,6 +27,15 @@
         "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+talosVersion: (?<currentValue>.*)",
         "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+kubernetesVersion: (?<currentValue>.*)"
       ]
+    },
+    {
+      "description": "Update Flux version in Terraform flux_bootstrap_git resource",
+      "fileMatch": ["^terraform/.+\\.tf$"],
+      "matchStrings": [
+        "resource \"flux_bootstrap_git\" \"flux\" \\{[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "fluxcd/flux2"
     }
   ]
 }
