@@ -77,20 +77,21 @@ services:
       - 5984:5984
     restart: unless-stopped
   
-  minio:
-    command: server /data --console-address ":9001"
-    image: minio/minio@sha256:d249d1fb6966de4d8ad26c04754b545205ff15a62e4fd19ebd0f26fa5baacbc0
+  rustfs:
+    image: rustfs/rustfs@sha256:8cb1ef89f1c8b35732b54e8a750af455577fe767d5f16e00896674a3945eb7a6
     environment:
-      - MINIO_ROOT_PASSWORD=$MINIO_ROOT_PASSWORD
-      - MINIO_ROOT_USER=mafyuh
+      - RUSTFS_ADDRESS=":9000"
+      - RUSTFS_CONSOLE_ENABLE=true
+      - RUSTFS_CONSOLE_ADDRESS=":9001"
     volumes:
-      - /docker/appdata/minio/data:/data
-    container_name: minio
+      - rustfs_data:/data
+    container_name: rustfs
     ports:
-      - 9001:9001
       - 9000:9000
+      - 9001:9001
 
 volumes:
   mysql_data:
   postgres_data:
   redis_data:
+  rustfs_data:
