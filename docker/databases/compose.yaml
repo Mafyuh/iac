@@ -80,9 +80,10 @@ services:
   rustfs:
     image: rustfs/rustfs@sha256:8cb1ef89f1c8b35732b54e8a750af455577fe767d5f16e00896674a3945eb7a6
     environment:
-      - RUSTFS_ADDRESS=":9000"
+      - RUSTFS_ADDRESS=:9000
       - RUSTFS_CONSOLE_ENABLE=true
-      - RUSTFS_CONSOLE_ADDRESS=":9001"
+      - RUSTFS_ACCESS_KEY=$RUSTFS_ACCESS_KEY
+      - RUSTFS_SECRET_KEY=$RUSTFS_SECRET_KEY
     volumes:
       - rustfs_data:/data
     container_name: rustfs
