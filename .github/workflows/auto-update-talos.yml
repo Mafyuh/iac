@@ -12,11 +12,18 @@ on:
     branches: [ main ]
     paths:
       - 'kubernetes/talos/talconfig.yaml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'kubernetes/talos/talconfig.yaml'
 
 jobs:
   auto-update:
     runs-on: self-hosted
-    if: contains(github.head_ref, 'renovate/') || github.event_name == 'workflow_dispatch'
+    if: |
+      (github.event_name == 'pull_request' && contains(github.head_ref, 'renovate/')) ||
+      (github.event_name == 'push') ||
+      github.event_name == 'workflow_dispatch'
     
     steps:
     - name: Checkout code
