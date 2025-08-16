@@ -26,7 +26,7 @@ resource "cloudflare_dns_record" "dev_local_wildcard" {
 }
 
 resource "cloudflare_dns_record" "dev_local" {
-  content = "10.0.0.220"
+  content = "10.0.0.210"
   name    = "local.${var.domains["dev"]}"
   proxied = false
   ttl     = 1

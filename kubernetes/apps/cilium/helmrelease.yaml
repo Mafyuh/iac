@@ -26,9 +26,9 @@ spec:
     endpointRoutes:
       enabled: true
     envoy:
-      enabled: false
+      enabled: true
     envoyConfig:
-      enabled: false
+      enabled: true
     hubble:
       enabled: true
       relay:
