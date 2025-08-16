@@ -121,32 +121,30 @@ spec:
             interval: 1m
             scrapeTimeout: 10s
 
-    ingress:
+    route:
       internal:
         enabled: true
-        className: nginx
-        annotations:
-          nginx.ingress.kubernetes.io/auth-url: http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
-          nginx.ingress.kubernetes.io/auth-signin: /outpost.goauthentik.io/start?rd=$escaped_request_uri
-          nginx.ingress.kubernetes.io/auth-response-headers: Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
-          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Host $http_host;
-        hosts:
-          - host: "prowlarr.${LOCAL_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: app
-                  port: http
-              - path: /metrics
-                pathType: Prefix
-                service:
-                  identifier: metrics
-                  port: metrics
-        tls:
-          - hosts:
-              - "prowlarr.${LOCAL_DOMAIN}"
-            secretName: local-mafyuh-dev-production-tls
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.local.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: prowlarr-app
+                port: *port
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /metrics
+            backendRefs:
+              - name: prowlarr-metrics
+                port: *metricsPort
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
 
     persistence:
       config:
