@@ -29,7 +29,6 @@ jobs:
             287c852d-f2b5-467d-bfc4-b20800f25f52 > aws_secret_access_key
             3b222376-ccd9-4f44-a4b4-b222001af68a > grafana_auth
             030fbb6a-3b6d-40dc-9c26-b222001b0fb6 > grafana_url
-            f8f85ab2-5f6d-46a7-9e06-b20800076d26 > s3_endpoint
             4dff237e-93ad-4eda-a776-b28400653181 > bws_access_token
             efd2db8f-4cb2-4031-ac2d-b2a500447bf4 > oci_private_key
 

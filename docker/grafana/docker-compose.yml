@@ -38,13 +38,6 @@ services:
   #   networks:
   #     - grafana
 
-  cluster-metrics-api:
-    image: mafyuh/metrics-server:1.1.0
-    build: .
-    ports:
-      - "3000:3000"
-    restart: unless-stopped
-
 networks:
   grafana:
 

@@ -9,7 +9,7 @@ resource "unifi_network" "default" {
   subnet        = "10.0.0.0/24"
   dhcp_enabled  = true
   dhcp_start    = "10.0.0.6"
-  dhcp_stop     = "10.0.0.254"
+  dhcp_stop     = "10.0.0.199"
 
   # DNS
   dhcp_dns      = [
