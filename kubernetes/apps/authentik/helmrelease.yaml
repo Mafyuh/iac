@@ -71,15 +71,15 @@ spec:
           matches:
             - path:
                 type: PathPrefix
-                value: /
-              backendRefs:
-                - name: authentik
-                  namespace: *app
-                  port: 80
+                value: "{{ .Values.authentik.web.path }}"
           parentRefs:
             - name: external
               namespace: kube-system
               sectionName: http-io
+
+      metrics:
+        serviceMonitor:
+          enabled: true
 
       volumes:
         - name: media
