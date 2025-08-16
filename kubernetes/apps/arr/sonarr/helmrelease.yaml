@@ -145,10 +145,6 @@ spec:
           - name: internal
             namespace: kube-system
             sectionName: https
-        tls:
-          - hosts:
-              - "sonarr.${LOCAL_DOMAIN}"
-            secretName: local-mafyuh-dev-production-tls
 
     persistence:
       config:
