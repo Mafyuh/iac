@@ -6,7 +6,7 @@ metadata:
   name: internal
   namespace: kube-system
   annotations:
-    external-dns.alpha.kubernetes.io/target: &hostname internal.mafyuh.dev
+    external-dns.alpha.kubernetes.io/target: &hostname local.mafyuh.dev
     external-dns.alpha.kubernetes.io/hostname: *hostname
 spec:
   gatewayClassName: cilium
@@ -17,14 +17,14 @@ spec:
     - name: http
       protocol: HTTP
       port: 80
-      hostname: "*.mafyuh.dev"
+      hostname: "*.local.mafyuh.dev"
       allowedRoutes:
         namespaces:
           from: Same
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: "*.mafyuh.dev"
+      hostname: "*.local.mafyuh.dev"
       allowedRoutes:
         namespaces:
           from: All
