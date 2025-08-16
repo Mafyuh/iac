@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - httproute.yaml
-  - flux-ks.yaml
