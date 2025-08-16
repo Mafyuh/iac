@@ -6,14 +6,12 @@ metadata:
   name: external
   annotations:
     external-dns.alpha.kubernetes.io/target: &hostname mafyuh.dev
+    external-dns.alpha.kubernetes.io/hostname: *hostname
 spec:
   gatewayClassName: cilium
   addresses:
     - type: IPAddress
       value: 10.0.0.215
-  infrastructure:
-    annotations:
-      external-dns.alpha.kubernetes.io/hostname: *hostname
   listeners:
     - name: http
       protocol: HTTP

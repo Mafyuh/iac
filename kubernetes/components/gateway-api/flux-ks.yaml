@@ -6,14 +6,12 @@ metadata:
   namespace: kube-system
 spec:
   interval: 30m
-  url: https://github.com/kubernetes-sigs/gateway-api
+  url: ghcr.io/wiremind/wiremind-helm-charts/gateway-api-crds
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
   ref:
-    tag: v1.3.0
-  ignore: |
-    # exclude
-    /*
-    # include
-    !config/crd/experimental
+    tag: 1.3.0
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
