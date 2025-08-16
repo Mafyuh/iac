@@ -10,9 +10,13 @@ spec:
   parentRefs:
     - name: external
       namespace: kube-system
-      sectionName: https
+      sectionName: http
   rules:
-    - backendRefs:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/"
+      backendRefs:
         - name: hubble-ui
           namespace: kube-system
           port: 80

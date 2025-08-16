@@ -237,7 +237,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname       = "*.${var.domains["dev"]}"
-        service        = "https://10.0.0.210:443"
+        service        = "http://10.0.0.215:80"
         path           = ""
         origin_request = {
           no_tls_verify            = true

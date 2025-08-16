@@ -5,6 +5,9 @@ kind: HTTPRoute
 metadata:
   name: httpsredirect
 spec:
+  hostnames:
+    - "*.mafyuh.dev"
+    - "*.local.mafyuh.dev"
   parentRefs:
     - name: internal
       namespace: kube-system

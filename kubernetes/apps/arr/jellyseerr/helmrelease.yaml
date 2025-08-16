@@ -87,22 +87,24 @@ spec:
           http:
             port: 5055
 
-    ingress:
+    route:
       internal:
         enabled: true
-        className: nginx
+        kind: HTTPRoute
+        annotations: {}
+        labels: {}
         hosts:
           - host: "request.${PUBLIC_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
+                pathType: PathPrefix
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - "request.${PUBLIC_DOMAIN}"
-            secretName: mafyuh-dev-production-tls
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: http
     
     persistence:
       config:
