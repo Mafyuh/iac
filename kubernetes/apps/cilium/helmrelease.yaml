@@ -26,9 +26,9 @@ spec:
     endpointRoutes:
       enabled: true
     envoy:
-      enabled: true
+      enabled: false
     envoyConfig:
-      enabled: true
+      enabled: false
     hubble:
       enabled: true
       relay:
@@ -41,6 +41,11 @@ spec:
       mode: kubernetes
     gatewayAPI:
       enabled: true
+      gatewayClass:
+        create: "true"
+      secretsNamespace:
+        create: false
+        name: kube-system
     ipv4NativeRoutingCIDR: 10.244.0.0/16
     kubeProxyReplacement: true
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
