@@ -1,5 +1,5 @@
 plugin: netbox.netbox.nb_inventory
-api_endpoint: https://netbox.mafyuh.io
+api_endpoint: https://netbox.local.mafyuh.dev
 validate_certs: true
 config_context: false
 group_by:

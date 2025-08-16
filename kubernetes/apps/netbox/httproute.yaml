@@ -6,11 +6,11 @@ metadata:
   name: netbox
   namespace: networking
 spec:
-  hostnames: ["netbox.mafyuh.io"]
+  hostnames: ["netbox.local.mafyuh.dev"]
   parentRefs:
-    - name: external
+    - name: internal
       namespace: kube-system
-      sectionName: http
+      sectionName: https
   rules:
     - matches:
         - path:
@@ -19,4 +19,4 @@ spec:
       backendRefs:
         - name: netbox
           namespace: networking
-          port: 8080
+          port: 80
