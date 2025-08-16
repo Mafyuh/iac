@@ -85,26 +85,25 @@ spec:
         controller: jellyseerr
         ports:
           http:
-            port: 5055
+            port: &port 5055
 
     route:
-      internal:
+      external:
         enabled: true
         kind: HTTPRoute
-        annotations: {}
-        labels: {}
-        hosts:
-          - host: "request.${PUBLIC_DOMAIN}"
-            paths:
-              - path: /
-                pathType: PathPrefix
-                service:
-                  identifier: app
-                  port: http
+        hostnames: ["request.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: jellyseerr
+                port: *port
         parentRefs:
           - name: external
             namespace: kube-system
-            sectionName: http
+            sectionName: https
     
     persistence:
       config:
