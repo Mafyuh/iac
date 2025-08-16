@@ -31,4 +31,4 @@ spec:
       tls:
         certificateRefs:
           - kind: Secret
-            name: mafyuh-dev-production-tls
+            name: local-mafyuh-dev-production-tls
