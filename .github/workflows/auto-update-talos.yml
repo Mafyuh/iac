@@ -33,4 +33,4 @@ jobs:
         cd scripts
         ./auto-update-talos.sh
       env:
-        TALOSCONFIG: ~/.talos/config
+        TALOSCONFIG: /home/mafyuh/iac/kubernetes/talos/clusterconfig/talosconfig
