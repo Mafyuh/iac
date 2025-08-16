@@ -103,7 +103,7 @@ spec:
         parentRefs:
           - name: external
             namespace: kube-system
-            sectionName: https
+            sectionName: http
     
     persistence:
       config:
