@@ -75,22 +75,25 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
-      internal:
+
+    route:
+      external:
         enabled: true
-        className: nginx
-        hosts:
-          - host: "{{ .Release.Name }}.mafyuh.dev"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - "{{ .Release.Name }}.mafyuh.dev"
-            secretName: mafyuh-dev-production-tls
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: kromgo
+                port: *port
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: http
+
     persistence:
       config-file:
         type: configMap
