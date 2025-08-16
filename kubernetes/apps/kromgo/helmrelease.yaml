@@ -80,7 +80,7 @@ spec:
       external:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        hostnames: ["kromgo.mafyuh.dev"]
         rules:
           - matches:
               - path:
