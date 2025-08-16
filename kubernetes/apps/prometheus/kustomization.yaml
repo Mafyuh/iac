@@ -5,3 +5,4 @@ resources:
   - exporters/
   - targets.yaml
   - rules.yaml
+  - httproute.yaml
