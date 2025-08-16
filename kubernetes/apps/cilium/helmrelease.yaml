@@ -37,6 +37,8 @@ spec:
         rollOutPods: true
     ipam:
       mode: kubernetes
+    gatewayAPI:
+      enabled: false
     ipv4NativeRoutingCIDR: 10.244.0.0/16
     kubeProxyReplacement: true
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
