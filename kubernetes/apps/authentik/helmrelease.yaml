@@ -79,7 +79,7 @@ spec:
           parentRefs:
             - name: external
               namespace: kube-system
-              sectionName: http
+              sectionName: http-io
 
       volumes:
         - name: media
