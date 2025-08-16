@@ -71,7 +71,7 @@ spec:
           matches:
             - path:
                 type: PathPrefix
-                value: "{{ .Values.authentik.web.path }}"
+                value: "/"
           parentRefs:
             - name: external
               namespace: kube-system
