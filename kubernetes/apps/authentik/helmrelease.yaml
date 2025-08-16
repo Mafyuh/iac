@@ -61,13 +61,25 @@ spec:
         runAsUser: &user 1000        
         runAsGroup: *user
         fsGroup: *user
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - "auth.${PUBLIC_DOMAIN2}"
-        paths: ["/"]
-        pathType: Prefix
+
+      route:
+        external:
+          enabled: true
+          kind: HTTPRoute
+          hostnames: auth.${PUBLIC_DOMAIN2}
+          matches:
+            - path:
+                type: PathPrefix
+                value: /
+              backendRefs:
+                - name: authentik
+                  namespace: *app
+                  port: 80
+          parentRefs:
+            - name: external
+              namespace: kube-system
+              sectionName: http
+
       volumes:
         - name: media
           persistentVolumeClaim:
