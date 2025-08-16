@@ -8,6 +8,7 @@ spec:
   hostnames:
     - "*.mafyuh.dev"
     - "*.local.mafyuh.dev"
+    - "*.mafyuh.io"
   parentRefs:
     - name: internal
       namespace: kube-system

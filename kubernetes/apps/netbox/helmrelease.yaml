@@ -27,16 +27,7 @@ spec:
       password: ${NETBOX_ADMIN_PASSWORD}
 
     ingress:
-      enabled: true
-      className: nginx
-      hosts:
-        - host: "netbox.${PUBLIC_DOMAIN2}"
-          paths:
-            - /
-      tls:
-        - secretName: mafyuh-dev-production-tls
-          hosts:
-            - "netbox.${PUBLIC_DOMAIN2}"
+      enabled: false
     
     persistence:
       enabled: true

@@ -3,20 +3,20 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: hubble-ui
-  namespace: kube-system
+  name: netbox
+  namespace: networking
 spec:
-  hostnames: ["hubble.local.mafyuh.dev"]
+  hostnames: ["netbox.mafyuh.io"]
   parentRefs:
-    - name: internal
+    - name: external
       namespace: kube-system
-      sectionName: https
+      sectionName: http
   rules:
     - matches:
         - path:
             type: PathPrefix
-            value: "/"
+            value: /
       backendRefs:
-        - name: hubble-ui
-          namespace: kube-system
-          port: 80
+        - name: netbox
+          namespace: networking
+          port: 8080
