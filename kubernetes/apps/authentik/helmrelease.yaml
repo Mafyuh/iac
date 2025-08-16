@@ -66,7 +66,8 @@ spec:
         external:
           enabled: true
           kind: HTTPRoute
-          hostnames: auth.${PUBLIC_DOMAIN2}
+          hostnames:
+            - auth.${PUBLIC_DOMAIN2}
           matches:
             - path:
                 type: PathPrefix
