@@ -3,7 +3,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: external
+  name: internal
   annotations:
     external-dns.alpha.kubernetes.io/target: &hostname local.mafyuh.dev
 spec:

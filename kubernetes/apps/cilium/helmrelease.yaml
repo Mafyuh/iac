@@ -38,7 +38,7 @@ spec:
     ipam:
       mode: kubernetes
     gatewayAPI:
-      enabled: false
+      enabled: true
     ipv4NativeRoutingCIDR: 10.244.0.0/16
     kubeProxyReplacement: true
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
