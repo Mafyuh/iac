@@ -1,0 +1,36 @@
+name: Auto-Update Talos
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force update'
+        required: false
+        default: false
+        type: boolean
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'kubernetes/talos/talconfig.yaml'
+
+jobs:
+  auto-update:
+    runs-on: self-hosted
+    if: contains(github.head_ref, 'renovate/') || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup environment
+      run: |
+        # Ensure tools are available
+        which talhelper || { echo "talhelper not found"; exit 1; }
+        which talosctl || { echo "talosctl not found"; exit 1; }
+    
+    - name: Run auto-update
+      run: |
+        cd scripts
+        ./auto-update-talos.sh
+      env:
+        TALOSCONFIG: ~/.talos/config

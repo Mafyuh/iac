@@ -51,8 +51,6 @@ credentials.pkr.hcl
 /docker/scalr-agent/docker-compose.yml
 /docker/Dockerfiles/scalr-agent/Dockerfile
 /docker/wazuh/config/
-scripts/auto-update-talos.sh
-.github/workflows/auto-update-talos.yml
 # Plausible
 docker-compose.override.yml
 docker/netbox/env/
