@@ -15,7 +15,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: "/"
+            value: /
       backendRefs:
         - name: prometheus-grafana
           namespace: monitoring

@@ -20,7 +20,7 @@ spec:
       hostname: "*.mafyuh.dev"
       allowedRoutes:
         namespaces:
-          from: Same
+          from: All
     - name: http-io
       protocol: HTTP
       port: 80
