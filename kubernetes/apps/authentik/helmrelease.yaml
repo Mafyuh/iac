@@ -75,7 +75,7 @@ spec:
           parentRefs:
             - name: external
               namespace: kube-system
-              sectionName: https-io
+              sectionName: http-io
           httpsRedirect: false
           https: false
 
