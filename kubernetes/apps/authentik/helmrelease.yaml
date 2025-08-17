@@ -76,6 +76,8 @@ spec:
             - name: external
               namespace: kube-system
               sectionName: https-io
+          httpsRedirect: false
+          https: false
 
       metrics:
         serviceMonitor:
