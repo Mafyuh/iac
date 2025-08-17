@@ -77,7 +77,7 @@ spec:
               namespace: kube-system
               sectionName: http-io
           httpsRedirect: false
-          https: false
+          https: true
 
       metrics:
         serviceMonitor:
