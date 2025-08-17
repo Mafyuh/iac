@@ -62,13 +62,20 @@ spec:
         runAsGroup: *user
         fsGroup: *user
 
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - "auth.${PUBLIC_DOMAIN2}"
-        paths: ["/"]
-        pathType: Prefix
+      route:
+        external:
+          enabled: true
+          kind: HTTPRoute
+          hostnames:
+            - auth.${PUBLIC_DOMAIN2}
+          matches:
+            - path:
+                type: PathPrefix
+                value: "{{ .Values.authentik.web.path }}"
+          parentRefs:
+            - name: external
+              namespace: kube-system
+              sectionName: https-io
 
       metrics:
         serviceMonitor:
