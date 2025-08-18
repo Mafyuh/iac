@@ -53,7 +53,7 @@ spec:
             kubectl config use-context main
         env:
           - name: KUBERNETES_SERVICE_HOST
-            value: 10.69.69.10
+            value: 10.0.0.9
           - name: KUBERNETES_SERVICE_PORT
             value: "6443"
           - name: KUBECONFIG
