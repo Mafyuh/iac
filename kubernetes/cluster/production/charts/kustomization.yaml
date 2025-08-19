@@ -12,3 +12,4 @@ resources:
 - twingate.yaml
 - headlamp-chart.yaml
 - tf-controller.yaml
+- metrics-server.yaml
