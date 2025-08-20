@@ -42,7 +42,7 @@ spec:
           unpoller:
             image:
               repository: ghcr.io/unpoller/unpoller
-              tag: v2.15.3
+              tag: v2.15.4
               pullPolicy: IfNotPresent
             env:
               UP_UNIFI_DEFAULT_PASS: ${UP_UNIFI_DEFAULT_PASS}
