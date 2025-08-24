@@ -1,0 +1,55 @@
+---
+services:
+  sabnzbd:
+    image: ghcr.io/home-operations/sabnzbd:4.5.2
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SABNZBD__PORT=8080
+      - SABNZBD__HOST_WHITELIST_ENTRIES= sab.mafyuh.xyz
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/sabnzbd:/config
+      - nas:/data:rw
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  qbitty:
+    image: ghcr.io/hotio/qbittorrent:release-5.0.5
+    container_name: qbitty
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv6.conf.all.disable_ipv6=1
+    environment:
+      - WEBUI_PORT=8080
+      - VPN_ENABLED=true
+      - VPN_CONF=wg0
+      - VPN_PROVIDER=proton
+      - VPN_KEEP_LOCAL_DNS=false
+      - VPN_AUTO_PORT_FORWARD=true
+      - VPN_LAN_NETWORK=10.0.0.0/24,10.69.69.0/24
+      - VPN_LAN_LEAK_ENABLED=false
+      - VPN_FIREWALL_TYPE=auto
+      - PRIVOXY_ENABLED=false
+      - VPN_HEALTHCHECK_ENABLED=false
+      - UNBOUND_ENABLED=false
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/qbitty:/config
+      - nas:/data:rw
+    ports:
+      - 8081:8080
+    restart: unless-stopped
+
+volumes:
+  nas:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=nas.lan,vers=4,rw
+      device: ":/mnt/thePool/thePoolShare"
