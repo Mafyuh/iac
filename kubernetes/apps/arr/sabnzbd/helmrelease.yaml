@@ -76,6 +76,7 @@ spec:
                 cpu: 20m
                 memory: 200Mi
               limits:
+                cpu: 600m
                 memory: 4000Mi
 
           metrics:
