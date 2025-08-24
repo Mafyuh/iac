@@ -37,6 +37,11 @@ blocking:
     strategy: fast
     maxErrorsPerSource: 5
 
+queryLog:
+  type: postgresql
+  target: 'postgres://blocky@10.20.10.100:5432/blocky'
+  logRetentionDays: 60
+
 prometheus:
   enable: true
   path: /metrics
