@@ -9,7 +9,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/sabnzbd:/config
+      - /docker/appdata/sabnzbd/config:/config:rw
       - nas:/data:rw
     ports:
       - 8082:8080
@@ -37,7 +37,7 @@ services:
       - UNBOUND_ENABLED=false
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/qbitty/config:/config:rw
+      - /docker/appdata/qbitty:/config:rw
       - nas:/data:rw
     ports:
       - 8081:8080
