@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   kasm:
     image: ghcr.io/linuxserver/kasm@sha256:28cac8bb473de32dc9305e4b89c284e81e6baca996762890a637fdbb75710039
