@@ -5,10 +5,10 @@ services:
     container_name: sabnzbd
     environment:
       - PUID=1000
-      - PGID=1000
+      - PGID=1001
       - TZ=Etc/UTC
       - SABNZBD__PORT=8080
-      - SABNZBD__HOST_WHITELIST_ENTRIES= sab.mafyuh.xyz
+      - SABNZBD__HOST_WHITELIST_ENTRIES=sab.mafyuh.xyz
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sabnzbd:/config
