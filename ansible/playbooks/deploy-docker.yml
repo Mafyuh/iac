@@ -14,14 +14,6 @@
       ansible.builtin.debug:
         var: git_pull_output.stdout_lines
 
-    - name: Ensure fail2ban logs directory exists
-      ansible.builtin.file:
-        path: /docker/appdata/fail2ban/f2b-logs
-        state: directory
-        mode: '0755'
-        owner: root
-        group: root
-
     - name: Read secret mapping
       ansible.builtin.slurp:
         src: "{{ secrets_mapping_file }}"
