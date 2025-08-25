@@ -15,7 +15,7 @@ services:
 
   fail2ban:
     image: crazymax/fail2ban:1.1.0
-    container_name: fail2ban_docker-pi
+    container_name: fail2ban
     network_mode: "host"
     cap_add:
       - NET_ADMIN
@@ -24,18 +24,25 @@ services:
       - "/docker/appdata/fail2ban/data:/data"
       - "/var/log/auth.log:/var/log/auth.log:ro"
       - "/docker/appdata/nginx/data/logs/:/log/npm/:ro"
+      - "/docker/appdata/fail2ban/f2b-logs:/f2b-logs:rw"
     environment:
       - TZ=America/New_York
-      - F2B_LOG_TARGET=STDOUT
+      - F2B_LOG_TARGET=/f2b-logs/fail2ban.log
       - F2B_LOG_LEVEL=INFO
       - F2B_DB_PURGE_AGE=1d
+      - F2B_MAX_RETRY=3
       - SSMTP_HOST=$SSMTP_HOST
       - SSMTP_PORT=587
       - SSMTP_HOSTNAME=$SSMTP_HOSTNAME
       - SSMTP_USER=$SSMTP_USER
       - SSMTP_PASSWORD=$SSMTP_PASSWORD
       - SSMTP_TLS=YES
-    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "10"
+    restart: unless-stopped
 
   cf-tunnel:
     restart: unless-stopped

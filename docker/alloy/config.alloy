@@ -5,7 +5,92 @@
 
 // SECTION: TARGETS
 
-loki.write "default" {
+// Get the fail2ban log and integrate GeoIP
+local.file_match "fail2ban" {
+	path_targets = [{
+		__address__ = "localhost",
+		__path__    = "/f2b-logs/fail2ban.log",
+		job         = "fail2ban",
+	}]
+}
+
+loki.process "fail2ban" {
+	forward_to = [loki.write.loki.receiver]
+
+	stage.multiline {
+		firstline     = "\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}"
+		max_wait_time = "10s"
+	}
+
+	stage.regex {
+		expression = "^(?s)(?P<time>\S+? \S+?) (fail2ban\.)(?P<component>\S+)\s* \[(?P<pid>\S+)\]: (?P<priority>\S+)\s* (?P<message>.*?)$"
+	}
+
+	stage.timestamp {
+		source = "time"
+		format = "2006-01-02 15:04:05,000"
+	}
+
+	stage.labels {
+		values = {
+			component = null,
+			priority  = null,
+		}
+	}
+
+	stage.output {
+		source = "message"
+	}
+
+	stage.match {
+		selector = "{job="fail2ban"} |~ "\[\S+\] .*""
+
+		stage.regex {
+			expression = "(\[(?P<jail>\S+)\] )?(?P<message>.*?)$"
+		}
+
+		stage.labels {
+			values = {
+				jail = null,
+			}
+		}
+
+		stage.output {
+			source = "message"
+		}
+	}
+
+	stage.regex {
+		expression = ".*?(?P<remote_addr>\d+\.\d+\.\d+\.\d+).*"
+	}
+
+	stage.labels {
+		values = {
+			geoip_city_name          = "",
+			geoip_country_name       = "",
+			geoip_country_code       = "",
+			geoip_continent_name     = "",
+			geoip_continent_code     = "",
+			geoip_location_latitude  = "",
+			geoip_location_longitude = "",
+			geoip_postal_code        = "",
+			geoip_timezone           = "",
+			geoip_subdivision_name   = "",
+			geoip_subdivision_code   = "",
+		}
+	}
+
+	stage.label_drop {
+		values = ["filename"]
+	}
+}
+
+loki.source.file "fail2ban" {
+	targets    = local.file_match.fail2ban.targets
+	forward_to = [loki.process.fail2ban.receiver]
+}
+
+loki.write "loki" {
 	endpoint {
 		url = "http://10.0.0.212:3100/loki/api/v1/push"
 	}
@@ -143,6 +228,100 @@ loki.source.docker "default" {
   labels     = {"platform" = "docker"}
   relabel_rules = discovery.relabel.dockerlogs.rules
   forward_to = [loki.write.default.receiver]
+}
+
+// !SECTION
+
+// SECTION: FAIL2BAN LOGS (ARM and NPM hosts only)
+
+local.file_match "fail2ban" {
+  path_targets = [{
+    __address__ = "localhost",
+    __path__    = "/docker/appdata/fail2ban/f2b-logs/fail2ban.log",
+    job         = "fail2ban",
+  }]
+}
+
+loki.process "fail2ban" {
+  forward_to = [loki.write.default.receiver]
+
+  stage.multiline {
+    firstline     = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"
+    max_wait_time = "10s"
+  }
+
+  stage.regex {
+    expression = "^(?s)(?P<time>\\S+? \\S+?) (fail2ban\\.)(?P<component>\\S+)\\s* \\[(?P<pid>\\S+)\\]: (?P<priority>\\S+)\\s* (?P<message>.*?)$"
+  }
+
+  stage.timestamp {
+    source = "time"
+    format = "2006-01-02 15:04:05,000"
+  }
+
+  stage.labels {
+    values = {
+      component = null,
+      priority  = null,
+    }
+  }
+
+  stage.output {
+    source = "message"
+  }
+
+  stage.match {
+    selector = "{job=\"fail2ban\"} |~ \"\\\\\\\\[\\\\\\\\S+\\\\\\\\] .*\""
+
+    stage.regex {
+      expression = "(\\[(?P<jail>\\S+)\\] )?(?P<message>.*?)$"
+    }
+
+    stage.labels {
+      values = {
+        jail = null,
+      }
+    }
+
+    stage.output {
+      source = "message"
+    }
+  }
+
+  stage.regex {
+    expression = ".*?(?P<remote_addr>\\d+\\.\\d+\\.\\d+\\.\\d+).*"
+  }
+
+  stage.geoip {
+    db      = "/usr/share/GeoIP/GeoLite2-City.mmdb"
+    source  = "remote_addr"
+    db_type = "city"
+  }
+
+  stage.labels {
+    values = {
+      geoip_city_name          = "",
+      geoip_country_name       = "",
+      geoip_country_code       = "",
+      geoip_continent_name     = "",
+      geoip_continent_code     = "",
+      geoip_location_latitude  = "",
+      geoip_location_longitude = "",
+      geoip_postal_code        = "",
+      geoip_timezone           = "",
+      geoip_subdivision_name   = "",
+      geoip_subdivision_code   = "",
+    }
+  }
+
+  stage.label_drop {
+    values = ["filename"]
+  }
+}
+
+loki.source.file "fail2ban" {
+  targets    = local.file_match.fail2ban.targets
+  forward_to = [loki.process.fail2ban.receiver]
 }
 
 // !SECTION

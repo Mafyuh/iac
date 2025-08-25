@@ -10,6 +10,7 @@ services:
       - --server.http.listen-addr=0.0.0.0:12345
       - --storage.path=/var/lib/alloy/data
       - /etc/alloy/config.alloy
+    init: true
     ports:
       - 12345:12345
     volumes:
@@ -21,6 +22,7 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker/:ro
       - /run/udev/data:/run/udev/data:ro
+      - /docker/appdata/fail2ban/f2b-logs:/f2b-logs:ro
     restart: unless-stopped
 
 volumes:
