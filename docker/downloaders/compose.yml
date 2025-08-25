@@ -24,7 +24,6 @@ services:
       - NET_ADMIN
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
-      - net.ipv6.conf.all.disable_ipv6=1
     environment:
       - WEBUI_PORT=8080
       - VPN_ENABLED=true
