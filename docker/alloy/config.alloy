@@ -18,12 +18,12 @@ loki.process "fail2ban" {
 	forward_to = [loki.write.loki.receiver]
 
 	stage.multiline {
-		firstline     = "\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}"
+		firstline     = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"
 		max_wait_time = "10s"
 	}
 
 	stage.regex {
-		expression = "^(?s)(?P<time>\S+? \S+?) (fail2ban\.)(?P<component>\S+)\s* \[(?P<pid>\S+)\]: (?P<priority>\S+)\s* (?P<message>.*?)$"
+		expression = "^(?s)(?P<time>\\S+? \\S+?) (fail2ban\\.)(?P<component>\\S+)\\s* \\[(?P<pid>\\S+)\\]: (?P<priority>\\S+)\\s* (?P<message>.*?)$"
 	}
 
 	stage.timestamp {
@@ -43,10 +43,10 @@ loki.process "fail2ban" {
 	}
 
 	stage.match {
-		selector = "{job="fail2ban"} |~ "\[\S+\] .*""
+		selector = "{job=\"fail2ban\"} |~ \"\\\\[\\\\S+\\\\] .*\""
 
 		stage.regex {
-			expression = "(\[(?P<jail>\S+)\] )?(?P<message>.*?)$"
+			expression = "(\\[(?P<jail>\\S+)\\] )?(?P<message>.*?)$"
 		}
 
 		stage.labels {
@@ -61,7 +61,7 @@ loki.process "fail2ban" {
 	}
 
 	stage.regex {
-		expression = ".*?(?P<remote_addr>\d+\.\d+\.\d+\.\d+).*"
+		expression = ".*?(?P<remote_addr>\\d+\\.\\d+\\.\\d+\\.\\d+).*"
 	}
 
 	stage.labels {
@@ -77,6 +77,20 @@ loki.process "fail2ban" {
 			geoip_timezone           = "",
 			geoip_subdivision_name   = "",
 			geoip_subdivision_code   = "",
+		}
+	}
+
+	stage.label_drop {
+		values = ["filename"]
+	}
+}
+
+loki.source.file "fail2ban" {
+	targets    = local.file_match.fail2ban.targets
+	forward_to = [loki.process.fail2ban.receiver]
+}
+
+loki.write "loki" {
 		}
 	}
 
