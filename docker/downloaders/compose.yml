@@ -1,14 +1,13 @@
 ---
 services:
   sabnzbd:
-    image: ghcr.io/home-operations/sabnzbd:4.5.2
+    image: ghcr.io/hotio/sabnzbd:release-4.5.2
     container_name: sabnzbd
     environment:
       - PUID=1000
       - PGID=1001
       - TZ=Etc/UTC
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sabnzbd/config:/config:rw
       - nas:/data:rw
     ports:
