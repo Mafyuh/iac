@@ -37,7 +37,7 @@ services:
       - UNBOUND_ENABLED=false
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/qbitty:/config
+      - /docker/appdata/qbitty/config:/config:rw
       - nas:/data:rw
     ports:
       - 8081:8080
