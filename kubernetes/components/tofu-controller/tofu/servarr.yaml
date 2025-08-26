@@ -13,7 +13,7 @@ spec:
         bucket                        = "tofu"
         key                           = "servarr.tfstate"
         region                        = "us-east-1"
-        endpoint                      = "https://s3.mafyuh.xyz"
+        endpoint                      = "https://s4.mafyuh.xyz"
         skip_region_validation        = true
         skip_credentials_validation   = true
         skip_requesting_account_id    = true
