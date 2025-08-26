@@ -25,6 +25,19 @@ spec:
       retries: 3
 
   values:
+    runner:
+      image:
+        repository: ghcr.io/flux-iac/tf-runner
+        tag: v0.16.0-rc.5
+        pullPolicy: IfNotPresent
+      grpc:
+        maxMessageSize: 30
+    logLevel: debug
+    allowBreakTheGlass: false
+    clusterDomain: cluster.local
+    concurrency: 24
+    caCertValidityDuration: 24h
+    certRotationCheckFrequency: 30m
 
     metrics:
       enabled: true
