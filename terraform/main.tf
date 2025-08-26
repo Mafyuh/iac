@@ -32,10 +32,6 @@ module "oci" {
   source = "./oracle"
 }
 
-module "servarr" {
-  source = "./servarr"
-}
-
 module "cloudflare" {
   source = "./cloudflare"
   domains = var.domains

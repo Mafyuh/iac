@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tofu-controller
+  namespace: flux-system
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: tf-controller
+      version: 0.15.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: tofu-controller
+        namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    awsPackage:
+      install: false
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        interval: 1m

@@ -2,10 +2,10 @@ resource "radarr_download_client_qbittorrent" "qbitty" {
   enable         = true
   priority       = 1
   name           = "qBittorrent"
-  host           = "qbitty.arr.svc.cluster.local"
+  host           = "10.69.69.2"
   url_base       = "/"
   movie_category = "radarr"
-  port           = 8080
+  port           = 8081
   first_and_last = false
   username       = "mafyuh"
   password       = data.bitwarden_secret.qbitty_password.value
@@ -17,9 +17,10 @@ resource "radarr_download_client_sabnzbd" "sabnzbd" {
   enable         = true
   priority       = 1
   name           = "SABnzbd"
-  host           = "sabnzbd-app.arr.svc.cluster.local"
+  host           = "sab.mafyuh.xyz"
   url_base       = "/"
-  port           = 8080
+  port           = 443
+  use_ssl  = true
   movie_category = "movies"
   api_key        = data.bitwarden_secret.sabnzbd_api_key.value
   remove_failed_downloads = true

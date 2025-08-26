@@ -1,0 +1,53 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: servarr-tofu
+  namespace: flux-system
+spec:
+  interval: 1h
+  approvePlan: auto
+  destroyResourcesOnDeletion: false
+  backendConfig:
+    customConfiguration: |
+      backend "s3" {
+        bucket   = "tofu"
+        key      = "servarr.tfstate"
+        region   = "us-east-1"
+        endpoints = {
+          s3 = "https://s3.mafyuh.xyz"
+        }
+
+        skip_credentials_validation = true
+        skip_requesting_account_id  = true
+        skip_metadata_api_check     = true
+        skip_region_validation      = true
+        use_path_style              = true
+        skip_s3_checksum            = true
+      }
+  backendConfigsFrom:
+    - kind: Secret
+      name: terraform-s3-backend
+      keys:
+      - access_key
+      - secret_key
+      optional: false
+  path: ./terraform/servarr
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  writeOutputsToSecret:
+    name: servarr-outputs
+  varsFrom:
+    - kind: Secret
+      name: cluster-secrets
+      varsKeys:
+        - BWS_ACCESS_TOKEN
+  runnerPodTemplate:
+    spec:
+      env:
+        - name: BWS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cluster-secrets
+              key: BWS_ACCESS_TOKEN
