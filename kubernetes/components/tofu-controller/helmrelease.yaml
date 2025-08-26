@@ -25,6 +25,8 @@ spec:
       retries: 3
 
   values:
+    awsPackage:
+      install: false
     runner:
       image:
         repository: ghcr.io/flux-iac/tf-runner
