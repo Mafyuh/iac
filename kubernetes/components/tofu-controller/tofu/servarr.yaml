@@ -50,9 +50,3 @@ spec:
             secretKeyRef:
               name: cluster-secrets
               key: BWS_ACCESS_TOKEN
-        - name: CHECKPOINT_DISABLE
-          value: "1"
-        - name: TF_PLUGIN_CACHE_DIR
-          value: "/tmp/.terraform.d/plugin-cache"
-        - name: TF_PROVIDER_SIGNATURE_VERIFICATION
-          value: "false"
