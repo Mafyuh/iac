@@ -29,6 +29,8 @@ spec:
       - secret_key
       optional: false
   path: ./terraform/servarr
+  cliConfigSecretRef:
+    name: terraform-cli-config
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -48,5 +50,3 @@ spec:
             secretKeyRef:
               name: cluster-secrets
               key: BWS_ACCESS_TOKEN
-        - name: TOFU_PROVIDER_SOURCE_REWRITE
-          value: "false"
