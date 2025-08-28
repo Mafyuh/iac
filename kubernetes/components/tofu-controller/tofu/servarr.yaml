@@ -48,3 +48,5 @@ spec:
             secretKeyRef:
               name: cluster-secrets
               key: BWS_ACCESS_TOKEN
+        - name: TOFU_PROVIDER_SOURCE_REWRITE
+          value: "false"
