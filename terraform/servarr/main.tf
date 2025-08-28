@@ -16,15 +16,15 @@ terraform {
 
   required_providers {
     sonarr = {
-      source  = "registry.terraform.io/devopsarr/sonarr"
+      source  = "devopsarr/sonarr"
       version = "3.4.0"
     }
     prowlarr = {
-      source  = "registry.terraform.io/devopsarr/prowlarr"
+      source  = "devopsarr/prowlarr"
       version = "3.0.2"
     }
     radarr = {
-      source  = "registry.terraform.io/devopsarr/radarr"
+      source  = "devopsarr/radarr"
       version = "2.3.3"
     }
     bitwarden = {
