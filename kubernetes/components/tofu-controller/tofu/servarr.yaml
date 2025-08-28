@@ -50,5 +50,3 @@ spec:
             secretKeyRef:
               name: cluster-secrets
               key: BWS_ACCESS_TOKEN
-        - name: OPENTOFU_STATEFILE_PROVIDER_ADDRESS_TRANSLATION
-          value: "0"
