@@ -67,7 +67,7 @@ jobs:
               databases) host="db-server" ;;
               downloaders) host="Ubu" ;;
               blocky) host="blocky-HA" ;;
-              grafana) host="Ubu" ;;
+              exporters) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;
               kasm) host="Kasm" ;;
               npm) host="Nginx-Proxy-Manager" ;;
