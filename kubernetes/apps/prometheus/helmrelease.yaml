@@ -142,7 +142,7 @@ spec:
               storageClassName: longhorn
               resources:
                 requests:
-                  storage: 30Gi
+                  storage: 40Gi
 
         additionalScrapeConfigs: |
           - job_name: 'speedtest-exporter'
