@@ -2,6 +2,7 @@ resource "unifi_device" "dream_router" {
   name              = "Dream Router 7"
   allow_adoption    = true
   forget_on_destroy = true
+  mac = "1c:0b:8b:42:36:90"
 
   port_override {
     number              = 5
@@ -39,6 +40,7 @@ resource "unifi_device" "flex_poe_8" {
   name              = "USW Flex 2.5G 8 PoE"
   allow_adoption    = true
   forget_on_destroy = false
+  mac = "84:78:48:fc:3a:e0"
   port_override {
     number              = 9
     name                = "PoE Injector Power In"

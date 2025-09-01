@@ -1,0 +1,52 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: unifi-tofu
+  namespace: flux-system
+spec:
+  interval: 1h
+  approvePlan: auto
+  destroyResourcesOnDeletion: false
+  backendConfig:
+    customConfiguration: |
+      backend "s3" {
+        bucket                        = "tofu"
+        key                           = "unifi.tfstate"
+        region                        = "us-east-1"
+        endpoint                      = "https://s3.mafyuh.xyz"
+        skip_region_validation        = true
+        skip_credentials_validation   = true
+        skip_requesting_account_id    = true
+        force_path_style              = true
+        skip_s3_checksum              = true
+        skip_metadata_api_check       = true
+      }
+  backendConfigsFrom:
+    - kind: Secret
+      name: terraform-s3-backend
+      keys:
+      - access_key
+      - secret_key
+      optional: false
+  path: ./terraform/unifi
+  cliConfigSecretRef:
+    name: terraform-cli-config
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  writeOutputsToSecret:
+    name: unifi-outputs
+  varsFrom:
+    - kind: Secret
+      name: cluster-secrets
+      varsKeys:
+        - BWS_ACCESS_TOKEN
+  runnerPodTemplate:
+    spec:
+      env:
+        - name: BWS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cluster-secrets
+              key: BWS_ACCESS_TOKEN

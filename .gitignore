@@ -56,3 +56,5 @@ docker-compose.override.yml
 docker/netbox/env/
 # SOPS
 *.decrypted~*
+scripts/radarr-custom-format-scores-fixed.sh
+*device_identifier*

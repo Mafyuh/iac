@@ -46,9 +46,9 @@ module "authentik" {
   domains = var.domains
 }
 
-module "unifi" {
-  source = "./unifi"
-}
+# module "unifi" {
+#   source = "./unifi"
+# }
 
 # module "pfsense" {
 #   source = "./pfsense"

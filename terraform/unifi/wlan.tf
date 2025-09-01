@@ -14,8 +14,8 @@ resource "unifi_wlan" "wifi" {
 
   network_id    = unifi_network.iot.id
   ## TODO Import these resources and remove the hardcoded IDs
-  user_group_id = "683112d62d8c8b784502f3a7"
-  ap_group_ids  = ["683112d72d8c8b784502f3ac"]
+  user_group_id = "68b5307ec8516827c169f8bb"
+  ap_group_ids  = ["68b5307ec8516827c169f8c0"]
 
   lifecycle {
     ignore_changes = [
