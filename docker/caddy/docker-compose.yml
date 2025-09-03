@@ -1,0 +1,57 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  caddy:
+    image: ghcr.io/caddybuilds/caddy-cloudflare:2.10.2
+    container_name: caddy
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+      - 2019:2019
+    volumes:
+      - /docker/appdata/caddy/data:/data
+      - /docker/appdata/caddy/config:/config
+      - /docker/appdata/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /docker/appdata/caddy/logs:/var/log/caddy
+    environment:
+      - CLOUDFLARE_API_TOKEN=$CLOUDFLARE_API_TOKEN
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  fail2ban:
+    image: crazymax/fail2ban:1.1.0
+    container_name: fail2ban-caddy
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - "/docker/appdata/fail2ban-caddy/data:/data"
+      - "/var/log/auth.log:/var/log/auth.log:ro"
+      - "/docker/appdata/caddy/logs:/log/caddy:ro"
+      - "/docker/appdata/fail2ban-caddy/f2b-logs:/f2b-logs:rw"
+    environment:
+      - TZ=America/New_York
+      - F2B_LOG_TARGET=/f2b-logs/fail2ban.log
+      - F2B_LOG_LEVEL=INFO
+      - F2B_DB_PURGE_AGE=1d
+      - F2B_MAX_RETRY=3
+      - SSMTP_HOST=$SSMTP_HOST
+      - SSMTP_PORT=587
+      - SSMTP_HOSTNAME=$SSMTP_HOSTNAME
+      - SSMTP_USER=$SSMTP_USER
+      - SSMTP_PASSWORD=$SSMTP_PASSWORD
+      - SSMTP_TLS=YES
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "10"
+    restart: unless-stopped
+    depends_on:
+      - caddy

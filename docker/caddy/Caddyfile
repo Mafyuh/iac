@@ -1,0 +1,21 @@
+# Global options
+{
+    # Use Cloudflare for DNS challenge (since your domain is on Cloudflare)
+    acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    metrics
+}
+
+# Simple Jellyfin reverse proxy (following official docs)
+jelly.mafyuh.io {
+    # Enable access logging for this site
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 50MB
+            roll_keep 7
+            roll_keep_for 168h
+        }
+        format json
+    }
+    
+    reverse_proxy 10.0.0.15:8096
+}
