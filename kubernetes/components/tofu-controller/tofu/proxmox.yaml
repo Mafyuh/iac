@@ -40,6 +40,12 @@ spec:
       name: cluster-secrets
       varsKeys:
         - BWS_ACCESS_TOKEN
+  vars:
+    - name: access_token
+      valueFrom:
+        secretKeyRef:
+          name: cluster-secrets
+          key: BWS_ACCESS_TOKEN
   runnerPodTemplate:
     spec:
       env:
