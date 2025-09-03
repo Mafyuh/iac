@@ -29,8 +29,6 @@ spec:
       - secret_key
       optional: false
   path: ./terraform/unifi
-  cliConfigSecretRef:
-    name: terraform-cli-config
   sourceRef:
     kind: GitRepository
     name: flux-system

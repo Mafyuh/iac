@@ -9,10 +9,7 @@ on:
         default: false
         type: boolean
   pull_request:
-    branches: [ main ]
-    paths:
-      - 'kubernetes/talos/talconfig.yaml'
-  push:
+    types: [closed]
     branches: [ main ]
     paths:
       - 'kubernetes/talos/talconfig.yaml'
@@ -21,8 +18,7 @@ jobs:
   auto-update:
     runs-on: self-hosted
     if: |
-      (github.event_name == 'pull_request' && contains(github.head_ref, 'renovate/')) ||
-      (github.event_name == 'push') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true) ||
       github.event_name == 'workflow_dispatch'
     
     steps:
