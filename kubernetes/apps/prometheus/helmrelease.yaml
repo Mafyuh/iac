@@ -226,3 +226,7 @@ spec:
                 target_label: instance
               - target_label: __address__
                 replacement: 10.69.69.2:9221  # PVE exporter.
+          
+          - job_name: caddy
+            static_configs:
+              - targets: ['192.168.2.2:2019']
