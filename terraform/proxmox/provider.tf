@@ -48,3 +48,10 @@ provider "proxmox" {
     }
   }
 }
+
+provider "bitwarden" {
+  access_token = var.access_token
+  experimental {
+    embedded_client = true
+  }
+}
