@@ -16,13 +16,13 @@ backend "s3" {
   }
 }
 
-module "proxmox" {
-  source = "./proxmox"
+# module "proxmox" {
+#   source = "./proxmox"
   
-  providers = {
-    proxmox = proxmox
-  }
-}
+#   providers = {
+#     proxmox = proxmox
+#   }
+# }
 
 module "flux" {
   source = "./flux"

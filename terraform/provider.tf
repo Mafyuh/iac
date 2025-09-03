@@ -62,30 +62,30 @@ provider "bitwarden" {
 }
 
 
-provider "proxmox" {
-  endpoint = "https://prox.mafyuh.xyz/"
-  password = data.bitwarden_secret.ssh_password.value
-  ## TODO: stop using root
-  username = "root@pam"
-  insecure = false
-  random_vm_ids = true
-  ssh {
-    agent = true
-  ## TODO: stop using root
-    username = "root"
-    password = data.bitwarden_secret.ssh_password.value
+# provider "proxmox" {
+#   endpoint = "https://prox.mafyuh.xyz/"
+#   password = data.bitwarden_secret.ssh_password.value
+#   ## TODO: stop using root
+#   username = "root@pam"
+#   insecure = false
+#   random_vm_ids = true
+#   ssh {
+#     agent = true
+#   ## TODO: stop using root
+#     username = "root"
+#     password = data.bitwarden_secret.ssh_password.value
 
-    node {
-      name    = "prox"
-      address = data.bitwarden_secret.prox_ip_address.value
-    }
+#     node {
+#       name    = "prox"
+#       address = data.bitwarden_secret.prox_ip_address.value
+#     }
 
-    node {
-      name    = "pve2"
-      address = data.bitwarden_secret.pve2_ip_address.value
-    }
-  }
-}
+#     node {
+#       name    = "pve2"
+#       address = data.bitwarden_secret.pve2_ip_address.value
+#     }
+#   }
+# }
 
 provider "twingate" {
   api_token = data.bitwarden_secret.twingate_api_key.value

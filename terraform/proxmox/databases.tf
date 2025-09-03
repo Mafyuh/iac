@@ -16,14 +16,14 @@ resource "proxmox_virtual_environment_vm" "databases" {
     
     # VM CPU Settings
     cpu {
-        cores = 2
+        cores = 4
         type  = "host"
         architecture = "x86_64"
     }
     
     # VM Memory Settings
     memory {
-        dedicated = 4096
+        dedicated = 8192
     }
 
     # VM Network Settings
