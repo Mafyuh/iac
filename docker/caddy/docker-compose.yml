@@ -27,6 +27,7 @@ services:
     image: crazymax/fail2ban:1.1.0
     container_name: fail2ban-caddy
     network_mode: "host"
+    privileged: true
     cap_add:
       - NET_ADMIN
       - NET_RAW
