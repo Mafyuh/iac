@@ -12,7 +12,7 @@ services:
     volumes:
       - /docker/appdata/caddy/data:/data
       - /docker/appdata/caddy/config:/config
-      - /docker/appdata/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - /docker/appdata/caddy/logs:/var/log/caddy
     environment:
       - CLOUDFLARE_API_TOKEN=$CLOUDFLARE_API_TOKEN
@@ -35,6 +35,11 @@ services:
       - "/var/log/auth.log:/var/log/auth.log:ro"
       - "/docker/appdata/caddy/logs:/log/caddy:ro"
       - "/docker/appdata/fail2ban-caddy/f2b-logs:/f2b-logs:rw"
+      - "./fail2ban-jail.conf:/data/jail.d/caddy.conf:ro"
+      - "./fail2ban-action-iptables.conf:/data/action.d/iptables-custom.conf:ro"
+      - "./caddy-auth.conf:/data/filter.d/caddy-auth.conf:ro"
+      - "./caddy-botsearch.conf:/data/filter.d/caddy-botsearch.conf:ro"
+      - "./caddy-limit.conf:/data/filter.d/caddy-limit.conf:ro"
     environment:
       - TZ=America/New_York
       - F2B_LOG_TARGET=/f2b-logs/fail2ban.log
