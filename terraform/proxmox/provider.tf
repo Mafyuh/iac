@@ -26,9 +26,7 @@ terraform {
 
 provider "proxmox" {
   endpoint = "https://prox.mafyuh.xyz/"
-  password = data.bitwarden_secret.ssh_password.value
-  ## TODO: stop using root
-  username = "root@pam"
+  api_token = data.bitwarden_secret.prox_api_key.value
   insecure = false
   random_vm_ids = true
   ssh {

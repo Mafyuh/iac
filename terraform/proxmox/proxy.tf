@@ -10,10 +10,6 @@ resource "proxmox_virtual_environment_vm" "proxy" {
     agent {
       enabled = true
     }
-
-    clone {
-        vm_id = 19000
-    }
     
     # VM CPU Settings
     cpu {

@@ -17,3 +17,7 @@ data "bitwarden_secret" "prox_ip_address" {
 data "bitwarden_secret" "pve2_ip_address" {
   id = "17ab7869-c7a1-4ece-8c64-b20800075213"
 }
+
+data "bitwarden_secret" "prox_api_key" {
+  id = "91163940-362e-41bc-8f36-b350010d6084"
+}
