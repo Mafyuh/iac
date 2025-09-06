@@ -18,3 +18,9 @@ spec:
   values:
     defaultSettings:
       defaultLonghornStaticStorageClass: longhorn
+      backupTarget: s3://longhorn@us-east-1/
+      backupTargetCredentialSecret: longhorn-s3-secret
+    longhornManager:
+      env:
+      - name: AWS_ENDPOINTS
+        value: https://s3.mafyuh.xyz
