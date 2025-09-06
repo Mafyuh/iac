@@ -78,20 +78,6 @@ services:
     ports:
       - 5984:5984
     restart: unless-stopped
-  
-  rustfs:
-    image: rustfs/rustfs@sha256:8cb1ef89f1c8b35732b54e8a750af455577fe767d5f16e00896674a3945eb7a6
-    environment:
-      - RUSTFS_ADDRESS=:9000
-      - RUSTFS_CONSOLE_ENABLE=true
-      - RUSTFS_ACCESS_KEY=$RUSTFS_ACCESS_KEY
-      - RUSTFS_SECRET_KEY=$RUSTFS_SECRET_KEY
-    volumes:
-      - rustfs_data:/data
-    container_name: rustfs
-    ports:
-      - 9000:9000
-      - 9001:9001
 
   minio:
     command: server /data --console-address ":9001"
