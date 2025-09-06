@@ -35,7 +35,7 @@ resource "proxmox_virtual_environment_vm" "databases" {
     # VM Disk Settings
     disk {
         datastore_id = "Fast2Tb"
-        size         = 50
+        size         = 750
         interface    = "scsi0"
     }
 
