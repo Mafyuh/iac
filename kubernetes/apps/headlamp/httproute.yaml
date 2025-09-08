@@ -1,0 +1,22 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.networking.k8s.io/httproute_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: headlamp
+  namespace: monitoring
+spec:
+  hostnames: ["headlamp.local.mafyuh.dev"]
+  parentRefs:
+    - name: internal
+      namespace: kube-system
+      sectionName: https
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: headlamp
+          namespace: monitoring
+          port: 80

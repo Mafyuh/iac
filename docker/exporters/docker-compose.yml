@@ -46,18 +46,16 @@ services:
       - jellystat_data:/app/backend/backup-data
     restart: unless-stopped
 
-  # smokeping_prober:
-  #   image: quay.io/superq/smokeping-prober:v0.10.0
-  #   container_name: smokeping_prober
-  #   privileged: true
-  #   environment:
-  #     - GOMAXPROCS=1
-  #   ports:
-  #     - 9374:9374
-  #   restart: unless-stopped
-  #   command: google.com
-  #   networks:
-  #     - grafana
+  smokeping-prober:
+    image: quay.io/superq/smokeping-prober:v0.10.0
+    container_name: smokeping-prober
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/smokeping-prober/config.yaml"
+    ports:
+      - 9374:9374
+    volumes:
+      - ./config/:/etc/smokeping-prober/
 
 networks:
   grafana:
