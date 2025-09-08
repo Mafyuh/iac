@@ -230,3 +230,7 @@ spec:
           - job_name: caddy
             static_configs:
               - targets: ['192.168.2.2:2019']
+
+          - job_name: smokeping-prober
+            static_configs:
+              - targets: ['10.69.69.2:9374']
