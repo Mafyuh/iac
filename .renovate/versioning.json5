@@ -13,5 +13,11 @@
       matchPackageNames: ["siderolabs/talos"],
       versioning: "semver",
     },
+    {
+      description: "hotio containers",
+      matchDatasources: ["docker"],
+      matchPackagePatterns: ["^ghcr\\.io/hotio/.+"],
+      versioning: "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+    },
   ],
 }
