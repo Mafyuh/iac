@@ -2,10 +2,10 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   packageRules: [
     {
-      description: "Loose versioning",
+      description: "Umami postgresql variant versioning",
       matchDatasources: ["docker"],
       matchPackageNames: ["ghcr.io/umami-software/umami"],
-      versioning: "loose",
+      versioning: "regex:^postgresql-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
     {
       description: "Talos version management",
