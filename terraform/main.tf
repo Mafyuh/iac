@@ -41,10 +41,10 @@ module "twingate" {
   source = "./twingate"
 }
 
-module "authentik" {
-  source = "./authentik"
-  domains = var.domains
-}
+# module "authentik" {
+#   source = "./authentik"
+#   domains = var.domains
+# }
 
 # module "unifi" {
 #   source = "./unifi"

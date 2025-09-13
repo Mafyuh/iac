@@ -6,9 +6,9 @@ metadata:
   name: headlamp
   namespace: monitoring
 spec:
-  hostnames: ["headlamp.local.mafyuh.dev"]
+  hostnames: ["headlamp.mafyuh.dev"]
   parentRefs:
-    - name: internal
+    - name: external
       namespace: kube-system
       sectionName: https
   rules:
