@@ -15,4 +15,5 @@ resources:
   - prometheus/
   - reflector/
   - reloader/
+  - termix/
   - twingate/

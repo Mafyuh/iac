@@ -1,0 +1,111 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app termix
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.2.0
+      interval: 60m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: monitoring
+
+    controllers:
+      termix:
+        enabled: true
+        type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        replicas: 1
+
+        pod:
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          termix:
+            image:
+              repository: ghcr.io/lukegus/termix
+              tag: latest@sha256:0c8a89ba5f011f62fe3ea974a93a5406153e2234c7591ba05d00c089daf5c166
+              pullPolicy: IfNotPresent
+            probes:
+              liveness:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+                add:
+                  - CHOWN
+                  - FOWNER
+                  - SETUID
+                  - SETGID
+                  - DAC_OVERRIDE
+            resources:
+              requests:
+                cpu: 100m
+                memory: 150Mi
+              limits:
+                memory: 256Mi
+
+    route:
+      external:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["termix.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: termix
+                port: 8080
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: http
+
+    service:
+      app:
+        primary: true
+        controller: termix
+        type: ClusterIP
+        ports:
+          http:
+            port: 8080
+
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        globalMounts:
+          - path: /app/data
+            subPath: data
