@@ -23,7 +23,7 @@ terraform {
     }
     oci = {
       source  = "oracle/oci"
-      version = "7.17.0"
+      version = "7.18.0"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
