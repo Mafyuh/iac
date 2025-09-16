@@ -91,6 +91,7 @@ services:
     ports:
       - 9002:9001
       - 9003:9000
+    restart: unless-stopped
 
 volumes:
   mysql_data:
