@@ -6,6 +6,7 @@ resources:
   - authentik/
   - cert-manager/
   - cilium/
+  - gatus/
   - headlamp/
   - kromgo/
   - loki/
