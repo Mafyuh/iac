@@ -15,7 +15,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   postgres:
-    image: postgres:17.5
+    image: postgres:17.6
     container_name: postgres
     restart: unless-stopped
     environment:
