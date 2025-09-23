@@ -16,6 +16,10 @@
     {
       "matchPackageNames": ["cloudflare/cloudflared"],
       "customChangelogUrl": "https://github.com/cloudflare/cloudflared/blob/master/RELEASE_NOTES"
+    },
+    {
+      "matchPackageNames": ["gotify/server-arm7	"],
+      "customChangelogUrl": "https://github.com/gotify/server/releases"
     }
  ]
 }
