@@ -92,17 +92,6 @@ services:
       - 9002:9001
       - 9003:9000
     restart: unless-stopped
-  
-  linkwarden:
-    image: ghcr.io/linkwarden/linkwarden:v2.12.2
-    container_name: linkwarden
-    restart: unless-stopped
-    ports:
-      - 3000:3000
-    volumes:
-      - linkwarden_data:/data/data
-    environment:
-      - DATABASE_URL=postgresql://linkwarden:${POSTGRES_PASSWORD}@postgres:5432/linkwarden
 
 volumes:
   mysql_data:
@@ -110,4 +99,3 @@ volumes:
   redis_data:
   rustfs_data:
   minio_data:
-  linkwarden_data:

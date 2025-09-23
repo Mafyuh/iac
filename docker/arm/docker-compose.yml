@@ -118,31 +118,6 @@ services:
     networks:
       gitea_main:
         ipv4_address: 172.25.0.25
-  ## Linkwarden
-  postgres:
-    image: postgres:16-alpine
-    env_file: .env
-    restart: always
-    volumes:
-      - /docker/appdata/linkwarden/pgdata:/var/lib/postgresql/data
-    networks:
-      - gitea_main
-  linkwarden:
-    env_file: .env
-    environment:
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
-    restart: always
-    container_name: linkwarden
-    image: ghcr.io/linkwarden/linkwarden:v2.12.2
-    networks:
-      - gitea_main
-    ports:
-      - 3005:3000
-    volumes:
-      - /docker/appdata/linkwarden/data:/data/data
-    depends_on:
-      - postgres
-
 
 networks:
   gitea_main:
