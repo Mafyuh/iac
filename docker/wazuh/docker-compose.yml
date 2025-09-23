@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   wazuh.manager:
-    image: wazuh/wazuh-manager:4.12.0
+    image: wazuh/wazuh-manager:4.13.0
     hostname: wazuh.manager
     restart: unless-stopped
     ulimits:
@@ -45,7 +45,7 @@ services:
       - ./config/wazuh_cluster/wazuh_manager.conf:/wazuh-config-mount/etc/ossec.conf
 
   wazuh.indexer:
-    image: wazuh/wazuh-indexer:4.12.0
+    image: wazuh/wazuh-indexer:4.13.0
     hostname: wazuh.indexer
     restart: unless-stopped
     ports:
@@ -73,7 +73,7 @@ services:
       # - ./config/wazuh-indexer/roles_mapping.yml:/usr/share/wazuh-indexer/opensearch-security/roles_mapping.yml
 
   wazuh.dashboard:
-    image: wazuh/wazuh-dashboard:4.12.0
+    image: wazuh/wazuh-dashboard:4.13.0
     hostname: wazuh.dashboard
     restart: unless-stopped
     ports:
