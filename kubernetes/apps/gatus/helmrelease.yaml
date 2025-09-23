@@ -31,7 +31,7 @@ spec:
       enabled: false # HTTPRoute
     
     serviceMonitor:
-      enabled: true
+      enabled: false
     
     config:
       storage:
