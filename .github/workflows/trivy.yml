@@ -1,4 +1,4 @@
-name: Scan Images
+name: Trivy Vulnerability Scan
 on:
   pull_request:
     paths:
@@ -97,11 +97,10 @@ jobs:
             const prNumber = context.issue.number;
             const scanUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/security/code-scanning?query=pr%3A${prNumber}+tool%3ATrivy+is%3Aopen`;
             
-            const comment = "## 🔍 Trivy Security Scan Complete\n\n" +
+            const comment = "## 🛡️ Trivy Security Scan Complete\n\n" +
               `**Scanned Image:** \`${image}\`\n` +
-              "**Severity Filter:** CRITICAL, HIGH\n\n" +
               `📊 **[View Security Scan Results](${scanUrl})**\n\n` +
-              "_Results are available in the Security tab above. Click the link to see any vulnerabilities found._";
+              "_Results are available in the Security tab above._";
             
             // Find existing comment to update
             const comments = await github.rest.issues.listComments({
@@ -111,7 +110,7 @@ jobs:
             });
             
             const existingComment = comments.data.find(comment => 
-              comment.body.includes('🔍 Trivy Security Scan Complete')
+              comment.body.includes('🛡️ Trivy Security Scan Complete')
             );
             
             if (existingComment) {
