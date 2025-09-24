@@ -32,7 +32,7 @@ jobs:
           echo "image=$image" >> $GITHUB_OUTPUT
 
       - name: Scan changed image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.33.1
         with:
           image-ref: ${{ steps.images.outputs.image }}
           format: 'sarif'
