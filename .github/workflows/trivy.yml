@@ -15,24 +15,49 @@ jobs:
       - name: Extract changed images from PR diff
         id: images
         run: |
-          git fetch origin ${{ github.base_ref }}
+          # Fetch the base branch with sufficient history
+          git fetch origin ${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }} --depth=100
+          
+          # Find merge base and create diff
+          MERGE_BASE=$(git merge-base HEAD origin/${{ github.base_ref }})
+          echo "Using merge base: $MERGE_BASE"
+          
+          echo "=== Analyzing PR diff for container images ==="
+          git diff $MERGE_BASE...HEAD --name-only | head -10
 
           # Look for changes to k8s images
-          repo=$(git diff origin/${{ github.base_ref }}...HEAD | grep -E '^\+.*repository:' | sed -E 's/.*repository:[[:space:]]*//g' | head -n1)
-          tag=$(git diff origin/${{ github.base_ref }}...HEAD | grep -E '^\+.*tag:' | sed -E 's/.*tag:[[:space:]]*//g' | head -n1)
+          repo=$(git diff $MERGE_BASE...HEAD | grep -E '^\+.*repository:' | sed -E 's/.*repository:[[:space:]]*([^[:space:]]+).*/\1/' | head -n1)
+          tag=$(git diff $MERGE_BASE...HEAD | grep -E '^\+.*tag:' | sed -E 's/.*tag:[[:space:]]*([^[:space:]]+).*/\1/' | head -n1)
+          
+          echo "Found k8s repo: '$repo', tag: '$tag'"
 
           if [ -n "$repo" ] && [ -n "$tag" ]; then
             image="$repo:$tag"
+            echo "Using k8s format: $image"
           else
             # Fall back to plain image: lines (docker-compose)
-            image=$(git diff origin/${{ github.base_ref }}...HEAD | grep -E '^\+.*image:' | sed -E 's/.*image:[[:space:]]*//g' | head -n1)
+            image=$(git diff $MERGE_BASE...HEAD | grep -E '^\+.*image:' | sed -E 's/.*image:[[:space:]]*([^[:space:]#]+).*/\1/' | head -n1)
+            echo "Raw image found: '$image'"
+            
+            # Clean up common prefixes and quotes
+            image=$(echo "$image" | sed -E 's/^["\x27]//; s/["\x27]$//; s/^[[:space:]]*//; s/[[:space:]]*$//')
+            echo "Cleaned image: '$image'"
           fi
 
           echo "Found image: $image"
           echo "image=$image" >> $GITHUB_OUTPUT
+          
+          # Set a flag to indicate if we should run the scan
+          if [ -n "$image" ] && [ "$image" != "" ]; then
+            echo "should_scan=true" >> $GITHUB_OUTPUT
+            echo "Will scan image: $image"
+          else
+            echo "should_scan=false" >> $GITHUB_OUTPUT
+            echo "No container images found in the diff, skipping Trivy scan"
+          fi
 
       - name: Scan changed image with Trivy
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ${{ steps.images.outputs.image }}
           format: 'sarif'
@@ -40,6 +65,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results to GitHub Security tab
+        if: steps.images.outputs.should_scan == 'true'
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
