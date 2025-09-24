@@ -57,3 +57,9 @@ metrics:
       - { color: "green", min: 0, max: 0 }
       - { color: "red", min: 1, max: 9999 }
     title: Alerts
+
+  - name: pve_version
+    query: pve_version_info{job="pve"}
+    label: version
+    title: Proxmox
+
