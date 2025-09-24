@@ -1,0 +1,45 @@
+name: Scan Images
+on:
+  pull_request:
+    paths:
+      - 'docker/**'
+      - 'kubernetes/**'
+
+jobs:
+  trivy-scan:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract changed images from PR diff
+        id: images
+        run: |
+          git fetch origin ${{ github.base_ref }}
+
+          # Look for changes to k8s images
+          repo=$(git diff origin/${{ github.base_ref }}...HEAD | grep -E '^\+.*repository:' | sed -E 's/.*repository:[[:space:]]*//g' | head -n1)
+          tag=$(git diff origin/${{ github.base_ref }}...HEAD | grep -E '^\+.*tag:' | sed -E 's/.*tag:[[:space:]]*//g' | head -n1)
+
+          if [ -n "$repo" ] && [ -n "$tag" ]; then
+            image="$repo:$tag"
+          else
+            # Fall back to plain image: lines (docker-compose)
+            image=$(git diff origin/${{ github.base_ref }}...HEAD | grep -E '^\+.*image:' | sed -E 's/.*image:[[:space:]]*//g' | head -n1)
+          fi
+
+          echo "Found image: $image"
+          echo "image=$image" >> $GITHUB_OUTPUT
+
+      - name: Scan changed image with Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ steps.images.outputs.image }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
