@@ -83,7 +83,7 @@ jobs:
 
       - name: Comment PR with link to security scan
         if: steps.images.outputs.should_scan == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const image = '${{ steps.images.outputs.image }}';
