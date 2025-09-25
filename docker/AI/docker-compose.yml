@@ -20,7 +20,7 @@ services:
               capabilities: [gpu]
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.6.30
+    image: ghcr.io/open-webui/open-webui:v0.6.31
     container_name: open-webui
     restart: unless-stopped
     networks:
