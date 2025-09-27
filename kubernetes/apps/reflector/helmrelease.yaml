@@ -16,3 +16,8 @@ spec:
         namespace: flux-system
   values:
     replicaCount: 1
+    rbac:
+      enabled: true
+    serviceAccount:
+      create: true
+      name: reflector
