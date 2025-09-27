@@ -44,7 +44,7 @@ resource "proxmox_virtual_environment_vm" "AI" {
     # VM Disk Settings
     disk {
         datastore_id = "Fast500Gb"
-        size         = 75 ## Need to increase
+        size         = 150
         interface    = "scsi0"
     }
 
