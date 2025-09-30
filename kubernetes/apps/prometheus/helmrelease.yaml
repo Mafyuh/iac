@@ -98,15 +98,18 @@ spec:
         config:
           spec:
             resources:
-              # Flux Controller Deployments - for version information
+              # Flux Controller Deployments - for dynamic version information
               - groupVersionKind:
                   group: apps
                   version: v1
                   kind: Deployment
-                metricNamePrefix: gotk
+                metricNamePrefix: flux
                 labelSelector:
                   matchLabels:
                     app.kubernetes.io/part-of: flux
+                labelsFromPath:
+                  component: [metadata, labels, "app.kubernetes.io/component"]
+                  version: [metadata, labels, "app.kubernetes.io/version"]
                 metrics:
                   - name: "controller_info"
                     help: "Information about Flux controllers including version."
@@ -117,10 +120,7 @@ spec:
                           name: [metadata, name]
                     labelsFromPath:
                       exported_namespace: [metadata, namespace]
-                      controller_name: [metadata, labels, "app.kubernetes.io/component"]
-                      version: [metadata, labels, "app.kubernetes.io/version"]
                       replicas: [spec, replicas]
-                      available_replicas: [status, availableReplicas]
                       ready_replicas: [status, readyReplicas]
               # Flux Kustomization Resources
               - groupVersionKind:
