@@ -104,13 +104,9 @@ spec:
                   version: v1
                   kind: Deployment
                 metricNamePrefix: gotk
-                commonLabels:
-                  controller_type: flux
-                labelSelectorFilter:
-                  - matchExpressions:
-                      - key: app.kubernetes.io/part-of
-                        operator: In
-                        values: [flux]
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/part-of: flux
                 metrics:
                   - name: "controller_info"
                     help: "Information about Flux controllers including version."
