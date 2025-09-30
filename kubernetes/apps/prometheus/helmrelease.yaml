@@ -92,6 +92,35 @@ spec:
       enabled: true
     kubeStateMetrics:
       enabled: true
+    kube-state-metrics:
+      customResourceState:
+        enabled: true
+        config:
+          configMapName: flux-kube-state-metrics-config
+          configMapNamespace: monitoring
+      rbac:
+        extraRules:
+          - apiGroups:
+              - source.toolkit.fluxcd.io
+              - kustomize.toolkit.fluxcd.io
+              - helm.toolkit.fluxcd.io
+              - notification.toolkit.fluxcd.io
+              - image.toolkit.fluxcd.io
+            resources:
+              - gitrepositories
+              - buckets
+              - helmrepositories
+              - helmcharts
+              - ocirepositories
+              - kustomizations
+              - helmreleases
+              - alerts
+              - providers
+              - receivers
+              - imagerepositories
+              - imagepolicies
+              - imageupdateautomations
+            verbs: ["list", "watch"]
     nodeExporter:
       enabled: true
     grafana:
