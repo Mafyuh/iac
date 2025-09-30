@@ -16,5 +16,5 @@ provider "flux" {
 
 resource "flux_bootstrap_git" "flux" {
   path               = "kubernetes/cluster/production"
-  version            = "v2.6.4"
+  version            = "v2.7.0"
 }
