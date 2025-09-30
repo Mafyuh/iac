@@ -2,7 +2,7 @@ terraform {
   required_providers {
     flux = {
       source  = "fluxcd/flux"
-      version = "1.6.4"
+      version = "1.7.1"
     }
     bitwarden = {
       source  = "maxlaverse/bitwarden"
