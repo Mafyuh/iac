@@ -6,8 +6,7 @@ metadata:
   name: &app flux-monitoring
   namespace: flux-system
 spec:
-  targetNamespace: monitoring
-  path: ./kubernetes/components/flux/
+  path: ./kubernetes/components/flux-operator/
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

@@ -4,6 +4,4 @@ metadata:
   name: flux-monitoring
   namespace: monitoring
 resources:
-  - flux-ks.yaml
-  - ./flux-podmonitor.yaml
-  - ./flux-servicemonitor.yaml
+  - helmrelease.yaml
