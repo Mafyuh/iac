@@ -7,4 +7,3 @@ resources:
   - flux-ks.yaml
   - ./flux-podmonitor.yaml
   - ./flux-servicemonitor.yaml
-  - ./flux-kube-state-metrics-config.yaml
