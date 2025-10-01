@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
-  name: flux-operator
-  namespace: flux-system
+  name: flux-monitoring
+  namespace: monitoring
 resources:
   - helmrelease.yaml

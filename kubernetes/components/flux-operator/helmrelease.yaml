@@ -1,19 +1,3 @@
----
-# yaml-language-server: $schema=https://kube-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: OCIRepository
-metadata:
-  name: flux-operator
-  namespace: flux-system
-spec:
-  interval: 5m
-  layerSelector:
-    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
-    operation: copy
-  ref:
-    tag: 0.30.0
-  url: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
----
 # yaml-language-server: $schema=https://kube-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -22,10 +6,14 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m
-  chartRef:
-    kind: OCIRepository
-    name: flux-operator
-    namespace: flux-system
+  chart:
+    spec:
+      chart: flux-operator
+      version: 0.30.0
+      sourceRef:
+        kind: HelmRepository
+        name: controlplaneio
+        namespace: flux-system
   dependsOn: []
   values:
     serviceMonitor:
