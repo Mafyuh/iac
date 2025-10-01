@@ -9,7 +9,7 @@ spec:
   type: github
   events: ["ping", "push"]
   secretRef:
-    name: FLUX_TOKEN
+    name: flux-token
   resources:
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: GitRepository

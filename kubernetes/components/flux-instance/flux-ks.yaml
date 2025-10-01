@@ -15,6 +15,16 @@ spec:
     kind: GitRepository
     name: iac
     namespace: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
+      - kind: Secret
+        name: cluster-secrets
   wait: true
   interval: 30m
   retryInterval: 1m
