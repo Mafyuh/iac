@@ -51,7 +51,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: iac
     namespace: flux-system
   dependsOn:
     - name: gateway-api-crd

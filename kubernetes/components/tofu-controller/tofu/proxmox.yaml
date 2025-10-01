@@ -31,7 +31,7 @@ spec:
   path: ./terraform/proxmox
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: iac
     namespace: flux-system
   writeOutputsToSecret:
     name: proxmox-outputs
