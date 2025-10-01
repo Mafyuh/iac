@@ -33,6 +33,6 @@ spec:
         name: iac
         kind: GitRepository
         url: https://github.com/mafyuh/iac
-        ref: main
+        ref: refs/heads/main
         path: kubernetes/cluster/production
         interval: 1h

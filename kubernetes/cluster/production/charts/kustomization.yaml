@@ -14,3 +14,4 @@ resources:
 - tf-controller.yaml
 - metrics-server.yaml
 - gatus-chart.yaml
+- controlplaneio.yaml
