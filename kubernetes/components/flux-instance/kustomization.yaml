@@ -5,3 +5,5 @@ metadata:
   namespace: monitoring
 resources:
   - helmrelease.yaml
+  - httproute.yaml
+  - receiver.yaml

@@ -88,9 +88,9 @@ resource "radarr_root_folder" "marvel" {
   path = "/data/Media/Marvel"
 }
 
-# resource "radarr_root_folder" "dc" {
-#   path = "/data/Media/DC"
-# }
+resource "radarr_root_folder" "dc" {
+  path = "/data/Media/DC"
+}
 
 resource "radarr_root_folder" "kids" {
   path = "/data/Media/Kids"
@@ -100,9 +100,9 @@ resource "radarr_root_folder" "movies" {
   path = "/data/Media/Movies"
 }
 
-# resource "radarr_root_folder" "requests" {
-#   path = "/data/Media/Requests"
-# }
+resource "radarr_root_folder" "requests" {
+  path = "/data/Media/Requests"
+}
 
 resource "radarr_root_folder" "stand-up" {
   path = "/data/Media/Stand-Up"
