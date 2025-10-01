@@ -34,5 +34,5 @@ spec:
         kind: GitRepository
         url: https://github.com/mafyuh/iac
         ref: refs/heads/main
-        path: kubernetes/cluster/production
+        path: kubernetes/flux
         interval: 1h
