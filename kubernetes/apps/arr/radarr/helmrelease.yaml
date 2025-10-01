@@ -55,6 +55,12 @@ spec:
               TZ: "${TZ}"
               RADARR__INSTANCE_NAME: *app
               RADARR__PORT: &port 7878
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__APIKEY: 
+                valueFrom:
+                  secretKeyRef:
+                    name: recyclarr-secrets
+                    key: RADARR_API_KEY
               RADARR__APPLICATION_URL: "https://radarr.${LOCAL_DOMAIN}"
               RADARR__THEME: dark
               RADARR__LOG_LEVEL: info

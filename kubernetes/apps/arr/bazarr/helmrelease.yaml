@@ -57,6 +57,13 @@ spec:
               BAZARR__PORT: &port 6767
               BAZARR__APPLICATION_URL: "https://bazarr.${LOCAL_DOMAIN}"
               BAZARR__LOG_LEVEL: info
+              BAZARR__AUTH__METHOD: External
+              BAZARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              BAZARR__AUTH__APIKEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: recyclarr-secrets
+                    key: BAZARR_API_KEY
 
             probes:
               liveness:

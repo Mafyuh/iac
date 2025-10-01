@@ -58,6 +58,13 @@ spec:
               PROWLARR__APPLICATION_URL: "https://prowlarr.${LOCAL_DOMAIN}"
               PROWLARR__THEME: dark
               PROWLARR__LOG_LEVEL: info
+              PROWLARR__AUTH__METHOD: External
+              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              PROWLARR__AUTH__APIKEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: recyclarr-secrets
+                    key: PROWLARR_API_KEY
 
             probes:
               liveness:
