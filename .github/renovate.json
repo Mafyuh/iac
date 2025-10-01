@@ -39,15 +39,13 @@
     },
     {
       "customType": "regex",
-      "description": "Update Flux version in Terraform flux_bootstrap_git resource",
+      "description": "Flux Instance",
       "managerFilePatterns": [
-        "/^terraform/.+\\.tf$/"
+        "/^kubernetes/.+\\.ya?ml$/"
       ],
       "matchStrings": [
-        "resource \"flux_bootstrap_git\" \"flux\" \\{[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
-      ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "fluxcd/flux2"
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s+version: (?<currentValue>.*)"
+      ]
     }
   ]
 }
