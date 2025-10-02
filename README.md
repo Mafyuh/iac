@@ -46,7 +46,7 @@ All services are **containerized**, either managed with **Docker Compose** or **
 
 To automate infrastructure updates, I use **Github Actions**, which trigger workflows upon changes to this repo. This ensures seamless deployment and maintenance across my homelab:  
 
-- **[Flux](https://fluxcd.io/)** manages Continuous Deployment (CD) for Kubernetes, bootstrapped via [OpenTofu](https://github.com/Mafyuh/iac/blob/main/terraform/flux/main.tf).
+- **[Flux](https://fluxcd.io/)** manages Continuous Deployment (CD) for Kubernetes, deployed via [Flux Operator](https://fluxcd.control-plane.io/).
 - **[Docker CD Workflow](https://github.com/Mafyuh/iac/blob/main/.github/workflows/CD.yml)** handles Continuous Deployment for Docker services.   
 - **[Renovate](https://github.com/renovatebot/renovate)** keeps services updated by opening PRs for new versions.  
 - **[super-linter](https://github.com/super-linter/super-linter)** ensures configuration files are properly structured.
@@ -57,6 +57,8 @@ For Secret management I use [Bitwarden Secrets](https://bitwarden.com/products/s
 > Kubernetes is using SOPS with Age encryption until migration over to Bitwarden Secrets.
 
 **[GitGuardian](https://www.gitguardian.com/)** makes sure to alert me if I do accidentally push a secret
+
+Each container image is automatically scanned by **[Trivy](https://trivy.dev/latest/)**, with detected vulnerabilities published to **[Github Security](https://github.com/security)**
 
 I use **Oracle Cloud** for their [Always-Free](https://www.oracle.com/cloud/free/) VM's and deploy Docker services that require uptime here. [Twingate](https://www.twingate.com/) is used to connect my home network to the various VPS's securely using [Zero Trust architecture](https://en.wikipedia.org/wiki/Zero_trust_architecture).
 

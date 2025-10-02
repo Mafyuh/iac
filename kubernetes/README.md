@@ -9,32 +9,27 @@
 Physical cluster on 3 Optiplex 7040 Micro's with Talos OS.
 
 ## ☁️ Core Components
-* **[cert-manager](https://cert-manager.io/)**
-* **[cilium](https://github.com/cilium/cilium)**
-* **[longhorn](https://longhorn.io/)**
-* **[NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/)**
-* **[sops](https://toolkit.fluxcd.io/guides/mozilla-sops/)**
+* **[cert-manager](https://cert-manager.io/)** - Certificate management and Let's Encrypt integration
+* **[cilium](https://github.com/cilium/cilium)** - eBPF-based networking, security, and observability
+* **[longhorn](https://longhorn.io/)** - Storage system for persistent volumes
+* **[prometheus](https://prometheus.io/)** - Monitoring and alerting stack with Grafana Alloy
+* **[sops](https://toolkit.fluxcd.io/guides/mozilla-sops/)** - Secret encryption
+* **[flux](https://fluxcd.io/)** - GitOps continuous delivery
+
 
 ### Cluster Setup
+The cluster uses **Flux Operator** with a **Flux Instance** for GitOps. Once the below are executed Flux will reconcile the entire cluster to this repo.
+
 ```bash
 kubectl create ns flux-system
 kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/home/$USER/.sops/key.txt
-```
-[Flux is bootstrapped via OpenTofu](https://github.com/Mafyuh/iac/blob/main/terraform/flux/main.tf) and once above commands are run Flux then takes over and reconciles to match Git
 
-## 🗃️ Folder Structure
-```shell
-kubernetes
-├── 📁 apps                        # Application deployments
-│   ├── 📁 arr                     # Media stack
-│   └── 📁 other applications      # Various containerized services
-├── 📁 cluster                     # Flux + cluster-level config
-│   └── 📁 production
-│       ├── 📁 charts             # Helm chart sources
-│       ├── 📁 flux-system        # Flux bootstrapping
-│       └── 📁 namespaces         # Cluster namespaces
-├── 📁 secrets                     # SOPS-encrypted secrets
-├── 📁 talos                      # Talos OS configuration
-└── README.md
+helm repo add controlplaneio https://controlplaneio.github.io/charts
+helm repo update
 
+helm install flux-operator controlplaneio/flux-operator -n flux-system
+
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=flux-operator -n flux-system --timeout=300s
+kubectl apply -f kubernetes/flux/cluster.yaml
 ```
+
