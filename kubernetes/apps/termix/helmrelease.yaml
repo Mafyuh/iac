@@ -49,7 +49,7 @@ spec:
           termix:
             image:
               repository: ghcr.io/lukegus/termix
-              tag: latest@sha256:1079ac353b25b07aa4958d6a025f79282e361399ddce634b5d3c128fa9bc64bd
+              tag: latest@sha256:cdafb30771ee0272bd4c6b51b42a8268a6d31555ca343b56272678026b1206f7
               pullPolicy: IfNotPresent
             probes:
               liveness:
