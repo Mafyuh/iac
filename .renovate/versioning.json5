@@ -14,9 +14,9 @@
       versioning: "semver",
     },
     {
-      description: "hotio containers",
+      description: "release prefix",
       matchDatasources: ["docker"],
-      matchPackagePatterns: ["^ghcr\\.io/hotio/.+"],
+      matchPackagePatterns: ["^ghcr\\.io/hotio/.+", "^ghcr\\.io/lukegus/termix$"],
       versioning: "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
   ],
