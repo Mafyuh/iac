@@ -1,8 +1,3 @@
----
-title: AI Chat Guidelines for Flux MCP Server
-description: AI system prompt for analyzing and troubleshooting FluxCD
----
-
 # AI Chat Guidelines for Flux MCP Server
 
 ## Purpose
