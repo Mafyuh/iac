@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app sabnzbd
+  name: sabnzbd-exporter
   namespace: arr
 spec:
   interval: 15m
@@ -26,67 +26,23 @@ spec:
 
   values:
     global:
-      fullnameOverride: *app
+      fullnameOverride: sabnzbd-exporter
       namespace: arr
 
     controllers:
-      sabnzbd:
+      sabnzbd-exporter:
         enabled: true
         type: deployment
-        annotations:
-          reloader.stakater.com/auto: "true"
-
         replicas: 1
-
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: &group 1000
-            fsGroup: *group
-            fsGroupChangePolicy: "OnRootMismatch"
-
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/sabnzbd
-              tag: 4.5.3
-              pullPolicy: IfNotPresent
-            env:
-              TZ: "${TZ}"
-              SABNZBD__PORT: &port 8080
-              SABNZBD__HOST_WHITELIST_ENTRIES: >-
-                {{ .Release.Name }},
-                {{ .Release.Name }}.arr,
-                {{ .Release.Name }}.arr.svc,
-                {{ .Release.Name }}.arr.svc.cluster.local,
-                sab.${LOCAL_DOMAIN}
-
-            probes:
-              liveness:
-                enabled: false
-
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                  - ALL
-
-            resources:
-              requests:
-                cpu: 20m
-                memory: 200Mi
-              limits:
-                cpu: 600m
-                memory: 4000Mi
-
-          metrics:
-            dependsOn: app
-            image:
               repository: ghcr.io/onedr0p/exportarr
               tag: v2.3.0
+              pullPolicy: IfNotPresent
             env:
               PORT: &metricsPort 9707
-              URL: "http://{{ .Release.Name }}-app.{{ .Release.Namespace }}.svc.cluster.local:8080"
+              URL: "https://sab.mafyuh.xyz"
               APIKEY:
                 valueFrom:
                   secretKeyRef:
@@ -103,12 +59,7 @@ spec:
     service:
       app:
         primary: true
-        controller: sabnzbd
-        ports:
-          http:
-            port: *port
-      metrics:
-        controller: sabnzbd
+        controller: sabnzbd-exporter
         ports:
           metrics:
             port: *metricsPort
@@ -116,60 +67,10 @@ spec:
     serviceMonitor:
       main:
         enabled: true
-        serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}-metrics'
+        serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}'
         endpoints:
           - port: metrics
             scheme: http
             path: /metrics
             interval: 1m
             scrapeTimeout: 10s
-
-    route:
-      internal:
-        enabled: true
-        kind: HTTPRoute
-        hostnames: ["sab.local.mafyuh.dev"]
-        rules:
-          - matches:
-              - path:
-                  type: PathPrefix
-                  value: /
-            backendRefs:
-              - name: sabnzbd-app
-                port: *port
-          - matches:
-              - path:
-                  type: PathPrefix
-                  value: /metrics
-            backendRefs:
-              - name: sabnzbd-metrics
-                port: *metricsPort
-        parentRefs:
-          - name: internal
-            namespace: kube-system
-            sectionName: https
-
-    persistence:
-      config:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: longhorn
-        globalMounts:
-          - path: /config
-
-      data:
-        enabled: true
-        type: nfs
-        server: "${NAS_IP}"
-        path: /mnt/thePool/thePoolShare
-        globalMounts:
-          - path: /data
-      
-      incomplete:
-        enabled: true
-        type: emptyDir
-        sizeLimit: 100Gi
-        globalMounts:
-          - path: /incomplete
