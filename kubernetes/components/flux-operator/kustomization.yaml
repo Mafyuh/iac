@@ -5,3 +5,4 @@ metadata:
   namespace: flux-system
 resources:
   - helmrelease.yaml
+  - mcp.yaml

@@ -7,4 +7,3 @@ resources:
   - helmrelease.yaml
   - httproute.yaml
   - receiver.yaml
-  - mcp.yaml
