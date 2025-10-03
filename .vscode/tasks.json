@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start MCP Port Forward",
+      "type": "shell",
+      "command": "kubectl",
+      "args": [
+        "port-forward",
+        "-n", "flux-system",
+        "svc/flux-operator-mcp",
+        "9090:9090"
+      ],
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*)$",
+          "file": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^Forwarding from",
+          "endsPattern": "never_ends_pattern_so_task_keeps_running"
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      }
+    },
+    {
+      "label": "Stop MCP Port Forward",
+      "type": "shell",
+      "command": "pkill",
+      "args": ["-f", "kubectl port-forward.*flux-operator-mcp"]
+    }
+  ]
+}

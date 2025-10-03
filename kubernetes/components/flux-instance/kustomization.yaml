@@ -1,9 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
-  name: flux-monitoring
-  namespace: monitoring
+  name: flux-instance
+  namespace: flux-system
 resources:
   - helmrelease.yaml
   - httproute.yaml
   - receiver.yaml
+  - mcp.yaml

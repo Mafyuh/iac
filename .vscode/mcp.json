@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "flux-operator-mcp": {
+      "type": "http",
+      "url": "http://localhost:9090/mcp"
+    }
+  }
+}
