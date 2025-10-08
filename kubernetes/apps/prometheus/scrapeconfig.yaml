@@ -1,0 +1,163 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name speedtest-exporter
+spec:
+  staticConfigs:
+    - targets:
+        - 10.69.69.2:9798
+  metricsPath: /metrics
+  relabelings:
+    - action: replace
+      targetLabel: job
+      replacement: *name
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name ping
+spec:
+  staticConfigs:
+    - targets:
+        - http://www.google.com/;google.com
+        - https://github.com/;github.com
+        - https://www.apple.com/;apple.com
+  metricsPath: /probe
+  params:
+    module: [http_2xx]
+  relabelings:
+    - sourceLabels: [__address__]
+      regex: '(.*);(.*)'
+      targetLabel: instance
+      replacement: $1
+    - sourceLabels: [__address__]
+      regex: '(.*);(.*)'
+      targetLabel: humanname
+      replacement: $2
+    - sourceLabels: [instance]
+      targetLabel: __param_target
+    - targetLabel: __address__
+      replacement: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+    - action: replace
+      targetLabel: job
+      replacement: *name
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name website-monitoring-http
+spec:
+  fileSDConfigs:
+    - files:
+        - /etc/prometheus/configmaps/website-monitoring-targets/targets.yml
+  metricsPath: /probe
+  params:
+    module: [http_2xx]
+  relabelings:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: blackbox-exporter-prometheus-blackbox-exporter:9115
+    - action: replace
+      targetLabel: job
+      replacement: *name
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name website-monitoring-icmp
+spec:
+  fileSDConfigs:
+    - files:
+        - /etc/prometheus/configmaps/website-monitoring-targets/targets.yml
+  metricsPath: /probe
+  params:
+    module: [icmp]
+  relabelings:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: blackbox-exporter-prometheus-blackbox-exporter:9115
+    - action: replace
+      targetLabel: job
+      replacement: *name
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name pve
+spec:
+  staticConfigs:
+    - targets:
+        - 10.0.0.30
+        - 10.0.0.3
+  metricsPath: /pve
+  params:
+    module: [default]
+    cluster: ['1']
+    node: ['1']
+  relabelings:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: 10.69.69.2:9221
+    - action: replace
+      targetLabel: job
+      replacement: *name
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name caddy
+spec:
+  staticConfigs:
+    - targets:
+        - 192.168.2.2:2019
+  metricsPath: /metrics
+  relabelings:
+    - action: replace
+      targetLabel: job
+      replacement: *name
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name smokeping-prober
+spec:
+  staticConfigs:
+    - targets:
+        - 10.69.69.2:9374
+  metricsPath: /metrics
+  relabelings:
+    - action: replace
+      targetLabel: job
+      replacement: *name
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name blocky
+spec:
+  staticConfigs:
+    - targets:
+        - 10.20.10.20:4000
+  metricsPath: /metrics
+  relabelings:
+    - action: replace
+      targetLabel: job
+      replacement: *name

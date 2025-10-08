@@ -97,9 +97,13 @@ spec:
           revision: 3
           datasource: Prometheus
         hubble:
-          gnetId: 14502
+          gnetId: 16613
           revision: 1
           datasource: Prometheus
+        hubble-flow:
+          gnetId: 19424
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
         kubernetes-coredns:
           # renovate: depName="Kubernetes / System / CoreDNS"
           gnetId: 15762
