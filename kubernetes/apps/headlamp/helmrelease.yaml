@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://github.com/kubernetes-sigs/headlamp/raw/refs/heads/main/charts/headlamp/values.schema.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -23,7 +23,7 @@ spec:
       watchPlugins: true
 
     ingress:
-      enabled: false  # Disable since we're using HTTPRoute
+      enabled: false
 
     initContainers:
       - command:

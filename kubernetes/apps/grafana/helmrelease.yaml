@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://github.com/kubernetes-sigs/headlamp/raw/refs/heads/main/charts/headlamp/values.schema.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -21,7 +21,9 @@ spec:
     admin:
       existingSecret: grafana-admin-secret
     env:
-      GF_SERVER_ROOT_URL: https://grafana.mafyuh.dev
+      GF_SERVER_ROOT_URL: https://grafana.local.mafyuh.dev
+      GF_EXPLORE_ENABLED: true
+      GF_PANELS_DISABLE_SANITIZE_HTML: true
     grafana.ini:
       analytics:
         check_for_updates: false
@@ -76,17 +78,27 @@ spec:
               path: /var/lib/grafana/dashboards/default
     dashboards:
       default:
-        blocky-postgres:
-          gnetId: 17996
-          revision: 13
+        blocky:
+          gnetId: 13768
+          revision: 6
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
+          inputs:
+            - name: "blocky_api_url"
+              type: "constant"
+              value: "http://10.20.10.100:4000"
+        blackbox-exporter:
+          gnetId: 13659
+          revision: 1
           datasource: Prometheus
         cert-manager:
           # renovate: depName="cert-manager-dashboard"
           gnetId: 20842
           revision: 3
           datasource: Prometheus
-        envoy-gateway:
-          url: https://raw.githubusercontent.com/envoyproxy/gateway/refs/heads/main/charts/gateway-addons-helm/dashboards/envoy-gateway-global.json
+        hubble:
+          gnetId: 14502
+          revision: 1
           datasource: Prometheus
         kubernetes-coredns:
           # renovate: depName="Kubernetes / System / CoreDNS"
@@ -118,6 +130,16 @@ spec:
           gnetId: 11454
           revision: 14
           datasource: Prometheus
+        media:
+          url: https://raw.githubusercontent.com/Mafyuh/json/refs/heads/main/media-dashboard.json
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
+        minio:
+          # renovate: depName="Minio"
+          gnetId: 13502
+          revision: 26
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
         node-exporter-full:
           # renovate: depName="Node Exporter Full"
           gnetId: 1860
@@ -129,6 +151,23 @@ spec:
           gnetId: 19105
           revision: 7
           datasource: Prometheus
+        proxmox-ve:
+          # renovate: depName="Proxmox VE"
+          gnetId: 10347
+          revision: 5
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
+        smokeping:
+          # renovate: depName="smokeping"
+          gnetId: 11335
+          revision: 1
+          datasource: Prometheus
+        speedtest-exporter:
+          # renovate: depName="Speedtest-Exporter"
+          gnetId: 13665
+          revision: 4
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
         unifi-insights:
           # renovate: depName="UniFi-Poller: Client Insights - Prometheus"
           gnetId: 11315
