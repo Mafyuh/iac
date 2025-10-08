@@ -4,6 +4,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name speedtest-exporter
+  namespace: monitoring
 spec:
   staticConfigs:
     - targets:
@@ -19,6 +20,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name ping
+  namespace: monitoring
 spec:
   staticConfigs:
     - targets:
@@ -50,6 +52,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name website-monitoring-http
+  namespace: monitoring
 spec:
   fileSDConfigs:
     - files:
@@ -73,6 +76,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name website-monitoring-icmp
+  namespace: monitoring
 spec:
   fileSDConfigs:
     - files:
@@ -96,6 +100,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name pve
+  namespace: monitoring
 spec:
   staticConfigs:
     - targets:
@@ -122,6 +127,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name caddy
+  namespace: monitoring
 spec:
   staticConfigs:
     - targets:
@@ -137,6 +143,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name smokeping-prober
+  namespace: monitoring
 spec:
   staticConfigs:
     - targets:
@@ -152,6 +159,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: &name blocky
+  namespace: monitoring
 spec:
   staticConfigs:
     - targets:
