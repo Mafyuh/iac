@@ -95,29 +95,7 @@ spec:
     nodeExporter:
       enabled: true
     grafana:
-      enabled: true
-      replicas: 1
-      operator:
-        dashboardsConfigMapRefEnabled: true
-      forceDeployDashboards: false
-      defaultDashboardsEnabled: false
-      defaultDashboardsTimezone: America/New_York
-      defaultDashboardsEditable: true
-      env:
-        GF_PANELS_DISABLE_SANITIZE_HTML: "true"
-      ingress:
-        enabled: false
-      adminPassword: "${GRAF_ADMIN_PASS}"
-      persistence:
-        enabled: true
-        type: sts
-        storageClassName: longhorn
-        accessModes:
-          - ReadWriteOnce
-        size: 10Gi
-        finalizers:
-          - kubernetes.io/pvc-protection
-
+      enabled: false
     prometheus:
       route:
         main:
