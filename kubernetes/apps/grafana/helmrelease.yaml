@@ -76,6 +76,10 @@ spec:
               path: /var/lib/grafana/dashboards/default
     dashboards:
       default:
+        blocky-postgres:
+          gnetId: 17996
+          revision: 13
+          datasource: Prometheus
         cert-manager:
           # renovate: depName="cert-manager-dashboard"
           gnetId: 20842
@@ -125,12 +129,6 @@ spec:
           gnetId: 19105
           revision: 7
           datasource: Prometheus
-        unifi-pdu:
-          # renovate: depName="UniFi-Poller: PDU Insights - Prometheus"
-          gnetId: 23027
-          revision: 1
-          datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
         unifi-insights:
           # renovate: depName="UniFi-Poller: Client Insights - Prometheus"
           gnetId: 11315
@@ -181,11 +179,11 @@ spec:
       main:
         enabled: true
         hostnames:
-          - "{{ .Release.Name }}.mafyuh.dev"
+          - "{{ .Release.Name }}.local.mafyuh.dev"
         parentRefs:
-          - name: external
+          - name: internal
             namespace: kube-system
-            sectionName: http
+            sectionName: https
     persistence:
       enabled: false
     testFramework:
