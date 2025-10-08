@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: prometheus-blackbox-exporter
-      version: 11.3.1
+      version: 11.4.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
