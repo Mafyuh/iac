@@ -3,17 +3,15 @@
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name: &name speedtest-exporter
+  name: speedtest-exporter
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   staticConfigs:
     - targets:
         - 10.69.69.2:9798
   metricsPath: /metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
 apiVersion: monitoring.coreos.com/v1alpha1
@@ -21,6 +19,8 @@ kind: ScrapeConfig
 metadata:
   name: &name ping
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   staticConfigs:
     - targets:
@@ -53,6 +53,8 @@ kind: ScrapeConfig
 metadata:
   name: &name website-monitoring-http
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   fileSDConfigs:
     - files:
@@ -77,6 +79,8 @@ kind: ScrapeConfig
 metadata:
   name: &name website-monitoring-icmp
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   fileSDConfigs:
     - files:
@@ -101,6 +105,8 @@ kind: ScrapeConfig
 metadata:
   name: &name pve
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   staticConfigs:
     - targets:
@@ -128,6 +134,8 @@ kind: ScrapeConfig
 metadata:
   name: &name caddy
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   staticConfigs:
     - targets:
@@ -144,6 +152,8 @@ kind: ScrapeConfig
 metadata:
   name: &name smokeping-prober
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   staticConfigs:
     - targets:
@@ -158,14 +168,12 @@ spec:
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name: &name blocky
+  name:  blocky
   namespace: monitoring
+  labels:
+    release: prometheus
 spec:
   staticConfigs:
     - targets:
         - 10.20.10.20:4000
   metricsPath: /metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
