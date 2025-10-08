@@ -23,44 +23,31 @@ spec:
       - kind: Secret
         name: cluster-secrets
   patches:
-    - # Add Kustomization defaults
+    - # Add HelmRelease defaults to all HelmReleases
       patch: |-
-        apiVersion: kustomize.toolkit.fluxcd.io/v1
-        kind: Kustomization
+        apiVersion: helm.toolkit.fluxcd.io/v2
+        kind: HelmRelease
         metadata:
           name: not-used
         spec:
-          decryption:
-            provider: sops
-          deletionPolicy: WaitForTermination
-          patches:
-            - patch: |-
-                apiVersion: helm.toolkit.fluxcd.io/v2
-                kind: HelmRelease
-                metadata:
-                  name: not-used
-                spec:
-                  install:
-                    crds: CreateReplace
-                    strategy:
-                      name: RetryOnFailure
-                  rollback:
-                    cleanupOnFail: true
-                    recreate: true
-                  upgrade:
-                    cleanupOnFail: true
-                    crds: CreateReplace
-                    strategy:
-                      name: RemediateOnFailure
-                    remediation:
-                      remediateLastFailure: true
-                      retries: 2
-              target:
-                group: helm.toolkit.fluxcd.io
-                kind: HelmRelease
+          install:
+            crds: CreateReplace
+            strategy:
+              name: RetryOnFailure
+          rollback:
+            cleanupOnFail: true
+            recreate: true
+          upgrade:
+            cleanupOnFail: true
+            crds: CreateReplace
+            strategy:
+              name: RemediateOnFailure
+            remediation:
+              remediateLastFailure: true
+              retries: 2
       target:
-        group: kustomize.toolkit.fluxcd.io
-        kind: Kustomization
+        group: helm.toolkit.fluxcd.io
+        kind: HelmRelease
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
