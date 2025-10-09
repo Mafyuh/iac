@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - helmrelease.yaml
+  - secretstore.yaml
+  - bws-access-token.sops.yaml
+  - flux-ks.yaml

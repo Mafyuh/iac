@@ -6,3 +6,6 @@ resources:
   - metrics-server/
   - flux-operator/
   - flux-instance/
+  - tofu-controller/
+  - external-secrets/
+  - gateway-api/

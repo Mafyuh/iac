@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
   - certificates/local.yaml
   - certificates/public.yaml
+  - certificates/selfsigned.yaml
+  - self-signed/bws.yaml
   - helmrelease.yaml
   - helmrepo.yaml
   - issuers/letsencrypt.yaml

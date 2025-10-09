@@ -15,3 +15,4 @@ resources:
 - metrics-server.yaml
 - gatus-chart.yaml
 - controlplaneio.yaml
+- external-secrets.yaml

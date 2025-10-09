@@ -1,0 +1,43 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: bitwarden-bootstrap-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: bitwarden-bootstrap-certificate
+  namespace: cert-manager
+spec:
+  # this is discouraged but required by ios
+  commonName: cert-manager-bitwarden-tls
+  isCA: true
+  secretName: bitwarden-tls-certs
+  subject:
+    organizations:
+      - external-secrets.io
+  dnsNames:
+    - external-secrets-bitwarden-sdk-server.security.svc.cluster.local
+    - bitwarden-sdk-server.security.svc.cluster.local
+    - localhost
+  ipAddresses:
+    - 127.0.0.1
+    - ::1
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS8
+    size: 2048
+  issuerRef:
+    name: bitwarden-bootstrap-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: bitwarden-certificate-issuer
+spec:
+  ca:
+    secretName: bitwarden-tls-certs
