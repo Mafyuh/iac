@@ -12,6 +12,8 @@ spec:
     - targets:
         - 10.69.69.2:9798
   metricsPath: /metrics
+  scrapeInterval: 1h
+  scrapeTimeout: 1m
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
 apiVersion: monitoring.coreos.com/v1alpha1
