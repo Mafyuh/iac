@@ -2,13 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>mafyuh/renovate",
+    "github>mafyuh/iac//.renovate/autoMerge.json5",
     "github>mafyuh/iac//.renovate/labels.json5",
     "github>mafyuh/iac//.renovate/semantic.json5",
     "github>mafyuh/iac//.renovate/versioning.json5",
-    "github>mafyuh/iac//.renovate/changelogs.json5"
-  ],
-  "ignorePaths": [
-    "kubernetes/cluster/production/flux-system/gotk-components.yaml"
+    "github>mafyuh/iac//.renovate/changelogs.json5",
+    "github>mafyuh/iac//.renovate/groups.json5"
   ],
   "flux": {
     "managerFilePatterns": [
