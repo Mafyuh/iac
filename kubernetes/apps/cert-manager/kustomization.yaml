@@ -8,4 +8,4 @@ resources:
   - helmrelease.yaml
   - helmrepo.yaml
   - issuers/letsencrypt.yaml
-  - issuers/secret-cf-token.yaml
+  - issuers/external-secret.yaml
