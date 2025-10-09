@@ -8,4 +8,3 @@ resources:
   - flux-instance/
   - tofu-controller/
   - external-secrets/
-  - gateway-api/
