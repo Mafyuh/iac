@@ -15,13 +15,14 @@ services:
       - mysql_data:/var/lib/mysql
 
   postgres:
-    image: postgres:17.6
+    image: postgres:18
     container_name: postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: mafyuh
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data
     ports:
       - 5432:5432
     volumes:
