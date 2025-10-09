@@ -41,7 +41,7 @@ spec:
           termix:
             image:
               repository: ghcr.io/lukegus/termix
-              tag: release-1.7.2
+              tag: release-1.7.3
               pullPolicy: IfNotPresent
             probes:
               liveness:
