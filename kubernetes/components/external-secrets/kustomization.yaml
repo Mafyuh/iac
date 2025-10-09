@@ -4,4 +4,3 @@ resources:
   - helmrelease.yaml
   - secretstore.yaml
   - bws-access-token.sops.yaml
-  - flux-ks.yaml
