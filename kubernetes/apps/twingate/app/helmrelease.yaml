@@ -1,9 +1,9 @@
 ---
-# yaml-language-server: $schema=https://github.com/Twingate/helm-charts/raw/refs/heads/master/stable/connector/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/refs/heads/main/helmrelease-helm-v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app twingate
+  name: twingate
   namespace: networking
 spec:
   interval: 15m
@@ -16,19 +16,6 @@ spec:
         kind: HelmRepository
         name: twingate-chart
         namespace: flux-system
-  values:
-
-    resources:
-      requests:
-        cpu: 50m
-        memory: 200Mi
-    
-    securityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop: ["ALL"]
-    
-    connector:
-      network: "mafyuh"
-      accessToken: ${TWINGATE_ACCESS_TOKEN}
-      refreshToken: ${TWINGATE_REFRESH_TOKEN}
+  valuesFrom:
+    - kind: ConfigMap
+      name: twingate-values

@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://github.com/Twingate/helm-charts/raw/refs/heads/master/stable/connector/values.schema.json
+resources:
+  requests:
+    cpu: 50m
+    memory: 200Mi
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+
+connector:
+  network: "mafyuh"
+  accessToken: ${TWINGATE_ACCESS_TOKEN}
+  refreshToken: ${TWINGATE_REFRESH_TOKEN}

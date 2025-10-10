@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0-standalone-strict/configmap-v1.json
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -16,7 +17,7 @@ sops:
             TEE4S29RY1Vmb1F5UEZDNDk2am5KVVUKSEVH409JMV2B33pLH/cOgKlq4n5zNp0J
             +0FYM+gFU3tfCBsQNbr1kNlngwm3n6unRW+gtZTRZ4NKpS38DYfLLQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-07-13T17:00:31Z"
-    mac: ENC[AES256_GCM,data:1u+hBexVtEX7cPZ2ea/rqVs6GZNp6dW6muZV+UCtSvkxTwlIAUkt7uMyhhTfH3uf/nQ+ZZom9LE+kQWxsdahBJeIsQl81AdTV/2Mnn+2ge1bj95n8vYCQCM8A+nqKdohNRso6kPd1SnnRUqUuWqg0cyBw+k+tf4we0jAZ4I/04s=,iv:uz6I2nHLELiMQsEpgotXorR6YVo4GeifswcujOoVgQs=,tag:txjMiUDoDvCz6NWsQ6WFPA==,type:str]
+    lastmodified: "2025-10-10T07:05:49Z"
+    mac: ENC[AES256_GCM,data:29hAKYygQvNn+zFho2Tg0oHEgAqXmggXPTLvPg4nyLkfxd1FairK0sNVGghOG7JGg4s9nBH1hm8xnRw4g8E97dJ6+DpxNrb1Xmxh/d/JoDDEkp90/9CcVE0wDACF6st6Y10KjMK35eBJu1JKrvgloiZJOnCAesHgi4VErsQzGC8=,iv:GPmNl5TpCEPXfGPWj4Wf72RmUfrr6d7vJY1TM5N+gsc=,tag:2zXCz+GjGLvJyxGtqj+Mew==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.10.2
