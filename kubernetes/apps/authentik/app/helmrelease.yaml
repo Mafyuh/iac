@@ -21,30 +21,15 @@ spec:
         secret.reloader.stakater.com/reload: *app
       env:
         - name: AUTHENTIK_POSTGRESQL__HOST
-          valueFrom:
-            secretKeyRef:
-              name: cluster-secrets
-              key: AUTHENTIK_POSTGRESQL_HOST
+          value: "${AUTHENTIK_POSTGRESQL_HOST}"
         - name: AUTHENTIK_POSTGRESQL__NAME
-          valueFrom:
-            secretKeyRef:
-              name: cluster-secrets
-              key: AUTHENTIK_POSTGRESQL_NAME
+          value: "${AUTHENTIK_POSTGRESQL_NAME}"
         - name: AUTHENTIK_POSTGRESQL__USER
-          valueFrom:
-            secretKeyRef:
-              name: cluster-secrets
-              key: AUTHENTIK_POSTGRESQL_USER
+          value: "${AUTHENTIK_POSTGRESQL_USER}"
         - name: AUTHENTIK_POSTGRESQL__PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cluster-secrets
-              key: AUTHENTIK_POSTGRESQL_PASSWORD
+          value: "${AUTHENTIK_POSTGRESQL_PASSWORD}"
         - name: AUTHENTIK_POSTGRESQL__PORT
-          valueFrom:
-            secretKeyRef:
-              name: cluster-secrets
-              key: AUTHENTIK_POSTGRESQL_PORT
+          value: "${AUTHENTIK_POSTGRESQL_PORT}"
     server:
       name: server
       env:
@@ -60,7 +45,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - "auth.${PUBLIC_DOMAIN2}"
+          - "${AUTHENTIK_DOMAIN}"
         paths: ["/"]
         pathType: Prefix
 
@@ -106,7 +91,7 @@ spec:
         host: smtp.protonmail.ch
         port: 587
         username: noreply@mafyuh.io
-        password: ${AUTH_SMTP_PASS}
+        password: ${AUTHENTIK_SMTP_PASSWORD}
         use_ssl: false
         use_tls: true
         timeout: 30
@@ -114,7 +99,7 @@ spec:
         host: "${AUTHENTIK_POSTGRESQL_HOST}"
       embeddedOutpost:
         enabled: true
-      secret_key: ${AUTH_SECRET_KEY}
+      secret_key: ${AUTHENTIK_SECRET_KEY}
     postgresql:
       enabled: false
     redis:

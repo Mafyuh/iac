@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - alloy/
   - arr/
-  - authentik/
+  - authentik/ks.yaml
   - cert-manager/
   - cilium/
   - gatus/
