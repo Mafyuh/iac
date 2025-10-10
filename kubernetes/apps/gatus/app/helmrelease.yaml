@@ -19,9 +19,6 @@ spec:
       strategy: RollingUpdate
       annotateConfigChecksum: true
     
-    annotations:
-      reloader.stakater.com/auto: "true"
-    
     service:
       type: ClusterIP
       port: 80

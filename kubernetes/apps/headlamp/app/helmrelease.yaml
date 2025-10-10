@@ -16,8 +16,6 @@ spec:
         name: headlamp-chart
         namespace: flux-system
   values:
-    podAnnotations:
-      reloader.stakater.com/auto: "true"
     replicaCount: 1
     config:
       watchPlugins: true

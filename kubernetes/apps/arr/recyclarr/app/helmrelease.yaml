@@ -25,8 +25,7 @@ spec:
       recyclarr:
         enabled: true
         type: cronjob
-        annotations:
-          reloader.stakater.com/auto: "true"
+
         cronjob:
           concurrencyPolicy: Forbid
           schedule: "0 2 * * 1"
