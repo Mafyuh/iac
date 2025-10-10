@@ -50,6 +50,11 @@ spec:
             secretKeyRef:
               name: authentik-secrets
               key: AUTHENTIK_SECRET_KEY
+        - name: AUTHENTIK_REDIS__HOST
+          valueFrom:
+            secretKeyRef:
+              name: authentik-secrets
+              key: AUTHENTIK_POSTGRESQL_HOST
     server:
       name: server
       env:
