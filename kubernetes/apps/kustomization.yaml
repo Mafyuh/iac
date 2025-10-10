@@ -19,6 +19,5 @@ resources:
   - nginx/ks.yaml
   - prometheus/ks.yaml
   - reflector/ks.yaml
-  - reloader/ks.yaml
   - twingate/ks.yaml
   - unpoller/ks.yaml
