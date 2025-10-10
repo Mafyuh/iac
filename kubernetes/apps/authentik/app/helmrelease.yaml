@@ -45,6 +45,11 @@ spec:
             secretKeyRef:
               name: authentik-secrets
               key: AUTHENTIK_POSTGRESQL_PORT
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik-secrets
+              key: AUTHENTIK_SECRET_KEY
     server:
       name: server
       env:
@@ -114,7 +119,7 @@ spec:
         host: "${AUTHENTIK_POSTGRESQL_HOST}"
       embeddedOutpost:
         enabled: true
-      secret_key: "${AUTHENTIK_SECRET_KEY}"
+      secret_key: ${AUTHENTIK_SECRET_KEY}
     postgresql:
       enabled: false
     redis:
