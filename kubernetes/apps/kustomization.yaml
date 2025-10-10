@@ -12,10 +12,10 @@ resources:
   - kromgo/
   - loki/
   - longhorn/
-  - netbox/
+  - netbox/ks.yaml
   - nginx/
   - prometheus/
   - reflector/
   - reloader/
   - termix/
-  - twingate/
+  - twingate/ks.yaml
