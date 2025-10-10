@@ -54,7 +54,7 @@ To automate infrastructure updates, I use **Github Actions**, which trigger work
 
 ### 🔒 **Security & Networking**
 For Secret management I use [Bitwarden Secrets](https://bitwarden.com/products/secrets-manager/) and their various [integrations](https://bitwarden.com/help/ansible-integration/) into the tools used.
-> Kubernetes is using SOPS with Age encryption until migration over to Bitwarden Secrets.
+> Kubernetes is using External Secrets implementation of BWS, not official. BWS Access Key is SOPS encrypted.
 
 **[GitGuardian](https://www.gitguardian.com/)** makes sure to alert me if I do accidentally push a secret
 
