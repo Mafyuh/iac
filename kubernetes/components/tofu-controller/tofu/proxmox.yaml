@@ -37,14 +37,14 @@ spec:
     name: proxmox-outputs
   varsFrom:
     - kind: Secret
-      name: cluster-secrets
+      name: terraform-s3-backend
       varsKeys:
         - BWS_ACCESS_TOKEN
   vars:
     - name: access_token
       valueFrom:
         secretKeyRef:
-          name: cluster-secrets
+          name: terraform-s3-backend
           key: BWS_ACCESS_TOKEN
   runnerPodTemplate:
     spec:
@@ -52,5 +52,5 @@ spec:
         - name: BWS_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
-              name: cluster-secrets
+              name: terraform-s3-backend
               key: BWS_ACCESS_TOKEN

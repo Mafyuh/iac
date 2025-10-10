@@ -37,7 +37,7 @@ spec:
     name: unifi-outputs
   varsFrom:
     - kind: Secret
-      name: cluster-secrets
+      name: terraform-s3-backend
       varsKeys:
         - BWS_ACCESS_TOKEN
   runnerPodTemplate:
@@ -46,5 +46,5 @@ spec:
         - name: BWS_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
-              name: cluster-secrets
+              name: terraform-s3-backend
               key: BWS_ACCESS_TOKEN

@@ -6,3 +6,4 @@ resources:
   - cluster.yaml
   - namespaces/
   - charts/
+  - secrets/

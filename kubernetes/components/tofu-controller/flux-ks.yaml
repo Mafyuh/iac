@@ -7,7 +7,7 @@ metadata:
   namespace: &ns flux-system
 spec:
   targetNamespace: *ns
-  path: ./kubernetes/components/tofu-controller/
+  path: ./kubernetes/components/tofu-controller/app
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
