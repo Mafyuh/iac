@@ -23,8 +23,7 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config
-      - kind: Secret
-        name: cluster-secrets
+
   wait: true
   interval: 30m
   retryInterval: 1m
