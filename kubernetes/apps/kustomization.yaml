@@ -4,6 +4,7 @@ resources:
   - alloy/
   - arr/
   - authentik/ks.yaml
+  - blackbox/ks.yaml
   - cert-manager/
   - cilium/
   - gatus/
@@ -14,8 +15,7 @@ resources:
   - longhorn/
   - netbox/ks.yaml
   - nginx/
-  - prometheus/
-  - reflector/
-  - reloader/
-  - termix/
+  - prometheus/ks.yaml
+  - reflector/ks.yaml
+  - reloader/ks.yaml
   - twingate/ks.yaml
