@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
 - bjw-s-chart.yaml
 - authentik-chart.yaml
-- reloader-chart.yaml
 - prometheus-community.yaml
 - grafana-charts.yaml
 - k8s-at-home.yaml

@@ -15,10 +15,6 @@ spec:
         name: prometheus-community
         namespace: flux-system
   values:
-    global:
-      podAnnotations:
-        secret.reloader.stakater.com/reload: prometheus
-    
     defaultRules:
       create: true
       rules:
