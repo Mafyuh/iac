@@ -19,6 +19,11 @@ spec:
     name: iac
     namespace: flux-system
   wait: false
+  healthChecks:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      name: gatus-secrets
+      namespace: monitoring
   postBuild:
     substituteFrom:
       - kind: Secret

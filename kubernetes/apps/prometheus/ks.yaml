@@ -18,6 +18,10 @@ spec:
     kind: GitRepository
     name: iac
     namespace: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   wait: false
   postBuild:
     substituteFrom:

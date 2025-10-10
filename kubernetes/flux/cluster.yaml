@@ -16,12 +16,6 @@ spec:
     secretRef:
       name: sops-age
   prune: false
-  postBuild:
-    substituteFrom:
-      - kind: ConfigMap
-        name: cluster-config
-      - kind: Secret
-        name: cluster-secrets
   patches:
     - # Add Kustomization defaults
       patch: |-
