@@ -109,5 +109,5 @@ spec:
           url: "https://minio.mafyuh.xyz/"
       alerting:
         gotify:
-          server-url: "https://go.${PUBLIC_DOMAIN2}"
+          server-url: "${GOTIFY_URL}"
           token: "${GOTIFY_GATUS_TOKEN}"
