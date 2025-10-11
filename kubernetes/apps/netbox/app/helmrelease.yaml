@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: netbox
-      version: 7.1.2
+      version: 7.1.4
       interval: 60m
       sourceRef:
         kind: HelmRepository
