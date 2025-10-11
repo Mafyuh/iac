@@ -10,4 +10,3 @@ resources:
   - httproute.yaml
   - receiver.yaml
   - external-secret.yaml
-  - flux-ks.yaml
