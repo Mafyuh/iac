@@ -13,7 +13,7 @@ Physical cluster on 3 Optiplex 7040 Micro's with Talos OS.
 * **[cilium](https://github.com/cilium/cilium)** - eBPF-based networking, security, and observability
 * **[longhorn](https://longhorn.io/)** - Storage system for persistent volumes
 * **[prometheus](https://prometheus.io/)** - Monitoring and alerting stack with Grafana Alloy
-* **[sops](https://toolkit.fluxcd.io/guides/mozilla-sops/)** - Secret encryption
+* **[external-secrets](https://external-secrets.io/latest/)** - Secrets pulled from Bitwarden Secrets.
 * **[flux](https://fluxcd.io/)** - GitOps continuous delivery
 
 
