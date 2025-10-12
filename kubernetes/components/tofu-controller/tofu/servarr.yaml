@@ -46,3 +46,11 @@ spec:
         secretKeyRef:
           name: terraform-s3-backend
           key: BWS_ACCESS_TOKEN
+  runnerPodTemplate:
+    spec:
+      env:
+        - name: BWS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: terraform-s3-backend
+              key: BWS_ACCESS_TOKEN
