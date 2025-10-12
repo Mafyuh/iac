@@ -10,7 +10,7 @@ resource "authentik_provider_ldap" "jellyfin" {
 resource "authentik_application" "jellyfin" {
   name              = "Jellyfin"
   slug              = "jellyfin"
-  meta_icon         = "/media/public/application-icons/icon-transparent.png"
+  meta_icon         = "/media/public/application-icons/icon-transparentjf.png"
   meta_description   = "My Streaming Service - To Request Stuff https://request.${var.domains["io"]}"
   meta_launch_url   = "https://jelly.${var.domains["io"]}/"
   protocol_provider = authentik_provider_ldap.jellyfin.id

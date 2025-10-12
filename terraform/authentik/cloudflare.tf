@@ -28,7 +28,7 @@ resource "authentik_application" "cloudflare" {
   slug              = "cloudflare"
   protocol_provider = authentik_provider_oauth2.cloudflare.id
   meta_description   = "Cloudflare Access (Logs into Open WebUI, authentik)"
-  meta_icon        = "/media/public/application-icons/cloudflare1.svg"
+  meta_icon        = "/media/public/application-icons/cloudflare.svg"
 }
 
 resource "authentik_policy_binding" "cloudflare-group-access" {

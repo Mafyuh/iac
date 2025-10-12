@@ -1,14 +1,7 @@
 resource "authentik_outpost" "embedded_outpost" {
   name = "authentik Embedded Outpost"
   protocol_providers = [
-    authentik_provider_proxy.bazarr.id,
-    authentik_provider_proxy.lidarr.id,
     authentik_provider_proxy.grafana.id,
-    authentik_provider_proxy.sonarr.id,
-    authentik_provider_proxy.prowlarr.id,
-    authentik_provider_proxy.sabnzbd.id,
-    authentik_provider_proxy.radarr.id,
-    authentik_provider_proxy.k3s-dashboard.id,
     56,
     68,
   ]

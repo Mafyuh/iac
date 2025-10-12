@@ -24,6 +24,13 @@ terraform {
   }
 }
 
+provider "bitwarden" {
+  access_token = var.access_token
+  experimental {
+    embedded_client = true
+  }
+}
+
 provider "authentik" {
   url   = "https://auth.${var.domains["io"]}"
   token = data.bitwarden_secret.authentik_api_key.value
@@ -32,3 +39,4 @@ provider "authentik" {
 data "bitwarden_secret" "authentik_api_key" {
   id = "e5160d74-f16c-48aa-b554-b2be015e30a5"
 }
+

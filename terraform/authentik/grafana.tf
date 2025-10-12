@@ -17,7 +17,7 @@ resource "authentik_provider_proxy" "grafana" {
 resource "authentik_application" "grafana" {
   name              = "Grafana"
   slug              = "grafana"
-  meta_icon         = "/media/public/application-icons/Grafana_icon.svg_5sO5qLM.png"
+  meta_icon         = "/media/public/application-icons/Grafana_icon.png"
   meta_launch_url   = "https://grafana.${var.domains["dev"]}"
   protocol_provider = authentik_provider_proxy.grafana.id
 }

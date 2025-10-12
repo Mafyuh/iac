@@ -7,3 +7,9 @@ variable "domains" {
     io  = "mafyuh.io"
   }
 }
+
+variable "access_token" {
+  description = "Bitwarden access token"
+  type        = string
+  sensitive   = true
+}

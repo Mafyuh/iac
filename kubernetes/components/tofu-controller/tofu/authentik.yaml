@@ -1,7 +1,7 @@
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: unifi-tofu
+  name: authentik-tofu
   namespace: flux-system
 spec:
   interval: 1h
@@ -11,7 +11,7 @@ spec:
     customConfiguration: |
       backend "s3" {
         bucket                        = "tofu"
-        key                           = "unifi.tfstate"
+        key                           = "authentik.tfstate"
         region                        = "us-east-1"
         endpoint                      = "https://s3.mafyuh.xyz"
         skip_region_validation        = true
@@ -28,13 +28,13 @@ spec:
       - access_key
       - secret_key
       optional: false
-  path: ./terraform/unifi
+  path: ./terraform/authentik
   sourceRef:
     kind: GitRepository
     name: iac
     namespace: flux-system
   writeOutputsToSecret:
-    name: unifi-outputs
+    name: authentik-outputs
   vars:
     - name: access_token
       valueFrom:

@@ -33,7 +33,7 @@ resource "authentik_application" "pgadmin" {
   name              = "pgAdmin"
   slug              = "pgadmin"
   protocol_provider = authentik_provider_oauth2.pgadmin.id
-  meta_icon        = "/media/public/application-icons/pgadmin.png"
+  meta_icon        = "/media/public/application-icons/pgadmin1.png"
 }
 
 resource "authentik_policy_binding" "pgadmin-access" {
