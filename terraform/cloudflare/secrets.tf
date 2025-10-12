@@ -28,3 +28,7 @@ data "bitwarden_secret" "cf_account_id" {
 data "bitwarden_secret" "pbx_ip" {
   id = "34c5c2f3-541f-41de-bb25-b309001f9253"
 }
+
+data "bitwarden_secret" "cloudflare_api_key" {
+  id = "87e2b23c-f62d-4b6d-8a3a-b2e1018983ac"
+}

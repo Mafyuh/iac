@@ -25,3 +25,9 @@ data "bitwarden_secret" "arm_subnet_id" {
 data "bitwarden_secret" "homelab_ip" {
   id = "bd5a4e06-fbfa-4550-975c-b2a7005600aa"
 }
+
+variable "access_token" {
+  description = "Access Token for BWS"
+  type        = string
+  sensitive   = true
+}
