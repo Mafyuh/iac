@@ -36,6 +36,7 @@ terraform {
 
 provider "bitwarden" {
   access_token = var.access_token
+  email        = "admin@mafyuh.io"
   experimental {
     embedded_client = true
   }
