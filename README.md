@@ -72,7 +72,19 @@ I use a combination of **Grafana, Loki, Alloy, and Prometheus** with various exp
 - **Prometheus** – Metrics collection and alerting  
 - **Loki** – Centralized logging for containers and VMs  
 - **Grafana** – Dashboarding and visualization  
-- **Exporters** – Alloy, Blackbox Exporter, Speedtest Exporter, etc.  
+- **Exporters** – Alloy, Blackbox Exporter, Speedtest Exporter, etc.
+
+## ☁️ **Cloud Dependencies**
+Although I try to self-host everything I can, my infra still relies on the cloud for certain services.
+
+| Service                                     | Use                                                               | Cost           |
+|---------------------------------------------|-------------------------------------------------------------------|----------------|
+| [Proton](https://proton.me/)         | IMAP, SMTP, VPN (Pass once there is Autofill Hotkey)    | ~$120/yr$       |
+| [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)         | Takes backups of Proxmox VM's, Kubernetes PV's (will migrate to Proton Drive once it is ready)   | Free (e5 dev)       |
+| [Cloudflare](https://www.cloudflare.com/)   | Domain, DNS, WAF           | Free       |
+| [GitHub](https://github.com/)               | Hosting this repo and continuous integration/deployments    | Free           |
+| [Oracle Cloud](https://www.oracle.com/cloud/) | ARM Cloud VM, services such as Uptime Kuma, Vaultwarden | ~$5/month$           |
+|                                             |                                                                  | Total: ~$15/mo |
 
 ## 🧑‍💻 **Getting Started**
 This repo is not structured like a project you can easily replicate. Although if you are new to any of the tools used I encourage you to read through the directories that make up each tool to see how I am using them.
