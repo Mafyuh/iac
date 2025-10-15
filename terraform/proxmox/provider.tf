@@ -15,7 +15,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.85.0"
+      version = "0.85.1"
     }
     bitwarden = {
       source  = "maxlaverse/bitwarden"
