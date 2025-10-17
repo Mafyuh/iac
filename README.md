@@ -80,6 +80,7 @@ Although I try to self-host everything I can, my infra still relies on the cloud
 | Service                                     | Use                                                               | Cost           |
 |---------------------------------------------|-------------------------------------------------------------------|----------------|
 | [Proton](https://proton.me/)         | IMAP, SMTP, VPN (Pass once there is Autofill Hotkey)    | ~$120/yr     |
+| [Bitwarden](https://bitwarden.com/)         | Secrets for all tools     | Free     |
 | [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)         | Takes backups of Proxmox VM's, Kubernetes PV's (will migrate to Proton Drive once there's proper Linux support)   | Free (e5 dev)       |
 | [Cloudflare](https://www.cloudflare.com/)   | Domain, DNS, WAF           | Free       |
 | [GitHub](https://github.com/)               | Hosting this repo and continuous integration/deployments    | Free           |
