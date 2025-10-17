@@ -18,7 +18,7 @@ resource "proxmox_virtual_environment_vm" "databases" {
     cpu {
         cores = 4
         type  = "host"
-        architecture = "x86_64"
+        #architecture = "x86_64"
     }
     
     # VM Memory Settings

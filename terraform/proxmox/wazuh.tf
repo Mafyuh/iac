@@ -7,7 +7,7 @@ resource "proxmox_virtual_environment_vm" "wazuh" {
     cpu {
         cores = "6"
         type  = "host"
-        architecture = "x86_64"
+        #architecture = "x86_64"
     }
 
     memory {

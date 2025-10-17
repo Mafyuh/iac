@@ -22,7 +22,7 @@ resource "proxmox_virtual_environment_vm" "TrueNAS" {
     type         = "qemu64"
     sockets      = 1
     units        = 1024
-    architecture = "x86_64"
+    #architecture = "x86_64"
   }
 
   # Memory Settings

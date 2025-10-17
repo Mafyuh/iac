@@ -19,7 +19,7 @@ resource "proxmox_virtual_environment_vm" "Runner" {
   cpu {
     cores        = 2
     type         = "host"
-    architecture = "x86_64"
+    #architecture = "x86_64"
     flags        = []
   }
   

@@ -27,7 +27,7 @@ resource "proxmox_virtual_environment_vm" "blockyHA" {
     cpu {
         cores = 2
         type  = "host"
-        architecture = "x86_64"
+        #architecture = "x86_64"
     }
     
     # VM Memory Settings

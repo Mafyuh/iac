@@ -40,6 +40,6 @@ vga {
 cpu {
         cores = 2
         type  = "host"
-        architecture = "x86_64"
+        #architecture = "x86_64"
     }
 }
