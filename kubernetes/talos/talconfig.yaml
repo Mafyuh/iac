@@ -3,7 +3,7 @@
 clusterName: optiplex-k8s
 endpoint: https://10.0.0.150:6443
 # renovate: depName=siderolabs/talos datasource=github-releases
-talosVersion: v1.11.2
+talosVersion: v1.11.3
 # renovate: depName=kubernetes/kubernetes datasource=github-releases
 kubernetesVersion: v1.34.1
 additionalApiServerCertSans: &sans
