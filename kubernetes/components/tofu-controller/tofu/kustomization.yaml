@@ -8,3 +8,4 @@ resources:
   - cloudflare.yaml
   - twingate.yaml
   - oracle.yaml
+  - minio.yaml
