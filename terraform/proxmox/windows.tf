@@ -20,7 +20,7 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
    cpu {
         cores = 2
         type  = "host"
-        #architecture = "x86_64"
+        architecture = "x86_64"
     }
 
     memory {

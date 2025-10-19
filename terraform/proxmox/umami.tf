@@ -8,7 +8,7 @@ resource "proxmox_virtual_environment_vm" "Plausible" {
     cpu {
         cores = "3"
         type  = "host"
-        #architecture = "x86_64"
+        architecture = "x86_64"
     }
 
     memory {
