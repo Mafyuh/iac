@@ -17,7 +17,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: iac
-    namespace: system-upgrade
+    namespace: flux-system
   wait: false
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
@@ -38,5 +38,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: iac
-    namespace: system-upgrade
+    namespace: flux-system
   wait: false
