@@ -21,5 +21,15 @@
       },
       minimumGroupSize: 3,
     },
+    {
+      description: "Talos Group",
+      groupName: "Talos",
+      matchPackageNames: ["/siderolabs/talos/", "/siderolabs/installer/"],
+      matchDatasources: ["docker", "github-releases", "github-tags"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
   ],
 }
