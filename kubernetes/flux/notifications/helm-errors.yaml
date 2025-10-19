@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/notification.toolkit.fluxcd.io/alert_v1beta3.json
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: flux-helm-errors
+  namespace: flux-system
+spec:
+  summary: Flux Helm Error
+  providerRef:
+    name: flux-errors
+  eventSeverity: error
+  eventSources:
+    - kind: HelmRepository
+      name: "*"
+    - kind: HelmRelease
+      name: "*"
