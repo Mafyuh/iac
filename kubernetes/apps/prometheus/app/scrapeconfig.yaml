@@ -179,3 +179,17 @@ spec:
     - targets:
         - 10.20.10.20:4000
   metricsPath: /metrics
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name:  minio
+  namespace: monitoring
+  labels:
+    release: prometheus
+spec:
+  staticConfigs:
+    - targets:
+        - 10.20.10.100:9003
+  metricsPath: /minio/v2/metrics/cluster
