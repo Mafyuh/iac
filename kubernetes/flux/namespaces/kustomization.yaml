@@ -10,3 +10,4 @@ resources:
 - arr.yaml
 - networking.yaml
 - tf-controller.yaml
+- system-upgrade.yaml

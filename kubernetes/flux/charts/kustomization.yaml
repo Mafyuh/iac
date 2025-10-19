@@ -17,3 +17,4 @@ resources:
 - gatus-chart.yaml
 - controlplaneio.yaml
 - external-secrets.yaml
+- tuppr.yaml

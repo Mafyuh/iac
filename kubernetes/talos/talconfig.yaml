@@ -89,7 +89,7 @@ controlPlane:
       machine:
         network:
           disableSearchDomain: true
-    # Enable host dns
+    # Enable feature
     - |-
       machine:
         features:
@@ -97,6 +97,12 @@ controlPlane:
             enabled: true
             resolveMemberNames: true
             forwardKubeDNSToHost: false
+          kubernetesTalosAPIAccess:
+            allowedKubernetesNamespaces:
+              - system-upgrade
+            allowedRoles:
+              - os:admin
+            enabled: true
     # Mount longhorn in kubelet
     - |-
       machine:
