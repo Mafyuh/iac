@@ -62,7 +62,7 @@ services:
     restart: unless-stopped
 
   uptime-kuma:
-    image: louislam/uptime-kuma:1.23.16
+    image: louislam/uptime-kuma:1.23.17
     container_name: uptime-kuma
     environment:
       - UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN=true
