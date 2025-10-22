@@ -4,6 +4,12 @@ on:
     paths:
       - 'docker/**'
       - 'kubernetes/**'
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'Container image to scan (e.g., nginx:latest)'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -29,6 +35,16 @@ jobs:
       - name: Extract changed images from PR diff
         id: images
         run: |
+          # Worflow dispatch triggered manually
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            image="${{ inputs.image }}"
+            echo "Manual scan requested for image: $image"
+            echo "image=$image" >> $GITHUB_OUTPUT
+            echo "should_scan=true" >> $GITHUB_OUTPUT
+            echo "is_manual=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
           echo "=== Analyzing PR diff for container images ==="
           
           # Get all changed files in docker/ and kubernetes/
@@ -62,6 +78,7 @@ jobs:
 
           echo "Found image: $image"
           echo "image=$image" >> $GITHUB_OUTPUT
+          echo "is_manual=false" >> $GITHUB_OUTPUT
           
           # Set a flag to indicate if we should run the scan
           if [ -n "$image" ] && [ "$image" != "" ]; then
@@ -80,6 +97,7 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
+          scanners: 'vuln'
 
       - name: Upload Trivy scan results to GitHub Security tab
         if: steps.images.outputs.should_scan == 'true'
@@ -88,7 +106,7 @@ jobs:
           sarif_file: 'trivy-results.sarif'
 
       - name: Comment PR with link to security scan
-        if: steps.images.outputs.should_scan == 'true'
+        if: steps.images.outputs.should_scan == 'true' && steps.images.outputs.is_manual != 'true'
         uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
