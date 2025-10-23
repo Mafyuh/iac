@@ -12,6 +12,7 @@ services:
       - /docker/appdata/jellyfin/cache:/nvmecache
       - /docker/appdata/jellyfin/metadata:/nvmemetadata
       - /docker/appdata/jellyfin/transcodes:/transcodes
+      - /home/mafyuh/jellyfin/index.html:/jellyfin/jellyfin-web/index.html
       - nas:/Media
     restart: 'unless-stopped'
     group_add:
