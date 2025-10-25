@@ -92,7 +92,6 @@ spec:
           revision: 1
           datasource: Prometheus
         cert-manager:
-          # renovate: depName="cert-manager-dashboard"
           gnetId: 20842
           revision: 3
           datasource: Prometheus
@@ -105,32 +104,26 @@ spec:
           datasource:
             - {name: DS_PROMETHEUS, value: Prometheus}
         kubernetes-coredns:
-          # renovate: depName="Kubernetes / System / CoreDNS"
           gnetId: 15762
           revision: 21
           datasource: Prometheus
         kubernetes-global:
-          # renovate: depName="Kubernetes / Views / Global"
           gnetId: 15757
           revision: 43
           datasource: Prometheus
         kubernetes-namespaces:
-          # renovate: depName="Kubernetes / Views / Namespaces"
           gnetId: 15758
           revision: 42
           datasource: Prometheus
         kubernetes-nodes:
-          # renovate: depName="Kubernetes / Views / Nodes"
           gnetId: 15759
           revision: 37
           datasource: Prometheus
         kubernetes-pods:
-          # renovate: depName="Kubernetes / Views / Pods"
           gnetId: 15760
           revision: 36
           datasource: Prometheus
         kubernetes-volumes:
-          # renovate: depName="K8s / Storage / Volumes / Cluster"
           gnetId: 11454
           revision: 14
           datasource: Prometheus
@@ -139,56 +132,46 @@ spec:
           datasource:
             - {name: DS_PROMETHEUS, value: Prometheus}
         minio:
-          # renovate: depName="Minio"
           gnetId: 13502
           revision: 26
           datasource:
             - {name: DS_PROMETHEUS, value: Prometheus}
         node-exporter-full:
-          # renovate: depName="Node Exporter Full"
           gnetId: 1860
           revision: 42
           datasource:
             - {name: DS_PROMETHEUS, value: Prometheus}
         prometheus:
-          # renovate: depName="Prometheus"
           gnetId: 19105
           revision: 7
           datasource: Prometheus
         proxmox-ve:
-          # renovate: depName="Proxmox VE"
           gnetId: 10347
           revision: 5
           datasource:
             - {name: DS_PROMETHEUS, value: Prometheus}
         smokeping:
-          # renovate: depName="smokeping"
           gnetId: 11335
           revision: 1
           datasource: Prometheus
         speedtest-exporter:
-          # renovate: depName="Speedtest-Exporter"
           gnetId: 13665
           revision: 4
           datasource:
             - {name: DS_PROMETHEUS, value: Prometheus}
         unifi-insights:
-          # renovate: depName="UniFi-Poller: Client Insights - Prometheus"
           gnetId: 11315
           revision: 9
           datasource: Prometheus
         unifi-network-sites:
-          # renovate: depName="UniFi-Poller: Network Sites - Prometheus"
           gnetId: 11311
           revision: 5
           datasource: Prometheus
         unifi-uap:
-          # renovate: depName="UniFi-Poller: UAP Insights - Prometheus"
           gnetId: 11314
           revision: 10
           datasource: Prometheus
         unifi-usw:
-          # renovate: depName="UniFi-Poller: USW Insights - Prometheus"
           gnetId: 11312
           revision: 9
           datasource: Prometheus
