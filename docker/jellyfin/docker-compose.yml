@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   jellyfin:
-    image: jellyfin/jellyfin:10.11.0
+    image: jellyfin/jellyfin:10.11.1
     container_name: jellyfin
     user: 1000:1000
     devices:
