@@ -43,7 +43,7 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
-        ssl: true
+        ssl: false
         prometheusEndpoint: http://prometheus-operated.monitoring.svc.cluster.local:9090
       mgr:
         modules:
@@ -159,3 +159,14 @@ spec:
       mountOptions: ["discard"]
     cephFileSystems: []
     cephObjectStores: []
+    
+    route:
+      dashboard:
+        host:
+          name: ceph.local.mafyuh.dev
+          path: /
+          PathType: PathPrefix
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
