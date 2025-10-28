@@ -43,7 +43,7 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
-        ssl: false
+        ssl: true
         prometheusEndpoint: http://prometheus-operated.monitoring.svc.cluster.local:9090
       mgr:
         modules:
