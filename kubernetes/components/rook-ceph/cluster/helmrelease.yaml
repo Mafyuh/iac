@@ -55,6 +55,9 @@ spec:
             enabled: true
           - name: rook
             enabled: true
+      mon:
+        count: 3
+        allowMultiplePerNode: false
       network:
         provider: host
         connections:
