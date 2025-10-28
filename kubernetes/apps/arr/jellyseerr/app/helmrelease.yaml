@@ -102,6 +102,6 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 2Gi
-        storageClass: longhorn
+        storageClass: ceph-block
         globalMounts:
           - path: /app/config

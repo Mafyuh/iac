@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rook-ceph-operator
+  namespace: rook-ceph
+spec:
+  interval: 1h
+  timeout: 15m
+  chart:
+    spec:
+      chart: rook-ceph
+      version: v1.17.6
+      sourceRef:
+        kind: HelmRepository
+        name: rook-ceph
+        namespace: flux-system
+  values:
+    csi:
+      cephFSKernelMountOptions: ms_mode=prefer-crc
+      enableLiveness: true
+      enableCephfsDriver: true
+      enableCephfsSnapshotter: true
+      serviceMonitor:
+        enabled: true
+      csiRBDProvisionerResource: |
+        - name : csi-provisioner
+          resource:
+            requests:
+              memory: 16Mi
+              cpu: 5m
+            limits:
+              memory: 32Mi
+              cpu: 100m
+        - name : csi-resizer
+          resource:
+            requests:
+              memory: 48Mi
+              cpu: 5m
+            limits:
+              memory: 96Mi
+              cpu: 100m
+        - name : csi-attacher
+          resource:
+            requests:
+              memory: 32Mi
+              cpu: 5m
+            limits:
+              memory: 64Mi
+              cpu: 100m
+        - name : csi-snapshotter
+          resource:
+            requests:
+              memory: 16Mi
+              cpu: 5m
+            limits:
+              memory: 32Mi
+              cpu: 100m
+        - name : csi-rbdplugin
+          resource:
+            requests:
+              memory: 48Mi
+              cpu: 15m
+            limits:
+              memory: 96Mi
+              cpu: 200m
+        - name : liveness-prometheus
+          resource:
+            requests:
+              memory: 24Mi
+              cpu: 5m
+            limits:
+              memory: 48Mi
+              cpu: 100m
+      csiRBDPluginResource: |
+        - name : driver-registrar
+          resource:
+            requests:
+              memory: 64Mi
+              cpu: 5m
+            limits:
+              memory: 128Mi
+              cpu: 100m
+        - name : csi-rbdplugin
+          resource:
+            requests:
+              memory: 64Mi
+              cpu: 10m
+            limits:
+              memory: 192Mi
+              cpu: 200m
+        - name : liveness-prometheus
+          resource:
+            requests:
+              memory: 48i
+              cpu: 5m
+            limits:
+              memory: 96Mi
+              cpu: 100m
+    cephCommandsTimeoutSeconds: "20"
+    monitoring:
+      enabled: true
+      createPrometheusRules: true

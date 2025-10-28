@@ -22,13 +22,6 @@ nodes:
         dhcp: true
         vip:
           ip: &vip 10.0.0.150
-    patches:
-      - |-
-        machine:
-          disks:
-          - device: /dev/sda
-            partitions:
-              - mountpoint: /var/lib/longhorn
   - hostname: talos-2.mafyuh.com
     ipAddress: 10.0.0.84
     controlPlane: true
@@ -39,13 +32,6 @@ nodes:
         dhcp: true
         vip:
           ip: *vip
-    patches:
-      - |-
-        machine:
-          disks:
-          - device: /dev/sda
-            partitions:
-              - mountpoint: /var/lib/longhorn
   - hostname: talos-3.mafyuh.com
     ipAddress: 10.0.0.177
     controlPlane: true
@@ -56,13 +42,6 @@ nodes:
         dhcp: true
         vip:
           ip: *vip
-    patches:
-      - |-
-        machine:
-          disks:
-          - device: /dev/sda
-            partitions:
-              - mountpoint: /var/lib/longhorn
 controlPlane:
   schematic:
     customization:
@@ -104,17 +83,6 @@ controlPlane:
             allowedRoles:
               - os:admin
             enabled: true
-    # Mount longhorn in kubelet
-    - |-
-      machine:
-        kubelet:
-          extraMounts:
-            - destination: /var/lib/longhorn
-              type: bind
-              source: /var/lib/longhorn
-              options: ["bind", "rshared", "rw"]
-        sysctls:
-          vm.nr_hugepages: "1024"
     # Configure cluster
     - |-
       cluster:

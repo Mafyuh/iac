@@ -5,10 +5,10 @@ resources:
 - monitoring.yaml
 - reflector.yaml
 - nginx.yaml
-- longhorn.yaml
 - certman.yaml
 - authentik.yaml
 - arr.yaml
 - networking.yaml
 - tf-controller.yaml
 - system-upgrade.yaml
+- rook.yaml

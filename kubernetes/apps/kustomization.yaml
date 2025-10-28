@@ -15,7 +15,6 @@ resources:
   - headlamp/ks.yaml
   - kromgo/ks.yaml
   - loki/ks.yaml
-  - longhorn/ks.yaml
   - netbox/ks.yaml
   - nginx/ks.yaml
   - prometheus/ks.yaml

@@ -19,7 +19,7 @@ spec:
       kubernetesModeWorkVolumeClaim:
         accessModes:
           - ReadWriteOnce
-        storageClassName: longhorn
+        storageClassName: ceph-block
         resources:
           requests:
             storage: 5Gi

@@ -9,3 +9,4 @@ resources:
   - tofu-controller/flux-ks.yaml
   - external-secrets/flux-ks.yaml
   - gateway-api/flux-ks.yaml
+  - rook-ceph/flux-ks.yaml
