@@ -93,7 +93,7 @@ spec:
         - name : liveness-prometheus
           resource:
             requests:
-              memory: 48i
+              memory: 48Mi
               cpu: 5m
             limits:
               memory: 96Mi
