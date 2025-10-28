@@ -5,3 +5,5 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - source.yaml
+  - httproute.yaml
+  - external-secret.yaml
