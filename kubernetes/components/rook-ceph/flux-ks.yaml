@@ -26,8 +26,6 @@ metadata:
   namespace: &ns rook-ceph
 spec:
   targetNamespace: *ns
-  dependsOn:
-    - name: tofu-controller
   path: ./kubernetes/components/rook-ceph/cluster
   prune: true
   sourceRef:
