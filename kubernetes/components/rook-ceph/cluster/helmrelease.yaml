@@ -165,7 +165,7 @@ spec:
         host:
           name: ceph.local.mafyuh.dev
           path: /
-          PathType: PathPrefix
+          pathType: PathPrefix
         parentRefs:
           - name: internal
             namespace: kube-system
