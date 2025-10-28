@@ -11,7 +11,7 @@ Physical cluster on 3 Optiplex 7040 Micro's with Talos OS.
 ## ☁️ Core Components
 * **[cert-manager](https://cert-manager.io/)** - Certificate management and Let's Encrypt integration
 * **[cilium](https://github.com/cilium/cilium)** - eBPF-based networking, security, and observability
-* **[longhorn](https://longhorn.io/)** - Storage system for persistent volumes
+* **[rook-ceph](https://github.com/rook/rook)** - Distributed storage system providing block, object, and file storage with Ceph
 * **[prometheus](https://prometheus.io/)** - Monitoring and alerting stack with Grafana Alloy
 * **[external-secrets](https://external-secrets.io/latest/)** - Secrets pulled from Bitwarden Secrets.
 * **[flux](https://fluxcd.io/)** - GitOps continuous delivery
