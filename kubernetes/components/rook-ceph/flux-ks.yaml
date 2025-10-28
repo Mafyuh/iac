@@ -8,9 +8,6 @@ metadata:
 spec:
   targetNamespace: *ns
   path: ./kubernetes/components/rook-ceph/app
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -32,9 +29,6 @@ spec:
   dependsOn:
     - name: tofu-controller
   path: ./kubernetes/components/rook-ceph/cluster
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: tofu-controller
   prune: true
   sourceRef:
     kind: GitRepository
