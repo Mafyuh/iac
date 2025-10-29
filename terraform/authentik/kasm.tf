@@ -20,7 +20,7 @@ resource "authentik_provider_saml" "kasm" {
 resource "authentik_application" "kasm" {
   name              = "Kasm"
   slug              = "kasms"
-  meta_icon         = "/media/public/application-icons/kasms.png"
+  meta_icon         = "https://github.com/Mafyuh/homelab-svg-assets/raw/refs/heads/main/assets/kasm.svg"
   meta_launch_url   = "https://kasm.${var.domains["io"]}"
   protocol_provider = authentik_provider_saml.kasm.id
 }

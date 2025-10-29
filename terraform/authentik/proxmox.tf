@@ -26,7 +26,7 @@ resource "authentik_application" "proxmox" {
   name              = "Proxmox"
   slug              = "prox"
   protocol_provider = authentik_provider_oauth2.proxmox.id
-  meta_icon        = "/media/public/application-icons/proxmox.webp"
+  meta_icon        = "https://github.com/Mafyuh/homelab-svg-assets/raw/refs/heads/main/assets/proxmox.svg"
 }
 
 resource "authentik_policy_binding" "proxmox-access" {
