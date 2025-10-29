@@ -6,5 +6,4 @@ resources:
   - external-secret.yaml
   - helmrelease.yaml
   - customcss.yaml
-  - media-pvc.yaml
   - ldap-lb.yaml
