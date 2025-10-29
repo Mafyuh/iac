@@ -27,17 +27,17 @@ variable "ldap_password" {
 
 # Resource Definiation for the VM Template
 source "proxmox-clone" "ubuntu-server-plucky" {
- 
+
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
     insecure_skip_tls_verify = true
-    
+
     # VM General Settings
     node = "prox"
 
-    
+
     clone_vm_id = "83266"
 
     vm_id = "19000"
@@ -61,9 +61,9 @@ source "proxmox-clone" "ubuntu-server-plucky" {
     # VM CPU Settings
     cores = "2"
     cpu_type = "x86-64-v2-AES"
-    
+
     # VM Memory Settings
-    memory = "2048" 
+    memory = "2048"
 
     # VM Network Settings
     network_adapters {
@@ -71,7 +71,7 @@ source "proxmox-clone" "ubuntu-server-plucky" {
         bridge = "vmbr0"
         firewall = "false"
     }
-    
+
 
     ssh_username = "packer"
     # WSL Filesystem
@@ -125,7 +125,7 @@ build {
         destination = "~/.zshrc"
     }
 
-    
+
     provisioner "shell" {
         inline = [
             "chmod +x /tmp/setup-ubuntu.sh",
@@ -136,17 +136,17 @@ build {
 
 ## Same thing as above just different node and vm_id
 source "proxmox-clone" "ubuntu-server-plucky2" {
- 
+
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
     insecure_skip_tls_verify = true
-    
+
     # VM General Settings
     node = "pve2"
 
-    
+
     clone_vm_id = "83266"
 
     vm_id = "19001"
@@ -170,9 +170,9 @@ source "proxmox-clone" "ubuntu-server-plucky2" {
     # VM CPU Settings
     cores = "2"
     cpu_type = "x86-64-v2-AES"
-    
+
     # VM Memory Settings
-    memory = "2048" 
+    memory = "2048"
 
     # VM Network Settings
     network_adapters {
@@ -180,7 +180,7 @@ source "proxmox-clone" "ubuntu-server-plucky2" {
         bridge = "vmbr0"
         firewall = "false"
     }
-    
+
 
     ssh_username = "packer"
     # WSL Filesystem
@@ -235,7 +235,7 @@ build {
         destination = "~/.zshrc"
     }
 
-    
+
     provisioner "shell" {
         inline = [
             "chmod +x /tmp/setup-ubuntu.sh",

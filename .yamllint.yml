@@ -1,0 +1,20 @@
+---
+yaml-files:
+  - "*.yaml"
+extends: default
+rules:
+  line-length:
+    max: 120
+    level: warning
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: disable
+  indentation:
+    indent-sequences: true
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  document-start: disable
+
+ignore: |
+  .github/

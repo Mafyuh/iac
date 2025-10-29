@@ -26,7 +26,6 @@ spec:
         enabled: true
         type: deployment
 
-
         replicas: 1
 
         pod:
@@ -106,7 +105,7 @@ spec:
         ports:
           metrics:
             port: *metricsPort
-    
+
     serviceMonitor:
       main:
         enabled: true

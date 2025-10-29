@@ -37,6 +37,6 @@
       semanticCommitType: "ci",
       semanticCommitScope: "github-action",
       commitMessageTopic: "action {{depName}}",
-    }
+    },
   ],
 }

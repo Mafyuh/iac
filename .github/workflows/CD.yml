@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'docker/**'
+      - "docker/**"
   workflow_dispatch:
     inputs:
       target_host:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Set Git safe directory
         run: git config --global --add safe.directory /__w/iac/iac
-      
+
       - name: Fetch all history for git diff
         run: git fetch --depth=2
 
@@ -44,7 +44,7 @@ jobs:
           folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
-          
+
       - name: Override Target Host and Folder (Manual Run)
         if: github.event_name == 'workflow_dispatch'
         run: |
@@ -90,13 +90,10 @@ jobs:
           echo "target_host=$hosts" >> $GITHUB_ENV
           echo "folder=$folders" >> $GITHUB_ENV
 
-        
-
       - name: Set up SSH agent
         run: |
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
-
 
       - name: Run Ansible Playbook
         env:
@@ -111,9 +108,8 @@ jobs:
             ./ansible/playbooks/deploy-docker.yml \
             --extra-vars "target_host=${target_host} folder=${folder}" \
             | tee ansible_output.txt
-          
+
           if grep -q 'unreachable=1\|failed=[1-9]' ansible_output.txt; then
             echo "Ansible reported failures or unreachable hosts."
             exit 1
           fi
-  

@@ -1,66 +1,66 @@
 resource "proxmox_virtual_environment_vm" "databases" {
 
-    # VM General Settings
-    node_name    = "prox"
-    name         = "db-server"
-    description  = "Database Server"
-    tags         = ["tofu", "ubuntu25", "ansible", "packer"]
+  # VM General Settings
+  node_name   = "prox"
+  name        = "db-server"
+  description = "Database Server"
+  tags        = ["tofu", "ubuntu25", "ansible", "packer"]
 
-    agent {
-      enabled = true
-    }
+  agent {
+    enabled = true
+  }
 
-    clone {
-        vm_id = 19000
-    }
-    
-    # VM CPU Settings
-    cpu {
-        cores = 4
-        type  = "host"
-        architecture = "x86_64"
-    }
-    
-    # VM Memory Settings
-    memory {
-        dedicated = 8192
-    }
+  clone {
+    vm_id = 19000
+  }
 
-    # VM Network Settings
-    network_device {
-        bridge  = "vmbr0"
-        vlan_id = 10
-    }
+  # VM CPU Settings
+  cpu {
+    cores        = 4
+    type         = "host"
+    architecture = "x86_64"
+  }
 
-    # VM Disk Settings
-    disk {
-        datastore_id = "Fast2Tb"
-        size         = 750
-        interface    = "scsi0"
-    }
+  # VM Memory Settings
+  memory {
+    dedicated = 8192
+  }
 
-    vga {
-        type = "serial0"
-    }
+  # VM Network Settings
+  network_device {
+    bridge  = "vmbr0"
+    vlan_id = 10
+  }
 
-    initialization {
-        ip_config {
-            ipv4 {
-                address = "10.20.10.100/24"
-                gateway = "10.20.10.1"
-            }
-        }
+  # VM Disk Settings
+  disk {
+    datastore_id = "Fast2Tb"
+    size         = 750
+    interface    = "scsi0"
+  }
 
-        user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
+  vga {
+    type = "serial0"
+  }
+
+  initialization {
+    ip_config {
+      ipv4 {
+        address = "10.20.10.100/24"
+        gateway = "10.20.10.1"
+      }
     }
 
-    lifecycle {
-        ignore_changes = [
-            initialization[0].user_account[0].keys,
-            initialization[0].user_account[0].password,
-            initialization[0].user_account[0].username,
-            initialization[0].user_data_file_id
-        ]
-    }
+    user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
+  }
+
+  lifecycle {
+    ignore_changes = [
+      initialization[0].user_account[0].keys,
+      initialization[0].user_account[0].password,
+      initialization[0].user_account[0].username,
+      initialization[0].user_data_file_id
+    ]
+  }
 
 }

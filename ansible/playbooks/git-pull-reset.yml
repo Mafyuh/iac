@@ -4,7 +4,7 @@
   tasks:
     - name: Ensure repo is in clean state
       ansible.builtin.git:
-        repo: 'https://github.com/mafyuh/iac.git'
+        repo: "https://github.com/mafyuh/iac.git"
         dest: "/home/{{ ansible_user }}/iac"
         version: main
         force: true

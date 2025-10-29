@@ -46,15 +46,15 @@ controlPlane:
   schematic:
     customization:
       extraKernelArgs:
-        - -init_on_alloc                     
-        - -selinux                           
-        - apparmor=0                         
-        - init_on_alloc=0                    
-        - init_on_free=0                     
-        - intel_iommu=on                      # PCI Passthrough
-        - iommu=pt                            # PCI Passthrough
-        - mitigations=off                    
-        - security=none                      
+        - -init_on_alloc
+        - -selinux
+        - apparmor=0
+        - init_on_alloc=0
+        - init_on_free=0
+        - intel_iommu=on # PCI Passthrough
+        - iommu=pt # PCI Passthrough
+        - mitigations=off
+        - security=none
         - talos.auditd.disabled=1
       systemExtensions:
         officialExtensions:

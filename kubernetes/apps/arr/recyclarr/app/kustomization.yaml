@@ -7,7 +7,7 @@ resources:
   - external-secret.yaml
 configMapGenerator:
   - name: recyclarr-config
-    namespace: arr  
+    namespace: arr
     files:
       - recyclarr.yml=./recyclarr.yml
 generatorOptions:

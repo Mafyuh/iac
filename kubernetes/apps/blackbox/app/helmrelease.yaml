@@ -30,7 +30,7 @@ spec:
             valid_status_codes: []
             method: GET
             preferred_ip_protocol: "ip4"
-            ip_protocol_fallback: false 
+            ip_protocol_fallback: false
         http_post_2xx:
           prober: http
           http:

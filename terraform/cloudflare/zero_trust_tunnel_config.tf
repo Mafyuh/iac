@@ -11,9 +11,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
   config = {
     ingress = [
       {
-        hostname       = "pg.${var.domains["dev"]}"
-        service        = "http://10.20.10.100:5050"
-        path           = ""
+        hostname = "pg.${var.domains["dev"]}"
+        service  = "http://10.20.10.100:5050"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -29,16 +29,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "couch.${var.domains["dev"]}"
-        service        = "http://10.20.10.100:5984"
-        path           = ""
+        hostname = "couch.${var.domains["dev"]}"
+        service  = "http://10.20.10.100:5984"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -54,16 +54,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "kasm.${var.domains["io"]}"
-        service        = "https://10.69.69.189"
-        path           = ""
+        hostname = "kasm.${var.domains["io"]}"
+        service  = "https://10.69.69.189"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -79,16 +79,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "stats.${var.domains["dev"]}"
-        service        = "http://10.69.69.199:3000"
-        path           = ""
+        hostname = "stats.${var.domains["dev"]}"
+        service  = "http://10.69.69.199:3000"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -104,16 +104,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "auth.${var.domains["io"]}"
-        service        = "https://10.0.0.213:443"
-        path           = ""
+        hostname = "auth.${var.domains["io"]}"
+        service  = "https://10.0.0.213:443"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -129,16 +129,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "prox.${var.domains["io"]}"
-        service        = "https://10.0.0.30:8006"
-        path           = ""
+        hostname = "prox.${var.domains["io"]}"
+        service  = "https://10.0.0.30:8006"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -154,16 +154,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "home.${var.domains["dev"]}"
-        service        = "https://10.0.0.210:443"
-        path           = ""
+        hostname = "home.${var.domains["dev"]}"
+        service  = "https://10.0.0.210:443"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -179,16 +179,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "chat.${var.domains["io"]}"
-        service        = "http://10.20.10.75:3000"
-        path           = ""
+        hostname = "chat.${var.domains["io"]}"
+        service  = "http://10.20.10.75:3000"
+        path     = ""
         origin_request = {
           no_tls_verify            = false
           origin_server_name       = ""
@@ -204,16 +204,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "*.${var.domains["io"]}"
-        service        = "http://10.0.0.215:80"
-        path           = ""
+        hostname = "*.${var.domains["io"]}"
+        service  = "http://10.0.0.215:80"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -229,16 +229,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },
       {
-        hostname       = "*.${var.domains["dev"]}"
-        service        = "http://10.0.0.215:80"
-        path           = ""
+        hostname = "*.${var.domains["dev"]}"
+        service  = "http://10.0.0.215:80"
+        path     = ""
         origin_request = {
           no_tls_verify            = true
           origin_server_name       = ""
@@ -254,9 +254,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
           ca_pool                  = ""
           no_happy_eyeballs        = false
           access = {
-            aud_tag = [""]
+            aud_tag   = [""]
             team_name = "mafyuh"
-            required = false
+            required  = false
           }
         }
       },

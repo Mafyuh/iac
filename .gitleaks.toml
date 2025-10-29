@@ -1,0 +1,22 @@
+title = "gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allowlist for false positives"
+paths = [
+  # External Secrets use 'key:' field for referencing secret keys, not actual secrets
+  '''kubernetes/apps/.*/external-secret\.yaml''',
+  '''kubernetes/components/.*/external-secret.*\.yaml''',
+  '''kubernetes/flux/.*/external-secret\.yaml''',
+  # Terraform files with placeholder/example values
+  '''terraform/authentik/oauth_sources\.tf''',
+]
+
+regexes = [
+  # UUID patterns used as key references in ExternalSecrets (e.g., Bitwarden Secret Manager IDs)
+  '''key:\s*"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"''',
+  # Placeholder consumer keys in terraform
+  '''consumer_key\s*=\s*"[0-9a-zA-Z_-]+"''',
+]

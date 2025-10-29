@@ -1,45 +1,45 @@
 ---
-    ## Stolen from https://github.com/chkpwd/iac/
-    name: "Label Sync"
-    on:
-      workflow_dispatch:
-      push:
-        branches: ["main"]
-        paths: [".github/labels.yml"]
-      schedule:
-        - cron: "0 0 * * *"
-      pull_request_target:
-        branches: ["main"]
+## Stolen from https://github.com/chkpwd/iac/
+name: "Label Sync"
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths: [".github/labels.yml"]
+  schedule:
+    - cron: "0 0 * * *"
+  pull_request_target:
+    branches: ["main"]
+permissions:
+  issues: write
+jobs:
+  label-sync:
+    name: Label Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          sparse-checkout: .github
+      - name: Sync Labels
+        uses: EndBug/label-sync@v2
+        with:
+          config-file: .github/labels.yml
+          delete-other-labels: true
+  labeler:
+    name: Labeler
     permissions:
-      issues: write
-    jobs:
-      label-sync:
-        name: Label Sync
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v5
-            with:
-              sparse-checkout: .github
-          - name: Sync Labels
-            uses: EndBug/label-sync@v2
-            with:
-              config-file: .github/labels.yml
-              delete-other-labels: true
-      labeler:
-        name: Labeler
-        permissions:
-          contents: read
-          pull-requests: write
-        runs-on: ubuntu-latest
-        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
-        steps:
-          - name: Checkout PR branch
-            uses: actions/checkout@v5
-            with:
-              ref: ${{ github.event.pull_request.head.ref }}
-              sparse-checkout: .github
-          - name: Labeler
-            uses: actions/labeler@v6
-            with:
-              configuration-path: .github/labeler.yml
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          sparse-checkout: .github
+      - name: Labeler
+        uses: actions/labeler@v6
+        with:
+          configuration-path: .github/labeler.yml

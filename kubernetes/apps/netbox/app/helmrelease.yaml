@@ -28,13 +28,13 @@ spec:
 
     ingress:
       enabled: false
-    
+
     persistence:
       enabled: false
-    
+
     postgresql:
       enabled: false
-    
+
     externalDatabase:
       host: ${MAIN_PG_DB_HOST}
       port: 5432
@@ -51,6 +51,6 @@ spec:
 
     housekeeping:
       enabled: false
-    
+
     worker:
       enabled: false

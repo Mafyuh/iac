@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 3h
-  path: "./kubernetes/apps" 
+  path: "./kubernetes/apps"
   sourceRef:
     kind: GitRepository
     name: iac
@@ -64,7 +64,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: "./kubernetes/components" 
+  path: "./kubernetes/components"
   sourceRef:
     kind: GitRepository
     name: iac
@@ -77,5 +77,3 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config
-
-

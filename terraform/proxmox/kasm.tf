@@ -1,28 +1,28 @@
 resource "proxmox_virtual_environment_vm" "Kasm2" {
   # VM General Settings
-  node_name    = "pve2"
-  vm_id        = 102
-  name         = "Kasm"
-  description  = "kasm"
-  tags         = ["tofu", "ubuntu-22", "iac-repo", "ansible"]
-  started      = true
-  machine      = "q35"
-  
+  node_name   = "pve2"
+  vm_id       = 102
+  name        = "Kasm"
+  description = "kasm"
+  tags        = ["tofu", "ubuntu-22", "iac-repo", "ansible"]
+  started     = true
+  machine     = "q35"
+
   agent {
-    enabled = true 
+    enabled = true
   }
 
   clone {
     vm_id = 9997
   }
-  
+
   # VM CPU Settings
   cpu {
-    cores = 6
-    type  = "host"
+    cores        = 6
+    type         = "host"
     architecture = "x86_64"
   }
-  
+
   # VM Memory Settings
   memory {
     dedicated = 8092
@@ -42,8 +42,8 @@ resource "proxmox_virtual_environment_vm" "Kasm2" {
   }
 
   vga {
-      memory = 16 
-      type   = "serial0"
+    memory = 16
+    type   = "serial0"
   }
 
   initialization {

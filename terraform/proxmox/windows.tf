@@ -8,8 +8,8 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
   machine   = "pc-q35-9.0"
 
   agent {
-      enabled = true
-    }
+    enabled = true
+  }
 
   disk {
     datastore_id = "Fast500Gb"
@@ -17,40 +17,40 @@ resource "proxmox_virtual_environment_vm" "Windows11" {
     size         = 50
   }
 
-   cpu {
-        cores = 2
-        type  = "host"
-        architecture = "x86_64"
-    }
+  cpu {
+    cores        = 2
+    type         = "host"
+    architecture = "x86_64"
+  }
 
-    memory {
-        dedicated = 8192
-        floating  = 2048
-    }
+  memory {
+    dedicated = 8192
+    floating  = 2048
+  }
 
-    efi_disk {
-        type = "4m"
-    }
+  efi_disk {
+    type = "4m"
+  }
 
-    network_device {
-        bridge  = "vmbr0"
-    }
+  network_device {
+    bridge = "vmbr0"
+  }
 
-    tpm_state {
-        datastore_id = "Fast500Gb"
-        version = "v2.0"
-    }
+  tpm_state {
+    datastore_id = "Fast500Gb"
+    version      = "v2.0"
+  }
 
-    operating_system {
-        type = "win11"
-    }
+  operating_system {
+    type = "win11"
+  }
 
-    audio_device {
-        enabled = true
-    }
+  audio_device {
+    enabled = true
+  }
 
-    vga {
-        memory = 16
-        type = "qxl"
-    }
+  vga {
+    memory = 16
+    type   = "qxl"
+  }
 }

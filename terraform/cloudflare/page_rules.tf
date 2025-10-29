@@ -1,6 +1,6 @@
 ## TODO: Constant errors trying to apply these
 # resource "cloudflare_page_rule" "request_forward" {
-#   zone_id  = 
+#   zone_id  =
 #   target   = "https://request.${var.domains["io"]}/*"
 #   priority = 3
 #   status   = "active"
@@ -17,7 +17,7 @@
 #   priority = 2
 #   status   = "active"
 #   target   = "https://auth.${var.domains["io"]}/api/v3/"
-#   zone_id  = 
+#   zone_id  =
 #   actions {
 #     browser_check = "off"
 #   }
@@ -27,7 +27,7 @@
 #   priority = 1
 #   status   = "active"
 #   target   = "https://auth.${var.domains["io"]}/application/o/*/jwks/"
-#   zone_id  = 
+#   zone_id  =
 #   actions  {
 #     browser_check = "off"
 #   }

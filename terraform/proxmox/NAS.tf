@@ -1,9 +1,9 @@
 resource "proxmox_virtual_environment_vm" "TrueNAS" {
 
-  node_name    = "prox"
-  vm_id        = 100
-  name         = "TrueNAS"
-  machine      = "q35"
+  node_name = "prox"
+  vm_id     = 100
+  name      = "TrueNAS"
+  machine   = "q35"
 
   # VM General Settings
   tags = [
@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "TrueNAS" {
     enabled = true
     type    = "virtio"
   }
-  
+
   # CPU Settings
   cpu {
     cores        = 6
@@ -32,9 +32,9 @@ resource "proxmox_virtual_environment_vm" "TrueNAS" {
 
   # Network Settings
   network_device {
-    bridge      = "vmbr0"
-    model       = "virtio"
-    firewall    = true
+    bridge   = "vmbr0"
+    model    = "virtio"
+    firewall = true
   }
 
   # Operating System Settings
@@ -56,22 +56,22 @@ resource "proxmox_virtual_environment_vm" "TrueNAS" {
   }
 
   # Additional Settings
-  scsi_hardware           = "virtio-scsi-pci"
-  keyboard_layout         = "en-us"
-  on_boot                 = true
-  migrate                 = false
-  stop_on_destroy         = false
-  reboot                  = false
+  scsi_hardware   = "virtio-scsi-pci"
+  keyboard_layout = "en-us"
+  on_boot         = true
+  migrate         = false
+  stop_on_destroy = false
+  reboot          = false
 
   # Timeout Settings
-  timeout_clone           = 1800
-  timeout_create          = 1800
-  timeout_migrate         = 1800
-  timeout_reboot          = 1800
-  timeout_shutdown_vm     = 1800
-  timeout_start_vm        = 1800
-  timeout_stop_vm         = 300
-  
+  timeout_clone       = 1800
+  timeout_create      = 1800
+  timeout_migrate     = 1800
+  timeout_reboot      = 1800
+  timeout_shutdown_vm = 1800
+  timeout_start_vm    = 1800
+  timeout_stop_vm     = 300
+
   # I do not consider this import done. Alot of things need updating on here (4 HDD's are connected)
 
   lifecycle {

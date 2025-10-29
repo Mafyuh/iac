@@ -9,15 +9,16 @@
 Physical cluster on 3 Optiplex 7040 Micro's with Talos OS.
 
 ## ☁️ Core Components
-* **[cert-manager](https://cert-manager.io/)** - Certificate management and Let's Encrypt integration
-* **[cilium](https://github.com/cilium/cilium)** - eBPF-based networking, security, and observability
-* **[rook-ceph](https://github.com/rook/rook)** - Distributed storage system providing block, object, and file storage with Ceph
-* **[prometheus](https://prometheus.io/)** - Monitoring and alerting stack with Grafana Alloy
-* **[external-secrets](https://external-secrets.io/latest/)** - Secrets pulled from Bitwarden Secrets.
-* **[flux](https://fluxcd.io/)** - GitOps continuous delivery
 
+- **[cert-manager](https://cert-manager.io/)** - Certificate management and Let's Encrypt integration
+- **[cilium](https://github.com/cilium/cilium)** - eBPF-based networking, security, and observability
+- **[rook-ceph](https://github.com/rook/rook)** - Distributed storage system providing block, object, and file storage with Ceph
+- **[prometheus](https://prometheus.io/)** - Monitoring and alerting stack with Grafana Alloy
+- **[external-secrets](https://external-secrets.io/latest/)** - Secrets pulled from Bitwarden Secrets.
+- **[flux](https://fluxcd.io/)** - GitOps continuous delivery
 
 ### Cluster Setup
+
 The cluster uses **Flux Operator** with a **Flux Instance** for GitOps. Once the below are executed Flux will reconcile the entire cluster to this repo.
 
 ```bash
@@ -32,4 +33,3 @@ helm install flux-operator controlplaneio/flux-operator -n flux-system
 kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=flux-operator -n flux-system --timeout=300s
 kubectl apply -f kubernetes/flux/cluster.yaml
 ```
-

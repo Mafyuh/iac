@@ -49,14 +49,13 @@
           # Display system information
           fastfetch
         owner: "{{ user }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Download Oh My Zsh installation script
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: /tmp/install_ohmyzsh.sh
-        mode: '0755'
-
+        mode: "0755"
 
     - name: Run Oh My Zsh installation script
       ansible.builtin.command: sh /tmp/install_ohmyzsh.sh --unattended
@@ -69,15 +68,13 @@
         RUNZSH: "no"
       changed_when: false
 
-
     - name: Ensure custom plugins directory exists
       ansible.builtin.file:
         path: "{{ zsh_custom }}/plugins"
         state: directory
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: '0755'
-
+        mode: "0755"
 
     - name: Clone zsh-syntax-highlighting plugin
       ansible.builtin.git:
@@ -85,7 +82,6 @@
         dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
         update: false
         version: 0.8.0
-
 
     - name: Clone zsh-autosuggestions plugin
       ansible.builtin.git:
@@ -113,19 +109,19 @@
         path: "/home/{{ user }}/.local/bin"
         state: directory
         owner: "{{ user }}"
-        mode: '0755'
+        mode: "0755"
 
     - name: Download Oh My Posh binary
       ansible.builtin.get_url:
         url: https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64
         dest: "/home/{{ user }}/.local/bin/oh-my-posh"
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure ownership of .local/bin/oh-my-posh
       ansible.builtin.file:
         path: "/home/{{ user }}/.local/bin/oh-my-posh"
         owner: "{{ user }}"
-        mode: '0755'
+        mode: "0755"
 
     - name: Change default shell to Zsh (after setting up .zshrc)
       ansible.builtin.user:

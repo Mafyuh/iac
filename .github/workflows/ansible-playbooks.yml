@@ -58,4 +58,3 @@ jobs:
               "ansible/playbooks/${{ github.event.inputs.playbook }}" \
               --extra-vars "bw_access_token=${{ secrets.BWS_ACCESS_TOKEN }}"
           fi
-        

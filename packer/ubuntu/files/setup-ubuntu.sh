@@ -1,7 +1,7 @@
 #!/bin/bash
 export DEBIAN_FRONTEND=noninteractive
 set -euo pipefail
-set -x 
+set -x
 
 log() {
   echo -e "\n==== $1 ====\n"

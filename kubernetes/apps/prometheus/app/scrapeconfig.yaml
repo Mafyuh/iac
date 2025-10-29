@@ -34,11 +34,11 @@ spec:
     module: [http_2xx]
   relabelings:
     - sourceLabels: [__address__]
-      regex: '(.*);(.*)'
+      regex: "(.*);(.*)"
       targetLabel: instance
       replacement: $1
     - sourceLabels: [__address__]
-      regex: '(.*);(.*)'
+      regex: "(.*);(.*)"
       targetLabel: humanname
       replacement: $2
     - sourceLabels: [instance]
@@ -117,8 +117,8 @@ spec:
   metricsPath: /pve
   params:
     module: [default]
-    cluster: ['1']
-    node: ['1']
+    cluster: ["1"]
+    node: ["1"]
   relabelings:
     - sourceLabels: [__address__]
       targetLabel: __param_target
@@ -170,7 +170,7 @@ spec:
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name:  blocky
+  name: blocky
   namespace: monitoring
   labels:
     release: prometheus
@@ -184,7 +184,7 @@ spec:
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name:  minio
+  name: minio
   namespace: monitoring
   labels:
     release: prometheus

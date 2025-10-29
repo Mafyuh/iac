@@ -17,8 +17,8 @@
     - name: Configure timesyncd to use the router's NTP server
       ansible.builtin.lineinfile:
         path: /etc/systemd/timesyncd.conf
-        regexp: '^NTP='
-        line: 'NTP=10.0.0.1'
+        regexp: "^NTP="
+        line: "NTP=10.0.0.1"
         insertafter: '^\[Time\]'
 
     - name: Restart systemd-timesyncd to apply changes

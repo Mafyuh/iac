@@ -16,4 +16,4 @@ spec:
     kind: ClusterIssuer
   commonName: "*.mafyuh.dev"
   dnsNames:
-  - "*.mafyuh.dev"
+    - "*.mafyuh.dev"

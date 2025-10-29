@@ -159,7 +159,7 @@ spec:
       mountOptions: ["discard"]
     cephFileSystems: []
     cephObjectStores: []
-    
+
     route:
       dashboard:
         host:

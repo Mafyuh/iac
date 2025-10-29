@@ -1,4 +1,4 @@
-resource oci_core_default_security_list Default-Security-List-for-NEW {
+resource "oci_core_default_security_list" "Default-Security-List-for-NEW" {
   compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/admin@mafyuh.com"
@@ -8,8 +8,8 @@ resource oci_core_default_security_list Default-Security-List-for-NEW {
   egress_security_rules {
     destination      = "0.0.0.0/0"
     destination_type = "CIDR_BLOCK"
-    protocol  = "all"
-    stateless = "false"
+    protocol         = "all"
+    stateless        = "false"
   }
   ingress_security_rules {
     icmp_options {
@@ -78,7 +78,7 @@ resource oci_core_default_security_list Default-Security-List-for-NEW {
   manage_default_resource_id = oci_core_vcn.NEW.default_security_list_id
 }
 
-resource oci_core_default_security_list Default-Security-List-for-vcn-20230309-0146 {
+resource "oci_core_default_security_list" "Default-Security-List-for-vcn-20230309-0146" {
   compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/mafyuhh@gmail.com"
@@ -88,8 +88,8 @@ resource oci_core_default_security_list Default-Security-List-for-vcn-20230309-0
   egress_security_rules {
     destination      = "0.0.0.0/0"
     destination_type = "CIDR_BLOCK"
-    protocol  = "all"
-    stateless = "false"
+    protocol         = "all"
+    stateless        = "false"
   }
   freeform_tags = {
   }

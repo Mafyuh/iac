@@ -1,8 +1,8 @@
 ---
 targets:
-- hosts:
-  - youtube.com
-  - google.com
-  - twitter.com
-  - github.com
-  - cloudflare.com
+  - hosts:
+      - youtube.com
+      - google.com
+      - twitter.com
+      - github.com
+      - cloudflare.com

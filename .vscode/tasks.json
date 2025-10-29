@@ -7,7 +7,8 @@
       "command": "kubectl",
       "args": [
         "port-forward",
-        "-n", "flux-system",
+        "-n",
+        "flux-system",
         "svc/flux-operator-mcp",
         "9090:9090"
       ],

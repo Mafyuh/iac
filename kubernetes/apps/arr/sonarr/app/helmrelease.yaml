@@ -26,7 +26,6 @@ spec:
         enabled: true
         type: deployment
 
-
         replicas: 1
 
         pod:
@@ -47,7 +46,7 @@ spec:
               SONARR__INSTANCE_NAME: *app
               SONARR__AUTH__METHOD: External
               SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              SONARR__AUTH__APIKEY:  
+              SONARR__AUTH__APIKEY:
                 valueFrom:
                   secretKeyRef:
                     name: recyclarr-secrets
@@ -73,7 +72,7 @@ spec:
                 memory: 200Mi
               limits:
                 memory: 512Mi
-          
+
           metrics:
             dependsOn: app
             image:
@@ -107,7 +106,7 @@ spec:
         ports:
           metrics:
             port: *metricsPort
-    
+
     serviceMonitor:
       main:
         enabled: true

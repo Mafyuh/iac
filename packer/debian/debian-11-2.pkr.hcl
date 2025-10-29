@@ -22,17 +22,17 @@ variable "proxmox_api_token_secret" {
 
 # Resource Definiation for the VM Template
 source "proxmox-clone" "debian2" {
- 
+
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
     insecure_skip_tls_verify = true
-    
+
     # VM General Settings
     node = "pve2"
 
-    
+
     clone_vm_id = "8105"
 
     vm_id = "9999"
@@ -55,9 +55,9 @@ source "proxmox-clone" "debian2" {
     # VM CPU Settings
     cores = "2"
     cpu_type = "x86-64-v2-AES"
-    
+
     # VM Memory Settings
-    memory = "2048" 
+    memory = "2048"
 
     # VM Network Settings
     network_adapters {
@@ -65,7 +65,7 @@ source "proxmox-clone" "debian2" {
         bridge = "vmbr0"
         firewall = "false"
     }
-    
+
 
     ssh_username = "mafyuh"
     # WSL Filesystem
@@ -105,7 +105,7 @@ build {
         inline = [ "sudo cp /tmp/pve.cfg /etc/cloud/cloud.cfg.d/pve.cfg" ]
     }
 
-    
+
     provisioner "shell" {
     inline = [
         "sudo apt-get update",

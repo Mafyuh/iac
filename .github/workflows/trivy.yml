@@ -2,12 +2,12 @@ name: Trivy Vulnerability Scan
 on:
   pull_request:
     paths:
-      - 'docker/**'
-      - 'kubernetes/**'
+      - "docker/**"
+      - "kubernetes/**"
   workflow_dispatch:
     inputs:
       image:
-        description: 'Container image to scan (e.g., nginx:latest)'
+        description: "Container image to scan (e.g., nginx:latest)"
         required: true
         type: string
 
@@ -44,23 +44,23 @@ jobs:
             echo "is_manual=true" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
+
           echo "=== Analyzing PR diff for container images ==="
-          
+
           # Get all changed files in docker/ and kubernetes/
           changed_files=$(git diff --name-only HEAD~1 HEAD | grep -E '^(docker|kubernetes)/' || true)
           echo "Changed files: $changed_files"
-          
+
           if [ -z "$changed_files" ]; then
             echo "No docker or kubernetes files changed"
             echo "should_scan=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
+
           # Look for changes to k8s images in the actual diff
           repo=$(git diff HEAD~1 HEAD | grep -E '^\+.*repository:' | sed -E 's/.*repository:[[:space:]]*([^[:space:]]+).*/\1/' | head -n1)
           tag=$(git diff HEAD~1 HEAD | grep -E '^\+.*tag:' | sed -E 's/.*tag:[[:space:]]*([^[:space:]]+).*/\1/' | head -n1)
-          
+
           echo "Found k8s repo: '$repo', tag: '$tag'"
 
           if [ -n "$repo" ] && [ -n "$tag" ]; then
@@ -70,7 +70,7 @@ jobs:
             # Fall back to plain image: lines (docker-compose)
             image=$(git diff HEAD~1 HEAD | grep -E '^\+.*image:' | sed -E 's/.*image:[[:space:]]*([^[:space:]#]+).*/\1/' | head -n1)
             echo "Raw image found: '$image'"
-            
+
             # Clean up common prefixes and quotes
             image=$(echo "$image" | sed -E 's/^["\x27]//; s/["\x27]$//; s/^[[:space:]]*//; s/[[:space:]]*$//')
             echo "Cleaned image: '$image'"
@@ -79,7 +79,7 @@ jobs:
           echo "Found image: $image"
           echo "image=$image" >> $GITHUB_OUTPUT
           echo "is_manual=false" >> $GITHUB_OUTPUT
-          
+
           # Set a flag to indicate if we should run the scan
           if [ -n "$image" ] && [ "$image" != "" ]; then
             echo "should_scan=true" >> $GITHUB_OUTPUT
@@ -94,16 +94,16 @@ jobs:
         uses: aquasecurity/trivy-action@0.33.1
         with:
           image-ref: ${{ steps.images.outputs.image }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH'
-          scanners: 'vuln'
+          format: "sarif"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
+          scanners: "vuln"
 
       - name: Upload Trivy scan results to GitHub Security tab
         if: steps.images.outputs.should_scan == 'true'
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"
           ref: refs/heads/main
           sha: ${{ github.sha }}
 
@@ -116,23 +116,23 @@ jobs:
             const image = '${{ steps.images.outputs.image }}';
             const prNumber = context.issue.number;
             const scanUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/security/code-scanning?query=pr%3A${prNumber}+tool%3ATrivy+is%3Aopen`;
-            
+
             const comment = "## 🛡️ Trivy Security Scan Complete\n\n" +
               `**Scanned Image:** \`${image}\`\n` +
               `📊 **[View Security Scan Results](${scanUrl})**\n\n` +
               "_Results are available in the Security tab above._";
-            
+
             // Find existing comment to update
             const comments = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            
-            const existingComment = comments.data.find(comment => 
+
+            const existingComment = comments.data.find(comment =>
               comment.body.includes('🛡️ Trivy Security Scan Complete')
             );
-            
+
             if (existingComment) {
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,

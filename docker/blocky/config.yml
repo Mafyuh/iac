@@ -15,7 +15,7 @@ customDNS:
   customTTL: 1h
   mapping:
     ubu.lan: 10.69.69.2 ## For Loki
-    nas.lan: 10.0.0.10  ## For NAS
+    nas.lan: 10.0.0.10 ## For NAS
 
 blocking:
   blackLists:
@@ -39,7 +39,7 @@ blocking:
 
 queryLog:
   type: postgresql
-  target: 'postgres://blocky@10.20.10.100:5432/blocky'
+  target: "postgres://blocky@10.20.10.100:5432/blocky"
   logRetentionDays: 60
 
 prometheus:

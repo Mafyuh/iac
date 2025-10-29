@@ -26,9 +26,8 @@ spec:
         enabled: true
         type: deployment
 
-
         replicas: 1
-        
+
         pod:
           securityContext:
             runAsUser: 1000
@@ -47,7 +46,7 @@ spec:
               RADARR__INSTANCE_NAME: *app
               RADARR__PORT: &port 7878
               RADARR__AUTH__METHOD: External
-              RADARR__AUTH__APIKEY: 
+              RADARR__AUTH__APIKEY:
                 valueFrom:
                   secretKeyRef:
                     name: recyclarr-secrets
@@ -106,7 +105,7 @@ spec:
         ports:
           metrics:
             port: *metricsPort
-    
+
     serviceMonitor:
       main:
         enabled: true

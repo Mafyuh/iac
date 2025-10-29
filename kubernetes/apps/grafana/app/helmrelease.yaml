@@ -40,9 +40,9 @@ spec:
       datasources.yaml:
         apiVersion: 1
         deleteDatasources:
-          - {name: Alertmanager, orgId: 1}
-          - {name: Loki, orgId: 1}
-          - {name: Prometheus, orgId: 1}
+          - { name: Alertmanager, orgId: 1 }
+          - { name: Loki, orgId: 1 }
+          - { name: Prometheus, orgId: 1 }
         datasources:
           - name: Prometheus
             type: prometheus
@@ -82,7 +82,7 @@ spec:
           gnetId: 13768
           revision: 6
           datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
+            - { name: DS_PROMETHEUS, value: Prometheus }
           inputs:
             - name: "blocky_api_url"
               type: "constant"
@@ -102,7 +102,7 @@ spec:
         hubble-flow:
           gnetId: 19424
           datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
+            - { name: DS_PROMETHEUS, value: Prometheus }
         kubernetes-coredns:
           gnetId: 15762
           revision: 21
@@ -130,17 +130,17 @@ spec:
         media:
           url: https://raw.githubusercontent.com/Mafyuh/json/refs/heads/main/media-dashboard.json
           datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
+            - { name: DS_PROMETHEUS, value: Prometheus }
         minio:
           gnetId: 13502
           revision: 26
           datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
+            - { name: DS_PROMETHEUS, value: Prometheus }
         node-exporter-full:
           gnetId: 1860
           revision: 42
           datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
+            - { name: DS_PROMETHEUS, value: Prometheus }
         prometheus:
           gnetId: 19105
           revision: 7
@@ -149,7 +149,7 @@ spec:
           gnetId: 10347
           revision: 5
           datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
+            - { name: DS_PROMETHEUS, value: Prometheus }
         smokeping:
           gnetId: 11335
           revision: 1
@@ -158,7 +158,7 @@ spec:
           gnetId: 13665
           revision: 4
           datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
+            - { name: DS_PROMETHEUS, value: Prometheus }
         unifi-insights:
           gnetId: 11315
           revision: 9

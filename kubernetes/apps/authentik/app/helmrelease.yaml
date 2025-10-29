@@ -58,7 +58,7 @@ spec:
       name: server
       replicas: 1
       securityContext:
-        runAsUser: &user 1000        
+        runAsUser: &user 1000
         runAsGroup: *user
         fsGroup: *user
 

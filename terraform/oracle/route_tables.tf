@@ -1,4 +1,4 @@
-resource oci_core_default_route_table Default-Route-Table-for-NEW {
+resource "oci_core_default_route_table" "Default-Route-Table-for-NEW" {
   compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/admin@mafyuh.com"
@@ -15,7 +15,7 @@ resource oci_core_default_route_table Default-Route-Table-for-NEW {
   }
 }
 
-resource oci_core_default_route_table Default-Route-Table-for-vcn-20230309-0146 {
+resource "oci_core_default_route_table" "Default-Route-Table-for-vcn-20230309-0146" {
   compartment_id = data.bitwarden_secret.compartment_id.value
   defined_tags = {
     "Oracle-Tags.CreatedBy" = "default/mafyuhh@gmail.com"

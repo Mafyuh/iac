@@ -26,7 +26,6 @@ spec:
         enabled: true
         type: deployment
 
-
         replicas: 1
 
         pod:
@@ -96,7 +95,7 @@ spec:
         storageClass: ceph-block
         globalMounts:
           - path: /etc/loki
-      
+
       loki-config:
         enabled: true
         type: configMap

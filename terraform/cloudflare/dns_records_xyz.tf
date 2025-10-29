@@ -1,5 +1,5 @@
 resource "cloudflare_dns_record" "xyz_wildcard" {
-  content = "${var.npm_ip_address}"
+  content = var.npm_ip_address
   name    = "*.${var.domains["xyz"]}"
   proxied = false
   ttl     = 1
@@ -45,7 +45,7 @@ resource "cloudflare_dns_record" "selector2" {
 
 resource "cloudflare_dns_record" "outlook_mx" {
   content  = "mafyuh-xyz.mail.protection.outlook.com"
-  name     = "${var.domains["xyz"]}"
+  name     = var.domains["xyz"]
   priority = 0
   proxied  = false
   ttl      = 3600
@@ -55,7 +55,7 @@ resource "cloudflare_dns_record" "outlook_mx" {
 
 resource "cloudflare_dns_record" "xyz_spf_record" {
   content = "\"v=spf1 include:spf.protection.outlook.com -all\""
-  name    = "${var.domains["xyz"]}"
+  name    = var.domains["xyz"]
   proxied = false
   ttl     = 3600
   type    = "TXT"
@@ -64,7 +64,7 @@ resource "cloudflare_dns_record" "xyz_spf_record" {
 
 resource "cloudflare_dns_record" "xyz_verification" {
   content = "\"MS=ms45733080\""
-  name    = "${var.domains["xyz"]}"
+  name    = var.domains["xyz"]
   proxied = false
   ttl     = 3600
   type    = "TXT"

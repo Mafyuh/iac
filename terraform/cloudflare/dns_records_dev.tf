@@ -135,7 +135,7 @@ resource "cloudflare_dns_record" "dev_wildcard" {
 
 resource "cloudflare_dns_record" "dev_root" {
   content = "mafyuh.github.io"
-  name    = "${var.domains["dev"]}"
+  name    = var.domains["dev"]
   proxied = false
   ttl     = 1
   type    = "CNAME"
@@ -189,7 +189,7 @@ resource "cloudflare_dns_record" "dev_stats" {
 
 resource "cloudflare_dns_record" "dev_mx_20" {
   content  = "mailsec.protonmail.ch"
-  name     = "${var.domains["dev"]}"
+  name     = var.domains["dev"]
   priority = 20
   proxied  = false
   ttl      = 1
@@ -199,7 +199,7 @@ resource "cloudflare_dns_record" "dev_mx_20" {
 
 resource "cloudflare_dns_record" "dev_mx_10" {
   content  = "mail.protonmail.ch"
-  name     = "${var.domains["dev"]}"
+  name     = var.domains["dev"]
   priority = 10
   proxied  = false
   ttl      = 1
@@ -218,7 +218,7 @@ resource "cloudflare_dns_record" "dev_dmarc" {
 
 resource "cloudflare_dns_record" "dev_spf" {
   content = "v=spf1 include:_spf.protonmail.ch mx ~all"
-  name    = "${var.domains["dev"]}"
+  name    = var.domains["dev"]
   proxied = false
   ttl     = 1
   type    = "TXT"
@@ -227,7 +227,7 @@ resource "cloudflare_dns_record" "dev_spf" {
 
 resource "cloudflare_dns_record" "dev_protonmail_verification" {
   content = "protonmail-verification=65e77a1a975eba119019f5c0a28d84e4a11183b8"
-  name    = "${var.domains["dev"]}"
+  name    = var.domains["dev"]
   proxied = false
   ttl     = 1
   type    = "TXT"

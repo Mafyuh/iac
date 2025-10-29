@@ -1,5 +1,5 @@
 resource "cloudflare_dns_record" "local_com_wildcard" {
-  content = "${var.k3s_nginx_ip_address}"
+  content = var.k3s_nginx_ip_address
   name    = "*.local.${var.domains["com"]}"
   proxied = false
   ttl     = 1
@@ -18,7 +18,7 @@ resource "cloudflare_dns_record" "com_wildcard" {
 
 resource "cloudflare_dns_record" "mafyuh_com" {
   content = "mafyuh.github.io"
-  name    = "${var.domains["com"]}"
+  name    = var.domains["com"]
   proxied = true
   ttl     = 1
   type    = "CNAME"
@@ -54,7 +54,7 @@ resource "cloudflare_dns_record" "com_protonmail_key" {
 
 resource "cloudflare_dns_record" "com_protonmail_mx" {
   content  = "mailsec.protonmail.ch"
-  name     = "${var.domains["com"]}"
+  name     = var.domains["com"]
   priority = 20
   proxied  = false
   ttl      = 1
@@ -64,7 +64,7 @@ resource "cloudflare_dns_record" "com_protonmail_mx" {
 
 resource "cloudflare_dns_record" "com_protonmail_mx_10" {
   content  = "mail.protonmail.ch"
-  name     = "${var.domains["com"]}"
+  name     = var.domains["com"]
   priority = 10
   proxied  = false
   ttl      = 1
@@ -101,7 +101,7 @@ resource "cloudflare_dns_record" "com_github_pages" {
 
 resource "cloudflare_dns_record" "com_google_verification" {
   content = "google-site-verification=xP-_n94kxaq7KI_eD4E58kqjYtnztyzQ9NeDZXxDPts"
-  name    = "${var.domains["com"]}"
+  name    = var.domains["com"]
   proxied = false
   ttl     = 3600
   type    = "TXT"
@@ -110,7 +110,7 @@ resource "cloudflare_dns_record" "com_google_verification" {
 
 resource "cloudflare_dns_record" "com_ms_verification" {
   content = "MS=ms65994231"
-  name    = "${var.domains["com"]}"
+  name    = var.domains["com"]
   proxied = false
   ttl     = 3600
   type    = "TXT"
@@ -119,7 +119,7 @@ resource "cloudflare_dns_record" "com_ms_verification" {
 
 resource "cloudflare_dns_record" "com_spf_record" {
   content = "v=spf1 include:_spf.protonmail.ch mx ~all"
-  name    = "${var.domains["com"]}"
+  name    = var.domains["com"]
   proxied = false
   ttl     = 1
   type    = "TXT"
@@ -128,7 +128,7 @@ resource "cloudflare_dns_record" "com_spf_record" {
 
 resource "cloudflare_dns_record" "com_protonmail_verification" {
   content = "protonmail-verification=cb0ab2aa9e9510223fe9e90a1821a9d640859f4f"
-  name    = "${var.domains["com"]}"
+  name    = var.domains["com"]
   proxied = false
   ttl     = 1
   type    = "TXT"

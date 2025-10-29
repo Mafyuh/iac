@@ -1,5 +1,5 @@
 ## ARM VM
-resource oci_core_instance arm {
+resource "oci_core_instance" "arm" {
   agent_config {
     are_all_plugins_disabled = "false"
     is_management_disabled   = "false"
@@ -17,7 +17,7 @@ resource oci_core_instance arm {
     recovery_action = "RESTORE_INSTANCE"
   }
   availability_domain = "nWCj:US-ASHBURN-AD-1"
-  compartment_id = data.bitwarden_secret.compartment_id.value
+  compartment_id      = data.bitwarden_secret.compartment_id.value
   create_vnic_details {
     assign_public_ip = "true"
     defined_tags = {
@@ -27,8 +27,8 @@ resource oci_core_instance arm {
     display_name = "instance-20230809-0455"
     freeform_tags = {
     }
-    hostname_label = "instance-20230809-0455"
-    private_ip = "10.0.0.56"
+    hostname_label         = "instance-20230809-0455"
+    private_ip             = "10.0.0.56"
     skip_source_dest_check = "true"
     subnet_id              = oci_core_subnet.NEW.id
   }
@@ -62,8 +62,8 @@ resource oci_core_instance arm {
   source_details {
     boot_volume_size_in_gbs = "149"
     boot_volume_vpus_per_gb = "10"
-    source_id   = "ocid1.image.oc1.iad.aaaaaaaagbgiy3w3psyvqarm5lcyjyort7ufmcx7qisizxsae3rdm6k75odq"
-    source_type = "image"
+    source_id               = "ocid1.image.oc1.iad.aaaaaaaagbgiy3w3psyvqarm5lcyjyort7ufmcx7qisizxsae3rdm6k75odq"
+    source_type             = "image"
   }
   state = "RUNNING"
 }

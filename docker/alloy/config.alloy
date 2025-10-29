@@ -7,101 +7,101 @@
 
 // Get the fail2ban log and integrate GeoIP
 local.file_match "fail2ban" {
-	path_targets = [{
-		__address__ = "localhost",
-		__path__    = "/f2b-logs/fail2ban.log",
-		job         = "fail2ban",
-	}]
+  path_targets = [{
+    __address__ = "localhost",
+    __path__    = "/f2b-logs/fail2ban.log",
+    job         = "fail2ban",
+  }]
 }
 
 loki.process "fail2ban" {
-	forward_to = [loki.write.loki.receiver]
+  forward_to = [loki.write.loki.receiver]
 
-	stage.multiline {
-		firstline     = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"
-		max_wait_time = "10s"
-	}
+  stage.multiline {
+    firstline     = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"
+    max_wait_time = "10s"
+  }
 
-	stage.regex {
-		expression = "^(?s)(?P<time>\\S+? \\S+?) (fail2ban\\.)(?P<component>\\S+)\\s* \\[(?P<pid>\\S+)\\]: (?P<priority>\\S+)\\s* (?P<message>.*?)$"
-	}
+  stage.regex {
+    expression = "^(?s)(?P<time>\\S+? \\S+?) (fail2ban\\.)(?P<component>\\S+)\\s* \\[(?P<pid>\\S+)\\]: (?P<priority>\\S+)\\s* (?P<message>.*?)$"
+  }
 
-	stage.timestamp {
-		source = "time"
-		format = "2006-01-02 15:04:05,000"
-	}
+  stage.timestamp {
+    source = "time"
+    format = "2006-01-02 15:04:05,000"
+  }
 
-	stage.labels {
-		values = {
-			component = null,
-			priority  = null,
-		}
-	}
+  stage.labels {
+    values = {
+      component = null,
+      priority  = null,
+    }
+  }
 
-	stage.output {
-		source = "message"
-	}
+  stage.output {
+    source = "message"
+  }
 
-	stage.match {
-		selector = "{job=\"fail2ban\"} |~ \"\\\\[\\\\S+\\\\] .*\""
+  stage.match {
+    selector = "{job=\"fail2ban\"} |~ \"\\\\[\\\\S+\\\\] .*\""
 
-		stage.regex {
-			expression = "(\\[(?P<jail>\\S+)\\] )?(?P<message>.*?)$"
-		}
+    stage.regex {
+      expression = "(\\[(?P<jail>\\S+)\\] )?(?P<message>.*?)$"
+    }
 
-		stage.labels {
-			values = {
-				jail = null,
-			}
-		}
+    stage.labels {
+      values = {
+        jail = null,
+      }
+    }
 
-		stage.output {
-			source = "message"
-		}
-	}
+    stage.output {
+      source = "message"
+    }
+  }
 
-	stage.regex {
-		expression = ".*?(?P<remote_addr>\\d+\\.\\d+\\.\\d+\\.\\d+).*"
-	}
+  stage.regex {
+    expression = ".*?(?P<remote_addr>\\d+\\.\\d+\\.\\d+\\.\\d+).*"
+  }
 
-	stage.labels {
-		values = {
-			geoip_city_name          = "",
-			geoip_country_name       = "",
-			geoip_country_code       = "",
-			geoip_continent_name     = "",
-			geoip_continent_code     = "",
-			geoip_location_latitude  = "",
-			geoip_location_longitude = "",
-			geoip_postal_code        = "",
-			geoip_timezone           = "",
-			geoip_subdivision_name   = "",
-			geoip_subdivision_code   = "",
-		}
-	}
+  stage.labels {
+    values = {
+      geoip_city_name          = "",
+      geoip_country_name       = "",
+      geoip_country_code       = "",
+      geoip_continent_name     = "",
+      geoip_continent_code     = "",
+      geoip_location_latitude  = "",
+      geoip_location_longitude = "",
+      geoip_postal_code        = "",
+      geoip_timezone           = "",
+      geoip_subdivision_name   = "",
+      geoip_subdivision_code   = "",
+    }
+  }
 
-	stage.label_drop {
-		values = ["filename"]
-	}
+  stage.label_drop {
+    values = ["filename"]
+  }
 }
 
 loki.source.file "fail2ban" {
-	targets    = local.file_match.fail2ban.targets
-	forward_to = [loki.process.fail2ban.receiver]
+  targets    = local.file_match.fail2ban.targets
+  forward_to = [loki.process.fail2ban.receiver]
 }
 
 loki.write "loki" {
-	endpoint {
-		url = "http://10.0.0.212:3100/loki/api/v1/push"
-	}
-	external_labels = {}
+  endpoint {
+    url = "http://10.0.0.212:3100/loki/api/v1/push"
+  }
+  external_labels = {}
 }
 
 loki.write "default" {
-	endpoint {
-		url = "http://10.0.0.212:3100/loki/api/v1/push"
-	}
-	external_labels = {}
+  endpoint {
+    url = "http://10.0.0.212:3100/loki/api/v1/push"
+  }
+  external_labels = {}
 }
 
 prometheus.remote_write "default" {
@@ -120,7 +120,7 @@ loki.source.journal "journal" {
   forward_to    = [loki.write.default.receiver]
   labels        = {component = string.format("%s-journal", constants.hostname)}
   // NOTE: This is important to fix https://github.com/grafana/alloy/issues/924
-  path          = "/var/log/journal" 
+  path          = "/var/log/journal"
 }
 
 local.file_match "system" {
@@ -220,7 +220,7 @@ discovery.docker "dockerlogs" {
 
 discovery.relabel "dockerlogs" {
       targets = []
-  
+
       rule {
           source_labels = ["__meta_docker_container_name"]
           regex = "/(.*)"

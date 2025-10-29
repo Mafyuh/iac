@@ -13,7 +13,7 @@ services:
       - /docker/appdata/jellyfin/metadata:/nvmemetadata
       - /docker/appdata/jellyfin/transcodes:/transcodes
       - nas:/Media
-    restart: 'unless-stopped'
+    restart: "unless-stopped"
     group_add:
       - "104"
     ports:

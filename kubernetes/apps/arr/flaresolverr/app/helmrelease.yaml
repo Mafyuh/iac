@@ -26,9 +26,8 @@ spec:
         enabled: true
         type: deployment
 
-
         replicas: 1
-        
+
         pod:
           securityContext:
             runAsUser: &context 1000

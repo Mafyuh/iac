@@ -1,18 +1,18 @@
 # DOCS https://registry.terraform.io/providers/ubiquiti-community/unifi/latest/docs/resources/network
 resource "unifi_network" "default" {
-  name     = "Main"
-  purpose  = "corporate"
-  vlan_id  = 0
-  enabled  = true
+  name    = "Main"
+  purpose = "corporate"
+  vlan_id = 0
+  enabled = true
 
   # IPv4 settings
-  subnet        = "10.0.0.0/24"
-  dhcp_enabled  = true
-  dhcp_start    = "10.0.0.6"
-  dhcp_stop     = "10.0.0.199"
+  subnet       = "10.0.0.0/24"
+  dhcp_enabled = true
+  dhcp_start   = "10.0.0.6"
+  dhcp_stop    = "10.0.0.199"
 
   # DNS
-  dhcp_dns      = [
+  dhcp_dns = [
     "10.20.10.20",
     "1.1.1.1",
     "9.9.9.9",
@@ -31,23 +31,23 @@ resource "unifi_network" "default" {
 
   # Advanced
   intra_network_access_enabled = true
-  internet_access_enabled = true
-  dhcpd_boot_enabled  = false
-  igmp_snooping = true
+  internet_access_enabled      = true
+  dhcpd_boot_enabled           = false
+  igmp_snooping                = true
 }
 
 ## secondary network
 resource "unifi_network" "secondary" {
-  name     = "Secondary"
-  purpose  = "corporate"
-  vlan_id  = 2
-  enabled  = true
+  name    = "Secondary"
+  purpose = "corporate"
+  vlan_id = 2
+  enabled = true
 
   # IPv4 settings
-  subnet        = "10.69.69.0/24"
-  dhcp_enabled  = true
-  dhcp_start    = "10.69.69.6"
-  dhcp_stop     = "10.69.69.254"
+  subnet       = "10.69.69.0/24"
+  dhcp_enabled = true
+  dhcp_start   = "10.69.69.6"
+  dhcp_stop    = "10.69.69.254"
 
   # DNS
   ## Using Auto which uses the DNS servers from the default network
@@ -64,23 +64,23 @@ resource "unifi_network" "secondary" {
 
   # Advanced
   intra_network_access_enabled = true
-  internet_access_enabled = true
-  dhcpd_boot_enabled  = false
+  internet_access_enabled      = true
+  dhcpd_boot_enabled           = false
 }
 
 
 ## Untrusted network
 resource "unifi_network" "untrusted" {
-  name     = "Untrusted Servers"
-  purpose  = "corporate"
-  vlan_id  = 10
-  enabled  = true
+  name    = "Untrusted Servers"
+  purpose = "corporate"
+  vlan_id = 10
+  enabled = true
 
   # IPv4 settings
-  subnet        = "10.20.10.0/24"
-  dhcp_enabled  = true
-  dhcp_start    = "10.20.10.6"
-  dhcp_stop     = "10.20.10.254"
+  subnet       = "10.20.10.0/24"
+  dhcp_enabled = true
+  dhcp_start   = "10.20.10.6"
+  dhcp_stop    = "10.20.10.254"
 
   # DNS
   ## Using Auto which uses the DNS servers from the default network
@@ -98,23 +98,23 @@ resource "unifi_network" "untrusted" {
   # Advanced
   ## TODO: #343 Add firewall rules to only allow access to NAS, or move NAS to this network
   intra_network_access_enabled = true
-  internet_access_enabled = true
-  dhcpd_boot_enabled  = false
+  internet_access_enabled      = true
+  dhcpd_boot_enabled           = false
 }
 
 ## IoT network
 resource "unifi_network" "iot" {
-  name     = "IoT"
-  purpose  = "corporate"
-  vlan_id  = 3
-  enabled  = true
+  name          = "IoT"
+  purpose       = "corporate"
+  vlan_id       = 3
+  enabled       = true
   igmp_snooping = true
 
   # IPv4 settings
-  subnet        = "10.10.34.0/24"
-  dhcp_enabled  = true
-  dhcp_start    = "10.10.34.6"
-  dhcp_stop     = "10.10.34.254"
+  subnet       = "10.10.34.0/24"
+  dhcp_enabled = true
+  dhcp_start   = "10.10.34.6"
+  dhcp_stop    = "10.10.34.254"
 
   # DNS
   ## Using Auto which uses the DNS servers from the default network
@@ -132,8 +132,8 @@ resource "unifi_network" "iot" {
   # Advanced
 
   intra_network_access_enabled = true ## Few wifi devices need access to the NAS, so this is enabled for now
-  internet_access_enabled = true
-  dhcpd_boot_enabled  = false
+  internet_access_enabled      = true
+  dhcpd_boot_enabled           = false
 }
 
 ## WAN

@@ -2,22 +2,22 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    name: website-monitoring-targets
-    namespace: monitoring
+  name: website-monitoring-targets
+  namespace: monitoring
 data:
-    targets.yml: ENC[AES256_GCM,data:96wnuCPz1laoKEis5b4W4HkZnVKW2lb4PS009mbf7+1+gH66F/1BCfWoiWvu2ShTsVdRNsXLCQFJ2L8Er2KuuhQyDmPvOFa0icavD0nTx/P/TeyoFX4Ac0MN749uxJ1Y0b+Tv9NxJDLzDov6zBUqe0kL7AexrHuTgafjkQavola4hsJ7Q+2A94MbykiL,iv:MFincimjj3BhgjyUhqS2kHdR+WVNZ4KHV4Cc9bDop8E=,tag:2gSFZCe7+WPW2feD9Mpxlg==,type:str]
+  targets.yml: ENC[AES256_GCM,data:96wnuCPz1laoKEis5b4W4HkZnVKW2lb4PS009mbf7+1+gH66F/1BCfWoiWvu2ShTsVdRNsXLCQFJ2L8Er2KuuhQyDmPvOFa0icavD0nTx/P/TeyoFX4Ac0MN749uxJ1Y0b+Tv9NxJDLzDov6zBUqe0kL7AexrHuTgafjkQavola4hsJ7Q+2A94MbykiL,iv:MFincimjj3BhgjyUhqS2kHdR+WVNZ4KHV4Cc9bDop8E=,tag:2gSFZCe7+WPW2feD9Mpxlg==,type:str]
 sops:
-    age:
-        - recipient: age18z6wevr8ze5azvq7nfty3l29s7887l8n5mefr64avhlthtr4uvnqw90nfs
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsQ3BWc1FBUjNSYUhoTHdQ
-            WFpXTU5SVmVISk4xWWdzK1VaQkd1bDFiYkVzCldZa0ZxZmlVNzlYK3ZHaGVtZ0FK
-            dGdSSTdtcWZNSURQZ0UyejhHNnU1YkkKLS0tIEJUT2JZRjIrRGYvMEVVRFBZQkJa
-            TEE4S29RY1Vmb1F5UEZDNDk2am5KVVUKSEVH409JMV2B33pLH/cOgKlq4n5zNp0J
-            +0FYM+gFU3tfCBsQNbr1kNlngwm3n6unRW+gtZTRZ4NKpS38DYfLLQ==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-10-10T07:05:49Z"
-    mac: ENC[AES256_GCM,data:29hAKYygQvNn+zFho2Tg0oHEgAqXmggXPTLvPg4nyLkfxd1FairK0sNVGghOG7JGg4s9nBH1hm8xnRw4g8E97dJ6+DpxNrb1Xmxh/d/JoDDEkp90/9CcVE0wDACF6st6Y10KjMK35eBJu1JKrvgloiZJOnCAesHgi4VErsQzGC8=,iv:GPmNl5TpCEPXfGPWj4Wf72RmUfrr6d7vJY1TM5N+gsc=,tag:2zXCz+GjGLvJyxGtqj+Mew==,type:str]
-    encrypted_regex: ^(data|stringData)$
-    version: 3.10.2
+  age:
+    - recipient: age18z6wevr8ze5azvq7nfty3l29s7887l8n5mefr64avhlthtr4uvnqw90nfs
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsQ3BWc1FBUjNSYUhoTHdQ
+        WFpXTU5SVmVISk4xWWdzK1VaQkd1bDFiYkVzCldZa0ZxZmlVNzlYK3ZHaGVtZ0FK
+        dGdSSTdtcWZNSURQZ0UyejhHNnU1YkkKLS0tIEJUT2JZRjIrRGYvMEVVRFBZQkJa
+        TEE4S29RY1Vmb1F5UEZDNDk2am5KVVUKSEVH409JMV2B33pLH/cOgKlq4n5zNp0J
+        +0FYM+gFU3tfCBsQNbr1kNlngwm3n6unRW+gtZTRZ4NKpS38DYfLLQ==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-10T07:05:49Z"
+  mac: ENC[AES256_GCM,data:29hAKYygQvNn+zFho2Tg0oHEgAqXmggXPTLvPg4nyLkfxd1FairK0sNVGghOG7JGg4s9nBH1hm8xnRw4g8E97dJ6+DpxNrb1Xmxh/d/JoDDEkp90/9CcVE0wDACF6st6Y10KjMK35eBJu1JKrvgloiZJOnCAesHgi4VErsQzGC8=,iv:GPmNl5TpCEPXfGPWj4Wf72RmUfrr6d7vJY1TM5N+gsc=,tag:2zXCz+GjGLvJyxGtqj+Mew==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.10.2

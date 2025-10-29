@@ -1,9 +1,9 @@
 ## Scope Mappings
 resource "authentik_property_mapping_provider_scope" "email" {
-  name       = "authentik default OAuth Mapping: OpenID 'email'"
-  scope_name = "email"
+  name        = "authentik default OAuth Mapping: OpenID 'email'"
+  scope_name  = "email"
   description = "Email address"
-  expression = <<EOF
+  expression  = <<EOF
 return {
     "email": request.user.email,
     "email_verified": True
@@ -20,10 +20,10 @@ EOF
 }
 
 resource "authentik_property_mapping_provider_scope" "profile" {
-  name       = "authentik default OAuth Mapping: OpenID 'profile'"
-  scope_name = "profile"
+  name        = "authentik default OAuth Mapping: OpenID 'profile'"
+  scope_name  = "profile"
   description = "General Profile Information"
-  expression = <<EOF
+  expression  = <<EOF
 return {
     # Because authentik only saves the user's full name, and has no concept of first and last names,
     # the full name is used as given name.

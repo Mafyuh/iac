@@ -10,27 +10,19 @@
     "github>mafyuh/iac//.renovate/groups.json5"
   ],
   "flux": {
-    "managerFilePatterns": [
-      "/^kubernetes/.+\\.ya?ml$/"
-    ]
+    "managerFilePatterns": ["/^kubernetes/.+\\.ya?ml$/"]
   },
   "helm-values": {
-    "managerFilePatterns": [
-      "/^kubernetes/.+\\.ya?ml$/"
-    ]
+    "managerFilePatterns": ["/^kubernetes/.+\\.ya?ml$/"]
   },
   "kubernetes": {
-    "managerFilePatterns": [
-      "/^kubernetes/.+\\.ya?ml$/"
-    ]
+    "managerFilePatterns": ["/^kubernetes/.+\\.ya?ml$/"]
   },
   "customManagers": [
     {
       "customType": "regex",
       "description": "Update Talos and Kubernetes versions in talconfig.yaml",
-      "managerFilePatterns": [
-        "/^kubernetes/talos/talconfig\\.ya?ml$/"
-      ],
+      "managerFilePatterns": ["/^kubernetes/talos/talconfig\\.ya?ml$/"],
       "matchStrings": [
         "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+talosVersion: (?<currentValue>.*)",
         "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+kubernetesVersion: (?<currentValue>.*)"
@@ -39,9 +31,7 @@
     {
       "customType": "regex",
       "description": "Flux Instance",
-      "managerFilePatterns": [
-        "/^kubernetes/.+\\.ya?ml$/"
-      ],
+      "managerFilePatterns": ["/^kubernetes/.+\\.ya?ml$/"],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s+version: (?<currentValue>.*)"
       ]

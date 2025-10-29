@@ -26,9 +26,8 @@ spec:
         enabled: true
         type: deployment
 
-
         replicas: 1
-        
+
         pod:
           securityContext:
             runAsUser: 1000
@@ -100,7 +99,7 @@ spec:
         ports:
           metrics:
             port: *metricsPort
-    
+
     serviceMonitor:
       main:
         enabled: true

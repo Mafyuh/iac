@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: bws-access-token
-    namespace: security
+  name: bws-access-token
+  namespace: security
 type: Opaque
 data:
-    token: ENC[AES256_GCM,data:YtWfQKym2jQp/zl6QXatUQr6CqCJ93TwagQqFbsiZqHUanoxQQLcdG9JnfiAqsRiLY44YjchGLQtNgpePxkj7qwdP8u/ZvXPpil1LR9VeP33XHzDG1D64tTNlqvEPDXoiSevWq667W6VyMGxiNhlXlAvWlCO++Ms8YhyZYWv1sM=,iv:SLfnPcO5L7s1Y1ZLtviAsqtq2VO9OtBs/+s78V7UIqw=,tag:Dy8dRJ2KOSGy9ReC0YtaAg==,type:str]
+  token: ENC[AES256_GCM,data:YtWfQKym2jQp/zl6QXatUQr6CqCJ93TwagQqFbsiZqHUanoxQQLcdG9JnfiAqsRiLY44YjchGLQtNgpePxkj7qwdP8u/ZvXPpil1LR9VeP33XHzDG1D64tTNlqvEPDXoiSevWq667W6VyMGxiNhlXlAvWlCO++Ms8YhyZYWv1sM=,iv:SLfnPcO5L7s1Y1ZLtviAsqtq2VO9OtBs/+s78V7UIqw=,tag:Dy8dRJ2KOSGy9ReC0YtaAg==,type:str]
 sops:
-    age:
-        - recipient: age18z6wevr8ze5azvq7nfty3l29s7887l8n5mefr64avhlthtr4uvnqw90nfs
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0R1IyR3N2T2V1cVFUMEF4
-            M0YxUkhtM2k4ZXlGbkVGU3ZNOFg2NmN1TVVBCndWQ05lcE5aa2J6R3FPOGZFTzBl
-            RllFTGJJaFZMSGU4RUo3dCtNNUVkc00KLS0tIEVFMDZ0R25tT1BWMEdGcnNWQWV5
-            WEdEMG1sVGRVWGVReWVoSm9ibkFmdWcKuEtaB43U9Mt+1uhXxCF8B0ba1WFyoMAY
-            l4KX+ATg0xFw6rjr8jG5iJgyaUbA5Dhj3wNHcBqda+skvYAPGmCK+A==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-10-09T05:33:34Z"
-    mac: ENC[AES256_GCM,data:AC8vz+yFMN2+4JKo6vXxkXSPzAFZpDNsLOPQSQ6347Md7S4HA1dIhQiKDP4zE7sNX3ZOPlqIhaA4YcyiFMMfmHM3C2aGuYzkosbjICD6BP5C1TaS/XLv8yuIRqnir2bA4ey63nBQ1bezMqjxAhz/sNBYLfV9JynQM1jVUZ+z0p8=,iv:G9KwT8EtQPFTz0iorSVT7g7QV5d0thmF87ysNS25IZ8=,tag:ngYvPS2BGibpS04nuhsHuA==,type:str]
-    encrypted_regex: ^(data|stringData)$
-    version: 3.10.2
+  age:
+    - recipient: age18z6wevr8ze5azvq7nfty3l29s7887l8n5mefr64avhlthtr4uvnqw90nfs
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0R1IyR3N2T2V1cVFUMEF4
+        M0YxUkhtM2k4ZXlGbkVGU3ZNOFg2NmN1TVVBCndWQ05lcE5aa2J6R3FPOGZFTzBl
+        RllFTGJJaFZMSGU4RUo3dCtNNUVkc00KLS0tIEVFMDZ0R25tT1BWMEdGcnNWQWV5
+        WEdEMG1sVGRVWGVReWVoSm9ibkFmdWcKuEtaB43U9Mt+1uhXxCF8B0ba1WFyoMAY
+        l4KX+ATg0xFw6rjr8jG5iJgyaUbA5Dhj3wNHcBqda+skvYAPGmCK+A==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-09T05:33:34Z"
+  mac: ENC[AES256_GCM,data:AC8vz+yFMN2+4JKo6vXxkXSPzAFZpDNsLOPQSQ6347Md7S4HA1dIhQiKDP4zE7sNX3ZOPlqIhaA4YcyiFMMfmHM3C2aGuYzkosbjICD6BP5C1TaS/XLv8yuIRqnir2bA4ey63nBQ1bezMqjxAhz/sNBYLfV9JynQM1jVUZ+z0p8=,iv:G9KwT8EtQPFTz0iorSVT7g7QV5d0thmF87ysNS25IZ8=,tag:ngYvPS2BGibpS04nuhsHuA==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.10.2

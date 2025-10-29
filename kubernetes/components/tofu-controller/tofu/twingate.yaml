@@ -25,8 +25,8 @@ spec:
     - kind: Secret
       name: terraform-s3-backend
       keys:
-      - access_key
-      - secret_key
+        - access_key
+        - secret_key
       optional: false
   path: ./terraform/twingate
   sourceRef:
@@ -49,4 +49,3 @@ spec:
             secretKeyRef:
               name: terraform-s3-backend
               key: BWS_ACCESS_TOKEN
-

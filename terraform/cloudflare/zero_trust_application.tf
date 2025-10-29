@@ -25,7 +25,7 @@
 #       id          = "8f07b241-9cf6-40e2-bb5d-71ca1ebfb5b6"
 #       name        = "USA"
 #       decision    = "allow"
-#       exclude     = [] 
+#       exclude     = []
 #       include = [
 #         {
 #           geo = {

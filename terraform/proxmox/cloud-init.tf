@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_file" "cloud_config_shared" {
       - default
       - name: mafyuh
         groups:
-          - sudo 
+          - sudo
         shell: /bin/zsh
         ssh_authorized_keys:
           - ${trimspace(local.ssh_public_key_1)}

@@ -1,4 +1,4 @@
-resource oci_core_vcn NEW {
+resource "oci_core_vcn" "NEW" {
   cidr_blocks = [
     "10.0.0.0/16",
   ]
@@ -11,7 +11,7 @@ resource oci_core_vcn NEW {
   dns_label    = "vcn06052048"
 }
 
-resource oci_core_vcn vcn-20230309-0146 {
+resource "oci_core_vcn" "vcn-20230309-0146" {
   cidr_blocks = [
     "10.0.0.0/16",
   ]

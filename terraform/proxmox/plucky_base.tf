@@ -24,21 +24,21 @@ resource "proxmox_virtual_environment_vm" "Ubuntu-plucky-Base" {
       }
     }
     user_data_file_id = proxmox_virtual_environment_file.cloud_init_qemu.id
-}
+  }
 
-serial_device {}
+  serial_device {}
 
-network_device {
+  network_device {
     bridge = "vmbr0"
-}
+  }
 
-vga {
-        type = "serial0"
-    }
+  vga {
+    type = "serial0"
+  }
 
-cpu {
-        cores = 2
-        type  = "host"
-        architecture = "x86_64"
-    }
+  cpu {
+    cores        = 2
+    type         = "host"
+    architecture = "x86_64"
+  }
 }

@@ -14,7 +14,11 @@
     {
       description: "Wazuh",
       groupName: "Wazuh",
-      matchPackageNames: ["/wazuh-manager/", "/wazuh-indexer/", "/wazuh-dashboard/"],
+      matchPackageNames: [
+        "/wazuh-manager/",
+        "/wazuh-indexer/",
+        "/wazuh-dashboard/",
+      ],
       matchDatasources: ["docker"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",

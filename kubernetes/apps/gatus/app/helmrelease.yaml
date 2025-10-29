@@ -19,18 +19,18 @@ spec:
     deployment:
       strategy: RollingUpdate
       annotateConfigChecksum: true
-    
+
     service:
       type: ClusterIP
       port: 80
       targetPort: 8080
-    
+
     ingress:
       enabled: false # HTTPRoute
-    
+
     serviceMonitor:
       enabled: false
-    
+
     config:
       storage:
         type: postgres
@@ -43,7 +43,7 @@ spec:
         alerts:
           - type: gotify
             sendOnResolved: true
-      
+
       endpoints:
         - name: "Sabnzbd"
           <<: *defaults

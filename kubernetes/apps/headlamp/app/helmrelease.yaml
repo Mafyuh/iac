@@ -62,7 +62,7 @@ spec:
     volumes:
       - name: kubeconfig
         emptyDir: {}
-    
+
     pluginsManager:
       enabled: false
       configContent: |

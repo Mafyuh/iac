@@ -10,7 +10,7 @@ resource "cloudflare_zero_trust_access_identity_provider" "authentik_access_iden
   name = "authentik"
   type = "oidc"
   scim_config = {
-    enabled = false
+    enabled          = false
     seat_deprovision = false
     user_deprovision = false
   }

@@ -99,7 +99,7 @@ resource "cloudflare_dns_record" "io_wildcard" {
 
 resource "cloudflare_dns_record" "io_mafyuh_io" {
   content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
-  name    = "${var.domains["io"]}"
+  name    = var.domains["io"]
   proxied = true
   ttl     = 1
   type    = "CNAME"
@@ -153,7 +153,7 @@ resource "cloudflare_dns_record" "io_sab" {
 
 resource "cloudflare_dns_record" "io_protonmail_mx" {
   content  = "mailsec.protonmail.ch"
-  name     = "${var.domains["io"]}"
+  name     = var.domains["io"]
   priority = 20
   proxied  = false
   ttl      = 1
@@ -163,7 +163,7 @@ resource "cloudflare_dns_record" "io_protonmail_mx" {
 
 resource "cloudflare_dns_record" "io_protonmail_mx_10" {
   content  = "mail.protonmail.ch"
-  name     = "${var.domains["io"]}"
+  name     = var.domains["io"]
   priority = 10
   proxied  = false
   ttl      = 1
@@ -182,7 +182,7 @@ resource "cloudflare_dns_record" "io_dmarc" {
 
 resource "cloudflare_dns_record" "io_hcp_verification" {
   content = "hcp-domain-verification=ff6c13e9a8728cc4f929db42bffe7a3cd75afe82ac7282042e5d565504984d51"
-  name    = "${var.domains["io"]}"
+  name    = var.domains["io"]
   proxied = false
   ttl     = 1
   type    = "TXT"
@@ -191,7 +191,7 @@ resource "cloudflare_dns_record" "io_hcp_verification" {
 
 resource "cloudflare_dns_record" "io_spf_record" {
   content = "v=spf1 include:_spf.protonmail.ch mx ~all"
-  name    = "${var.domains["io"]}"
+  name    = var.domains["io"]
   proxied = false
   ttl     = 1
   type    = "TXT"
@@ -200,7 +200,7 @@ resource "cloudflare_dns_record" "io_spf_record" {
 
 resource "cloudflare_dns_record" "io_protonmail_verification" {
   content = "protonmail-verification=a89583b3c8939a627b53a95a699f91de657807e1"
-  name    = "${var.domains["io"]}"
+  name    = var.domains["io"]
   proxied = false
   ttl     = 1
   type    = "TXT"

@@ -26,9 +26,8 @@ spec:
         enabled: true
         type: deployment
 
-
         replicas: 1
-        
+
         pod:
           securityContext:
             runAsUser: 1000
@@ -73,7 +72,7 @@ spec:
                 memory: 150Mi
               limits:
                 memory: 512Mi
-          
+
           metrics:
             dependsOn: app
             image:
@@ -107,7 +106,7 @@ spec:
         ports:
           metrics:
             port: *metricsPort
-    
+
     serviceMonitor:
       main:
         enabled: true

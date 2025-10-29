@@ -1,8 +1,8 @@
 ## Default LDAP Provider and App
 resource "authentik_provider_ldap" "ldap" {
-  name      = "LDAP"
-  base_dn   = "DC=ldap,DC=goauthentik,DC=io"
-  bind_flow = data.authentik_flow.ldap-authentication-flow.id
+  name        = "LDAP"
+  base_dn     = "DC=ldap,DC=goauthentik,DC=io"
+  bind_flow   = data.authentik_flow.ldap-authentication-flow.id
   unbind_flow = data.authentik_flow.default-invalidation-flow.id
   mfa_support = false
 }
