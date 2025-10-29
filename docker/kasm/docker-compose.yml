@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   kasm:
-    image: ghcr.io/linuxserver/kasm@sha256:1ac9b8bced32d389246f303f66d44b974ef06820d8bc8d7e1f479eaf3c04e1b2
+    image: ghcr.io/linuxserver/kasm@sha256:e9703a398845d4ba3b6236832643b3a78b1d7964f4c47052daa41f23f5a3785b
     container_name: kasm
     privileged: true
     environment:
