@@ -48,7 +48,7 @@ spec:
       mgr:
         modules:
           - name: diskprediction_local
-            enabled: true
+            enabled: false
           - name: insights
             enabled: true
           - name: pg_autoscaler
