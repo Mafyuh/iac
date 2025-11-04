@@ -12,3 +12,4 @@ resources:
   - tf-controller.yaml
   - system-upgrade.yaml
   - rook.yaml
+  - storage.yaml

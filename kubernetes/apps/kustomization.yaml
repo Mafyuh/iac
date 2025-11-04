@@ -22,3 +22,4 @@ resources:
   - tuppr/ks.yaml
   - twingate/ks.yaml
   - unpoller/ks.yaml
+  - volsync/ks.yaml
