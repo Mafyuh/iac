@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  geohub:
+    image: ghcr.io/benlikescode/geohub:main
+    env_file:
+      - .env
+    environment:
+      MONGO_URI: mongodb://root:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017
+    volumes:
+      - .env:/usr/src/app/.env
+    ports:
+      - "3009:3000"
+  mongo:
+    image: mongo
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./database:/data/db

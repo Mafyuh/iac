@@ -12,6 +12,8 @@ paths = [
   '''kubernetes/flux/.*/external-secret\.yaml''',
   # Terraform files with placeholder/example values
   '''terraform/authentik/oauth_sources\.tf''',
+  # Docker secret mappings - contains Bitwarden Secret Manager IDs only
+  '''docker/secret-mappings\.yml''',
 ]
 
 regexes = [
