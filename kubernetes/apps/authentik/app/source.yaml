@@ -3,8 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: gatus-chart
-  namespace: flux-system
+  name: authentik-chart
 spec:
   interval: 2h
-  url: https://twin.github.io/helm-charts
+  url: https://charts.goauthentik.io

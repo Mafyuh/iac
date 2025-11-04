@@ -3,9 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: cilium
-  namespace: flux-system
+  name: gatus-chart
 spec:
-  interval: 30m
-  url: https://helm.cilium.io/
-  timeout: 3m
+  interval: 2h
+  url: https://twin.github.io/helm-charts

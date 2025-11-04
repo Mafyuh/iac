@@ -15,7 +15,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: authentik-chart
-        namespace: flux-system
   values:
     global:
       env:

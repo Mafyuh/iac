@@ -14,7 +14,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cilium
-        namespace: flux-system
   values:
     cni:
       exclusive: false

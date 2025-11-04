@@ -14,7 +14,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: gatus-chart
-        namespace: flux-system
   values:
     deployment:
       strategy: RollingUpdate

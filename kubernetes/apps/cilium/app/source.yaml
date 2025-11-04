@@ -3,8 +3,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: authentik-chart
-  namespace: flux-system
+  name: cilium
 spec:
-  interval: 2h
-  url: https://charts.goauthentik.io
+  interval: 30m
+  url: https://helm.cilium.io/
+  timeout: 3m

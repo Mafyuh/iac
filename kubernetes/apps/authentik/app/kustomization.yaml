@@ -7,3 +7,4 @@ resources:
   - helmrelease.yaml
   - customcss.yaml
   - ldap-lb.yaml
+  - source.yaml
