@@ -6,3 +6,4 @@ resources:
   - helmrelease.yaml
   - httproute.yaml
   - auth.yaml
+  - source.yaml

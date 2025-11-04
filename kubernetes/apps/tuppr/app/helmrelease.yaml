@@ -8,7 +8,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: tuppr
-    namespace: flux-system
   interval: 1h
   values:
     replicaCount: 2

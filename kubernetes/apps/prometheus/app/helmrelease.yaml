@@ -15,7 +15,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-        namespace: flux-system
   values:
     defaultRules:
       create: true

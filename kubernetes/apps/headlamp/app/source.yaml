@@ -3,8 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: k8s-at-home
-  namespace: flux-system
+  name: headlamp-chart
 spec:
   interval: 2h
-  url: https://k8s-at-home.com/charts/
+  url: https://kubernetes-sigs.github.io/headlamp/

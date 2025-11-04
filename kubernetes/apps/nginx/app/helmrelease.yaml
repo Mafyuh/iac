@@ -13,7 +13,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: nginx-ingress-repo
-        namespace: flux-system
   values:
     controller:
       allowSnippetAnnotations: "true"

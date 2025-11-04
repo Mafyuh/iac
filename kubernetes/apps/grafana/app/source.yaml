@@ -3,8 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: wazuh-chart
-  namespace: flux-system
+  name: grafana-chart
 spec:
   interval: 2h
-  url: https://morgoved.github.io/wazuh-helm
+  url: https://grafana.github.io/helm-charts

@@ -3,8 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: headlamp-chart
-  namespace: flux-system
+  name: twingate-chart
 spec:
   interval: 2h
-  url: https://kubernetes-sigs.github.io/headlamp/
+  url: https://twingate.github.io/helm-charts

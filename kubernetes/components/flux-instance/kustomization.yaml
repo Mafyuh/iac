@@ -10,3 +10,4 @@ resources:
   - httproute.yaml
   - receiver.yaml
   - external-secret.yaml
+  - source.yaml

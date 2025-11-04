@@ -14,7 +14,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: headlamp-chart
-        namespace: flux-system
   values:
     replicaCount: 1
     config:

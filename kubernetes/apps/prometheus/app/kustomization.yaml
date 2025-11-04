@@ -8,3 +8,4 @@ resources:
   - rules.yaml
   - scrapeconfig.yaml
   - external-secret.yaml
+  - source.yaml

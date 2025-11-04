@@ -6,3 +6,4 @@ resources:
   - helmrelease.yaml
   - httproute.yaml
   - external-secret.yaml
+  - source.yaml

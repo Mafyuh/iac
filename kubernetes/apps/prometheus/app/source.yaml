@@ -3,8 +3,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: grafana-chart
-  namespace: flux-system
+  name: prometheus-community
 spec:
-  interval: 2h
-  url: https://grafana.github.io/helm-charts
+  interval: 30m
+  url: https://prometheus-community.github.io/helm-charts
+  timeout: 3m

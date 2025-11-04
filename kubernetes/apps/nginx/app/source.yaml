@@ -3,8 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: unpoller
-  namespace: flux-system
+  name: nginx-ingress-repo
 spec:
-  interval: 2h
-  url: https://unpoller.github.io/helm-chart
+  interval: 1m
+  url: https://kubernetes.github.io/ingress-nginx

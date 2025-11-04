@@ -13,7 +13,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: reflector-repo
-        namespace: flux-system
   values:
     replicaCount: 1
     rbac:

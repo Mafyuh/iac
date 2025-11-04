@@ -3,8 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: twingate-chart
-  namespace: flux-system
+  name: reflector-repo
 spec:
-  interval: 2h
-  url: https://twingate.github.io/helm-charts
+  interval: 1m
+  url: https://emberstack.github.io/helm-charts

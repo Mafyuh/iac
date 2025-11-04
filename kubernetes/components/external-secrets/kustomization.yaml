@@ -6,3 +6,4 @@ resources:
   - helmrelease.yaml
   - secretstore.yaml
   - bws-access-token.sops.yaml
+  - source.yaml
