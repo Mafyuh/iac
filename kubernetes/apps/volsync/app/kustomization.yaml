@@ -6,3 +6,4 @@ resources:
   - helmrelease.yaml
   - source.yaml
   - prometheusrule.yaml
+  - mutatingadmissionpolicy.yaml
