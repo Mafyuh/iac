@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: snapshot-controller
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: snapshot-controller
+  interval: 1h
+  values:
+    controller:
+      serviceMonitor:
+        create: true
