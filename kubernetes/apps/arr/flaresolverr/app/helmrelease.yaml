@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/flaresolverr/flaresolverr
-              tag: v3.4.3
+              tag: v3.4.4
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
