@@ -7,7 +7,7 @@ metadata:
   namespace: &ns arr
 spec:
   components:
-    - ../../../components/volsync
+    - ../../../../components/volsync
   targetNamespace: *ns
   commonMetadata:
     labels:
