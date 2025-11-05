@@ -5,16 +5,25 @@ kind: HelmRelease
 metadata:
   name: volsync
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: volsync
-      interval: 30m
-      version: 0.13.1
-      sourceRef:
-        kind: HelmRepository
-        name: backube
+  chartRef:
+    kind: OCIRepository
+    name: volsync
+  interval: 1h
   values:
+    fullnameOverride: volsync # Required for volsync-perfectra1n fork
+    image: &image
+      repository: ghcr.io/perfectra1n/volsync
+      tag: v0.16.13
+    kopia: *image
+    rclone: *image
+    restic: *image
+    rsync: *image
+    rsync-tls: *image
+    syncthing: *image
     manageCRDs: true
     metrics:
       disableAuth: true
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
