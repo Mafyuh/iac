@@ -87,6 +87,10 @@ controlPlane:
     - |-
       cluster:
         allowSchedulingOnControlPlanes: true
+        apiServer:
+          extraArgs:
+            feature-gates: "ImageVolume=true,MutatingAdmissionPolicy=true,ResourceHealthStatus=true"
+            runtime-config: "admissionregistration.k8s.io/v1beta1=true"
         coreDNS:
             disabled: false
         proxy:
