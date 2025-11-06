@@ -4,9 +4,11 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app jellyseerr
-  namespace: arr
+  namespace: &ns arr
 spec:
-  targetNamespace: arr
+  components:
+    - ../../../../components/volsync
+  targetNamespace: *ns
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -20,6 +22,9 @@ spec:
     namespace: flux-system
   wait: false
   postBuild:
+    substitute:
+      APP: jellyseerr
+      VOLSYNC_CAPACITY: 2Gi
     substituteFrom:
       - kind: Secret
         name: arr-secrets
