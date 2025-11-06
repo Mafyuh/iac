@@ -15,7 +15,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana-chart
-        namespace: flux-system
+        namespace: monitoring
   values:
     alloy:
       mounts:

@@ -138,11 +138,7 @@ spec:
 
     persistence:
       config:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: ceph-block
+        existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /config
 
