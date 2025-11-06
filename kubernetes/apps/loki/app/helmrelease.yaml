@@ -39,7 +39,7 @@ spec:
           loki:
             image:
               repository: grafana/loki
-              tag: 3.5.7
+              tag: 3.5.8
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
