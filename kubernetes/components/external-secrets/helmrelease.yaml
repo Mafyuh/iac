@@ -32,7 +32,7 @@ spec:
         interval: 1m
     image:
       repository: ghcr.io/external-secrets/external-secrets
-      tag: v0.20.4
+      tag: v1.0.0
       pullPolicy: IfNotPresent
     replicaCount: 1
     createOperator: true
