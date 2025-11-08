@@ -1,6 +1,16 @@
 ---
 version: "3"
 
+set:
+  - pipefail
+
 includes:
-  talos:
-    taskfile: .taskfiles/Talos.yaml
+  talos: ".taskfiles/talos/Taskfile.yaml"
+
+vars:
+  TALOSCONFIG: "{{.ROOT_DIR}}/kubernetes/talos/clusterconfig/talosconfig"
+
+tasks:
+  default:
+    silent: true
+    cmd: task --list
