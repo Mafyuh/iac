@@ -6,3 +6,5 @@ resources:
   - datasources.yaml
   - grafana.yaml
   - httproute.yaml
+  - servicemonitor.yaml
+  - dashboards

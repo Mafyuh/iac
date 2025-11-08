@@ -1,0 +1,23 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/kustomization.json
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - blocky.yaml
+  - kubernetes-coredns.yaml
+  - kubernetes-global.yaml
+  - kubernetes-namespaces.yaml
+  - kubernetes-nodes.yaml
+  - kubernetes-pods.yaml
+  - kubernetes-volumes.yaml
+  - media.yaml
+  - minio.yaml
+  - node-exporter-full.yaml
+  - prometheus.yaml
+  - proxmox-ve.yaml
+  - smokeping.yaml
+  - speedtest-exporter.yaml
+  - unifi-insights.yaml
+  - unifi-network-sites.yaml
+  - unifi-uap.yaml
+  - unifi-usw.yaml
