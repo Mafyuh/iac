@@ -1,0 +1,37 @@
+---
+version: "3"
+
+vars:
+  TALOS_DIR: "{{.ROOT_DIR}}/kubernetes/talos"
+  TALOSCONFIG: "{{.TALOS_DIR}}/clusterconfig/talosconfig"
+
+tasks:
+  talos:generate:
+    desc: Generate Talos configuration
+    dir: "{{.TALOS_DIR}}"
+    cmd: talhelper genconfig
+    preconditions:
+      - test -f {{.TALOS_DIR}}/talconfig.yaml
+      - which talhelper
+
+  talos:apply:
+    desc: Apply Talos config to all nodes
+    dir: "{{.TALOS_DIR}}"
+    cmds:
+      - talhelper genconfig
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.9 --file clusterconfig/optiplex-k8s-talos-1.mafyuh.com.yaml
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.84 --file clusterconfig/optiplex-k8s-talos-2.mafyuh.com.yaml
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.177 --file clusterconfig/optiplex-k8s-talos-3.mafyuh.com.yaml
+    preconditions:
+      - test -f {{.TALOS_DIR}}/talconfig.yaml
+      - which talhelper talosctl
+
+  talos:apply-node:
+    desc: Apply Talos config to a specific node [IP=required, FILE=required]
+    dir: "{{.TALOS_DIR}}"
+    cmd: export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes {{.IP}} --file {{.FILE}}
+    requires:
+      vars: [IP, FILE]
+    preconditions:
+      - test -f {{.TALOS_DIR}}/{{.FILE}}
+      - which talosctl
