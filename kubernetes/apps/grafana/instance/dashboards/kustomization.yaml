@@ -10,7 +10,6 @@ resources:
   - kubernetes-nodes.yaml
   - kubernetes-pods.yaml
   - kubernetes-volumes.yaml
-  - media.yaml
   - minio.yaml
   - node-exporter-full.yaml
   - prometheus.yaml
