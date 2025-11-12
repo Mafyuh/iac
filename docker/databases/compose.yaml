@@ -64,7 +64,7 @@ services:
 
   couchdb-obsidian-livesync:
     container_name: obsidian-livesync
-    image: couchdb:3.4.3
+    image: couchdb:3.5.1
     environment:
       - PUID=2003
       - PGID=2003
