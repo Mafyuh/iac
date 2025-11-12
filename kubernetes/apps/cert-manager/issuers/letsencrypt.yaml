@@ -21,3 +21,4 @@ spec:
           dnsZones:
             - local.mafyuh.dev
             - mafyuh.dev
+            - mafyuh.io
