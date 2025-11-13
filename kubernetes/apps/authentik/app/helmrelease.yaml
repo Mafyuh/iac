@@ -62,12 +62,26 @@ spec:
         fsGroup: *user
 
       ingress:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - "${AUTHENTIK_DOMAIN}"
-        paths: ["/"]
-        pathType: Prefix
+        enabled: false
+
+      route:
+        main:
+          enabled: true
+          kind: HTTPRoute
+          hostnames: ["auth.mafyuh.io"]
+          parentRefs:
+            - name: external
+              namespace: kube-system
+              sectionName: http-io
+            - name: external
+              namespace: kube-system
+              sectionName: https-io
+          matches:
+            - path:
+                type: PathPrefix
+                value: /
+          httpsRedirect: false
+          https: false
 
       metrics:
         serviceMonitor:

@@ -112,11 +112,11 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname = "auth.${var.domains["io"]}"
-        service  = "https://10.0.0.213:443"
+        service  = "https://10.0.0.215:443"
         path     = ""
         origin_request = {
           no_tls_verify            = true
-          origin_server_name       = ""
+          origin_server_name       = "auth.mafyuh.io"
           disable_chunked_encoding = false
           http2_origin             = false
           tcp_keep_alive           = 300
