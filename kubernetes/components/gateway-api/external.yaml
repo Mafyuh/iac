@@ -35,6 +35,10 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: mafyuh-io-production-tls
     - name: https
       protocol: HTTPS
       port: 443
