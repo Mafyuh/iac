@@ -17,7 +17,6 @@ resources:
   - kromgo/ks.yaml
   - loki/ks.yaml
   - netbox/ks.yaml
-  - nginx/ks.yaml
   - prometheus/ks.yaml
   - reflector/ks.yaml
   - reloader/ks.yaml
