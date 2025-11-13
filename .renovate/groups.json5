@@ -35,5 +35,18 @@
       },
       minimumGroupSize: 2,
     },
+    {
+      description: "Kubernetes Group",
+      groupName: "Kubernetes",
+      matchPackageNames: [
+        "kubernetes/kubernetes",
+        "ghcr.io/siderolabs/kubelet",
+      ],
+      matchDatasources: ["docker", "github-releases"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
   ],
 }
