@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "oderwat.indent-rainbow",
+    "blueglassblock.better-json5",
+    "hashicorp.hcl",
+    "vivaxy.vscode-conventional-commits",
+    "redhat.vscode-yaml",
+    "signageos.signageos-vscode-sops",
+    "opentofu.vscode-opentofu",
+    "bluebrown.yamlfmt"
+  ]
+}
