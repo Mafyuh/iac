@@ -6,9 +6,11 @@ set:
 
 includes:
   talos: ".taskfiles/talos/Taskfile.yaml"
+  helm: ".taskfiles/helm/Taskfile.yaml"
 
 vars:
   TALOSCONFIG: "{{.ROOT_DIR}}/kubernetes/talos/clusterconfig/talosconfig"
+  K8S_DIR: "{{.ROOT_DIR}}/kubernetes"
 
 tasks:
   default:

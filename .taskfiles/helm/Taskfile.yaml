@@ -1,0 +1,25 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+output:
+  group:
+    error_only: true
+tasks:
+  add-helm-repos:
+    desc: Add all helm repos to helm
+    preconditions:
+      - which helm yq
+    dir: "{{.K8S_DIR}}"
+    sources:
+      - "{{.K8S_DIR}}/**/source.yml"
+      - exclude: "{{.HELM_SOURCES_DIR}}/kustomization.yml"
+    cmds:
+      - for: sources
+        cmd: |
+          name=$(yq -r '.metadata.name' {{.ITEM}})
+          url=$(yq -r '.spec.url' {{.ITEM}})
+          if [[ ! $url =~ "oci://" ]];
+          then
+            helm repo add "$name" "$url"
+          fi
+      - helm repo update
