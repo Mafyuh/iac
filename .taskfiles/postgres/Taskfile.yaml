@@ -1,0 +1,18 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+output:
+  group:
+    error_only: true
+vars:
+  POSTGRES_HOST: "10.20.10.100"
+  POSTGRES_USER: "mafyuh"
+  BACKUP_FILE: "backup.sql"
+tasks:
+  backup:
+    desc: Backup PostgreSQL database via SSH and copy locally
+    cmds:
+      - ssh {{.POSTGRES_USER}}@{{.POSTGRES_HOST}} 'docker exec -t postgres pg_dumpall -U {{.POSTGRES_USER}} > {{.BACKUP_FILE}}'
+      - scp {{.POSTGRES_USER}}@{{.POSTGRES_HOST}}:{{.BACKUP_FILE}} ./{{.BACKUP_FILE}}
+      - cmd: echo "Backup completed - local copy at ./{{.BACKUP_FILE}}, remote at {{.POSTGRES_HOST}}:~/{{.BACKUP_FILE}}"
+        silent: false

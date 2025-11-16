@@ -8,6 +8,7 @@ set:
 includes:
   talos: ".taskfiles/talos/Taskfile.yaml"
   helm: ".taskfiles/helm/Taskfile.yaml"
+  postgres: ".taskfiles/postgres/Taskfile.yaml"
 
 vars:
   TALOSCONFIG: "{{.ROOT_DIR}}/kubernetes/talos/clusterconfig/talosconfig"
