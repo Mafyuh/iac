@@ -32,62 +32,31 @@ jobs:
             kubernetes/**/*
             docker/**/*
 
-      - name: Extract changed images from PR diff
+      - name: Detect image from diff or manual input
         id: images
         run: |
-          # Worflow dispatch triggered manually
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            image="${{ inputs.image }}"
-            echo "Manual scan requested for image: $image"
-            echo "image=$image" >> $GITHUB_OUTPUT
+            echo "image=${{ inputs.image }}" >> $GITHUB_OUTPUT
             echo "should_scan=true" >> $GITHUB_OUTPUT
-            echo "is_manual=true" >> $GITHUB_OUTPUT
             exit 0
           fi
 
-          echo "=== Analyzing PR diff for container images ==="
+          image=$(git diff -U0 HEAD^ HEAD \
+            | grep -E "^\+.*(image:|repository:|tag:)" \
+            | awk '
+              /repository:/ { repo=$2 }
+              /tag:/ { tag=$2 }
+              /image:/ { img=$2 }
+              END {
+                gsub(/["'\'' ]/,"",repo); gsub(/["'\'' ]/,"",tag)
+                gsub(/["'\'' ]/,"",img)
+                if (repo && tag) print repo ":" tag;
+                else if (img) print img;
+              }'
+          )
 
-          # Get changed files from the action
-          changed_files="${{ steps.changed-files.outputs.changed_files }}"
-          echo "Changed files: $changed_files"
-
-          if [ -z "$changed_files" ]; then
-            echo "No docker or kubernetes files changed"
-            echo "should_scan=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Look for changes to k8s images in the actual diff
-          repo=$(git diff HEAD~1 HEAD | grep -E '^\+.*repository:' | sed -E 's/.*repository:[[:space:]]*([^[:space:]]+).*/\1/' | head -n1)
-          tag=$(git diff HEAD~1 HEAD | grep -E '^\+.*tag:' | sed -E 's/.*tag:[[:space:]]*([^[:space:]]+).*/\1/' | head -n1)
-
-          echo "Found k8s repo: '$repo', tag: '$tag'"
-
-          if [ -n "$repo" ] && [ -n "$tag" ]; then
-            image="$repo:$tag"
-            echo "Using k8s format: $image"
-          else
-            # Fall back to plain image: lines (docker-compose)
-            image=$(git diff HEAD~1 HEAD | grep -E '^\+.*image:' | sed -E 's/.*image:[[:space:]]*([^[:space:]#]+).*/\1/' | head -n1)
-            echo "Raw image found: '$image'"
-
-            # Clean up common prefixes and quotes
-            image=$(echo "$image" | sed -E 's/^["\x27]//; s/["\x27]$//; s/^[[:space:]]*//; s/[[:space:]]*$//')
-            echo "Cleaned image: '$image'"
-          fi
-
-          echo "Found image: $image"
           echo "image=$image" >> $GITHUB_OUTPUT
-          echo "is_manual=false" >> $GITHUB_OUTPUT
-
-          # Set a flag to indicate if we should run the scan
-          if [ -n "$image" ] && [ "$image" != "" ]; then
-            echo "should_scan=true" >> $GITHUB_OUTPUT
-            echo "Will scan image: $image"
-          else
-            echo "should_scan=false" >> $GITHUB_OUTPUT
-            echo "No container images found in the diff, skipping Trivy scan"
-          fi
+          echo "should_scan=$([ -n "$image" ] && echo true || echo false)" >> $GITHUB_OUTPUT
 
       - name: Scan changed image with Trivy
         if: steps.images.outputs.should_scan == 'true'
