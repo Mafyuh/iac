@@ -24,13 +24,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Fetch all history for git diff
-        run: |
-          if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
-            git fetch --unshallow
-          else
-            git fetch --depth=2
-          fi
+      - name: Get Changed Files
+        id: changed-files
+        uses: bjw-s-labs/action-changed-files@1a5aeab1bfa64d0c4e786f501d5a3f1fad4a24da # v0.4.1
+        with:
+          patterns: |
+            kubernetes/**/*
+            docker/**/*
 
       - name: Extract changed images from PR diff
         id: images
@@ -47,8 +47,8 @@ jobs:
 
           echo "=== Analyzing PR diff for container images ==="
 
-          # Get all changed files in docker/ and kubernetes/
-          changed_files=$(git diff --name-only HEAD~1 HEAD | grep -E '^(docker|kubernetes)/' || true)
+          # Get changed files from the action
+          changed_files="${{ steps.changed-files.outputs.changed_files }}"
           echo "Changed files: $changed_files"
 
           if [ -z "$changed_files" ]; then
@@ -107,42 +107,13 @@ jobs:
 
       - name: Comment PR with link to security scan
         if: steps.images.outputs.should_scan == 'true' && steps.images.outputs.is_manual != 'true'
-        uses: actions/github-script@v8
+        uses: mshick/add-pr-comment@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const image = '${{ steps.images.outputs.image }}';
-            const prNumber = context.issue.number;
-            const scanUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/security/code-scanning?query=pr%3A${prNumber}+tool%3ATrivy+is%3Aopen`;
+          message-id: trivy-scan-${{ github.event.pull_request.number }}
+          message: |
+            ## 🛡️ Trivy Security Scan Complete
 
-            const comment = "## 🛡️ Trivy Security Scan Complete\n\n" +
-              `**Scanned Image:** \`${image}\`\n` +
-              `📊 **[View Security Scan Results](${scanUrl})**\n\n` +
-              "_Results are available in the Security tab above._";
+            **Scanned Image:** `${{ steps.images.outputs.image }}`
+            📊 **[View Security Scan Results](https://github.com/${{ github.repository }}/security/code-scanning?query=pr%3A${{ github.event.pull_request.number }}+tool%3ATrivy+is%3Aopen)**
 
-            // Find existing comment to update
-            const comments = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
-
-            const existingComment = comments.data.find(comment =>
-              comment.body.includes('🛡️ Trivy Security Scan Complete')
-            );
-
-            if (existingComment) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existingComment.id,
-                body: comment
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: comment
-              });
-            }
+            _Results are available in the Security tab above._
