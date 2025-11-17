@@ -24,39 +24,40 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Get Changed Files
-        id: changed-files
-        uses: bjw-s-labs/action-changed-files@1a5aeab1bfa64d0c4e786f501d5a3f1fad4a24da # v0.4.1
-        with:
-          patterns: |
-            kubernetes/**/*
-            docker/**/*
-
-      - name: Detect image from diff or manual input
+      - name: Extract changed images from PR diff
         id: images
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "image=${{ inputs.image }}" >> $GITHUB_OUTPUT
             echo "should_scan=true" >> $GITHUB_OUTPUT
+            echo "is_manual=true" >> $GITHUB_OUTPUT
             exit 0
           fi
 
-          image=$(git diff -U0 HEAD^ HEAD \
-            | grep -E "^\+.*(image:|repository:|tag:)" \
-            | awk '
-              /repository:/ { repo=$2 }
-              /tag:/ { tag=$2 }
-              /image:/ { img=$2 }
-              END {
-                gsub(/["'\'' ]/,"",repo); gsub(/["'\'' ]/,"",tag)
-                gsub(/["'\'' ]/,"",img)
-                if (repo && tag) print repo ":" tag;
-                else if (img) print img;
-              }'
-          )
+          echo "=== Detecting container images from PR ==="
+
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+
+          diff=$(git diff -U0 "$base" "$head")
+
+          repo=$(echo "$diff" | grep -E '^\+.*repository:' | awk '{print $2}' | head -n1)
+          tag=$(echo "$diff" | grep -E '^\+.*tag:' | awk '{print $2}' | head -n1)
+
+          if [ -n "$repo" ] && [ -n "$tag" ]; then
+            image="$repo:$tag"
+          else
+            image=$(echo "$diff" | grep -E '^\+.*image:' | sed -E 's/.*image:[[:space:]]*([^[:space:]#]+).*/\1/' | head -n1)
+          fi
 
           echo "image=$image" >> $GITHUB_OUTPUT
-          echo "should_scan=$([ -n "$image" ] && echo true || echo false)" >> $GITHUB_OUTPUT
+          echo "is_manual=false" >> $GITHUB_OUTPUT
+
+          if [ -n "$image" ]; then
+            echo "should_scan=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_scan=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Scan changed image with Trivy
         if: steps.images.outputs.should_scan == 'true'
