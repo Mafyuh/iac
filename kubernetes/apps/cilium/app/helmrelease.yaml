@@ -25,9 +25,9 @@ spec:
     endpointRoutes:
       enabled: true
     envoy:
-      enabled: true
+      enabled: false
     envoyConfig:
-      enabled: true
+      enabled: false
     hubble:
       enabled: true
       metrics:
