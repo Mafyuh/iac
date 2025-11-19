@@ -70,10 +70,10 @@ spec:
           kind: HTTPRoute
           hostnames: ["auth.mafyuh.io"]
           parentRefs:
-            - name: external
+            - name: envoy-external
               namespace: kube-system
               sectionName: http-io
-            - name: external
+            - name: envoy-external
               namespace: kube-system
               sectionName: https-io
           matches:
