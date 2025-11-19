@@ -8,7 +8,7 @@ metadata:
 spec:
   hostnames: ["status.mafyuh.dev"]
   parentRefs:
-    - name: external
+    - name: envoy-external
       namespace: kube-system
       sectionName: http
   rules:

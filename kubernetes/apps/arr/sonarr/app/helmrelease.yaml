@@ -139,7 +139,7 @@ spec:
               - name: sonarr-metrics
                 port: *metricsPort
         parentRefs:
-          - name: internal
+          - name: envoy-internal
             namespace: kube-system
             sectionName: https
 

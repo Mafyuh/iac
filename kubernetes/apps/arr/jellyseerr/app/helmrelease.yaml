@@ -91,7 +91,7 @@ spec:
               - name: jellyseerr
                 port: *port
         parentRefs:
-          - name: external
+          - name: envoy-external
             namespace: kube-system
             sectionName: http
 

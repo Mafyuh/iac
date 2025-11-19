@@ -72,7 +72,7 @@ spec:
         hostnames:
           - "{{ .Release.Name }}.local.mafyuh.dev"
         parentRefs:
-          - name: internal
+          - name: envoy-internal
             namespace: kube-system
     configMaps:
       config:

@@ -10,7 +10,7 @@ spec:
     - "*.local.mafyuh.dev"
     - "*.mafyuh.io"
   parentRefs:
-    - name: internal
+    - name: envoy-internal
       namespace: kube-system
       sectionName: http
     - name: external

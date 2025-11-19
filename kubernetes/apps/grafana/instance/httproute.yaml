@@ -8,7 +8,7 @@ spec:
   hostnames:
     - grafana.local.mafyuh.dev
   parentRefs:
-    - name: internal
+    - name: envoy-internal
       namespace: kube-system
   rules:
     - backendRefs:
