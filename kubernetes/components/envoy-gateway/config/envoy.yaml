@@ -100,11 +100,15 @@ metadata:
   name: https-redirect
 spec:
   parentRefs:
-    - name: envoy-external
-      namespace: network
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-external
+      namespace: kube-system
       sectionName: http
-    - name: envoy-internal
-      namespace: network
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-internal
+      namespace: kube-system
       sectionName: http
   rules:
     - filters:
@@ -112,3 +116,7 @@ spec:
           requestRedirect:
             scheme: https
             statusCode: 301
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

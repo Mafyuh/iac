@@ -27,7 +27,8 @@ spec:
       tls:
         certificateRefs:
           - kind: Secret
-            name: mafyuh-local-dev-production-tls
+            name: local-mafyuh-dev-production-tls
+            namespace: kube-system
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.envoyproxy.io/envoypatchpolicy_v1alpha1.json
 apiVersion: gateway.envoyproxy.io/v1alpha1
