@@ -5,9 +5,6 @@ kind: Gateway
 metadata:
   name: external
   namespace: kube-system
-  annotations:
-    external-dns.alpha.kubernetes.io/target: &hostname mafyuh.dev
-    external-dns.alpha.kubernetes.io/hostname: *hostname
 spec:
   gatewayClassName: cilium
   addresses:

@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.networking.k8s.io/gateway_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy-internal
+spec:
+  gatewayClassName: envoy
+  infrastructure:
+    annotations:
+      lbipam.cilium.io/ips: 10.0.0.218
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      hostname: "*.local.mafyuh.dev"
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: "*.local.mafyuh.dev"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: mafyuh-local-dev-production-tls
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.envoyproxy.io/envoypatchpolicy_v1alpha1.json
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyPatchPolicy
+metadata:
+  name: envoy-internal
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: envoy-internal
+  type: JSONPatch
+  jsonPatches:
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: network/envoy-internal/https
+      operation: &operation
+        op: add
+        jsonPath: ..filters[*].typed_config.http_filters[?(@.name=="envoy.filters.http.compressor.zstd")].typed_config
+        value:
+          "@type": type.googleapis.com/envoy.extensions.filters.http.compressor.v3.Compressor
+          choose_first: true
+          compressor_library:
+            name: envoy.compression.zstd.compressor
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.compression.zstd.compressor.v3.Zstd
+          response_direction_config:
+            remove_accept_encoding_header: true
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: network/envoy-internal/https-quic
+      operation: *operation
