@@ -72,10 +72,10 @@ spec:
           parentRefs:
             - name: envoy-external
               namespace: kube-system
-              sectionName: http-io
+              sectionName: http
             - name: envoy-external
               namespace: kube-system
-              sectionName: https-io
+              sectionName: https
           matches:
             - path:
                 type: PathPrefix

@@ -13,14 +13,12 @@ spec:
     - name: http
       protocol: HTTP
       port: 80
-      hostname: "*.mafyuh.dev"
       allowedRoutes:
         namespaces:
           from: All
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: "*.mafyuh.dev"
       allowedRoutes:
         namespaces:
           from: All
@@ -29,22 +27,6 @@ spec:
           - kind: Secret
             name: mafyuh-dev-production-tls
             namespace: kube-system
-    - name: http-io
-      protocol: HTTP
-      port: 80
-      hostname: "*.mafyuh.io"
-      allowedRoutes:
-        namespaces:
-          from: All
-    - name: https-io
-      protocol: HTTPS
-      port: 443
-      hostname: "*.mafyuh.io"
-      allowedRoutes:
-        namespaces:
-          from: All
-      tls:
-        certificateRefs:
           - kind: Secret
             name: mafyuh-io-production-tls
             namespace: kube-system
@@ -62,7 +44,7 @@ spec:
   type: JSONPatch
   jsonPatches:
     - type: type.googleapis.com/envoy.config.listener.v3.Listener
-      name: network/envoy-external/https
+      name: kube-system/envoy-external/https
       operation: &operation
         op: add
         jsonPath: ..filters[*].typed_config.http_filters[?(@.name=="envoy.filters.http.compressor.zstd")].typed_config
@@ -75,6 +57,3 @@ spec:
               "@type": type.googleapis.com/envoy.extensions.compression.zstd.compressor.v3.Zstd
           response_direction_config:
             remove_accept_encoding_header: true
-    - type: type.googleapis.com/envoy.config.listener.v3.Listener
-      name: network/envoy-external/https-quic
-      operation: *operation
