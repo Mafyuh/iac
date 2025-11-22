@@ -43,8 +43,8 @@ spec:
   type: JSONPatch
   jsonPatches:
     - type: type.googleapis.com/envoy.config.listener.v3.Listener
-      name: network/envoy-internal/https
-      operation: &operation
+      name: kube-system/envoy-internal/https
+      operation:
         op: add
         jsonPath: ..filters[*].typed_config.http_filters[?(@.name=="envoy.filters.http.compressor.zstd")].typed_config
         value:
@@ -56,6 +56,3 @@ spec:
               "@type": type.googleapis.com/envoy.extensions.compression.zstd.compressor.v3.Zstd
           response_direction_config:
             remove_accept_encoding_header: true
-    - type: type.googleapis.com/envoy.config.listener.v3.Listener
-      name: network/envoy-internal/https-quic
-      operation: *operation

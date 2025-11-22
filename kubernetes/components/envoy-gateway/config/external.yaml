@@ -45,7 +45,7 @@ spec:
   jsonPatches:
     - type: type.googleapis.com/envoy.config.listener.v3.Listener
       name: kube-system/envoy-external/https
-      operation: &operation
+      operation:
         op: add
         jsonPath: ..filters[*].typed_config.http_filters[?(@.name=="envoy.filters.http.compressor.zstd")].typed_config
         value:
