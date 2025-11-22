@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/gateway.networking.k8s.io/referencegrant_v1beta1.json
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: authentik-service
+  namespace: authentik
+spec:
+  from:
+    - group: gateway.envoyproxy.io
+      kind: SecurityPolicy
+      namespace: arr
+    - group: gateway.envoyproxy.io
+      kind: SecurityPolicy
+      namespace: monitoring
+  to:
+    - group: ""
+      kind: Service
+      name: ak-outpost-proxy-outpost
