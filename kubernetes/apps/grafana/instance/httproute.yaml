@@ -6,10 +6,11 @@ metadata:
   name: grafana
 spec:
   hostnames:
-    - grafana.local.mafyuh.dev
+    - grafana.mafyuh.dev
   parentRefs:
-    - name: envoy-internal
+    - name: envoy-external
       namespace: kube-system
+      sectionName: https
   rules:
     - backendRefs:
         - name: grafana-service

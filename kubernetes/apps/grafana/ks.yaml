@@ -28,6 +28,8 @@ metadata:
   namespace: &ns monitoring
 spec:
   targetNamespace: *ns
+  components:
+    - ../../../components/authentik-proxy
   path: ./kubernetes/apps/grafana/instance
   commonMetadata:
     labels:

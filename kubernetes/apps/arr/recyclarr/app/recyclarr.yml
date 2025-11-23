@@ -1,6 +1,6 @@
 sonarr:
   series:
-    base_url: https://sonarr.local.mafyuh.dev
+    base_url: http://sonarr-app.arr.svc.cluster.local:8989
     api_key: !env_var SONARR_API_KEY
 
     delete_old_custom_formats: true
@@ -45,7 +45,7 @@ sonarr:
 
 radarr:
   radarr_main:
-    base_url: https://radarr.local.mafyuh.dev
+    base_url: http://radarr-app.arr.svc.cluster.local:7878
     api_key: !env_var RADARR_API_KEY
 
     # Custom Format Configuration

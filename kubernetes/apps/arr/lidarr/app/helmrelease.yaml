@@ -115,7 +115,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.local.mafyuh.dev"]
+        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
         rules:
           - matches:
               - path:
@@ -132,7 +132,7 @@ spec:
               - name: lidarr-metrics
                 port: *metricsPort
         parentRefs:
-          - name: envoy-internal
+          - name: envoy-external
             namespace: kube-system
             sectionName: https
 

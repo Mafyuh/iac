@@ -4,9 +4,11 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app headlamp
-  namespace: monitoring
+  namespace: &ns monitoring
 spec:
-  targetNamespace: monitoring
+  targetNamespace: *ns
+  components:
+    - ../../../components/authentik-proxy
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

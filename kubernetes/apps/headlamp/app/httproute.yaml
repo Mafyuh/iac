@@ -6,9 +6,9 @@ metadata:
   name: headlamp
   namespace: monitoring
 spec:
-  hostnames: ["headlamp.local.mafyuh.dev"]
+  hostnames: ["k8s.mafyuh.dev"]
   parentRefs:
-    - name: envoy-internal
+    - name: envoy-external
       namespace: kube-system
       sectionName: https
   rules:
