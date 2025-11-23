@@ -63,7 +63,7 @@ spec:
         emptyDir: {}
 
     pluginsManager:
-      enabled:
+      enabled: true
       configContent: |
         plugins:
           - name: cert-manager
