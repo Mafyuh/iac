@@ -20,4 +20,7 @@ spec:
     kind: GitRepository
     name: iac
     namespace: flux-system
+  postBuild:
+    substitute:
+      APP: headlamp
   wait: false
