@@ -63,7 +63,7 @@ spec:
         emptyDir: {}
 
     pluginsManager:
-      enabled: false
+      enabled:
       configContent: |
         plugins:
           - name: cert-manager
@@ -71,7 +71,10 @@ spec:
             version: 0.1.0
           - name: flux
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
-            version: 0.4.0
+            version: 0.5.0
           - name: kompose
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_kompose
             version: 0.1.0-beta-1
+          - name: AI
+            source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
+            version: 0.1.0-alpha
