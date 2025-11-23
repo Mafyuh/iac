@@ -43,16 +43,16 @@ provider "bitwarden" {
 }
 
 provider "sonarr" {
-  url     = "https://sonarr.local.mafyuh.dev"
+  url     = "http://sonarr-app.arr.svc.cluster.local:8989"
   api_key = data.bitwarden_secret.sonarr_api_key.value
 }
 
 provider "radarr" {
-  url     = "https://radarr.local.mafyuh.dev"
+  url     = "http://radarr-app.arr.svc.cluster.local:7878"
   api_key = data.bitwarden_secret.radarr_api_key.value
 }
 
 provider "prowlarr" {
-  url     = "https://prowlarr.local.mafyuh.dev"
+  url     = "http://prowlarr-app.arr.svc.cluster.local:6767"
   api_key = data.bitwarden_secret.prowlarr_api_key.value
 }

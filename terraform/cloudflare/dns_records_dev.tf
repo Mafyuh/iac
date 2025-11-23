@@ -43,33 +43,6 @@ resource "cloudflare_dns_record" "dev_n8n" {
   zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
-resource "cloudflare_dns_record" "dev_prowlarr" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
-  name    = "prowlarr.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_radarr" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
-  name    = "radarr.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_sonarr" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
-  name    = "sonarr.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
-}
-
 resource "cloudflare_dns_record" "dev_sync" {
   content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "sync.${var.domains["dev"]}"
@@ -82,15 +55,6 @@ resource "cloudflare_dns_record" "dev_sync" {
 resource "cloudflare_dns_record" "dev_vault" {
   content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "vault.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_wiki" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
-  name    = "wiki.${var.domains["dev"]}"
   proxied = true
   ttl     = 1
   type    = "A"
@@ -118,15 +82,6 @@ resource "cloudflare_dns_record" "dev_domainconnect" {
 resource "cloudflare_dns_record" "dev_home" {
   content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
   name    = "home.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_wildcard" {
-  content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
-  name    = "*.${var.domains["dev"]}"
   proxied = true
   ttl     = 1
   type    = "CNAME"
