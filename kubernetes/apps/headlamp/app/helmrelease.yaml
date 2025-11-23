@@ -75,6 +75,6 @@ spec:
           - name: kompose
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_kompose
             version: 0.1.0-beta-1
-          - name: AI
+          - name: ai-assistant
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
             version: 0.1.0-alpha
