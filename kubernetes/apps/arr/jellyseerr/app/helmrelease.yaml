@@ -93,7 +93,7 @@ spec:
         parentRefs:
           - name: envoy-external
             namespace: kube-system
-            sectionName: http
+            sectionName: https
 
     persistence:
       config:
