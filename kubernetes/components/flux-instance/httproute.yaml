@@ -10,7 +10,7 @@ spec:
   parentRefs:
     - name: envoy-external
       namespace: kube-system
-      sectionName: http
+      sectionName: https
   rules:
     - backendRefs:
         - name: webhook-receiver
