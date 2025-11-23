@@ -10,6 +10,7 @@ resources:
   - blackbox/ks.yaml
   - cert-manager/ks.yaml
   - cilium/ks.yaml
+  - cloudflared/ks.yaml
   - gatus/ks.yaml
   - grafana/ks.yaml
   - headlamp/ks.yaml

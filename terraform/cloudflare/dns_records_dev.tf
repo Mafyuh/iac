@@ -1,9 +1,9 @@
-resource "cloudflare_dns_record" "dev_git" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
-  name    = "git.${var.domains["dev"]}"
+resource "cloudflare_dns_record" "dev_external" {
+  content = "9516dded-1ccc-4f32-b9ed-3691ae265523.cfargotunnel.com"
+  name    = "external.${var.domains["dev"]}"
   proxied = true
   ttl     = 1
-  type    = "A"
+  type    = "CNAME"
   zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
