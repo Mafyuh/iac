@@ -39,5 +39,8 @@ spec:
     kind: GitRepository
     name: iac
     namespace: flux-system
+  postBuild:
+    substitute:
+      APP: grafana
   wait: true
   interval: 30m
