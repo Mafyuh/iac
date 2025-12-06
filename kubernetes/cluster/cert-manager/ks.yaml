@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/cert-manager/app
+  path: ./kubernetes/cluster/cert-manager/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -35,7 +35,7 @@ spec:
       app.kubernetes.io/name: cert-manager-self-signed
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/cert-manager/self-signed
+  path: ./kubernetes/cluster/cert-manager/self-signed
   prune: true
   sourceRef:
     kind: GitRepository
@@ -58,7 +58,7 @@ spec:
       app.kubernetes.io/name: cert-manager-issuers
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/cert-manager/issuers
+  path: ./kubernetes/cluster/cert-manager/issuers
   prune: true
   sourceRef:
     kind: GitRepository
@@ -81,7 +81,7 @@ spec:
       app.kubernetes.io/name: cert-manager-certificates
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/cert-manager/certificates
+  path: ./kubernetes/cluster/cert-manager/certificates
   prune: true
   sourceRef:
     kind: GitRepository

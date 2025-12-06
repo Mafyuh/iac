@@ -3,11 +3,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app rook-ceph-operator
-  namespace: &ns rook-ceph
+  name: &app tofu-controller
+  namespace: &ns flux-system
 spec:
   targetNamespace: *ns
-  path: ./kubernetes/components/rook-ceph/app
+  path: ./kubernetes/cluster/tofu-controller/app
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -22,11 +25,16 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: rook-ceph-cluster
-  namespace: &ns rook-ceph
+  name: tofu-controller-resources
+  namespace: &ns flux-system
 spec:
   targetNamespace: *ns
-  path: ./kubernetes/components/rook-ceph/cluster
+  dependsOn:
+    - name: tofu-controller
+  path: ./kubernetes/cluster/tofu-controller/tofu
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: tofu-controller
   prune: true
   sourceRef:
     kind: GitRepository

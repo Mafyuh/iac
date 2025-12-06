@@ -3,10 +3,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app flux-instance
-  namespace: flux-system
+  name: &app snapshot-controller
+  namespace: &ns kube-system
 spec:
-  path: ./kubernetes/components/flux-instance/
+  targetNamespace: *ns
+  path: ./kubernetes/cluster/snapshot-controller/app
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -15,15 +16,6 @@ spec:
     kind: GitRepository
     name: iac
     namespace: flux-system
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
-  postBuild:
-    substituteFrom:
-      - kind: ConfigMap
-        name: cluster-config
-
   wait: true
   interval: 30m
   retryInterval: 1m

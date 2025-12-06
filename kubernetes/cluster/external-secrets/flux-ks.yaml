@@ -3,11 +3,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app metrics-server
-  namespace: &ns monitoring
+  name: &app external-secrets
+  namespace: security
 spec:
-  targetNamespace: *ns
-  path: ./kubernetes/components/metrics-server/
+  path: ./kubernetes/cluster/external-secrets/
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -16,6 +15,11 @@ spec:
     kind: GitRepository
     name: iac
     namespace: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+
   wait: true
   interval: 30m
   retryInterval: 1m
