@@ -75,7 +75,7 @@ services:
       - gitea_main
 
   linkstack:
-    image: linkstackorg/linkstack@sha256:abd691b4293b020a317de8794737671e0315159efcb868e8a4124d6f0611f7ae
+    image: linkstackorg/linkstack@sha256:2b298302ab50184cf99294ef3ae6a3c49c13081162e9a1d067a872e9c75b3e55
     container_name: linkstack
     ports:
       - 8005:80
