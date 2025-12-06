@@ -26,18 +26,42 @@ spec:
       serviceMonitor:
         enabled: true
         interval: 1m
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
     certController:
       serviceMonitor:
         enabled: true
         interval: 1m
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
     image:
       repository: ghcr.io/external-secrets/external-secrets
       tag: v1.1.1
       pullPolicy: IfNotPresent
     replicaCount: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 256Mi
     createOperator: true
     bitwarden-sdk-server:
       enabled: true
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
       serviceMonitor:
         enabled: true
         interval: 1m
