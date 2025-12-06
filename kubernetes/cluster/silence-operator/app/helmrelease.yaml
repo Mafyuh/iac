@@ -13,3 +13,5 @@ spec:
     alertmanagerAddress: http://alertmanager-operated.monitoring.svc.cluster.local:9093
     networkPolicy:
       enabled: false
+    image:
+      tag: v0.20.0
