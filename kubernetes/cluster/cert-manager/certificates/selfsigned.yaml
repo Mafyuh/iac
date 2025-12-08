@@ -5,6 +5,8 @@ kind: Certificate
 metadata:
   name: bitwarden-tls-certs
   namespace: security
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
 spec:
   secretName: bitwarden-tls-certs
   dnsNames:

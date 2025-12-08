@@ -10,6 +10,9 @@ kind: Certificate
 metadata:
   name: bitwarden-bootstrap-certificate
   namespace: cert-manager
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+    reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
 spec:
   # this is discouraged but required by ios
   commonName: cert-manager-bitwarden-tls
@@ -41,3 +44,4 @@ metadata:
 spec:
   ca:
     secretName: bitwarden-tls-certs
+    namespace: cert-manager
