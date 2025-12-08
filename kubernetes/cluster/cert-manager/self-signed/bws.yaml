@@ -44,4 +44,3 @@ metadata:
 spec:
   ca:
     secretName: bitwarden-tls-certs
-    namespace: cert-manager
