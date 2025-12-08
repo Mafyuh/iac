@@ -73,3 +73,5 @@ spec:
       readOnlyRootFilesystem: true
       runAsNonRoot: true
       runAsUser: 1000
+    grafanaDashboard:
+      enabled: true
