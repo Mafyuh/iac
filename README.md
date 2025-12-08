@@ -45,7 +45,6 @@ To automate infrastructure updates, I use **Github Actions**, which trigger work
 - **[Flux](https://fluxcd.io/)** manages Continuous Deployment (CD) for Kubernetes, deployed via [Flux Operator](https://fluxcd.control-plane.io/).
 - **[Docker CD Workflow](https://github.com/Mafyuh/iac/blob/main/.github/workflows/CD.yml)** handles Continuous Deployment for Docker services.
 - **[Renovate](https://github.com/renovatebot/renovate)** keeps services updated by opening PRs for new versions.
-- **[super-linter](https://github.com/super-linter/super-linter)** ensures configuration files are properly structured.
 - **[Ansible](https://github.com/ansible/ansible)** is used to execute playbooks on all of my VMs, automating management and configurations
 
 ### 🔒 **Security & Networking**
@@ -93,17 +92,20 @@ This repo is not structured like a project you can easily replicate. Although if
 
 Over time I will try to add more detailed instructions in each directories README.
 
-Some good references for how I learned this stuff (other than RTM)
+Some good references for how I learned this stuff (other than RTFM)
 
 - [Kubernetes Cluster Setup](https://technotim.live/posts/k3s-etcd-ansible/)
 - [Kubernetes + Flux](https://technotim.live/posts/flux-devops-gitops/)
 - [Kubernetes Secrets with SOPS](https://technotim.live/posts/secret-encryption-sops/)
+- [Finding Kubernetes HelmReleases](https://kubesearch.dev)
 - [Packer with Proxmox](https://www.youtube.com/watch?v=1nf3WOEFq1Y)
 - [Terraform with Proxmox](https://www.youtube.com/watch?v=dvyeoDBUtsU)
 - [Docker](https://www.youtube.com/watch?v=eGz9DS-aIeY)
 - [Ansible](https://www.youtube.com/watch?v=goclfp6a2IQ)
 
 ## 🖥️ **Hardware**
+
+Proof that you don't need expensive new equipment to run infra like mine. Mostly everything here is secondhand, bought over time, totaling less than ~$3k.
 
 <details open>
   <summary><strong>Servers</strong></summary>
