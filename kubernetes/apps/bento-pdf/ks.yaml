@@ -21,7 +21,3 @@ spec:
     name: iac
     namespace: flux-system
   wait: false
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: arr-secrets
