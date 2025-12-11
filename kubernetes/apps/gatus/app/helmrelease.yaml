@@ -50,11 +50,11 @@ spec:
           group: servarr
         - name: "Radarr"
           <<: *defaults
-          url: "https://radarr.local.mafyuh.dev"
+          url: "https://radarr.mafyuh.dev"
           group: servarr
         - name: "Sonarr"
           <<: *defaults
-          url: "https://sonarr.local.mafyuh.dev"
+          url: "https://sonarr.mafyuh.dev"
           group: servarr
         - name: "authentik"
           <<: *defaults
