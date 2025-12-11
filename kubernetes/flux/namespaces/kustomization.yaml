@@ -13,3 +13,4 @@ resources:
   - system-upgrade.yaml
   - rook.yaml
   - storage.yaml
+  - databases.yaml

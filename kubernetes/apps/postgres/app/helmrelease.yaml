@@ -1,0 +1,38 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/refs/heads/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: postgres-operator
+  namespace: databases
+spec:
+  chart:
+    spec:
+      chart: postgres-operator
+      version: 1.14.0
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: postgres-operator-charts
+  interval: 1h
+  valuesFrom:
+    - kind: Secret
+      name: postgres-secrets
+      valuesKey: PG_MINIO_SECRET_KEY
+      targetPath: configLogicalBackup.logical_backup_s3_secret_access_key
+  values:
+    configLogicalBackup:
+      logical_backup_docker_image: "ghcr.io/zalando/postgres-operator/logical-backup:v1.14.0"
+      logical_backup_s3_access_key_id: "K3Bf56zgJk4DqMQnIV2m"
+      logical_backup_s3_bucket: "postgres"
+      logical_backup_s3_region: "us-east-1"
+      logical_backup_s3_endpoint: "https://s3.mafyuh.xyz"
+      logical_backup_s3_sse: ""
+      logical_backup_schedule: "30 00 * * *"
+    resources:
+      requests:
+        cpu: 2m
+        memory: 25M
+      limits:
+        cpu: 10m
+        memory: 50M

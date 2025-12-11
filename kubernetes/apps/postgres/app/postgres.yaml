@@ -1,0 +1,43 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: pg-cluster
+  namespace: databases
+spec:
+  teamId: "mafyuh"
+  allowedSourceRanges:
+    - 0.0.0.0/0
+  serviceAnnotations:
+    lbipam.cilium.io/ips: "10.0.0.210"
+  volume:
+    size: 10Gi
+    storageClass: ceph-block
+  numberOfInstances: 3
+  enableMasterLoadBalancer: true
+  enableLogicalBackup: true
+  users:
+    mafyuh:
+      - superuser
+      - createdb
+    authentik: []
+    blocky: []
+    gatus: []
+    jellyseerr: []
+    netbox: []
+    umami: []
+  databases:
+    authentik: authentik
+    blocky: blocky
+    gatus: gatus
+    jellyseerr: jellyseerr
+    netbox: netbox
+    umami: umami
+  postgresql:
+    version: "17"
+  resources:
+    requests:
+      cpu: 10m
+      memory: 115Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi

@@ -1,0 +1,10 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/refs/heads/main/helmrepository-source-v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: postgres-operator-ui-charts
+  namespace: databases
+spec:
+  interval: 2h
+  url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
