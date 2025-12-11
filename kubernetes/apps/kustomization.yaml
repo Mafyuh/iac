@@ -7,7 +7,6 @@ resources:
   - alloy/ks.yaml
   - arr/
   - authentik/ks.yaml
-  - bento-pdf/ks.yaml
   - blackbox/ks.yaml
   - cloudflared/ks.yaml
   - gatus/ks.yaml
