@@ -50,6 +50,14 @@ spec:
                 drop:
                   - ALL
 
+            volumeMounts:
+              - name: cache
+                mountPath: /var/cache/nginx
+
+        volumes:
+          cache:
+            emptyDir: {}
+
             resources:
               requests:
                 cpu: 10m
