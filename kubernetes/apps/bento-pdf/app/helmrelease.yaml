@@ -20,7 +20,7 @@ spec:
       fullnameOverride: *app
 
     controllers:
-      bazarr:
+      bento-pdf:
         enabled: true
         type: deployment
 
