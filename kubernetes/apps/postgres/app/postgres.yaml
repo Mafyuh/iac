@@ -34,6 +34,9 @@ spec:
     umami: umami
   postgresql:
     version: "17"
+  patroni:
+    pg_hba:
+      - "host all all 10.244.0.0/16 md5"
   resources:
     requests:
       cpu: 10m
