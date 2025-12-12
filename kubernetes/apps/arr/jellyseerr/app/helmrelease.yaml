@@ -45,7 +45,7 @@ spec:
               TZ: "${TZ}"
               LOG_LEVEL: info
               DB_TYPE: postgres
-              DB_HOST: "10.20.10.100"
+              DB_HOST: "10.0.0.210"
               DB_PORT: "5432"
               DB_USER: "jellyseerr"
               DB_PASS: ${JELLYSEERR_DB_PASS}
