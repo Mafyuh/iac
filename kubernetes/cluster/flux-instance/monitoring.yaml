@@ -4,6 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: flux-components
+  namespace: flux-system
 spec:
   namespaceSelector:
     matchNames:

@@ -4,6 +4,7 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: flux-k8s-api-performance
+  namespace: flux-system
 spec:
   allowCrossNamespaceImport: true
   instanceSelector:
@@ -19,6 +20,7 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: flux-performance
+  namespace: flux-system
 spec:
   allowCrossNamespaceImport: true
   instanceSelector:
@@ -34,6 +36,7 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: flux-cluster
+  namespace: flux-system
 spec:
   allowCrossNamespaceImport: true
   instanceSelector:
@@ -49,6 +52,7 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: flux-control-plane
+  namespace: flux-system
 spec:
   allowCrossNamespaceImport: true
   instanceSelector:
