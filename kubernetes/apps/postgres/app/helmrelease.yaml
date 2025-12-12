@@ -29,6 +29,22 @@ spec:
       logical_backup_s3_endpoint: "https://s3.mafyuh.xyz"
       logical_backup_s3_sse: ""
       logical_backup_schedule: "30 00 * * *"
+    configGeneral:
+      sidecar_docker_images:
+        exporter: "quay.io/prometheuscommunity/postgres-exporter:v0.18.1"
+    configKubernetes:
+      share_pgsocket_with_sidecars: true
+    extraEnvs:
+      - name: DATA_SOURCE_URI
+        value: "localhost:5432/postgres?sslmode=disable"
+      - name: DATA_SOURCE_USER
+        value: "mafyuh"
+      - name: DATA_SOURCE_PASS
+        valueFrom:
+          secretKeyRef:
+            name: postgres-secrets
+            key: MAFYUH_POSTGRES_PASSWORD
+
     resources:
       requests:
         cpu: 2m
