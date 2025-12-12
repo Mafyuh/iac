@@ -11,3 +11,5 @@ resources:
   - receiver.yaml
   - external-secret.yaml
   - source.yaml
+  - dashboard.yaml
+  - monitoring.yaml
