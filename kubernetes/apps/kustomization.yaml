@@ -9,6 +9,7 @@ resources:
   - authentik/ks.yaml
   - blackbox/ks.yaml
   - cloudflared/ks.yaml
+  - fluent-bit/ks.yaml
   - gatus/ks.yaml
   - grafana/ks.yaml
   - headlamp/ks.yaml
@@ -25,4 +26,5 @@ resources:
   - tuppr/ks.yaml
   - twingate/ks.yaml
   - unpoller/ks.yaml
+  - victoria-logs/ks.yaml
   - volsync/ks.yaml

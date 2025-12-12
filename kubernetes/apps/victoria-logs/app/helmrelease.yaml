@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-logs
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: victoria-logs
+  interval: 1h
+  values:
+    fullnameOverride: victoria-logs
+    server:
+      persistentVolume:
+        enabled: true
+        storageClassName: ceph-block
+        size: 20Gi
+      retentionPeriod: 14d
+      route:
+        enabled: true
+        hostnames:
+          - victoria-logs.local.mafyuh.dev
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+        extraRules:
+          - filters:
+              - type: RequestRedirect
+                requestRedirect:
+                  path:
+                    type: ReplaceFullPath
+                    replaceFullPath: /select/vmui/
+                  statusCode: 302
+            matches:
+              - path:
+                  type: Exact
+                  value: /
+      serviceMonitor:
+        enabled: true
+    dashboards:
+      enabled: true
