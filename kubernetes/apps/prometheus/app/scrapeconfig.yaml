@@ -193,3 +193,28 @@ spec:
     - targets:
         - 10.20.10.100:9003
   metricsPath: /minio/v2/metrics/cluster
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name nfs-probe
+  namespace: monitoring
+  labels:
+    release: prometheus
+spec:
+  staticConfigs:
+    - targets:
+        - 10.0.0.10:2049
+  metricsPath: /probe
+  params:
+    module: [tcp_connect]
+  relabelings:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: blackbox-exporter-prometheus-blackbox-exporter:9115
+    - action: replace
+      targetLabel: job
+      replacement: *name

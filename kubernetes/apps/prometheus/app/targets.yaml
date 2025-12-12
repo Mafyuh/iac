@@ -5,7 +5,7 @@ metadata:
   name: website-monitoring-targets
   namespace: monitoring
 data:
-  targets.yml: ENC[AES256_GCM,data:vjPUOWgnjN5ZF/clDtcil2SCYkFBYoRPFsZcgD8usOoKO9p0ZHMBT8LBrICB1fBHkvorzr0FRuQrpBUu77LaHBJ8Lai/LcNIpIvmexTzSwSEB7sQutVhjx7naN21qh8aoFecYD+DNgxcxF/DZmsny0IYZj4g+Z8QFomwVoQgGTWbQkar3jU6qB672Cnk6FEsoBHY94nmJPLFCf/wc6MvfQ==,iv:TQ6tSKmsgrvIsw/v1w0aqMuEN8UbIojwizOZpTCwmy0=,tag:TMIl3lsRFEKBlKnaXHAp1Q==,type:str]
+  targets.yml: ENC[AES256_GCM,data:lSYB+ogQZWE5D/+ETnxtDegmFCQIga0w2HZF2tz3m51XS6UFUySIv6dY4j3jUJnIhMJP/qEoANvgr56039rp2YgAJnFO9sWhltX0gl3qvQK7OI3XTxk17sHWL9B/ykUReefYWwj/34rEUQ/LdQUMePwIgXxZvQImemmmw3dNzLtlQ1nR4GfRG6GiRQvPW7iCNDXcfL/5oOler+4=,iv:2mn5Xa2K4U4KjcIKwzB3OfA8IdFaAy/zk1X5CXpCOXg=,tag:ckRxKKL1GdW3Rx+A4O4l6g==,type:str]
 sops:
   age:
     - recipient: age18z6wevr8ze5azvq7nfty3l29s7887l8n5mefr64avhlthtr4uvnqw90nfs
@@ -17,7 +17,7 @@ sops:
         TEE4S29RY1Vmb1F5UEZDNDk2am5KVVUKSEVH409JMV2B33pLH/cOgKlq4n5zNp0J
         +0FYM+gFU3tfCBsQNbr1kNlngwm3n6unRW+gtZTRZ4NKpS38DYfLLQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-12-12T03:15:46Z"
-  mac: ENC[AES256_GCM,data:eVo0eofUa3V07L7reMoICZGm88zTIqGLwNlDvZ60mCFEd0CesrXSr2Zyt2yJkR4RuQcsPCABn2l15uVMEiTKFd3WcUz1jDkNJenfv/xndh+rD6nhkCNd7vOC8ayddqSWLzuDlwJh5QEONaBJuO+jvMaZQ/PfGROOZCwq11PCmgk=,iv:rNPT0VLUkzDpGMiHXSzCpdOceBIbwmGP/MWyDoAyvd4=,tag:qgmBxhIQJMewI0ae0G92ig==,type:str]
+  lastmodified: "2025-12-12T03:45:04Z"
+  mac: ENC[AES256_GCM,data:BYqanb3qkjs9t8mGPdbl+dXrWEzA73NVv4whQqUNus2UBo+qO1ihVPzDqfagqBjMUMRXj7qqZXg3V3/7sn/l1jARAOujBbEVgZj3mNLeDrqkvDxS3wcbnFyUJWX4nTJgb3ho9yrPBA6K456r3cW+7g4GeQwyPoVICvP2HO+qSXk=,iv:7FwtkTftcvwjLkNzpwTIbZ+A51YeRQXtHjm47Sab5Ig=,tag:A+C+9eXSc1/CzFImk80OYA==,type:str]
   encrypted_regex: ^(data|stringData)$
   version: 3.11.0

@@ -18,7 +18,7 @@ spec:
     - type: prometheus
       metadata:
         serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
-        query: avg_over_time(probe_success{instance="10.0.0.10:2049",job="scrapeConfig/monitoring/website-monitoring-icmp"}[2m])
+        query: avg_over_time(probe_success{instance="10.0.0.10:2049",job="nfs-probe"}[2m])
         threshold: "0.5"
         activationThreshold: "0.5"
         ignoreNullValues: "0"
