@@ -27,6 +27,6 @@ spec:
     matchLabels:
       grafana.internal/instance: grafana
   datasources:
-    - datasourceName: prometheus
-      inputName: DS_PROMETHEUS
-  url: https://grafana.com/api/dashboards/22759/revisions/8/download
+    - datasourceName: victoria-logs
+      inputName: ds
+  url: https://raw.githubusercontent.com/Mafyuh/json/refs/heads/main/k8s-logs.json
