@@ -1,0 +1,24 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/keda.sh/scaledobject_v1alpha1.json
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: ${APP}-nfs-probe
+spec:
+  cooldownPeriod: 15
+  minReplicaCount: 0
+  maxReplicaCount: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ${APP}
+  advanced:
+    restoreToOriginalReplicaCount: true
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
+        query: avg_over_time(probe_success{instance="10.0.0.10:2049",job="scrapeConfig/monitoring/website-monitoring-icmp"}[2m])
+        threshold: "0.5"
+        activationThreshold: "0.5"
+        ignoreNullValues: "0"

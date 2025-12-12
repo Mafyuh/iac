@@ -12,6 +12,7 @@ resources:
   - gatus/ks.yaml
   - grafana/ks.yaml
   - headlamp/ks.yaml
+  - keda/ks.yaml
   - kopia/ks.yaml
   - kromgo/ks.yaml
   - loki/ks.yaml
