@@ -9,6 +9,7 @@ spec:
   components:
     - ../../../../components/volsync
     - ../../../../components/authentik-proxy
+    - ../../../../components/nfs
   targetNamespace: *ns
   commonMetadata:
     labels:
