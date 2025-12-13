@@ -63,7 +63,7 @@ spec:
           protocol: TCP
       env:
         - name: DATA_SOURCE_URI
-          value: "10.0.0.210:5432/postgres?sslmode=disable"
+          value: "pg-cluster:5432/postgres?sslmode=disable"
         - name: DATA_SOURCE_USER
           value: "mafyuh"
         - name: DATA_SOURCE_PASS
