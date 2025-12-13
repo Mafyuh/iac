@@ -90,9 +90,19 @@ services:
       - minio_data:/data
     container_name: minio
     ports:
-      - 9002:9001
       - 9003:9000
     restart: unless-stopped
+
+  minio-console:
+    image: ghcr.io/georgmangold/console:v1.9.0
+    container_name: minio-console
+    restart: unless-stopped
+    environment:
+      - CONSOLE_MINIO_SERVER=https://s3.mafyuh.xyz
+    depends_on:
+      - minio
+    ports:
+      - 9004:9090
 
 volumes:
   mysql_data:
