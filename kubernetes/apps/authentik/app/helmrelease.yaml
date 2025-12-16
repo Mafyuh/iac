@@ -3,18 +3,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app authentik
-  namespace: *app
+  name: authentik
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: authentik
-      version: 2025.10.1
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: authentik-chart
+  chartRef:
+    name: authentik-chart
+    kind: OCIRepository
   values:
     global:
       env:
