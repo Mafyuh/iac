@@ -4,9 +4,10 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app flux-operator
-  namespace: flux-system
+  namespace: &ns flux-system
 spec:
-  path: ./kubernetes/cluster/flux-operator/
+  path: ./kubernetes/cluster/flux-operator/app
+  targetNamespace: *ns
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -14,7 +15,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: iac
-    namespace: flux-system
+    namespace: *ns
   wait: true
   interval: 30m
   retryInterval: 1m

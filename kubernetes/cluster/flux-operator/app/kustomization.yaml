@@ -8,3 +8,5 @@ metadata:
 resources:
   - helmrelease.yaml
   - mcp.yaml
+  - source.yaml
+  - httproute.yaml
