@@ -5,14 +5,9 @@ kind: HelmRelease
 metadata:
   name: kopia
 spec:
-  chart:
-    spec:
-      chart: app-template
-      version: 4.5.0
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: kopia
   interval: 1h
   values:
     controllers:

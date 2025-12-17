@@ -6,6 +6,7 @@ resources:
   - helmrelease.yaml
   - external-secret.yaml
   - dashboard.yaml
+  - source.yaml
 configMapGenerator:
   - name: cloudflared-configmap
     files:

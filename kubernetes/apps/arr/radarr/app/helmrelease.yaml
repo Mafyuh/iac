@@ -7,15 +7,9 @@ metadata:
   namespace: arr
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: app-template
-      version: 4.5.0
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: radarr
   values:
     global:
       fullnameOverride: *app

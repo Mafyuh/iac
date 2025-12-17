@@ -6,3 +6,4 @@ namespace: monitoring
 resources:
   - helmrelease.yaml
   - external-secret.yaml
+  - source.yaml

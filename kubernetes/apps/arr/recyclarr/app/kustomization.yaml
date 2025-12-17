@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - external-secret.yaml
+  - source.yaml
 configMapGenerator:
   - name: recyclarr-config
     namespace: arr
