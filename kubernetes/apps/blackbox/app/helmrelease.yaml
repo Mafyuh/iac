@@ -4,18 +4,11 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: blackbox-exporter
-  namespace: monitoring
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: prometheus-blackbox-exporter
-      version: 11.4.1
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-community
-        namespace: monitoring
+  chartRef:
+    kind: OCIRepository
+    name: blackbox-exporter
   values:
     serviceMonitor:
       enabled: true
