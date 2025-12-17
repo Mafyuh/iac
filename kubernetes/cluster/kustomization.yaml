@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - metrics-server/flux-ks.yaml
   - flux-operator/ks.yaml
-  - flux-instance/flux-ks.yaml
+  - flux-instance/ks.yaml
   - tofu-controller/flux-ks.yaml
   - snapshot-controller/flux-ks.yaml
   - external-secrets/flux-ks.yaml
