@@ -8,6 +8,7 @@ metadata:
 spec:
   chart:
     spec:
+      ## waiting on https://github.com/zalando/postgres-operator/pull/2853 to migrate to oci
       chart: postgres-operator
       version: 1.14.0
       interval: 30m

@@ -7,14 +7,9 @@ metadata:
   namespace: monitoring
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: kube-prometheus-stack
-      version: 79.1.1
-      interval: 60m
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-community
+  chartRef:
+    kind: OCIRepository
+    name: kube-prometheus-stack
   values:
     defaultRules:
       create: true
