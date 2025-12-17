@@ -3,12 +3,12 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: cert-manager
+  name: flux-instance
 spec:
   interval: 5m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: v1.19.2
-  url: oci://quay.io/jetstack/charts/cert-manager
+    tag: 0.37.0
+  url: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance

@@ -3,17 +3,11 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: flux-instance
-  namespace: flux-system
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: flux-instance
-      version: 0.37.0
-      sourceRef:
-        kind: HelmRepository
-        name: controlplaneio
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: flux-instance
   dependsOn:
     - name: flux-operator
       namespace: flux-system
