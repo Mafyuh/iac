@@ -4,17 +4,11 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app netbox
-  namespace: networking
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: netbox
-      version: 7.1.18
-      interval: 60m
-      sourceRef:
-        kind: HelmRepository
-        name: netbox-chart
+  chartRef:
+    kind: OCIRepository
+    name: netbox
   values:
     global:
       fullnameOverride: *app
