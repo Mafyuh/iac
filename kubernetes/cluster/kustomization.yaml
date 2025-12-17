@@ -8,7 +8,7 @@ resources:
   - flux-instance/ks.yaml
   - tofu-controller/flux-ks.yaml
   - snapshot-controller/flux-ks.yaml
-  - external-secrets/flux-ks.yaml
+  - external-secrets/ks.yaml
   - gateway-api/flux-ks.yaml
   - rook-ceph/flux-ks.yaml
   - envoy-gateway/flux-ks.yaml
