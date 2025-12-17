@@ -8,14 +8,9 @@ metadata:
 spec:
   interval: 1h
   timeout: 15m
-  chart:
-    spec:
-      chart: rook-ceph
-      version: v1.18.8
-      sourceRef:
-        kind: HelmRepository
-        name: rook-ceph
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: rook-ceph
   values:
     csi:
       cephFSKernelMountOptions: ms_mode=prefer-crc

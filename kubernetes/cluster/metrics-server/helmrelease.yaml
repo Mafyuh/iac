@@ -6,22 +6,9 @@ metadata:
   name: metrics-server
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: metrics-server
-      version: 3.13.0
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: metrics-server
-  driftDetection:
-    mode: enabled
-  install:
-    remediation:
-      retries: -1
-  upgrade:
-    remediation:
-      retries: 3
+  chartRef:
+    kind: OCIRepository
+    name: metrics-server
   values:
     args:
       - --kubelet-insecure-tls

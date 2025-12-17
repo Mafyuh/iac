@@ -7,15 +7,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m
-  chart:
-    spec:
-      chart: tf-controller
-      version: 0.15.1
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: tofu-controller
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: tofu-controller
   install:
     remediation:
       retries: 3
