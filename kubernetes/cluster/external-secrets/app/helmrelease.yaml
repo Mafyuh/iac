@@ -37,7 +37,7 @@ spec:
           memory: 256Mi
     image:
       repository: ghcr.io/external-secrets/external-secrets
-      tag: v1.1.1
+      tag: v1.2.0
       pullPolicy: IfNotPresent
     replicaCount: 1
     resources:
