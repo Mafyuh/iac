@@ -15,7 +15,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "5.14.0"
+      version = "5.15.0"
     }
     bitwarden = {
       source  = "maxlaverse/bitwarden"
