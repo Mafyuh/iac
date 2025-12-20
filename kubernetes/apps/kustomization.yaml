@@ -10,7 +10,6 @@ resources:
   - kopia/ks.yaml
   - monitoring/
   - networking/
-  - postgres/ks.yaml
   - reflector/ks.yaml
   - reloader/ks.yaml
   - spegel/ks.yaml
