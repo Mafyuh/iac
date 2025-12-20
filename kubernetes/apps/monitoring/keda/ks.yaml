@@ -3,16 +3,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app kromgo
-  namespace: monitoring
+  name: &app keda
+  namespace: &ns monitoring
 spec:
-  targetNamespace: monitoring
+  targetNamespace: *ns
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/kromgo/app
+  path: ./kubernetes/apps/monitoring/keda/app
   prune: true
   sourceRef:
     kind: GitRepository

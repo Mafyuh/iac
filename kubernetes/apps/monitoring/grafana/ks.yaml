@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/grafana/app
+  path: ./kubernetes/apps/monitoring/grafana/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -30,7 +30,7 @@ spec:
   targetNamespace: *ns
   components:
     - ../../../components/authentik-proxy
-  path: ./kubernetes/apps/grafana/instance
+  path: ./kubernetes/apps/monitoring/grafana/instance
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

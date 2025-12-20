@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/cloudflared/app
+  path: ./kubernetes/apps/networking/cloudflared/app
   prune: true
   sourceRef:
     kind: GitRepository

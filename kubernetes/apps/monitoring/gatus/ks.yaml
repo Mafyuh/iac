@@ -3,27 +3,28 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app prometheus
-  namespace: &ns monitoring
+  name: &app gatus
+  namespace: monitoring
 spec:
-  targetNamespace: *ns
+  targetNamespace: monitoring
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/prometheus/app
+  path: ./kubernetes/apps/monitoring/gatus/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: iac
     namespace: flux-system
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
   wait: false
+  healthChecks:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      name: gatus-secrets
+      namespace: monitoring
   postBuild:
     substituteFrom:
       - kind: Secret
-        name: prometheus-secrets
+        name: gatus-secrets

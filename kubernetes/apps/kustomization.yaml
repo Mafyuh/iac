@@ -6,23 +6,13 @@ resources:
   - actions-runner/ks.yaml
   - arr/
   - authentik/ks.yaml
-  - blackbox/ks.yaml
-  - cloudflared/ks.yaml
-  - fluent-bit/ks.yaml
-  - gatus/ks.yaml
-  - grafana/ks.yaml
-  - headlamp/ks.yaml
-  - keda/ks.yaml
   - kopia/ks.yaml
-  - kromgo/ks.yaml
-  - netbox/ks.yaml
+  - monitoring/
+  - networking/
   - postgres/ks.yaml
-  - prometheus/ks.yaml
   - reflector/ks.yaml
   - reloader/ks.yaml
   - spegel/ks.yaml
   - tuppr/ks.yaml
   - twingate/ks.yaml
-  - unpoller/ks.yaml
-  - victoria-logs/ks.yaml
   - volsync/ks.yaml

@@ -3,28 +3,22 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app gatus
-  namespace: monitoring
+  name: &app victoria-logs
+  namespace: &ns monitoring
 spec:
-  targetNamespace: monitoring
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  targetNamespace: *ns
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/gatus/app
+  path: ./kubernetes/apps/monitoring/victoria-logs/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: iac
     namespace: flux-system
   wait: false
-  healthChecks:
-    - apiVersion: external-secrets.io/v1
-      kind: ExternalSecret
-      name: gatus-secrets
-      namespace: monitoring
-  postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: gatus-secrets
