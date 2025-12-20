@@ -49,32 +49,8 @@ spec:
       - "hostssl all all all md5"
   resources:
     requests:
-      cpu: 10m
+      cpu: 30m
       memory: 115Mi
     limits:
-      cpu: 250m
+      cpu: 300m
       memory: 256Mi
-  sidecars:
-    - name: exporter
-      image: quay.io/prometheuscommunity/postgres-exporter:v0.18.1
-      ports:
-        - name: metrics
-          containerPort: 9187
-          protocol: TCP
-      env:
-        - name: DATA_SOURCE_URI
-          value: "pg-cluster:5432/postgres?sslmode=disable"
-        - name: DATA_SOURCE_USER
-          value: "mafyuh"
-        - name: DATA_SOURCE_PASS
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secrets
-              key: MAFYUH_POSTGRES_PASSWORD
-      resources:
-        requests:
-          cpu: 50m
-          memory: 32Mi
-        limits:
-          cpu: 200m
-          memory: 64Mi

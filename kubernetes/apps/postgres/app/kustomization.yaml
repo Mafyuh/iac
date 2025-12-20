@@ -7,5 +7,3 @@ resources:
   - postgres.yaml
   - source.yaml
   - external-secret.yaml
-  - monitoring.yaml
-  - dashboard.yaml
