@@ -23,7 +23,7 @@ resource "proxmox_virtual_environment_vm" "matrix" {
 
   # VM Memory Settings
   memory {
-    dedicated = 2048
+    dedicated = 4096
   }
 
   # VM Network Settings
