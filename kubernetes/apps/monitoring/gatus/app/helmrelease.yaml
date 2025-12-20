@@ -33,7 +33,7 @@ spec:
     config:
       storage:
         type: postgres
-        path: "postgres://gatus:${GATUS_PG_PASS}@10.0.0.210:5432/gatus?sslmode=disable"
+        path: "postgres://gatus:${GATUS_PG_PASS}@pg-cluster-ha.databases.svc.cluster.local:5432/gatus?sslmode=disable"
       default-endpoint: &defaults
         interval: "1m"
         conditions:
