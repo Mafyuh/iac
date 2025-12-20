@@ -49,8 +49,8 @@ spec:
       - "hostssl all all all md5"
   resources:
     requests:
-      cpu: 30m
-      memory: 115Mi
-    limits:
-      cpu: 300m
+      cpu: 100m
       memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
