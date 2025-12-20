@@ -94,7 +94,7 @@ services:
     restart: unless-stopped
 
   minio-console:
-    image: ghcr.io/georgmangold/console:v1.9.0
+    image: ghcr.io/georgmangold/console:v1.9.1
     container_name: minio-console
     restart: unless-stopped
     environment:
