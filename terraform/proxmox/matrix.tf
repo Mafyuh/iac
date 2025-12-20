@@ -29,7 +29,7 @@ resource "proxmox_virtual_environment_vm" "matrix" {
   # VM Network Settings
   network_device {
     bridge  = "vmbr0"
-    vlan_id = 6
+    vlan_id = 2
   }
 
   # VM Disk Settings
