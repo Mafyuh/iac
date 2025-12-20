@@ -29,7 +29,7 @@ metadata:
 spec:
   targetNamespace: *ns
   components:
-    - ../../../components/authentik-proxy
+    - ../../../../components/authentik-proxy
   path: ./kubernetes/apps/monitoring/grafana/instance
   commonMetadata:
     labels:
