@@ -10,7 +10,7 @@ spec:
     type: LoadBalancer
     metadata:
       annotations:
-        io.cilium/lb-ipam-ips: "10.0.0.216"
+        io.cilium/lb-ipam-ips: "10.0.0.210"
   patroni:
     dynamicConfiguration:
       synchronous_mode: true
@@ -55,13 +55,10 @@ spec:
             storage: 10Gi
   users:
     - name: mafyuh
-      databases:
-        ["authentik", "blocky", "gatus", "jellyseerr", "netbox", "umami"]
+      databases: ["authentik", "gatus", "jellyseerr", "netbox", "umami"]
       options: "SUPERUSER"
     - name: authentik
       databases: ["authentik"]
-    - name: blocky
-      databases: ["blocky"]
     - name: gatus
       databases: ["gatus"]
     - name: jellyseerr
