@@ -1,0 +1,68 @@
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/postgres-operator.crunchydata.com/postgrescluster_v1beta1.json
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: pg-cluster
+spec:
+  postgresVersion: 18
+  service:
+    type: LoadBalancer
+    metadata:
+      annotations:
+        io.cilium/lb-ipam-ips: "10.0.0.216"
+  instances:
+    - name: pg-instance
+      replicas: 3
+      metadata:
+        labels:
+          app.kubernetes.io/name: crunchy-postgres
+      dataVolumeClaimSpec:
+        storageClassName: ceph-block
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+  users:
+    - name: mafyuh
+      databases:
+        ["authentik", "blocky", "gatus", "jellyseerr", "netbox", "umami"]
+      options: "SUPERUSER"
+    - name: authentik
+      databases: ["authentik"]
+    - name: blocky
+      databases: ["blocky"]
+    - name: gatus
+      databases: ["gatus"]
+    - name: jellyseerr
+      databases: ["jellyseerr"]
+    - name: netbox
+      databases: ["netbox"]
+    - name: umami
+      databases: ["umami"]
+  backups:
+    pgbackrest:
+      configuration:
+        - secret:
+            name: pg-cluster-crunchy-postgres
+      global:
+        repo1-block: "y"
+        repo1-bundle: "y"
+        repo1-path: /pg-cluster
+        repo1-retention-full: "7"
+        repo1-retention-full-type: time
+        repo1-s3-uri-style: path
+      jobs:
+        ttlSecondsAfterFinished: 60
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
+      repos:
+        - name: repo1
+          s3:
+            bucket: postgres
+            endpoint: "https://s3.mafyuh.xyz"
+            region: us-east-1
+          schedules:
+            full: "30 0 * * *"
