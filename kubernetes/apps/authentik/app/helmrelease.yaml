@@ -93,17 +93,20 @@ spec:
           subPath: custom.css
       resources:
         requests:
-          cpu: 200m
+          cpu: 250m
+          memory: 512Mi
         limits:
           cpu: "1"
+          memory: 1024Mi
     worker:
       replicas: 1
       env:
       resources:
         requests:
-          cpu: 20m
-          memory: 600Mi
+          cpu: 200m
+          memory: 512Mi
         limits:
+          cpu: "500m"
           memory: 1024Mi
     authentik:
       log_level: info
