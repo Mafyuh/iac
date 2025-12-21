@@ -1,0 +1,137 @@
+---
+# HTTP Route for Synapse (Matrix homeserver)
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: matrix-synapse
+  namespace: matrix
+spec:
+  hostnames: ["matrix.mafyuh.dev"]
+  parentRefs:
+    - name: envoy-external
+      namespace: kube-system
+      sectionName: https
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: matrix-synapse
+          namespace: matrix
+          port: 8008
+
+---
+# HTTP Route for Matrix Authentication Service (MAS)
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: matrix-auth-service
+  namespace: matrix
+spec:
+  hostnames: ["auth.mafyuh.dev"]
+  parentRefs:
+    - name: envoy-external
+      namespace: kube-system
+      sectionName: https
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: matrix-matrix-authentication-service
+          namespace: matrix
+          port: 8080
+
+---
+# HTTP Route for Matrix RTC (Real-Time Communication)
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: matrix-rtc
+  namespace: matrix
+spec:
+  hostnames: ["rtc.mafyuh.dev"]
+  parentRefs:
+    - name: envoy-external
+      namespace: kube-system
+      sectionName: https
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: matrix-matrix-rtc-sfu
+          namespace: matrix
+          port: 7880
+
+---
+# HTTP Route for Element Admin
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: matrix-admin
+  namespace: matrix
+spec:
+  hostnames: ["admin.mafyuh.dev"]
+  parentRefs:
+    - name: envoy-external
+      namespace: kube-system
+      sectionName: https
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: matrix-element-admin
+          namespace: matrix
+          port: 8080
+
+---
+# HTTP Route for Element Web
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: matrix-element
+  namespace: matrix
+spec:
+  hostnames: ["element.mafyuh.dev"]
+  parentRefs:
+    - name: envoy-external
+      namespace: kube-system
+      sectionName: https
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: matrix-element-web
+          namespace: matrix
+          port: 80
+
+---
+# HTTP Route for Well-Known Delegation
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: matrix-well-known
+  namespace: matrix
+spec:
+  hostnames: ["matrix.mafyuh.dev"]
+  parentRefs:
+    - name: envoy-external
+      namespace: kube-system
+      sectionName: https
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /.well-known/
+      backendRefs:
+        - name: matrix-well-known
+          namespace: matrix
+          port: 8010

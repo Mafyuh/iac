@@ -63,6 +63,8 @@ spec:
       databases: ["gatus"]
     - name: jellyseerr
       databases: ["jellyseerr"]
+    - name: matrix
+      databases: ["matrix"]
     - name: netbox
       databases: ["netbox"]
     - name: umami

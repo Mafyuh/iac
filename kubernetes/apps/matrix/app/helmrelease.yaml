@@ -1,0 +1,203 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: matrix
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: matrix
+  values:
+    serverName: matrix.mafyuh.dev
+    labels:
+      app.kubernetes.io/instance: matrix
+
+    synapse:
+      enabled: true
+      ingress:
+        host: matrix.mafyuh.dev
+        className: disabled
+        tlsEnabled: false
+      postgres:
+        host: pg-cluster-ha.databases.svc.cluster.local
+        port: 5432
+        database: matrix
+        username: matrix
+        password:
+          secret: matrix-secrets
+          secretKey: PG_PASSWORD
+      media:
+        storage:
+          size: 10Gi
+        maxUploadSize: 100M
+      additional:
+        1-base-config:
+          config: |
+            public_baseurl: https://matrix.mafyuh.dev
+            presence:
+              enabled: true
+            enable_metrics: true
+            report_stats: false
+            suppress_key_server_warning: true
+            trusted_key_servers:
+              - server_name: "matrix.org"
+            admin_contact: "mailto:admin@mafyuh.dev"
+            enable_search: true
+            url_preview_enabled: true
+            url_preview_ip_range_blacklist:
+              - '127.0.0.0/8'
+              - '10.0.0.0/8'
+              - '172.16.0.0/12'
+              - '192.168.0.0/16'
+              - '100.64.0.0/10'
+              - '169.254.0.0/16'
+              - '::1/128'
+              - 'fe80::/64'
+              - 'fc00::/7'
+            rc_message:
+              per_second: 10
+              burst_count: 50
+            experimental_features:
+              msc3575_enabled: true
+              msc4186_enabled: true
+        2-email-config:
+          config: |
+            email:
+              smtp_host: smtp.protonmail.ch
+              smtp_port: 587
+              smtp_user: noreply@mafyuh.io
+              smtp_pass: ${SMTP_PASSWORD}
+              require_transport_security: true
+              notif_from: "Matrix <noreply@mafyuh.io>"
+
+    matrixAuthenticationService:
+      enabled: true
+      ingress:
+        host: auth.mafyuh.dev
+        className: disabled
+        tlsEnabled: false
+      additional:
+        1-mas-config:
+          config: |
+            branding:
+              service_name: "Mafyuh Matrix"
+            passwords:
+              enabled: true
+              minimum_length: 12
+            account:
+              email_change_allowed: true
+              displayname_change_allowed: true
+            upstream_oauth2:
+              providers:
+                - id: 01HFVBY12TMNTYTBV8W921M5FB
+                  human_name: Authentik
+                  issuer: https://auth.mafyuh.io/application/o/matrix/
+                  client_id: BvM5CUdFjcZZ1OFJjDxy0mCrQqkezey1agpCk09X
+                  client_secret: ${CLIENT_SECRET}
+                  userinfo_endpoint: https://auth.mafyuh.io/application/o/userinfo/
+                  authorization_endpoint: https://auth.mafyuh.io/application/o/authorize/
+                  token_endpoint: https://auth.mafyuh.io/application/o/token/
+                  jwks_uri: https://auth.mafyuh.io/application/o/matrix/jwks/
+                  token_endpoint_auth_method: client_secret_post
+                  scope: "openid email profile"
+                  discovery_mode: oidc
+                  pkce_method: auto
+                  claims_imports:
+                    localpart:
+                      action: require
+                      template: "{{ user.preferred_username }}"
+                      on_conflict: replace
+                    displayname:
+                      action: suggest
+                      template: "{{ user.name }}"
+                    email:
+                      action: suggest
+                      template: "{{ user.email }}"
+
+    matrixRTC:
+      enabled: true
+      ingress:
+        host: rtc.mafyuh.dev
+        className: disabled
+        tlsEnabled: false
+      sfu:
+        useStunToDiscoverPublicIP: false
+
+    elementAdmin:
+      enabled: true
+      ingress:
+        host: admin.mafyuh.dev
+        className: disabled
+        tlsEnabled: false
+
+    elementWeb:
+      enabled: true
+      ingress:
+        host: element.mafyuh.dev
+        className: disabled
+        tlsEnabled: false
+      additional:
+        extra-config.json: |
+          {
+            "brand": "Mafyuh Matrix",
+            "default_theme": "dark",
+            "show_labs_settings": true,
+            "default_server_config": {
+              "m.homeserver": {
+                "base_url": "https://matrix.mafyuh.dev",
+                "server_name": "matrix.mafyuh.dev"
+              },
+              "m.identity_server": {
+                "base_url": "https://vector.im"
+              }
+            },
+            "features": {
+              "feature_video_rooms": true,
+              "feature_element_call_video_rooms": true,
+              "feature_group_calls": true,
+              "feature_native_sliding_sync": true
+            },
+            "setting_defaults": {
+              "FTUE.userOnboardingButton": false
+            },
+            "jitsi": {
+              "preferred_domain": "meet.jit.si"
+            },
+            "permalink_prefix": "https://element.mafyuh.dev"
+          }
+
+    wellKnownDelegation:
+      enabled: true
+      ingress:
+        className: disabled
+        tlsEnabled: false
+      additional:
+        server: |
+          {
+            "m.server": "matrix.mafyuh.dev:443"
+          }
+        client: |
+          {
+            "m.homeserver": {
+              "base_url": "https://matrix.mafyuh.dev"
+            },
+            "m.identity_server": {
+              "base_url": "https://vector.im"
+            },
+            "org.matrix.msc3575.proxy": {
+              "url": "https://matrix.mafyuh.dev"
+            },
+            "io.element.e2ee": {
+              "default": true,
+              "secure_backup_required": false,
+              "secure_backup_setup_methods": ["key", "passphrase"]
+            },
+            "io.element.call": {
+              "rtc_backend": "https://rtc.mafyuh.dev"
+            }
+          }
+
+    postgres:
+      enabled: false

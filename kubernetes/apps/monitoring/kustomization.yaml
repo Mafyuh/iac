@@ -10,6 +10,7 @@ resources:
   - headlamp/ks.yaml
   - keda/ks.yaml
   - kromgo/ks.yaml
+  - matrix/ks.yaml
   - prometheus/ks.yaml
   - unpoller/ks.yaml
   - victoria-logs/ks.yaml
