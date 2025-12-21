@@ -83,7 +83,7 @@ spec:
         host: pg-cluster-ha.databases.svc.cluster.local
         port: 5432
         sslMode: prefer
-        database: matrix
+        database: matrixauth
         user: matrix
         password:
           secret: matrix-secrets

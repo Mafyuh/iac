@@ -64,7 +64,7 @@ spec:
     - name: jellyseerr
       databases: ["jellyseerr"]
     - name: matrix
-      databases: ["matrix"]
+      databases: ["matrix", "matrixauth"]
     - name: netbox
       databases: ["netbox"]
     - name: umami
