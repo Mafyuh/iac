@@ -20,18 +20,9 @@ spec:
         host: matrix.mafyuh.dev
         className: disabled
         tlsEnabled: false
-      postgres:
-        host: pg-cluster-ha.databases.svc.cluster.local
-        port: 5432
-        sslMode: prefer
-        database: matrix
-        user: matrix
-        password:
-          secret: matrix-secrets
-          secretKey: PG_PASSWORD
       media:
         storage:
-          size: 10Gi
+          size: 1Gi
         maxUploadSize: 100M
       additional:
         1-base-config:
@@ -81,15 +72,6 @@ spec:
         host: auth.mafyuh.dev
         className: disabled
         tlsEnabled: false
-      postgres:
-        host: pg-cluster-ha.databases.svc.cluster.local
-        port: 5432
-        sslMode: prefer
-        database: matrixauth
-        user: matrix
-        password:
-          secret: matrix-secrets
-          secretKey: PG_PASSWORD
       additional:
         1-mas-config:
           config: |
@@ -212,4 +194,6 @@ spec:
           }
 
     postgres:
-      enabled: false
+      enabled: true
+      storage:
+        size: 5Gi
