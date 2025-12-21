@@ -8,6 +8,7 @@ resources:
   - authentik/ks.yaml
   - crunchy-pgo/ks.yaml
   - kopia/ks.yaml
+  - matrix/ks.yaml
   - monitoring/
   - networking/
   - reflector/ks.yaml
