@@ -63,6 +63,8 @@ spec:
             experimental_features:
               msc3575_enabled: true
               msc4186_enabled: true
+            database:
+              allow_unsafe_locale: true
         2-email-config:
           config: |
             email:
