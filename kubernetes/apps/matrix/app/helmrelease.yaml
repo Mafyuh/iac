@@ -23,6 +23,7 @@ spec:
       postgres:
         host: pg-cluster-ha.databases.svc.cluster.local
         port: 5432
+        sslMode: prefer
         database: matrix
         user: matrix
         password:
@@ -78,6 +79,15 @@ spec:
         host: auth.mafyuh.dev
         className: disabled
         tlsEnabled: false
+      postgres:
+        host: pg-cluster-ha.databases.svc.cluster.local
+        port: 5432
+        sslMode: prefer
+        database: matrix
+        user: matrix
+        password:
+          secret: matrix-secrets
+          secretKey: PG_PASSWORD
       additional:
         1-mas-config:
           config: |
