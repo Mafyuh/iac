@@ -52,7 +52,7 @@ spec:
         - op: add
           path: /spec/patroni/dynamicConfiguration/postgresql/pg_hba
           value:
-            - hostnossl immich immich 10.244.0.0/16 md5
+            - host immich immich 10.244.0.0/16 md5
       target:
         kind: PostgresCluster
     - patch: |
