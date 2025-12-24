@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app crunchy-pgo
+  name: &app dragonfly-operator
   namespace: &ns databases
 spec:
   targetNamespace: *ns
@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/crunchy-pgo/app
+  path: ./kubernetes/apps/databases/dragonfly-operator/app
   prune: true
   sourceRef:
     kind: GitRepository

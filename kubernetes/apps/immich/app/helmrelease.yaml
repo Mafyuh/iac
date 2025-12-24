@@ -1,0 +1,129 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: immich
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1026
+        runAsGroup: &group 100
+        fsGroup: *group
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    controllers:
+      server:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v2.4.1
+              pullPolicy: IfNotPresent
+            env: &env
+              TZ: America/New_York
+              IMMICH_WORKERS_INCLUDE: api
+              REDIS_HOSTNAME: "immich-dragonfly.default.svc.cluster.local"
+              REDIS_PORT: "6379"
+              DB_DATABASE_NAME: immich
+              DB_HOSTNAME: "immich-pg.default.svc.cluster.local"
+              DB_USERNAME: immich
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-secrets
+                    key: PG_PASSWORD
+              LOG_LEVEL: info
+              MPLCONFIGDIR: /tmp/matplotlib
+            securityContext: &securityContext
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: [ALL] }
+        pod:
+          terminationGracePeriodSeconds: 1
+      microservices:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v2.4.1
+              pullPolicy: IfNotPresent
+            env:
+              <<: *env
+              IMMICH_WORKERS_INCLUDE: null
+              IMMICH_WORKERS_EXCLUDE: api
+            securityContext: *securityContext
+        pod:
+          terminationGracePeriodSeconds: 1
+      machine-learning:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v2.4.0
+              pullPolicy: IfNotPresent
+            securityContext: *securityContext
+    service:
+      immich:
+        controller: immich
+        enabled: false
+      machine-learning:
+        controller: machine-learning
+        ports:
+          http:
+            port: 3003
+      server:
+        enabled: true
+        controller: server
+        ports:
+          http:
+            port: &serverPort 2283
+    route:
+      public:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: immich-server
+                port: *serverPort
+        parentRefs:
+          - name: envoy-external
+            namespace: kube-system
+            sectionName: https
+    persistence:
+      upload:
+        enabled: true
+        type: nfs
+        server: "10.0.0.10"
+        path: /mnt/thePool/thePoolShare/Media/Pictures
+        advancedMounts:
+          server:
+            app:
+              - path: /data
+          microservices:
+            app:
+              - path: /data
+      model-cache:
+        enabled: true
+        storageClass: ceph-block
+        accessMode: ReadWriteOnce
+        size: 8Gi
+        retain: true
+        advancedMounts:
+          machine-learning:
+            app:
+              - path: /cache
+      tmp:
+        enabled: true
+        type: emptyDir

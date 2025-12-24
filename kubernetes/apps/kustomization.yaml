@@ -6,7 +6,8 @@ resources:
   - actions-runner/ks.yaml
   - arr/
   - authentik/ks.yaml
-  - crunchy-pgo/ks.yaml
+  - databases/
+  - immich/ks.yaml
   - kopia/ks.yaml
   - matrix/ks.yaml
   - monitoring/

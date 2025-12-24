@@ -1,0 +1,81 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app immich
+  namespace: &ns default
+spec:
+  components:
+    - ../../../components/postgres
+    - ../../../components/nfs
+    - ../../../components/dragonfly
+  targetNamespace: *ns
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  interval: 30m
+  timeout: 5m
+  path: ./kubernetes/apps/immich/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: iac
+    namespace: flux-system
+  wait: false
+  postBuild:
+    substitute:
+      APP: immich
+      POSTGRES_SIZE: 10Gi
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/config/parameters/-
+          value:
+            shared_preload_libraries: "vchord.so"
+      target:
+        kind: PostgresCluster
+    - patch: |
+        - op: add
+          path: /spec/args/-
+          value:
+            --default_lua_flags=allow-undeclared-keys
+      target:
+        kind: Dragonfly
+    - patch: |
+        - op: replace
+          path: /spec/image
+          value: ghcr.io/budimanjojo/crunchy-postgres-vectorchord:ubi9-17.6-2542
+      target:
+        kind: PostgresCluster
+    - patch: |
+        - op: add
+          path: /spec/patroni/dynamicConfiguration/postgresql/pg_hba
+          value:
+            - hostnossl immich immich 10.244.0.0/16 md5
+      target:
+        kind: PostgresCluster
+    - patch: |
+        - op: add
+          path: /spec/databaseInitSQL
+          value:
+            name: immich-database-init-sql
+            key: init.sql
+      target:
+        kind: PostgresCluster
+    - patch: |
+        - op: replace
+          path: /spec/users/0
+          value:
+            name: immich
+            databases: ["immich"]
+            password:
+              type: AlphaNumeric
+      target:
+        kind: PostgresCluster
+    - patch: |
+        - op: add
+          path: "/metadata/annotations/postgres-operator.crunchydata.com~1authorizeBackupRemoval"
+          value: "true"
+      target:
+        kind: PostgresCluster

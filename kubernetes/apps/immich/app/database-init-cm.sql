@@ -1,0 +1,2 @@
+/c immich\\
+CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
