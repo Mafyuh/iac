@@ -26,10 +26,9 @@ spec:
     substitute:
       APP: immich
   patches:
-    - patch: |
+    - target:
+        kind: Dragonfly
+      patch: |-
         - op: add
           path: /spec/args/-
-          value:
-            --default_lua_flags=allow-undeclared-keys
-      target:
-        kind: Dragonfly
+          value: --default_lua_flags=allow-undeclared-keys
