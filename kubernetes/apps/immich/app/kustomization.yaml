@@ -6,6 +6,7 @@ resources:
   - helmrelease.yaml
   - db.yaml
   - source.yaml
+  - external-secret.yaml
 configMapGenerator:
   - name: immich-database-init-sql
     options:
