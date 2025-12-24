@@ -32,7 +32,7 @@ spec:
               REDIS_HOSTNAME: "immich-dragonfly.default.svc.cluster.local"
               REDIS_PORT: "6379"
               DB_DATABASE_NAME: immich
-              DB_HOSTNAME: "immich-pg.default.svc.cluster.local"
+              DB_HOSTNAME: "immich-pg-ha.default.svc.cluster.local"
               DB_USERNAME: immich
               DB_PASSWORD:
                 valueFrom:
@@ -66,7 +66,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v2.4.0
+              tag: v2.4.1
               pullPolicy: IfNotPresent
             securityContext: *securityContext
     service:
