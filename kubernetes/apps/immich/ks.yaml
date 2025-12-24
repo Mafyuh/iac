@@ -8,7 +8,6 @@ metadata:
 spec:
   components:
     - ../../../components/nfs
-    - ../../../components/dragonfly
   targetNamespace: *ns
   commonMetadata:
     labels:
@@ -25,10 +24,3 @@ spec:
   postBuild:
     substitute:
       APP: immich
-  patches:
-    - target:
-        kind: Dragonfly
-      patch: |-
-        - op: add
-          path: /spec/args/-
-          value: --default_lua_flags=allow-undeclared-keys
