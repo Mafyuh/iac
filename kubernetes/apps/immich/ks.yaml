@@ -43,7 +43,7 @@ spec:
       target:
         kind: Dragonfly
     - patch: |
-        - op: replace
+        - op: add
           path: /spec/image
           value: ghcr.io/budimanjojo/crunchy-postgres-vectorchord:ubi9-17.6-2542
       target:

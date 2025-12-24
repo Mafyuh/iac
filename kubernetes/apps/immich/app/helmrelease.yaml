@@ -31,14 +31,11 @@ spec:
               IMMICH_WORKERS_INCLUDE: api
               REDIS_HOSTNAME: "immich-dragonfly.default.svc.cluster.local"
               REDIS_PORT: "6379"
-              DB_DATABASE_NAME: immich
-              DB_HOSTNAME: "immich-pg-ha.default.svc.cluster.local"
-              DB_USERNAME: immich
-              DB_PASSWORD:
+              DB_URL:
                 valueFrom:
                   secretKeyRef:
-                    name: immich-secrets
-                    key: PG_PASSWORD
+                    name: immich-pg-pguser-immich
+                    key: uri
               LOG_LEVEL: info
               MPLCONFIGDIR: /tmp/matplotlib
             securityContext: &securityContext
