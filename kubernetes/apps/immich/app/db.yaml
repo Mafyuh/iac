@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/postgres-operator.crunchydata.com/postgrescluster_v1beta1.json
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: immich-pg
+spec:
+  image: ghcr.io/budimanjojo/crunchy-postgres-vectorchord:ubi9-17.6-2534
+  imagePullPolicy: IfNotPresent
+  postgresVersion: 17
+  config:
+    parameters:
+      shared_preload_libraries: "vchord.so"
+  databaseInitSQL:
+    name: immich-database-init-sql
+    key: init.sql
+  patroni:
+    dynamicConfiguration:
+      synchronous_mode: true
+      postgresql:
+        max_wal_size: 5GB
+        synchronous_commit: "on"
+        parameters:
+          max_connections: 500
+  instances:
+    - name: crunchy-postgres-instance
+      metadata:
+        labels:
+          app.kubernetes.io/name: immich-crunchy-postgres
+      dataVolumeClaimSpec:
+        storageClassName: ceph-block
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+  users:
+    - name: immich
+      databases: ["immich"]
+      options: "SUPERUSER"
+      password:
+        type: AlphaNumeric
+  backups:
+    pgbackrest:
+      configuration:
+        - secret:
+            name: "immich-crunchy-postgres"
+      global:
+        repo1-block: "y"
+        repo1-bundle: "y"
+        repo1-path: /${APP}
+        repo1-retention-full: "7"
+        repo1-retention-full-type: time
+        repo1-s3-uri-style: path
+      jobs:
+        ttlSecondsAfterFinished: 60
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
+      metadata:
+        labels:
+          app.kubernetes.io/name: immich-crunchy-postgres-backup
+      repos:
+        - name: repo1
+          s3:
+            bucket: postgres
+            endpoint: "https://s3.mafyuh.xyz"
+            region: us-east-1
+          schedules:
+            full: "30 0 * * *"
