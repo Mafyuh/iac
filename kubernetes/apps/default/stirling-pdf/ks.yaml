@@ -6,8 +6,6 @@ metadata:
   name: &app stirling-pdf
   namespace: &ns default
 spec:
-  components:
-    - ../../../../components/authentik-proxy
   targetNamespace: *ns
   commonMetadata:
     labels:
@@ -24,3 +22,6 @@ spec:
   postBuild:
     substitute:
       APP: stirling-pdf
+    substituteFrom:
+      - kind: Secret
+        name: stirling-pdf-secrets

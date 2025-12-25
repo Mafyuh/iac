@@ -14,6 +14,7 @@ paths = [
   '''terraform/authentik/oauth_sources\.tf''',
   # Docker secret mappings - contains Bitwarden Secret Manager IDs only
   '''docker/secret-mappings\.yml''',
+  '''kubernetes/apps/default/stirling-pdf/app/helmrelease\.yaml''',
 ]
 
 regexes = [

@@ -7,8 +7,7 @@ resource "authentik_outpost" "embedded_outpost" {
     20,
     71,
     15,
-    9,
-    77
+    9
   ]
   service_connection = authentik_service_connection_kubernetes.local.id
 }
