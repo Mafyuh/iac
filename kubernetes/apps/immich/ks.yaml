@@ -6,8 +6,6 @@ metadata:
   name: &app immich
   namespace: &ns default
 spec:
-  components:
-    - ../../../components/nfs
   targetNamespace: *ns
   commonMetadata:
     labels:

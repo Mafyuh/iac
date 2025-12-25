@@ -65,7 +65,12 @@ spec:
               repository: ghcr.io/immich-app/immich-machine-learning
               tag: v2.4.1
               pullPolicy: IfNotPresent
-            securityContext: *securityContext
+            env:
+              MPLCONFIGDIR: /tmp/matplotlib
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: [ALL] }
     service:
       immich:
         controller: immich
