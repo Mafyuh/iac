@@ -36,11 +36,11 @@ spec:
       password: ${NETBOX_ADMIN_PASSWORD}
 
     valkey:
-      enabled: true
-      pdb:
-        create: false
-      replica:
-        replicaCount: 1
+      enabled: false
+
+    cachingDatabase:
+      host: netbox-dragonfly.networking.svc.cluster.local
+      port: 6379
 
     housekeeping:
       enabled: false

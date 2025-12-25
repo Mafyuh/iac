@@ -6,6 +6,8 @@ metadata:
   name: &app netbox
   namespace: &ns networking
 spec:
+  components:
+    - ../../../../components/dragonfly
   targetNamespace: *ns
   commonMetadata:
     labels:
@@ -20,6 +22,8 @@ spec:
     namespace: flux-system
   wait: false
   postBuild:
+    substitute:
+      APP: netbox
     substituteFrom:
       - kind: Secret
         name: netbox-secrets
