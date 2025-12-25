@@ -71,28 +71,28 @@ spec:
       resources:
         mgr:
           limits:
-            cpu: 500m
+            cpu: 200m
             memory: 700Mi
           requests:
             cpu: 50m
             memory: 320Mi
         mon:
           limits:
-            cpu: 500m
+            cpu: 200m
             memory: 640Mi
           requests:
             cpu: 100m
             memory: 320Mi
         osd:
           limits:
-            cpu: 500m
+            cpu: 300m
             memory: 1600Mi
           requests:
             cpu: 150m
             memory: 800Mi
         prepareosd:
           limits:
-            cpu: 1000m
+            cpu: 400m
             memory: 400Mi
           requests:
             cpu: 50m
@@ -120,7 +120,7 @@ spec:
             memory: 16Mi
         cleanup:
           limits:
-            cpu: 500m
+            cpu: 200m
             memory: 1Gi
           requests:
             cpu: 100m

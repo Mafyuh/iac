@@ -61,8 +61,8 @@ spec:
                 cpu: 75m
                 memory: 256Mi
               limits:
-                cpu: "1"
-                memory: 1Gi
+                cpu: 400m
+                memory: 2Gi
 
     service:
       app:
