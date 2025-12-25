@@ -67,10 +67,6 @@ spec:
               pullPolicy: IfNotPresent
             env:
               MPLCONFIGDIR: /tmp/matplotlib
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              capabilities: { drop: [ALL] }
     service:
       immich:
         controller: immich
@@ -129,3 +125,7 @@ spec:
       tmp:
         enabled: true
         type: emptyDir
+        advancedMounts:
+          machine-learning:
+            app:
+              - path: /tmp
