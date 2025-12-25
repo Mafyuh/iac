@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/immich/app
+  path: ./kubernetes/apps/default/immich/app
   prune: true
   sourceRef:
     kind: GitRepository
