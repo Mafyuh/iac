@@ -1,24 +1,16 @@
-resource "authentik_provider_oauth2" "pdf" {
+resource "authentik_provider_proxy" "pdf" {
   name                         = "Stirling PDF"
-  client_id = "3dc91fcac00cfc2e0e63aaeee0819e30abd41958"
-
-  authentication_flow   = null
-  invalidation_flow     = data.authentik_flow.default-invalidation-flow.id
-  authorization_flow    = data.authentik_flow.default-authorization-flow.id
-  access_token_validity = "minutes=5"
-  signing_key           = data.authentik_certificate_key_pair.main.id
-
-  property_mappings = [
-    authentik_property_mapping_provider_scope.openid.id,
-    authentik_property_mapping_provider_scope.email.id,
-    authentik_property_mapping_provider_scope.profile.id,
-  ]
-
-  allowed_redirect_uris = [
-    {
-      matching_mode = "strict"
-      url           = "https://pdf.${var.domains["dev"]}/login/oauth2/code/authentik"
-    }
+  access_token_validity        = "hours=24"
+  authorization_flow           = data.authentik_flow.default-authorization-flow.id
+  external_host                = "https://pdf.${var.domains["dev"]}"
+  invalidation_flow            = "3c575d1a-1d27-4eaf-90a4-aacbccc1382f"
+  internal_host_ssl_validation = true
+  mode                         = "forward_single"
+  jwt_federation_sources = [
+    authentik_source_oauth.github.uuid,
+    authentik_source_oauth.proton.uuid,
+    authentik_source_oauth.google.uuid,
+    authentik_source_oauth.azure.uuid,
   ]
 }
 
@@ -26,7 +18,7 @@ resource "authentik_application" "pdf" {
   name              = "Stirling PDF"
   slug              = "stirling-pdf"
   meta_icon         = "https://github.com/Mafyuh/homelab-svg-assets/raw/refs/heads/main/assets/stirlingpdf.svg"
-  protocol_provider = authentik_provider_oauth2.pdf.id
+  protocol_provider = authentik_provider_proxy.pdf.id
   meta_launch_url       = "https://pdf.mafyuh.dev"
 }
 

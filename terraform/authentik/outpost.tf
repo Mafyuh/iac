@@ -2,6 +2,7 @@ resource "authentik_outpost" "embedded_outpost" {
   name = "authentik Embedded Outpost"
   protocol_providers = [
     authentik_provider_proxy.grafana.id,
+    authentik_provider_proxy.pdf.id,
     16,
     19,
     20,

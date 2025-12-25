@@ -26,15 +26,6 @@ spec:
               SYSTEM_GOOGLEVISIBILITY: "false"
               SECURITY_INITIALLOGIN_USERNAME: "admin"
               SECURITY_INITIALLOGIN_PASSWORD: "${STIRLING_PDF_ADMIN_PASSWORD}"
-              SECURITY_OAUTH2_ENABLED: "true"
-              SECURITY_OAUTH2_ISSUER: https://auth.mafyuh.io/application/o/stirling-pdf/
-              SECURITY_OAUTH2_CLIENTID: "3dc91fcac00cfc2e0e63aaeee0819e30abd41958"
-              SECURITY_OAUTH2_CLIENTSECRET: "${STIRLING_PDF_OAUTH2_CLIENT_SECRET}"
-              SECURITY_OAUTH2_SCOPES: "openid, profile, email"
-              SECURITY_OAUTH2_USEASUSERNAME: "preferred_username"
-              SECURITY_OAUTH2_PROVIDER: "authentik"
-              SECURITY_OAUTH2_AUTOCREATEUSER: "true"
-              SECURITY_OAUTH2_BLOCKREGISTRATION: "false"
             probes:
               liveness:
                 enabled: true
