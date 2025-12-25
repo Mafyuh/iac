@@ -13,10 +13,7 @@ spec:
     global:
       env:
         - name: AUTHENTIK_POSTGRESQL__HOST
-          valueFrom:
-            secretKeyRef:
-              name: authentik-secrets
-              key: AUTHENTIK_POSTGRESQL_HOST
+          value: "10.20.10.100"
         - name: AUTHENTIK_POSTGRESQL__NAME
           valueFrom:
             secretKeyRef:
