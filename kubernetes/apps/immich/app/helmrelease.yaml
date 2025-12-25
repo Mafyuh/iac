@@ -67,6 +67,15 @@ spec:
               pullPolicy: IfNotPresent
             env:
               MPLCONFIGDIR: /tmp/matplotlib
+            securityContext:
+              fsGroupChangePolicy: OnRootMismatch
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: [ALL] }
+        pod:
+          securityContext:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
     service:
       immich:
         controller: immich
