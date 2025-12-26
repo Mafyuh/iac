@@ -78,7 +78,7 @@ spec:
             branding:
               service_name: "Mafyuh Matrix"
             passwords:
-              enabled: true
+              enabled: false
               minimum_length: 12
             account:
               email_change_allowed: true
