@@ -61,6 +61,14 @@ spec:
     - matches:
         - path:
             type: PathPrefix
+            value: /sfu/get
+      backendRefs:
+        - name: matrix-matrix-rtc-authorisation-service
+          namespace: matrix
+          port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
             value: /
       backendRefs:
         - name: matrix-matrix-rtc-sfu
