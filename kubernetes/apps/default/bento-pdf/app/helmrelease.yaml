@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app stirling-pdf
+  name: &app bento-pdf
 spec:
   chartRef:
     kind: OCIRepository
@@ -11,21 +11,12 @@ spec:
   interval: 15m
   values:
     controllers:
-      stirling-pdf:
+      bento-pdf:
         containers:
           main:
             image:
-              repository: ghcr.io/stirling-tools/stirling-pdf
-              tag: 2.1.5@sha256:e8b96ebd749ee6c087f853c31fbbb79dc35bb08792bdd5ef0e72e74f5b209ea1
-            env:
-              TZ: ${TIMEZONE}
-              MODE: BOTH
-              DOCKER_ENABLE_SECURITY: "false"
-              METRICS_ENABLED: "false"
-              SYSTEM_ENABLEANALYTICS: "false"
-              SYSTEM_GOOGLEVISIBILITY: "false"
-              SECURITY_INITIALLOGIN_USERNAME: "admin"
-              SECURITY_INITIALLOGIN_PASSWORD: "${STIRLING_PDF_ADMIN_PASSWORD}"
+              repository: ghcr.io/alam00000/bentopdf
+              tag: v1.15.1
             probes:
               liveness:
                 enabled: true
@@ -62,21 +53,3 @@ spec:
             backendRefs:
               - identifier: app
                 port: 8080
-
-    persistence:
-      config:
-        type: persistentVolumeClaim
-        storageClass: ceph-block
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        globalMounts:
-          - path: /configs
-      tmpfs:
-        type: emptyDir
-        globalMounts:
-          - path: /logs
-            subPath: logs
-          - path: /pipeline
-            subPath: pipeline
-          - path: /tmp
-            subPath: tmp

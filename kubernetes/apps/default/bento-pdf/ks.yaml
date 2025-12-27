@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app stirling-pdf
+  name: &app bento-pdf
   namespace: &ns default
 spec:
   components:
@@ -14,7 +14,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/default/stirling-pdf/app
+  path: ./kubernetes/apps/default/bento-pdf/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -23,7 +23,4 @@ spec:
   wait: false
   postBuild:
     substitute:
-      APP: stirling-pdf
-    substituteFrom:
-      - kind: Secret
-        name: stirling-pdf-secrets
+      APP: bento-pdf
