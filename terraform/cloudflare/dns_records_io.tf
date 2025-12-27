@@ -61,15 +61,6 @@ resource "cloudflare_dns_record" "io_x" {
   zone_id = data.bitwarden_secret.cf_io_zone_id.value
 }
 
-resource "cloudflare_dns_record" "io_auth" {
-  content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
-  name    = "auth.${var.domains["io"]}"
-  proxied = true
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
-}
-
 resource "cloudflare_dns_record" "io_chat" {
   content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
   name    = "chat.${var.domains["io"]}"

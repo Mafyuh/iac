@@ -23,3 +23,24 @@ spec:
     substituteFrom:
       - kind: Secret
         name: matrix-secrets
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app maubot
+  namespace: &ns matrix
+spec:
+  targetNamespace: *ns
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  interval: 30m
+  timeout: 5m
+  path: ./kubernetes/apps/matrix/maubot
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: iac
+    namespace: flux-system
+  wait: false

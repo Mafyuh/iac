@@ -1,0 +1,77 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: maubot
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: maubot
+  values:
+    controllers:
+      maubot:
+        replicas: 1
+        type: deployment
+        containers:
+          app:
+            image:
+              repository: dock.mau.dev/maubot/maubot
+              tag: v0.6.0
+            restartPolicy: unless-stopped
+
+    service:
+      manager:
+        enabled: true
+        type: ClusterIP
+        ports:
+          http:
+            enabled: true
+            port: 29316
+            protocol: TCP
+
+    route:
+      external:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: Exact
+                  value: /
+            filters:
+              - type: RequestRedirect
+                requestRedirect:
+                  path:
+                    type: ReplaceFullPath
+                    replaceFullPath: /_matrix/maubot
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: maubot
+                port: 29316
+        parentRefs:
+          - name: envoy-external
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /data
+      config:
+        enabled: true
+        type: secret
+        name: maubot-config
+        globalMounts:
+          - path: /data/config.yaml
+            subPath: config.yaml
+            readOnly: false

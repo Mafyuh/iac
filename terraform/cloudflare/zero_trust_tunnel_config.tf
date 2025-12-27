@@ -136,14 +136,14 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
         }
       },
       {
-        hostname = "home.${var.domains["dev"]}"
-        service  = "https://10.0.0.210:443"
+        hostname = "bot.${var.domains["dev"]}"
+        service  = "http://10.69.69.169:29316"
         path     = ""
         origin_request = {
-          no_tls_verify            = true
+          no_tls_verify            = false
           origin_server_name       = ""
           disable_chunked_encoding = false
-          http2_origin             = false
+          http2_origin             = true
           tcp_keep_alive           = 300
           keep_alive_connections   = 100
           keep_alive_timeout       = 90
