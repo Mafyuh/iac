@@ -137,7 +137,7 @@ spec:
           {
             "brand": "Mafyuh Matrix",
             "default_theme": "dark",
-            "show_labs_settings": true,
+            "show_labs_settings": false,
             "default_server_config": {
               "m.homeserver": {
                 "base_url": "https://matrix.mafyuh.dev",
@@ -184,9 +184,7 @@ spec:
               "url": "https://matrix.mafyuh.dev"
             },
             "io.element.e2ee": {
-              "default": true,
-              "secure_backup_required": false,
-              "secure_backup_setup_methods": ["key", "passphrase"]
+              "force_disable": true
             },
             "io.element.call": {
               "rtc_backend": "https://rtc.mafyuh.dev"
