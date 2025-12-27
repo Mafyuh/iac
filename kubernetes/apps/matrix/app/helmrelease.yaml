@@ -138,6 +138,7 @@ spec:
             "brand": "Mafyuh Matrix",
             "default_theme": "dark",
             "show_labs_settings": false,
+            "force_verification": false,
             "default_server_config": {
               "m.homeserver": {
                 "base_url": "https://matrix.mafyuh.dev",
@@ -151,7 +152,9 @@ spec:
               "feature_video_rooms": true,
               "feature_element_call_video_rooms": true,
               "feature_group_calls": true,
-              "feature_native_sliding_sync": true
+              "feature_native_sliding_sync": true,
+              "feature_cross_signing": false,
+              "feature_pinning": true
             },
             "setting_defaults": {
               "FTUE.userOnboardingButton": false
