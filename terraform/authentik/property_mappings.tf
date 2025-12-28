@@ -37,6 +37,14 @@ return {
 EOF
 }
 
+resource "authentik_property_mapping_provider_scope" "offline_access" {
+  name       = "authentik default OAuth Mapping: OpenID 'offline_access'"
+  scope_name = "offline_access"
+  expression = <<EOF
+return {}
+EOF
+}
+
 ## This is just needed to map superusers in Netbox to authentik admins. Only admins can access netbox
 resource "authentik_property_mapping_provider_scope" "netbox" {
   name       = "Netbox roles"

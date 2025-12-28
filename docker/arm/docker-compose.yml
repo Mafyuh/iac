@@ -54,6 +54,7 @@ services:
       - SSMTP_USER=$SSMTP_USER
       - SSMTP_PASSWORD=$SSMTP_PASSWORD
       - SSMTP_TLS=YES
+      - DATABASE_URL=postgresql://user:password@host[:port]/database_name
     logging:
       driver: "json-file"
       options:
@@ -114,10 +115,42 @@ services:
     environment:
       - DOMAIN=$VWDOMAIN
       - SIGNUPS_ALLOWED=false
+      - SSO_ENABLED=true
+      - SSO_AUTHORITY=https://auth.mafyuh.io/application/o/vaultwarden/
+      - SSO_SCOPES="email profile offline_access"
+      - SSO_CLIENT_ID=e17019c548f26f15e483b74b2b0a95e8900a03bb
+      - SSO_CLIENT_SECRET=$VW_SSO_CLIENT_SECRET
+      - SMTP_HOST=smtp.protonmail.ch
+      - SMTP_FROM=noreply@mafyuh.dev
+      - SMTP_FROM_NAME=Vaultwarden
+      - SMTP_USERNAME=noreply@mafyuh.dev
+      - SMTP_PASSWORD=$SMTP_PASSWORD
+      - SMTP_TIMEOUT=15
+      - SMTP_SECURITY=starttls
+      - SMTP_PORT=587
+      - DATABASE_URL=$DATABASE_URL
     restart: unless-stopped
     networks:
       gitea_main:
         ipv4_address: 172.25.0.25
+
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vaultwarden
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: vaultwarden
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - gitea_main
 
 networks:
   gitea_main:
@@ -126,4 +159,4 @@ networks:
 volumes:
   linkstack:
   n8n_data:
-  db-data:
+  postgres_data:
