@@ -112,7 +112,7 @@ services:
       - /home/mafyuh/vw-data/:/data
     environment:
       - DOMAIN=$VWDOMAIN
-      - SIGNUPS_ALLOWED=false
+      - SIGNUPS_ALLOWED=true
       - SSO_ENABLED=true
       - SSO_AUTHORITY=https://auth.mafyuh.io/application/o/vaultwarden/
       - SSO_SCOPES="openid email profile offline_access"
