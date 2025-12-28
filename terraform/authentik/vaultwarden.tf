@@ -32,6 +32,6 @@ resource "authentik_application" "vaultwarden" {
 
 resource "authentik_policy_binding" "vaultwarden-access" {
   target = authentik_application.vaultwarden.uuid
-  group  = authentik_group.admin_group.id
+  group  = authentik_group.jellyfin-ldap.id
   order  = 0
 }

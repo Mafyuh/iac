@@ -108,8 +108,6 @@ services:
   vaultwarden:
     image: vaultwarden/server:1.35.0
     container_name: vaultwarden
-    ports:
-      - 8989:80
     volumes:
       - /home/mafyuh/vw-data/:/data
     environment:
@@ -117,7 +115,9 @@ services:
       - SIGNUPS_ALLOWED=false
       - SSO_ENABLED=true
       - SSO_AUTHORITY=https://auth.mafyuh.io/application/o/vaultwarden/
-      - SSO_SCOPES="email profile offline_access"
+      - SSO_SCOPES="openid email profile offline_access"
+      - SSO_ONLY=true
+      - SSO_AUTH_ONLY_NOT_SESSION=true
       - SSO_CLIENT_ID=e17019c548f26f15e483b74b2b0a95e8900a03bb
       - SSO_CLIENT_SECRET=$SSO_CLIENT_SECRET
       - SMTP_HOST=smtp.protonmail.ch
