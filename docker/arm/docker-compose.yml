@@ -119,7 +119,7 @@ services:
       - SSO_AUTHORITY=https://auth.mafyuh.io/application/o/vaultwarden/
       - SSO_SCOPES="email profile offline_access"
       - SSO_CLIENT_ID=e17019c548f26f15e483b74b2b0a95e8900a03bb
-      - SSO_CLIENT_SECRET=$VW_SSO_CLIENT_SECRET
+      - SSO_CLIENT_SECRET=$SSO_CLIENT_SECRET
       - SMTP_HOST=smtp.protonmail.ch
       - SMTP_FROM=noreply@mafyuh.dev
       - SMTP_FROM_NAME=Vaultwarden
