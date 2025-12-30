@@ -106,7 +106,7 @@ services:
       - gitea_main
 
   vaultwarden:
-    image: vaultwarden/server:1.35.0
+    image: vaultwarden/server:1.35.1
     container_name: vaultwarden
     volumes:
       - /home/mafyuh/vw-data/:/data
