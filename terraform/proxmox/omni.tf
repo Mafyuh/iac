@@ -1,8 +1,8 @@
-resource "proxmox_virtual_environment_vm" "matrix" {
+resource "proxmox_virtual_environment_vm" "omni" {
 
   # VM General Settings
   node_name   = "prox"
-  name        = "matrix"
+  name        = "omni"
   description = "testing"
   tags        = ["tofu", "ubuntu25", "ansible", "packer"]
   started     = true
