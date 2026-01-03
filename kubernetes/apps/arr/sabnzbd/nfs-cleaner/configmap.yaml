@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: failed-cleanup-scripts
+data:
+  cleanup.sh: |
+    #!/bin/sh
+    set -e
+
+    echo "Starting cleanup"
+    CLEANUP_PATH="/data"
+
+    if [ ! -d "$CLEANUP_PATH" ]; then
+      echo "ERROR: Directory does not exist: $CLEANUP_PATH"
+      exit 1
+    fi
+
+    # Find and delete all directories with _FAILED_
+    FOUND=0
+    find "$CLEANUP_PATH" -maxdepth 1 -type d -name "_FAILED_*" | while read -r dir; do
+      echo "Deleting: $dir"
+      rm -rf "$dir"
+      FOUND=1
+    done
+
+    if [ $FOUND -eq 0 ]; then
+      echo "No _FAILED_ directories found in $CLEANUP_PATH"
+    else
+      echo "Cleanup completed successfully"
+    fi

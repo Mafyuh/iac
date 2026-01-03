@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app nfs-failed-cleanup
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: sabnzbd-exporter
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    controllers:
+      failed-cleanup:
+        enabled: true
+        type: cronjob
+
+        cronjob:
+          concurrencyPolicy: Forbid
+          schedule: "0 1 * * *"
+          startingDeadlineSeconds: 30
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          backoffLimit: 1
+
+        pod:
+          securityContext:
+            runAsUser: &context 1000
+            runAsGroup: *context
+            fsGroup: *context
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: library/busybox
+              tag: latest
+            command: ["/bin/sh"]
+            args: ["/scripts/cleanup.sh"]
+            env:
+              TZ: ${TZ}
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 5m
+                memory: 32Mi
+              limits:
+                memory: 128Mi
+
+    persistence:
+      scripts:
+        type: configMap
+        name: failed-cleanup-scripts
+        globalMounts:
+          - path: /scripts
+            readOnly: true
+      nfs:
+        type: nfs
+        server: 10.0.0.10
+        path: /mnt/thePool/thePoolShare/usenet/complete
+        globalMounts:
+          - path: /data
