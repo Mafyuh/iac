@@ -6,6 +6,14 @@ metadata:
   name: &app netbox
 spec:
   interval: 15m
+  install:
+    timeout: 100m
+    remediation:
+      retries: -1
+  upgrade:
+    timeout: 10m
+    remediation:
+      retries: -1
   chartRef:
     kind: OCIRepository
     name: netbox
