@@ -13,7 +13,7 @@ spec:
     global:
       env:
         - name: AUTHENTIK_POSTGRESQL__HOST
-          value: "10.20.10.100"
+          value: "pg-cluster-primary.databases.svc.cluster.local"
         - name: AUTHENTIK_POSTGRESQL__NAME
           valueFrom:
             secretKeyRef:
