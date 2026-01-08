@@ -13,7 +13,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   interval: 30m
-  timeout: 5m
+  timeout: 10m
   path: ./kubernetes/apps/networking/netbox/app
   prune: true
   sourceRef:
