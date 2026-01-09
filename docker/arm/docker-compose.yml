@@ -106,7 +106,7 @@ services:
       - gitea_main
 
   vaultwarden:
-    image: ghcr.io/dani-garcia/vaultwarden:1.35.1
+    image: ghcr.io/dani-garcia/vaultwarden:1.35.2
     container_name: vaultwarden
     volumes:
       - /home/mafyuh/vw-data/:/data
