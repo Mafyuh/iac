@@ -26,7 +26,7 @@ spec:
   postBuild:
     substitute:
       APP: prowlarr
-      VOLSYNC_CAPACITY: 1Gi
+      VOLSYNC_CAPACITY: 2Gi
     substituteFrom:
       - kind: Secret
         name: arr-secrets
