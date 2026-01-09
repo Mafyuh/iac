@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - crunchy-pgo/ks.yaml
   - dragonfly-operator/ks.yaml
+  - pgadmin/ks.yaml

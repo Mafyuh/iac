@@ -16,6 +16,9 @@ spec:
     - group: gateway.envoyproxy.io
       kind: SecurityPolicy
       namespace: default
+    - group: gateway.envoyproxy.io
+      kind: SecurityPolicy
+      namespace: databases
   to:
     - group: ""
       kind: Service
