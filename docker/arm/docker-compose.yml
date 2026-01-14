@@ -62,19 +62,6 @@ services:
         max-file: "10"
     restart: unless-stopped
 
-  uptime-kuma:
-    image: louislam/uptime-kuma:1.23.16
-    container_name: uptime-kuma
-    environment:
-      - UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN=true
-    ports:
-      - 3001:3001
-    volumes:
-      - /docker/appdata/kuma:/app/data
-    restart: unless-stopped
-    networks:
-      - gitea_main
-
   linkstack:
     image: linkstackorg/linkstack@sha256:2b298302ab50184cf99294ef3ae6a3c49c13081162e9a1d067a872e9c75b3e55
     container_name: linkstack
