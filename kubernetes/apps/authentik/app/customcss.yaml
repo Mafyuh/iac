@@ -8,6 +8,7 @@ metadata:
 data:
   custom.css: |
     /* Custom CSS for Authentik Login Page and Admin Interface */
+    /* Updated for Authentik 2025.12.0 with shadow DOM support */
 
     :root {
       --ak-accent: #3a3a40;
@@ -16,122 +17,162 @@ data:
       --pf-global--primary-color--400: var(--ak-accent);
     }
 
-    /*** Main login page ***/
-    .pf-c-login__main {
+    /*** Main login page using ::part() selectors for shadow DOM ***/
+    ak-flow-executor::part(main) {
       background-color: transparent !important;
       backdrop-filter: blur(8px);
       border: 2px solid #807e82;
       border-radius: 25px;
       animation: pulse-border 3s infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      box-sizing: border-box;
     }
 
     /* Glowing border animation */
     @keyframes pulse-border {
       0%, 100% {
-        box-shadow: 0 0 10px #807e82, 0 0 15px #807e82;
+        box-shadow: 0 0 10px #807e82, 0 0 15px #807e82, inset 0 0 10px rgba(128, 126, 130, 0.1);
       }
       50% {
-        box-shadow: 0 0 15px #807e82, 0 0 25px #807e82;
+        box-shadow: 0 0 15px #807e82, 0 0 25px #807e82, inset 0 0 15px rgba(128, 126, 130, 0.2);
       }
     }
 
-    /* Sidebar and footer transparency */
-    .pf-c-page__sidebar,
-    .pf-c-login__main-footer-band,
-    .pf-c-login__footer .pf-c-list {
-      background-color: transparent !important;
-      backdrop-filter: blur(10px);
+    /* Branding styling */
+    ak-flow-executor::part(branding) {
+      margin-bottom: 1.5rem;
     }
 
-    /* Pseudo-elements for background effects */
-    .pf-c-login__main::before,
-    .pf-c-login__main-footer-band::before,
-    .pf-c-login__footer .pf-c-list::before,
-    .pf-c-page__sidebar::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
+    ak-flow-executor::part(branding) img {
+      max-width: 150px;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(128, 126, 130, 0.3));
+    }
+
+    /* Stage identification card styling */
+    ak-stage-identification::part(flow-card) {
+      background: rgba(30, 30, 30, 0.4) !important;
+      backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(128, 126, 130, 0.3) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+      padding: 2rem !important;
       width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.1;
-      background-color: var(--ak-dark-background);
-      border-radius: 25px;
+      max-width: 400px;
+    }
+
+    /* Text inputs styling */
+    ak-stage-identification::part(flow-card) input[type="text"],
+    ak-stage-identification::part(flow-card) input[type="password"],
+    ak-stage-identification::part(flow-card) input[type="email"] {
+      border-radius: 15px !important;
+      border: 2px solid #807e82 !important;
+      background-color: rgba(58, 58, 64, 0.3) !important;
+      color: #b7b7b7 !important;
+      padding: 10px 15px !important;
+      transition: all 0.3s ease !important;
+    }
+
+    ak-stage-identification::part(flow-card) input:focus {
+      border-color: #d6d6d6 !important;
+      box-shadow: 0 0 10px rgba(214, 214, 214, 0.3) !important;
+      background-color: rgba(58, 58, 64, 0.5) !important;
     }
 
     /* Login button styling */
-    .pf-c-button.pf-m-block {
-      --pf-c-button--disabled--BackgroundColor: var(--pf-c-button--m-link--disabled--BackgroundColor);
-      color: white;
-      background-color: #3a3a40;
-      border-radius: 20px;
-      opacity: 0.785;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-      width: 50%;
-      margin: 0 auto;
+    ak-stage-identification::part(flow-card) button[type="submit"] {
+      background-color: #3a3a40 !important;
+      color: white !important;
+      border-radius: 15px !important;
+      border: none !important;
+      padding: 12px 30px !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+      transition: all 0.3s ease !important;
+      cursor: pointer !important;
     }
 
-    /* Form input styling */
-    .pf-c-form-control,
-    .pf-c-input-group {
-      border-radius: 20px;
-      border: 2px solid #3a3a40 !important;
+    ak-stage-identification::part(flow-card) button[type="submit"]:hover {
+      background-color: #4a4a50 !important;
+      box-shadow: 0 6px 20px rgba(128, 126, 130, 0.4) !important;
     }
 
-    /* Text color for various elements */
-    a,
-    body,
-    h1,
-    h2,
-    .pf-c-expandable-section__toggle,
-    .pf-c-page__header-tools,
-    .pf-c-button {
+    ak-stage-identification::part(flow-card) button[type="submit"]:active {
+      transform: scale(0.98) !important;
+    }
+
+    /* Other buttons styling */
+    ak-stage-identification::part(source-item) {
+      border-radius: 12px !important;
+      border: 1px solid rgba(128, 126, 130, 0.3) !important;
+      background: rgba(30, 30, 30, 0.3) !important;
+      transition: all 0.3s ease !important;
+      padding: 8px 12px !important;
+    }
+
+    ak-stage-identification::part(source-item):hover {
+      background: rgba(58, 58, 64, 0.5) !important;
+      border-color: #807e82 !important;
+      box-shadow: 0 4px 12px rgba(128, 126, 130, 0.2) !important;
+    }
+
+    /* Text styling */
+    ak-flow-executor {
+      --ak-text-color: #b7b7b7;
+      color: #b7b7b7;
+    }
+
+    ak-stage-identification::part(flow-card) label,
+    ak-stage-identification::part(flow-card) span,
+    ak-stage-identification::part(flow-card) a {
       color: #b7b7b7 !important;
     }
 
-    .pf-c-button.pf-m-secondary.pf-m-block::after {
-    content: none; /* Removes the content from the ::after pseudo-element */
-    box-shadow: none; /* Removes any shadow that may create a square effect */
-    border: none; /* If there's any border being applied, remove it */
+    ak-stage-identification::part(flow-card) a {
+      text-decoration: none;
+      border-bottom: 1px solid #3a3a40;
+      transition: all 0.3s ease;
     }
 
-    /* Light mode adjustments */
-    :host([theme="light"]) .pf-c-page__header-tools-item .fas,
-    :host([theme="light"]) .pf-c-notification-badge__count,
-    :host([theme="light"]) .pf-c-page__header-tools-group .pf-c-button {
-      color: #b7b7b7 !important;
+    ak-stage-identification::part(flow-card) a:hover {
+      color: #d6d6d6 !important;
+      border-bottom-color: #d6d6d6;
     }
 
-    /* App card styling */
-    .pf-c-card.pf-m-compact,
-    .pf-c-expandable-section.pf-m-display-lg {
-      border-radius: 20px;
-      background: rgba(18, 18, 18, 0.4);
-      backdrop-filter: blur(7px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: box-shadow 0.3s ease-in-out;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      background: linear-gradient(135deg, rgba(30, 30, 30, 0.3) 0%, rgba(15, 15, 15, 0.3) 100%);
+    /* Footer styling */
+    ak-stage-identification::part(challenge-footer-band) {
+      background-color: transparent !important;
+      border-top: 1px solid rgba(128, 126, 130, 0.2) !important;
+      margin-top: 1.5rem !important;
+      padding-top: 1.5rem !important;
     }
 
-    /* App card hover effect */
-    .pf-c-card.pf-m-compact:hover,
-    .pf-c-expandable-section.pf-m-display-lg:hover {
-      box-shadow: 0 0 15px 3px #d6d6d6;
+    ak-stage-identification::part(challenge-additional-actions) {
+      background-color: transparent !important;
     }
 
-    /* App icon rounded corners */
-    .icon.pf-c-avatar {
-      border-radius: 15px;
+    /* Admin interface - fallback for non-shadow DOM elements */
+    .pf-c-page {
+      background-color: transparent !important;
     }
 
-    /*** Admin interface ***/
     .pf-c-page__sidebar {
       backdrop-filter: blur(10px);
+      background-color: rgba(30, 30, 30, 0.4) !important;
     }
 
-    .pf-c-page,
-    .pf-c-tabs__item {
-      background-color: transparent !important;
+    .pf-c-card,
+    .pf-c-expandable-section {
+      background: rgba(30, 30, 30, 0.4) !important;
+      backdrop-filter: blur(7px);
+      border: 1px solid rgba(128, 126, 130, 0.2) !important;
+      border-radius: 15px !important;
+    }
+
+    .pf-c-card:hover,
+    .pf-c-expandable-section:hover {
+      box-shadow: 0 0 15px 3px rgba(214, 214, 214, 0.1) !important;
     }
