@@ -86,31 +86,6 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
         }
       },
       {
-        hostname = "stats.${var.domains["dev"]}"
-        service  = "http://10.69.69.199:3000"
-        path     = ""
-        origin_request = {
-          no_tls_verify            = true
-          origin_server_name       = ""
-          disable_chunked_encoding = false
-          http2_origin             = false
-          tcp_keep_alive           = 300
-          keep_alive_connections   = 100
-          keep_alive_timeout       = 90
-          tls_timeout              = 10
-          connect_timeout          = 30
-          http_host_header         = ""
-          proxy_type               = ""
-          ca_pool                  = ""
-          no_happy_eyeballs        = false
-          access = {
-            aud_tag   = [""]
-            team_name = "mafyuh"
-            required  = false
-          }
-        }
-      },
-      {
         hostname = "prox.${var.domains["io"]}"
         service  = "https://10.0.0.30:8006"
         path     = ""

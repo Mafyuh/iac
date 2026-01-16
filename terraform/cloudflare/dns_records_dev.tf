@@ -133,15 +133,6 @@ resource "cloudflare_dns_record" "dev_protonmail_key" {
   zone_id = data.bitwarden_secret.cf_dev_zone_id.value
 }
 
-resource "cloudflare_dns_record" "dev_stats" {
-  content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
-  name    = "stats.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_dev_zone_id.value
-}
-
 resource "cloudflare_dns_record" "dev_mx_20" {
   content  = "mailsec.protonmail.ch"
   name     = var.domains["dev"]

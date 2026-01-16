@@ -70,9 +70,7 @@ jobs:
               blocky) host="blocky-HA" ;;
               exporters) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;
-              kasm) host="Kasm" ;;
               npm) host="Nginx-Proxy-Manager" ;;
-              umami) host="umami" ;;
               wazuh) host="wazuh" ;;
               *) echo "Unknown folder: $folder" && exit 1 ;;
             esac

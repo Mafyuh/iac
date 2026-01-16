@@ -11,5 +11,6 @@ resources:
   - keda/ks.yaml
   - kromgo/ks.yaml
   - prometheus/ks.yaml
+  - umami/ks.yaml
   - unpoller/ks.yaml
   - victoria-logs/ks.yaml
