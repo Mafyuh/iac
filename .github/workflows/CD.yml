@@ -67,6 +67,7 @@ jobs:
               databases) host="db-server" ;;
               downloaders) host="Ubu" ;;
               geohub) host="Ubu" ;;
+              omni) host="omni" ;;
               blocky) host="blocky-HA" ;;
               exporters) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;

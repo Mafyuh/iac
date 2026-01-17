@@ -1,0 +1,39 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  omni:
+    restart: unless-stopped
+    network_mode: host
+    image: ghcr.io/siderolabs/omni:v1.4.7
+    command: --name=molntuss-omni
+      --account-id=${OMNI_ACCOUNT_UUID}
+      --private-key-source=file:///omni.asc
+      --cert=/tls.crt
+      --key=/tls.key
+      --siderolink-api-cert=/tls.crt
+      --siderolink-api-key=/tls.key
+      --machine-api-cert=/tls.crt
+      --event-sink-port=8091
+      --bind-addr=0.0.0.0:443
+      --machine-api-bind-addr=0.0.0.0:8090
+      --k8s-proxy-bind-addr=0.0.0.0:8100
+      --advertised-api-url=https://omni.mafyuh.xyz/
+      --siderolink-api-advertised-url=https://omni.mafyuh.xyz:8090/
+      --siderolink-wireguard-advertised-addr=10.69.69.169:50180
+      --advertised-kubernetes-proxy-url=https://omni.mafyuh.xyz:8100/
+      --sqlite-storage-path=/data/omni.db
+      --auth-saml-enabled=true
+      --auth-saml-url=https://auth.mafyuh.io/application/saml/omni/metadata/
+    volumes:
+      - omni-data:/data
+      - omni-etcd:/data/etcd
+      - /home/mafyuh/omni/omni.asc:/omni.asc
+      - /home/mafyuh/omni/fullchain.pem:/tls.crt
+      - /home/mafyuh/omni/tls.key:/tls.key
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+volumes:
+  omni-data:
+  omni-etcd:
