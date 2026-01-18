@@ -6,6 +6,10 @@ metadata:
   name: &app sabnzbd
   namespace: &ns arr
 spec:
+  components:
+    - ../../../../components/volsync
+    - ../../../../components/authentik-proxy
+    - ../../../../components/nfs
   targetNamespace: *ns
   commonMetadata:
     labels:
@@ -20,6 +24,9 @@ spec:
     namespace: flux-system
   wait: false
   postBuild:
+    substitute:
+      APP: sabnzbd
+      VOLSYNC_CAPACITY: 2Gi
     substituteFrom:
       - kind: Secret
         name: arr-secrets
