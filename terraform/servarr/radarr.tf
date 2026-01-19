@@ -17,10 +17,10 @@ resource "radarr_download_client_sabnzbd" "sabnzbd" {
   enable                     = true
   priority                   = 1
   name                       = "SABnzbd"
-  host                       = "sab.mafyuh.xyz"
+  host                       = "sabnzbd-app.arr.svc.cluster.local"
   url_base                   = "/"
-  port                       = 443
-  use_ssl                    = true
+  port                       = 8080
+  use_ssl                    = false
   movie_category             = "movies"
   api_key                    = data.bitwarden_secret.sabnzbd_api_key.value
   remove_failed_downloads    = true

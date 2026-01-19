@@ -12,10 +12,10 @@ resource "sonarr_download_client_sabnzbd" "sabnzbd" {
   enable   = true
   priority = 1
   name     = "sabnzbd"
-  host     = "sab.mafyuh.xyz"
-  use_ssl  = true
+  host     = "sabnzbd-app.arr.svc.cluster.local"
+  use_ssl  = false
   url_base = "/"
-  port     = 443
+  port     = 8080
   api_key  = data.bitwarden_secret.sabnzbd_api_key.value
 }
 
