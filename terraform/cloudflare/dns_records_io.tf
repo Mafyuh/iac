@@ -19,7 +19,7 @@ resource "cloudflare_dns_record" "io_jelly" {
 resource "cloudflare_dns_record" "io_kuma" {
   content = data.bitwarden_secret.arm_oci_vm_ip.value
   name    = "kuma.${var.domains["io"]}"
-  proxied = true
+  proxied = false
   ttl     = 1
   type    = "A"
   zone_id = data.bitwarden_secret.cf_io_zone_id.value
