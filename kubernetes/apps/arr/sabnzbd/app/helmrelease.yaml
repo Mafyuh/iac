@@ -149,10 +149,3 @@ spec:
         path: /mnt/thePool/thePoolShare
         globalMounts:
           - path: /data
-
-      incomplete:
-        enabled: true
-        type: emptyDir
-        sizeLimit: 100Gi
-        globalMounts:
-          - path: /incomplete

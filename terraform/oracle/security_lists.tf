@@ -65,6 +65,17 @@ resource "oci_core_default_security_list" "Default-Security-List-for-NEW" {
     }
   }
   ingress_security_rules {
+    description = "Postgres"
+    protocol    = "6"
+    source      = "${data.bitwarden_secret.homelab_ip.value}/32"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "5432"
+      min = "5432"
+    }
+  }
+  ingress_security_rules {
     description = "SSH"
     protocol    = "6"
     source      = "${data.bitwarden_secret.homelab_ip.value}/32"
