@@ -18,7 +18,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: iac-runner
+    runs-on: self-hosted
     steps:
       - name: Pre-clean workspace directory
         run: |
