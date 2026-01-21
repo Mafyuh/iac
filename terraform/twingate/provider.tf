@@ -17,21 +17,20 @@ terraform {
       source  = "Twingate/twingate"
       version = "3.7.0"
     }
-    bitwarden = {
-      source  = "maxlaverse/bitwarden"
-      version = "0.16.0"
+    bitwarden-secrets = {
+      source  = "bitwarden/bitwarden-secrets"
+      version = "~> 0.1.0"
     }
   }
 }
 
 provider "twingate" {
-  api_token = data.bitwarden_secret.twingate_api_key.value
+  api_token = data.bitwarden-secrets_secret.twingate_api_key.value
   network   = "mafyuh"
 }
 
-provider "bitwarden" {
-  access_token = var.access_token
-  experimental {
-    embedded_client = true
-  }
+provider "bitwarden-secrets" {
+  access_token    = var.access_token
+  organization_id = "305f1e91-cd2b-411c-8acf-b1a3004a82b2"
+  project_id      = "5afc4f45-6422-4373-96cb-b2080005bf71"
 }

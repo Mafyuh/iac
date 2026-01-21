@@ -17,22 +17,21 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "5.15.0"
     }
-    bitwarden = {
-      source  = "maxlaverse/bitwarden"
-      version = "0.16.0"
+    bitwarden-secrets = {
+      source  = "bitwarden/bitwarden-secrets"
+      version = "~> 0.1.0"
     }
   }
 }
 
-provider "bitwarden" {
-  access_token = var.access_token
-  experimental {
-    embedded_client = true
-  }
+provider "bitwarden-secrets" {
+  access_token    = var.access_token
+  organization_id = "305f1e91-cd2b-411c-8acf-b1a3004a82b2"
+  project_id      = "5afc4f45-6422-4373-96cb-b2080005bf71"
 }
 
 provider "cloudflare" {
-  # api_token = data.bitwarden_secret.cloudflare_api_token.value
-  api_key = data.bitwarden_secret.cloudflare_api_key.value
+  # api_token = data.bitwarden-secrets_secret.cloudflare_api_token.value
+  api_key = data.bitwarden-secrets_secret.cloudflare_api_key.value
   email   = "matt@mafyuh.dev"
 }

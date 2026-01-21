@@ -17,39 +17,38 @@ terraform {
       source  = "bpg/proxmox"
       version = "0.93.0"
     }
-    bitwarden = {
-      source  = "maxlaverse/bitwarden"
-      version = "0.16.0"
+    bitwarden-secrets = {
+      source  = "bitwarden/bitwarden-secrets"
+      version = "~> 0.1.0"
     }
   }
 }
 
 provider "proxmox" {
   endpoint      = "https://prox.mafyuh.xyz/"
-  api_token     = data.bitwarden_secret.prox_api_key.value
+  api_token     = data.bitwarden-secrets_secret.prox_api_key.value
   insecure      = false
   random_vm_ids = true
   ssh {
     agent = true
     ## TODO: stop using root
     username = "root"
-    password = data.bitwarden_secret.ssh_password.value
+    password = data.bitwarden-secrets_secret.ssh_password.value
 
     node {
       name    = "prox"
-      address = data.bitwarden_secret.prox_ip_address.value
+      address = data.bitwarden-secrets_secret.prox_ip_address.value
     }
 
     node {
       name    = "pve2"
-      address = data.bitwarden_secret.pve2_ip_address.value
+      address = data.bitwarden-secrets_secret.pve2_ip_address.value
     }
   }
 }
 
-provider "bitwarden" {
-  access_token = var.access_token
-  experimental {
-    embedded_client = true
-  }
+provider "bitwarden-secrets" {
+  access_token    = var.access_token
+  organization_id = "305f1e91-cd2b-411c-8acf-b1a3004a82b2"
+  project_id      = "5afc4f45-6422-4373-96cb-b2080005bf71"
 }

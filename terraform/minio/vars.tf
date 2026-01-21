@@ -4,6 +4,6 @@ variable "access_token" {
   sensitive   = true
 }
 
-data "bitwarden_secret" "minio_password" {
+data "bitwarden-secrets_secret" "minio_password" {
   id = "aeb09725-39f5-47bf-823a-b31001738d02"
 }

@@ -16,24 +16,23 @@ terraform {
       source  = "oracle/oci"
       version = "7.30.0"
     }
-    bitwarden = {
-      source  = "maxlaverse/bitwarden"
-      version = "0.16.0"
+    bitwarden-secrets = {
+      source  = "bitwarden/bitwarden-secrets"
+      version = "~> 0.1.0"
     }
   }
 }
 
 provider "oci" {
-  tenancy_ocid = data.bitwarden_secret.tenancy_ocid.value
-  user_ocid    = data.bitwarden_secret.user_ocid.value
-  private_key  = data.bitwarden_secret.oci_private_key.value
-  fingerprint  = data.bitwarden_secret.fingerprint.value
+  tenancy_ocid = data.bitwarden-secrets_secret.tenancy_ocid.value
+  user_ocid    = data.bitwarden-secrets_secret.user_ocid.value
+  private_key  = data.bitwarden-secrets_secret.oci_private_key.value
+  fingerprint  = data.bitwarden-secrets_secret.fingerprint.value
   region       = "us-ashburn-1"
 }
 
-provider "bitwarden" {
-  access_token = var.access_token
-  experimental {
-    embedded_client = true
-  }
+provider "bitwarden-secrets" {
+  access_token    = var.access_token
+  organization_id = "305f1e91-cd2b-411c-8acf-b1a3004a82b2"
+  project_id      = "5afc4f45-6422-4373-96cb-b2080005bf71"
 }

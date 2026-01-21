@@ -1,5 +1,5 @@
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
-  account_id = data.bitwarden_secret.cf_account_id.value
+  account_id = data.bitwarden-secrets_secret.cf_account_id.value
   tunnel_id  = "c68b2785-4489-4a5b-a265-4cb72d2e2625"
 
   lifecycle {
