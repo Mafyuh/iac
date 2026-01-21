@@ -58,4 +58,4 @@ docker/netbox/env/
 *.decrypted~*
 scripts/radarr-custom-format-scores-fixed.sh
 *device_identifier*
-terraform/cloudflare/.bw-provider-state
+*.bw-provider-state
