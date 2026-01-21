@@ -27,32 +27,31 @@ terraform {
       source  = "devopsarr/radarr"
       version = "2.3.4"
     }
-    bitwarden = {
-      source  = "maxlaverse/bitwarden"
-      version = "0.16.0"
+    bitwarden-secrets = {
+      source  = "bitwarden/bitwarden-secrets"
+      version = "~> 0.1.0"
     }
   }
 }
 
-provider "bitwarden" {
-  access_token = var.access_token
-  email        = "admin@mafyuh.io"
-  experimental {
-    embedded_client = true
-  }
+provider "bitwarden-secrets" {
+  access_token    = var.access_token
+  email           = "admin@mafyuh.io"
+  organization_id = "305f1e91-cd2b-411c-8acf-b1a3004a82b2"
+  project_id      = "5afc4f45-6422-4373-96cb-b2080005bf71"
 }
 
 provider "sonarr" {
   url     = "http://sonarr-app.arr.svc.cluster.local:8989"
-  api_key = data.bitwarden_secret.sonarr_api_key.value
+  api_key = data.bitwarden-secrets_secret.sonarr_api_key.value
 }
 
 provider "radarr" {
   url     = "http://radarr-app.arr.svc.cluster.local:7878"
-  api_key = data.bitwarden_secret.radarr_api_key.value
+  api_key = data.bitwarden-secrets_secret.radarr_api_key.value
 }
 
 provider "prowlarr" {
   url     = "http://prowlarr-app.arr.svc.cluster.local:6767"
-  api_key = data.bitwarden_secret.prowlarr_api_key.value
+  api_key = data.bitwarden-secrets_secret.prowlarr_api_key.value
 }

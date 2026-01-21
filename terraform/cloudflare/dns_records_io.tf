@@ -1,37 +1,37 @@
 resource "cloudflare_dns_record" "io_go" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
+  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
   name    = "go.${var.domains["io"]}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_jelly" {
-  content = data.bitwarden_secret.vps_oci_vm_ip.value
+  content = data.bitwarden-secrets_secret.vps_oci_vm_ip.value
   name    = "jelly.${var.domains["io"]}"
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_kuma" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
+  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
   name    = "kuma.${var.domains["io"]}"
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_links" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
+  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
   name    = "links.${var.domains["io"]}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_local_wildcard" {
@@ -40,25 +40,25 @@ resource "cloudflare_dns_record" "io_local_wildcard" {
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_request" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
+  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
   name    = "request.${var.domains["io"]}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_x" {
-  content = data.bitwarden_secret.arm_oci_vm_ip.value
+  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
   name    = "x.${var.domains["io"]}"
   proxied = true
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_chat" {
@@ -67,7 +67,7 @@ resource "cloudflare_dns_record" "io_chat" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_kasm" {
@@ -76,7 +76,7 @@ resource "cloudflare_dns_record" "io_kasm" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_wildcard" {
@@ -85,7 +85,7 @@ resource "cloudflare_dns_record" "io_wildcard" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_mafyuh_io" {
@@ -94,7 +94,7 @@ resource "cloudflare_dns_record" "io_mafyuh_io" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_protonmail2" {
@@ -103,7 +103,7 @@ resource "cloudflare_dns_record" "io_protonmail2" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_protonmail3" {
@@ -112,7 +112,7 @@ resource "cloudflare_dns_record" "io_protonmail3" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_protonmail_key" {
@@ -121,7 +121,7 @@ resource "cloudflare_dns_record" "io_protonmail_key" {
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_prox" {
@@ -130,7 +130,7 @@ resource "cloudflare_dns_record" "io_prox" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_sab" {
@@ -139,7 +139,7 @@ resource "cloudflare_dns_record" "io_sab" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_protonmail_mx" {
@@ -149,7 +149,7 @@ resource "cloudflare_dns_record" "io_protonmail_mx" {
   proxied  = false
   ttl      = 1
   type     = "MX"
-  zone_id  = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id  = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_protonmail_mx_10" {
@@ -159,7 +159,7 @@ resource "cloudflare_dns_record" "io_protonmail_mx_10" {
   proxied  = false
   ttl      = 1
   type     = "MX"
-  zone_id  = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id  = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_dmarc" {
@@ -168,7 +168,7 @@ resource "cloudflare_dns_record" "io_dmarc" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_hcp_verification" {
@@ -177,7 +177,7 @@ resource "cloudflare_dns_record" "io_hcp_verification" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_spf_record" {
@@ -186,7 +186,7 @@ resource "cloudflare_dns_record" "io_spf_record" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_protonmail_verification" {
@@ -195,14 +195,14 @@ resource "cloudflare_dns_record" "io_protonmail_verification" {
   proxied = false
   ttl     = 1
   type    = "TXT"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
 resource "cloudflare_dns_record" "io_pbx" {
-  content = data.bitwarden_secret.pbx_ip.value
+  content = data.bitwarden-secrets_secret.pbx_ip.value
   name    = "pbx.${var.domains["io"]}"
   proxied = false
   ttl     = 1
   type    = "A"
-  zone_id = data.bitwarden_secret.cf_io_zone_id.value
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }

@@ -8,7 +8,7 @@ resource "radarr_download_client_qbittorrent" "qbitty" {
   port                       = 8081
   first_and_last             = false
   username                   = "mafyuh"
-  password                   = data.bitwarden_secret.qbitty_password.value
+  password                   = data.bitwarden-secrets_secret.qbitty_password.value
   remove_failed_downloads    = true
   remove_completed_downloads = true
 }
@@ -22,7 +22,7 @@ resource "radarr_download_client_sabnzbd" "sabnzbd" {
   port                       = 8080
   use_ssl                    = false
   movie_category             = "movies"
-  api_key                    = data.bitwarden_secret.sabnzbd_api_key.value
+  api_key                    = data.bitwarden-secrets_secret.sabnzbd_api_key.value
   remove_failed_downloads    = true
   remove_completed_downloads = true
 }
@@ -80,7 +80,7 @@ resource "radarr_notification_gotify" "gotify" {
   include_health_warnings          = false
   name                             = "Gotify"
   server                           = "https://go.mafyuh.io"
-  app_token                        = data.bitwarden_secret.gotify_radarr_key.value
+  app_token                        = data.bitwarden-secrets_secret.gotify_radarr_key.value
   priority                         = 8
 }
 

@@ -24,7 +24,7 @@
 #     },
 #     {
 #       name            = "apiKey"
-#       sensitive_value = data.bitwarden_secret.ninjacentral_api_key.value
+#       sensitive_value = data.bitwarden-secrets_secret.ninjacentral_api_key.value
 #     },
 #     {
 #       name       = "vipExpiration"
@@ -62,7 +62,7 @@
 #     },
 #     {
 #       name            = "apiKey"
-#       sensitive_value = data.bitwarden_secret.nzbgeek_api_key.value
+#       sensitive_value = data.bitwarden-secrets_secret.nzbgeek_api_key.value
 #     },
 #     {
 #       name       = "vipExpiration"
@@ -96,7 +96,7 @@
 #     },
 #     {
 #       name            = "apiKey"
-#       sensitive_value = data.bitwarden_secret.althub_api_key.value
+#       sensitive_value = data.bitwarden-secrets_secret.althub_api_key.value
 #     },
 #     {
 #       name       = "vipExpiration"

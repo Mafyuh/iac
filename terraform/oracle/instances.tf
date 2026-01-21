@@ -17,7 +17,7 @@ resource "oci_core_instance" "arm" {
     recovery_action = "RESTORE_INSTANCE"
   }
   availability_domain = "nWCj:US-ASHBURN-AD-1"
-  compartment_id      = data.bitwarden_secret.compartment_id.value
+  compartment_id      = data.bitwarden-secrets_secret.compartment_id.value
   create_vnic_details {
     assign_public_ip = "true"
     defined_tags = {
