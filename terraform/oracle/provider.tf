@@ -34,5 +34,6 @@ provider "oci" {
 provider "bitwarden-secrets" {
   access_token    = var.access_token
   organization_id = "305f1e91-cd2b-411c-8acf-b1a3004a82b2"
-  project_id      = "5afc4f45-6422-4373-96cb-b2080005bf71"
+  api_url         = "https://api.bitwarden.com"
+  identity_url    = "https://identity.bitwarden.com"
 }
