@@ -24,6 +24,7 @@ spec:
         storage:
           size: 1Gi
         maxUploadSize: 100M
+      replicas: 2
       additional:
         1-base-config:
           config: |
