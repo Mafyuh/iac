@@ -20,8 +20,17 @@ variable "proxmox_api_token_secret" {
     sensitive = true
 }
 
-# Resource Definiation for the VM Template
-source "proxmox-clone" "debian2" {
+variable "ldap_password" {
+  type      = string
+  sensitive = true
+}
+
+variable "ssh_authorized_keys" {
+  type      = list(string)
+  sensitive = true
+}
+
+source "proxmox-iso" "ubuntu-server-noble" {
 
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
@@ -32,12 +41,9 @@ source "proxmox-clone" "debian2" {
     # VM General Settings
     node = "pve2"
 
-
-    clone_vm_id = "8105"
-
-    vm_id = "9999"
-    vm_name = "debian-template"
-    template_description = "Debian Bullseye"
+    vm_id = "199"
+    vm_name = "ubuntu-24-template"
+    template_description = "Ubuntu Server noble from Packer"
 
     # VM System Settings
     qemu_agent = true
@@ -46,18 +52,24 @@ source "proxmox-clone" "debian2" {
     scsi_controller = "virtio-scsi-pci"
 
     disks {
-        disk_size = "3G"
-        format = "raw"
-        storage_pool = "Fast500Gb"
         type = "scsi"
+        disk_size = "8G"
+        storage_pool = "NAS"
+    }
+
+    boot_iso {
+        type = "scsi"
+        iso_file = "NAS:iso/ubuntu-24.04.3-live-server-amd64.iso"
+        unmount = true
+        iso_checksum = "sha512:c3514bf0056180d09376462a7a1b4f213c1d6e8ea67fae5c25099c6fd3d8274b"
     }
 
     # VM CPU Settings
-    cores = "2"
-    cpu_type = "x86-64-v2-AES"
+    cores = "3"
+    cpu_type = "host"
 
     # VM Memory Settings
-    memory = "2048"
+    memory = "4096"
 
     # VM Network Settings
     network_adapters {
@@ -66,17 +78,39 @@ source "proxmox-clone" "debian2" {
         firewall = "false"
     }
 
+    cloud_init              = true
+    cloud_init_storage_pool = "local-lvm"
+
 
     ssh_username = "mafyuh"
+## The build takes forever, 60 is more than enough
+    ssh_timeout  = "60m"
     # WSL Filesystem
     ssh_private_key_file = "~/.ssh/id_rsa"
+
+    boot_wait = "10s"
+    boot_command = [
+        "<esc><wait>",
+        "e<wait>",
+        "<down><down><down><end>",
+        "<bs><bs><bs><bs><wait>",
+        "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+        "<f10><wait>"
+    ]
+
+    http_content = {
+      "/user-data" = local.user_data
+      "/meta-data" = "instance-id: packer\nlocal-hostname: ubuntu-noble-template"
+    }
+    http_port_min = 8001
+    http_port_max = 8001
 }
 
 
 build {
 
-    name = "debian"
-    sources = ["source.proxmox-clone.debian2"]
+    name = "ubuntu-server-noble"
+    sources = ["source.proxmox-iso.ubuntu-server-noble"]
 
     ## Cleanup for re-template
     provisioner "shell" {
@@ -97,7 +131,7 @@ build {
     }
 
     provisioner "file" {
-        source = "files/pve.cfg"
+        source = "ubuntu/files/pve.cfg"
         destination = "/tmp/pve.cfg"
     }
 
@@ -105,13 +139,27 @@ build {
         inline = [ "sudo cp /tmp/pve.cfg /etc/cloud/cloud.cfg.d/pve.cfg" ]
     }
 
+    provisioner "file" {
+        source = "ubuntu/files/setup-ubuntu.sh"
+        destination = "/tmp/setup-ubuntu.sh"
+    }
+
 
     provisioner "shell" {
-    inline = [
-        "sudo apt-get update",
-        "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y open-iscsi nfs-common cryptsetup",
-        "sudo mkdir -p /etc/systemd/resolved.conf.d && echo '[Resolve]\nDNS=1.1.1.1' | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf",
-        "sudo apt-get -y upgrade"
-    ]
+        inline = [
+            "chmod +x /tmp/setup-ubuntu.sh",
+            "/tmp/setup-ubuntu.sh"
+        ]
     }
+
+    provisioner "file" {
+        source = "ubuntu/files/.zshrc"
+        destination = "~/.zshrc"
+    }
+}
+
+locals {
+  user_data = templatefile("../files/cloud-init.pkrtpl.hcl", {
+    ssh_authorized_keys = join("\n", var.ssh_authorized_keys)
+  })
 }

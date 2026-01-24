@@ -24,3 +24,14 @@ resource "proxmox_virtual_environment_download_file" "talos_image" {
   checksum_algorithm = "sha256"
   overwrite          = false
 }
+
+resource "proxmox_virtual_environment_download_file" "ubuntu_server_24_iso" {
+  content_type       = "iso"
+  datastore_id       = "NAS"
+  file_name          = "ubuntu-24.04.3-live-server-amd64.iso"
+  node_name          = "prox"
+  url                = "https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso"
+  checksum           = "c3514bf0056180d09376462a7a1b4f213c1d6e8ea67fae5c25099c6fd3d8274b"
+  checksum_algorithm = "sha256"
+  overwrite          = false
+}

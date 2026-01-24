@@ -19,6 +19,7 @@ resource "proxmox_virtual_environment_vm" "omni" {
   cpu {
     cores        = 2
     type         = "host"
+    architecture = "x86_64"
   }
 
   # VM Memory Settings

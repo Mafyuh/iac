@@ -12,21 +12,9 @@ wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.29.0/fastfet
 sudo dpkg -i fastfetch-linux-amd64.deb || echo "dpkg install failed"
 rm -f fastfetch-linux-amd64.deb
 
-log "Updating APT and installing packages"
-sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg lsb-release nfs-common net-tools zsh fzf
-
-log "Changing default shell to zsh for user 'mafyuh'"
-sudo chsh -s "$(which zsh)" packer
-
 log "Installing Docker"
 curl -fsSL https://get.docker.com | sudo sh
-
-log "Installing Docker Loki plugin"
-sudo docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions || echo "Loki plugin install failed"
-
-log "Moving Docker daemon config"
-sudo mv /tmp/daemon.json /etc/docker/daemon.json || echo "daemon.json not found or failed to move"
+sudo usermod -aG docker mafyuh
 
 log "Installing Lazydocker"
 curl -fsSL https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
@@ -37,6 +25,9 @@ echo -e '[Resolve]\nDNS=10.20.10.20' | sudo tee /etc/systemd/resolved.conf.d/dns
 
 log "Installing Oh My Zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended || echo "Oh My Zsh install failed"
+
+log "Setting default shell to zsh"
+sudo chsh -s /bin/zsh mafyuh
 
 log "Cloning Zsh plugins"
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
