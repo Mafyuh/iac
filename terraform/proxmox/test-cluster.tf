@@ -11,18 +11,18 @@ resource "proxmox_virtual_environment_vm" "test-cluster-1" {
   }
 
   clone {
-    vm_id = 19101
+    vm_id = 199
   }
 
   # VM CPU Settings
   cpu {
-    cores        = 4
+    cores        = 5
     type         = "host"
   }
 
   # VM Memory Settings
   memory {
-    dedicated = 8192
+    dedicated = 12288
   }
 
   # VM Network Settings
@@ -75,18 +75,18 @@ resource "proxmox_virtual_environment_vm" "test-cluster-2" {
   }
 
   clone {
-    vm_id = 19101
+    vm_id = 199
   }
 
   # VM CPU Settings
   cpu {
-    cores        = 4
+    cores        = 5
     type         = "host"
   }
 
   # VM Memory Settings
   memory {
-    dedicated = 8192
+    dedicated = 12288
   }
 
   # VM Network Settings
@@ -139,18 +139,18 @@ resource "proxmox_virtual_environment_vm" "test-cluster-3" {
   }
 
   clone {
-    vm_id = 19101
+    vm_id = 199
   }
 
   # VM CPU Settings
   cpu {
-    cores        = 4
+    cores        = 5
     type         = "host"
   }
 
   # VM Memory Settings
   memory {
-    dedicated = 8192
+    dedicated = 12288
   }
 
   # VM Network Settings
