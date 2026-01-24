@@ -28,6 +28,7 @@ resource "proxmox_virtual_environment_vm" "test-cluster-1" {
   # VM Network Settings
   network_device {
     bridge  = "vmbr0"
+    vlan_id = 30
   }
 
   # VM Disk Settings
@@ -44,7 +45,8 @@ resource "proxmox_virtual_environment_vm" "test-cluster-1" {
   initialization {
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "10.30.0.11/24"
+        gateway = "10.30.0.1"
       }
     }
   }
@@ -90,6 +92,7 @@ resource "proxmox_virtual_environment_vm" "test-cluster-2" {
   # VM Network Settings
   network_device {
     bridge  = "vmbr0"
+    vlan_id = 30
   }
 
   # VM Disk Settings
@@ -106,7 +109,8 @@ resource "proxmox_virtual_environment_vm" "test-cluster-2" {
   initialization {
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "10.30.0.12/24"
+        gateway = "10.30.0.1"
       }
     }
   }
@@ -152,6 +156,7 @@ resource "proxmox_virtual_environment_vm" "test-cluster-3" {
   # VM Network Settings
   network_device {
     bridge  = "vmbr0"
+    vlan_id = 30
   }
 
   # VM Disk Settings
@@ -168,7 +173,8 @@ resource "proxmox_virtual_environment_vm" "test-cluster-3" {
   initialization {
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "10.30.0.13/24"
+        gateway = "10.30.0.1"
       }
     }
   }
