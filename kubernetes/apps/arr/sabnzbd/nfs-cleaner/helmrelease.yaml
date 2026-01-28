@@ -8,7 +8,7 @@ spec:
   interval: 15m
   chartRef:
     kind: OCIRepository
-    name: sabnzbd-exporter
+    name: sabnzbd
   values:
     global:
       fullnameOverride: *app
