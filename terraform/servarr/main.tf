@@ -17,7 +17,7 @@ terraform {
   required_providers {
     sonarr = {
       source  = "devopsarr/sonarr"
-      version = "3.4.0"
+      version = "3.4.1"
     }
     prowlarr = {
       source  = "devopsarr/prowlarr"
