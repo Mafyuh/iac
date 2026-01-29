@@ -10,5 +10,5 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: v1.3.1
+    tag: v1.4.0
   url: oci://ghcr.io/dragonflydb/dragonfly-operator/helm/dragonfly-operator
