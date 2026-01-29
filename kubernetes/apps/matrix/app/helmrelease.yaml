@@ -79,7 +79,6 @@ spec:
               service_name: "Mafyuh Matrix"
             passwords:
               enabled: false
-              minimum_length: 12
             account:
               email_change_allowed: true
               displayname_change_allowed: true
@@ -137,7 +136,7 @@ spec:
           {
             "brand": "Mafyuh Matrix",
             "default_theme": "dark",
-            "show_labs_settings": false,
+            "show_labs_settings": true,
             "force_verification": false,
             "default_server_config": {
               "m.homeserver": {
@@ -153,11 +152,13 @@ spec:
               "feature_element_call_video_rooms": true,
               "feature_group_calls": true,
               "feature_native_sliding_sync": true,
-              "feature_cross_signing": false,
+              "feature_new_room_list": false,
               "feature_pinning": true
             },
             "setting_defaults": {
-              "FTUE.userOnboardingButton": false
+              "FTUE.userOnboardingButton": false,
+              "Spaces.allRoomsInHome": true,
+              "alwaysShowTimestamps": true,
             },
             "jitsi": {
               "preferred_domain": "meet.jit.si"
@@ -187,7 +188,8 @@ spec:
               "url": "https://matrix.mafyuh.dev"
             },
             "io.element.e2ee": {
-              "force_disable": true
+              "force_disable": false,
+              "default": false
             },
             "io.element.call": {
               "rtc_backend": "https://rtc.mafyuh.dev"
