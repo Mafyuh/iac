@@ -158,7 +158,7 @@ spec:
             "setting_defaults": {
               "FTUE.userOnboardingButton": false,
               "Spaces.allRoomsInHome": true,
-              "alwaysShowTimestamps": true,
+              "alwaysShowTimestamps": true
             },
             "jitsi": {
               "preferred_domain": "meet.jit.si"
