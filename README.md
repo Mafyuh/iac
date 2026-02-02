@@ -103,6 +103,8 @@ Some good references for how I learned this stuff (other than RTFM)
 - [Docker](https://www.youtube.com/watch?v=eGz9DS-aIeY)
 - [Ansible](https://www.youtube.com/watch?v=goclfp6a2IQ)
 
+Special thank you to [@chkpwd](https://github.com/chkpwd) for helping me get this started. [His repo](https://github.com/chkpwd/iac) was the inspiration for this.
+
 ## 🖥️ **Hardware**
 
 Proof that you don't need expensive new equipment to run infra like mine. Mostly everything here is secondhand, bought over time, totaling less than ~$3k.
