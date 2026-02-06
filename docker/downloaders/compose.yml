@@ -43,6 +43,18 @@ services:
       - 8081:8080
     restart: unless-stopped
 
+  autobrr:
+    container_name: autobrr
+    image: ghcr.io/autobrr/autobrr:v1.72.1
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    user: 1000:1000
+    volumes:
+      - /docker/appdata/autobrr/config:/config
+    ports:
+      - 7474:7474
+
 volumes:
   nas:
     driver: local

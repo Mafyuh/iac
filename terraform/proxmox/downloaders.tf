@@ -1,9 +1,9 @@
-resource "proxmox_virtual_environment_vm" "clawdbot" {
+resource "proxmox_virtual_environment_vm" "downloaders" {
 
   # VM General Settings
   node_name   = "pve2"
-  name        = "clawdbot"
-  description = "Clawdbot Server"
+  name        = "downloaders"
+  description = "Sabnzbd and qbittorrent server/ VM faster than k8s"
   tags        = ["tofu", "ubuntu24", "ansible", "packer"]
 
   agent {
@@ -16,13 +16,13 @@ resource "proxmox_virtual_environment_vm" "clawdbot" {
 
   # VM CPU Settings
   cpu {
-    cores        = 3
+    cores        = 4
     type         = "host"
   }
 
   # VM Memory Settings
   memory {
-    dedicated = 4096
+    dedicated = 8192
   }
 
   # VM Network Settings
@@ -34,7 +34,7 @@ resource "proxmox_virtual_environment_vm" "clawdbot" {
   # VM Disk Settings
   disk {
     datastore_id = "Fast500Gb"
-    size         = 50
+    size         = 150
     interface    = "scsi0"
   }
 

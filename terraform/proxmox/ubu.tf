@@ -24,7 +24,7 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
 
   # VM Memory Settings
   memory {
-    dedicated = 8192
+    dedicated = 16384
   }
 
   # VM Network Settings
