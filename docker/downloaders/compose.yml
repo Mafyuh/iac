@@ -2,14 +2,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   sabnzbd:
-    image: ghcr.io/hotio/sabnzbd:release-4.5.5
+    image: ghcr.io/linuxserver/sabnzbd:4.5.5
     container_name: sabnzbd
     environment:
       - PUID=1000
-      - PGID=1001
-      - TZ=Etc/UTC
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/New_York
     volumes:
       - /docker/appdata/sabnzbd/config:/config:rw
+      ## Fix failed 7za return code 2 errors when unpacking certain nzbs
+      - /docker/appdata/sabnzbd/custom-init.sh:/custom-cont-init.d/99-fix-7z.sh
+      - /docker/appdata/sabnzbd/7zz-wrapper:/custom-cont-init.d/7zz-wrapper
       - nas:/data:rw
     ports:
       - 8082:8080
