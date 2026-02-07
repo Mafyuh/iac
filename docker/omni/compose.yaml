@@ -4,7 +4,7 @@ services:
   omni:
     restart: unless-stopped
     network_mode: host
-    image: ghcr.io/siderolabs/omni:v1.4.7
+    image: ghcr.io/siderolabs/omni:v1.5.0
     command: --name=molntuss-omni
       --account-id=${OMNI_ACCOUNT_UUID}
       --private-key-source=file:///omni.asc
