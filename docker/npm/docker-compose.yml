@@ -51,7 +51,7 @@ services:
     container_name: cloudflared
 
   twingate-famous-alligator:
-    image: twingate/connector@sha256:0a171922dbaee00eb968b7d3fd45b7b54ca9b5d6fdf0c6d4f5b91ca82adf107b
+    image: twingate/connector@sha256:ae4cfbdaf51b17da0fc541bd06c43bb6be6598a2d8bbfb8456106c299f9c6b39
     container_name: twingate-famous-alligator
     restart: always
     environment:
