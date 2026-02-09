@@ -42,7 +42,7 @@ services:
       - redis_data:/data
 
   adminer:
-    image: adminer:5.4.1
+    image: adminer:5.4.2
     container_name: adminer
     restart: unless-stopped
     ports:
