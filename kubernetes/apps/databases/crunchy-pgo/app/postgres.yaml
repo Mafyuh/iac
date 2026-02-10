@@ -52,7 +52,7 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 10Gi
+            storage: 20Gi
   users:
     - name: mafyuh
       databases: ["authentik", "gatus", "jellyseerr", "netbox", "umami"]
