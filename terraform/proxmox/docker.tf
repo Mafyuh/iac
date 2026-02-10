@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "docker" {
 
   # VM General Settings
-  node_name   = "pve2"
+  node_name   = "prox"
   name        = "docker"
   description = "testing"
   tags        = ["tofu", "ubuntu24", "ansible", "packer"]

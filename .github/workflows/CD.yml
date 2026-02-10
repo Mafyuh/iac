@@ -64,8 +64,8 @@ jobs:
               alloy) host="all" ;;
               arm) host="ARM" ;;
               caddy) host="proxy" ;;
-              databases) host="db-server" ;;
-              downloaders) host="Ubu" ;;
+              databases) host="docker" ;;
+              downloaders) host="downloaders" ;;
               geohub) host="Ubu" ;;
               omni) host="omni" ;;
               blocky) host="blocky-HA" ;;
