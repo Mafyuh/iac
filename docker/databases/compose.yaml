@@ -1,19 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
-  mysql:
-    image: mysql:9.4
-    container_name: mysql
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: mafyuh
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    ports:
-      - 3306:3306
-    volumes:
-      - mysql_data:/var/lib/mysql
-
   postgres:
     image: postgres:18
     container_name: postgres
@@ -41,27 +28,6 @@ services:
     volumes:
       - redis_data:/data
 
-  adminer:
-    image: adminer:5.4.1
-    container_name: adminer
-    restart: unless-stopped
-    ports:
-      - 8080:8080
-
-  pgadmin:
-    image: dpage/pgadmin4:9.12.0
-    container_name: pgadmin
-    restart: unless-stopped
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@mafyuh.com
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-      - PGADMIN_DISABLE_POSTFIX=true
-      # - PGADMIN_CONFIG_OAUTH2_CONFIG=${PGADMIN_CONFIG_OAUTH2_CONFIG}
-      # - PGADMIN_CONFIG_AUTHENTICATION_SOURCES="['oauth2', 'internal']"
-      # - PGADMIN_CONFIG_OAUTH2_AUTO_CREATE_USER=True
-    ports:
-      - 5050:80
-
   couchdb-obsidian-livesync:
     container_name: obsidian-livesync
     image: couchdb:3.5.1
@@ -79,34 +45,22 @@ services:
       - 5984:5984
     restart: unless-stopped
 
-  minio:
-    command: server /data --console-address ":9001"
-    image: minio/minio@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e
+  rustfs:
+    image: rustfs/rustfs@sha256:eadee1b524ec05cbc1fe08426a95e589bc70e70cd15a4591edf176cabde238a6
     environment:
-      - MINIO_ROOT_PASSWORD=$MINIO_ROOT_PASSWORD
-      - MINIO_ROOT_USER=mafyuh
-      - MINIO_PROMETHEUS_AUTH_TYPE=public
+      - RUSTFS_ADDRESS=:9000
+      - RUSTFS_CONSOLE_ENABLE=true
+      - RUSTFS_ACCESS_KEY=$RUSTFS_ACCESS_KEY
+      - RUSTFS_SECRET_KEY=$RUSTFS_SECRET_KEY
     volumes:
-      - minio_data:/data
-    container_name: minio
+      - rustfs_data:/data
+    container_name: rustfs
     ports:
-      - 9003:9000
-    restart: unless-stopped
-
-  minio-console:
-    image: ghcr.io/georgmangold/console:v1.9.1
-    container_name: minio-console
-    restart: unless-stopped
-    environment:
-      - CONSOLE_MINIO_SERVER=https://s3.mafyuh.xyz
-    depends_on:
-      - minio
-    ports:
-      - 9004:9090
+      - 9000:9000
+      - 9001:9001
 
 volumes:
   mysql_data:
   postgres_data:
   redis_data:
   rustfs_data:
-  minio_data:
