@@ -5,8 +5,6 @@ services:
     image: ollama/ollama:0.15.6
     container_name: ollama
     restart: unless-stopped
-    networks:
-      - ai-stack
     volumes:
       - ollama:/root/.ollama
     ports:
