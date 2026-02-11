@@ -46,7 +46,7 @@ services:
     restart: unless-stopped
 
   rustfs:
-    image: rustfs/rustfs@sha256:eadee1b524ec05cbc1fe08426a95e589bc70e70cd15a4591edf176cabde238a6
+    image: rustfs/rustfs@sha256:1cfa82fb394a7c6a4ffc24f5333b52afee608d258503f94b37fcce5cc965c896
     environment:
       - RUSTFS_ADDRESS=:9000
       - RUSTFS_CONSOLE_ENABLE=true
