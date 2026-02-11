@@ -11,8 +11,8 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
   config = {
     ingress = [
       {
-        hostname = "pg.${var.domains["dev"]}"
-        service  = "http://10.20.10.100:5050"
+        hostname = "ai.${var.domains["io"]}"
+        service  = "http://10.69.69.50:3000"
         path     = ""
         origin_request = {
           no_tls_verify            = true

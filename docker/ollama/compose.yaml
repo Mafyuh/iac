@@ -25,6 +25,15 @@ services:
       - 3000:8080
     volumes:
       - open-webui:/app/backend/data
+    environment:
+      - ENABLE_OAUTH_SIGNUP=true
+      - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true
+      - OAUTH_PROVIDER_NAME=Authentik
+      - OPENID_PROVIDER_URL=https://auth.mafyuh.io/application/o/open-webui/.well-known/openid-configuration
+      - OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID
+      - OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET
+      - OAUTH_SCOPES=openid email profile
+      - OPENID_REDIRECT_URI=https://ai.mafyuh.io/oauth/oidc/callback
     extra_hosts:
       - host.docker.internal:host-gateway
 
