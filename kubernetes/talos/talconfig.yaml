@@ -5,7 +5,7 @@ endpoint: https://10.0.0.150:6443
 # renovate: depName=siderolabs/talos datasource=github-releases
 talosVersion: v1.12.1
 # renovate: depName=kubernetes/kubernetes datasource=github-releases
-kubernetesVersion: v1.35.0
+kubernetesVersion: v1.35.1
 additionalApiServerCertSans: &sans
   - 127.0.0.1
 additionalMachineCertSans: *sans
