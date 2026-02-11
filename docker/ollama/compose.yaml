@@ -17,5 +17,17 @@ services:
               count: all
               capabilities: [gpu]
 
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:0.7.2
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - 3000:8080
+    volumes:
+      - open-webui:/app/backend/data
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
 volumes:
   ollama:
+  open-webui:
