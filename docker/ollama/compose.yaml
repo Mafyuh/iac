@@ -1,0 +1,23 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  ollama:
+    image: ollama/ollama:0.15.6
+    container_name: ollama
+    restart: unless-stopped
+    networks:
+      - ai-stack
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  ollama:
