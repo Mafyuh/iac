@@ -68,6 +68,7 @@ jobs:
               downloaders) host="downloaders" ;;
               geohub) host="Ubu" ;;
               omni) host="omni" ;;
+              ollama) host="ollama" ;;
               blocky) host="blocky-HA" ;;
               exporters) host="Ubu" ;;
               jellyfin) host="Ark-Ripper" ;;
