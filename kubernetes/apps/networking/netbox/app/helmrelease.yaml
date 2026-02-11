@@ -50,6 +50,10 @@ spec:
       host: netbox-dragonfly.networking.svc.cluster.local
       port: 6379
 
+    tasksDatabase:
+      host: netbox-dragonfly.networking.svc.cluster.local
+      port: 6379
+
     housekeeping:
       enabled: false
 
