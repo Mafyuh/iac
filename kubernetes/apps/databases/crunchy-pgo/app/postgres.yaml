@@ -63,6 +63,8 @@ spec:
       databases: ["gatus"]
     - name: jellyseerr
       databases: ["jellyseerr"]
+    - name: jellystat
+      databases: ["jellystat"]
     - name: matrix
       databases: ["matrix", "matrixauth"]
     - name: netbox
