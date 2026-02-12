@@ -37,6 +37,43 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
 
+  searxng:
+    image: searxng/searxng@sha256:1502823ea918998e325d95f8c0cbd3db1dbd024da412dcce9f504e6244632b26
+    container_name: searxng
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/appdata/searxng:/etc/searxng
+    depends_on:
+      - ollama
+      - open-webui
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+
+  subgen:
+    container_name: subgen
+    tty: true
+    image: mccloud/subgen:2026.02.0
+    environment:
+      - "WHISPER_MODEL=medium"
+      - "WHISPER_THREADS=4"
+      - "PROCADDEDMEDIA=true"
+    volumes:
+      - "/docker/appdata/whisper/subgen/models:/subgen/models"
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
 volumes:
   ollama:
   open-webui:
