@@ -10,5 +10,5 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 2025.12.3
+    tag: 2025.12.4
   url: oci://ghcr.io/goauthentik/helm-charts/authentik
