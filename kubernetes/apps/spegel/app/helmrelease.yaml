@@ -20,6 +20,7 @@ spec:
       containerdRegistryConfigPath: /etc/cri/conf.d/hosts
     grafanaDashboard:
       enabled: true
+      mode: GrafanaOperator
     resources:
       requests:
         cpu: 50m
