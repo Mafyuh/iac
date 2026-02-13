@@ -57,7 +57,7 @@ services:
   subgen:
     container_name: subgen
     tty: true
-    image: mccloud/subgen:2026.02.0
+    image: mccloud/subgen:2026.02.9
     environment:
       - "WHISPER_MODEL=medium"
       - "WHISPER_THREADS=4"
