@@ -49,7 +49,7 @@ services:
 
   autobrr:
     container_name: autobrr
-    image: ghcr.io/autobrr/autobrr:v1.72.1
+    image: ghcr.io/autobrr/autobrr:v1.73.0
     restart: unless-stopped
     environment:
       - TZ=America/New_York
