@@ -3,20 +3,20 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app jellyseerr
+  name: &app seerr
   namespace: arr
 spec:
   interval: 15m
   chartRef:
     kind: OCIRepository
-    name: jellyseerr
+    name: seerr
   values:
     global:
       fullnameOverride: *app
       namespace: arr
 
     controllers:
-      jellyseerr:
+      seerr:
         enabled: true
         type: deployment
 
@@ -32,8 +32,8 @@ spec:
         containers:
           app:
             image:
-              repository: fallenbagel/jellyseerr
-              tag: 2.7.3
+              repository: ghcr.io/seerr-team/seerr
+              tag: v3.0.1
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
@@ -41,8 +41,8 @@ spec:
               DB_TYPE: postgres
               DB_HOST: "pg-cluster-ha.databases.svc.cluster.local"
               DB_PORT: "5432"
-              DB_USER: "jellyseerr"
-              DB_PASS: ${JELLYSEERR_DB_PASS}
+              DB_USER: "seerr"
+              DB_PASS: ${SEERR_DB_PASS}
               DB_NAME: "jellyseerr"
               DB_LOG_QUERIES: "false"
 
@@ -67,7 +67,7 @@ spec:
     service:
       app:
         primary: true
-        controller: jellyseerr
+        controller: seerr
         ports:
           http:
             port: &port 5055
@@ -83,7 +83,7 @@ spec:
                   type: PathPrefix
                   value: /
             backendRefs:
-              - name: jellyseerr
+              - name: seerr
                 port: *port
         parentRefs:
           - name: envoy-external

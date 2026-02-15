@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app jellyseerr
+  name: &app seerr
   namespace: &ns arr
 spec:
   components:
@@ -14,7 +14,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/arr/jellyseerr/app
+  path: ./kubernetes/apps/arr/seerr/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -23,10 +23,10 @@ spec:
   wait: false
   postBuild:
     substitute:
-      APP: jellyseerr
+      APP: seerr
       VOLSYNC_CAPACITY: 2Gi
     substituteFrom:
       - kind: Secret
         name: arr-secrets
       - kind: Secret
-        name: jellyseerr-secrets
+        name: seerr-secrets
