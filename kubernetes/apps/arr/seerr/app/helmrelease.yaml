@@ -41,7 +41,7 @@ spec:
               DB_TYPE: postgres
               DB_HOST: "pg-cluster-ha.databases.svc.cluster.local"
               DB_PORT: "5432"
-              DB_USER: "seerr"
+              DB_USER: "jellyseerr"
               DB_PASS: ${SEERR_DB_PASS}
               DB_NAME: "jellyseerr"
               DB_LOG_QUERIES: "false"
