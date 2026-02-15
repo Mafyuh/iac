@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - bazarr/ks.yaml
   - flaresolverr/ks.yaml
-  - jellyseerr/ks.yaml
+  - seerr/ks.yaml
   - lidarr/ks.yaml
   - prowlarr/ks.yaml
   - radarr/ks.yaml
