@@ -7,6 +7,7 @@ resources:
   - fluent-bit/ks.yaml
   - gatus/ks.yaml
   - grafana/ks.yaml
+  - graphite-exporter/ks.yaml
   - headlamp/ks.yaml
   - keda/ks.yaml
   - kromgo/ks.yaml

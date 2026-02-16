@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graphite-mapping
+  namespace: monitoring
+data:
+  graphite_mapping.conf: |
+    mappings:
+      - match: 'scale\.monitoring\.(.*)'
+        match_type: regex
+        name: '${1}'
+        labels:
+          job: truenas
+          source: scale_monitoring
