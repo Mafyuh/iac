@@ -3,6 +3,7 @@
 services:
   geohub:
     image: ghcr.io/benlikescode/geohub:main
+    restart: unless-stopped
     env_file:
       - .env
     environment:

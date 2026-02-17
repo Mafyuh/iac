@@ -55,6 +55,7 @@ services:
     volumes:
       - rustfs_data:/data
     container_name: rustfs
+    restart: unless-stopped
     ports:
       - 9000:9000
       - 9001:9001
