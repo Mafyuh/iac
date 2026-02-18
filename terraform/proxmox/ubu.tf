@@ -5,6 +5,7 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
   vm_id       = 5000
   name        = "Ubu"
   description = "My attempt to move things to 1 VM"
+  started = false
   tags        = ["tofu", "ubuntu-22", "ansible"]
 
   agent {
@@ -51,16 +52,13 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
         gateway = data.bitwarden-secrets_secret.vlan_gateway.value
       }
     }
-
-    user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
   }
 
   lifecycle {
     ignore_changes = [
       initialization[0].user_account[0].keys,
       initialization[0].user_account[0].password,
-      initialization[0].user_account[0].username,
-      initialization[0].user_data_file_id
+      initialization[0].user_account[0].username
     ]
   }
 

@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "downloaders" {
 
   # VM General Settings
-  node_name   = "pve2"
+  node_name   = "prox"
   name        = "downloaders"
   description = "Sabnzbd and qbittorrent server/ VM faster than k8s"
   tags        = ["tofu", "ubuntu24", "ansible", "packer"]
@@ -33,7 +33,7 @@ resource "proxmox_virtual_environment_vm" "downloaders" {
 
   # VM Disk Settings
   disk {
-    datastore_id = "Fast500Gb"
+    datastore_id = "Fast2Tb"
     size         = 150
     interface    = "scsi0"
   }
@@ -43,6 +43,7 @@ resource "proxmox_virtual_environment_vm" "downloaders" {
   }
 
   initialization {
+    datastore_id = "Fast2Tb"
     ip_config {
       ipv4 {
         address = "10.20.10.11/24"

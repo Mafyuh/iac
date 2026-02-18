@@ -95,7 +95,7 @@ spec:
       repository:
         type: nfs
         server: 10.0.0.10
-        path: /mnt/thePool/thePoolShare/kopia
+        path: /mnt/backups/backup/kopia
         globalMounts:
           - path: /repository
       tmpfs:

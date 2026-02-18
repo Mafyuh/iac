@@ -102,7 +102,7 @@ spec:
                 name: "repository",
                 nfs: Object.spec.template.spec.volumes.nfs{
                   server: "10.0.0.10",
-                  path: "/mnt/thePool/thePoolShare/kopia"
+                  path: "/mnt/backups/backup/kopia"
                 }
               }
             },
