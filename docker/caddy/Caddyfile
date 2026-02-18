@@ -15,5 +15,5 @@ jelly.mafyuh.io {
         format json
     }
 
-    reverse_proxy 10.0.0.15:8096
+    reverse_proxy 10.0.0.10:8096
 }

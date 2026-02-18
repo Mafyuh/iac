@@ -1,0 +1,25 @@
+##  Migrated Jellyfin to TrueNAS
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.11.6
+    container_name: jellyfin
+    user: 1000:1000
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    volumes:
+      - /mnt/ssd-appdata/appdata/jellyfin/config:/config
+      - /mnt/thePool/thePoolShare/Media:/Media
+      - /mnt/ssd-appdata/appdata/jellyfin:/tmp
+      - /mnt/ssd-appdata/appdata/jellyfin/metadata:/nvmemetadata
+      - /mnt/ssd-appdata/appdata/jellyfin/cache:/nvmecache
+      - /mnt/ssd-appdata/appdata/jellyfin/transcodes:/transcodes
+    restart: "unless-stopped"
+    group_add:
+      - "107"
+    ports:
+      - 8096:8096
+    environment:
+      - JELLYFIN_DATA_DIR=/config/data
+      - JELLYFIN_CONFIG_DIR=/config
+      - JELLYFIN_LOG_DIR=/config/log
+      - JELLYFIN_CACHE_DIR=/nvmecache

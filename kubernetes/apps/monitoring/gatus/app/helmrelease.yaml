@@ -80,7 +80,7 @@ spec:
         - name: "Jellyfin"
           <<: *defaults
           interval: "2m"
-          url: "http://10.0.0.15:8096/health"
+          url: "http://10.0.0.10:8096/health"
         - name: "Postgres"
           url: "tcp://10.20.10.100:5432"
           interval: 30s
