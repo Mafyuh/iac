@@ -91,7 +91,7 @@ jobs:
 
       - name: Scan changed image with Trivy
         if: steps.images.outputs.should_scan == 'true'
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: ${{ steps.images.outputs.image }}
           format: "sarif"
