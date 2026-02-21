@@ -63,7 +63,7 @@ services:
     restart: unless-stopped
 
   linkstack:
-    image: linkstackorg/linkstack@sha256:d9c4e1fd521e1ae78e796ac549b4d3e6371665775761d6c712aec8ac3bd9c5bc
+    image: linkstackorg/linkstack@sha256:1c8b05399ee459ac601bac3eede7fbe765d1b6b7be725663b57f3220610958bf
     container_name: linkstack
     ports:
       - 8005:80
