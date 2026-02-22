@@ -50,11 +50,11 @@ spec:
           group: servarr
         - name: "Radarr"
           <<: *defaults
-          url: "https://radarr.mafyuh.dev"
+          url: "http://radarr-app.arr.svc.cluster.local"
           group: servarr
         - name: "Sonarr"
           <<: *defaults
-          url: "https://sonarr.mafyuh.dev"
+          url: "https://sonarr-app.arr.svc.cluster.local"
           group: servarr
         - name: "authentik"
           <<: *defaults
@@ -82,28 +82,15 @@ spec:
           interval: "2m"
           url: "http://10.0.0.10:8096/health"
         - name: "Postgres"
-          url: "tcp://10.20.10.100:5432"
+          url: "tcp://10.0.0.210:5432"
           interval: 30s
           group: databases
           conditions:
             - "[CONNECTED] == true"
-        - name: "Redis"
-          url: "tcp://10.20.10.100:6379"
-          interval: 30s
-          group: databases
-          conditions:
-            - "[CONNECTED] == true"
-        - name: Netbox
-          <<: *defaults
-          url: "https://netbox.local.mafyuh.dev"
         - name: NAS
           <<: *defaults
           group: storage
           url: "http://10.0.0.10"
-        - name: Minio
-          <<: *defaults
-          group: storage
-          url: "https://minio.mafyuh.xyz/"
       alerting:
         gotify:
           server-url: "${GOTIFY_URL}"
