@@ -43,7 +43,7 @@ spec:
               key: AUTHENTIK_SECRET_KEY
     server:
       name: server
-      replicas: 1
+      replicas: 2
       securityContext:
         runAsUser: &user 1000
         runAsGroup: *user
