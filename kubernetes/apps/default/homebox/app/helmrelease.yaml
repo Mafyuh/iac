@@ -11,7 +11,7 @@ spec:
     name: homebox
   values:
     controllers:
-      homepage:
+      homebox:
         annotations:
           secret.reloader.stakater.com/reload: "auto"
         strategy: RollingUpdate
