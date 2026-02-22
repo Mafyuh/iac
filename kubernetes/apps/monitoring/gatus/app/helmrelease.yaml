@@ -50,11 +50,11 @@ spec:
           group: servarr
         - name: "Radarr"
           <<: *defaults
-          url: "http://radarr-app.arr.svc.cluster.local"
+          url: "http://radarr-app.arr.svc.cluster.local:7878"
           group: servarr
         - name: "Sonarr"
           <<: *defaults
-          url: "https://sonarr-app.arr.svc.cluster.local"
+          url: "https://sonarr-app.arr.svc.cluster.local:8989"
           group: servarr
         - name: "authentik"
           <<: *defaults
