@@ -32,6 +32,17 @@ services:
       timeout: 1s
       retries: 5
 
+  homebox:
+    image: ghcr.io/sysadminsmedia/homebox:0.23.1
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    ports:
+      - "3100:7745"
+    volumes:
+      - homebox_data:/data
+
 volumes:
   db_data:
   storage:
+  homebox_data:
