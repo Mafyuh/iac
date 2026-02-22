@@ -54,7 +54,7 @@ spec:
           group: servarr
         - name: "Sonarr"
           <<: *defaults
-          url: "https://sonarr-app.arr.svc.cluster.local:8989"
+          url: "http://sonarr-app.arr.svc.cluster.local:8989"
           group: servarr
         - name: "authentik"
           <<: *defaults
