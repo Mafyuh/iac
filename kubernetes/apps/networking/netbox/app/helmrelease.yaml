@@ -71,11 +71,18 @@ spec:
     livenessProbe:
       enabled: false
     customLivenessProbe:
-      httpGet:
-        path: /api/
-        port: http
-      initialDelaySeconds: 30
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 0
       periodSeconds: 10
       timeoutSeconds: 5
-      failureThreshold: 6
+      failureThreshold: 3
+      successThreshold: 1
+
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 0
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
       successThreshold: 1
