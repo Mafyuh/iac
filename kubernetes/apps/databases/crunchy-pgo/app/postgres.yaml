@@ -71,6 +71,8 @@ spec:
       databases: ["netbox"]
     - name: umami
       databases: ["umami"]
+    - name: homebox
+      databases: ["homebox"]
   backups:
     pgbackrest:
       configuration:

@@ -1,0 +1,53 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/app-template-4.5.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: homebox
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: homebox
+  values:
+    controllers:
+      homepage:
+        annotations:
+          secret.reloader.stakater.com/reload: "auto"
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/sysadminsmedia/homebox
+              tag: 0.23.1
+            env:
+              TZ: America/New_York
+              HBOX_DATABASE_DRIVER: postgres
+              HBOX_DATABASE_HOST: pg-cluster-primary.databases.svc.cluster.local
+              HBOX_DATABASE_PORT: 5432
+              HBOX_DATABASE_DATABASE: homebox
+              HBOX_DATABASE_USERNAME: homebox
+              HBOX_DATABASE_PASSWORD: ${HBOX_DATABASE_PASSWORD}
+            probes:
+              liveness:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+    service:
+      app:
+        controller: homebox
+        ports:
+          http:
+            port: 7745
+
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        parentRefs:
+          - name: envoy-external
+            namespace: kube-system
+            sectionName: https
