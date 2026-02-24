@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-go/master/schema/compose-spec.json
 services:
   snipeit:
-    image: snipe/snipe-it:v8.3.7
+    image: snipe/snipe-it:v8.4.0
     restart: unless-stopped
     volumes:
       - storage:/var/lib/snipeit
