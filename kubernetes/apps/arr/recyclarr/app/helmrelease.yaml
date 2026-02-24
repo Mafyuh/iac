@@ -39,7 +39,7 @@ spec:
           app:
             image:
               repository: ghcr.io/recyclarr/recyclarr
-              tag: 7.5.2
+              tag: 8.3.0
             command: ["/app/recyclarr/recyclarr"]
             args: ["sync"]
             env:
