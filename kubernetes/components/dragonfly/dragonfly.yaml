@@ -5,7 +5,7 @@ kind: Dragonfly
 metadata:
   name: ${APP}-dragonfly
 spec:
-  image: ghcr.io/dragonflydb/dragonfly:v1.36.0
+  image: ghcr.io/dragonflydb/dragonfly:v1.37.0
   replicas: 1
   env:
     - name: MAX_MEMORY
