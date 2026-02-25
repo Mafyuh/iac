@@ -4,6 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: authentik
+  namespace: authentik
 spec:
   interval: 15m
   chartRef:
@@ -92,14 +93,6 @@ spec:
           memory: 1024Mi
     worker:
       replicas: 1
-      env:
-      resources:
-        requests:
-          cpu: 200m
-          memory: 512Mi
-        limits:
-          cpu: "500m"
-          memory: 1024Mi
     authentik:
       log_level: info
       error_reporting:
