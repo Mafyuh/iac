@@ -1,0 +1,53 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/app-template-4.5.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rackpeek
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: rackpeek
+  values:
+    controllers:
+      rackpeek:
+        annotations:
+          secret.reloader.stakater.com/reload: "auto"
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: aptacode/rackpeek
+              tag: v1.0.0
+            env:
+              TZ: America/New_York
+            probes:
+              liveness:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+    service:
+      app:
+        controller: rackpeek
+        ports:
+          http:
+            port: 8080
+
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.local.mafyuh.dev"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      config:
+        existingClaim: "{{ .Release.Name }}"
+        globalMounts:
+          - path: /app/config
