@@ -6,8 +6,8 @@ metadata:
   name: ${APP}
 spec:
   sourcePVC: ${APP}
-  trigger:
-    schedule: 0 */6 * * *
+  # trigger:
+  #   schedule: 0 */6 * * *
   kopia:
     accessModes:
       - ${VOLSYNC_SNAP_ACCESSMODES:=ReadWriteOnce}
