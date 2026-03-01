@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seerr-team/seerr
-              tag: v3.0.1
+              tag: v3.1.0
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
