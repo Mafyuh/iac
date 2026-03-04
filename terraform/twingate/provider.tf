@@ -15,7 +15,7 @@ terraform {
   required_providers {
     twingate = {
       source  = "Twingate/twingate"
-      version = "4.0.1"
+      version = "4.0.2"
     }
     bitwarden-secrets = {
       source  = "bitwarden/bitwarden-secrets"
