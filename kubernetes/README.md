@@ -42,19 +42,3 @@ kubectl apply -f kubernetes/flux/cluster.yaml
 Each app in [kubernetes/apps](./kubernetes/apps) has a `kustomization.yaml` that defines its namespace and Flux `Kustomization` resources, which then manage `HelmRelease` or other Kubernetes objects.
 
 [Renovate](https://github.com/renovatebot/renovate) automatically scans for dependency updates, opens pull requests, and once merged, Flux applies the changes to the cluster.
-
-### Backups & Restoration
-
-The cluster uses a three-layer backup strategy ensuring zero data loss in case of complete infrastructure failure:
-
-**Layer 1: Volsync + Snapshots**
-[VolSync](https://github.com/backube/volsync) runs hourly snapshots of all PersistentVolumeClaims using Kopia as the backend. Each application defines a `ReplicationSource` resource that automatically captures point-in-time snapshots. Snapshots are retained for 24 hours (hourly) and 7 days (daily). Snapshots use Ceph's native snapshot capability via the `csi-ceph-blockpool` storage class for efficient, point-in-time recovery.
-
-**Layer 2: Kopia Repository**
-VolSync stores all snapshots in a centralized [Kopia](https://kopia.io/) repository mounted via NFS. Kopia handles deduplication, compression (zstd), and retention policies, allowing efficient long-term storage.
-
-**Layer 3: Cloud Backup**
-The NFS pool is backed up daily to OneDrive, providing off-site redundancy. This ensures that even if the entire homelab is destroyed, all cluster data can be restored.
-
-**Recovery Process**
-Complete cluster rebuild from bare metal to all apps fully operational with zero data loss: boot the machine, iPXE installs Talos, run the bootstrap command above, and Flux automatically restores everything including application data from Kopia snapshots. This takes approximately 10 minutes.
