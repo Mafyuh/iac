@@ -29,7 +29,7 @@ metadata:
   name: matrix-auth-service
   namespace: matrix
 spec:
-  hostnames: ["auth.mafyuh.dev"]
+  hostnames: ["oauth.mafyuh.dev"]
   parentRefs:
     - name: envoy-external
       namespace: kube-system
