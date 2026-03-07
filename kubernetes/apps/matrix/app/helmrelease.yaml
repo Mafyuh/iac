@@ -108,6 +108,30 @@ spec:
                     email:
                       action: suggest
                       template: "{{ user.email }}"
+                - id: 01KK2WWG9H63HW9WZDRRK065EF
+                  human_name: authentik test
+                  issuer: https://0auth.techpro.com/application/o/matrix/
+                  client_id: V5VyeDhHzrmFUc4iMD7nRNmQeSpSt8kbPIZBWeia
+                  client_secret: ${TEST_SECRET}
+                  userinfo_endpoint: https://0auth.techpro.com/application/o/userinfo/
+                  authorization_endpoint: https://0auth.techpro.com/application/o/authorize/
+                  token_endpoint: https://0auth.techpro.com/application/o/token/
+                  jwks_uri: https://0auth.techpro.com/application/o/matrix/jwks/
+                  token_endpoint_auth_method: client_secret_post
+                  scope: "openid email profile"
+                  discovery_mode: oidc
+                  pkce_method: auto
+                  claims_imports:
+                    localpart:
+                      action: require
+                      template: "{{ user.preferred_username }}"
+                      on_conflict: replace
+                    displayname:
+                      action: suggest
+                      template: "{{ user.name }}"
+                    email:
+                      action: suggest
+                      template: "{{ user.email }}"
 
     matrixRTC:
       enabled: true
