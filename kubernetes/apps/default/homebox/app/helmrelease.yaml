@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sysadminsmedia/homebox
-              tag: 0.24.0
+              tag: 0.24.2
             env:
               TZ: America/New_York
               HBOX_DATABASE_DRIVER: postgres
