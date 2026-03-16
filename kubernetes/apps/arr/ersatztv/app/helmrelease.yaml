@@ -1,0 +1,103 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ersatztv
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: ersatztv
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    controllers:
+      ersatztv:
+        enabled: true
+        type: deployment
+
+        replicas: 1
+
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: &group 1000
+            fsGroup: *group
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/ersatztv/ersatztv
+              tag: v26.3.0@sha256:7c402e5f348184359e0951b44d55fb6db3df671fa77fc91dcbd609034d28778b
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              XDG_DATA_HOME: /config
+
+            probes:
+              liveness:
+                enabled: false
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+            resources:
+              requests:
+                cpu: 10m
+                memory: 150Mi
+              limits:
+                memory: 512Mi
+
+    service:
+      app:
+        primary: true
+        controller: ersatztv
+        ports:
+          http:
+            port: &port 8409
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.local.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: *app
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 4Gi
+        storageClass: ceph-block
+        globalMounts:
+          - path: /config
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          ersatztv:
+            app:
+              - path: /cache
+                subPath: cache
+              - path: /tmp
+                subPath: tmp
+              - path: /transcode
+                subPath: transcode

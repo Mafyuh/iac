@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - bazarr/ks.yaml
   - dispatcharr/ks.yaml
+  - ersatztv/ks.yaml
   - flaresolverr/ks.yaml
   - seerr/ks.yaml
   - lidarr/ks.yaml
