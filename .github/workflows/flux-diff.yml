@@ -30,7 +30,7 @@ jobs:
           resource: "${{ matrix.resources }}"
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Create PR Comments
-        uses: mshick/add-pr-comment@v2
+        uses: mshick/add-pr-comment@v3
         continue-on-error: true
         with:
           message-id: "${{ github.event.pull_request.number }}/${{ matrix.cluster_path }}/${{ matrix.resources }}"
