@@ -9,6 +9,10 @@ spec:
     kind: OCIRepository
     name: envoy-gateway
   interval: 1h
+  install:
+    crds: Skip
+  upgrade:
+    crds: Skip
   values:
     config:
       envoyGateway:
