@@ -107,7 +107,7 @@ jobs:
 
       - name: Comment PR with link to security scan
         if: steps.images.outputs.should_scan == 'true' && steps.images.outputs.is_manual != 'true'
-        uses: mshick/add-pr-comment@v2
+        uses: mshick/add-pr-comment@v3
         with:
           message-id: trivy-scan-${{ github.event.pull_request.number }}
           message: |
