@@ -4,14 +4,19 @@ sonarr:
     api_key: !env_var SONARR_API_KEY
 
     delete_old_custom_formats: true
-    replace_existing_custom_formats: true
 
-    include:
-      - template: sonarr-v4-custom-formats-web-1080p
-      - template: sonarr-v4-quality-profile-web-1080p
-      - template: sonarr-quality-definition-series
-      - template: sonarr-v4-quality-profile-web-2160p
-      - template: sonarr-v4-custom-formats-web-2160p
+    quality_definition:
+      type: series
+
+    quality_profiles:
+      - trash_id: 72dae194fc92bf828f32cde7744e51a1 # WEB-1080p
+        name: WEB-DL (1080p)
+        reset_unmatched_scores:
+          enabled: true
+      - trash_id: d1498e7d189fbe6c7110ceaabb7473e6 # WEB-2160p
+        name: WEB-2160p
+        reset_unmatched_scores:
+          enabled: true
 
     # quality_profiles:
     #   - name: WEB-DL (1080p)
@@ -50,15 +55,19 @@ radarr:
 
     # Custom Format Configuration
     delete_old_custom_formats: true
-    replace_existing_custom_formats: true
 
-    include:
-      - template: radarr-quality-definition-movie
-      - template: radarr-quality-profile-hd-bluray-web
-      - template: radarr-custom-formats-hd-bluray-web
-      - template: radarr-quality-definition-movie
-      - template: radarr-quality-profile-uhd-bluray-web
-      - template: radarr-custom-formats-uhd-bluray-web
+    quality_definition:
+      type: movie
+
+    quality_profiles:
+      - trash_id: d1d67249d3890e49bc12e275d989a7e9 # HD Bluray + WEB
+        name: HD Bluray + WEB
+        reset_unmatched_scores:
+          enabled: true
+      - trash_id: 64fb5f9858489bdac2af690e27c8f42f # UHD Bluray + WEB
+        name: UHD Bluray + WEB
+        reset_unmatched_scores:
+          enabled: true
 
     # quality_profiles:
     #   - name: HD Bluray + WEB
