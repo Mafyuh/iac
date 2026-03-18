@@ -39,7 +39,7 @@ spec:
           max_worker_processes: "4"
           max_parallel_workers_per_gather: "2"
           max_parallel_workers: "4"
-          max_connections: "500"
+          max_connections: "600"
           synchronous_commit: "on"
   instances:
     - name: pg-instance
