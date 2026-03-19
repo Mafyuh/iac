@@ -17,3 +17,4 @@ spec:
   commonName: "*.mafyuh.dev"
   dnsNames:
     - "*.mafyuh.dev"
+    - "mafyuh.dev"

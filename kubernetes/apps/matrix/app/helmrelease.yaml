@@ -10,12 +10,20 @@ spec:
     kind: OCIRepository
     name: matrix
   values:
-    serverName: matrix.mafyuh.dev
+    serverName: mafyuh.dev
     labels:
       app.kubernetes.io/instance: matrix
 
     synapse:
       enabled: true
+      postgres:
+        host: pg-cluster-primary.databases.svc.cluster.local
+        port: 5432
+        user: matrix
+        database: matrix
+        password:
+          secret: pg-cluster-pguser-matrix
+          secretKey: password
       ingress:
         host: matrix.mafyuh.dev
         className: disabled
@@ -54,8 +62,6 @@ spec:
             experimental_features:
               msc3575_enabled: true
               msc4186_enabled: true
-            database:
-              allow_unsafe_locale: true
         2-email-config:
           config: |
             email:
@@ -68,6 +74,14 @@ spec:
 
     matrixAuthenticationService:
       enabled: true
+      postgres:
+        host: pg-cluster-primary.databases.svc.cluster.local
+        port: 5432
+        user: matrix
+        database: matrixauth
+        password:
+          secret: pg-cluster-pguser-matrix
+          secretKey: password
       ingress:
         host: oauth.mafyuh.dev
         className: disabled
@@ -169,6 +183,7 @@ spec:
     wellKnownDelegation:
       enabled: true
       ingress:
+        host: mafyuh.dev
         className: disabled
         tlsEnabled: false
       additional:
@@ -197,6 +212,4 @@ spec:
           }
 
     postgres:
-      enabled: true
-      storage:
-        size: 5Gi
+      enabled: false

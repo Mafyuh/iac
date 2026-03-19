@@ -129,7 +129,7 @@ metadata:
   name: matrix-well-known
   namespace: matrix
 spec:
-  hostnames: ["matrix.mafyuh.dev"]
+  hostnames: ["mafyuh.dev"]
   parentRefs:
     - name: envoy-external
       namespace: kube-system
