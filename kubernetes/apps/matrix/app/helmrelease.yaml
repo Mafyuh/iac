@@ -4,6 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: matrix
+  namespace: matrix
 spec:
   interval: 15m
   chartRef:
@@ -183,7 +184,6 @@ spec:
     wellKnownDelegation:
       enabled: true
       ingress:
-        host: mafyuh.dev
         className: disabled
         tlsEnabled: false
       additional:
