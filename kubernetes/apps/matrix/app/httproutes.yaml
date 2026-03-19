@@ -14,6 +14,14 @@ spec:
   rules:
     - matches:
         - path:
+            type: RegularExpression
+            value: /_matrix/client/(v3|r0)/(login|logout|refresh|register)(/.*)?
+      backendRefs:
+        - name: matrix-matrix-authentication-service
+          namespace: matrix
+          port: 8080
+    - matches:
+        - path:
             type: PathPrefix
             value: /
       backendRefs:
