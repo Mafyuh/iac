@@ -64,13 +64,7 @@ spec:
           group: proxmox
           client:
             insecure: true
-          url: "https://10.0.0.30:8006/"
-        - name: "Proxmox Node 2"
-          <<: *defaults
-          group: proxmox
-          client:
-            insecure: true
-          url: "https://10.0.0.3:8006/"
+          url: "https://10.0.0.5:8006/"
         - name: "Proxmox Backup Server"
           <<: *defaults
           group: proxmox

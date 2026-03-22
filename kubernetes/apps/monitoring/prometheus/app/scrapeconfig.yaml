@@ -112,8 +112,7 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-        - 10.0.0.30
-        - 10.0.0.3
+        - 10.0.0.5
   metricsPath: /pve
   params:
     module: [default]
