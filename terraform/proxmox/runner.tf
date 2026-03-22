@@ -1,18 +1,14 @@
 resource "proxmox_virtual_environment_vm" "Runner" {
 
   # VM General Settings
-  node_name   = "prox"
-  vm_id       = 952
+  node_name   = "pve"
+  vm_id       = 104
   name        = "Runner"
   description = "Forgejo Runner for iac"
   tags        = ["tofu", "ubuntu-22", "iac-repo", "ansible"]
 
   agent {
     enabled = true
-  }
-
-  clone {
-    vm_id = 9996
   }
 
   # VM CPU Settings
@@ -35,13 +31,11 @@ resource "proxmox_virtual_environment_vm" "Runner" {
   }
 
   # VM Disk Settings
-  disk {
-    datastore_id      = "Fast2Tb"
-    size              = 50
-    interface         = "scsi0"
-    file_format       = "raw"
-    path_in_datastore = "vm-952-disk-0"
-  }
+  # disk {
+  #   datastore_id      = "local-lvm"
+  #   size              = 50
+  #   interface         = "scsi0"
+  # }
 
   vga {
     type = "serial0"
@@ -54,8 +48,6 @@ resource "proxmox_virtual_environment_vm" "Runner" {
         gateway = "10.0.0.1"
       }
     }
-
-    user_data_file_id = "Slow4tb:snippets/cloud-config.yaml"
   }
 
   lifecycle {

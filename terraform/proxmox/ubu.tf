@@ -1,19 +1,15 @@
 resource "proxmox_virtual_environment_vm" "Ubu" {
 
   # VM General Settings
-  node_name   = "prox"
-  vm_id       = 5000
+  node_name   = "pve"
+  vm_id       = 105
   name        = "Ubu"
   description = "My attempt to move things to 1 VM"
-  started = false
+  started = true
   tags        = ["tofu", "ubuntu-22", "ansible"]
 
   agent {
     enabled = true # read 'Qemu guest agent' section, change to true only when ready
-  }
-
-  clone {
-    vm_id = 9998
   }
 
   # VM CPU Settings
@@ -35,11 +31,11 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
   }
 
   # VM Disk Settings
-  disk {
-    datastore_id = "Fast2Tb"
-    size         = 120
-    interface    = "scsi0"
-  }
+  # disk {
+  #   datastore_id = "local-lvm"
+  #   size         = 120
+  #   interface    = "scsi0"
+  # }
 
   vga {
     type = "serial0"

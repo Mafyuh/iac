@@ -12,8 +12,8 @@ services:
     volumes:
       - /docker/appdata/sabnzbd/config:/config:rw
       ## Fix failed 7za return code 2 errors when unpacking certain nzbs
-      - /docker/appdata/sabnzbd/custom-init.sh:/custom-cont-init.d/99-fix-7z.sh
-      - /docker/appdata/sabnzbd/7zz-wrapper:/custom-cont-init.d/7zz-wrapper
+      - ./custom-init.sh:/custom-cont-init.d/99-fix-7z.sh
+      - ./7zz-wrapper:/custom-cont-init.d/7zz-wrapper
       - nas:/data:rw
     ports:
       - 8082:8080

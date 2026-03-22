@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "docker" {
 
   # VM General Settings
-  node_name   = "prox"
+  node_name   = "pve"
   name        = "docker"
   description = "testing"
   tags        = ["tofu", "ubuntu24", "ansible", "packer"]
@@ -9,10 +9,6 @@ resource "proxmox_virtual_environment_vm" "docker" {
 
   agent {
     enabled = true
-  }
-
-  clone {
-    vm_id = 199
   }
 
   # VM CPU Settings

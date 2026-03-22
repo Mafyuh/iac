@@ -1,18 +1,14 @@
 resource "proxmox_virtual_environment_vm" "NPM" {
 
   # VM General Settings
-  node_name   = "prox"
-  vm_id       = 204
+  node_name   = "pve"
+  vm_id       = 103
   name        = "Nginx-Proxy-Manager"
   description = "Nginx Proxy Manager"
   tags        = ["tofu", "ubuntu24", "infrastructure", "ansible"]
 
   agent {
     enabled = true
-  }
-
-  clone {
-    vm_id = 8002
   }
 
   # VM CPU Settings
@@ -35,7 +31,7 @@ resource "proxmox_virtual_environment_vm" "NPM" {
 
   # VM Disk Settings
   disk {
-    datastore_id = "Fast2Tb"
+    datastore_id = "local-lvm"
     size         = 40
     interface    = "scsi0"
   }

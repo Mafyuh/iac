@@ -8,7 +8,7 @@
 resource "proxmox_virtual_environment_vm" "blockyHA" {
 
   # VM General Settings
-  node_name   = "prox"
+  node_name   = "pve"
   name        = "blocky-HA"
   description = "blocky DNS server HA"
   tags        = ["tofu", "ubuntu25", "ansible", "packer"]
@@ -17,10 +17,6 @@ resource "proxmox_virtual_environment_vm" "blockyHA" {
 
   agent {
     enabled = true
-  }
-
-  clone {
-    vm_id = 19000
   }
 
   # VM CPU Settings
@@ -59,8 +55,6 @@ resource "proxmox_virtual_environment_vm" "blockyHA" {
         gateway = "10.20.10.1"
       }
     }
-
-    user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
   }
 
   lifecycle {

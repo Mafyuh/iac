@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "proxy" {
 
   # VM General Settings
-  node_name   = "prox"
+  node_name   = "pve"
   name        = "proxy"
   description = "Isolated Reverse Proxy for Jellyfin"
   tags        = ["tofu", "ubuntu25", "ansible", "packer"]
@@ -31,7 +31,7 @@ resource "proxmox_virtual_environment_vm" "proxy" {
 
   # VM Disk Settings
   disk {
-    datastore_id = "Fast2Tb"
+    datastore_id = "local-lvm"
     size         = 30
     interface    = "scsi0"
   }
@@ -46,8 +46,6 @@ resource "proxmox_virtual_environment_vm" "proxy" {
         address = "dhcp"
       }
     }
-
-    user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
   }
 
   lifecycle {

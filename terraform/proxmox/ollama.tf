@@ -1,12 +1,12 @@
 resource "proxmox_virtual_environment_vm" "ollama" {
 
   # VM General Settings
-  node_name   = "pve2"
+  node_name   = "pve"
   name        = "ollama"
   description = "ollama"
   tags        = ["tofu", "ubuntu24", "ansible", "packer"]
   started     = true
-  machine = "q35"
+  machine     = "q35"
 
   agent {
     enabled = true
@@ -18,25 +18,25 @@ resource "proxmox_virtual_environment_vm" "ollama" {
 
   # VM CPU Settings
   cpu {
-    cores        = 3
+    cores        = 12
     type         = "host"
   }
 
   # VM Memory Settings
   memory {
-    dedicated = 8192
+    dedicated = 12288
   }
 
   # VM Network Settings
   network_device {
     bridge  = "vmbr0"
-    vlan_id = 2
+    vlan_id = 10
   }
 
   # VM Disk Settings
   disk {
     datastore_id = "local-lvm"
-    size         = 75
+    size         = 50
     interface    = "scsi0"
   }
 
@@ -46,15 +46,15 @@ resource "proxmox_virtual_environment_vm" "ollama" {
 
   hostpci {
     device = "hostpci0"
-    mapping = "gpu2"
+    mapping = "gtx1660"
     pcie = true
   }
 
   initialization {
     ip_config {
       ipv4 {
-        address = "10.69.69.50/24"
-        gateway = "10.69.69.1"
+        address = "10.20.10.55/24"
+        gateway = "10.20.10.1"
       }
     }
   }

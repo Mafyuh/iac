@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "omni" {
 
   # VM General Settings
-  node_name   = "prox"
+  node_name   = "pve"
   name        = "omni"
   description = "testing"
   tags        = ["tofu", "ubuntu25", "ansible", "packer"]
@@ -9,10 +9,6 @@ resource "proxmox_virtual_environment_vm" "omni" {
 
   agent {
     enabled = true
-  }
-
-  clone {
-    vm_id = 19000
   }
 
   # VM CPU Settings
@@ -35,7 +31,7 @@ resource "proxmox_virtual_environment_vm" "omni" {
 
   # VM Disk Settings
   disk {
-    datastore_id = "Fast2Tb"
+    datastore_id = "local-lvm"
     size         = 30
     interface    = "scsi0"
   }
@@ -51,8 +47,6 @@ resource "proxmox_virtual_environment_vm" "omni" {
         gateway = "10.69.69.1"
       }
     }
-
-    user_data_file_id = proxmox_virtual_environment_file.cloud_config_shared.id
   }
 
   lifecycle {

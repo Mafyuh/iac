@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket                      = "tofu"
     region                      = "us-east-1"
-    key                         = "proxmox.tfstate"
+    key                         = "prox.tfstate"
     endpoint                    = "https://s3.mafyuh.xyz"
     skip_region_validation      = true
     skip_credentials_validation = true
