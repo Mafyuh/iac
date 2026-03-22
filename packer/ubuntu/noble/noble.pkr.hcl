@@ -39,7 +39,7 @@ source "proxmox-iso" "ubuntu-server-noble" {
     insecure_skip_tls_verify = true
 
     # VM General Settings
-    node = "pve2"
+    node = "pve"
 
     vm_id = "199"
     vm_name = "ubuntu-24-template"
@@ -54,12 +54,12 @@ source "proxmox-iso" "ubuntu-server-noble" {
     disks {
         type = "scsi"
         disk_size = "8G"
-        storage_pool = "NAS"
+        storage_pool = "local-lvm"
     }
 
     boot_iso {
         type = "scsi"
-        iso_file = "NAS:iso/ubuntu-24.04.3-live-server-amd64.iso"
+        iso_file = "local:iso/ubuntu-24.04.3-live-server-amd64.iso"
         unmount = true
         iso_checksum = "sha512:c3514bf0056180d09376462a7a1b4f213c1d6e8ea67fae5c25099c6fd3d8274b"
     }

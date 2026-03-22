@@ -88,15 +88,6 @@ resource "cloudflare_dns_record" "dev_home" {
   zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
 }
 
-resource "cloudflare_dns_record" "dev_root" {
-  content = "mafyuh.github.io"
-  name    = var.domains["dev"]
-  proxied = false
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
 resource "cloudflare_dns_record" "dev_prom_metrics" {
   content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
   name    = "prom-metrics.${var.domains["dev"]}"

@@ -12,7 +12,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
     ingress = [
       {
         hostname = "ai.${var.domains["io"]}"
-        service  = "http://10.69.69.50:3000"
+        service  = "http://10.20.10.55:3000"
         path     = ""
         origin_request = {
           no_tls_verify            = true
@@ -87,7 +87,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname = "prox.${var.domains["io"]}"
-        service  = "https://10.0.0.30:8006"
+        service  = "https://10.0.0.5:8006"
         path     = ""
         origin_request = {
           no_tls_verify            = true

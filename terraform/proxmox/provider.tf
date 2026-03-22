@@ -36,13 +36,8 @@ provider "proxmox" {
     password = data.bitwarden-secrets_secret.ssh_password.value
 
     node {
-      name    = "prox"
+      name    = "pve"
       address = data.bitwarden-secrets_secret.prox_ip_address.value
-    }
-
-    node {
-      name    = "pve2"
-      address = data.bitwarden-secrets_secret.pve2_ip_address.value
     }
   }
 }

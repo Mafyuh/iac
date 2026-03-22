@@ -197,12 +197,3 @@ resource "cloudflare_dns_record" "io_protonmail_verification" {
   type    = "TXT"
   zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
-
-resource "cloudflare_dns_record" "io_pbx" {
-  content = data.bitwarden-secrets_secret.pbx_ip.value
-  name    = "pbx.${var.domains["io"]}"
-  proxied = false
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
-}
