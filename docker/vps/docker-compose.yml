@@ -4,8 +4,6 @@ services:
   gotify:
     image: ghcr.io/gotify/server:2.9.1
     container_name: gotify
-    ports:
-      - 9008:80
     volumes:
       - /docker/appdata/gotify:/app/data
     restart: unless-stopped
@@ -14,7 +12,7 @@ services:
       - GOTIFY_DEFAULTUSER_NAME=$GOTIFY_DEFAULTUSER_NAME
       - GOTIFY_DEFAULTUSER_PASS=$GOTIFY_DEFAULTUSER_PASS
     networks:
-      - gitea_main
+      - racknerd
 
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:2.14.0
@@ -28,7 +26,7 @@ services:
       - /docker/appdata/nginx/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
     networks:
-      - gitea_main
+      - racknerd
 
   fail2ban:
     image: crazymax/fail2ban:1.1.0
@@ -54,7 +52,6 @@ services:
       - SSMTP_USER=$SSMTP_USER
       - SSMTP_PASSWORD=$SSMTP_PASSWORD
       - SSMTP_TLS=YES
-      - DATABASE_URL=postgresql://user:password@host[:port]/database_name
     logging:
       driver: "json-file"
       options:
@@ -62,26 +59,9 @@ services:
         max-file: "10"
     restart: unless-stopped
 
-  linkstack:
-    image: linkstackorg/linkstack@sha256:1c8b05399ee459ac601bac3eede7fbe765d1b6b7be725663b57f3220610958bf
-    container_name: linkstack
-    ports:
-      - 8005:80
-      - 8006:443
-    volumes:
-      - linkstack:/htdocs
-    environment:
-      - HTTP_SERVER_NAME=$HTTP_SERVER_NAME
-      - HTTPS_SERVER_NAME=$HTTP_SERVER_NAME
-      - SERVER_ADMIN=$SERVER_ADMIN
-    restart: unless-stopped
-    networks:
-      - gitea_main
   n8n:
     image: ghcr.io/n8n-io/n8n:2.13.2
     container_name: n8n
-    ports:
-      - 5678:5678
     volumes:
       - n8n_data:/home/node/.n8n
     environment:
@@ -90,7 +70,7 @@ services:
       - WEBHOOK_URL=$WEBHOOK_URL
     restart: unless-stopped
     networks:
-      - gitea_main
+      - racknerd
 
   vaultwarden:
     image: ghcr.io/dani-garcia/vaultwarden:1.35.4
@@ -118,11 +98,10 @@ services:
       - DATABASE_URL=$DATABASE_URL
     restart: unless-stopped
     networks:
-      gitea_main:
-        ipv4_address: 172.25.0.25
+      - racknerd
 
   postgres:
-    image: postgres:18
+    image: postgres:18.3
     container_name: postgres
     restart: unless-stopped
     environment:
@@ -131,18 +110,16 @@ services:
       POSTGRES_DB: vaultwarden
     volumes:
       - postgres_data:/var/lib/postgresql
-    ports:
-      - 5432:5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - gitea_main
+      - racknerd
 
 networks:
-  gitea_main:
+  racknerd:
     external: true
 
 volumes:

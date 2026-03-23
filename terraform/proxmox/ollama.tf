@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "ollama" {
   # VM Disk Settings
   disk {
     datastore_id = "local-lvm"
-    size         = 50
+    size         = 100
     interface    = "scsi0"
   }
 
