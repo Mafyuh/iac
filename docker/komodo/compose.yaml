@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  mongo:
+    image: mongo
+    labels:
+      komodo.skip:
+    command: --quiet --wiredTigerCacheSizeGB 0.25
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${KOMODO_DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${KOMODO_DB_PASSWORD}
+    networks:
+      - racknerd
+
+  core:
+    image: ghcr.io/moghtech/komodo-core:2.0.0-dev
+    labels:
+      komodo.skip:
+    restart: unless-stopped
+    container_name: komodo-core
+    depends_on:
+      - mongo
+    env_file: .env
+    environment:
+      KOMODO_DATABASE_ADDRESS: mongo:27017
+      KOMODO_DATABASE_USERNAME: ${KOMODO_DB_USERNAME}
+      KOMODO_DATABASE_PASSWORD: ${KOMODO_DB_PASSWORD}
+    volumes:
+      - backups:/backups
+      - syncs:/syncs
+    networks:
+      - racknerd
+
+  periphery:
+    image: ghcr.io/moghtech/komodo-periphery:2.0.0-dev
+    labels:
+      komodo.skip:
+    restart: unless-stopped
+    container_name: komodo-periphery
+    env_file: .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/proc
+      - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
+    networks:
+      - racknerd
+
+volumes:
+  mongo-data:
+  mongo-config:
+  backups:
+  syncs:
+
+networks:
+  racknerd:
+    external: true
