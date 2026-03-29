@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  couchdb-obsidian-livesync:
+    container_name: obsidian-livesync
+    image: couchdb:3.5.1
+    environment:
+      - PUID=2003
+      - PGID=2003
+      - UMASK=0022
+      - TZ=America/New_York
+      - COUCHDB_USER=mafyuh
+      - COUCHDB_PASSWORD=$COUCHDB_PASSWORD
+    volumes:
+      - /docker/appdata/couchdb-obsidian-livesync/data:/opt/couchdb/data
+      - /docker/appdata/couchdb-obsidian-livesync/etc/local.d:/opt/couchdb/etc/local.d
+    ports:
+      - 5984:5984
+    restart: unless-stopped

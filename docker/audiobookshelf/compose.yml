@@ -16,18 +16,6 @@ services:
       - 9090:80
     restart: unless-stopped
 
-  podsync:
-    image: ghcr.io/mxpv/podsync:v2.8.0
-    container_name: podsync
-    volumes:
-      - podsync_data:/app/data/
-      - podsync_db:/app/db/
-      - /mnt/ssd-appdata/appdata/podsync/config.toml:/app/config.toml
-    ports:
-      - 9091:8080
-
 volumes:
   config:
   metadata:
-  podsync_data:
-  podsync_db:
