@@ -6,6 +6,7 @@ services:
     labels:
       komodo.skip:
     restart: unless-stopped
+    init: true
     environment:
       PERIPHERY_ROOT_DIRECTORY: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
       PERIPHERY_CORE_ADDRESS: komo.mafyuh.io

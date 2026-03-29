@@ -21,6 +21,7 @@ services:
     labels:
       komodo.skip:
     restart: unless-stopped
+    init: true
     container_name: komodo-core
     depends_on:
       - mongo
@@ -38,6 +39,7 @@ services:
 
   periphery:
     image: ghcr.io/moghtech/komodo-periphery:2.0.0
+    init: true
     labels:
       komodo.skip:
     restart: unless-stopped
