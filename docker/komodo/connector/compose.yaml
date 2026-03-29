@@ -15,6 +15,7 @@ services:
       PERIPHERY_SSL_ENABLED: true
       PERIPHERY_DISABLE_TERMINALS: false
       PERIPHERY_INCLUDE_DISK_MOUNTS: /etc/hostname
+      PERIPHERY_CORE_PUBLIC_KEYS: MCowBQYDK2VuAyEAdaEppEhX6hboF6Tt1SiCoGiiCe35BYbc1FrG+PRVCU8=
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc:/proc
