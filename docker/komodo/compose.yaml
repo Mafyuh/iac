@@ -32,6 +32,7 @@ services:
     volumes:
       - backups:/backups
       - syncs:/syncs
+      - keys:/config/keys
     networks:
       - racknerd
 
@@ -45,6 +46,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc:/proc
+      - keys:/config/keys
       - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
     networks:
       - racknerd
@@ -54,6 +56,7 @@ volumes:
   mongo-config:
   backups:
   syncs:
+  keys:
 
 networks:
   racknerd:
