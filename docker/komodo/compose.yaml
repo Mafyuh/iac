@@ -17,7 +17,7 @@ services:
       - racknerd
 
   core:
-    image: ghcr.io/moghtech/komodo-core:2.0.0-dev
+    image: ghcr.io/moghtech/komodo-core:2.0.0
     labels:
       komodo.skip:
     restart: unless-stopped
@@ -36,7 +36,7 @@ services:
       - racknerd
 
   periphery:
-    image: ghcr.io/moghtech/komodo-periphery:2.0.0-dev
+    image: ghcr.io/moghtech/komodo-periphery:2.0.0
     labels:
       komodo.skip:
     restart: unless-stopped
