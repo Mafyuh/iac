@@ -22,7 +22,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kashalls/kromgo
-              tag: v0.8.2
+              tag: v0.9.0
             env:
               PROMETHEUS_URL: http://prometheus-operated.monitoring.svc.cluster.local:9090
               SERVER_HOST: 0.0.0.0
