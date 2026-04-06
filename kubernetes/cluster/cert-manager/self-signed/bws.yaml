@@ -18,6 +18,12 @@ spec:
   commonName: cert-manager-bitwarden-tls
   isCA: true
   secretName: bitwarden-tls-certs
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "security"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "security"
   subject:
     organizations:
       - external-secrets.io

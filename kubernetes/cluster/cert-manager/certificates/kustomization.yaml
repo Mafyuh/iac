@@ -5,5 +5,4 @@ kind: Kustomization
 resources:
   - local.yaml
   - public.yaml
-  - selfsigned.yaml
   - public-io.yaml
