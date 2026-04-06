@@ -99,6 +99,7 @@ spec:
               sectionName: https
 
       prometheusSpec:
+        evaluationInterval: 2m
         enableRemoteWriteReceiver: true
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
