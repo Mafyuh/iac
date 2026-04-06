@@ -5,6 +5,7 @@ metadata:
 spec:
   selfSigned: {}
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cert-manager.io/certificate_v1.json
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -34,6 +35,8 @@ spec:
   ipAddresses:
     - 127.0.0.1
     - ::1
+  duration: 87600h
+  renewBefore: 720h
   privateKey:
     algorithm: RSA
     encoding: PKCS8
