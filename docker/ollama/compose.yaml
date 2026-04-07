@@ -38,7 +38,7 @@ services:
       - host.docker.internal:host-gateway
 
   searxng:
-    image: searxng/searxng@sha256:4da2820fd56920bf05303183b2f3a8c8cce18fcbcd88526cae31bc039b2d4dd1
+    image: searxng/searxng@sha256:6a89a150d0163877caab1982b7a20d0a03fd4b39401a0d3f26f61ad205949442
     container_name: searxng
     environment:
       - PUID=${PUID:-1000}
