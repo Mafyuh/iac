@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/maintainerr/maintainerr
-              tag: 3.4.1
+              tag: 3.5.0
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
