@@ -6,5 +6,4 @@ resources:
   - immich/ks.yaml
   - bento-pdf/ks.yaml
   - homepage/ks.yaml
-  - homebox/ks.yaml
   - rackpeek/ks.yaml
