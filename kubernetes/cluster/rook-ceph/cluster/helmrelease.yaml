@@ -66,14 +66,14 @@ spec:
       resources:
         mgr:
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 700Mi
           requests:
             cpu: 50m
             memory: 320Mi
         mon:
           limits:
-            cpu: 200m
+            cpu: 300m
             memory: 640Mi
           requests:
             cpu: 100m
