@@ -12,6 +12,5 @@ resources:
   - gateway-api/flux-ks.yaml
   - rook-ceph/flux-ks.yaml
   - envoy-gateway/flux-ks.yaml
-  - silence-operator/flux-ks.yaml
   - cilium/ks.yaml
   - cert-manager/ks.yaml
