@@ -49,7 +49,6 @@ spec:
                 enabled: false
 
             securityContext:
-              runAsNonRoot: true
               allowPrivilegeEscalation: false
               capabilities:
                 drop:
