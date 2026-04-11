@@ -26,6 +26,13 @@ spec:
             image:
               repository: docker.io/dpage/pgadmin4
               tag: "9.14@sha256:ff557f69d9808085dc3554f56c1b06a36ac8cddabe4485212920b9604261abdb"
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+                add:
+                  - NET_BIND_SERVICE
             envFrom:
               - secretRef:
                   name: pgadmin-secret

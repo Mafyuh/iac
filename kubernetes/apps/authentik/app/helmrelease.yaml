@@ -49,6 +49,11 @@ spec:
         runAsUser: &user 1000
         runAsGroup: *user
         fsGroup: *user
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
 
       ingress:
         enabled: false
@@ -86,6 +91,12 @@ spec:
           subPath: custom.css
     worker:
       replicas: 1
+      containerSecurityContext:
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
     authentik:
       log_level: info
       error_reporting:
