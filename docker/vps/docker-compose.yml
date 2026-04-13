@@ -73,7 +73,7 @@ services:
       - racknerd
 
   vaultwarden:
-    image: ghcr.io/dani-garcia/vaultwarden:1.35.4
+    image: ghcr.io/dani-garcia/vaultwarden:1.35.7
     container_name: vaultwarden
     volumes:
       - /home/mafyuh/vw-data/:/data
