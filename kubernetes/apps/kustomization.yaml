@@ -16,5 +16,4 @@ resources:
   - reloader/ks.yaml
   - spegel/ks.yaml
   - tuppr/ks.yaml
-  - twingate/ks.yaml
   - volsync/ks.yaml
