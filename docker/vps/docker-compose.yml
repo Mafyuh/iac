@@ -19,7 +19,7 @@ services:
     container_name: nginx-proxy-manager
     ports:
       - 80:80
-      - 81:81
+      - 127.0.0.1:81:81
       - 443:443
     volumes:
       - /docker/appdata/nginx/data:/data
