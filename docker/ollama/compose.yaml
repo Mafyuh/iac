@@ -1,22 +1,7 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
-  ollama:
-    image: ollama/ollama:0.21.0
-    container_name: ollama
-    restart: unless-stopped
-    volumes:
-      - ollama:/root/.ollama
-    ports:
-      - "11434:11434"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
+## Hooked up to LM Studio on Gaming rig, Ollama annoying me
   open-webui:
     image: ghcr.io/open-webui/open-webui:v0.8.12
     container_name: open-webui
@@ -48,7 +33,6 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /docker/appdata/searxng:/etc/searxng
     depends_on:
-      - ollama
       - open-webui
     restart: unless-stopped
     ports:
@@ -84,6 +68,17 @@ services:
       - open-terminal:/home/user
     environment:
       - OPEN_TERMINAL_API_KEY=$OPEN_TERMINAL_API_KEY
+
+  mcphub:
+    container_name: mcphub
+    image: mirror.gcr.io/samanhappy/mcphub:0.12.12
+    restart: unless-stopped
+    ports:
+      - 3003:3000
+    environment:
+      - ADMIN_PASSWORD=$MCPHUB_ADMIN_PASSWORD
+    volumes:
+      - ./mcp_settings.json:/app/mcp_settings.json:rw
 
 volumes:
   ollama:
