@@ -3,7 +3,7 @@
 services:
 ## Hooked up to LM Studio on Gaming rig, Ollama annoying me
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.8.12
+    image: ghcr.io/open-webui/open-webui:v0.9.1
     container_name: open-webui
     restart: unless-stopped
     ports:
