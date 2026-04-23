@@ -9,7 +9,6 @@ resources:
   - databases/
   - default/
   - kopia/ks.yaml
-  - matrix/ks.yaml
   - monitoring/
   - networking/
   - reflector/ks.yaml

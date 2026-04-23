@@ -49,16 +49,3 @@ services:
     image: cloudflare/cloudflared@sha256:6b599ca3e974349ead3286d178da61d291961182ec3fe9c505e1dd02c8ac31b0
     command: tunnel --no-autoupdate run --token $CF_TOKEN
     container_name: cloudflared
-
-  twingate-famous-alligator:
-    image: twingate/connector@sha256:0a74cb9ffcf00e02d22199c8b9b53e3d02aa577d10615542bc3138acf7bb68f5
-    container_name: twingate-famous-alligator
-    restart: always
-    environment:
-      - TWINGATE_NETWORK=$TWINGATE_NETWORK
-      - TWINGATE_ACCESS_TOKEN=$TWINGATE_ACCESS_TOKEN
-      - TWINGATE_REFRESH_TOKEN=$TWINGATE_REFRESH_TOKEN
-      - TWINGATE_LABEL_HOSTNAME=${HOSTNAME}
-      - TWINGATE_LABEL_DEPLOYED_BY=docker
-    sysctls:
-      - net.ipv4.ping_group_range=0 2147483647
