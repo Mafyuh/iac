@@ -16,7 +16,7 @@ spec:
           main:
             image:
               repository: ghcr.io/alam00000/bentopdf
-              tag: 2.8.3
+              tag: 2.8.4
             probes:
               liveness:
                 enabled: true
