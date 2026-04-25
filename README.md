@@ -36,7 +36,7 @@ This is my homelab infrastructure, defined in code.
 
 This repository contains the IaC ([Infrastructure as Code](https://en.wikipedia.org/wiki/Infrastructure_as_code)) configuration for my homelab.
 
-My homelab runs two infrastructure stacks: Kubernetes nodes provisioned with Talos Linux, and Proxmox VMs running Docker. All VMs are cloned from templates I created with [Packer](https://www.packer.io/). My Kubernetes nodes are all defined as code using Talos Linux. I have been migrating my Ubuntu VM's over to NixOS, see Nix config [here](https://github.com/Mafyuh/nixos) and going forward all VM's will be NixOS
+My homelab runs two infrastructure stacks: Kubernetes and Proxmox VMs running Docker. Legacy VMs are Ubuntu cloned from templates I created with [Packer](https://www.packer.io/), I have been migrating my Ubuntu VM's over to NixOS, see Nix config [here](https://github.com/Mafyuh/nixos) and going forward all VM's will be NixOS. My Kubernetes nodes are all defined as code using [Talos Linux](https://www.talos.dev/) with [talhelper](https://github.com/budimanjojo/talhelper).
 
 Everything is containerized — either managed with Docker Compose or orchestrated through Kubernetes. My long-term goal is to move it all to Kubernetes using **[GitOps](https://en.wikipedia.org/wiki/DevOps) practices**, and the migration is ongoing. Docker Compose sticks around mainly due to hardware limitations; scaling a homelab Kubernetes cluster means buying alot of hardware.
 
