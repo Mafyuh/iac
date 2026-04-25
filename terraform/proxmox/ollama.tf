@@ -25,7 +25,7 @@ resource "proxmox_virtual_environment_vm" "ollama" {
 
   # VM Memory Settings
   memory {
-    dedicated = 24576
+    dedicated = 6144
   }
 
   # VM Network Settings
