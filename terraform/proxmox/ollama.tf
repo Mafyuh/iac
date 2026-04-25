@@ -4,9 +4,10 @@ resource "proxmox_virtual_environment_vm" "ollama" {
   node_name   = "pve"
   name        = "ollama"
   description = "ollama"
-  tags        = ["tofu", "ubuntu24", "ansible", "packer"]
+  tags        = ["tofu", "ubuntu26", "ansible", "packer"]
   started     = true
   machine     = "q35"
+  on_boot     = false
 
   agent {
     enabled = true
@@ -24,7 +25,7 @@ resource "proxmox_virtual_environment_vm" "ollama" {
 
   # VM Memory Settings
   memory {
-    dedicated = 12288
+    dedicated = 24576
   }
 
   # VM Network Settings

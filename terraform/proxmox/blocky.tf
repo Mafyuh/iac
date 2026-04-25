@@ -11,7 +11,7 @@ resource "proxmox_virtual_environment_vm" "blockyHA" {
   node_name   = "pve"
   name        = "blocky-HA"
   description = "blocky DNS server HA"
-  tags        = ["tofu", "ubuntu25", "ansible", "packer"]
+  tags        = ["tofu", "ubuntu26", "ansible", "packer"]
   migrate     = true
   started     = true
 

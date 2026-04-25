@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "docker" {
   node_name   = "pve"
   name        = "docker"
   description = "testing"
-  tags        = ["tofu", "ubuntu24", "ansible", "packer"]
+  tags        = ["tofu", "ubuntu26", "ansible", "packer"]
   started     = true
 
   agent {

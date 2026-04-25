@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "proxy" {
   node_name   = "pve"
   name        = "proxy"
   description = "Isolated Reverse Proxy for Jellyfin"
-  tags        = ["tofu", "ubuntu25", "ansible", "packer"]
+  tags        = ["tofu", "ubuntu26", "ansible", "packer"]
   started     = true
 
   agent {
@@ -20,7 +20,7 @@ resource "proxmox_virtual_environment_vm" "proxy" {
 
   # VM Memory Settings
   memory {
-    dedicated = 2048
+    dedicated = 3072
   }
 
   # VM Network Settings
@@ -34,10 +34,6 @@ resource "proxmox_virtual_environment_vm" "proxy" {
     datastore_id = "local-lvm"
     size         = 30
     interface    = "scsi0"
-  }
-
-  vga {
-    type = "serial0"
   }
 
   initialization {

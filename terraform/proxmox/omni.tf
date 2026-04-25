@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "omni" {
   node_name   = "pve"
   name        = "omni"
   description = "testing"
-  tags        = ["tofu", "ubuntu25", "ansible", "packer"]
+  tags        = ["tofu", "ubuntu26", "ansible", "packer"]
   started     = true
 
   agent {

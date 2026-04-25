@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
   name        = "Ubu"
   description = "My attempt to move things to 1 VM"
   started = true
-  tags        = ["tofu", "ubuntu-22", "ansible"]
+  tags        = ["tofu", "ubuntu26", "ansible"]
 
   agent {
     enabled = true # read 'Qemu guest agent' section, change to true only when ready

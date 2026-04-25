@@ -5,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "NPM" {
   vm_id       = 103
   name        = "Nginx-Proxy-Manager"
   description = "Nginx Proxy Manager"
-  tags        = ["tofu", "ubuntu24", "infrastructure", "ansible"]
+  tags        = ["tofu", "ubuntu26", "infrastructure", "ansible"]
 
   agent {
     enabled = true
