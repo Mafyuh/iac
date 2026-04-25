@@ -30,7 +30,6 @@ services:
       - PGID=${PGID:-1000}
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
       - /docker/appdata/searxng:/etc/searxng
     depends_on:
       - open-webui
