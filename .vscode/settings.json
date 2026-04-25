@@ -1,0 +1,18 @@
+{
+  "editor.bracketPairColorization.enabled": true,
+  "editor.fontFamily": "FiraCode Nerd Font",
+  "editor.fontSize": 14,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": true,
+  "editor.guides.highlightActiveBracketPair": true,
+  "editor.stickyScroll.enabled": false,
+  "github.copilot.git.generateCommitMessage.addCoAuthored": false,
+  "explorer.autoReveal": true,
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.fontSize": 14,
+  "window.zoomLevel": 0,
+  "yaml.schemaStore.enable": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "bluebrown.yamlfmt"
+  }
+}
