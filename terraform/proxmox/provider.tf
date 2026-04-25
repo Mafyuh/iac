@@ -15,7 +15,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.103.0"
+      version = "0.104.0"
     }
     bitwarden-secrets = {
       source  = "bitwarden/bitwarden-secrets"
