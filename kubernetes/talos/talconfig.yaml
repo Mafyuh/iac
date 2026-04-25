@@ -18,7 +18,7 @@ nodes:
     installDisk: /dev/nvme0n1
     networkInterfaces:
       - deviceSelector:
-          physical: true
+          hardwareAddr: 8c:ae:4c:b9:53:31
         dhcp: true
         vip:
           ip: &vip 10.0.0.150
@@ -28,7 +28,7 @@ nodes:
     installDisk: /dev/nvme0n1
     networkInterfaces:
       - deviceSelector:
-          physical: true
+          hardwareAddr: 8c:ae:4c:b9:53:42
         dhcp: true
         vip:
           ip: *vip
@@ -38,7 +38,7 @@ nodes:
     installDisk: /dev/nvme0n1
     networkInterfaces:
       - deviceSelector:
-          physical: true
+          hardwareAddr: 8c:ae:4c:b9:53:6f
         dhcp: true
         vip:
           ip: *vip
