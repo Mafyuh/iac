@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
     environment:
       PEGAPROX_BEHIND_PROXY: "true"
-      PEGAPROX_TRUSTED_PROXIES: "192.168.2.0/16"
+      PEGAPROX_TRUSTED_PROXIES: "10.69.69.0/16"
       PEGAPROX_ALLOWED_ORIGINS: "https://pegaprox.mafyuh.xyz"
 
 volumes:
