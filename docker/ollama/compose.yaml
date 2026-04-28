@@ -19,6 +19,7 @@ services:
       - OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET
       - OAUTH_SCOPES=openid email profile
       - OPENID_REDIRECT_URI=https://ai.mafyuh.io/oauth/oidc/callback
+      - DATABASE_URL=$DATABASE_URL
     extra_hosts:
       - host.docker.internal:host-gateway
 

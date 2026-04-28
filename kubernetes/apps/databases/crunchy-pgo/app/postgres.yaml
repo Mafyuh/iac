@@ -67,6 +67,8 @@ spec:
       databases: ["jellystat"]
     - name: matrix
       databases: ["matrix", "matrixauth"]
+    - name: openwebui
+      databases: ["openwebui"]
     - name: netbox
       databases: ["netbox"]
     - name: umami
