@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: ghcr.io/dispatcharr/dispatcharr
-              tag: 0.23.0
+              tag: 0.24.0
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
