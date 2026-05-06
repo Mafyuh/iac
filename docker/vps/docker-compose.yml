@@ -60,7 +60,7 @@ services:
     restart: unless-stopped
 
   n8n:
-    image: ghcr.io/n8n-io/n8n:2.19.2
+    image: ghcr.io/n8n-io/n8n:2.20.0
     container_name: n8n
     volumes:
       - n8n_data:/home/node/.n8n
