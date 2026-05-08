@@ -22,6 +22,8 @@ spec:
     namespace: flux-system
   wait: false
   postBuild:
+    substitute:
+      APP: code-server
     substituteFrom:
       - kind: Secret
         name: code-server-secret
