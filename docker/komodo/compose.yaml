@@ -17,7 +17,7 @@ services:
       - racknerd
 
   core:
-    image: ghcr.io/moghtech/komodo-core:2.1.2
+    image: ghcr.io/moghtech/komodo-core:2.2.0
     labels:
       komodo.skip:
     restart: unless-stopped
