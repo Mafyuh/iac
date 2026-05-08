@@ -38,7 +38,7 @@ services:
       - racknerd
 
   periphery:
-    image: ghcr.io/moghtech/komodo-periphery:2.1.2
+    image: ghcr.io/moghtech/komodo-periphery:2.2.0
     init: true
     labels:
       komodo.skip:
