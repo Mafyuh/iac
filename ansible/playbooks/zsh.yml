@@ -7,12 +7,6 @@
     user: "{{ ansible_user }}"
 
   tasks:
-    - name: Add the Fastfetch PPA repository
-      ansible.builtin.apt_repository:
-        repo: ppa:zhangsongcui3371/fastfetch
-        state: present
-        update_cache: true
-
     - name: Install necessary packages
       ansible.builtin.apt:
         name:
