@@ -27,6 +27,7 @@ autoinstall:
     - nfs-common
     - net-tools
     - fzf
+    - ansible
   user-data:
     package_upgrade: false
     timezone: America/New_York

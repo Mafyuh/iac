@@ -139,23 +139,31 @@ build {
         inline = [ "sudo cp /tmp/pve.cfg /etc/cloud/cloud.cfg.d/pve.cfg" ]
     }
 
-    provisioner "file" {
-        source = "ubuntu/files/setup-ubuntu.sh"
-        destination = "/tmp/setup-ubuntu.sh"
-    }
-
-
     provisioner "shell" {
         inline = [
-            "chmod +x /tmp/setup-ubuntu.sh",
-            "/tmp/setup-ubuntu.sh"
+            "curl -fsSL https://get.docker.com | sudo sh",
+            "curl -fsSL https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash"
         ]
     }
 
-    provisioner "file" {
-        source = "ubuntu/files/.zshrc"
-        destination = "~/.zshrc"
+    provisioner "ansible-local" {
+        playbook_file = "../../ansible/playbooks/zsh.yml"
+        extra_arguments = ["-e", "ansible_user=mafyuh"]
     }
+
+    provisioner "shell" {
+        inline = [
+            "sudo usermod -aG docker mafyuh",
+            "sudo mkdir -p /etc/systemd/resolved.conf.d",
+            "echo -e '[Resolve]\\nDNS=10.20.10.20' | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf",
+            "git config --global user.name 'Mafyuh'",
+            "git config --global user.email 'matt@mafyuh.com'",
+            "sudo cp -r $HOME/.oh-my-zsh /etc/skel/ 2>/dev/null || true",
+            "sudo cp -r $HOME/.oh-my-posh /etc/skel/ 2>/dev/null || true",
+            "sudo cp -r $HOME/.local /etc/skel/ 2>/dev/null || true"
+        ]
+    }
+
 }
 
 locals {
