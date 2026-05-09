@@ -57,7 +57,7 @@ source "proxmox-iso" "ubuntu-server-resolute" {
 
     disks {
         type = "scsi"
-        disk_size = "8G"
+        disk_size = "10G"
         storage_pool = "local-lvm"
     }
 
@@ -73,7 +73,7 @@ source "proxmox-iso" "ubuntu-server-resolute" {
     cpu_type = "host"
 
     # VM Memory Settings
-    memory = "4096"
+    memory = "8192"
 
     # VM Network Settings
     network_adapters {
