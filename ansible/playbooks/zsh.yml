@@ -34,7 +34,7 @@
 
           # Plugins
           plugins=(git ubuntu copypath copyfile dirhistory zsh-interactive-cd docker docker-compose opentofu \
-                  zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use)
+                  zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use zsh-fzf-history-search)
 
           source $ZSH/oh-my-zsh.sh
 
@@ -96,6 +96,12 @@
         dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
         update: false
         version: v1.1.0
+
+    - name: Clone zsh-fzf-history-search plugin
+      ansible.builtin.git:
+        repo: https://github.com/joshskidmore/zsh-fzf-history-search.git
+        dest: "/home/{{ ansible_user }}/.oh-my-zsh/custom/plugins/zsh-fzf-history-search"
+        update: false
 
     - name: Clone you-should-use plugin
       ansible.builtin.git:

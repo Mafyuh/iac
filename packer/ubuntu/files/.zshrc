@@ -6,7 +6,7 @@ export PATH=$PATH:$HOME/.local/bin
 ZSH_THEME="robbyrussell"
 
 # Plugins
-plugins=(git ubuntu copypath copyfile dirhistory kubectl zsh-interactive-cd docker docker-compose opentofu zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use)
+plugins=(git ubuntu copypath copyfile dirhistory kubectl zsh-interactive-cd docker docker-compose opentofu zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting you-should-use zsh-fzf-history-search)
 
 source $ZSH/oh-my-zsh.sh
 

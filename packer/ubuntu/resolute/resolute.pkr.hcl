@@ -86,7 +86,7 @@ source "proxmox-iso" "ubuntu-server-resolute" {
 ## The build takes forever, 60 is more than enough
     ssh_timeout  = "60m"
     # WSL Filesystem
-    ssh_private_key_file = "~/.ssh/id_ed25519"
+    ssh_private_key_file = "~/.ssh/id_ed"
 
     boot_wait = "10s"
     boot_command = [
