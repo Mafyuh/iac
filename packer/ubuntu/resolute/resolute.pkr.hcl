@@ -151,7 +151,7 @@ build {
     }
 
     provisioner "ansible-local" {
-        playbook_file = "../../ansible/playbooks/zsh.yml"
+        playbook_file = "../ansible/playbooks/zsh.yml"
         extra_arguments = ["-e", "ansible_user=mafyuh"]
     }
 
