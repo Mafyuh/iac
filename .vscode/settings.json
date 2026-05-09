@@ -6,7 +6,6 @@
   "editor.guides.bracketPairsHorizontal": true,
   "editor.guides.highlightActiveBracketPair": true,
   "editor.stickyScroll.enabled": false,
-  "github.copilot.git.generateCommitMessage.addCoAuthored": false,
   "explorer.autoReveal": true,
   "files.trimTrailingWhitespace": true,
   "terminal.integrated.fontSize": 14,

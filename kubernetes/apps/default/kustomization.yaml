@@ -5,6 +5,5 @@ kind: Kustomization
 resources:
   - immich/ks.yaml
   - bento-pdf/ks.yaml
-  - code-server/ks.yaml
   - homepage/ks.yaml
   - rackpeek/ks.yaml
