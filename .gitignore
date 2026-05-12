@@ -61,3 +61,4 @@ scripts/radarr-custom-format-scores-fixed.sh
 *.bw-provider-state
 kubernetes/apps/default/homepage/app/config.yaml
 docker/ollama/mcp_settings.json
+terraform/seerr/

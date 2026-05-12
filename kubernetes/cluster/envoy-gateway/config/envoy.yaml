@@ -30,7 +30,7 @@ spec:
           imageRepository: mirror.gcr.io/envoyproxy/envoy
           resources:
             requests:
-              cpu: 100m
+              cpu: 25m
             limits:
               memory: 1Gi
       envoyService:
