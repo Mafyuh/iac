@@ -39,26 +39,6 @@ services:
     ports:
       - "8081:8080"
 
-  subgen:
-    container_name: subgen
-    tty: true
-    image: mccloud/subgen:2026.05.3
-    environment:
-      - "WHISPER_MODEL=medium"
-      - "WHISPER_THREADS=4"
-      - "PROCADDEDMEDIA=true"
-    volumes:
-      - "/docker/appdata/whisper/subgen/models:/subgen/models"
-    ports:
-      - "9000:9000"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
   open-terminal:
     container_name: open-terminal
     image: ghcr.io/open-webui/open-terminal:0.11.34
@@ -82,6 +62,5 @@ services:
       - ./mcp_settings.json:/app/mcp_settings.json:rw
 
 volumes:
-  ollama:
   open-webui:
   open-terminal:
