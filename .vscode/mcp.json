@@ -2,7 +2,10 @@
   "servers": {
     "mcphub": {
       "type": "http",
-      "url": "http://10.20.10.55:3003/mcp"
-    },
+      "url": "http://10.20.10.55:3003/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MCPHUB_API_KEY}"
+      }
+    }
   }
 }
