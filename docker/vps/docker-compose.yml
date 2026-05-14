@@ -118,6 +118,15 @@ services:
     networks:
       - racknerd
 
+  databasus:
+    image: mirror.gcr.io/databasus/databasus:v3.39.1
+    container_name: databasus
+    volumes:
+      - databasus_data:/databasus-data
+    restart: unless-stopped
+    networks:
+      - racknerd
+
 networks:
   racknerd:
     external: true
@@ -126,3 +135,4 @@ volumes:
   linkstack:
   n8n_data:
   postgres_data:
+  databasus_data:
