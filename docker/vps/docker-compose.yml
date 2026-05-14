@@ -68,9 +68,20 @@ services:
       - GENERIC_TIMEZONE=America/New_York
       - TZ=America/New_York
       - WEBHOOK_URL=$WEBHOOK_URL
+      - N8N_ENCRYPTION_KEY=$N8N_ENCRYPTION_KEY
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=vaultwarden
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_POSTGRESDB_SSL_ENABLED=false
     restart: unless-stopped
     networks:
       - racknerd
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   vaultwarden:
     image: ghcr.io/dani-garcia/vaultwarden:1.36.0
