@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/sabnzbd
-              tag: 5.0.2
+              tag: 5.0.3
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
