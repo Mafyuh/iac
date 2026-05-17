@@ -7,3 +7,4 @@ resources:
   - bento-pdf/ks.yaml
   - homepage/ks.yaml
   - rackpeek/ks.yaml
+  - open-webui/ks.yaml

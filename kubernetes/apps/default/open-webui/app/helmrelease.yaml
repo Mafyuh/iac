@@ -1,0 +1,65 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: open-webui
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: open-webui
+  values:
+    ollama:
+      enabled: false
+    pipelines:
+      enabled: false
+    tika:
+      enabled: false
+    terminals:
+      enabled: false
+    workload:
+      kind: Deployment
+    image:
+      repository: ghcr.io/open-webui/open-webui
+      tag: v0.9.5
+      pullPolicy: "IfNotPresent"
+      useSlim: false
+    route:
+      enabled: true
+      hostnames: ["chat.mafyuh.dev"]
+      parentRefs:
+        - name: envoy-external
+          namespace: kube-system
+          sectionName: https
+    persistence:
+      enabled: true
+      accessMode:
+        - ReadWriteOnce
+      size: 1Gi
+      storageClass: ceph-block
+    enableOpenaiApi: true
+    openaiBaseApiUrls:
+      - "https://integrate.api.nvidia.com/v1"
+      - "https://openrouter.ai/api/v1"
+      - "http://10.20.10.55:8080/v1" # copilot-api https://github.com/ericc-ch/copilot-api
+    openaiApiKeysExistingSecret: "open-webui-secrets"
+    openaiApiKeysExistingSecretKey: "OPENAI_API_KEYS"
+    databaseUrl: "${DATABASE_URL}"
+    sso:
+      enabled: true
+      enableSignup: true
+      mergeAccountsByEmail: true
+      oidc:
+        enabled: true
+        providerName: "Authentik"
+        providerUrl: "https://auth.mafyuh.io/application/o/open-webui/.well-known/openid-configuration"
+        scopes: "openid email profile"
+        clientExistingSecret: "open-webui-secrets"
+        clientIdExistingSecretKey: "OAUTH_CLIENT_ID"
+        clientExistingSecretKey: "OAUTH_CLIENT_SECRET"
+    extraEnvVars:
+      - name: ENABLE_LOGIN_FORM
+        value: "false"
+      - name: OPENID_REDIRECT_URI
+        value: "https://chat.mafyuh.dev/oauth/oidc/callback"
