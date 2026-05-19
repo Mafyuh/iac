@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: flux-instance
+  namespace: flux-system
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: flux-instance
+  dependsOn:
+    - name: flux-operator
+      namespace: flux-system
+  values:
+    instance:
+      distribution:
+        # renovate: datasource=github-releases depName=controlplaneio-fluxcd/distribution
+        version: 2.8.7
+      cluster:
+        networkPolicy: false
+      components:
+        - source-controller
+        - kustomize-controller
+        - helm-controller
+        - notification-controller
+      sync:
+        name: iac
+        kind: GitRepository
+        url: https://github.com/mafyuh/iac
+        ref: refs/heads/main
+        path: kubernetes/flux
+        interval: 1h

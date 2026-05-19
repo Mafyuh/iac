@@ -1,0 +1,8 @@
+---
+ingress:
+  - hostname: "*.mafyuh.net"
+    service: https://envoy-external.networking.svc.cluster.local
+    originRequest:
+      http2Origin: true
+      originServerName: external.mafyuh.net
+  - service: http_status:404

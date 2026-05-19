@@ -1,0 +1,71 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-secrets
+  namespace: security
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: external-secrets
+  values:
+    fullnameOverride: external-secrets
+    installCRDs: true
+    serviceMonitor:
+      enabled: true
+      interval: 1m
+    webhook:
+      serviceMonitor:
+        enabled: true
+        interval: 1m
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
+    certController:
+      serviceMonitor:
+        enabled: true
+        interval: 1m
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
+    image:
+      repository: ghcr.io/external-secrets/external-secrets
+      tag: v2.5.0
+      pullPolicy: IfNotPresent
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 256Mi
+    createOperator: true
+    bitwarden-sdk-server:
+      enabled: true
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
+      serviceMonitor:
+        enabled: true
+        interval: 1m
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+    grafanaDashboard:
+      enabled: true

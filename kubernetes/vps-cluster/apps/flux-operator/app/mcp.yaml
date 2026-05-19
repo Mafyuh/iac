@@ -1,0 +1,43 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: flux-operator-mcp
+  namespace: flux-system
+spec:
+  inputs:
+    - readonly: true
+      namespace: flux-system
+      accessFrom:
+        - kube-system
+      gateway: internal
+  resources:
+    - apiVersion: source.toolkit.fluxcd.io/v1
+      kind: OCIRepository
+      metadata:
+        name: << inputs.provider.name >>
+        namespace: << inputs.provider.namespace >>
+      spec:
+        interval: 60m
+        url: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator-mcp
+        layerSelector:
+          mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+          operation: copy
+        ref:
+          semver: "*"
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: << inputs.provider.name >>
+        namespace: << inputs.provider.namespace >>
+      spec:
+        serviceAccountName: flux-operator
+        chartRef:
+          kind: OCIRepository
+          name: << inputs.provider.name >>
+        interval: 30m
+        values:
+          readonly: << inputs.readonly >>
+          transport: http
+          networkPolicy:
+            ingress:
+              namespaces: << inputs.accessFrom | toYaml | nindent 8 >>

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: flux-operator
+  namespace: flux-system
+spec:
+  interval: 15m
+  chartRef:
+    name: flux-operator
+    kind: OCIRepository
+  values:
+    serviceMonitor:
+      create: true
+    web:
+      networkPolicy:
+        create: false
