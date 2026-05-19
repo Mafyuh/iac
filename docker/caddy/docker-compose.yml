@@ -16,6 +16,7 @@ services:
       - /docker/appdata/caddy/logs:/var/log/caddy
     environment:
       - CLOUDFLARE_API_TOKEN=$CLOUDFLARE_API_TOKEN
+      - JELLYFIN_DOMAIN=$JELLYFIN_DOMAIN
     restart: unless-stopped
     logging:
       driver: "json-file"
