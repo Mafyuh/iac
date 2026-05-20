@@ -5,7 +5,7 @@
     metrics
 }
 
-{env.JELLYFIN_DOMAIN} {
+{$JELLYFIN_DOMAIN} {
     log {
         output file /var/log/caddy/access.log {
             roll_size 50MB
