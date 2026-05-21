@@ -1,5 +1,7 @@
 [![CD](https://github.com/Mafyuh/iac/actions/workflows/CD.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/CD.yml)
 [![Ansible](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml/badge.svg)](https://github.com/Mafyuh/iac/actions/workflows/ansible-playbooks.yml)
+[![GitLab Mirror](https://img.shields.io/badge/Mirror-GitLab-orange?logo=gitlab)](https://gitlab.com/Mafyuh/iac)
+[![Forgejo Mirror](https://img.shields.io/badge/Mirror-Forgejo-orange?logo=forgejo)](https://git.mafyuh.io/mafyuh/iac)
 
 [![Pods](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_pods_running&&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
 [![Nodes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_node_count&label=Nodes&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
