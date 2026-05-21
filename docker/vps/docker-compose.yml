@@ -149,6 +149,7 @@ services:
       - GITEA__database__NAME=forgejo
       - GITEA__database__USER=vaultwarden
       - GITEA__database__PASSWD=$POSTGRES_PASSWORD
+      - FORGEJO__service__DISABLE_REGISTRATION=true
     restart: always
     networks:
       - racknerd
