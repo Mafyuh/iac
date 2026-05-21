@@ -138,6 +138,27 @@ services:
     networks:
       - racknerd
 
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:15.0.2
+    container_name: forgejo
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=postgres:5432
+      - GITEA__database__NAME=forgejo
+      - GITEA__database__USER=vaultwarden
+      - GITEA__database__PASSWD=$POSTGRES_PASSWORD
+    restart: always
+    networks:
+      - racknerd
+    volumes:
+      - forgejo_data:/data
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
 networks:
   racknerd:
     external: true
@@ -147,3 +168,4 @@ volumes:
   n8n_data:
   postgres_data:
   databasus_data:
+  forgejo_data:
