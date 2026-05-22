@@ -149,7 +149,13 @@ services:
       - GITEA__database__NAME=forgejo
       - GITEA__database__USER=vaultwarden
       - GITEA__database__PASSWD=$POSTGRES_PASSWORD
-      - FORGEJO__service__DISABLE_REGISTRATION=true
+      - GITEA__openid__ENABLE_OPENID_SIGNIN=false
+      - GITEA__oauth2_client__ENABLE_AUTO_REGISTRATION=true
+      - GITEA__oauth2_client__USERNAME=preferred_username
+      - GITEA__oauth2_client__UPDATE_AVATAR=true
+      - GITEA__oauth2_client__OPENID_CONNECT_SCOPES=openid email profile
+      - GITEA__service__ALLOW_ONLY_EXTERNAL_REGISTRATION=true
+      - GITEA__service__DISABLE_REGISTRATION=false
     restart: always
     networks:
       - racknerd
