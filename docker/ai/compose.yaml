@@ -1,29 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
-## Hooked up to LM Studio on Gaming rig, Ollama annoying me
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.9.5
-    container_name: open-webui
-    restart: unless-stopped
-    ports:
-      - 3000:8080
-    volumes:
-      - open-webui:/app/backend/data
-    environment:
-      - ENABLE_OAUTH_SIGNUP=true
-      - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true
-      - OAUTH_PROVIDER_NAME=Authentik
-      - OPENID_PROVIDER_URL=https://auth.mafyuh.io/application/o/open-webui/.well-known/openid-configuration
-      - OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID
-      - OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET
-      - OAUTH_SCOPES=openid email profile
-      - OPENID_REDIRECT_URI=https://ai.mafyuh.io/oauth/oidc/callback
-      - ENABLE_LOGIN_FORM=false
-      - DATABASE_URL=$DATABASE_URL
-    extra_hosts:
-      - host.docker.internal:host-gateway
-
   searxng:
     image: searxng/searxng@sha256:6ba4dc74513d1e3da2bde4a6c419a8c4a0ec3475ada97d9637d8f5a75ec8b595
     container_name: searxng
@@ -33,8 +10,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/searxng:/etc/searxng
-    depends_on:
-      - open-webui
     restart: unless-stopped
     ports:
       - "8081:8080"
@@ -62,5 +37,4 @@ services:
       - ./mcp_settings.json:/app/mcp_settings.json:rw
 
 volumes:
-  open-webui:
   open-terminal:

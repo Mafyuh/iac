@@ -60,5 +60,5 @@ scripts/radarr-custom-format-scores-fixed.sh
 *device_identifier*
 *.bw-provider-state
 kubernetes/apps/default/homepage/app/config.yaml
-docker/ollama/mcp_settings.json
+docker/ai/mcp_settings.json
 terraform/seerr/
