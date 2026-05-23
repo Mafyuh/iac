@@ -18,7 +18,7 @@
 
 <div align="center">
 
-# iac (wip)
+# iac
 
 This is my homelab infrastructure, defined in code.
 
