@@ -1,0 +1,45 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app crd-schema-publisher
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: crd-schema-publisher
+  values:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    fullnameOverride: crd-schema-publisher
+    config:
+      cfPagesProject: kubernetes-schemas
+    existingSecret:
+      name: "crd-schema-publisher-cloudflare"
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 65534
+      runAsGroup: 65534
+      fsGroup: 65534
+      seccompProfile:
+        type: RuntimeDefault
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+    metrics:
+      podMonitor:
+        enabled: true
+      prometheusRule:
+        enabled: true
+    grafana:
+      dashboard:
+        enabled: false
+        operator:
+          enabled: true
+          instanceSelector:
+            matchLabels:
+              grafana.internal/instance: grafana

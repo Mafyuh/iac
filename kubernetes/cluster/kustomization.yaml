@@ -14,3 +14,4 @@ resources:
   - envoy-gateway/flux-ks.yaml
   - cilium/ks.yaml
   - cert-manager/ks.yaml
+  - crd-schema-publisher/ks.yaml
