@@ -7,12 +7,8 @@ on:
       - "docker/**"
   workflow_dispatch:
     inputs:
-      target_host:
-        description: "Target host (ex. Ubu, ARM, Main)"
-        required: true
-        type: string
       folder:
-        description: "Folder to deploy (ex. jellyfin, arm, all)"
+        description: "Folder to deploy (ex. jellyfin, blocky, geohub)"
         required: true
         type: string
 
@@ -45,44 +41,48 @@ jobs:
           echo "Modified folders: $folders"
           echo "::set-output name=folders::$folders"
 
-      - name: Override Target Host and Folder (Manual Run)
+      - name: Override Folder (Manual Run)
         if: github.event_name == 'workflow_dispatch'
         run: |
-          echo "target_host=${{ github.event.inputs.target_host }}" >> $GITHUB_ENV
           echo "folder=${{ github.event.inputs.folder }}" >> $GITHUB_ENV
 
       - name: Map Folder to Host
-        if: github.event_name != 'workflow_dispatch'
         shell: bash
         run: |
-          IFS=' ' read -r -a folder_array <<< "${{ steps.detect-changes.outputs.folders }}"
+          if [ -n "${folder}" ]; then
+            folder_list="${folder}"
+          else
+            folder_list="${{ steps.detect-changes.outputs.folders }}"
+          fi
+
+          IFS=' ' read -r -a folder_array <<< "$folder_list"
           hosts=""
           folders=""
 
-          for folder in "${folder_array[@]}"; do
-            case $folder in
-              alloy) host="all" ;;
-              arm) host="ARM" ;;
-              caddy) host="proxy" ;;
-              databases) host="docker" ;;
-              downloaders) host="downloaders" ;;
-              geohub) host="Ubu" ;;
-              omni) host="omni" ;;
-              ollama) host="ollama" ;;
+          for f in "${folder_array[@]}"; do
+            case $f in
+              ai) host="ollama" ;;
+              audiobookshelf) host="audiobook-shelf" ;;
               blocky) host="blocky-HA" ;;
+              caddy) host="proxy" ;;
+              couchdb) host="docker" ;;
+              downloaders) host="truenas" ;;
               exporters) host="Ubu" ;;
-              jellyfin) host="Ark-Ripper" ;;
+              geohub) host="Ubu" ;;
+              jellyfin) host="truenas" ;;
               npm) host="Nginx-Proxy-Manager" ;;
+              omni) host="omni" ;;
+              vps) host="racknerd-vps" ;;
               wazuh) host="wazuh" ;;
-              *) echo "Unknown folder: $folder" && exit 1 ;;
+              *) echo "Unknown folder: $f" && exit 1 ;;
             esac
 
             if [ -z "$hosts" ]; then
               hosts="$host"
-              folders="$folder"
+              folders="$f"
             else
               hosts="$hosts,$host"
-              folders="$folders,$folder"
+              folders="$folders,$f"
             fi
           done
 

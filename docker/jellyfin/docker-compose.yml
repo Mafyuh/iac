@@ -1,21 +1,23 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+##  Migrated Jellyfin to TrueNAS
 services:
   jellyfin:
     image: jellyfin/jellyfin:10.11.9
     container_name: jellyfin
     user: 1000:1000
     devices:
-      - /dev/dri/renderD129:/dev/dri/renderD129
+      - /dev/dri/renderD128:/dev/dri/renderD128
     volumes:
-      - /docker/appdata/jellyfin/config:/config
-      - /docker/appdata/jellyfin/cache:/nvmecache
-      - /docker/appdata/jellyfin/metadata:/nvmemetadata
-      - /docker/appdata/jellyfin/transcodes:/transcodes
-      - nas:/Media
+      - /mnt/ssd-appdata/appdata/jellyfin/config:/config
+      - /mnt/thePool/thePoolShare/Media:/Media
+      - /mnt/ssd-appdata/appdata/jellyfin:/tmp
+      - /mnt/ssd-appdata/appdata/jellyfin/metadata:/nvmemetadata
+      - /mnt/ssd-appdata/appdata/jellyfin/cache:/nvmecache
+      - /mnt/ssd-appdata/appdata/jellyfin/transcodes:/transcodes
     restart: "unless-stopped"
     group_add:
-      - "104"
+      - "107"
     ports:
       - 8096:8096
     environment:
@@ -23,28 +25,3 @@ services:
       - JELLYFIN_CONFIG_DIR=/config
       - JELLYFIN_LOG_DIR=/config/log
       - JELLYFIN_CACHE_DIR=/nvmecache
-
-  makemkv:
-    image: jlesage/makemkv:v26.01.2
-    container_name: makemkv
-    ports:
-      - 5800:5800
-    environment:
-      - MAKEMKV_KEY=$MAKEMKV_KEY
-    volumes:
-      - /docker/appdata/makemkv:/config:rw
-      - /home/mafyuh/makemkv/storage:/storage:rw
-      - nas:/output:rw
-    devices:
-      - /dev/sr0:/dev/sr0
-    privileged: true
-    security_opt:
-      - apparmor:unconfined
-
-volumes:
-  nas:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=nas.lan,vers=4,rw
-      device: ":/mnt/thePool/thePoolShare/Media"

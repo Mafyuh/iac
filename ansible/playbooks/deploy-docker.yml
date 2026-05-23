@@ -25,7 +25,7 @@
 
     - name: Set env_variables
       ansible.builtin.set_fact:
-        env_variables: "{{ secret_mapping[target_host]['env_variables'] | default({}) }}"
+        env_variables: "{{ secret_mapping[folder]['env_variables'] | default({}) }}"
 
     - name: Lookup secrets on the control machine
       ansible.builtin.shell: "bws secret get {{ item }} | jq -r '.value'"
