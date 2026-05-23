@@ -141,8 +141,8 @@ Proof that you don't need expensive new equipment to run infra like mine. Mostly
 
 | Name   | Device                                                                                                 | Purpose         |
 | ------ | ------------------------------------------------------------------------------------------------------ | --------------- |
-| Switch | [Unifi Flex 2.5Gb PoE](https://store.ui.com/us/en/category/all-switching/products/usw-flex-2-5g-8-poe) | Switch with PoE |
-| Router | [Unifi Dream Router 7](https://store.ui.com/us/en/products/udr7)                                       | Router/Firewall |
+| Switch | [Pro XG 8 PoE](https://store.ui.com/us/en/category/switching-utility/products/usw-pro-xg-8-poe) | Switch with PoE |
+| Router | [Cloud Gateway Fiber](https://store.ui.com/us/en/category/cloud-gateways-compact/collections/cloud-gateway-fiber/products/ucg-fiber)                                       | Router/Firewall |
 | AP     | [U7 Pro XG](https://store.ui.com/us/en/category/all-wifi/products/u7-pro-xg)                           | AP              |
 
 </details>
