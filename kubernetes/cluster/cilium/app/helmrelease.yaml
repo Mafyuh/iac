@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -101,7 +101,7 @@ spec:
     - start: 10.0.0.210
       stop: 10.0.0.220
 ---
-# yaml-language-server: $schema=https://lds-schemas.pages.dev/cilium.io/ciliuml2announcementpolicy_v2alpha1.json
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/cilium.io/ciliuml2announcementpolicy_v2alpha1.json
 apiVersion: cilium.io/v2alpha1
 kind: CiliumL2AnnouncementPolicy
 metadata:
