@@ -2,6 +2,10 @@ data "unifi_user_group" "default" {
   name = "Default"
 }
 
+data "unifi_ap_group" "default" {
+  name = "default"
+}
+
 resource "unifi_wlan" "wifi" {
   name      = "BOP"
   security  = "wpapsk"
@@ -12,10 +16,9 @@ resource "unifi_wlan" "wifi" {
   wpa3_transition = true
   pmf_mode        = "optional"
 
-  network_id = unifi_network.iot.id
-  ## TODO Import these resources and remove the hardcoded IDs
-  user_group_id = "68b5307ec8516827c169f8bb"
-  ap_group_ids  = ["68b5307ec8516827c169f8c0"]
+  network_id    = unifi_network.iot.id
+  user_group_id = data.unifi_user_group.default.id
+  ap_group_ids  = [data.unifi_ap_group.default.id]
 
   lifecycle {
     ignore_changes = [
