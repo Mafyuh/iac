@@ -1,7 +1,6 @@
 # Global options
 {
     acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-    admin 0.0.0.0:2019
     metrics
 }
 

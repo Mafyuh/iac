@@ -8,7 +8,6 @@ services:
       - 80:80
       - 443:443
       - 443:443/udp
-      - 2019:2019
     volumes:
       - /docker/appdata/caddy/data:/data
       - /docker/appdata/caddy/config:/config
