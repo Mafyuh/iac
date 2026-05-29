@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   searxng:
-    image: searxng/searxng@sha256:1a9d21346437a41ddfc2286968026dddece1d4d0721625cffa2c3b00bb2f9cf3
+    image: searxng/searxng@sha256:0d1abab8685ad55a03b097bee44f07668d87823a9a2e06d5b868a77acac1a126
     container_name: searxng
     environment:
       - PUID=${PUID:-1000}
