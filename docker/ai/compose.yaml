@@ -28,7 +28,7 @@ services:
 
   mcphub:
     container_name: mcphub
-    image: mirror.gcr.io/samanhappy/mcphub:0.12.12
+    image: mirror.gcr.io/samanhappy/mcphub:0.12.17
     restart: unless-stopped
     ports:
       - 3003:3000
