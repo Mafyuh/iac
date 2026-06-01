@@ -9,6 +9,9 @@
     "github>mafyuh/iac//.renovate/changelogs.json5",
     "github>mafyuh/iac//.renovate/groups.json5"
   ],
+  "registryAliases": {
+    "mirror.gcr.io": "docker.io"
+  },
   "flux": {
     "managerFilePatterns": ["/^kubernetes/.+\\.ya?ml$/"]
   },
