@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/lidarr
-              tag: 3.1.2.4938
+              tag: 3.1.3.4968
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
