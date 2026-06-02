@@ -63,3 +63,5 @@ spec:
         value: "false"
       - name: OPENID_REDIRECT_URI
         value: "https://chat.mafyuh.dev/oauth/oidc/callback"
+      - name: OAUTH_AUTO_REDIRECT
+        value: "true"
