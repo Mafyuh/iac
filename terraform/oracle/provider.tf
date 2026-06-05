@@ -14,7 +14,7 @@ terraform {
   required_providers {
     oci = {
       source  = "oracle/oci"
-      version = "8.16.0"
+      version = "8.17.0"
     }
     bitwarden-secrets = {
       source  = "bitwarden/bitwarden-secrets"
