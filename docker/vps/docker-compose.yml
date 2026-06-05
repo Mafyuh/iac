@@ -139,7 +139,7 @@ services:
       - racknerd
 
   forgejo:
-    image: codeberg.org/forgejo/forgejo:15.0.2
+    image: data.forgejo.org/forgejo/forgejo:15.0.2
     container_name: forgejo
     environment:
       - USER_UID=1000
