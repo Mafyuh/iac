@@ -22,6 +22,27 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: ceph-csi-drivers
+  namespace: &ns rook-ceph
+spec:
+  targetNamespace: *ns
+  path: ./kubernetes/cluster/rook-ceph/csi-drivers
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: iac
+    namespace: flux-system
+  dependsOn:
+    - name: rook-ceph-operator
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: rook-ceph-cluster
   namespace: &ns rook-ceph
 spec:

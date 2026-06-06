@@ -1,0 +1,100 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ceph-csi-drivers
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: ceph-csi-drivers
+  interval: 1h
+  values:
+    drivers:
+      cephfs:
+        enabled: true
+        snapshotPolicy: volumeSnapshot
+        kernelMountOptions:
+          ms_mode: prefer-crc
+        controllerPlugin:
+          resources:
+            csi-provisioner:
+              requests:
+                memory: 16Mi
+                cpu: 5m
+              limits:
+                memory: 32Mi
+                cpu: 100m
+            csi-resizer:
+              requests:
+                memory: 48Mi
+                cpu: 5m
+              limits:
+                memory: 96Mi
+                cpu: 100m
+            csi-attacher:
+              requests:
+                memory: 32Mi
+                cpu: 5m
+              limits:
+                memory: 64Mi
+                cpu: 100m
+            csi-snapshotter:
+              requests:
+                memory: 16Mi
+                cpu: 5m
+              limits:
+                memory: 32Mi
+                cpu: 100m
+            csi-cephfsplugin:
+              requests:
+                memory: 48Mi
+                cpu: 15m
+              limits:
+                memory: 128Mi
+                cpu: 200m
+      nfs:
+        enabled: false
+      nvmeof:
+        enabled: false
+      rbd:
+        enabled: true
+        name: rook-ceph.rbd.csi.ceph.com
+        snapshotPolicy: volumeSnapshot
+        controllerPlugin:
+          resources:
+            csi-provisioner:
+              requests:
+                memory: 16Mi
+                cpu: 5m
+              limits:
+                memory: 32Mi
+                cpu: 100m
+            csi-resizer:
+              requests:
+                memory: 48Mi
+                cpu: 5m
+              limits:
+                memory: 96Mi
+                cpu: 100m
+            csi-attacher:
+              requests:
+                memory: 32Mi
+                cpu: 5m
+              limits:
+                memory: 64Mi
+                cpu: 100m
+            csi-snapshotter:
+              requests:
+                memory: 16Mi
+                cpu: 5m
+              limits:
+                memory: 32Mi
+                cpu: 100m
+            csi-rbdplugin:
+              requests:
+                memory: 48Mi
+                cpu: 15m
+              limits:
+                memory: 128Mi
+                cpu: 200m
