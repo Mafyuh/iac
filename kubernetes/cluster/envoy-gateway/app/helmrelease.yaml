@@ -23,5 +23,9 @@ spec:
           kubernetes:
             deploy:
               type: GatewayNamespace
+    crds:
+      gatewayAPI:
+        safeUpgradePolicy:
+          enabled: false
     global:
       imageRegistry: mirror.gcr.io
