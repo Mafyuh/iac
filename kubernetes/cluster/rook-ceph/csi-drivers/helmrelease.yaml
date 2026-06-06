@@ -18,41 +18,45 @@ spec:
           ms_mode: prefer-crc
         controllerPlugin:
           resources:
-            csi-provisioner:
+            provisioner:
               requests:
                 memory: 16Mi
                 cpu: 5m
               limits:
                 memory: 32Mi
                 cpu: 100m
-            csi-resizer:
+            resizer:
               requests:
                 memory: 48Mi
                 cpu: 5m
               limits:
                 memory: 96Mi
                 cpu: 100m
-            csi-attacher:
+            attacher:
               requests:
                 memory: 32Mi
                 cpu: 5m
               limits:
                 memory: 64Mi
                 cpu: 100m
-            csi-snapshotter:
+            snapshotter:
               requests:
                 memory: 16Mi
                 cpu: 5m
               limits:
                 memory: 32Mi
                 cpu: 100m
-            csi-cephfsplugin:
+            plugin:
               requests:
                 memory: 48Mi
                 cpu: 15m
               limits:
                 memory: 128Mi
                 cpu: 200m
+            liveness: {}
+            addons: {}
+            logRotator: {}
+            omapGenerator: {}
       nfs:
         enabled: false
       nvmeof:
@@ -63,38 +67,42 @@ spec:
         snapshotPolicy: volumeSnapshot
         controllerPlugin:
           resources:
-            csi-provisioner:
+            provisioner:
               requests:
                 memory: 16Mi
                 cpu: 5m
               limits:
                 memory: 32Mi
                 cpu: 100m
-            csi-resizer:
+            resizer:
               requests:
                 memory: 48Mi
                 cpu: 5m
               limits:
                 memory: 96Mi
                 cpu: 100m
-            csi-attacher:
+            attacher:
               requests:
                 memory: 32Mi
                 cpu: 5m
               limits:
                 memory: 64Mi
                 cpu: 100m
-            csi-snapshotter:
+            snapshotter:
               requests:
                 memory: 16Mi
                 cpu: 5m
               limits:
                 memory: 32Mi
                 cpu: 100m
-            csi-rbdplugin:
+            plugin:
               requests:
                 memory: 48Mi
                 cpu: 15m
               limits:
                 memory: 128Mi
                 cpu: 200m
+            liveness: {}
+            addons: {}
+            logRotator: {}
+            omapGenerator: {}
