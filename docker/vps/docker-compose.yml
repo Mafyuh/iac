@@ -14,11 +14,11 @@ services:
     networks:
       - racknerd
     labels:
-      caddy: go.mafyuh.io
-      caddy.reverse_proxy: "{{upstreams 80}}" 
+      caddy: $GOTIFY_HOSTNAME
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
   caddy:
-    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.05.19
+    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.06.03
     container_name: caddy
     ports:
       - 80:80
@@ -86,6 +86,9 @@ services:
     container_name: n8n
     volumes:
       - n8n_data:/home/node/.n8n
+    labels:
+      caddy: $N8N_HOSTNAME
+      caddy.reverse_proxy: "{{upstreams 5678}}"
     environment:
       - GENERIC_TIMEZONE=America/New_York
       - TZ=America/New_York
@@ -110,6 +113,9 @@ services:
     container_name: vaultwarden
     volumes:
       - /home/mafyuh/vw-data/:/data
+    labels:
+      caddy: $VW_HOSTNAME
+      caddy.reverse_proxy: "{{upstreams 80}}"
     environment:
       - DOMAIN=$VWDOMAIN
       - SIGNUPS_ALLOWED=true
@@ -156,6 +162,9 @@ services:
     container_name: databasus
     volumes:
       - databasus_data:/databasus-data
+    labels:
+      caddy: $DATABASUS_HOSTNAME
+      caddy.reverse_proxy: "{{upstreams 3000}}"
     restart: unless-stopped
     networks:
       - racknerd
@@ -163,6 +172,9 @@ services:
   forgejo:
     image: data.forgejo.org/forgejo/forgejo:15.0.2
     container_name: forgejo
+    labels:
+      caddy: $FORGEJO_HOSTNAME
+      caddy.reverse_proxy: "{{upstreams 3000}}"
     environment:
       - USER_UID=1000
       - USER_GID=1000
