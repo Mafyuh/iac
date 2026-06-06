@@ -15,7 +15,7 @@ services:
       - racknerd
 
   nginx-proxy-manager:
-    image: jc21/nginx-proxy-manager:2.15.0
+    image: jc21/nginx-proxy-manager:2.15.1
     container_name: nginx-proxy-manager
     ports:
       - 80:80
