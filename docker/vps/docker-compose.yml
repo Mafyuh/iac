@@ -36,6 +36,8 @@ services:
       - CLOUDFLARE_API_TOKEN=$CLOUDFLARE_API_TOKEN
       - CADDY_DOCKER_CADDYFILE_PATH=/etc/caddy/generated
     restart: unless-stopped
+    networks:
+      - racknerd
     logging:
       driver: "json-file"
       options:
