@@ -62,6 +62,7 @@ controlPlane:
           - siderolabs/util-linux-tools
           - siderolabs/i915
           - siderolabs/intel-ucode
+          - siderolabs/realtek-firmware
   patches:
     # Disable search domain (DHCP is used)
     - |-

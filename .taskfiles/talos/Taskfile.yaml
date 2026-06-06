@@ -4,6 +4,10 @@ version: "3"
 
 vars:
   TALOS_DIR: "{{.ROOT_DIR}}/kubernetes/talos"
+  SOPS_AGE_KEY_FILE: "/home/mafyuh/.sops/key.txt"
+
+env:
+  SOPS_AGE_KEY_FILE: "{{.SOPS_AGE_KEY_FILE}}"
 
 tasks:
   generate:
@@ -35,3 +39,11 @@ tasks:
     preconditions:
       - test -f {{.TALOS_DIR}}/{{.FILE}}
       - which talosctl
+
+  apply-node-1:
+    desc: Apply Talos config to node 1
+    cmds:
+      - task: apply-node
+        vars:
+          IP: 10.0.0.9
+          FILE: clusterconfig/optiplex-k8s-talos-1.mafyuh.com.yaml
