@@ -11,6 +11,15 @@
       ignoreTests: false,
     },
     {
+      description: "Auto-merge NetBox",
+      matchDatasources: ["docker"],
+      automerge: true,
+      automergeType: "pr",
+      matchUpdateTypes: ["minor", "patch", "digest"],
+      matchPackageNames: ["ghcr.io/netbox-community/netbox-chart/netbox"],
+      ignoreTests: false,
+    },
+    {
       description: "Auto-merge Grafana + Prometheus",
       matchDatasources: ["docker"],
       automerge: true,
