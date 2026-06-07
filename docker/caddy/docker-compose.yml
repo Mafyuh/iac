@@ -16,6 +16,7 @@ services:
     environment:
       - CLOUDFLARE_API_TOKEN=$CLOUDFLARE_API_TOKEN
       - JELLYFIN_DOMAIN=$JELLYFIN_DOMAIN
+      - NEW_JELLYFIN_DOMAIN=$NEW_JELLYFIN_DOMAIN
     restart: unless-stopped
     logging:
       driver: "json-file"
