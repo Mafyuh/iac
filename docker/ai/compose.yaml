@@ -3,7 +3,7 @@
 name: ollama
 services:
   searxng:
-    image: searxng/searxng@sha256:1081d08bdcd6126533de497ee597f64de94064339e7bc03bc046352adfe320e6
+    image: searxng/searxng@sha256:283c3f8dcd55997c52d08cd491eea7b71012873c31879456260c85ec4fe7c198
     container_name: searxng
     environment:
       - PUID=${PUID:-1000}
