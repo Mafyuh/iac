@@ -3,7 +3,7 @@
 ##  Migrated Jellyfin to TrueNAS
 services:
   jellyfin:
-    image: jellyfin/jellyfin:10.11.10
+    image: jellyfin/jellyfin:10.11.11
     container_name: jellyfin
     user: 1000:1000
     devices:
