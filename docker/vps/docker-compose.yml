@@ -18,7 +18,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 80}}"
 
   caddy:
-    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.06.03
+    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.06.09
     container_name: caddy
     ports:
       - 80:80
