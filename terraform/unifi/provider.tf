@@ -17,7 +17,7 @@ terraform {
   required_providers {
     unifi = {
       source  = "ubiquiti-community/unifi"
-      version = "0.42.0"
+      version = "0.45.0"
     }
     bitwarden-secrets = {
       source  = "bitwarden/bitwarden-secrets"
