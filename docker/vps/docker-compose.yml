@@ -84,7 +84,7 @@ services:
       - caddy
 
   n8n:
-    image: ghcr.io/n8n-io/n8n:2.26.4
+    image: ghcr.io/n8n-io/n8n:2.27.2
     container_name: n8n
     volumes:
       - n8n_data:/home/node/.n8n
