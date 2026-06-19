@@ -47,6 +47,14 @@ spec:
       metadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  postgres-operator.crunchydata.com/cluster: pg-cluster
+                  postgres-operator.crunchydata.com/instance-set: pg-instance
       dataVolumeClaimSpec:
         storageClassName: ceph-block
         accessModes: ["ReadWriteOnce"]
