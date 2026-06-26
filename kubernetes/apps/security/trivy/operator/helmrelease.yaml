@@ -18,12 +18,12 @@ spec:
       configAuditScannerScanOnlyCurrentRevisions: true
       scanJobTTL: 300s
       scanJobTimeout: 20m
-      scanJobsConcurrentLimit: 3
+      scanJobsConcurrentLimit: 2
       builtInTrivyServer: true
       vulnerabilityScannerEnabled: true
       sbomGenerationEnabled: false
-      configAuditScannerEnabled: false
-      rbacAssessmentScannerEnabled: false
+      configAuditScannerEnabled: true
+      rbacAssessmentScannerEnabled: true
       infraAssessmentScannerEnabled: false
       clusterComplianceEnabled: false
       exposedSecretScannerEnabled: false
@@ -61,7 +61,7 @@ spec:
     resources:
       requests:
         cpu: 50m
-        memory: 128Mi
+        memory: 512Mi
       limits:
         cpu: 200m
-        memory: 256Mi
+        memory: 1Gi
