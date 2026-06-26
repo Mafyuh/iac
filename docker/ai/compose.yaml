@@ -39,7 +39,7 @@ services:
 
   cli-proxy-api:
     container_name: cli-proxy-api
-    image: mirror.gcr.io/eceasy/cli-proxy-api:v7.2.32
+    image: mirror.gcr.io/eceasy/cli-proxy-api:v7.2.42
     restart: unless-stopped
     ports:
       - 8317:8317
