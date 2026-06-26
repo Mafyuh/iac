@@ -21,14 +21,14 @@ spec:
       configAuditScannerScanOnlyCurrentRevisions: true
       scanJobTTL: 300s
       scanJobTimeout: 20m
-      scanJobsConcurrentLimit: 2
+      scanJobsConcurrentLimit: 3
       builtInTrivyServer: true
       vulnerabilityScannerEnabled: true
-      sbomGenerationEnabled: false
+      sbomGenerationEnabled: true
       configAuditScannerEnabled: true
       rbacAssessmentScannerEnabled: true
       infraAssessmentScannerEnabled: false
-      clusterComplianceEnabled: false
+      clusterComplianceEnabled: true
       exposedSecretScannerEnabled: false
       metricsFindingsEnabled: true
       metricsVulnIdEnabled: false
