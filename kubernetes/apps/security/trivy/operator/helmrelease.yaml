@@ -11,6 +11,9 @@ spec:
     name: trivy-operator
   interval: 1h
   values:
+    serviceMonitor:
+      enabled: true
+
     operator:
       annotations:
         reloader.stakater.com/auto: "true"
