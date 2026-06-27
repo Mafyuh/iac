@@ -13,7 +13,7 @@ spec:
     http:
       backendRefs:
         - name: ak-outpost-authentik-embedded-outpost
-          namespace: authentik
+          namespace: security
           port: 9000
       path: /outpost.goauthentik.io/auth/envoy
       headersToBackend:

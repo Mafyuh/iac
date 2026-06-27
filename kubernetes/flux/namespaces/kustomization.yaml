@@ -6,7 +6,6 @@ resources:
   - reflector.yaml
   - nginx.yaml
   - certman.yaml
-  - authentik.yaml
   - arr.yaml
   - networking.yaml
   - tf-controller.yaml

@@ -70,7 +70,7 @@ spec:
           group: servarr
         - name: "authentik"
           <<: *defaults
-          url: "http://authentik-server.authentik.svc.cluster.local/-/health/live/"
+          url: "http://authentik-server.security.svc.cluster.local/-/health/live/"
         - name: "Proxmox Node 1"
           <<: *defaults
           group: proxmox
