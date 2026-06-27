@@ -63,19 +63,19 @@ spec:
         plugins:
           - name: cert-manager
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
-            version: 0.1.0
+            version: 0.1.1
           - name: flux
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
-            version: 0.5.0
+            version: 0.6.0
           - name: keda
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_keda
             version: 0.1.2
           - name: kompose
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_kompose
-            version: 0.1.0-beta-1
+            version: 0.1.1-beta
           - name: trivy
             source: https://artifacthub.io/packages/headlamp/headlamp-trivy/headlamp_trivy
             version: 0.3.2
           - name: ai-assistant
             source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
-            version: 0.1.0-alpha
+            version: 0.2.0-alpha
