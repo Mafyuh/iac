@@ -1,0 +1,75 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app cli-proxy-api
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: cli-proxy-api
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: ai
+
+    controllers:
+      cli-proxy-api:
+        enabled: true
+        type: deployment
+
+        replicas: 1
+
+        containers:
+          app:
+            image:
+              repository: mirror.gcr.io/eceasy/cli-proxy-api
+              tag: v7.2.42
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/New_York
+
+            probes:
+              liveness:
+                enabled: false
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+            resources:
+              requests:
+                cpu: 25m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+    service:
+      app:
+        primary: true
+        controller: cli-proxy-api
+        ports:
+          http:
+            port: &port 8317
+
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: cli-proxy-api-config
+        globalMounts:
+          - path: /CLIProxyAPI/config.yaml
+            subPath: config.yaml
+            readOnly: true
+
+      auth-dir:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: ceph-block
+        globalMounts:
+          - path: /root/.cli-proxy-api

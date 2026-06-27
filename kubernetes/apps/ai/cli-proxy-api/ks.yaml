@@ -1,0 +1,28 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app cli-proxy-api
+  namespace: &ns ai
+spec:
+  targetNamespace: *ns
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  interval: 30m
+  timeout: 5m
+  path: ./kubernetes/apps/ai/cli-proxy-api/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: iac
+    namespace: flux-system
+  wait: false
+  postBuild:
+    substitute:
+      APP: cli-proxy-api
+    substituteFrom:
+      - kind: Secret
+        name: cli-proxy-api-secrets
+        optional: false

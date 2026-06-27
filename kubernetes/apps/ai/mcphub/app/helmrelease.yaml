@@ -1,0 +1,92 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app mcphub
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: mcphub
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: ai
+
+    controllers:
+      mcphub:
+        enabled: true
+        type: deployment
+
+        replicas: 1
+
+        containers:
+          app:
+            image:
+              repository: mirror.gcr.io/samanhappy/mcphub
+              tag: 1.0.18
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/New_York
+              ADMIN_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: mcphub-secrets
+                    key: MCPHUB_ADMIN_PASSWORD
+
+            probes:
+              liveness:
+                enabled: false
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+            resources:
+              requests:
+                cpu: 25m
+                memory: 512Mi
+              limits:
+                memory: 2Gi
+
+    service:
+      app:
+        primary: true
+        controller: mcphub
+        ports:
+          http:
+            port: &port 3000
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.local.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: mcphub
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: ceph-block
+        advancedMounts:
+          mcphub:
+            app:
+              - path: /app/mcp_settings.json
+                subPath: mcp_settings.json
