@@ -3,7 +3,7 @@
 clusterName: optiplex-k8s
 endpoint: https://10.0.0.150:6443
 # renovate: depName=siderolabs/talos datasource=github-releases
-talosVersion: v1.13.3
+talosVersion: v1.13.5
 # renovate: depName=kubernetes/kubernetes datasource=github-releases
 kubernetesVersion: v1.36.1
 additionalApiServerCertSans: &sans
@@ -101,6 +101,12 @@ controlPlane:
           extraArgs:
             feature-gates: "ImageVolume=true,MutatingAdmissionPolicy=true,ResourceHealthStatus=true"
             runtime-config: "admissionregistration.k8s.io/v1beta1=true"
+            oidc-client-id: "kubernetes"
+            oidc-groups-claim: "groups"
+            oidc-groups-prefix: "authentik:"
+            oidc-issuer-url: "https://auth.mafyuh.io/application/o/kubernetes/"
+            oidc-username-claim: "email"
+            oidc-username-prefix: "authentik:"
         coreDNS:
             disabled: false
         proxy:
