@@ -12,6 +12,7 @@ resources:
   - networking/
   - reflector/ks.yaml
   - reloader/ks.yaml
+  - security/
   - spegel/ks.yaml
   - tuppr/ks.yaml
   - volsync/ks.yaml

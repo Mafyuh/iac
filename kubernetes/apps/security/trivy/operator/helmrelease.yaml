@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: trivy-operator
+  namespace: security
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: trivy-operator
+  interval: 1h
+  values:
+    serviceMonitor:
+      enabled: true
+
+    operator:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      vulnerabilityScannerScanOnlyCurrentRevisions: true
+      configAuditScannerScanOnlyCurrentRevisions: true
+      scanJobTTL: 300s
+      scanJobTimeout: 20m
+      scanJobsConcurrentLimit: 3
+      builtInTrivyServer: true
+      vulnerabilityScannerEnabled: true
+      sbomGenerationEnabled: true
+      configAuditScannerEnabled: true
+      rbacAssessmentScannerEnabled: true
+      infraAssessmentScannerEnabled: false
+      clusterComplianceEnabled: true
+      exposedSecretScannerEnabled: false
+      metricsFindingsEnabled: true
+      metricsVulnIdEnabled: false
+
+    trivy:
+      additionalVulnerabilityReportFields: Links,CVSS,Target,Class,PackagePath,PackageType
+      slow: true
+      ignoreUnfixed: true
+      severity: HIGH,CRITICAL
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 300m
+          memory: 512Mi
+      server:
+        replicas: 1
+        resources:
+          requests:
+            cpu: 50m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 768Mi
+
+    trivyOperator:
+      scanJobCompressLogs: false
+
+    compliance:
+      specs: []
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 512Mi
+      limits:
+        cpu: 200m
+        memory: 1Gi
