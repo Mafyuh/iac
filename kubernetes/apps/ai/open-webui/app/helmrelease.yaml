@@ -17,14 +17,14 @@ spec:
     tika:
       enabled: false
     terminals:
-      enabled: false
+      enabled: true
     workload:
       kind: Deployment
     image:
       repository: ghcr.io/open-webui/open-webui
       tag: v0.9.6
       pullPolicy: "IfNotPresent"
-      useSlim: false
+      useSlim: true
     route:
       enabled: true
       hostnames: ["chat.mafyuh.dev"]
@@ -42,7 +42,7 @@ spec:
     openaiBaseApiUrls:
       - "https://integrate.api.nvidia.com/v1"
       - "https://openrouter.ai/api/v1"
-      - "http://10.20.10.55:8080/v1" # copilot-api https://github.com/ericc-ch/copilot-api
+      - "http://cli-proxy-api.ai.svc.cluster.local:8317/v1"
     openaiApiKeysExistingSecret: "open-webui-secrets"
     openaiApiKeysExistingSecretKey: "OPENAI_API_KEYS"
     databaseUrl: "${DATABASE_URL}"

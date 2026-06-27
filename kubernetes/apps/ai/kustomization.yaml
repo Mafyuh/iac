@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - cli-proxy-api/ks.yaml
   - mcphub/ks.yaml
+  - open-webui/ks.yaml

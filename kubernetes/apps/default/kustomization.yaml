@@ -6,4 +6,3 @@ resources:
   - immich/ks.yaml
   - bento-pdf/ks.yaml
   - homepage/ks.yaml
-  - open-webui/ks.yaml

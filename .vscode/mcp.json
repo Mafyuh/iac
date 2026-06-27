@@ -2,7 +2,7 @@
   "servers": {
     "mcphub": {
       "type": "http",
-      "url": "https://mcp.mafyuh.xyz/mcp",
+      "url": "https://mcphub.local.mafyuh.dev/mcp",
       "headers": {
         "Authorization": "Bearer ${env:MCPHUB_API_KEY}"
       }
