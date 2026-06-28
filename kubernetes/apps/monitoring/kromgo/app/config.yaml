@@ -62,3 +62,21 @@ metrics:
     query: pve_version_info{job="pve"}
     label: version
     title: Proxmox
+
+  - name: speedtest_download
+    query: round(max(speedtest_download_bits_per_second) / 1000000, 0.1)
+    title: Download
+    suffix: " Mbps"
+    colors:
+      - { color: "green", min: 500, max: 99999 }
+      - { color: "orange", min: 100, max: 499 }
+      - { color: "red", min: 0, max: 99 }
+
+  - name: speedtest_upload
+    query: round(max(speedtest_upload_bits_per_second) / 1000000, 0.1)
+    title: Upload
+    suffix: " Mbps"
+    colors:
+      - { color: "green", min: 50, max: 99999 }
+      - { color: "orange", min: 20, max: 49 }
+      - { color: "red", min: 0, max: 19 }

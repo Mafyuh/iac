@@ -8,6 +8,8 @@
 [![Uptime](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_uptime_days&label=Uptime&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
 [![CPU](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_cpu_usage&&logo=kubernetes&label=CPU&color=black)](https://kubernetes.io/)&nbsp;
 [![RAM](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_memory_usage&&logo=kubernetes&label=RAM&color=black)](https://kubernetes.io/)&nbsp;
+[![Download](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fspeedtest_download&label=Download&logo=speedtest&color=black)](https://www.speedtest.net/)&nbsp;
+[![Upload](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fspeedtest_upload&label=Upload&logo=speedtest&color=black)](https://www.speedtest.net/)&nbsp;
 [![Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fkubernetes_version&label=Kubernetes&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
 [![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Ftalos_version&&logo=talos&color=black)](https://kubernetes.io/)&nbsp;
 [![PVE Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fpve_version&&logo=proxmox&color=black)](https://kubernetes.io/)&nbsp;
