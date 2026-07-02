@@ -46,7 +46,7 @@ spec:
                     name: recyclarr-secrets
                     key: SONARR_API_KEY
               SONARR__PORT: &port 8989
-              SONARR__APPLICATION_URL: "https://sonarr.${LOCAL_DOMAIN}"
+              SONARR__APPLICATION_URL: "https://sonarr.${PUBLIC_DOMAIN}"
               SONARR__THEME: dark
               SONARR__LOG_LEVEL: info
 
@@ -116,7 +116,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        hostnames: ["{{ .Release.Name }}.${PUBLIC_DOMAIN}"]
         rules:
           - matches:
               - path:

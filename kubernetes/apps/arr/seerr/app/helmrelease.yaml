@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app seerr
-  namespace: arr
 spec:
   interval: 15m
   chartRef:
@@ -58,7 +57,7 @@ spec:
 
             resources:
               requests:
-                cpu: 25m
+                cpu: 10m
               limits:
                 memory: 2Gi
 
@@ -74,7 +73,7 @@ spec:
       external:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["request.mafyuh.dev"]
+        hostnames: ["request.${PUBLIC_DOMAIN}"]
         rules:
           - matches:
               - path:

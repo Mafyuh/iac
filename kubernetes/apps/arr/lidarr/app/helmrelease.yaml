@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app lidarr
-  namespace: arr
 spec:
   interval: 15m
   chartRef:
@@ -39,7 +38,7 @@ spec:
               TZ: "${TZ}"
               LIDARR__INSTANCE_NAME: *app
               LIDARR__PORT: &port 8686
-              LIDARR__APPLICATION_URL: "https://lidarr.${LOCAL_DOMAIN}"
+              LIDARR__APPLICATION_URL: "https://lidarr.${PUBLIC_DOMAIN}"
               LIDARR__THEME: dark
               LIDARR__LOG_LEVEL: info
 
@@ -109,7 +108,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        hostnames: ["{{ .Release.Name }}.${PUBLIC_DOMAIN}"]
         rules:
           - matches:
               - path:
