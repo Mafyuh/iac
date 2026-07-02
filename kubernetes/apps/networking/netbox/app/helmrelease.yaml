@@ -37,7 +37,7 @@ spec:
       enabled: false
 
     externalDatabase:
-      host: pg-cluster-ha.databases.svc.cluster.local
+      host: pg-cluster-primary.databases.svc.cluster.local
       port: 5432
       database: netbox
       username: netbox

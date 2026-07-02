@@ -39,7 +39,7 @@ spec:
               TZ: "${TZ}"
               LOG_LEVEL: info
               DB_TYPE: postgres
-              DB_HOST: "pg-cluster-ha.databases.svc.cluster.local"
+              DB_HOST: "pg-cluster-primary.databases.svc.cluster.local"
               DB_PORT: "5432"
               DB_USER: "jellyseerr"
               DB_PASS: ${SEERR_DB_PASS}

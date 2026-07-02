@@ -2,6 +2,27 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 name: ollama
 services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:v0.10.2
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - 3000:8080
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - ENABLE_OAUTH_SIGNUP=true
+      - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true
+      - OAUTH_PROVIDER_NAME=Authentik
+      - OPENID_PROVIDER_URL=https://auth.mafyuh.io/application/o/open-webui/.well-known/openid-configuration
+      - OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID
+      - OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET
+      - OAUTH_SCOPES=openid email profile
+      - OPENID_REDIRECT_URI=https://chat.mafyuh.io/oauth/oidc/callback
+      - ENABLE_LOGIN_FORM=false
+      - DATABASE_URL=$DATABASE_URL
+    extra_hosts:
+      - host.docker.internal:host-gateway
   searxng:
     image: searxng/searxng@sha256:8ee5966e1fe91953ed98383dce45373289f5536d0f8927cc0c0352729f8009f7
     container_name: searxng
@@ -26,26 +47,6 @@ services:
     environment:
       - OPEN_TERMINAL_API_KEY=$OPEN_TERMINAL_API_KEY
 
-  mcphub:
-    container_name: mcphub
-    image: mirror.gcr.io/samanhappy/mcphub:1.0.20
-    restart: unless-stopped
-    ports:
-      - 3003:3000
-    environment:
-      - ADMIN_PASSWORD=$MCPHUB_ADMIN_PASSWORD
-    volumes:
-      - ./mcp_settings.json:/app/mcp_settings.json:rw
-
-  cli-proxy-api:
-    container_name: cli-proxy-api
-    image: mirror.gcr.io/eceasy/cli-proxy-api:v7.2.44
-    restart: unless-stopped
-    ports:
-      - 8317:8317
-    volumes:
-      - ./config.yaml:/CLIProxyAPI/config.yaml
-      - /docker/appdata/cli-proxy-api/auth-dir:/root/.cli-proxy-api
-
 volumes:
   open-terminal:
+  open-webui:
