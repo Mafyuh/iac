@@ -24,7 +24,7 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
   searxng:
-    image: searxng/searxng@sha256:368b4ecb96b8df7070f7ac426ec0bd2800f94526a3447d1d73fb8341f84ed653
+    image: searxng/searxng@sha256:02aa607ecc87165ebe6212476a176b8984d891c01a2d130ad03a58109d13db77
     container_name: searxng
     environment:
       - PUID=${PUID:-1000}
