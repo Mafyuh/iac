@@ -1,0 +1,52 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: forgejo
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: forgejo
+  values:
+    image:
+      registry: code.forgejo.org
+      repository: forgejo/forgejo
+      tag: 15.0.4
+      rootless: true
+
+    podSecurityContext:
+      fsGroup: 1000
+
+    persistence:
+      enabled: true
+      create: true
+      claimName: forgejo-data
+      size: 2Gi
+      accessModes:
+        - ReadWriteOnce
+
+    gitea:
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: monitoring
+      config:
+        database:
+          DB_TYPE: postgres
+          HOST: oke-cluster-primary.databases.svc.cluster.local:5432
+          NAME: forgejo
+          USER: forgejo
+          PASSWD: ${password}
+        openid:
+          ENABLE_OPENID_SIGNIN: false
+        oauth2_client:
+          ENABLE_AUTO_REGISTRATION: true
+          USERNAME: preferred_username
+          UPDATE_AVATAR: true
+          OPENID_CONNECT_SCOPES: openid email profile
+        service:
+          ALLOW_ONLY_EXTERNAL_REGISTRATION: true
+          DISABLE_REGISTRATION: false
