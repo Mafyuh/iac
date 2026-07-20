@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/gotify/server
-              tag: 2.9.1
+              tag: 3.0.0
             env:
               TZ: America/New_York
               GOTIFY_SERVER_PORT: &port 8080
