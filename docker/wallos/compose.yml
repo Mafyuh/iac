@@ -9,6 +9,6 @@ services:
     environment:
       TZ: 'America/New_York'
     volumes:
-      - '/docker/appdata/db:/var/www/html/db'
-      - '/docker/appdata/logos:/var/www/html/images/uploads/logos'
+      - '/docker/appdata/wallos/db:/var/www/html/db'
+      - '/docker/appdata/wallos/logos:/var/www/html/images/uploads/logos'
     restart: unless-stopped
