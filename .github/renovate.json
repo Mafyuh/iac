@@ -9,6 +9,8 @@
     "github>mafyuh/iac//.renovate/changelogs.json5",
     "github>mafyuh/iac//.renovate/groups.json5"
   ],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
   "registryAliases": {
     "mirror.gcr.io": "docker.io"
   },
