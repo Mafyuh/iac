@@ -1,0 +1,14 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  wallos:
+    container_name: wallos
+    image: mirror.gcr.io/bellamy/wallos:5.4.2
+    ports:
+      - "8282:80/tcp"
+    environment:
+      TZ: 'America/New_York'
+    volumes:
+      - '/docker/appdata/db:/var/www/html/db'
+      - '/docker/appdata/logos:/var/www/html/images/uploads/logos'
+    restart: unless-stopped
