@@ -29,6 +29,7 @@
     kubernetes-helm
     kubectl
     fluxcd
+    oci-cli
     wireguard-tools
     pkgs-unstable.claude-code
     pkgs-unstable.discord
