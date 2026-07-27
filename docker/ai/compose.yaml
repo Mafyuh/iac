@@ -87,3 +87,5 @@ services:
 volumes:
   open-terminal:
   open-webui:
+  ollama:
+
