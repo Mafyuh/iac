@@ -76,6 +76,17 @@ I use a combination of **Grafana, fluent-bit, VictoriaLogs and Prometheus** with
 - **Grafana** – Dashboarding and visualization
 - **Exporters** – Blackbox Exporter, Speedtest Exporter, etc.
 
+### 🤖 **AI**
+
+I use [LiteLLM](https://www.litellm.ai/) as a model gateway for local and cloud AI providers.
+
+- **Providers:** Ollama, NVIDIA NIM, Claude ($20/m), Codex ($20/m), and OpenRouter
+- **Interfaces:** [Open WebUI](https://github.com/open-webui/open-webui) for chat and the [LiteLLM connector for VS Code Copilot](https://open-vsx.org/vscode/item?itemName=Gethnet.litellm-connector-copilot)
+- **Infrastructure:**
+  - [cli-proxy-api](https://github.com/router-for-me/CLIProxyAPI) exposes Claude and Codex subscriptions over API to LiteLLM
+  - [mcphub](https://github.com/samanhappy/mcphub) provides one MCP connection to all of my MCP servers
+  - [SearXNG](https://github.com/searxng/searxng) provides web search for AI
+
 ### ☁️ **Cloud Dependencies**
 
 Although I try to self-host everything I can, my infra still relies on the cloud for certain services.
@@ -87,7 +98,7 @@ Although I try to self-host everything I can, my infra still relies on the cloud
 | [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage) | Takes backups of Proxmox VM's, Kubernetes PV's (will migrate to Proton Drive once there's proper Linux support) | Free (e5 dev)  |
 | [Cloudflare](https://www.cloudflare.com/)                                               | Domain, DNS, WAF                                                                                                | Free           |
 | [GitHub](https://github.com/)                                                           | Hosting this repo and continuous integration/deployments                                                        | Free           |
-| [RackNerd](https://www.racknerd.com/)                                                   | RackNerd VPS, services such as Gotify, Vaultwarden                                                              | ~$60/yr        |
+| [RackNerd](https://www.racknerd.com/)                                                   | RackNerd VPS, runs services such as Forgejo                                                                     | ~$60/yr        |
 |                                                                                         |                                                                                                                 | Total: ~$15/mo |
 
 ## 🧑‍💻 **Getting Started**
