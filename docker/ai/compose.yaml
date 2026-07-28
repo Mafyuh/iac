@@ -62,6 +62,13 @@ services:
       STORE_MODEL_IN_DB: "True"
       LITELLM_MASTER_KEY: $LITELLM_MASTER_KEY
       LITELLM_SALT_KEY: $LITELLM_SALT_KEY
+      PROXY_BASE_URL: $LITELLM_DOMAIN
+      GENERIC_CLIENT_ID: litellm
+      GENERIC_CLIENT_SECRET: ${LITELLM_OAUTH_CLIENT_SECRET}
+      GENERIC_AUTHORIZATION_ENDPOINT: https://auth.mafyuh.io/application/o/litellm/authorize/
+      GENERIC_TOKEN_ENDPOINT: https://auth.mafyuh.io/application/o/litellm/token/
+      GENERIC_USERINFO_ENDPOINT: https://auth.mafyuh.io/application/o/litellm/userinfo/
+      GENERIC_SCOPE: "openid email profile"
     healthcheck:
       test:
         - CMD-SHELL
