@@ -1,18 +1,22 @@
 - name: Deploy application
   hosts: "{{ target_host }}"
   vars:
+    checkout_repo_path: "/home/mafyuh/iac"
     repo_path: "/home/mafyuh/iac/docker/{{ folder }}"
     secrets_mapping_file: "/home/mafyuh/iac/docker/secret-mappings.yml"
   tasks:
-    - name: Ensure the repository is up-to-date
-      ansible.builtin.shell: git pull
+    - name: Reset the repository to the remote main branch
+      ansible.builtin.shell: |
+        git fetch origin main
+        git checkout -B main origin/main
+        git reset --hard origin/main
       args:
-        chdir: "{{ repo_path }}"
-      register: git_pull_output
+        chdir: "{{ checkout_repo_path }}"
+      register: git_sync_output
 
-    - name: Display git pull output
+    - name: Display git synchronization output
       ansible.builtin.debug:
-        var: git_pull_output.stdout_lines
+        var: git_sync_output.stdout_lines
 
     - name: Read secret mapping
       ansible.builtin.slurp:
@@ -41,12 +45,14 @@
           {{ key }}={{ secret.stdout }}
           {% endfor %}
 
-    - name: Backup existing .env file if exists
+    - name: Back up existing .env file and rotate old backups
       ansible.builtin.shell: |
-        if [ -f .env ]; then cp .env .env.bak.$(date +%Y-%m-%d-%H-%M-%S); fi
+        if [ -f .env ]; then
+          cp .env .env.bak.$(date +%Y-%m-%d-%H-%M-%S)
+        fi
+        ls -1t -- .env.bak.* 2>/dev/null | tail -n +6 | xargs -r rm -f --
       args:
         chdir: "{{ repo_path }}"
-      ignore_errors: true
 
     - name: Write .env file to target host
       ansible.builtin.copy:
