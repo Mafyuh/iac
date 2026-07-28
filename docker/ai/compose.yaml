@@ -80,7 +80,7 @@ services:
       start_period: 40s
 
   searxng:
-    image: searxng/searxng@sha256:d0aaeb14880e6e92bde1518fcc7261e995783367d63d95203383607bef9c6516
+    image: searxng/searxng@sha256:a1c2f53b692381f78a13ec8170874c808e139f27419fe882c5fe169f8a90ebcd
     container_name: searxng
     environment:
       - PUID=${PUID:-1000}
