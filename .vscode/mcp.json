@@ -1,10 +1,10 @@
 {
   "servers": {
-    "mcphub": {
+    "litellm": {
       "type": "http",
-      "url": "https://mcphub.local.mafyuh.dev/mcp",
+      "url": "http://10.20.10.55:4000/mcp",
       "headers": {
-        "Authorization": "Bearer ${env:MCPHUB_API_KEY}"
+        "Authorization": "Bearer ${env:LITELLM_API_KEY}"
       }
     }
   }
