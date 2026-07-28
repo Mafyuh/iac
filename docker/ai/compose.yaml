@@ -65,10 +65,11 @@ services:
       PROXY_BASE_URL: $LITELLM_DOMAIN
       GENERIC_CLIENT_ID: litellm
       GENERIC_CLIENT_SECRET: ${LITELLM_OAUTH_CLIENT_SECRET}
-      GENERIC_AUTHORIZATION_ENDPOINT: https://auth.mafyuh.io/application/o/litellm/authorize/
-      GENERIC_TOKEN_ENDPOINT: https://auth.mafyuh.io/application/o/litellm/token/
-      GENERIC_USERINFO_ENDPOINT: https://auth.mafyuh.io/application/o/litellm/userinfo/
+      GENERIC_AUTHORIZATION_ENDPOINT: https://auth.mafyuh.io/application/o/authorize/
+      GENERIC_TOKEN_ENDPOINT: https://auth.mafyuh.io/application/o/token/
+      GENERIC_USERINFO_ENDPOINT: https://auth.mafyuh.io/application/o/userinfo/
       GENERIC_SCOPE: "openid email profile"
+      AUTO_REDIRECT_UI_LOGIN_TO_SSO: true
     healthcheck:
       test:
         - CMD-SHELL
