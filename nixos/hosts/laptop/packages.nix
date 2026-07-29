@@ -32,6 +32,7 @@
     oci-cli
     wireguard-tools
     pkgs-unstable.claude-code
+    pkgs-unstable.opencode
     pkgs-unstable.discord
     pkgs-unstable.codex
     pkgs-unstable.termius
