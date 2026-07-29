@@ -79,6 +79,19 @@ services:
       retries: 3
       start_period: 40s
 
+  bifrost:
+    image: ghcr.io/maximhq/bifrost:v1.6.6
+    container_name: bifrost
+    restart: unless-stopped
+    ports:
+      - "4001:8080"
+    volumes:
+      - bifrost-data:/app/data
+    environment:
+      - APP_HOST=0.0.0.0
+      - LOG_LEVEL=info
+      - LOG_STYLE=pretty
+
   searxng:
     image: searxng/searxng@sha256:5d6d903ab82afa56ee32792d477f36bc63d3e5ca04fcb6947e28a5cfd987fad3
     container_name: searxng
@@ -96,4 +109,4 @@ volumes:
   open-terminal:
   open-webui:
   ollama:
-
+  bifrost-data:
