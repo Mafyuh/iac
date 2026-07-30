@@ -6,7 +6,7 @@
       customChangelogUrl: "https://github.com/ollama/ollama/releases",
     },
     {
-      matchPackageNames: ["cloudflare/cloudflared"],
+      matchPackageNames: ["mirror.gcr.io/cloudflare/cloudflared"],
       customChangelogUrl: "https://github.com/cloudflare/cloudflared/blob/master/RELEASE_NOTES",
     },
   ],

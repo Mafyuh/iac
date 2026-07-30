@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   nginx:
-    image: jc21/nginx-proxy-manager:2.15.1
+    image: mirror.gcr.io/jc21/nginx-proxy-manager:2.15.1
     container_name: nginx-proxy-manager
     ports:
       - 80:80
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   fail2ban:
-    image: crazymax/fail2ban:1.1.0
+    image: ghcr.io/crazy-max/fail2ban:1.1.0
     container_name: fail2ban
     network_mode: "host"
     cap_add:
@@ -46,6 +46,6 @@ services:
 
   cf-tunnel:
     restart: unless-stopped
-    image: cloudflare/cloudflared@sha256:e39ee8da81ad5e05d77f38d2f51c60ca51bf2a8450ac3abab50c17fdb91d91bf
+    image: mirror.gcr.io/cloudflare/cloudflared@sha256:e39ee8da81ad5e05d77f38d2f51c60ca51bf2a8450ac3abab50c17fdb91d91bf
     command: tunnel --no-autoupdate run --token $CF_TOKEN
     container_name: cloudflared
