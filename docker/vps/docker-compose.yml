@@ -29,7 +29,7 @@ services:
         max-file: "5"
 
   fail2ban:
-    image: mirror.gcr.io/crazymax/fail2ban:1.1.0
+    image: ghcr.io/crazy-max/fail2ban:1.1.0
     container_name: fail2ban-caddy
     network_mode: "host"
     privileged: true
@@ -68,7 +68,7 @@ services:
       - caddy
 
   postgres:
-    image: postgres:18.4
+    image: mirror.gcr.io/postgres:18.4
     container_name: postgres
     restart: unless-stopped
     environment:

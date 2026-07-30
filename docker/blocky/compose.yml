@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   blocky:
-    image: spx01/blocky:v0.26
+    image: ghcr.io/0xerr0r/blocky:v0.26
     container_name: blocky
     restart: unless-stopped
     hostname: blocky

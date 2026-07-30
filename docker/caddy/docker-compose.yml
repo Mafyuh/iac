@@ -25,7 +25,7 @@ services:
         max-file: "5"
 
   fail2ban:
-    image: crazymax/fail2ban:1.1.0
+    image: ghcr.io/crazy-max/fail2ban:1.1.0
     container_name: fail2ban-caddy
     network_mode: "host"
     privileged: true
