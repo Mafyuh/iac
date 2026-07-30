@@ -25,20 +25,23 @@
   home-manager.users.mafyuh.home.packages = with pkgs; [
     wget
     terraform
-    freelens-bin
+    pkgs-unstable.freelens-bin
     kubernetes-helm
-    kubectl
-    fluxcd
+    pkgs-unstable.kubectl
+    pkgs-unstable.fluxcd
     oci-cli
     wireguard-tools
     pkgs-unstable.claude-code
     pkgs-unstable.opencode
+    pkgs-unstable.t3code
     pkgs-unstable.discord
     pkgs-unstable.codex
     pkgs-unstable.termius
     pkgs-unstable.k9s
     pkgs-unstable.vscode
     pkgs-unstable.brave
+    pkgs-unstable.talosctl
+    pkgs-unstable.talhelper
     bottles
     unityhub
     pay-respects
