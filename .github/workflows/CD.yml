@@ -37,9 +37,9 @@ jobs:
           if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
             git fetch --unshallow
           fi
-          folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq)
+          folders=$(git diff --name-only HEAD~1 HEAD | grep '^docker/' | cut -d/ -f2 | sort | uniq | tr '\n' ' ')
           echo "Modified folders: $folders"
-          echo "::set-output name=folders::$folders"
+          echo "folders=$folders" >> "$GITHUB_OUTPUT"
 
       - name: Override Folder (Manual Run)
         if: github.event_name == 'workflow_dispatch'
