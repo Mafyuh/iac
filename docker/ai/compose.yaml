@@ -93,7 +93,7 @@ services:
       - LOG_STYLE=pretty
 
   searxng:
-    image: mirror.gcr.io/searxng/searxng@sha256:f9d1250cca864c93d8831fe0e5e686f3999922cc9abe76a86bb8d1aa4e050877
+    image: mirror.gcr.io/searxng/searxng@sha256:79c2be18a18367484474bae9b18a8cd9085114ab3dcd49cac091cad8c548a0a9
     container_name: searxng
     environment:
       - PUID=${PUID:-1000}
