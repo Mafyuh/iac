@@ -24,7 +24,7 @@ spec:
         containers:
           main:
             image:
-              repository: docker.io/dpage/pgadmin4
+              repository: mirror.gcr.io/dpage/pgadmin4
               tag: "9.17@sha256:2f4ce946ddf8360680d7eff4eaba1d91859eb6b4003e6623bad5c63a322c2f4d"
             securityContext:
               allowPrivilegeEscalation: false

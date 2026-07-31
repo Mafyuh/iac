@@ -20,7 +20,7 @@ spec:
         containers:
           app:
             image:
-              repository: prom/graphite-exporter
+              repository: mirror.gcr.io/prom/graphite-exporter
               tag: v0.17.0
               pullPolicy: IfNotPresent
             args:
