@@ -8,6 +8,12 @@
   "editor.stickyScroll.enabled": false,
   "explorer.autoReveal": true,
   "files.trimTrailingWhitespace": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/bin/zsh"
+    }
+  },
   "terminal.integrated.fontSize": 14,
   "window.zoomLevel": 0,
   "yaml.schemaStore.enable": true,
