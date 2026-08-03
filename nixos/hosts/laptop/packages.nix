@@ -26,6 +26,7 @@
     wget
     terraform
     pkgs-unstable.freelens-bin
+    pre-commit
     kubernetes-helm
     pkgs-unstable.kubectl
     pkgs-unstable.fluxcd
