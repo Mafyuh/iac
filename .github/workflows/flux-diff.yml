@@ -1,39 +1,72 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: "Flux Diff"
 on:
   pull_request:
     branches: ["main"]
-    paths: ["kubernetes/**.yaml"]
+    paths: ["kubernetes/**"]
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 permissions:
+  contents: read
   pull-requests: write
 jobs:
-  flux-diff:
-    name: Compute diffs
+  filter-changes:
+    name: Filter Changes
     runs-on: ubuntu-latest
+    outputs:
+      changed-files: ${{ steps.changed-files.outputs.changed_files }}
+    steps:
+      - name: Get changed files
+        id: changed-files
+        uses: bjw-s-labs/action-changed-files@v0.6.0
+        with:
+          patterns: |-
+            kubernetes/**/*
+
+  flate-diff:
+    name: Flate Diff
+    runs-on: ubuntu-latest
+    needs: filter-changes
+    if: ${{ needs.filter-changes.outputs.changed-files != '[]' }}
+    env:
+      FLATE_PATH: ./kubernetes/flux
     strategy:
       matrix:
         cluster_path: ["kubernetes"]
-        resources:
-          - helmrelease
-          - kustomization
     steps:
-      - name: Setup Flux CLI
-        uses: fluxcd/flux2/action@v2.9.3
-      - name: Diff Resources
-        uses: allenporter/flux-local/action/diff@8.4.0
-        id: diff
+      - name: Checkout
+        uses: actions/checkout@v7
         with:
-          path: "${{ matrix.cluster_path }}/flux"
-          resource: "${{ matrix.resources }}"
-      - if: ${{ steps.diff.outputs.diff != '' }}
-        name: Create PR Comments
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup flate
+        uses: home-operations/flate/action@v0.4.12
+        with:
+          cache: true
+      - name: Test
+        run: flate test all --allow-missing-secrets --path "${{ matrix.cluster_path }}"
+      - name: Diff
+        id: diff
+        run: |
+          flate diff all \
+            --path "${{ matrix.cluster_path }}" \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --allow-missing-secrets \
+            --no-progress \
+            -o github > diff.txt
+          {
+            echo 'diff<<EOF'
+            cat diff.txt
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+      - name: Create PR Comments
+        if: ${{ steps.diff.outputs.diff != '' }}
         uses: mshick/add-pr-comment@v3
         continue-on-error: true
         with:
-          message-id: "${{ github.event.pull_request.number }}/${{ matrix.cluster_path }}/${{ matrix.resources }}"
+          message-id: "${{ github.event.pull_request.number }}/${{ matrix.cluster_path }}/flux"
           message-failure: Diff was not successful
           message: |
             ```diff
