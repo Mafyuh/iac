@@ -80,7 +80,7 @@ services:
       start_period: 40s
 
   bifrost:
-    image: ghcr.io/maximhq/bifrost:v1.6.7
+    image: ghcr.io/maximhq/bifrost:v1.6.8
     container_name: bifrost
     restart: unless-stopped
     ports:
