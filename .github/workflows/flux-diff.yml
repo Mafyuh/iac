@@ -42,7 +42,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Setup flate
-        uses: home-operations/flate/action@v0.4.14
+        uses: home-operations/flate/action@v0.5.0
         with:
           cache: true
       - name: Test
