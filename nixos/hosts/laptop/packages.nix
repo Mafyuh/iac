@@ -12,10 +12,11 @@
     extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   };
   environment.systemPackages = with pkgs; [
+    # System administration
     btop
     docker
-    tlp
     dmidecode
+    tlp
   ];
 
   fonts.packages = with pkgs; [
@@ -23,35 +24,43 @@
   ];
 
   home-manager.users.mafyuh.home.packages = with pkgs; [
-    wget
-    terraform
-    pkgs-unstable.freelens-bin
+    # Dev + infra
+    nodejs
     pre-commit
     kubernetes-helm
-    pkgs-unstable.kubectl
-    pkgs-unstable.fluxcd
+    terraform
+    wget
+    yadm
+    jq
     oci-cli
-    wireguard-tools
     pkgs-unstable.claude-code
+    pkgs-unstable.codex
+    pkgs-unstable.fluxcd
+    pkgs-unstable.k9s
+    pkgs-unstable.kubectl
     pkgs-unstable.opencode
     pkgs-unstable.t3code
-    pkgs-unstable.discord
-    pkgs-unstable.codex
-    pkgs-unstable.termius
-    pkgs-unstable.k9s
     pkgs-unstable.vscode
-    pkgs-unstable.brave
-    pkgs-unstable.talosctl
-    pkgs-unstable.talhelper
+    wireguard-tools
+
+    # Desktop
     bottles
     unityhub
-    pay-respects
-    fastfetch
-    oh-my-posh
-    nerd-fonts.fira-code
+    pkgs-unstable.vscode
+    pkgs-unstable.brave
+    pkgs-unstable.discord
+    pkgs-unstable.termius
     kdePackages.plasma-browser-integration
-    yadm
     vlc
-    jq
+
+    # Shell
+    fastfetch
+    nerd-fonts.fira-code
+    oh-my-posh
+    pay-respects
+
+    # Talos
+    pkgs-unstable.talhelper
+    pkgs-unstable.talosctl
   ];
 }

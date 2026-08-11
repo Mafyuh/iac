@@ -14,6 +14,8 @@
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.11";
 
+  virtualisation.docker.enable = true;
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
