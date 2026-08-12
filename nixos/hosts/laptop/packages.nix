@@ -34,6 +34,7 @@
     jq
     oci-cli
     github-cli
+    pkgs-unstable.grok-build
     pkgs-unstable.claude-code
     pkgs-unstable.codex
     pkgs-unstable.fluxcd
