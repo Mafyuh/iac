@@ -1,10 +1,10 @@
 {
   "servers": {
-    "litellm": {
+    "bifrost": {
       "type": "http",
-      "url": "http://10.20.10.55:4000/mcp",
+      "url": "https://api.mafyuh.xyz/mcp",
       "headers": {
-        "Authorization": "Bearer ${env:LITELLM_API_KEY}"
+        "x-bf-vk": "${env:BIFROST_API_KEY}"
       }
     }
   }

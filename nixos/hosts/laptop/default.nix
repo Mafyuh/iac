@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   imports = [
     ./boot.nix
     ./hardware.nix
@@ -16,9 +16,21 @@
 
   virtualisation.docker.enable = true;
 
+  sops.secrets.bifrost_api_key = {
+    sopsFile = ../../secrets/laptop.yaml;
+    owner = config.users.users.mafyuh.name;
+    group = config.users.users.mafyuh.group;
+    mode = "0400";
+  };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.mafyuh = import ./home.nix;
+    users.mafyuh = {
+      imports = [ ./home.nix ];
+      programs.zsh.initContent = ''
+        export BIFROST_API_KEY=$(cat ${config.sops.secrets.bifrost_api_key.path})
+      '';
+    };
   };
 }

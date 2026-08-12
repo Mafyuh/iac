@@ -83,7 +83,7 @@ I use [Bifrost](https://github.com/maximhq/bifrost) as a model gateway for local
 - **Providers:** Ollama, NVIDIA NIM, Opencode ($10/m), Codex ($20/m), and OpenRouter
 - **Interfaces:** [Open WebUI](https://github.com/open-webui/open-webui) for chat, [T3Code](https://t3.codes) & [OAI Compatible Provider for Copilot](https://github.com/JohnnyZ93/oai-compatible-copilot)
 - **Infrastructure:**
-  - [cli-proxy-api](https://github.com/router-for-me/CLIProxyAPI) exposes subscriptions over API to LiteLLM
+  - [cli-proxy-api](https://github.com/router-for-me/CLIProxyAPI) exposes subscriptions over API to Bifrost
   - [mcphub](https://github.com/samanhappy/mcphub) provides one MCP connection to all of my stdio MCP servers
   - [SearXNG](https://github.com/searxng/searxng) provides web search for AI
 
