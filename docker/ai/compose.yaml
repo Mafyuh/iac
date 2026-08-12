@@ -51,34 +51,6 @@ services:
       - OPEN_TERMINAL_API_KEY=$OPEN_TERMINAL_API_KEY
       - OPEN_TERMINAL_MULTI_USER=true
 
-  litellm:
-    image: ghcr.io/berriai/litellm:v1.96.0
-    container_name: litellm
-    restart: unless-stopped
-    ports:
-      - "4000:4000"
-    environment:
-      DATABASE_URL: postgresql://llmproxy:${LITELLM_DB_PASSWORD}@10.0.0.210:5432/litellm
-      STORE_MODEL_IN_DB: "True"
-      LITELLM_MASTER_KEY: $LITELLM_MASTER_KEY
-      LITELLM_SALT_KEY: $LITELLM_SALT_KEY
-      PROXY_BASE_URL: $LITELLM_DOMAIN
-      GENERIC_CLIENT_ID: litellm
-      GENERIC_CLIENT_SECRET: ${LITELLM_OAUTH_CLIENT_SECRET}
-      GENERIC_AUTHORIZATION_ENDPOINT: https://auth.mafyuh.io/application/o/authorize/
-      GENERIC_TOKEN_ENDPOINT: https://auth.mafyuh.io/application/o/token/
-      GENERIC_USERINFO_ENDPOINT: https://auth.mafyuh.io/application/o/userinfo/
-      GENERIC_SCOPE: "openid email profile"
-      AUTO_REDIRECT_UI_LOGIN_TO_SSO: true
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')"
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
   bifrost:
     image: ghcr.io/maximhq/bifrost:v1.6.9
     container_name: bifrost
@@ -91,6 +63,19 @@ services:
       - APP_HOST=0.0.0.0
       - LOG_LEVEL=info
       - LOG_STYLE=pretty
+
+  ai-proxy:
+    image: ghcr.io/mafyuh/ai-proxy:v1.0.0
+    pull_policy: always
+    restart: unless-stopped
+    container_name: ai-proxy
+    ports:
+      - "3010:3000"
+    environment:
+      UPSTREAM_BASE_URL: "https://api.mafyuh.xyz"
+      MODELS_DEV_URL: "https://models.dev/catalog.json"
+      CATALOG_REFRESH_HOURS: "24"
+#      MODEL_ALIASES_FILE: "/app/config/model-aliases.yml"
 
   searxng:
     image: mirror.gcr.io/searxng/searxng@sha256:cd22dbf7fac8b25d5e39e65af53a4b47009df5ad3162e270c477fd5b30ce03f2

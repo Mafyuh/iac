@@ -78,13 +78,13 @@ I use a combination of **Grafana, fluent-bit, VictoriaLogs and Prometheus** with
 
 ### 🤖 **AI**
 
-I use [LiteLLM](https://www.litellm.ai/) as a model gateway for local and cloud AI providers.
+I use [Bifrost](https://github.com/maximhq/bifrost) as a model gateway for local and cloud AI providers.
 
 - **Providers:** Ollama, NVIDIA NIM, Opencode ($10/m), Codex ($20/m), and OpenRouter
-- **Interfaces:** [Open WebUI](https://github.com/open-webui/open-webui) for chat, [T3Code](https://t3.codes) & [LiteLLM connector for VS Code Copilot](https://open-vsx.org/vscode/item?itemName=Gethnet.litellm-connector-copilot)
+- **Interfaces:** [Open WebUI](https://github.com/open-webui/open-webui) for chat, [T3Code](https://t3.codes) & [OAI Compatible Provider for Copilot](https://github.com/JohnnyZ93/oai-compatible-copilot)
 - **Infrastructure:**
   - [cli-proxy-api](https://github.com/router-for-me/CLIProxyAPI) exposes subscriptions over API to LiteLLM
-  - [mcphub](https://github.com/samanhappy/mcphub) provides one MCP connection to all of my MCP servers
+  - [mcphub](https://github.com/samanhappy/mcphub) provides one MCP connection to all of my stdio MCP servers
   - [SearXNG](https://github.com/searxng/searxng) provides web search for AI
 
 ### ☁️ **Cloud Dependencies**
