@@ -3,7 +3,7 @@
 name: ollama
 services:
   ollama:
-    image: mirror.gcr.io/ollama/ollama:0.32.6
+    image: mirror.gcr.io/ollama/ollama:0.32.9
     container_name: ollama
     restart: unless-stopped
     volumes:
