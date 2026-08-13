@@ -68,7 +68,7 @@ services:
       - caddy
 
   postgres:
-    image: mirror.gcr.io/postgres:18.4
+    image: mirror.gcr.io/postgres:18.6
     container_name: postgres
     restart: unless-stopped
     environment:
