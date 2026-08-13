@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/umami-software/umami
-              tag: 3.2.0@sha256:8edfe4beaef13f9d1300619fa264ef250a3688df9cc54d24ca830ca31cb475ec
+              tag: 3.3.0@sha256:87312d334d009ee67ee0d2fba8fed01435547cc468e452243aef5133a9984d48
               pullPolicy: IfNotPresent
             env:
               APP_SECRET:
