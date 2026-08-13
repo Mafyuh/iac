@@ -52,7 +52,7 @@ services:
       - OPEN_TERMINAL_MULTI_USER=true
 
   bifrost:
-    image: ghcr.io/maximhq/bifrost:v1.6.9
+    image: ghcr.io/maximhq/bifrost:v1.6.10
     container_name: bifrost
     restart: unless-stopped
     ports:
