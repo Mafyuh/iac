@@ -7,5 +7,3 @@ resources:
   - external-secret.yaml
   - source.yaml
   - postgres.yaml
-  - pgadmin.yaml
-  - httproute.yaml
