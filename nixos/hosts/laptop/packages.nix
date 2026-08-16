@@ -38,7 +38,7 @@
     pkgs-unstable.claude-code
     pkgs-unstable.codex
     pkgs-unstable.fluxcd
-    pkgs-unstable.k9s
+    pkgs-unstable.freelens-bin
     pkgs-unstable.kubectl
     pkgs-unstable.opencode
     pkgs-unstable.t3code
