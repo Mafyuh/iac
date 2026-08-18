@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/sabnzbd
-              tag: 5.1.0
+              tag: 5.1.1
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
