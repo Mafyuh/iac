@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   caddy:
-    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.08.11
+    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.08.18
     container_name: caddy
     ports:
       - 80:80
