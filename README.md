@@ -122,6 +122,8 @@ Although I try to self-host everything I can, my infra still relies on the cloud
 
 ## 🧑‍💻 **Getting Started**
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Mafyuh/iac)
+
 This repo is not structured like a project you can easily replicate. Although if you are new to any of the tools used I encourage you to read through the directories that make up each tool to see how I am using them.
 
 Over time I will try to add more detailed instructions in each directories README.
