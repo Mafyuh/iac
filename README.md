@@ -50,6 +50,24 @@ To automate infrastructure updates, I use **Github Actions**, which trigger work
 - **[Docker CD Workflow](https://github.com/Mafyuh/iac/blob/main/.github/workflows/CD.yml)** handles Continuous Deployment for Docker services.
 - **[Renovate](https://github.com/renovatebot/renovate)** keeps services updated by opening PRs for new versions.
 - **[Ansible](https://github.com/ansible/ansible)** is used to execute playbooks on all of my VMs, automating management and configurations
+- [**Comin**](https://github.com/nlewo/comin) keeps NixOS flakes in sync with this repo
+
+### 🏠 **Homelab as Code, not Cluster as Code**
+
+A lot of public GitOps homelabs are **cluster as code**: Talos, Flux, and whatever can be a HelmRelease. This repo is the **whole lab**. The Kubernetes cluster is just one layer. The hypervisor, VM images, guest OS, LAN, DNS, SSO, Docker, and a second cluster on Oracle all live in the same git repo and follow the same rule. If something can be defined as code and GitOpsified, it will be.
+
+Everything here is designed so I can merge a PR and the infrastructure updates itself to match git. No SSH, no clicking around in UIs. Git is the single source of truth, automation does the rest.
+
+| Layer                | Defined in                                                    |
+| -------------------- | ------------------------------------------------------------- |
+| Hypervisor (Proxmox) | [`terraform/proxmox`](./terraform/proxmox)                    |
+| VM images            | [`packer`](./packer) + [`nixos`](./nixos)                     |
+| LAN (UniFi)          | [`terraform/unifi`](./terraform/unifi)                        |
+| DNS / Zero Trust     | [`terraform/cloudflare`](./terraform/cloudflare)              |
+| SSO (Authentik)      | [`terraform/authentik`](./terraform/authentik)                |
+| \*arr config         | [`terraform/servarr`](./terraform/servarr)                    |
+| Docker services      | [`docker`](./docker) + [Actions CD](.github/workflows/CD.yml) |
+| Kubernetes           | [`kubernetes`](./kubernetes) (Flux + Talos)                   |
 
 ### 🔒 **Security & Networking**
 
@@ -86,6 +104,7 @@ I use [Bifrost](https://github.com/maximhq/bifrost) as a model gateway for local
   - [cli-proxy-api](https://github.com/router-for-me/CLIProxyAPI) exposes subscriptions over API to Bifrost
   - [mcphub](https://github.com/samanhappy/mcphub) provides one MCP connection to all of my stdio MCP servers
   - [SearXNG](https://github.com/searxng/searxng) provides web search for AI
+  - ai-proxy (custom) backfills `/v1/models` with [models.dev](https://models.dev) metadata so chat and IDE clients actually know each model's capabilities
 
 ### ☁️ **Cloud Dependencies**
 
@@ -122,7 +141,7 @@ Special thank you to [@chkpwd](https://github.com/chkpwd) for helping me get thi
 
 ## 🖥️ **Hardware**
 
-Proof that you don't need expensive new equipment to run infra like mine. Mostly everything here is secondhand, bought over time, totaling less than ~$3k.
+Proof that you don't need expensive new equipment to run infra like mine. Mostly everything here is secondhand, bought over time, totaling less than ~$4k.
 
 <details open>
   <summary><strong>Servers</strong></summary>
