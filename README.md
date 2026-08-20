@@ -52,23 +52,6 @@ To automate infrastructure updates, I use **Github Actions**, which trigger work
 - **[Ansible](https://github.com/ansible/ansible)** is used to execute playbooks on all of my VMs, automating management and configurations
 - [**Comin**](https://github.com/nlewo/comin) keeps NixOS flakes in sync with this repo
 
-### 🏠 **Homelab as Code, not Cluster as Code**
-
-A lot of public GitOps homelabs are **cluster as code**: Talos, Flux, and whatever can be a HelmRelease. This repo is the **whole lab**. The Kubernetes cluster is just one layer. The hypervisor, VM images, guest OS, LAN, DNS, SSO, Docker, and a second cluster on Oracle all live in the same git repo and follow the same rule. If something can be defined as code and GitOpsified, it will be.
-
-Everything here is designed so I can merge a PR and the infrastructure updates itself to match git. No SSH, no clicking around in UIs. Git is the single source of truth, automation does the rest.
-
-| Layer                | Defined in                                                    |
-| -------------------- | ------------------------------------------------------------- |
-| Hypervisor (Proxmox) | [`terraform/proxmox`](./terraform/proxmox)                    |
-| VM images            | [`packer`](./packer) + [`nixos`](./nixos)                     |
-| LAN (UniFi)          | [`terraform/unifi`](./terraform/unifi)                        |
-| DNS / Zero Trust     | [`terraform/cloudflare`](./terraform/cloudflare)              |
-| SSO (Authentik)      | [`terraform/authentik`](./terraform/authentik)                |
-| \*arr config         | [`terraform/servarr`](./terraform/servarr)                    |
-| Docker services      | [`docker`](./docker) + [Actions CD](.github/workflows/CD.yml) |
-| Kubernetes           | [`kubernetes`](./kubernetes) (Flux + Talos)                   |
-
 ### 🔒 **Security & Networking**
 
 For Secret management I use [Bitwarden Secrets](https://bitwarden.com/products/secrets-manager/) and their various [integrations](https://bitwarden.com/help/ansible-integration/) into the tools used.
