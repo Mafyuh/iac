@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: mirror.gcr.io/eceasy/cli-proxy-api
-              tag: v7.2.136
+              tag: v7.2.140
               pullPolicy: IfNotPresent
             env:
               TZ: America/New_York
