@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/dani-garcia/vaultwarden
-              tag: 1.37.1
+              tag: 1.37.2
             env:
               TZ: America/New_York
               DOMAIN: https://${SECRET_DOMAIN}
