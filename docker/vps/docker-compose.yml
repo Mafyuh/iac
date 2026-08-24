@@ -86,7 +86,7 @@ services:
       - racknerd
 
   databasus:
-    image: mirror.gcr.io/databasus/databasus:v3.53.0
+    image: mirror.gcr.io/databasus/databasus:v3.55.0
     container_name: databasus
     volumes:
       - databasus_data:/databasus-data
