@@ -41,7 +41,7 @@ services:
 
   open-terminal:
     container_name: open-terminal
-    image: ghcr.io/open-webui/open-terminal:0.12.2
+    image: ghcr.io/open-webui/open-terminal:0.12.3
     restart: unless-stopped
     ports:
       - 3001:8000
