@@ -15,7 +15,7 @@ spec:
     fullnameOverride: "n8n"
     image:
       repository: ghcr.io/n8n-io/n8n
-      tag: 2.37.6
+      tag: 2.38.1
       pullPolicy: IfNotPresent
     config:
       timezone: America/New_York
