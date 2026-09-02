@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: ghcr.io/gethomepage/homepage
-              tag: v2.1.2
+              tag: v2.2.0
             env:
               TZ: America/New_York
               HOMEPAGE_ALLOWED_HOSTS: lab.mafyuh.dev
