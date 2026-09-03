@@ -2,16 +2,16 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   packageRules: [
     {
-      matchPackageNames: ["mirror.gcr.io/ollama/ollama"],
-      customChangelogUrl: "https://github.com/ollama/ollama/releases",
+      matchDepNames: ["mirror.gcr.io/ollama/ollama"],
+      changelogUrl: "https://github.com/ollama/ollama/releases",
     },
     {
-      matchPackageNames: ["mirror.gcr.io/cloudflare/cloudflared"],
-      customChangelogUrl: "https://github.com/cloudflare/cloudflared/blob/master/RELEASE_NOTES",
+      matchDepNames: ["mirror.gcr.io/cloudflare/cloudflared"],
+      changelogUrl: "https://github.com/cloudflare/cloudflared/blob/master/RELEASE_NOTES",
     },
     {
-      matchPackageNames: ["mirror.gcr.io/eceasy/cli-proxy-api"],
-      customChangelogUrl: "https://github.com/router-for-me/CLIProxyAPI/releases",
+      matchDepNames: ["mirror.gcr.io/eceasy/cli-proxy-api"],
+      changelogUrl: "https://github.com/router-for-me/CLIProxyAPI/releases",
     }
   ],
 }
