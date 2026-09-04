@@ -11,6 +11,14 @@
   ],
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
+  "hostRules": [
+    {
+      "matchHost": "ghcr.io",
+      "hostType": "docker",
+      "username": "Mafyuh",
+      "password": "{{ secrets.GHCR_TOKEN }}"
+    }
+  ],
   "registryAliases": {
     "mirror.gcr.io": "docker.io"
   },
