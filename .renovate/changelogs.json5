@@ -2,12 +2,69 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   packageRules: [
     {
-      matchDepNames: ["mirror.gcr.io/ollama/ollama"],
-      sourceUrl: "https://github.com/ollama/ollama",
+      matchDepNames: ["ghcr.io/cyfershepard/jellystat"],
+      sourceUrl: "https://github.com/CyferShepard/Jellystat",
+    },
+    {
+      matchDepNames: ["ghcr.io/external-secrets/external-secrets"],
+      sourceUrl: "https://github.com/external-secrets/external-secrets",
+    },
+    {
+      matchDepNames: ["ghcr.io/maximhq/bifrost"],
+      sourceUrl: "https://github.com/maximhq/bifrost",
+    },
+    {
+      matchDepNames: ["ghcr.io/miguelndecarvalho/speedtest-exporter"],
+      sourceUrl: "https://github.com/MiguelNdeCarvalho/speedtest-exporter",
+    },
+    {
+      matchDepNames: ["ghcr.io/umami-software/umami"],
+      sourceUrl: "https://github.com/umami-software/umami",
+    },
+    {
+      matchDepNames: ["mirror.gcr.io/alpine/kubectl"],
+      sourceUrl: "https://github.com/kubernetes/kubernetes",
+    },
+    {
+      matchDepNames: ["mirror.gcr.io/couchdb"],
+      sourceUrl: "https://github.com/apache/couchdb",
+      changelogUrl: "https://docs.couchdb.org/en/stable/whatsnew/",
+    },
+    {
+      matchDepNames: ["mirror.gcr.io/dpage/pgadmin4"],
+      changelogUrl: "https://www.pgadmin.org/docs/pgadmin4/latest/release_notes.html",
     },
     {
       matchDepNames: ["mirror.gcr.io/eceasy/cli-proxy-api"],
       sourceUrl: "https://github.com/router-for-me/CLIProxyAPI",
+    },
+    {
+      matchDepNames: ["mirror.gcr.io/eeacms/postfix"],
+      sourceUrl: "https://github.com/eea/eea.docker.postfix",
+    },
+    {
+      matchDepNames: ["mirror.gcr.io/ollama/ollama"],
+      sourceUrl: "https://github.com/ollama/ollama",
+    },
+    {
+      matchDepNames: ["mirror.gcr.io/postgres"],
+      changelogUrl: "https://www.postgresql.org/docs/release/",
+    },
+    {
+      matchDepNames: ["mirror.gcr.io/prom/graphite-exporter"],
+      sourceUrl: "https://github.com/prometheus/graphite_exporter",
+    },
+    {
+      matchDepNames: [
+        "mirror.gcr.io/wazuh/wazuh-dashboard",
+        "mirror.gcr.io/wazuh/wazuh-indexer",
+        "mirror.gcr.io/wazuh/wazuh-manager",
+      ],
+      sourceUrl: "https://github.com/wazuh/wazuh",
+    },
+    {
+      matchDepNames: ["quay.io/superq/smokeping-prober"],
+      sourceUrl: "https://github.com/SuperQ/smokeping_prober",
     }
   ],
 }
