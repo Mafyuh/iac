@@ -3,15 +3,11 @@
   packageRules: [
     {
       matchDepNames: ["mirror.gcr.io/ollama/ollama"],
-      changelogUrl: "https://github.com/ollama/ollama/releases",
-    },
-    {
-      matchDepNames: ["mirror.gcr.io/cloudflare/cloudflared"],
-      changelogUrl: "https://github.com/cloudflare/cloudflared/blob/master/RELEASE_NOTES",
+      sourceUrl: "https://github.com/ollama/ollama",
     },
     {
       matchDepNames: ["mirror.gcr.io/eceasy/cli-proxy-api"],
-      changelogUrl: "https://github.com/router-for-me/CLIProxyAPI/releases",
+      sourceUrl: "https://github.com/router-for-me/CLIProxyAPI",
     }
   ],
 }
