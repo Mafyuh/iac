@@ -26,7 +26,7 @@ resource "authentik_source_oauth" "azure" {
   oidc_jwks_url       = "https://login.microsoftonline.com/common/discovery/keys"
   oidc_well_known_url = "https://login.microsoftonline.com/common/.well-known/openid-configuration"
   profile_url         = "https://login.microsoftonline.com/common/openid/userinfo"
-  provider_type       = "azuread"
+  provider_type       = "entraid"
   consumer_key        = "2bb37b8d-20b6-4bc4-b0d7-1c430bd3dc17"
   consumer_secret     = ""
   user_matching_mode  = "identifier"

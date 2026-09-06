@@ -60,9 +60,9 @@ resource "oci_core_instance" "arm" {
     vcpus                     = "2"
   }
   source_details {
-    boot_volume_size_in_gbs = "100"
+    boot_volume_size_in_gbs = "50"
     boot_volume_vpus_per_gb = "10"
-    source_id               = "ocid1.image.oc1.iad.aaaaaaaai7jydfj624afgrkqvvykdvvdvskdo6upkhys56nyskim3mr526va"
+    source_id               = "ocid1.image.oc1.iad.aaaaaaaa3dvtpqhqrxddfkyk25jjropedhalubzmritlr2777zqj2ybtxa4a"
     source_type             = "image"
   }
   state = "RUNNING"

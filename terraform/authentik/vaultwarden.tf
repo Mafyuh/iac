@@ -20,6 +20,11 @@ resource "authentik_provider_oauth2" "vaultwarden" {
       matching_mode     = "strict"
       redirect_uri_type = "authorization"
       url               = "https://vault.${var.domains["dev"]}/identity/connect/oidc-signin"
+    },
+    {
+      matching_mode     = "strict"
+      redirect_uri_type = "authorization"
+      url               = "https://vault.matt.fo/identity/connect/oidc-signin"
     }
   ]
 }

@@ -19,8 +19,8 @@ resource "proxmox_virtual_environment_vm" "ollama" {
 
   # VM CPU Settings
   cpu {
-    cores        = 12
-    type         = "host"
+    cores = 12
+    type  = "host"
   }
 
   # VM Memory Settings
@@ -41,14 +41,12 @@ resource "proxmox_virtual_environment_vm" "ollama" {
     interface    = "scsi0"
   }
 
-  vga {
-    type = "serial0"
-  }
-
   hostpci {
-    device = "hostpci0"
-    mapping = "gtx1660"
-    pcie = true
+    device  = "hostpci0"
+    mapping = "gpu"
+    pcie    = true
+    rombar  = true
+    xvga    = true
   }
 
   initialization {

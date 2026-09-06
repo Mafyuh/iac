@@ -35,7 +35,7 @@ resource "cloudflare_dns_record" "dev_local" {
 }
 
 resource "cloudflare_dns_record" "dev_n8n" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = sensitive("192.210.213.73")
   name    = "n8n.${var.domains["dev"]}"
   proxied = true
   ttl     = 1
@@ -53,7 +53,7 @@ resource "cloudflare_dns_record" "dev_sync" {
 }
 
 resource "cloudflare_dns_record" "dev_vault" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
+  content = sensitive("192.210.213.73")
   name    = "vault.${var.domains["dev"]}"
   proxied = true
   ttl     = 1

@@ -1,105 +1,34 @@
-resource "unifi_device" "dream_router" {
-  name              = "Dream Router 7"
-  allow_adoption    = true
-  forget_on_destroy = true
-  mac               = "1c:0b:8b:42:36:90"
-
-  port_override {
-    number = 5
-    name   = "10GB Link"
-  }
-
-  port_override {
-    number   = 1
-    name     = "Main PC"
-    poe_mode = "off"
-  }
-
-  port_override {
-    number = 3
-    name   = "Port 3"
-  }
-
-  port_override {
-    number = 4
-    name   = "WAN"
-  }
-
-  ## Getting Error: api.err.NotSupportQosConfig (400 ) for PUT https://10.0.0.1/proxy/network/api/s/default/rest/device
-  ## will update this once i look into it more
-  lifecycle {
-    ignore_changes = [
-      port_override
-    ]
-  }
-}
-
-
-
-resource "unifi_device" "flex_poe_8" {
-  name              = "USW Flex 2.5G 8 PoE"
+resource "unifi_device" "cgf" {
+  name              = "CGF"
   allow_adoption    = true
   forget_on_destroy = false
-  mac               = "84:78:48:fc:3a:e0"
-  port_override {
-    number  = 9
-    name    = "PoE Injector Power In"
-    op_mode = "switch"
-  }
+  mac               = "a8:9c:6c:94:af:e8"
+}
 
-  port_override {
-    number   = 1
-    name     = "Port 1"
-    op_mode  = "switch"
-    poe_mode = "off"
-  }
+resource "unifi_device" "pro_xg_8_poe" {
+  name              = "USW Pro XG 8 PoE"
+  allow_adoption    = true
+  forget_on_destroy = false
+  mac               = "8c:ed:e1:b0:81:00"
+}
 
-  port_override {
-    number          = 2
-    name            = "Port 2"
-    poe_mode        = "auto"
-    port_profile_id = unifi_port_profile.poe_enabled.id
-  }
+resource "unifi_device" "flex_2_5g_5" {
+  name              = "USW Flex 2.5G 5"
+  allow_adoption    = true
+  forget_on_destroy = false
+  mac               = "a8:9c:6c:18:04:e4"
+}
 
-  port_override {
-    number   = 3
-    name     = "Port 3"
-    op_mode  = "switch"
-    poe_mode = "off"
-  }
+resource "unifi_device" "u7_pro_xg" {
+  name              = "U7 Pro XG"
+  allow_adoption    = true
+  forget_on_destroy = false
+  mac               = "8c:30:66:84:3b:98"
+}
 
-  port_override {
-    number   = 4
-    name     = "Port 4"
-    op_mode  = "switch"
-    poe_mode = "off"
-  }
-
-  port_override {
-    number   = 5
-    name     = "Port 5"
-    op_mode  = "switch"
-    poe_mode = "off"
-  }
-
-  port_override {
-    number          = 6
-    name            = "AP"
-    poe_mode        = "auto"
-    port_profile_id = unifi_port_profile.poe_enabled.id
-  }
-
-  port_override {
-    number   = 7
-    name     = "Port 7"
-    op_mode  = "switch"
-    poe_mode = "off"
-  }
-
-  port_override {
-    number   = 8
-    name     = "Port 8"
-    op_mode  = "switch"
-    poe_mode = "off"
-  }
+resource "unifi_device" "u5g_backup" {
+  name              = "U5G Backup"
+  allow_adoption    = true
+  forget_on_destroy = false
+  mac               = "74:f9:2c:b2:87:7c"
 }

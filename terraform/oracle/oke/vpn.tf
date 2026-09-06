@@ -3,7 +3,7 @@
 
 resource "oci_core_cpe" "home" {
   compartment_id      = data.bitwarden-secrets_secret.compartment_ocid.value
-  display_name        = "unifi-dream-router-home"
+  display_name        = "unifi-dream-router-home-new-ip"
   ip_address          = data.bitwarden-secrets_secret.homelab_ip.value
   cpe_device_shape_id = "0c14a129-ce70-43f3-bf07-e980a6784ae8"
 }
@@ -54,7 +54,7 @@ resource "oci_core_drg_attachment" "oke_vcn" {
 
 resource "oci_core_ipsec" "home" {
   compartment_id            = data.bitwarden-secrets_secret.compartment_ocid.value
-  display_name              = "oke-vcn-lan-to-unifi"
+  display_name              = "oke-vcn-lan-to-unifi-new-ip"
   cpe_id                    = oci_core_cpe.home.id
   drg_id                    = oci_core_drg.oke.id
   cpe_local_identifier      = data.bitwarden-secrets_secret.homelab_ip.value

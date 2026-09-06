@@ -13,6 +13,10 @@ data "bitwarden-secrets_secret" "cf_dev_zone_id" {
 data "bitwarden-secrets_secret" "cf_io_zone_id" {
   id = "bbba9ae9-0ba9-462f-8b7d-b2b7014fbb83"
 }
+data "bitwarden-secrets_secret" "homelab_ip" {
+  id = "bd5a4e06-fbfa-4550-975c-b2a7005600aa"
+}
+
 data "bitwarden-secrets_secret" "arm_oci_vm_ip" {
   id = "6f9cef86-eb39-4e05-8c5b-b23e001e6170"
 }

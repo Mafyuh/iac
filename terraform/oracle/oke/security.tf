@@ -2,6 +2,56 @@ resource "oci_core_security_list" "service_load_balancers" {
   compartment_id = data.bitwarden-secrets_secret.compartment_ocid.value
   display_name   = "oke-vcn-lan-svclbseclist"
   vcn_id         = oci_core_vcn.oke.id
+
+  ingress_security_rules {
+    source      = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    protocol    = "6"
+    tcp_options {
+      min = 80
+      max = 80
+    }
+  }
+
+  ingress_security_rules {
+    source      = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    protocol    = "6"
+    tcp_options {
+      min = 443
+      max = 443
+    }
+  }
+
+  egress_security_rules {
+    destination      = "10.100.10.0/24"
+    destination_type = "CIDR_BLOCK"
+    protocol         = "6"
+    tcp_options {
+      min = 10256
+      max = 10256
+    }
+  }
+
+  egress_security_rules {
+    destination      = "10.100.10.0/24"
+    destination_type = "CIDR_BLOCK"
+    protocol         = "6"
+    tcp_options {
+      min = 30456
+      max = 30456
+    }
+  }
+
+  egress_security_rules {
+    destination      = "10.100.10.0/24"
+    destination_type = "CIDR_BLOCK"
+    protocol         = "6"
+    tcp_options {
+      min = 31350
+      max = 31350
+    }
+  }
 }
 
 resource "oci_core_security_list" "workers_and_pods" {
@@ -100,6 +150,36 @@ resource "oci_core_security_list" "workers_and_pods" {
     tcp_options {
       min = 22
       max = 22
+    }
+  }
+
+  ingress_security_rules {
+    source      = "10.100.20.0/24"
+    source_type = "CIDR_BLOCK"
+    protocol    = "6"
+    tcp_options {
+      min = 10256
+      max = 10256
+    }
+  }
+
+  ingress_security_rules {
+    source      = "10.100.20.0/24"
+    source_type = "CIDR_BLOCK"
+    protocol    = "6"
+    tcp_options {
+      min = 30456
+      max = 30456
+    }
+  }
+
+  ingress_security_rules {
+    source      = "10.100.20.0/24"
+    source_type = "CIDR_BLOCK"
+    protocol    = "6"
+    tcp_options {
+      min = 31350
+      max = 31350
     }
   }
 

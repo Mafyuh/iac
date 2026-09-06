@@ -17,14 +17,17 @@ resource "radarr_download_client_sabnzbd" "sabnzbd" {
   enable                     = true
   priority                   = 1
   name                       = "SABnzbd"
-  host                       = "sabnzbd-app.arr.svc.cluster.local"
+  host                       = "sab.mafyuh.xyz"
   url_base                   = "/"
-  port                       = 8080
-  use_ssl                    = false
+  port                       = 443
+  use_ssl                    = true
   movie_category             = "movies"
   api_key                    = data.bitwarden-secrets_secret.sabnzbd_api_key.value
   remove_failed_downloads    = true
   remove_completed_downloads = true
+  older_movie_priority       = -100
+  recent_movie_priority      = -100
+  tags                       = []
 }
 
 resource "radarr_delay_profile" "default" {
@@ -68,28 +71,23 @@ resource "radarr_media_management" "media_settings_configs" {
 }
 
 resource "radarr_notification_gotify" "gotify" {
-  on_grab                          = true
-  on_download                      = true
-  on_upgrade                       = true
+  on_grab                          = false
+  on_download                      = false
+  on_upgrade                       = false
   on_movie_added                   = false
   on_movie_delete                  = false
   on_movie_file_delete             = false
   on_movie_file_delete_for_upgrade = true
   on_health_issue                  = false
+  on_health_restored               = false
+  on_manual_interaction_required   = false
   on_application_update            = false
   include_health_warnings          = false
   name                             = "Gotify"
-  server                           = "https://go.mafyuh.io"
+  server                           = "https://go.matt.fo"
   app_token                        = data.bitwarden-secrets_secret.gotify_radarr_key.value
   priority                         = 8
-}
-
-resource "radarr_root_folder" "marvel" {
-  path = "/data/Media/Marvel"
-}
-
-resource "radarr_root_folder" "dc" {
-  path = "/data/Media/DC"
+  tags                             = []
 }
 
 resource "radarr_root_folder" "kids" {

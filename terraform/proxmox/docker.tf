@@ -13,8 +13,8 @@ resource "proxmox_virtual_environment_vm" "docker" {
 
   # VM CPU Settings
   cpu {
-    cores        = 3
-    type         = "host"
+    cores = 3
+    type  = "host"
   }
 
   # VM Memory Settings

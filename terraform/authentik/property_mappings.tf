@@ -27,14 +27,13 @@ resource "authentik_property_mapping_provider_scope" "profile" {
   description = "General Profile Information"
   expression  = <<EOF
 return {
-    # Because authentik only saves the user's full name, and has no concept of first and last names,
-    # the full name is used as given name.
-    # You can override this behaviour in custom mappings, i.e. `request.user.name.split(" ")`
     "name": request.user.name,
-    "given_name": request.user.name,
+    "given_name": ak_obj_attr(request.user, "given_name", "name"),
+    "family_name": ak_obj_attr(request.user, "family_name"),
     "preferred_username": request.user.username,
     "nickname": request.user.username,
     "groups": [group.name for group in request.user.groups.all()],
+    "picture": request.user.avatar,
 }
 EOF
 }

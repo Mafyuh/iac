@@ -54,17 +54,6 @@ resource "oci_core_default_security_list" "Default-Security-List-for-NEW" {
     }
   }
   ingress_security_rules {
-    description = "NPM WEBUI"
-    protocol    = "6"
-    source      = "${data.bitwarden-secrets_secret.homelab_ip.value}/32"
-    source_type = "CIDR_BLOCK"
-    stateless   = "false"
-    tcp_options {
-      max = "81"
-      min = "81"
-    }
-  }
-  ingress_security_rules {
     description = "Postgres"
     protocol    = "6"
     source      = "${data.bitwarden-secrets_secret.homelab_ip.value}/32"
@@ -84,6 +73,26 @@ resource "oci_core_default_security_list" "Default-Security-List-for-NEW" {
     tcp_options {
       max = "22"
       min = "22"
+    }
+  }
+  ingress_security_rules {
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "60001"
+      min = "60001"
+    }
+  }
+  ingress_security_rules {
+    protocol    = "6"
+    source      = "${data.bitwarden-secrets_secret.homelab_ip.value}/32"
+    source_type = "CIDR_BLOCK"
+    stateless   = "false"
+    tcp_options {
+      max = "8000"
+      min = "8000"
     }
   }
   manage_default_resource_id = oci_core_vcn.NEW.default_security_list_id

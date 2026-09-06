@@ -5,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "Ubu" {
   vm_id       = 105
   name        = "Ubu"
   description = "My attempt to move things to 1 VM"
-  started = true
+  started     = true
   tags        = ["tofu", "ubuntu26", "ansible"]
 
   agent {

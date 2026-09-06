@@ -1,6 +1,6 @@
 resource "authentik_flow" "main-login" {
-  name               = "Hello Human!"
-  title              = "Hello Human!"
+  name               = "Welcome to authentik!"
+  title              = "Welcome to authentik!"
   slug               = "default-authentication-flow"
   background         = ""
   designation        = "authentication"
