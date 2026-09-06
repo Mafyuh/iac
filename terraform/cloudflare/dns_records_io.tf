@@ -1,12 +1,3 @@
-resource "cloudflare_dns_record" "io_go" {
-  content = sensitive("192.210.213.73")
-  name    = "go.${var.domains["io"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
-}
-
 resource "cloudflare_dns_record" "io_jelly" {
   content = data.bitwarden-secrets_secret.homelab_ip.value
   name    = "jelly.${var.domains["io"]}"

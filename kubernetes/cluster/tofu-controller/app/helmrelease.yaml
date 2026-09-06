@@ -22,7 +22,7 @@ spec:
     runner:
       image:
         repository: ghcr.io/flux-iac/tf-runner
-        tag: v0.16.0-rc.5
+        tag: v0.16.5
         pullPolicy: IfNotPresent
       grpc:
         maxMessageSize: 30

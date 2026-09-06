@@ -7,15 +7,6 @@ resource "cloudflare_dns_record" "dev_external" {
   zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
 }
 
-resource "cloudflare_dns_record" "dev_links" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
-  name    = "links.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
 resource "cloudflare_dns_record" "dev_local_wildcard" {
   content = "10.0.0.218"
   name    = "*.local.${var.domains["dev"]}"
@@ -35,7 +26,7 @@ resource "cloudflare_dns_record" "dev_local" {
 }
 
 resource "cloudflare_dns_record" "dev_n8n" {
-  content = sensitive("192.210.213.73")
+  content = data.bitwarden-secrets_secret.vps_oci_vm_ip.value
   name    = "n8n.${var.domains["dev"]}"
   proxied = true
   ttl     = 1
@@ -43,54 +34,9 @@ resource "cloudflare_dns_record" "dev_n8n" {
   zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
 }
 
-resource "cloudflare_dns_record" "dev_sync" {
-  content = data.bitwarden-secrets_secret.arm_oci_vm_ip.value
-  name    = "sync.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_vault" {
-  content = sensitive("192.210.213.73")
-  name    = "vault.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_docs" {
-  content = "mafyuh.github.io/iac-wiki"
-  name    = "docs.${var.domains["dev"]}"
-  proxied = false
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
 resource "cloudflare_dns_record" "dev_domainconnect" {
   content = "connect.domains.google.com"
   name    = "_domainconnect.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_home" {
-  content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
-  name    = "home.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
-resource "cloudflare_dns_record" "dev_prom_metrics" {
-  content = "c68b2785-4489-4a5b-a265-4cb72d2e2625.cfargotunnel.com"
-  name    = "prom-metrics.${var.domains["dev"]}"
   proxied = true
   ttl     = 1
   type    = "CNAME"
