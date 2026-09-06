@@ -51,3 +51,8 @@ spec:
             secretKeyRef:
               name: terraform-s3-backend
               key: BWS_ACCESS_TOKEN
+        - name: BW_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: terraform-s3-backend
+              key: BWS_ACCESS_TOKEN
