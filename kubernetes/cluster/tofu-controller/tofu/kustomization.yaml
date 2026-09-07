@@ -9,3 +9,4 @@ resources:
   - authentik.yaml
   - cloudflare.yaml
   - oracle.yaml
+  - seerr.yaml
