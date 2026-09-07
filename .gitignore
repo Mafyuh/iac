@@ -62,4 +62,3 @@ scripts/radarr-custom-format-scores-fixed.sh
 kubernetes/apps/default/homepage/app/config.yaml
 docker/ai/mcp_settings.json
 docker/ai/config.yaml
-terraform/seerr/
