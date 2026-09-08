@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
 
   jellystat:
-    image: ghcr.io/cyfershepard/jellystat:1.1.11
+    image: ghcr.io/cyfershepard/jellystat:1.1.12
     environment:
       POSTGRES_USER: jellystat
       POSTGRES_PASSWORD: $JS_POSTGRES_PASSWORD
