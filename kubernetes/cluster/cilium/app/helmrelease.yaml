@@ -108,4 +108,4 @@ metadata:
   name: default-policy
 spec:
   loadBalancerIPs: true
-  interfaces: ["^enp.*"]
+  interfaces: ["^en.*"]
