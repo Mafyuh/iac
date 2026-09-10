@@ -23,9 +23,9 @@ tasks:
     dir: "{{.TALOS_DIR}}"
     cmds:
       - talhelper genconfig
-      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.9 --file clusterconfig/optiplex-k8s-talos-1.mafyuh.com.yaml
-      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.84 --file clusterconfig/optiplex-k8s-talos-2.mafyuh.com.yaml
-      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.177 --file clusterconfig/optiplex-k8s-talos-3.mafyuh.com.yaml
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.201 --file clusterconfig/optiplex-k8s-talos-4.yaml
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.202 --file clusterconfig/optiplex-k8s-talos-5.yaml
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.203 --file clusterconfig/optiplex-k8s-talos-6.yaml
     preconditions:
       - test -f {{.TALOS_DIR}}/talconfig.yaml
       - which talhelper talosctl
@@ -40,10 +40,26 @@ tasks:
       - test -f {{.TALOS_DIR}}/{{.FILE}}
       - which talosctl
 
-  apply-node-1:
-    desc: Apply Talos config to node 1
+  apply-node-4:
+    desc: Apply Talos config to node 4
     cmds:
       - task: apply-node
         vars:
-          IP: 10.0.0.9
-          FILE: clusterconfig/optiplex-k8s-talos-1.mafyuh.com.yaml
+          IP: 10.0.0.201
+          FILE: clusterconfig/optiplex-k8s-talos-4.yaml
+
+  apply-node-5:
+    desc: Apply Talos config to node 5
+    cmds:
+      - task: apply-node
+        vars:
+          IP: 10.0.0.202
+          FILE: clusterconfig/optiplex-k8s-talos-5.yaml
+
+  apply-node-6:
+    desc: Apply Talos config to node 6
+    cmds:
+      - task: apply-node
+        vars:
+          IP: 10.0.0.203
+          FILE: clusterconfig/optiplex-k8s-talos-6.yaml

@@ -58,9 +58,18 @@ spec:
         connections:
           requireMsgr2: true
       storage:
-        useAllNodes: true
+        useAllNodes: false
         useAllDevices: false
-        deviceFilter: sda
+        nodes:
+          - name: talos-4
+            devices:
+              - name: /dev/disk/by-id/nvme-eui.36483330543292750025385800000001
+          - name: talos-5
+            devices:
+              - name: /dev/disk/by-id/nvme-eui.36483331543165880025384600000001
+          - name: talos-6
+            devices:
+              - name: /dev/disk/by-id/nvme-eui.36483330543357870025384600000001
         config:
           osdsPerDevice: "1"
       resources:

@@ -3,42 +3,42 @@
 clusterName: optiplex-k8s
 endpoint: https://10.0.0.150:6443
 # renovate: depName=siderolabs/talos datasource=github-releases
-talosVersion: v1.13.9
+talosVersion: v1.14.0
 # renovate: depName=kubernetes/kubernetes datasource=github-releases
-kubernetesVersion: v1.36.3
+kubernetesVersion: v1.37.0
 additionalApiServerCertSans: &sans
   - 127.0.0.1
 additionalMachineCertSans: *sans
 cniConfig:
   name: none
 nodes:
-  - hostname: talos-1.mafyuh.com
-    ipAddress: 10.0.0.9
+  - hostname: talos-4
+    ipAddress: 10.0.0.201
     controlPlane: true
-    installDisk: /dev/nvme0n1
+    installDisk: /dev/disk/by-id/nvme-eui.36483330542821510025385800000001
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: 18:66:da:10:67:04
+          hardwareAddr: e8:6a:64:bf:bf:10
         dhcp: true
         vip:
           ip: &vip 10.0.0.150
-  - hostname: talos-2.mafyuh.com
-    ipAddress: 10.0.0.84
+  - hostname: talos-5
+    ipAddress: 10.0.0.202
     controlPlane: true
-    installDisk: /dev/nvme0n1
+    installDisk: /dev/disk/by-id/nvme-eui.36483330542821640025385800000001
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: 8c:ae:4c:b9:53:42
+          hardwareAddr: e8:6a:64:c8:28:e8
         dhcp: true
         vip:
           ip: *vip
-  - hostname: talos-3.mafyuh.com
-    ipAddress: 10.0.0.177
+  - hostname: talos-6
+    ipAddress: 10.0.0.203
     controlPlane: true
-    installDisk: /dev/nvme0n1
+    installDisk: /dev/disk/by-id/nvme-eui.36483330543292560025385800000001
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: 8c:ae:4c:b9:53:6f
+          hardwareAddr: 98:fa:9b:af:65:e5
         dhcp: true
         vip:
           ip: *vip
@@ -64,11 +64,17 @@ controlPlane:
           - siderolabs/intel-ucode
           - siderolabs/realtek-firmware
   patches:
-    # Disable search domain (DHCP is used)
+    # Configure DNS
     - |-
-      machine:
-        network:
-          disableSearchDomain: true
+      apiVersion: v1alpha1
+      kind: ResolverConfig
+      searchDomains:
+        disableDefault: true
+        domains: []
+      hostDNS:
+        enabled: true
+        resolveMemberNames: true
+        forwardKubeDNSToHost: false
     # Customize containerd (Spegel)
     - |-
       machine:
@@ -78,14 +84,10 @@ controlPlane:
             content: |
               [plugins."io.containerd.cri.v1.images"]
                 discard_unpacked_layers = false
-    # Enable feature
+    # Allow in-cluster Talos API access
     - |-
       machine:
         features:
-          hostDNS:
-            enabled: true
-            resolveMemberNames: true
-            forwardKubeDNSToHost: false
           kubernetesTalosAPIAccess:
             allowedKubernetesNamespaces:
               - system-upgrade
@@ -93,24 +95,22 @@ controlPlane:
             allowedRoles:
               - os:admin
             enabled: true
-    # Configure cluster
+    # Configure cluster workload placement.
     - |-
       cluster:
         allowSchedulingOnControlPlanes: true
-        apiServer:
-          extraArgs:
-            feature-gates: "ImageVolume=true,MutatingAdmissionPolicy=true,ResourceHealthStatus=true"
-            runtime-config: "admissionregistration.k8s.io/v1beta1=true"
-            oidc-client-id: "kubernetes"
-            oidc-groups-claim: "groups"
-            oidc-groups-prefix: "authentik:"
-            oidc-issuer-url: "https://auth.mafyuh.io/application/o/kubernetes/"
-            oidc-username-claim: "email"
-            oidc-username-prefix: "authentik:"
-        coreDNS:
-            disabled: false
-        proxy:
-          disabled: true
+    # Configure kube-apiserver.
+    - |-
+      apiVersion: v1alpha1
+      kind: KubeAPIServerConfig
+      extraArgs:
+        feature-gates: "ImageVolume=true,MutatingAdmissionPolicy=true,ResourceHealthStatus=true"
+        runtime-config: "admissionregistration.k8s.io/v1beta1=true"
+    # Cilium replaces kube-proxy.
+    - |-
+      apiVersion: v1alpha1
+      kind: KubeProxyConfig
+      enabled: false
     # Configure etcd
     - |-
       cluster:
@@ -119,13 +119,13 @@ controlPlane:
             - 10.0.0.0/24
     # Configure kube-controller-manager metrics
     - |-
-      cluster:
-        controllerManager:
-          extraArgs:
-            bind-address: "0.0.0.0"
+      apiVersion: v1alpha1
+      kind: KubeControllerManagerConfig
+      extraArgs:
+        bind-address: "0.0.0.0"
     # Configure kube-scheduler metrics
     - |-
-      cluster:
-        scheduler:
-          extraArgs:
-            bind-address: "0.0.0.0"
+      apiVersion: v1alpha1
+      kind: KubeSchedulerConfig
+      extraArgs:
+        bind-address: "0.0.0.0"

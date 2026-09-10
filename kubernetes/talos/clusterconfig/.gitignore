@@ -2,6 +2,10 @@ talos-proxmox-talos-1.mafyuh.com.yaml
 talos-proxmox-talos-2.mafyuh.com.yaml
 talos-proxmox-talos-3.mafyuh.com.yaml
 talosconfig
+migration-*/
 optiplex-k8s-talos-1.mafyuh.com.yaml
 optiplex-k8s-talos-2.mafyuh.com.yaml
 optiplex-k8s-talos-3.mafyuh.com.yaml
+optiplex-k8s-talos-4.yaml
+optiplex-k8s-talos-5.yaml
+optiplex-k8s-talos-6.yaml
