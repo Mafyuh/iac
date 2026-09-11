@@ -84,15 +84,97 @@ services:
       - DB_POSTGRESDB_USER=vaultwarden
       - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
       - DB_POSTGRESDB_SSL_ENABLED=false
+      - N8N_ENABLED_MODULES=instance-ai
+      - N8N_INSTANCE_AI_MODEL=openai/gpt-5.6-terra
+      - N8N_INSTANCE_AI_MODEL_URL=https://aiproxy.mafyuh.xyz/v1
+      - N8N_INSTANCE_AI_MODEL_API_KEY=$N8N_INSTANCE_AI_MODEL_API_KEY
+      - N8N_INSTANCE_AI_SANDBOX_ENABLED=true
+      - N8N_INSTANCE_AI_SANDBOX_PROVIDER=n8n-sandbox
+      - N8N_SANDBOX_SERVICE_URL=http://sandbox-api:8080
+      - N8N_SANDBOX_SERVICE_API_KEY=$N8N_SANDBOX_SERVICE_API_KEY
     restart: unless-stopped
     networks:
       - racknerd
     depends_on:
       postgres:
         condition: service_healthy
+      sandbox-api:
+        condition: service_started
     labels:
       caddy: $N8N_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 5678}}"
+
+  # One-shot: generates mTLS certificates for the sandbox stack, then exits
+  sandbox-certs:
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
+    container_name: sandbox-certs
+    user: "0:0"
+    entrypoint: ["sh", "-c"]
+    command:
+      - >
+        bootstrap-mtls.sh --out-dir /tls --api-san sandbox-api
+        --control-san-prefix sandbox-runner --world-readable &&
+        chown -R sandbox-api:sandbox-api /tls/api && chmod -R a+rX /tls
+    environment:
+      NUM_RUNNERS: "1"
+    volumes:
+      - sandbox-tls:/tls
+    networks:
+      - racknerd
+    restart: "no"
+
+  # Self-hosted sandbox API for n8n AI Assistant. Internal only, never expose.
+  sandbox-api:
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
+    container_name: sandbox-api
+    depends_on:
+      sandbox-certs:
+        condition: service_completed_successfully
+    environment:
+      - SANDBOX_API_KEYS=$N8N_SANDBOX_SERVICE_API_KEY
+      - SANDBOX_API_RUNNER_REGISTRATION_TOKEN=$SANDBOX_RUNNER_REGISTRATION_TOKEN
+      - SANDBOX_API_RUNNER_API_KEY=$SANDBOX_RUNNER_API_KEY
+      - SANDBOX_API_GRPC_TLS_CERT_FILE=/tls/api/grpc-server.crt
+      - SANDBOX_API_GRPC_TLS_KEY_FILE=/tls/api/grpc-server.key
+      - SANDBOX_API_GRPC_TLS_CLIENT_CA_FILE=/tls/api/ca.crt
+      - SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_CA_FILE=/tls/api/ca.crt
+      - SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_CERT_FILE=/tls/api/control-grpc-api-client.crt
+      - SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_KEY_FILE=/tls/api/control-grpc-api-client.key
+      - SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_SERVER_NAME=sandbox-runner-1
+    volumes:
+      - sandbox-tls:/tls:ro
+    networks:
+      - racknerd
+    restart: unless-stopped
+
+  # Privileged Docker-in-Docker runner. Internal only, never expose publicly.
+  sandbox-runner-1:
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind@sha256:a065eb3480600104a8e5bdcb23d73f7057d61dbf53f749cf4901b075612c51db
+    container_name: sandbox-runner-1
+    privileged: true
+    depends_on:
+      - sandbox-api
+    environment:
+      - SANDBOX_RUNNER_API_KEYS=$SANDBOX_RUNNER_API_KEY
+      - SANDBOX_RUNNER_REGISTRATION_TOKEN=$SANDBOX_RUNNER_REGISTRATION_TOKEN
+      - SANDBOX_RUNNER_API_GRPC_ADDR=sandbox-api:9090
+      - SANDBOX_RUNNER_HTTP_BASE_URL=http://sandbox-runner-1:8080
+      - SANDBOX_RUNNER_CONTROL_GRPC_LISTEN_ADDR=:9091
+      - SANDBOX_RUNNER_CONTROL_GRPC_ADVERTISE_ADDR=sandbox-runner-1:9091
+      - SANDBOX_RUNNER_ID=runner-1
+      - SANDBOX_RUNNER_DOCKER_SANDBOX_IMAGE=ghcr.io/n8n-io/n8n-sandbox-service-sandbox:latest
+      - SANDBOX_RUNNER_REGISTRATION_GRPC_CA_FILE=/tls/runner/ca.crt
+      - SANDBOX_RUNNER_REGISTRATION_GRPC_CERT_FILE=/tls/runner/grpc-client.crt
+      - SANDBOX_RUNNER_REGISTRATION_GRPC_KEY_FILE=/tls/runner/grpc-client.key
+      - SANDBOX_RUNNER_REGISTRATION_GRPC_SERVER_NAME=sandbox-api
+      - SANDBOX_RUNNER_CONTROL_GRPC_TLS_CERT_FILE=/tls/runner/control-grpc-server.crt
+      - SANDBOX_RUNNER_CONTROL_GRPC_TLS_KEY_FILE=/tls/runner/control-grpc-server.key
+      - SANDBOX_RUNNER_CONTROL_GRPC_TLS_CLIENT_CA_FILE=/tls/ca.crt
+    volumes:
+      - sandbox-tls:/tls:ro
+    networks:
+      - racknerd
+    restart: unless-stopped
 
   postgres:
     image: mirror.gcr.io/postgres:18.6
@@ -161,6 +243,7 @@ networks:
 
 volumes:
   n8n_data:
+  sandbox-tls:
   postgres_data:
   databasus_data:
   forgejo_data:

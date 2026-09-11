@@ -49,3 +49,30 @@ services:
     image: mirror.gcr.io/cloudflare/cloudflared@sha256:ff69a2225ad7c6f85ed84fbd5f3087df46202426b2388ec60214098e0adf05e9
     command: tunnel --no-autoupdate run --token $CF_TOKEN
     container_name: cloudflared
+
+  tailscale:
+    image: tailscale/tailscale:v1.102.3
+    container_name: tailscale
+    hostname: npm-subnet-router
+    entrypoint:
+      - sh
+      - -c
+      - ln -sf /usr/sbin/iptables-nft /usr/sbin/iptables && ln -sf /usr/sbin/ip6tables-nft /usr/sbin/ip6tables && exec /usr/local/bin/containerboot
+    environment:
+      - TS_AUTHKEY=$TS_AUTHKEY
+      - TS_HOSTNAME=npm-subnet-router
+      - TS_ROUTES=10.69.69.0/24,10.20.10.0/24,10.0.0.0/24
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_ACCEPT_DNS=false
+    volumes:
+      - tailscale-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    network_mode: host
+    restart: unless-stopped
+
+volumes:
+  tailscale-data:
