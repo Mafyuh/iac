@@ -65,8 +65,8 @@ spec:
         cpu: 25m
         memory: 256Mi
       limits:
-        cpu: 500m
-        memory: 1024Mi
+        cpu: "1"
+        memory: 2Gi
 
     livenessProbe:
       enabled: false
