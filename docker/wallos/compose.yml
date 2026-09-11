@@ -3,7 +3,7 @@
 services:
   wallos:
     container_name: wallos
-    image: mirror.gcr.io/bellamy/wallos:5.6.0
+    image: mirror.gcr.io/bellamy/wallos:5.7.1
     ports:
       - "8282:80/tcp"
     environment:
