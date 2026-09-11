@@ -63,7 +63,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v3.1.0
+              tag: v3.2.0
               pullPolicy: IfNotPresent
             env:
               MPLCONFIGDIR: /tmp/matplotlib
