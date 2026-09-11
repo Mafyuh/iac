@@ -6,6 +6,5 @@ resources:
   - cloudflared/ks.yaml
   - crunchy-pgo/ks.yaml
   - gotify/ks.yaml
-  - n8n/ks.yaml
   - prometheus/ks.yaml
   - vaultwarden/ks.yaml
