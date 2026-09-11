@@ -34,6 +34,15 @@ resource "cloudflare_dns_record" "io_wildcard" {
   zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
 }
 
+resource "cloudflare_dns_record" "io_n8n" {
+  content = data.bitwarden-secrets_secret.vps_oci_vm_ip.value
+  name    = "n8n.${var.domains["io"]}"
+  proxied = true
+  ttl     = 1
+  type    = "A"
+  zone_id = data.bitwarden-secrets_secret.cf_io_zone_id.value
+}
+
 resource "cloudflare_dns_record" "io_protonmail2" {
   content = "protonmail2.domainkey.do3ms56zchvtm6sjemsbc5v2e3ednpsah4nnxa75siw5n7oowueya.domains.proton.ch"
   name    = "protonmail2._domainkey.${var.domains["io"]}"

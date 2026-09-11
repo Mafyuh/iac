@@ -67,6 +67,33 @@ services:
     depends_on:
       - caddy
 
+  n8n:
+    image: ghcr.io/n8n-io/n8n:2.39.2
+    container_name: n8n
+    volumes:
+      - n8n_data:/home/node/.n8n
+    environment:
+      - GENERIC_TIMEZONE=America/New_York
+      - TZ=America/New_York
+      - WEBHOOK_URL=$WEBHOOK_URL
+      - N8N_ENCRYPTION_KEY=$N8N_ENCRYPTION_KEY
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=vaultwarden
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_POSTGRESDB_SSL_ENABLED=false
+    restart: unless-stopped
+    networks:
+      - racknerd
+    depends_on:
+      postgres:
+        condition: service_healthy
+    labels:
+      caddy: $N8N_HOSTNAME
+      caddy.reverse_proxy: "{{upstreams 5678}}"
+
   postgres:
     image: mirror.gcr.io/postgres:18.6
     container_name: postgres
@@ -133,6 +160,7 @@ networks:
     external: true
 
 volumes:
+  n8n_data:
   postgres_data:
   databasus_data:
   forgejo_data:
