@@ -106,6 +106,7 @@ spec:
               sectionName: https
 
       prometheusSpec:
+        externalUrl: https://prometheus.local.mafyuh.dev
         evaluationInterval: 2m
         enableRemoteWriteReceiver: true
         serviceMonitorSelectorNilUsesHelmValues: false
