@@ -73,11 +73,18 @@ spec:
               match:
                 severity: "critical"
               continue: true
+            - receiver: "pushover"
+              match:
+                severity: "critical"
         receivers:
           - name: "null"
           - name: "n8n"
             webhook_configs:
               - url: ${N8N_GOTIFY_ALERTM}
+          - name: "pushover"
+            pushover_configs:
+              - user_key: ${PUSHOVER_USER_KEY}
+                token: ${PUSHOVER_TOKEN}
     kubeApiServer:
       enabled: true
     kubelet:

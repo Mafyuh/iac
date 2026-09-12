@@ -104,7 +104,6 @@ services:
       caddy: $N8N_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 5678}}"
 
-  # One-shot: generates mTLS certificates for the sandbox stack, then exits
   sandbox-certs:
     image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
     container_name: sandbox-certs
@@ -123,7 +122,6 @@ services:
       - racknerd
     restart: "no"
 
-  # Self-hosted sandbox API for n8n AI Assistant. Internal only, never expose.
   sandbox-api:
     image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
     container_name: sandbox-api
@@ -147,7 +145,6 @@ services:
       - racknerd
     restart: unless-stopped
 
-  # Privileged Docker-in-Docker runner. Internal only, never expose publicly.
   sandbox-runner-1:
     image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind@sha256:a065eb3480600104a8e5bdcb23d73f7057d61dbf53f749cf4901b075612c51db
     container_name: sandbox-runner-1
