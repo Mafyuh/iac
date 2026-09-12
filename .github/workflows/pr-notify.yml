@@ -7,11 +7,23 @@ on:
 jobs:
   pushover-actions:
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
-      - uses: actions/checkout@v7
-      - name: pushover-actions
-        uses: clivern/pushover-actions@master
+      - name: Send Pushover notification
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          curl --fail --silent --show-error \
+            --form-string "token=$PUSHOVER_TOKEN" \
+            --form-string "user=$PUSHOVER_USER" \
+            --form-string "title=New PR #$PR_NUMBER — $REPOSITORY" \
+            --form-string "message=$PR_TITLE\nOpened by $PR_AUTHOR" \
+            --form-string "url=$PR_URL" \
+            --form-string "url_title=Open pull request" \
+            https://api.pushover.net/1/messages.json
