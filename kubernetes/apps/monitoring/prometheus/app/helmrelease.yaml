@@ -106,11 +106,12 @@ spec:
         configMaps:
           - website-monitoring-targets
         replicas: 1
-        retention: 14d
+        retention: 90d
+        retentionSize: 135GB
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: ceph-block
               resources:
                 requests:
-                  storage: 40Gi
+                  storage: 150Gi
