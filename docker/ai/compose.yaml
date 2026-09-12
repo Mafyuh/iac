@@ -65,7 +65,7 @@ services:
       - LOG_STYLE=pretty
 
   ai-proxy:
-    image: ghcr.io/mafyuh/ai-proxy:v1.0.0
+    image: ghcr.io/mafyuh/ai-proxy:v1.0.1
     pull_policy: always
     restart: unless-stopped
     container_name: ai-proxy
