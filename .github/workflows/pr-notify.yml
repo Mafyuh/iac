@@ -1,0 +1,17 @@
+name: Pushover PR Notification
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  pushover-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: pushover-actions
+        uses: clivern/pushover-actions@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
