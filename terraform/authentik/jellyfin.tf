@@ -21,3 +21,40 @@ resource "authentik_policy_binding" "jellyfin-group-access" {
   group  = authentik_group.jellyfin-ldap.id
   order  = 0
 }
+
+resource "authentik_policy_expression" "jellyfin-ldap-avatar-sync" {
+  name       = "jellyfin-ldap-avatar-sync"
+  expression = <<EOF
+try:
+    flow_plan = request.context.get("flow_plan")
+    user = None
+    if flow_plan:
+        user = flow_plan.context.get("pending_user")
+    if user is None:
+        user = getattr(request, "user", None)
+    if user is None or not getattr(user, "is_authenticated", False):
+        return True
+    avatar = getattr(user, "avatar", None)
+    attrs = getattr(user, "attributes", None) or {}
+    if avatar:
+        url = "https://auth.${var.domains["io"]}" + avatar.url
+        if attrs.get("avatar-url") != url:
+            attrs["avatar-url"] = url
+            user.attributes = attrs
+            user.save(update_fields=["attributes"])
+    else:
+        if "avatar-url" in attrs:
+            attrs.pop("avatar-url", None)
+            user.attributes = attrs
+            user.save(update_fields=["attributes"])
+except Exception:
+    pass
+return True
+EOF
+}
+
+resource "authentik_policy_binding" "jellyfin-ldap-avatar-sync" {
+  target = authentik_flow.ldap-authentication.uuid
+  policy = authentik_policy_expression.jellyfin-ldap-avatar-sync.id
+  order  = 0
+}
