@@ -78,7 +78,7 @@ services:
 #      MODEL_ALIASES_FILE: "/app/config/model-aliases.yml"
 
   searxng:
-    image: mirror.gcr.io/searxng/searxng@sha256:6c9da4d4d236672a1b722f597d643de2202410a2281b7aa4d98fccca3a8f3732
+    image: mirror.gcr.io/searxng/searxng@sha256:1f3720f59a0361592dc942e4be50e0ebb63c112d915883fcb78a011995fffb47
     container_name: searxng
     environment:
       - PUID=${PUID:-1000}
