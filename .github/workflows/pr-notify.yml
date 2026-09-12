@@ -23,7 +23,7 @@ jobs:
             --form-string "token=$PUSHOVER_TOKEN" \
             --form-string "user=$PUSHOVER_USER" \
             --form-string "title=New PR #$PR_NUMBER — $REPOSITORY" \
-            --form-string "message=$PR_TITLE\nOpened by $PR_AUTHOR" \
+            --form-string "message=$PR_TITLE Opened by $PR_AUTHOR" \
             --form-string "url=$PR_URL" \
             --form-string "url_title=Open pull request" \
             https://api.pushover.net/1/messages.json
