@@ -2,12 +2,17 @@ upstreams:
   groups:
     default:
       - 1.1.1.1
-      - 10.0.0.1
       - https://dns.google/dns-query
       - https://dns.nextdns.io
       - tcp-tls:dns.quad9.net
   strategy: parallel_best
   timeout: 2s
+
+## Oke addresses
+conditional:
+  fallbackUpstream: true
+  mapping:
+    matt.fo: 10.0.0.1
 
 startVerifyUpstream: true
 connectIPVersion: v4
