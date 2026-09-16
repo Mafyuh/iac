@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   fail2ban:
-    image: ghcr.io/crazy-max/fail2ban:1.1.0
+    image: ghcr.io/crazy-max/fail2ban:1.1.1
     container_name: fail2ban
     network_mode: "host"
     cap_add:
