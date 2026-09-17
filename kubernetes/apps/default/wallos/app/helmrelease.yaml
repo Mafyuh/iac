@@ -1,0 +1,67 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app wallos
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+  interval: 15m
+  values:
+    controllers:
+      wallos:
+        containers:
+          main:
+            image:
+              repository: mirror.gcr.io/bellamy/wallos
+              tag: 5.7.1
+            env:
+              TZ: America/New_York
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 80
+
+    route:
+      app:
+        hostnames:
+          - "wallos.local.mafyuh.dev"
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - identifier: app
+                port: *port
+
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /var/www/html/db
+            subPath: db
+          - path: /var/www/html/images/uploads/logos
+            subPath: logos

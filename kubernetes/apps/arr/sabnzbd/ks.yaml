@@ -27,6 +27,7 @@ spec:
     substitute:
       APP: sabnzbd
       VOLSYNC_CAPACITY: 2Gi
+      VOLSYNC_SCHEDULE: "10 0 * * *"
     substituteFrom:
       - kind: Secret
         name: arr-secrets

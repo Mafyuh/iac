@@ -1,0 +1,73 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app jellystat
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+  interval: 15m
+  values:
+    controllers:
+      jellystat:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/cyfershepard/jellystat
+              tag: 1.1.12
+            env:
+              TZ: America/New_York
+              POSTGRES_USER: jellystat
+              POSTGRES_IP: 10.0.0.210
+              POSTGRES_PORT: "5432"
+              POSTGRES_DB: jellystat
+              JS_GEOLITE_ACCOUNT_ID: "972418"
+              MINIMUM_SECONDS_TO_INCLUDE_PLAYBACK: "15"
+            envFrom:
+              - secretRef:
+                  name: jellystat-secret
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 3000
+
+    route:
+      app:
+        hostnames:
+          - "jellystat.local.mafyuh.dev"
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - identifier: app
+                port: *port
+
+    persistence:
+      backup:
+        type: emptyDir
+        globalMounts:
+          - path: /app/backend/backup-data

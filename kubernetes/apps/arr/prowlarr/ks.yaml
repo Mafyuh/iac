@@ -27,6 +27,7 @@ spec:
     substitute:
       APP: prowlarr
       VOLSYNC_CAPACITY: 2Gi
+      VOLSYNC_SCHEDULE: "20 0 * * *"
     substituteFrom:
       - kind: Secret
         name: arr-secrets

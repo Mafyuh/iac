@@ -27,25 +27,6 @@ services:
     image: mirror.gcr.io/prompve/prometheus-pve-exporter:3.10.0
     restart: unless-stopped
 
-  jellystat:
-    image: ghcr.io/cyfershepard/jellystat:1.1.12
-    environment:
-      POSTGRES_USER: jellystat
-      POSTGRES_PASSWORD: $JS_POSTGRES_PASSWORD
-      POSTGRES_IP: 10.0.0.210
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: jellystat
-      JWT_SECRET: $JWT_SECRET
-      JS_GEOLITE_ACCOUNT_ID: 972418
-      JS_GEOLITE_LICENSE_KEY: $JS_GEOLITE_LICENSE_KEY
-      TZ: America/New_York
-      MINIMUM_SECONDS_TO_INCLUDE_PLAYBACK: 15
-    ports:
-      - "3000:3000"
-    volumes:
-      - jellystat_data:/app/backend/backup-data
-    restart: unless-stopped
-
   smokeping-prober:
     image: quay.io/superq/smokeping-prober:v0.12.0
     container_name: smokeping-prober

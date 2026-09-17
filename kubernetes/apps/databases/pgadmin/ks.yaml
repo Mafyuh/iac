@@ -26,3 +26,4 @@ spec:
     substitute:
       APP: pgadmin
       VOLSYNC_CAPACITY: 2Gi
+      VOLSYNC_SCHEDULE: "10 1 * * *"

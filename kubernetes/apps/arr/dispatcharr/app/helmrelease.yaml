@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app dispatcharr
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: dispatcharr
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    controllers:
+      dispatcharr:
+        enabled: true
+        type: deployment
+
+        replicas: 1
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/dispatcharr/dispatcharr
+              tag: 0.31.0
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "America/New_York"
+              DISPATCHARR_ENV: "aio"
+              REDIS_HOST: localhost
+              CELERY_BROKER_URL: redis://localhost:6379/0
+              DISPATCHARR_LOG_LEVEL: info
+
+            probes:
+              liveness:
+                enabled: false
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 1Gi
+              limits:
+                memory: 2Gi
+
+    service:
+      app:
+        primary: true
+        controller: dispatcharr
+        ports:
+          http:
+            port: &port 9191
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.local.mafyuh.dev"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: *app
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /data
