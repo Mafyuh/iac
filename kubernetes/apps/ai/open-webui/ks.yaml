@@ -3,20 +3,18 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app lidarr
-  namespace: &ns arr
+  name: &app open-webui
+  namespace: &ns ai
 spec:
   components:
     - ../../../../components/volsync
-    - ../../../../components/authentik-proxy
-    - ../../../../components/nfs
   targetNamespace: *ns
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  path: ./kubernetes/apps/arr/lidarr/app
+  path: ./kubernetes/apps/ai/open-webui/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -25,6 +23,9 @@ spec:
   wait: false
   postBuild:
     substitute:
-      APP: lidarr
-      VOLSYNC_CAPACITY: 2Gi
-      VOLSYNC_SCHEDULE: "40 0 * * *"
+      APP: open-webui
+      VOLSYNC_CAPACITY: 5Gi
+      VOLSYNC_SCHEDULE: "40 1 * * *"
+    substituteFrom:
+      - kind: Secret
+        name: open-webui-secrets

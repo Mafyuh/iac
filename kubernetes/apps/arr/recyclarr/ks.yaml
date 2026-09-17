@@ -20,6 +20,3 @@ spec:
     namespace: flux-system
   wait: false
   postBuild:
-    substituteFrom:
-      - kind: Secret
-        name: arr-secrets

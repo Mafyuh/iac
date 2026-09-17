@@ -28,6 +28,3 @@ spec:
       APP: sonarr
       VOLSYNC_CAPACITY: 4Gi
       VOLSYNC_SCHEDULE: "0 1 * * *"
-    substituteFrom:
-      - kind: Secret
-        name: arr-secrets

@@ -73,7 +73,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["stats.mafyuh.dev"]
+        hostnames: ["stats.${PUBLIC_DOMAIN}"]
         rules:
           - matches:
               - path:

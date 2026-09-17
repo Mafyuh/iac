@@ -16,6 +16,10 @@ spec:
     secretRef:
       name: sops-age
   prune: false
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: cluster-secrets
   patches:
     - # Add Kustomization defaults
       patch: |-
@@ -27,6 +31,11 @@ spec:
           decryption:
             provider: sops
           deletionPolicy: WaitForTermination
+          postBuild:
+            substitute:
+              PUBLIC_DOMAIN: "${PUBLIC_DOMAIN}"
+              LOCAL_DOMAIN: "${LOCAL_DOMAIN}"
+              NAS_IP: "${NAS_IP}"
           patches:
             - patch: |-
                 apiVersion: helm.toolkit.fluxcd.io/v2

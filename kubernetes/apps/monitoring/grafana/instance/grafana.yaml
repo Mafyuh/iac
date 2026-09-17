@@ -30,7 +30,7 @@ spec:
       angular_support_enabled: "true"
     server:
       enable_gzip: "true"
-      root_url: https://grafana.mafyuh.dev
+      root_url: https://grafana.${PUBLIC_DOMAIN}
   deployment:
     spec:
       strategy:

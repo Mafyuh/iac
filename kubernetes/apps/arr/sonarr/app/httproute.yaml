@@ -5,7 +5,7 @@ kind: HTTPRoute
 metadata:
   name: sonarr-local
 spec:
-  hostnames: ["sonarr.local.mafyuh.dev"]
+  hostnames: ["sonarr.${LOCAL_DOMAIN}"]
   parentRefs:
     - name: envoy-internal
       namespace: kube-system

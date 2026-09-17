@@ -65,7 +65,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.local.mafyuh.dev"
+          - "{{ .Release.Name }}.${LOCAL_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: kube-system

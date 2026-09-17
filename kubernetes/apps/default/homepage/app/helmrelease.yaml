@@ -22,7 +22,7 @@ spec:
               tag: v2.3.0
             env:
               TZ: America/New_York
-              HOMEPAGE_ALLOWED_HOSTS: lab.mafyuh.dev
+              HOMEPAGE_ALLOWED_HOSTS: lab.${PUBLIC_DOMAIN}
             envFrom:
               - secretRef:
                   name: *secret
@@ -36,7 +36,7 @@ spec:
                     path: /api/healthcheck
                     httpHeaders:
                       - name: Host
-                        value: lab.mafyuh.dev
+                        value: lab.${PUBLIC_DOMAIN}
                   initialDelaySeconds: 0
               readiness: *probes
               startup: *probes
@@ -50,7 +50,7 @@ spec:
             port: 3000
     route:
       app:
-        hostnames: ["lab.mafyuh.dev"]
+        hostnames: ["lab.${PUBLIC_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: kube-system

@@ -28,6 +28,3 @@ spec:
       APP: radarr
       VOLSYNC_CAPACITY: 4Gi
       VOLSYNC_SCHEDULE: "50 0 * * *"
-    substituteFrom:
-      - kind: Secret
-        name: arr-secrets

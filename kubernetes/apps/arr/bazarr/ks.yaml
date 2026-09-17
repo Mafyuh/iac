@@ -28,6 +28,3 @@ spec:
       APP: bazarr
       VOLSYNC_CAPACITY: 2Gi
       VOLSYNC_SCHEDULE: "30 0 * * *"
-    substituteFrom:
-      - kind: Secret
-        name: arr-secrets

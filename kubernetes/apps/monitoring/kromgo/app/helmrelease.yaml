@@ -67,7 +67,7 @@ spec:
       external:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["kromgo.mafyuh.dev"]
+        hostnames: ["kromgo.${PUBLIC_DOMAIN}"]
         rules:
           - matches:
               - path:

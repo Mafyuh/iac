@@ -51,7 +51,7 @@ spec:
 
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        hostnames: ["{{ .Release.Name }}.${PUBLIC_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: kube-system

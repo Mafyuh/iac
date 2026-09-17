@@ -52,7 +52,7 @@ spec:
     route:
       app:
         hostnames:
-          - "jellystat.local.mafyuh.dev"
+          - "jellystat.${LOCAL_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: kube-system

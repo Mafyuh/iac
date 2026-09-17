@@ -28,6 +28,4 @@ spec:
       VOLSYNC_SCHEDULE: "0 0 * * *"
     substituteFrom:
       - kind: Secret
-        name: arr-secrets
-      - kind: Secret
         name: seerr-secrets

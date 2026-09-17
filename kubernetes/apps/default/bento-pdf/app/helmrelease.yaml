@@ -39,7 +39,7 @@ spec:
     route:
       app:
         hostnames:
-          - "pdf.mafyuh.dev"
+          - "pdf.${PUBLIC_DOMAIN}"
         parentRefs:
           - name: envoy-external
             namespace: kube-system

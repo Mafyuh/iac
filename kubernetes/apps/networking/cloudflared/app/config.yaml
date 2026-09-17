@@ -1,8 +1,8 @@
 ---
 ingress:
-  - hostname: "*.mafyuh.dev"
+  - hostname: "*.${PUBLIC_DOMAIN}"
     service: https://envoy-external.kube-system.svc.cluster.local
     originRequest:
       http2Origin: true
-      originServerName: external.mafyuh.dev
+      originServerName: external.${PUBLIC_DOMAIN}
   - service: http_status:404

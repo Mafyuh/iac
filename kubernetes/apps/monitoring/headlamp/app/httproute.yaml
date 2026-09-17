@@ -6,7 +6,7 @@ metadata:
   name: headlamp
   namespace: monitoring
 spec:
-  hostnames: ["k8s.mafyuh.dev"]
+  hostnames: ["k8s.${PUBLIC_DOMAIN}"]
   parentRefs:
     - name: envoy-external
       namespace: kube-system

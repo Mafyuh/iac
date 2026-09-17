@@ -50,7 +50,7 @@ spec:
               - send: "NICK prober"
               - send: "USER prober prober prober :prober"
               - expect: "PING :([^ ]+)"
-                send: "PONG ${1}"
+                send: "PONG $${1}"
               - expect: "^:[^ ]+ 001"
         icmp:
           prober: icmp

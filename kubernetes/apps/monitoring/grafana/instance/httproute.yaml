@@ -6,7 +6,7 @@ metadata:
   name: grafana
 spec:
   hostnames:
-    - grafana.mafyuh.dev
+    - grafana.${PUBLIC_DOMAIN}
   parentRefs:
     - name: envoy-external
       namespace: kube-system

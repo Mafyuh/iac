@@ -95,7 +95,7 @@ spec:
       public:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.mafyuh.dev"]
+        hostnames: ["{{ .Release.Name }}.${PUBLIC_DOMAIN}"]
         rules:
           - matches:
               - path:

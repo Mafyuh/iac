@@ -43,7 +43,7 @@ spec:
     route:
       app:
         hostnames:
-          - "wallos.local.mafyuh.dev"
+          - "wallos.${LOCAL_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: kube-system

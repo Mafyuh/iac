@@ -59,7 +59,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.local.mafyuh.dev"]
+        hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
         rules:
           - matches:
               - path:
