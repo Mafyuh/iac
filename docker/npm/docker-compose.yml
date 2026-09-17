@@ -51,7 +51,7 @@ services:
     container_name: cloudflared
 
   tailscale:
-    image: tailscale/tailscale:v1.102.3
+    image: tailscale/tailscale:v1.102.4
     container_name: tailscale
     hostname: npm-subnet-router
     entrypoint:
