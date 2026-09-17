@@ -8,7 +8,7 @@ data:
     mappings:
       - match: 'scale\.monitoring\.(.*)'
         match_type: regex
-        name: '${1}'
+        name: '$${1}'
         labels:
           job: truenas
           source: scale_monitoring
