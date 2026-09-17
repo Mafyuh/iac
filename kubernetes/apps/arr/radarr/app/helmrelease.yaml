@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: 6.4.4.10684
+              tag: 6.4.4.10685
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
