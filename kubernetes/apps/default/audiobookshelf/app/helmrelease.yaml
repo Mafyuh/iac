@@ -1,0 +1,99 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app audiobookshelf
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+  interval: 15m
+  values:
+    controllers:
+      audiobookshelf:
+        strategy: Recreate
+        pod:
+          terminationGracePeriodSeconds: 60
+          securityContext:
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 1000
+        containers:
+          app:
+            image:
+              repository: ghcr.io/advplyr/audiobookshelf
+              tag: 2.36.1
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/New_York
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 2Gi
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 80
+
+    route:
+      app:
+        hostnames:
+          - "pod.${PUBLIC_DOMAIN}"
+        parentRefs:
+          - name: envoy-external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - identifier: app
+                port: *port
+
+    persistence:
+      config:
+        existingClaim: *app
+        globalMounts:
+          - path: /config
+            subPath: config
+          - path: /metadata
+            subPath: metadata
+      books:
+        type: nfs
+        server: "${NAS_IP}"
+        path: /mnt/thePool/thePoolShare/Media/Books
+        globalMounts:
+          - path: /books
+      audiobooks:
+        type: nfs
+        server: "${NAS_IP}"
+        path: /mnt/thePool/thePoolShare/Media/Audiobooks
+        globalMounts:
+          - path: /audiobooks
+      podcasts:
+        type: nfs
+        server: "${NAS_IP}"
+        path: /mnt/thePool/thePoolShare/Media/Podcasts
+        globalMounts:
+          - path: /podcasts

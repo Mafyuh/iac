@@ -22,11 +22,11 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "main_tunnel" {
       },
       {
         hostname = "pod.${var.domains["io"]}"
-        service  = "http://10.0.0.10:9090"
+        service  = "https://10.0.0.217:443"
         path     = ""
         origin_request = {
           no_tls_verify            = false
-          origin_server_name       = ""
+          origin_server_name       = "pod.${var.domains["io"]}"
           disable_chunked_encoding = false
           http2_origin             = true
           tcp_keep_alive           = 300
