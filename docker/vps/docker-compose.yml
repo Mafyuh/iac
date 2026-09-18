@@ -146,7 +146,7 @@ services:
     restart: unless-stopped
 
   sandbox-runner-1:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind@sha256:a065eb3480600104a8e5bdcb23d73f7057d61dbf53f749cf4901b075612c51db
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind@sha256:ccb9b68e70d845bf8ee87083e51732e8eb898558110c541751ea7995a66128ad
     container_name: sandbox-runner-1
     privileged: true
     depends_on:
