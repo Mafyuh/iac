@@ -18,47 +18,5 @@ services:
               count: all
               capabilities: [gpu]
 
-  bifrost:
-    image: ghcr.io/maximhq/bifrost:v2.2.0
-    container_name: bifrost
-    restart: unless-stopped
-    ports:
-      - "4001:8080"
-    volumes:
-      - bifrost-data:/app/data
-    environment:
-      - APP_HOST=0.0.0.0
-      - LOG_LEVEL=info
-      - LOG_STYLE=pretty
-
-  ai-proxy:
-    image: ghcr.io/mafyuh/ai-proxy:v1.0.1
-    pull_policy: always
-    restart: unless-stopped
-    container_name: ai-proxy
-    ports:
-      - "3010:3000"
-    environment:
-      UPSTREAM_BASE_URL: "https://api.mafyuh.xyz"
-      MODELS_DEV_URL: "https://models.dev/catalog.json"
-      CATALOG_REFRESH_HOURS: "24"
-#      MODEL_ALIASES_FILE: "/app/config/model-aliases.yml"
-
-  searxng:
-    image: mirror.gcr.io/searxng/searxng@sha256:a31763b7af3caf6ae9aac1816ba774214eb550252e06a4998f276ded8d60461b
-    container_name: searxng
-    environment:
-      - PUID=${PUID:-1000}
-      - PGID=${PGID:-1000}
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/searxng:/etc/searxng
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
-
 volumes:
-  open-terminal:
-  open-webui:
   ollama:
-  bifrost-data:
