@@ -17,39 +17,6 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.11.3
-    container_name: open-webui
-    restart: unless-stopped
-    ports:
-      - 3000:8080
-    volumes:
-      - open-webui:/app/backend/data
-    environment:
-      - ENABLE_OAUTH_SIGNUP=true
-      - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true
-      - OAUTH_PROVIDER_NAME=Authentik
-      - OPENID_PROVIDER_URL=https://auth.mafyuh.io/application/o/open-webui/.well-known/openid-configuration
-      - OAUTH_CLIENT_ID=$OAUTH_CLIENT_ID
-      - OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET
-      - OAUTH_SCOPES=openid email profile
-      - OPENID_REDIRECT_URI=https://chat.mafyuh.io/oauth/oidc/callback
-      - ENABLE_LOGIN_FORM=false
-      - DATABASE_URL=$DATABASE_URL
-    extra_hosts:
-      - host.docker.internal:host-gateway
-
-  open-terminal:
-    container_name: open-terminal
-    image: ghcr.io/open-webui/open-terminal:0.13.0
-    restart: unless-stopped
-    ports:
-      - 3001:8000
-    volumes:
-      - open-terminal:/home
-    environment:
-      - OPEN_TERMINAL_API_KEY=$OPEN_TERMINAL_API_KEY
-      - OPEN_TERMINAL_MULTI_USER=true
 
   bifrost:
     image: ghcr.io/maximhq/bifrost:v2.2.0

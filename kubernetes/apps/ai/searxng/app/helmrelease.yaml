@@ -1,0 +1,83 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app searxng
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: searxng
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: ai
+
+    controllers:
+      searxng:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: mirror.gcr.io/searxng/searxng
+              digest: sha256:a31763b7af3caf6ae9aac1816ba774214eb550252e06a4998f276ded8d60461b
+              pullPolicy: IfNotPresent
+            env:
+              PUID: "1000"
+              PGID: "1000"
+              TZ: America/New_York
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 8080
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 2
+                  failureThreshold: 3
+              readiness: *probe
+            resources:
+              requests:
+                cpu: 25m
+                memory: 128Mi
+              limits:
+                memory: 1Gi
+
+    service:
+      app:
+        primary: true
+        controller: searxng
+        ports:
+          http:
+            port: *port
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: searxng
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: searxng
+        globalMounts:
+          - path: /etc/searxng

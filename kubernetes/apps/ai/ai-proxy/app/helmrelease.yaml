@@ -1,0 +1,102 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ai-proxy
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: ai-proxy
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: ai
+
+    defaultExternalSecretStoreRef:
+      kind: ClusterSecretStore
+      name: bitwarden-secrets-manager
+
+    externalSecrets:
+      registry:
+        forceRename: ai-proxy-registry
+        refreshInterval: 3h
+        target:
+          creationPolicy: Owner
+          template:
+            type: kubernetes.io/dockerconfigjson
+        data:
+          - secretKey: .dockerconfigjson
+            remoteRef:
+              key: "02f71988-a821-4a1a-9b5c-b4c9001aeabe"
+
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: ai-proxy-registry
+
+    controllers:
+      ai-proxy:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/mafyuh/ai-proxy
+              tag: v1.0.1
+              pullPolicy: IfNotPresent
+            env:
+              UPSTREAM_BASE_URL: http://bifrost.ai.svc.cluster.local:8080
+              MODELS_DEV_URL: https://models.dev/catalog.json
+              CATALOG_REFRESH_HOURS: "24"
+              TZ: America/New_York
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /healthz
+                    port: &port 3000
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 2
+                  failureThreshold: 3
+              readiness: *probe
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+            resources:
+              requests:
+                cpu: 25m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+    service:
+      app:
+        primary: true
+        controller: ai-proxy
+        ports:
+          http:
+            port: *port
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: ai-proxy
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
