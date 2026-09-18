@@ -105,7 +105,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 5678}}"
 
   sandbox-certs:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:33d01f44779fba0bc49fa051818ac2f4054c68ead17862543b684ba6a7c3b693
     container_name: sandbox-certs
     user: "0:0"
     entrypoint: ["sh", "-c"]
@@ -123,7 +123,7 @@ services:
     restart: "no"
 
   sandbox-api:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:33d01f44779fba0bc49fa051818ac2f4054c68ead17862543b684ba6a7c3b693
     container_name: sandbox-api
     depends_on:
       sandbox-certs:
