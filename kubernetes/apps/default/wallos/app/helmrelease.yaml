@@ -16,7 +16,7 @@ spec:
           main:
             image:
               repository: mirror.gcr.io/bellamy/wallos
-              tag: 5.7.1
+              tag: 5.8.1
             env:
               TZ: America/New_York
             probes:
