@@ -65,7 +65,6 @@ jobs:
               audiobookshelf) host="audiobook-shelf" ;;
               blocky) host="blocky-HA" ;;
               caddy) host="proxy" ;;
-              couchdb) host="docker" ;;
               downloaders) host="truenas" ;;
               exporters) host="Ubu" ;;
               geohub) host="Ubu" ;;

@@ -1,0 +1,128 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app couchdb
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: couchdb
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: databases
+
+    defaultExternalSecretStoreRef:
+      kind: ClusterSecretStore
+      name: bitwarden-secrets-manager
+
+    externalSecrets:
+      couchdb:
+        forceRename: couchdb-secret
+        refreshInterval: 3h
+        data:
+          - secretKey: COUCHDB_PASSWORD
+            remoteRef:
+              key: "aeb09725-39f5-47bf-823a-b31001738d02"
+
+    controllers:
+      couchdb:
+        enabled: true
+        type: deployment
+        strategy: Recreate
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: mirror.gcr.io/couchdb
+              tag: 3.5.2
+              pullPolicy: IfNotPresent
+            env:
+              COUCHDB_USER: mafyuh
+              TZ: America/New_York
+            envFrom:
+              - externalSecretRef:
+                  identifier: couchdb
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 5984
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 2
+                  failureThreshold: 3
+              readiness: *probe
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 5
+                  timeoutSeconds: 2
+                  failureThreshold: 30
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+              readOnlyRootFilesystem: false
+            resources:
+              requests:
+                cpu: 25m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 5984
+        runAsGroup: 5984
+        fsGroup: 5984
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+
+    service:
+      app:
+        primary: true
+        controller: couchdb
+        ports:
+          http:
+            port: *port
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: couchdb
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: couchdb
+        advancedMounts:
+          couchdb:
+            app:
+              - path: /opt/couchdb/data
+                subPath: data
+              - path: /opt/couchdb/etc/local.d
+                subPath: local.d

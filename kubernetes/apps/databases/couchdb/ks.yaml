@@ -1,0 +1,28 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app couchdb
+  namespace: &ns databases
+spec:
+  components:
+    - ../../../../components/volsync
+  targetNamespace: *ns
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  interval: 30m
+  timeout: 5m
+  path: ./kubernetes/apps/databases/couchdb/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: iac
+    namespace: flux-system
+  wait: false
+  postBuild:
+    substitute:
+      APP: couchdb
+      VOLSYNC_CAPACITY: 2Gi
+      VOLSYNC_SCHEDULE: "15 1 * * *"
