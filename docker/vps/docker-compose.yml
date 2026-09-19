@@ -234,6 +234,41 @@ services:
       caddy: git.mafyuh.io
       caddy.reverse_proxy: "{{upstreams 3000}}"
 
+  vaultwarden:
+    image: ghcr.io/dani-garcia/vaultwarden:1.37.3
+    container_name: vaultwarden
+    environment:
+      - TZ=America/New_York
+      - DOMAIN=https://${VW_HOSTNAME}
+      - DATABASE_URL=postgresql://vaultwarden:${POSTGRES_PASSWORD}@postgres:5432/vaultwarden
+      - SIGNUPS_ALLOWED=true
+      - SSO_ENABLED=true
+      - SSO_AUTHORITY=https://auth.mafyuh.io/application/o/vaultwarden/
+      - SSO_SCOPES=openid email profile offline_access
+      - SSO_ONLY=true
+      - SSO_AUTH_ONLY_NOT_SESSION=true
+      - SSO_CLIENT_ID=e17019c548f26f15e483b74b2b0a95e8900a03bb
+      - SSO_CLIENT_SECRET=$SSO_CLIENT_SECRET
+      - SMTP_HOST=smtp.protonmail.ch
+      - SMTP_FROM=noreply@mafyuh.dev
+      - SMTP_FROM_NAME=Vaultwarden
+      - SMTP_USERNAME=noreply@mafyuh.dev
+      - SMTP_PASSWORD=$SMTP_PASSWORD
+      - SMTP_TIMEOUT=15
+      - SMTP_SECURITY=starttls
+      - SMTP_PORT=587
+    volumes:
+      - vaultwarden_data:/data
+    restart: unless-stopped
+    networks:
+      - racknerd
+    depends_on:
+      postgres:
+        condition: service_healthy
+    labels:
+      caddy: $VW_HOSTNAME
+      caddy.reverse_proxy: "{{upstreams 80}}"
+
 networks:
   racknerd:
     external: true
@@ -244,3 +279,4 @@ volumes:
   postgres_data:
   databasus_data:
   forgejo_data:
+  vaultwarden_data:
