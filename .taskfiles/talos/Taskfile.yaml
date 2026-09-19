@@ -10,56 +10,83 @@ env:
   SOPS_AGE_KEY_FILE: "{{.SOPS_AGE_KEY_FILE}}"
 
 tasks:
-  generate:
-    desc: Generate Talos configuration
+  build:
+    desc: Render Talos configs with talstomize
     dir: "{{.TALOS_DIR}}"
-    cmd: talhelper genconfig
+    cmd: talstomize build . -o ./clusterconfig
     preconditions:
-      - test -f {{.TALOS_DIR}}/talconfig.yaml
-      - which talhelper
+      - test -f {{.TALOS_DIR}}/talstomize.yaml
+      - which talstomize sops
 
-  apply:
-    desc: Apply Talos config to all nodes
+  diff:
+    desc: Diff rendered configs against all live nodes (read-only)
     dir: "{{.TALOS_DIR}}"
     cmds:
-      - talhelper genconfig
-      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.201 --file clusterconfig/optiplex-k8s-talos-4.yaml
-      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.202 --file clusterconfig/optiplex-k8s-talos-5.yaml
-      - export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes 10.0.0.203 --file clusterconfig/optiplex-k8s-talos-6.yaml
+      - task: build
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talstomize diff -f .
     preconditions:
-      - test -f {{.TALOS_DIR}}/talconfig.yaml
-      - which talhelper talosctl
+      - which talstomize talosctl sops
+
+  diff-node:
+    desc: Diff rendered config against one live node (read-only) [NODE=required, e.g. talos-6]
+    dir: "{{.TALOS_DIR}}"
+    cmds:
+      - task: build
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talstomize diff -f . --node {{.NODE}}
+    requires:
+      vars: [NODE]
+    preconditions:
+      - which talstomize talosctl sops
+
+  diff-node-4:
+    desc: Diff rendered config against node 4 (read-only)
+    cmds:
+      - task: diff-node
+        vars:
+          NODE: talos-4
+
+  diff-node-5:
+    desc: Diff rendered config against node 5 (read-only)
+    cmds:
+      - task: diff-node
+        vars:
+          NODE: talos-5
+
+  diff-node-6:
+    desc: Diff rendered config against node 6 (read-only)
+    cmds:
+      - task: diff-node
+        vars:
+          NODE: talos-6
 
   apply-node:
-    desc: Apply Talos config to a specific node [IP=required, FILE=required]
+    desc: Render + apply Talos config to one node [NODE=required, e.g. talos-6]
     dir: "{{.TALOS_DIR}}"
-    cmd: export TALOSCONFIG={{.TALOSCONFIG}} && talosctl apply-config --nodes {{.IP}} --file {{.FILE}}
+    cmds:
+      - task: build
+      - export TALOSCONFIG={{.TALOSCONFIG}} && talstomize apply -f . --node {{.NODE}}
     requires:
-      vars: [IP, FILE]
+      vars: [NODE]
     preconditions:
-      - test -f {{.TALOS_DIR}}/{{.FILE}}
-      - which talosctl
+      - which talstomize talosctl sops
 
   apply-node-4:
-    desc: Apply Talos config to node 4
+    desc: Render + apply Talos config to node 4
     cmds:
       - task: apply-node
         vars:
-          IP: 10.0.0.201
-          FILE: clusterconfig/optiplex-k8s-talos-4.yaml
+          NODE: talos-4
 
   apply-node-5:
-    desc: Apply Talos config to node 5
+    desc: Render + apply Talos config to node 5
     cmds:
       - task: apply-node
         vars:
-          IP: 10.0.0.202
-          FILE: clusterconfig/optiplex-k8s-talos-5.yaml
+          NODE: talos-5
 
   apply-node-6:
-    desc: Apply Talos config to node 6
+    desc: Render + apply Talos config to node 6
     cmds:
       - task: apply-node
         vars:
-          IP: 10.0.0.203
-          FILE: clusterconfig/optiplex-k8s-talos-6.yaml
+          NODE: talos-6

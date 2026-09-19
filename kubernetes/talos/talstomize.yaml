@@ -1,0 +1,55 @@
+---
+apiVersion: config.talstomize.dev/v1alpha1
+kind: Talstomize
+clusterName: optiplex-k8s
+controlPlaneEndpoint: https://10.0.0.150:6443
+# renovate: depName=siderolabs/talos datasource=github-releases
+kubernetesVersion: v1.37.0
+secrets: ./talsecret.sops.yaml
+dnsDomain: cluster.local
+additionalSubjectAltNames:
+  - 127.0.0.1
+
+installer:
+  # renovate: depName=siderolabs/talos datasource=github-releases
+  talosVersion: v1.14.0
+  schematic:
+    customization:
+      extraKernelArgs:
+        - -init_on_alloc
+        - -selinux
+        - apparmor=0
+        - init_on_alloc=0
+        - init_on_free=0
+        - intel_iommu=on # PCI Passthrough
+        - iommu=pt # PCI Passthrough
+        - mitigations=off
+        - security=none
+        - talos.auditd.disabled=1
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/iscsi-tools
+          - siderolabs/util-linux-tools
+          - siderolabs/i915
+          - siderolabs/intel-ucode
+          - siderolabs/realtek-firmware
+
+patches:
+  - ./patches/cluster.yaml
+
+nodes:
+  talos-4:
+    ip: 10.0.0.201
+    kind: controlplane
+    patches:
+      - ./patches/talos-4.yaml
+  talos-5:
+    ip: 10.0.0.202
+    kind: controlplane
+    patches:
+      - ./patches/talos-5.yaml
+  talos-6:
+    ip: 10.0.0.203
+    kind: controlplane
+    patches:
+      - ./patches/talos-6.yaml

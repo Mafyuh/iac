@@ -1,0 +1,72 @@
+---
+# Cluster-wide patches, applied to every node.
+apiVersion: v1alpha1
+kind: ResolverConfig
+searchDomains:
+  disableDefault: true
+  domains: []
+hostDNS:
+  enabled: true
+  resolveMemberNames: true
+  forwardKubeDNSToHost: false
+---
+# Customize containerd (Spegel)
+machine:
+  files:
+    - path: /etc/cri/conf.d/20-customization.part
+      op: create
+      content: |
+        [plugins."io.containerd.cri.v1.images"]
+          discard_unpacked_layers = false
+---
+# Allow in-cluster Talos API access
+machine:
+  features:
+    kubernetesTalosAPIAccess:
+      allowedKubernetesNamespaces:
+        - system-upgrade
+        - actions-runner-system
+      allowedRoles:
+        - os:admin
+      enabled: true
+---
+apiVersion: v1alpha1
+kind: KubeFlannelCNIConfig
+$patch: delete
+---
+# KubeNodeConfig defaults add a control-plane NoSchedule taint; the live
+# cluster is untainted, so delete the taints field explicitly.
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+taints:
+  $patch: delete
+---
+# Configure kube-apiserver.
+apiVersion: v1alpha1
+kind: KubeAPIServerConfig
+extraArgs:
+  feature-gates: "ImageVolume=true,MutatingAdmissionPolicy=true,ResourceHealthStatus=true"
+  runtime-config: "admissionregistration.k8s.io/v1beta1=true"
+---
+# Cilium replaces kube-proxy.
+apiVersion: v1alpha1
+kind: KubeProxyConfig
+enabled: false
+---
+# Configure etcd
+cluster:
+  etcd:
+    advertisedSubnets:
+      - 10.0.0.0/24
+---
+# Configure kube-controller-manager metrics
+apiVersion: v1alpha1
+kind: KubeControllerManagerConfig
+extraArgs:
+  bind-address: "0.0.0.0"
+---
+# Configure kube-scheduler metrics
+apiVersion: v1alpha1
+kind: KubeSchedulerConfig
+extraArgs:
+  bind-address: "0.0.0.0"

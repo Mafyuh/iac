@@ -1,0 +1,11 @@
+---
+machine:
+  install:
+    disk: /dev/disk/by-id/nvme-eui.36483330543292560025385800000001
+  network:
+    interfaces:
+      - deviceSelector:
+          hardwareAddr: 98:fa:9b:ef:f4:bd
+        dhcp: true
+        vip:
+          ip: 10.0.0.150
