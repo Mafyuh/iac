@@ -40,7 +40,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Update Talos and Kubernetes versions in talstomize.yaml (talconfig.yaml is frozen since the talhelper retirement)",
+      "description": "Update Talos and Kubernetes versions in talstomize.yaml",
       "managerFilePatterns": ["/^kubernetes/talos/talstomize\\.ya?ml$/"],
       "matchStrings": [
         "# renovate: depName=(?<depName>.*?) datasource=(?<datasource>.*?)\\s+talosVersion: (?<currentValue>.*)",
