@@ -237,6 +237,7 @@ services:
   vaultwarden:
     image: ghcr.io/dani-garcia/vaultwarden:1.37.3
     container_name: vaultwarden
+    user: "1000:1000"
     environment:
       - TZ=America/New_York
       - DOMAIN=https://${VW_HOSTNAME}
