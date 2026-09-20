@@ -8,7 +8,7 @@ spec:
   allowCrossNamespaceImport: true
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      grafana.internal/instance: grafana
   datasources:
     - datasourceName: prometheus
       inputName: DS_PROMETHEUS
