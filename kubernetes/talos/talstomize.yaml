@@ -33,6 +33,7 @@ installer:
           - siderolabs/i915
           - siderolabs/intel-ucode
           - siderolabs/realtek-firmware
+          - siderolabs/nut-client
 
 patches:
   - ./patches/cluster.yaml
@@ -43,13 +44,16 @@ nodes:
     kind: controlplane
     patches:
       - ./patches/talos-4.yaml
+      - ./patches/nut-client.yaml
   talos-5:
     ip: 10.0.0.202
     kind: controlplane
     patches:
       - ./patches/talos-5.yaml
+      - ./patches/nut-client.yaml
   talos-6:
     ip: 10.0.0.203
     kind: controlplane
     patches:
       - ./patches/talos-6.yaml
+      - ./patches/nut-client.yaml

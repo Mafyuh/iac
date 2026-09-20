@@ -1,0 +1,15 @@
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: nut-client
+configFiles:
+  - mountPath: /usr/local/etc/nut/upsmon.conf
+    content: |-
+      MONITOR ups@10.0.0.10 1 upsmon upsmon secondary
+      MINSUPPLIES 1
+      SHUTDOWNCMD "/sbin/poweroff"
+      POLLFREQ 5
+      POLLFREQALERT 5
+      HOSTSYNC 15
+      DEADTIME 15
+      POWERDOWNFLAG /etc/killpower
