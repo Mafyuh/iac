@@ -10,6 +10,25 @@ spec:
     name: *app
   interval: 15m
   values:
+    defaultExternalSecretStoreRef:
+      kind: ClusterSecretStore
+      name: bitwarden-secrets-manager
+
+    externalSecrets:
+      jellystat:
+        forceRename: jellystat-secrets
+        refreshInterval: 3h
+        data:
+          - secretKey: POSTGRES_PASSWORD
+            remoteRef:
+              key: "fda9e7f2-0f6d-4067-ab92-b349013165a1"
+          - secretKey: JWT_SECRET
+            remoteRef:
+              key: "783928df-392a-4ec7-be08-b25b0058752a"
+          - secretKey: JS_GEOLITE_LICENSE_KEY
+            remoteRef:
+              key: "9da192f7-a8b4-4cf9-857f-b34901335ea1"
+
     controllers:
       jellystat:
         containers:
@@ -20,14 +39,14 @@ spec:
             env:
               TZ: America/New_York
               POSTGRES_USER: jellystat
-              POSTGRES_IP: 10.0.0.210
+              POSTGRES_IP: pg-cluster-primary.databases.svc.cluster.local
               POSTGRES_PORT: "5432"
               POSTGRES_DB: jellystat
               JS_GEOLITE_ACCOUNT_ID: "972418"
               MINIMUM_SECONDS_TO_INCLUDE_PLAYBACK: "15"
             envFrom:
-              - secretRef:
-                  name: jellystat-secret
+              - externalSecretRef:
+                  identifier: jellystat
             probes:
               liveness:
                 enabled: true
