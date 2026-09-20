@@ -13,6 +13,9 @@ spec:
       cloudflared:
         replicas: 2
         strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
         annotations:
           reloader.stakater.com/auto: "true"
         containers:

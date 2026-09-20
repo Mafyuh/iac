@@ -15,6 +15,9 @@ spec:
           secret.reloader.stakater.com/reload: &secret homepage-secret
           configmap.reloader.stakater.com/reload: &configmap homepage-config
         strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
         containers:
           app:
             image:

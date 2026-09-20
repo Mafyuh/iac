@@ -20,6 +20,10 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     controllers:
       server:
+        strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
         containers:
           app:
             image:
@@ -45,6 +49,10 @@ spec:
         pod:
           terminationGracePeriodSeconds: 1
       microservices:
+        strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
         containers:
           app:
             image:

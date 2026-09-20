@@ -37,6 +37,10 @@ spec:
 
     controllers:
       ai-proxy:
+        strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
         enabled: true
         type: deployment
         replicas: 1

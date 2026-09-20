@@ -17,6 +17,9 @@ spec:
       kromgo:
         replicas: 1
         strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
 
         containers:
           app:

@@ -17,6 +17,10 @@ spec:
 
     controllers:
       flaresolverr:
+        strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
         enabled: true
         type: deployment
 

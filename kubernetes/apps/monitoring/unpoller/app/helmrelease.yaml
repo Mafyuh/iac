@@ -18,6 +18,10 @@ spec:
 
     controllers:
       unpoller:
+        strategy: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 0
+          maxSurge: 1
         enabled: true
         type: deployment
 
