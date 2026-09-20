@@ -13,6 +13,7 @@ resources:
   - kromgo/ks.yaml
   - prometheus/ks.yaml
   - silence-operator/ks.yaml
+  - smartctl-exporter/ks.yaml
   - umami/ks.yaml
   - unpoller/ks.yaml
   - victoria-logs/ks.yaml
