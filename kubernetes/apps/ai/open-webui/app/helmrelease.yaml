@@ -28,7 +28,7 @@ spec:
       kind: Deployment
     image:
       repository: ghcr.io/open-webui/open-webui
-      tag: v0.11.3
+      tag: v0.11.4
       pullPolicy: "IfNotPresent"
       useSlim: true
     route:
