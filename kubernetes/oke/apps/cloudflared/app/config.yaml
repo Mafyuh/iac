@@ -1,8 +1,0 @@
----
-ingress:
-  - hostname: "*.matt.fo"
-    service: https://envoy-external.networking.svc.cluster.local
-    originRequest:
-      http2Origin: true
-      originServerName: external.matt.fo
-  - service: http_status:404
