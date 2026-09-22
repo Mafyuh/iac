@@ -1,0 +1,128 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app tracearr
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: tracearr
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    externalSecrets:
+      tracearr:
+        forceRename: tracearr-secrets
+        refreshInterval: 3h
+        data:
+          - secretKey: DATABASE_URL
+            remoteRef:
+              key: "ac1ef45d-06d7-4a2a-b86f-b4cd0035d7c2"
+          - secretKey: JWT_SECRET
+            remoteRef:
+              key: "75e19672-a635-42b4-8bf9-b4cd0035d7f6"
+          - secretKey: COOKIE_SECRET
+            remoteRef:
+              key: "cf910e12-b987-4a79-9c71-b4cd0035d822"
+
+    controllers:
+      tracearr:
+        enabled: true
+        type: deployment
+
+        replicas: 1
+
+        pod:
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: &group 1001
+            fsGroup: *group
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/connorgallopo/tracearr
+              tag: 2.4.1
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "America/New_York"
+              NODE_ENV: production
+              HOST: "0.0.0.0"
+              PORT: "3000"
+              LOG_LEVEL: info
+              TRUST_PROXY: "true"
+              BETTER_AUTH_URL: "https://tracearr.${LOCAL_DOMAIN}"
+              BACKUP_DIR: /data/tracearr/backup
+              REDIS_URL: "redis://tracearr-dragonfly.arr.svc.cluster.local:6379"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: tracearr-secrets
+                    key: DATABASE_URL
+              JWT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: tracearr-secrets
+                    key: JWT_SECRET
+              COOKIE_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: tracearr-secrets
+                    key: COOKIE_SECRET
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
+              limits:
+                memory: 2Gi
+
+    service:
+      app:
+        primary: true
+        controller: tracearr
+        ports:
+          http:
+            port: &port 3000
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: tracearr
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      data:
+        existingClaim: "{{ .Release.Name }}"
+        globalMounts:
+          - path: /data/tracearr
