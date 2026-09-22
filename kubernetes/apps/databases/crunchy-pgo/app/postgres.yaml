@@ -26,6 +26,7 @@ spec:
           - "host all all 0.0.0.0/0 md5"
           - "hostssl all all 0.0.0.0/0 md5"
         parameters:
+          shared_preload_libraries: "timescaledb"
           shared_buffers: "256MB"
           effective_cache_size: "768MB"
           maintenance_work_mem: "192MB"
@@ -74,6 +75,8 @@ spec:
       databases: ["jellyseerr"]
     - name: jellystat
       databases: ["jellystat"]
+    - name: tracearr
+      databases: ["tracearr"]
     - name: matrix
       databases: ["matrix", "matrixauth"]
     - name: openwebui
