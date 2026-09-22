@@ -14,6 +14,10 @@ spec:
       fullnameOverride: *app
       namespace: arr
 
+    defaultExternalSecretStoreRef:
+      kind: ClusterSecretStore
+      name: bitwarden-secrets-manager
+
     externalSecrets:
       tracearr:
         forceRename: tracearr-secrets
