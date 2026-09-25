@@ -6,7 +6,6 @@ resources:
   - bazarr/ks.yaml
   - dispatcharr/ks.yaml
   - flaresolverr/ks.yaml
-  - jellystat/ks.yaml
   - seerr/ks.yaml
   - lidarr/ks.yaml
   - prowlarr/ks.yaml
