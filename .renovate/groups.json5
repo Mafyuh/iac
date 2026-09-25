@@ -75,5 +75,25 @@
       },
       minimumGroupSize: 2,
     },
+    {
+      description: "n8n Group",
+      groupName: "n8n",
+      matchPackageNames: ["/n8n-io/"],
+      matchDatasources: ["docker"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
+    {
+      description: "Cloudflare Group",
+      groupName: "Cloudflare",
+      matchPackageNames: ["/cloudflare/", "/cloudflared/"],
+      matchDatasources: ["docker"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
   ],
 }
