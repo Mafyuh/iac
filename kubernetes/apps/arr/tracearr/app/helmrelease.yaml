@@ -39,6 +39,7 @@ spec:
         type: deployment
 
         replicas: 1
+        strategy: Recreate
 
         pod:
           securityContext:
@@ -63,21 +64,9 @@ spec:
               BETTER_AUTH_URL: "https://tracearr.${LOCAL_DOMAIN}"
               BACKUP_DIR: /data/tracearr/backup
               REDIS_URL: "redis://tracearr-dragonfly.arr.svc.cluster.local:6379"
-              DATABASE_URL:
-                valueFrom:
-                  secretKeyRef:
-                    name: tracearr-secrets
-                    key: DATABASE_URL
-              JWT_SECRET:
-                valueFrom:
-                  secretKeyRef:
-                    name: tracearr-secrets
-                    key: JWT_SECRET
-              COOKIE_SECRET:
-                valueFrom:
-                  secretKeyRef:
-                    name: tracearr-secrets
-                    key: COOKIE_SECRET
+            envFrom:
+              - secretRef:
+                  name: tracearr-secrets
             probes:
               liveness:
                 enabled: false
@@ -95,6 +84,49 @@ spec:
             resources:
               requests:
                 cpu: 100m
+                memory: 512Mi
+              limits:
+                memory: 2Gi
+
+          timescale:
+            image:
+              repository: timescale/timescaledb-ha
+              tag: pg18.4-ts2.29.1@sha256:26a7598a17939878a388864a8faea56f4b90558163b28cfa0e73600091689c82
+              pullPolicy: IfNotPresent
+            args:
+              - postgres
+              - -c
+              - listen_addresses=127.0.0.1
+              - -c
+              - timescaledb.license=timescale
+              - -c
+              - shared_buffers=256MB
+            env:
+              POSTGRES_USER: tracearr
+              POSTGRES_DB: tracearr
+              POSTGRES_HOST_AUTH_METHOD: trust
+              PGDATA: /home/postgres/pgdata/data
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: [pg_isready, -h, 127.0.0.1, -U, tracearr]
+                  periodSeconds: 10
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 500m
                 memory: 512Mi
               limits:
                 memory: 2Gi
@@ -128,5 +160,26 @@ spec:
     persistence:
       data:
         existingClaim: "{{ .Release.Name }}"
-        globalMounts:
-          - path: /data/tracearr
+        advancedMounts:
+          tracearr:
+            app:
+              - path: /data/tracearr
+      postgres:
+        type: persistentVolumeClaim
+        forceRename: tracearr-postgres
+        accessMode: ReadWriteOnce
+        storageClass: ceph-block
+        size: 5Gi
+        retain: true
+        advancedMounts:
+          tracearr:
+            timescale:
+              - path: /home/postgres/pgdata
+      dshm:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 512Mi
+        advancedMounts:
+          tracearr:
+            timescale:
+              - path: /dev/shm
