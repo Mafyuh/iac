@@ -74,8 +74,6 @@ spec:
       databases: ["jellyseerr"]
     - name: jellystat
       databases: ["jellystat"]
-    - name: tracearr
-      databases: ["tracearr"]
     - name: matrix
       databases: ["matrix", "matrixauth"]
     - name: openwebui
@@ -88,6 +86,9 @@ spec:
       databases: ["litellm"]
     - name: homebox
       databases: ["homebox"]
+    - name: sparkyfitness
+      databases: ["sparkyfitness"]
+      options: "SUPERUSER"
   backups:
     pgbackrest:
       configuration:

@@ -1,0 +1,203 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app sparkyfitness
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+  interval: 15m
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: default
+
+    controllers:
+      server:
+        enabled: true
+        type: deployment
+        replicas: 1
+        strategy: Recreate
+        pod:
+          terminationGracePeriodSeconds: 30
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: ghcr.io/codewithcj/sparkyfitness-server
+              tag: v1.7.2
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/New_York
+              NODE_ENV: production
+              SPARKY_FITNESS_LOG_LEVEL: info
+              SPARKY_FITNESS_DB_HOST: "pg-cluster-primary.databases.svc.cluster.local"
+              SPARKY_FITNESS_DB_PORT: "5432"
+              SPARKY_FITNESS_DB_NAME: sparkyfitness
+              SPARKY_FITNESS_DB_USER: sparkyfitness
+              SPARKY_FITNESS_DB_PASSWORD: ${SPARKY_DB_PASSWORD}
+              SPARKY_FITNESS_APP_DB_USER: sparky
+              SPARKY_FITNESS_APP_DB_PASSWORD: ${SPARKY_APP_DB_PASSWORD}
+              SPARKY_FITNESS_API_ENCRYPTION_KEY: ${SPARKY_API_ENCRYPTION_KEY}
+              BETTER_AUTH_SECRET: ${SPARKY_BETTER_AUTH_SECRET}
+              SPARKY_FITNESS_FRONTEND_URL: "https://health.${PUBLIC_DOMAIN}"
+              SPARKY_FITNESS_DISABLE_SIGNUP: "false"
+              SPARKY_FITNESS_FORCE_EMAIL_LOGIN: "false"
+              SPARKY_FITNESS_DISABLE_EMAIL_LOGIN: "true"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: 3010
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 10
+                  failureThreshold: 5
+              readiness: *probes
+              startup: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: [ALL] }
+            resources:
+              requests:
+                cpu: 200m
+                memory: 256Mi
+              limits:
+                cpu: "1"
+                memory: 1Gi
+
+      frontend:
+        enabled: true
+        type: deployment
+        replicas: 1
+        strategy: RollingUpdate
+        pod:
+          terminationGracePeriodSeconds: 30
+          securityContext:
+            runAsUser: 101
+            runAsGroup: 101
+            fsGroup: 101
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: ghcr.io/codewithcj/sparkyfitness-frontend
+              tag: v1.7.2
+              pullPolicy: IfNotPresent
+            env:
+              SPARKY_FITNESS_FRONTEND_URL: "https://health.${PUBLIC_DOMAIN}"
+              SPARKY_FITNESS_SERVER_HOST: "sparkyfitness-server"
+              SPARKY_FITNESS_SERVER_PORT: "3010"
+              NGINX_LISTEN_PORT: "80"
+              NGINX_RATE_LIMIT: 5r/s
+            probes:
+              liveness: &frontendProbes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 80
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 10
+                  failureThreshold: 5
+              readiness: *frontendProbes
+              startup: *frontendProbes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: [ALL]
+                add: [NET_BIND_SERVICE]
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                cpu: 500m
+                memory: 256Mi
+
+    service:
+      server:
+        controller: server
+        ports:
+          http:
+            port: 3010
+      frontend:
+        controller: frontend
+        ports:
+          http:
+            port: &frontendPort 80
+
+    route:
+      public:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["health.${PUBLIC_DOMAIN}"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: sparkyfitness-frontend
+                port: *frontendPort
+        parentRefs:
+          - name: envoy-external
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      data:
+        existingClaim: *app
+        advancedMounts:
+          server:
+            app:
+              - path: /app/SparkyFitnessServer/uploads
+                subPath: uploads
+              - path: /app/SparkyFitnessServer/backup
+                subPath: backup
+      temp-uploads:
+        type: emptyDir
+        advancedMounts:
+          server:
+            app:
+              - path: /app/SparkyFitnessServer/temp_uploads
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          server:
+            app:
+              - path: /tmp
+          frontend:
+            app:
+              - path: /tmp
+      nginx-conf:
+        type: emptyDir
+        advancedMounts:
+          frontend:
+            app:
+              - path: /etc/nginx/conf.d
+      nginx-cache:
+        type: emptyDir
+        advancedMounts:
+          frontend:
+            app:
+              - path: /var/cache/nginx
+      nginx-run:
+        type: emptyDir
+        advancedMounts:
+          frontend:
+            app:
+              - path: /run
