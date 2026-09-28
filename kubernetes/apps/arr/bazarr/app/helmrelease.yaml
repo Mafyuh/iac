@@ -63,7 +63,7 @@ spec:
                 cpu: 25m
                 memory: 150Mi
               limits:
-                memory: 512Mi
+                memory: 1024Mi
 
           metrics:
             dependsOn: app
