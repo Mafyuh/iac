@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: mirror.gcr.io/searxng/searxng
-              digest: sha256:a31763b7af3caf6ae9aac1816ba774214eb550252e06a4998f276ded8d60461b
+              tag: 2026.9.25-12f8b6515@sha256:5286edb35782454ab8a102c5eff6b54bff745853191b46aeead95f225aa6dfb6
               pullPolicy: IfNotPresent
             env:
               PUID: "1000"
