@@ -95,5 +95,31 @@
       },
       minimumGroupSize: 2,
     },
+    {
+      description: "Immich Group",
+      groupName: "Immich",
+      matchPackageNames: [
+        "ghcr.io/immich-app/immich-server",
+        "ghcr.io/immich-app/immich-machine-learning",
+      ],
+      matchDatasources: ["docker"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
+    {
+      description: "SparkyFitness Group",
+      groupName: "SparkyFitness",
+      matchPackageNames: [
+        "ghcr.io/codewithcj/sparkyfitness-server",
+        "ghcr.io/codewithcj/sparkyfitness-frontend",
+      ],
+      matchDatasources: ["docker"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
   ],
 }
