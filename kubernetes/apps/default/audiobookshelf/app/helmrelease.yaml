@@ -24,7 +24,7 @@ spec:
           app:
             image:
               repository: ghcr.io/advplyr/audiobookshelf
-              tag: 2.36.1
+              tag: 2.37.0
               pullPolicy: IfNotPresent
             env:
               TZ: America/New_York
