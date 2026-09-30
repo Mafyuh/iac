@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: mirror.gcr.io/searxng/searxng
-              tag: 2026.9.29-f5035873a@sha256:eb2a404db174d33a04cd9f2e519bcae2ca722a58923510652cc1314be94e8e63
+              tag: 2026.9.30-a9d990033@sha256:a07a5cd2da2c63d66e559f9e4d3a3db106cfc6c32fb0ac70abe91cc28bcd7350
               pullPolicy: IfNotPresent
             env:
               PUID: "1000"
