@@ -108,11 +108,11 @@ spec:
           - website-monitoring-targets
         replicas: 1
         retention: 90d
-        retentionSize: 135GB
+        retentionSize: 150GB
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: ceph-block
               resources:
                 requests:
-                  storage: 150Gi
+                  storage: 175Gi
