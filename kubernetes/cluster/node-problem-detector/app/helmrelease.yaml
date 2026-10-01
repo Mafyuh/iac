@@ -1,0 +1,29 @@
+---
+# yaml-language-server: $schema=https://schemas.mafyuh.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app node-problem-detector
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: node-problem-detector
+  interval: 1h
+  values:
+    fullnameOverride: *app
+    settings:
+      log_monitors:
+        - /config/kernel-monitor.json
+        - /config/readonly-monitor.json
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+      prometheusRule:
+        enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 128Mi

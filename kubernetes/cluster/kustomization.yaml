@@ -12,6 +12,7 @@ resources:
   - flux-operator/ks.yaml
   - gateway-api/ks.yaml
   - metrics-server/ks.yaml
+  - node-problem-detector/ks.yaml
   - reloader/ks.yaml
   - rook-ceph/ks.yaml
   - snapshot-controller/ks.yaml
