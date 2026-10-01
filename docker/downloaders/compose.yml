@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
 
   qbitty:
-    image: ghcr.io/hotio/qbittorrent:release-5.2.3
+    image: ghcr.io/hotio/qbittorrent:release-5.2.4
     container_name: qbitty
     cap_add:
       - NET_ADMIN
