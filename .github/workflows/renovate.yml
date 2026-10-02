@@ -3,20 +3,21 @@
 name: Renovate
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/renovate.json
-      - .renovate/**.json5
-  schedule:
-    - cron: 20 * * * *
+  # TODO: re-enable once Mend Renovate is uninstalled
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - .github/renovate.json
+  #     - .renovate/**.json5
+  # schedule:
+  #   - cron: 20 * * * *
   workflow_dispatch:
     inputs:
       dryRun:
         description: Dry Run
         type: boolean
-        default: false
+        default: true
         required: true
       logLevel:
         description: Log Level
@@ -42,19 +43,22 @@ jobs:
       image: ghcr.io/renovatebot/renovate:44.132.0
     steps:
       - name: Load Secrets
+        id: load-secrets
         uses: bitwarden/sm-action@v3
         with:
           access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
+          set_env: false
           secrets: |
             0f1b843b-452b-4559-b1c7-b4d700dc4d9c > GH_CLIENT_ID
             0aab8d2c-0794-42ef-9b74-b381016b8ea0 > GH_PRIVATE_KEY
+            732a8d4d-1fa4-444c-91c2-b4d700f2294f > GHCR_TOKEN
 
       - name: Generate Token
         uses: actions/create-github-app-token@v3
         id: app-token
         with:
-          client-id: ${{ env.GH_CLIENT_ID }}
-          private-key: ${{ env.GH_PRIVATE_KEY }}
+          client-id: ${{ steps.load-secrets.outputs.GH_CLIENT_ID }}
+          private-key: ${{ steps.load-secrets.outputs.GH_PRIVATE_KEY }}
           permission-checks: write
           permission-contents: write
           permission-issues: write
@@ -75,5 +79,5 @@ jobs:
           RENOVATE_TOKEN: ${{ steps.app-token.outputs.token }}
           RENOVATE_SECRETS: |-
             {
-              "GHCR_TOKEN": "${{ secrets.GHCR_TOKEN }}"
+              "GHCR_TOKEN": "${{ steps.load-secrets.outputs.GHCR_TOKEN }}"
             }
