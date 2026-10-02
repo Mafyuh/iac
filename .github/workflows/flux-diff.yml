@@ -10,7 +10,6 @@ concurrency:
   cancel-in-progress: true
 permissions:
   contents: read
-  pull-requests: write
 jobs:
   filter-changes:
     name: Filter Changes
@@ -61,11 +60,30 @@ jobs:
             cat diff.txt
             echo EOF
           } >> "$GITHUB_OUTPUT"
+      - name: Load Secrets
+        if: ${{ steps.diff.outputs.diff != '' }}
+        id: load-secrets
+        uses: bitwarden/sm-action@v3.0.1
+        with:
+          access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
+          set_env: false
+          secrets: |
+            0f1b843b-452b-4559-b1c7-b4d700dc4d9c > GH_CLIENT_ID
+            0aab8d2c-0794-42ef-9b74-b381016b8ea0 > GH_PRIVATE_KEY
+      - name: Generate Token
+        if: ${{ steps.diff.outputs.diff != '' }}
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ steps.load-secrets.outputs.GH_CLIENT_ID }}
+          private-key: ${{ steps.load-secrets.outputs.GH_PRIVATE_KEY }}
+          permission-pull-requests: write
       - name: Create PR Comments
         if: ${{ steps.diff.outputs.diff != '' }}
         uses: mshick/add-pr-comment@v3
         continue-on-error: true
         with:
+          repo-token: ${{ steps.app-token.outputs.token }}
           message-id: "${{ github.event.pull_request.number }}/${{ matrix.cluster_path }}/flux"
           message-failure: Diff was not successful
           message: |
