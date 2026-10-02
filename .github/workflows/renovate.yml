@@ -1,0 +1,83 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Renovate
+
+on:
+  # TODO: re-enable once Mend Renovate is uninstalled
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - .github/renovate.json
+  #     - .renovate/**.json5
+  # schedule:
+  #   - cron: 20 * * * *
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        description: Dry Run
+        type: boolean
+        default: true
+        required: true
+      logLevel:
+        description: Log Level
+        type: choice
+        default: debug
+        options:
+          - debug
+          - info
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  main:
+    name: Renovate
+    runs-on: iac-runner
+    container:
+      image: ghcr.io/renovatebot/renovate:44.132.0
+    steps:
+      - name: Load Secrets
+        id: load-secrets
+        uses: bitwarden/sm-action@v3
+        with:
+          access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
+          set_env: false
+          secrets: |
+            0f1b843b-452b-4559-b1c7-b4d700dc4d9c > GH_CLIENT_ID
+            0aab8d2c-0794-42ef-9b74-b381016b8ea0 > GH_PRIVATE_KEY
+            732a8d4d-1fa4-444c-91c2-b4d700f2294f > GHCR_TOKEN
+
+      - name: Generate Token
+        uses: actions/create-github-app-token@v3
+        id: app-token
+        with:
+          client-id: ${{ steps.load-secrets.outputs.GH_CLIENT_ID }}
+          private-key: ${{ steps.load-secrets.outputs.GH_PRIVATE_KEY }}
+          permission-checks: write
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+          permission-statuses: write
+          permission-vulnerability-alerts: read
+          permission-workflows: write
+
+      - name: Run Renovate
+        run: renovate
+        env:
+          LOG_LEVEL: ${{ inputs.logLevel || 'debug' }}
+          RENOVATE_DRY_RUN: ${{ inputs.dryRun && 'full' || '' }}
+          RENOVATE_INTERNAL_CHECKS_FILTER: strict
+          RENOVATE_PLATFORM: github
+          RENOVATE_PLATFORM_COMMIT: enabled
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          RENOVATE_TOKEN: ${{ steps.app-token.outputs.token }}
+          RENOVATE_SECRETS: |-
+            {
+              "GHCR_TOKEN": "${{ steps.load-secrets.outputs.GHCR_TOKEN }}"
+            }
