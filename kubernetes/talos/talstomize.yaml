@@ -12,7 +12,7 @@ additionalSubjectAltNames:
 
 installer:
   # renovate: depName=siderolabs/talos datasource=github-releases
-  talosVersion: v1.14.0
+  talosVersion: v1.14.2
   schematic:
     customization:
       extraKernelArgs:
