@@ -4,7 +4,7 @@ kind: Talstomize
 clusterName: optiplex-k8s
 controlPlaneEndpoint: https://10.0.0.150:6443
 # renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
-kubernetesVersion: v1.37.0
+kubernetesVersion: v1.37.1
 secrets: ./talsecret.sops.yaml
 dnsDomain: cluster.local
 additionalSubjectAltNames:
