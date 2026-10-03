@@ -8,6 +8,9 @@ metadata:
 spec:
   interval: 1h
   approvePlan: auto
+  retryInterval: 5m
+  remediation:
+    retries: 3
   destroyResourcesOnDeletion: false
   backendConfig:
     customConfiguration: |
