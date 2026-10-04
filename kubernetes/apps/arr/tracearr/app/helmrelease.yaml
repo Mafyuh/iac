@@ -52,7 +52,7 @@ spec:
           app:
             image:
               repository: ghcr.io/connorgallopo/tracearr
-              tag: 2.6.1
+              tag: 2.6.2
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
