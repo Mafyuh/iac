@@ -236,7 +236,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 3000}}"
 
   vaultwarden:
-    image: ghcr.io/dani-garcia/vaultwarden:1.37.3
+    image: ghcr.io/dani-garcia/vaultwarden:1.37.4
     container_name: vaultwarden
     user: "1000:1000"
     environment:
