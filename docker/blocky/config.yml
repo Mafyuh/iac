@@ -8,11 +8,10 @@ upstreams:
   strategy: parallel_best
   timeout: 2s
 
-## Oke addresses
 conditional:
   fallbackUpstream: true
   mapping:
-    matt.fo: 10.0.0.1
+    iac.gg: 10.0.0.1
 
 startVerifyUpstream: true
 connectIPVersion: v4
@@ -23,8 +22,7 @@ caching:
 customDNS:
   customTTL: 1h
   mapping:
-    ubu.lan: 10.69.69.2 ## For Loki
-    nas.lan: 10.0.0.10 ## For NAS
+    nas.lan: 10.0.0.10
 
 blocking:
   blackLists:

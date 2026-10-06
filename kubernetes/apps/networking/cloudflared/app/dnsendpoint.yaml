@@ -1,0 +1,11 @@
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/externaldns.k8s.io/dnsendpoint_v1alpha1.json
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: cloudflared
+spec:
+  endpoints:
+    - dnsName: external.iac.gg
+      recordType: CNAME
+      targets: ["9516dded-1ccc-4f32-b9ed-3691ae265523.cfargotunnel.com"]

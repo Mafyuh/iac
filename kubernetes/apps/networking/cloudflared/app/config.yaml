@@ -5,4 +5,9 @@ ingress:
     originRequest:
       http2Origin: true
       originServerName: external.${PUBLIC_DOMAIN}
+  - hostname: "*.iac.gg"
+    service: https://envoy-external.kube-system.svc.cluster.local
+    originRequest:
+      http2Origin: true
+      originServerName: external.iac.gg
   - service: http_status:404

@@ -19,6 +19,7 @@ spec:
               key: cloudflare-token
         selector:
           dnsZones:
+            - iac.gg
             - local.mafyuh.dev
             - mafyuh.dev
             - mafyuh.io

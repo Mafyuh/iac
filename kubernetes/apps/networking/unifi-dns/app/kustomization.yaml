@@ -3,7 +3,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - cloudflare-dns/ks.yaml
-  - cloudflared/ks.yaml
-  - netbox/ks.yaml
-  - unifi-dns/ks.yaml
+  - external-secret.yaml
+  - helmrelease.yaml
+  - source.yaml

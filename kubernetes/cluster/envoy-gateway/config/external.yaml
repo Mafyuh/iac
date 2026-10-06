@@ -4,6 +4,8 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: envoy-external
+  annotations:
+    external-dns.alpha.kubernetes.io/target: external.iac.gg
 spec:
   gatewayClassName: envoy
   infrastructure:
@@ -24,6 +26,9 @@ spec:
           from: All
       tls:
         certificateRefs:
+          - kind: Secret
+            name: iac-gg-production-tls
+            namespace: kube-system
           - kind: Secret
             name: mafyuh-dev-production-tls
             namespace: kube-system
