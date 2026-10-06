@@ -58,6 +58,7 @@ spec:
       app:
         hostnames:
           - "pod.${PUBLIC_DOMAIN}"
+          - "pod.iac.gg"
         parentRefs:
           - name: envoy-external
             namespace: kube-system

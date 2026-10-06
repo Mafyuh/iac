@@ -6,6 +6,7 @@ metadata:
   name: envoy-external
   annotations:
     external-dns.alpha.kubernetes.io/target: external.iac.gg
+    external-dns.kubernetes.io/target: external.iac.gg
 spec:
   gatewayClassName: envoy
   infrastructure:
