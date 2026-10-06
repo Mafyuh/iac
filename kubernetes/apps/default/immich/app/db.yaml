@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://schemas.mafyuh.dev/postgres-operator.crunchydata.com/postgrescluster_v1beta1.json
+# yaml-language-server: $schema=https://schemas.iac.gg/postgres-operator.crunchydata.com/postgrescluster_v1beta1.json
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
@@ -78,7 +78,7 @@ spec:
           schedules:
             full: "30 0 * * *"
 ---
-# yaml-language-server: $schema=https://schemas.mafyuh.dev/dragonflydb.io/dragonfly_v1alpha1.json
+# yaml-language-server: $schema=https://schemas.iac.gg/dragonflydb.io/dragonfly_v1alpha1.json
 apiVersion: dragonflydb.io/v1alpha1
 kind: Dragonfly
 metadata:
