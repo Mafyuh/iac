@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://schemas.mafyuh.dev/postgres-operator.crunchydata.com/postgrescluster_v1beta1.json
+# yaml-language-server: $schema=https://schemas.iac.gg/postgres-operator.crunchydata.com/postgrescluster_v1beta1.json
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
