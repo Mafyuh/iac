@@ -38,7 +38,7 @@ spec:
               TZ: "America/New_York"
               PROWLARR__INSTANCE_NAME: *app
               PROWLARR__PORT: &port 9696
-              PROWLARR__APPLICATION_URL: "https://prowlarr.${PUBLIC_DOMAIN}"
+              PROWLARR__APPLICATION_URL: "https://prowlarr.${NEW_DOMAIN}"
               PROWLARR__THEME: dark
               PROWLARR__LOG_LEVEL: info
               PROWLARR__AUTH__METHOD: External
@@ -115,7 +115,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.${PUBLIC_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:

@@ -6,7 +6,7 @@ metadata:
   name: radarr-local
   namespace: arr
 spec:
-  hostnames: ["radarr.${LOCAL_DOMAIN}"]
+  hostnames: ["radarr.${NEW_DOMAIN}"]
   parentRefs:
     - name: envoy-internal
       namespace: kube-system

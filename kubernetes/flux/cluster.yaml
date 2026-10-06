@@ -35,6 +35,7 @@ spec:
             substitute:
               PUBLIC_DOMAIN: "${PUBLIC_DOMAIN}"
               LOCAL_DOMAIN: "${LOCAL_DOMAIN}"
+              NEW_DOMAIN: "${NEW_DOMAIN}"
               NAS_IP: "${NAS_IP}"
           patches:
             - patch: |-

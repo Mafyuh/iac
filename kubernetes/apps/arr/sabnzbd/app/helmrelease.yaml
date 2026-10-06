@@ -46,7 +46,7 @@ spec:
                 {{ .Release.Name }}.arr,
                 {{ .Release.Name }}.arr.svc,
                 {{ .Release.Name }}.arr.svc.cluster.local,
-                sab.${PUBLIC_DOMAIN}
+                sab.${NEW_DOMAIN}
 
             probes:
               liveness:
@@ -115,7 +115,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["sab.${PUBLIC_DOMAIN}"]
+        hostnames: ["sab.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:

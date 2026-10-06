@@ -6,7 +6,7 @@ metadata:
   name: prowlarr-local
   namespace: arr
 spec:
-  hostnames: ["prowlarr.${LOCAL_DOMAIN}"]
+  hostnames: ["prowlarr.${NEW_DOMAIN}"]
   parentRefs:
     - name: envoy-internal
       namespace: kube-system

@@ -61,7 +61,7 @@ spec:
               PORT: "3000"
               LOG_LEVEL: info
               TRUST_PROXY: "true"
-              BETTER_AUTH_URL: "https://tracearr.${LOCAL_DOMAIN}"
+              BETTER_AUTH_URL: "https://tracearr.${NEW_DOMAIN}"
               BACKUP_DIR: /data/tracearr/backup
               REDIS_URL: "redis://tracearr-dragonfly.arr.svc.cluster.local:6379"
             envFrom:
@@ -143,7 +143,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:

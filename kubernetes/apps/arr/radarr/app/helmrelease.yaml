@@ -44,7 +44,7 @@ spec:
                   secretKeyRef:
                     name: recyclarr-secrets
                     key: RADARR_API_KEY
-              RADARR__APPLICATION_URL: "https://radarr.${PUBLIC_DOMAIN}"
+              RADARR__APPLICATION_URL: "https://radarr.${NEW_DOMAIN}"
               RADARR__THEME: dark
               RADARR__LOG_LEVEL: info
 
@@ -114,7 +114,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.${PUBLIC_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:
