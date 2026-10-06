@@ -9,6 +9,11 @@ resource "unifi_wlan" "wifi" {
   pmf_mode        = "optional"
 
   bss_transition = true
+
+  mac_filter = {
+    enabled = false
+    policy  = "allow"
+  }
   group_rekey    = 0
 
   network_id = unifi_network.iot.id

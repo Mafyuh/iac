@@ -18,8 +18,6 @@ resource "unifi_network" "default" {
     dns_enabled        = true
     dns_servers        = [
       "10.20.10.20",
-      "1.1.1.1",
-      "9.9.9.9",
     ]
     boot = {
       enabled = false
