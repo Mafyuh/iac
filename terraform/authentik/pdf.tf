@@ -2,7 +2,7 @@ resource "authentik_provider_proxy" "pdf" {
   name                         = "Bento PDF"
   access_token_validity        = "hours=24"
   authorization_flow           = data.authentik_flow.default-authorization-flow.id
-  external_host                = "https://pdf.iac.gg}"
+  external_host                = "https://pdf.iac.gg"
   invalidation_flow            = "3c575d1a-1d27-4eaf-90a4-aacbccc1382f"
   internal_host_ssl_validation = true
   mode                         = "forward_single"
