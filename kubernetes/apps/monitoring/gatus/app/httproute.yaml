@@ -6,7 +6,7 @@ metadata:
   name: gatus
   namespace: monitoring
 spec:
-  hostnames: ["status.${PUBLIC_DOMAIN}"]
+  hostnames: ["status.${NEW_DOMAIN}"]
   parentRefs:
     - name: envoy-external
       namespace: kube-system

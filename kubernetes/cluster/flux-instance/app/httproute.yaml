@@ -6,7 +6,7 @@ metadata:
   name: flux-webhook
   namespace: flux-system
 spec:
-  hostnames: ["flux.mafyuh.dev"]
+  hostnames: ["flux.iac.gg"]
   parentRefs:
     - name: envoy-external
       namespace: kube-system

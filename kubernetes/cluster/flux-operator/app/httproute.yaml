@@ -6,7 +6,7 @@ metadata:
   name: flux-operator
 spec:
   hostnames:
-    - flux-operator.local.mafyuh.dev
+    - flux-operator.iac.gg
   parentRefs:
     - name: envoy-internal
       namespace: kube-system
@@ -23,7 +23,7 @@ metadata:
   name: flux-operator-mcp
 spec:
   hostnames:
-    - flux-mcp.local.mafyuh.dev
+    - flux-mcp.iac.gg
   parentRefs:
     - name: envoy-internal
       namespace: kube-system
