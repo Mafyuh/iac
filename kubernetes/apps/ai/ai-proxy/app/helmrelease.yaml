@@ -91,7 +91,7 @@ spec:
       internal:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:
