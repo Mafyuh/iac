@@ -46,7 +46,7 @@ spec:
               SPARKY_FITNESS_APP_DB_PASSWORD: ${SPARKY_APP_DB_PASSWORD}
               SPARKY_FITNESS_API_ENCRYPTION_KEY: ${SPARKY_API_ENCRYPTION_KEY}
               BETTER_AUTH_SECRET: ${SPARKY_BETTER_AUTH_SECRET}
-              SPARKY_FITNESS_FRONTEND_URL: "https://health.${PUBLIC_DOMAIN}"
+              SPARKY_FITNESS_FRONTEND_URL: "https://health.${NEW_DOMAIN}"
               SPARKY_FITNESS_DISABLE_SIGNUP: "false"
               SPARKY_FITNESS_FORCE_EMAIL_LOGIN: "false"
               SPARKY_FITNESS_DISABLE_EMAIL_LOGIN: "true"
@@ -95,7 +95,7 @@ spec:
               tag: v1.7.3
               pullPolicy: IfNotPresent
             env:
-              SPARKY_FITNESS_FRONTEND_URL: "https://health.${PUBLIC_DOMAIN}"
+              SPARKY_FITNESS_FRONTEND_URL: "https://health.${NEW_DOMAIN}"
               SPARKY_FITNESS_SERVER_HOST: "sparkyfitness-server.default.svc.cluster.local"
               SPARKY_FITNESS_SERVER_PORT: "3010"
               NGINX_LISTEN_PORT: "80"
