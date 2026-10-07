@@ -20,7 +20,7 @@ spec:
       route:
         enabled: true
         hostnames:
-          - victoria-logs.${LOCAL_DOMAIN}
+          - victoria-logs.${NEW_DOMAIN}
         parentRefs:
           - name: envoy-internal
             namespace: kube-system

@@ -103,7 +103,7 @@ spec:
       public:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["{{ .Release.Name }}.${PUBLIC_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:

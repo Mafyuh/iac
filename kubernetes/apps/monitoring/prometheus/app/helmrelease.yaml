@@ -92,14 +92,14 @@ spec:
       route:
         main:
           enabled: true
-          hostnames: ["{{ .Release.Name }}.${LOCAL_DOMAIN}"]
+          hostnames: ["{{ .Release.Name }}.${NEW_DOMAIN}"]
           parentRefs:
             - name: envoy-internal
               namespace: kube-system
               sectionName: https
 
       prometheusSpec:
-        externalUrl: https://prometheus.${LOCAL_DOMAIN}
+        externalUrl: https://prometheus.${NEW_DOMAIN}
         evaluationInterval: 2m
         enableRemoteWriteReceiver: true
         serviceMonitorSelectorNilUsesHelmValues: false

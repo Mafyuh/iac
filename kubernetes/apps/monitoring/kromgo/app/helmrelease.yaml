@@ -70,7 +70,7 @@ spec:
       external:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["kromgo.${PUBLIC_DOMAIN}"]
+        hostnames: ["kromgo.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:

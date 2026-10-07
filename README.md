@@ -3,18 +3,18 @@
 [![GitLab Mirror](https://img.shields.io/badge/Mirror-GitLab-orange?logo=gitlab)](https://gitlab.com/Mafyuh/iac)
 [![Forgejo Mirror](https://img.shields.io/badge/Mirror-Forgejo-orange?logo=forgejo)](https://git.mafyuh.io/mafyuh/iac)
 
-[![Pods](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_pods_running&&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
-[![Nodes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_node_count&label=Nodes&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
-[![Uptime](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_uptime_days&label=Uptime&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
-[![CPU](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_cpu_usage&&logo=kubernetes&label=CPU&color=black)](https://kubernetes.io/)&nbsp;
-[![RAM](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_memory_usage&&logo=kubernetes&label=RAM&color=black)](https://kubernetes.io/)&nbsp;
-[![Download](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fspeedtest_download&label=Download&logo=speedtest&color=black)](https://www.speedtest.net/)&nbsp;
-[![Upload](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fspeedtest_upload&label=Upload&logo=speedtest&color=black)](https://www.speedtest.net/)&nbsp;
-[![Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fkubernetes_version&label=Kubernetes&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
-[![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Ftalos_version&&logo=talos&color=black)](https://kubernetes.io/)&nbsp;
-[![PVE Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fpve_version&&logo=proxmox&color=black)](https://kubernetes.io/)&nbsp;
-[![Flux](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fflux_version&&logo=flux&color=black)](https://kubernetes.io/)&nbsp;
-[![Alerts](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.mafyuh.dev%2Fcluster_alert_count&&logo=prometheus)](https://kubernetes.io/)&nbsp;
+[![Pods](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fcluster_pods_running&&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
+[![Nodes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fcluster_node_count&label=Nodes&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
+[![Uptime](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fcluster_uptime_days&label=Uptime&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
+[![CPU](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fcluster_cpu_usage&&logo=kubernetes&label=CPU&color=black)](https://kubernetes.io/)&nbsp;
+[![RAM](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fcluster_memory_usage&&logo=kubernetes&label=RAM&color=black)](https://kubernetes.io/)&nbsp;
+[![Download](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fspeedtest_download&label=Download&logo=speedtest&color=black)](https://www.speedtest.net/)&nbsp;
+[![Upload](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fspeedtest_upload&label=Upload&logo=speedtest&color=black)](https://www.speedtest.net/)&nbsp;
+[![Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fkubernetes_version&label=Kubernetes&logo=kubernetes&color=black)](https://kubernetes.io/)&nbsp;
+[![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Ftalos_version&&logo=talos&color=black)](https://kubernetes.io/)&nbsp;
+[![PVE Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fpve_version&&logo=proxmox&color=black)](https://kubernetes.io/)&nbsp;
+[![Flux](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fflux_version&&logo=flux&color=black)](https://kubernetes.io/)&nbsp;
+[![Alerts](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.iac.gg%2Fcluster_alert_count&&logo=prometheus)](https://kubernetes.io/)&nbsp;
 
 ![Header Image](https://raw.githubusercontent.com/Mafyuh/homelab-svg-assets/main/assets/header_.png)
 

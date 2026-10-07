@@ -144,7 +144,7 @@ spec:
       public:
         enabled: true
         kind: HTTPRoute
-        hostnames: ["health.${PUBLIC_DOMAIN}"]
+        hostnames: ["health.${NEW_DOMAIN}"]
         rules:
           - matches:
               - path:

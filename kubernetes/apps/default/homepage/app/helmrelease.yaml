@@ -53,7 +53,7 @@ spec:
             port: 3000
     route:
       app:
-        hostnames: ["lab.${PUBLIC_DOMAIN}"]
+        hostnames: ["lab.${NEW_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: kube-system

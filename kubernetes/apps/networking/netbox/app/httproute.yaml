@@ -6,7 +6,7 @@ metadata:
   name: netbox
   namespace: networking
 spec:
-  hostnames: ["netbox.${LOCAL_DOMAIN}"]
+  hostnames: ["netbox.${NEW_DOMAIN}"]
   parentRefs:
     - name: envoy-internal
       namespace: kube-system

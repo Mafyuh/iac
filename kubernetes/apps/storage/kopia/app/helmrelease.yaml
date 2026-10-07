@@ -69,7 +69,7 @@ spec:
     route:
       app:
         hostnames:
-          - "{{ .Release.Name }}.${LOCAL_DOMAIN}"
+          - "{{ .Release.Name }}.${NEW_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: kube-system

@@ -43,7 +43,7 @@ spec:
     route:
       app:
         hostnames:
-          - "pdf.${PUBLIC_DOMAIN}"
+          - "pdf.${NEW_DOMAIN}"
         parentRefs:
           - name: envoy-external
             namespace: kube-system

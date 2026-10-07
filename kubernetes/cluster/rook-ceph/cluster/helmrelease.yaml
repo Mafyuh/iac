@@ -167,7 +167,7 @@ spec:
     route:
       dashboard:
         host:
-          name: ceph.local.mafyuh.dev
+          name: ceph.${NEW_DOMAIN}
           path: /
           pathType: PathPrefix
         parentRefs:
