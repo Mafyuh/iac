@@ -25,7 +25,7 @@ spec:
               tag: v2.4.0
             env:
               TZ: America/New_York
-              HOMEPAGE_ALLOWED_HOSTS: lab.${PUBLIC_DOMAIN}
+              HOMEPAGE_ALLOWED_HOSTS: lab.${NEW_DOMAIN}
             envFrom:
               - secretRef:
                   name: *secret
@@ -39,7 +39,7 @@ spec:
                     path: /api/healthcheck
                     httpHeaders:
                       - name: Host
-                        value: lab.${PUBLIC_DOMAIN}
+                        value: lab.${NEW_DOMAIN}
                   initialDelaySeconds: 0
               readiness: *probes
               startup: *probes
