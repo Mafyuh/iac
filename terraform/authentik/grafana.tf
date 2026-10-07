@@ -2,7 +2,7 @@ resource "authentik_provider_proxy" "grafana" {
   name                         = "Grafana"
   access_token_validity        = "hours=24"
   authorization_flow           = data.authentik_flow.default-authorization-flow.id
-  external_host                = "https://grafana.iac.gg}"
+  external_host                = "https://grafana.iac.gg"
   invalidation_flow            = "3c575d1a-1d27-4eaf-90a4-aacbccc1382f"
   internal_host_ssl_validation = true
   mode                         = "forward_single"
@@ -18,7 +18,7 @@ resource "authentik_application" "grafana" {
   name              = "Grafana"
   slug              = "grafana"
   meta_icon         = "https://github.com/Mafyuh/homelab-svg-assets/raw/refs/heads/main/assets/grafana.svg"
-  meta_launch_url   = "https://grafana.iac.gg}"
+  meta_launch_url   = "https://grafana.iac.gg"
   protocol_provider = authentik_provider_proxy.grafana.id
 }
 
