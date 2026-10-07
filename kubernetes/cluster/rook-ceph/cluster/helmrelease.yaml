@@ -167,7 +167,7 @@ spec:
     route:
       dashboard:
         host:
-          name: ceph.${NEW_DOMAIN}
+          name: ceph.iac.gg
           path: /
           pathType: PathPrefix
         parentRefs:

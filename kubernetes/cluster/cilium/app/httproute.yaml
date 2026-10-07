@@ -6,7 +6,7 @@ metadata:
   name: hubble-ui
   namespace: kube-system
 spec:
-  hostnames: ["hubble.${NEW_DOMAIN}"]
+  hostnames: ["hubble.iac.gg"]
   parentRefs:
     - name: envoy-internal
       namespace: kube-system
