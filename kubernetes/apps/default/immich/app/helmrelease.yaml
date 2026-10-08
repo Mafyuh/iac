@@ -28,7 +28,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v3.2.4
+              tag: v3.3.0
               pullPolicy: IfNotPresent
             env: &env
               TZ: America/New_York
@@ -57,7 +57,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v3.2.4
+              tag: v3.3.0
               pullPolicy: IfNotPresent
             env:
               <<: *env
@@ -71,7 +71,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v3.2.4
+              tag: v3.3.0
               pullPolicy: IfNotPresent
             env:
               MPLCONFIGDIR: /tmp/matplotlib
