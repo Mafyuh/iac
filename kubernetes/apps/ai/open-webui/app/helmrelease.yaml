@@ -26,6 +26,8 @@ spec:
           storageClass: ceph-block
     workload:
       kind: Deployment
+    strategy:
+      type: Recreate
     image:
       repository: ghcr.io/open-webui/open-webui
       tag: v0.12.0
