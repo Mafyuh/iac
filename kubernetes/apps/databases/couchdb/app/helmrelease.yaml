@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: mirror.gcr.io/couchdb
-              tag: 3.5.2
+              tag: 3.5.3
               pullPolicy: IfNotPresent
             env:
               COUCHDB_USER: mafyuh
