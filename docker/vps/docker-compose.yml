@@ -69,7 +69,7 @@ services:
       - caddy
 
   n8n:
-    image: ghcr.io/n8n-io/n8n:2.43.3
+    image: ghcr.io/n8n-io/n8n:2.44.1
     container_name: n8n
     volumes:
       - n8n_data:/home/node/.n8n
@@ -106,7 +106,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 5678}}"
 
   sandbox-certs:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:cd41b40dc7e1b05cc54f4a4398941a808225cbf601f0c6592feb7ee6ae0d7713
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:3ac19681cae36f3d1fb879cc572d3488088d03c45c4c96b6ff4f0bbdd2d00e7e
     container_name: sandbox-certs
     user: "0:0"
     entrypoint: ["sh", "-c"]
@@ -124,7 +124,7 @@ services:
     restart: "no"
 
   sandbox-api:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:cd41b40dc7e1b05cc54f4a4398941a808225cbf601f0c6592feb7ee6ae0d7713
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api@sha256:3ac19681cae36f3d1fb879cc572d3488088d03c45c4c96b6ff4f0bbdd2d00e7e
     container_name: sandbox-api
     depends_on:
       sandbox-certs:
@@ -147,7 +147,7 @@ services:
     restart: unless-stopped
 
   sandbox-runner-1:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind@sha256:12907547996b04c5586267de461469d5a1afead3469a854b725f3a3c8138a089
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind@sha256:b744471997bbaf1bf75b5ca667d0931352bdb4d59ecc7935ceab7e742829a117
     container_name: sandbox-runner-1
     privileged: true
     depends_on:
