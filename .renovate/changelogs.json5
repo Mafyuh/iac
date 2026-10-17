@@ -31,10 +31,6 @@
       changelogUrl: "https://docs.couchdb.org/en/stable/whatsnew/",
     },
     {
-      matchDepNames: ["mirror.gcr.io/dpage/pgadmin4"],
-      changelogUrl: "https://www.pgadmin.org/docs/pgadmin4/latest/release_notes.html",
-    },
-    {
       matchDepNames: ["mirror.gcr.io/eceasy/cli-proxy-api"],
       sourceUrl: "https://github.com/router-for-me/CLIProxyAPI",
     },

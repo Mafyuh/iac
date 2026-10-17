@@ -1,0 +1,33 @@
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/postgres-operator.crunchydata.com/pgadmin_v1beta1.json
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PGAdmin
+metadata:
+  name: pg-cluster
+spec:
+  users:
+    - username: admin@mafyuh.io
+      role: Administrator
+      passwordRef:
+        name: pgadmin-secret
+        key: PGADMIN_DEFAULT_PASSWORD
+  dataVolumeClaimSpec:
+    storageClassName: ceph-block
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Gi
+  serverGroups:
+    - name: pg-cluster
+      postgresClusterName: pg-cluster
+  config:
+    settings:
+      AUTHENTICATION_SOURCES: ["internal"]
+  resources:
+    requests:
+      cpu: 15m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+  serviceName: pg-cluster-pgadmin
