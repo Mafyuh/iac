@@ -18,7 +18,7 @@ spec:
         bucket                        = "tofu"
         key                           = "oci.tfstate"
         region                        = "us-east-1"
-        endpoint                      = "https://s3.mafyuh.xyz"
+        endpoint                      = "https://s3.${NEW_DOMAIN}"
         skip_region_validation        = true
         skip_credentials_validation   = true
         skip_requesting_account_id    = true
