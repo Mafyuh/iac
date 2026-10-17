@@ -35,7 +35,7 @@ spec:
       useSlim: true
     route:
       enabled: true
-      hostnames: ["chat.${PUBLIC_DOMAIN}"]
+      hostnames: ["chat.${NEW_DOMAIN}"]
       parentRefs:
         - name: envoy-external
           namespace: kube-system
@@ -72,6 +72,6 @@ spec:
       - name: ENABLE_LOGIN_FORM
         value: "false"
       - name: OPENID_REDIRECT_URI
-        value: "https://chat.${PUBLIC_DOMAIN}/oauth/oidc/callback"
+        value: "https://chat.${NEW_DOMAIN}/oauth/oidc/callback"
       - name: OAUTH_AUTO_REDIRECT
         value: "true"
