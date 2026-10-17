@@ -7,8 +7,6 @@ metadata:
   namespace: &ns databases
 spec:
   targetNamespace: *ns
-  components:
-    - ../../../../components/authentik-proxy
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
