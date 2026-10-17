@@ -10,20 +10,11 @@ spec:
     name: spegel
   interval: 1h
   values:
-    service:
-      registry:
-        hostPort: 29999
     serviceMonitor:
       enabled: true
     spegel:
       containerdSock: /run/containerd/containerd.sock
       containerdRegistryConfigPath: /etc/cri/conf.d/hosts
-    grafanaDashboard:
-      enabled: true
-      mode: GrafanaOperator
-      grafanaOperator:
-        matchLabels:
-          grafana.internal/instance: grafana
     resources:
       requests:
         cpu: 50m

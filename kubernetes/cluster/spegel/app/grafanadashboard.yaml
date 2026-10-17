@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/grafana.integreatly.org/grafanadashboard_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: spegel
+spec:
+  allowCrossNamespaceImport: true
+  instanceSelector:
+    matchLabels:
+      grafana.internal/instance: grafana
+  datasources:
+    - datasourceName: prometheus
+      inputName: DS_PROMETHEUS
+  url: https://raw.githubusercontent.com/spegel-org/spegel/v0.7.4/charts/spegel/monitoring/grafana-dashboard.json
