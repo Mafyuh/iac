@@ -35,8 +35,6 @@ spec:
               memory: 1Gi
       envoyService:
         externalTrafficPolicy: Cluster
-  shutdown:
-    drainTimeout: 180s
   telemetry:
     metrics:
       prometheus:
