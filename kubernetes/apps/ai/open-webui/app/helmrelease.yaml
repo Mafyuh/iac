@@ -64,6 +64,11 @@ spec:
         clientIdExistingSecretKey: "OAUTH_CLIENT_ID"
         clientExistingSecretKey: "OAUTH_CLIENT_SECRET"
     extraEnvVars:
+      - name: WEBUI_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: open-webui-secrets
+            key: WEBUI_SECRET_KEY
       - name: ENABLE_LOGIN_FORM
         value: "false"
       - name: OPENID_REDIRECT_URI
