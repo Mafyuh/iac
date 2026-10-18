@@ -29,10 +29,11 @@ resource "sonarr_download_client_qbittorrent" "qbitty" {
   enable         = true
   priority       = 1
   name           = "qbittorrent"
-  host           = "10.69.69.2"
+  host           = "qbitty.iac.gg"
   url_base       = "/"
   tv_category    = "tv-sonarr"
-  port           = 8081
+  port           = 443
+  use_ssl        = true
   first_and_last = false
   username       = "mafyuh"
   password       = data.bitwarden-secrets_secret.qbitty_password.value
