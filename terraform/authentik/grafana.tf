@@ -7,6 +7,7 @@ resource "authentik_provider_oauth2" "grafana" {
   authorization_flow    = data.authentik_flow.default-authorization-flow.id
   access_token_validity = "minutes=10"
   signing_key           = data.authentik_certificate_key_pair.main.id
+  grant_types           = ["authorization_code", "refresh_token"]
 
   property_mappings = [
     authentik_property_mapping_provider_scope.openid.id,
