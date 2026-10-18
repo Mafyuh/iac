@@ -86,8 +86,8 @@ services:
       - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
       - DB_POSTGRESDB_SSL_ENABLED=false
       - N8N_ENABLED_MODULES=instance-ai
-      - N8N_INSTANCE_AI_MODEL=openai/gpt-5.6-terra
-      - N8N_INSTANCE_AI_MODEL_URL=https://aiproxy.mafyuh.xyz/v1
+      - N8N_INSTANCE_AI_MODEL=anthropic/claude-opus-5-5
+      - N8N_INSTANCE_AI_MODEL_URL=https://ai-proxy.iac.gg/v1
       - N8N_INSTANCE_AI_MODEL_API_KEY=$N8N_INSTANCE_AI_MODEL_API_KEY
       - N8N_INSTANCE_AI_SANDBOX_ENABLED=true
       - N8N_INSTANCE_AI_SANDBOX_PROVIDER=n8n-sandbox

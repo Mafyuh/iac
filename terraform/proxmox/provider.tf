@@ -25,7 +25,7 @@ terraform {
 }
 
 provider "proxmox" {
-  endpoint      = "https://prox.mafyuh.xyz/"
+  endpoint      = "https://prox.iac.gg/"
   api_token     = data.bitwarden-secrets_secret.prox_api_key.value
   insecure      = false
   random_vm_ids = true

@@ -12,7 +12,7 @@ resource "sonarr_download_client_sabnzbd" "sabnzbd" {
   enable                     = true
   priority                   = 1
   name                       = "sabnzbd"
-  host                       = "sab.mafyuh.xyz"
+  host                       = "sab.iac.gg"
   use_ssl                    = true
   url_base                   = "/"
   port                       = 443

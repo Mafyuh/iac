@@ -17,7 +17,7 @@ resource "radarr_download_client_sabnzbd" "sabnzbd" {
   enable                     = true
   priority                   = 1
   name                       = "SABnzbd"
-  host                       = "sab.mafyuh.xyz"
+  host                       = "sab.iac.gg"
   url_base                   = "/"
   port                       = 443
   use_ssl                    = true
