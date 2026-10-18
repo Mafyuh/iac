@@ -16,7 +16,25 @@ spec:
     auth:
       disable_login_form: "false"
     auth.anonymous:
+      enabled: "false"
+    auth.generic_oauth:
       enabled: "true"
+      name: authentik
+      icon: signin
+      client_id: 5be249b401c30c2c6288f540d5ae4c271f653694
+      scopes: openid email profile
+      auth_url: https://auth.mafyuh.io/application/o/authorize/
+      token_url: https://auth.mafyuh.io/application/o/token/
+      api_url: https://auth.mafyuh.io/application/o/userinfo/
+      signout_redirect_url: https://auth.mafyuh.io/application/o/grafana/end-session/
+      use_pkce: "true"
+      auto_login: "true"
+      allow_sign_up: "true"
+      login_attribute_path: preferred_username
+      name_attribute_path: name
+      email_attribute_path: email
+      role_attribute_path: contains(groups[*], 'authentik Admins') && 'GrafanaAdmin' || 'Viewer'
+      allow_assign_grafana_admin: "true"
     log:
       mode: console
     metrics:
@@ -45,6 +63,11 @@ spec:
                     secretKeyRef:
                       name: grafana-admin-secret
                       key: GF_SECURITY_ADMIN_PASSWORD
+                - name: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-oidc-secret
+                      key: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true
