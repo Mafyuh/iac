@@ -91,6 +91,18 @@ resource "radarr_notification_pushover" "pushover" {
   tags                             = []
 }
 
+resource "radarr_metadata_kodi" "kodi" {
+  enable                  = true
+  name                    = "Kodi (XBMC) / Emby"
+  movie_metadata          = true
+  movie_metadata_url      = true
+  movie_metadata_language = 1
+  movie_images            = true
+  use_movie_nfo           = true
+  add_collection_name     = true
+  tags                    = []
+}
+
 resource "radarr_root_folder" "kids" {
   path = "/data/Media/Kids"
 }

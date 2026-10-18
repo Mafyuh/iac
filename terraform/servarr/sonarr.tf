@@ -94,6 +94,18 @@ resource "sonarr_notification_pushover" "pushover" {
   tags                               = []
 }
 
+resource "sonarr_metadata_kodi" "kodi" {
+  enable              = true
+  name                = "Kodi (XBMC) / Emby"
+  series_metadata     = true
+  series_metadata_url = false
+  episode_metadata    = true
+  series_images       = true
+  season_images       = true
+  episode_images      = true
+  tags                = []
+}
+
 resource "sonarr_root_folder" "tv" {
   path = "/data/Media/TV"
 }
