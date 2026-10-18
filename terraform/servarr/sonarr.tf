@@ -72,6 +72,27 @@ resource "sonarr_media_management" "media_settings_configs" {
   rescan_after_refresh        = "always"
 }
 
+resource "sonarr_notification_pushover" "pushover" {
+  on_grab                            = false
+  on_download                        = false
+  on_upgrade                         = true
+  on_import_complete                 = true
+  on_series_add                      = false
+  on_series_delete                   = false
+  on_episode_file_delete             = false
+  on_episode_file_delete_for_upgrade = true
+  on_health_issue                    = false
+  on_health_restored                 = false
+  on_manual_interaction_required     = true
+  on_application_update              = false
+  include_health_warnings            = false
+  name                               = "Pushover"
+  api_key                            = data.bitwarden-secrets_secret.sonarr_pushover_api_key.value
+  user_key                           = data.bitwarden-secrets_secret.pushover_user_key.value
+  priority                           = 0
+  tags                               = []
+}
+
 resource "sonarr_root_folder" "tv" {
   path = "/data/Media/TV"
 }

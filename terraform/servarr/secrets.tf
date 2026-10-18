@@ -22,6 +22,10 @@ data "bitwarden-secrets_secret" "radarr_pushover_api_key" {
   id = "ea3639b7-c679-4461-90b3-b4e70033fb73"
 }
 
+data "bitwarden-secrets_secret" "sonarr_pushover_api_key" {
+  id = "c1270148-5cd0-4b85-848b-b4e700358c64"
+}
+
 data "bitwarden-secrets_secret" "pushover_user_key" {
   id = "d54446e7-b51e-4210-aee0-b4e70033fbaf"
 }
