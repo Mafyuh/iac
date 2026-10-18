@@ -18,8 +18,12 @@ data "bitwarden-secrets_secret" "sabnzbd_api_key" {
   id = "76f700af-4d22-4377-991f-b25b005de1b0"
 }
 
-data "bitwarden-secrets_secret" "gotify_radarr_key" {
-  id = "cd76bb9d-1e0c-453f-9611-b2b70019825a"
+data "bitwarden-secrets_secret" "radarr_pushover_api_key" {
+  id = "ea3639b7-c679-4461-90b3-b4e70033fb73"
+}
+
+data "bitwarden-secrets_secret" "pushover_user_key" {
+  id = "d54446e7-b51e-4210-aee0-b4e70033fbaf"
 }
 
 data "bitwarden-secrets_secret" "nzbgeek_api_key" {

@@ -2,10 +2,11 @@ resource "radarr_download_client_qbittorrent" "qbitty" {
   enable                     = true
   priority                   = 1
   name                       = "qBittorrent"
-  host                       = "10.69.69.2"
+  host                       = "qbitty.iac.gg"
   url_base                   = "/"
   movie_category             = "radarr"
-  port                       = 8081
+  use_ssl                    = true
+  port                       = 443
   first_and_last             = false
   username                   = "mafyuh"
   password                   = data.bitwarden-secrets_secret.qbitty_password.value
@@ -70,23 +71,23 @@ resource "radarr_media_management" "media_settings_configs" {
   enable_media_info                           = true
 }
 
-resource "radarr_notification_gotify" "gotify" {
+resource "radarr_notification_pushover" "pushover" {
   on_grab                          = false
-  on_download                      = false
-  on_upgrade                       = false
+  on_download                      = true
+  on_upgrade                       = true
   on_movie_added                   = false
   on_movie_delete                  = false
   on_movie_file_delete             = false
   on_movie_file_delete_for_upgrade = true
   on_health_issue                  = false
   on_health_restored               = false
-  on_manual_interaction_required   = false
+  on_manual_interaction_required   = true
   on_application_update            = false
   include_health_warnings          = false
-  name                             = "Gotify"
-  server                           = "https://go.matt.fo"
-  app_token                        = data.bitwarden-secrets_secret.gotify_radarr_key.value
-  priority                         = 8
+  name                             = "Pushover"
+  api_key                          = data.bitwarden-secrets_secret.radarr_pushover_api_key.value
+  user_key                         = data.bitwarden-secrets_secret.pushover_user_key.value
+  priority                         = 0
   tags                             = []
 }
 
