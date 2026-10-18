@@ -10,10 +10,10 @@ resources:
   - kubernetes-nodes.yaml
   - kubernetes-pods.yaml
   - kubernetes-volumes.yaml
-  - minio.yaml
   - node-exporter-full.yaml
   - prometheus.yaml
   - proxmox-ve.yaml
+  - rustfs.yaml
   - smokeping.yaml
   - speedtest-exporter.yaml
   - unifi-insights.yaml

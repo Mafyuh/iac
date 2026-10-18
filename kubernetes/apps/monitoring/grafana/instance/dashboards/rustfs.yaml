@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/grafana.integreatly.org/grafanadashboard_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: rustfs
+spec:
+  allowCrossNamespaceImport: true
+  instanceSelector:
+    matchLabels:
+      grafana.internal/instance: grafana
+  url: https://raw.githubusercontent.com/rustfs/rustfs/ee534fa19baa7ac8d3d4616fe94326986ec485c8/.docker/observability/grafana/dashboards/rustfs.json
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/grafana.integreatly.org/grafanadashboard_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: rustfs-object-data-cache
+spec:
+  allowCrossNamespaceImport: true
+  instanceSelector:
+    matchLabels:
+      grafana.internal/instance: grafana
+  url: https://raw.githubusercontent.com/rustfs/rustfs/ee534fa19baa7ac8d3d4616fe94326986ec485c8/.docker/observability/grafana/dashboards/grafana-object-data-cache.json
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/grafana.integreatly.org/grafanadashboard_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: rustfs-get-rollout-health
+spec:
+  allowCrossNamespaceImport: true
+  instanceSelector:
+    matchLabels:
+      grafana.internal/instance: grafana
+  url: https://raw.githubusercontent.com/rustfs/rustfs/ee534fa19baa7ac8d3d4616fe94326986ec485c8/.docker/observability/grafana/dashboards/grafana-get-rollout-health.json
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/grafana.integreatly.org/grafanadashboard_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: rustfs-get-data-integrity
+spec:
+  allowCrossNamespaceImport: true
+  instanceSelector:
+    matchLabels:
+      grafana.internal/instance: grafana
+  url: https://raw.githubusercontent.com/rustfs/rustfs/ee534fa19baa7ac8d3d4616fe94326986ec485c8/.docker/observability/grafana/dashboards/grafana-get-data-integrity.json
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/grafana.integreatly.org/grafanadashboard_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: rustfs-get-resource-impact
+spec:
+  allowCrossNamespaceImport: true
+  instanceSelector:
+    matchLabels:
+      grafana.internal/instance: grafana
+  url: https://raw.githubusercontent.com/rustfs/rustfs/ee534fa19baa7ac8d3d4616fe94326986ec485c8/.docker/observability/grafana/dashboards/grafana-get-resource-impact.json
