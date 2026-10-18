@@ -57,7 +57,7 @@ spec:
         - name: repo1
           s3:
             bucket: postgres
-            endpoint: "https://s3.mafyuh.xyz"
+            endpoint: "https://s3.iac.gg"
             region: us-east-1
           schedules:
             full: "30 0 * * *"

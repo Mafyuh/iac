@@ -5,7 +5,7 @@ terraform {
     bucket                      = "tofu"
     region                      = "us-east-1"
     key                         = "arr.tfstate"
-    endpoint                    = "https://s3.mafyuh.xyz"
+    endpoint                    = "https://s3.iac.gg"
     skip_region_validation      = true
     skip_credentials_validation = true
     skip_requesting_account_id  = true

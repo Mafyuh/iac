@@ -34,6 +34,14 @@ spec:
                   secretKeyRef:
                     name: mcphub-secrets
                     key: MCPHUB_ADMIN_PASSWORD
+              PG_URI:
+                valueFrom:
+                  secretKeyRef:
+                    name: pg-cluster-pguser-mcphub
+                    key: uri
+              DB_URL:
+                value: $(PG_URI)?sslmode=no-verify
+                dependsOn: PG_URI
 
             probes:
               liveness:
@@ -77,16 +85,3 @@ spec:
           - name: envoy-internal
             namespace: kube-system
             sectionName: https
-
-    persistence:
-      config:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: ceph-block
-        advancedMounts:
-          mcphub:
-            app:
-              - path: /app/mcp_settings.json
-                subPath: mcp_settings.json
