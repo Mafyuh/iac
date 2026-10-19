@@ -48,7 +48,7 @@ spec:
           teamarr:
             image:
               repository: ghcr.io/pharaoh-labs/teamarr
-              tag: 2.24.1
+              tag: 2.24.2
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
