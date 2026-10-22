@@ -13,5 +13,6 @@ resources:
   - recyclarr/ks.yaml
   - sabnzbd/ks.yaml
   - sonarr/ks.yaml
+  - teamarr/ks.yaml
   - maintainerr/ks.yaml
   - tracearr/ks.yaml

@@ -1,0 +1,71 @@
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app teamarr
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: teamarr
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: arr
+
+    controllers:
+      teamarr:
+        enabled: true
+        type: deployment
+
+        replicas: 1
+        strategy: Recreate
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/pharaoh-labs/teamarr
+              tag: 2.24.3
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "America/New_York"
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+
+    service:
+      app:
+        primary: true
+        controller: teamarr
+        ports:
+          http:
+            port: &port 9195
+
+    route:
+      internal:
+        enabled: true
+        kind: HTTPRoute
+        hostnames: ["{{ .Release.Name }}.${NEW_DOMAIN}"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: *app
+                port: *port
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /app/data

@@ -45,21 +45,6 @@ spec:
               limits:
                 memory: 2Gi
 
-          teamarr:
-            image:
-              repository: ghcr.io/pharaoh-labs/teamarr
-              tag: 2.24.3
-              pullPolicy: IfNotPresent
-            env:
-              TZ: "America/New_York"
-
-            resources:
-              requests:
-                cpu: 50m
-                memory: 256Mi
-              limits:
-                memory: 1Gi
-
     service:
       app:
         primary: true
@@ -67,8 +52,6 @@ spec:
         ports:
           http:
             port: &port 9191
-          teamarr:
-            port: &teamarrPort 9195
 
     route:
       internal:
@@ -87,30 +70,9 @@ spec:
           - name: envoy-internal
             namespace: kube-system
             sectionName: https
-      teamarr:
-        enabled: true
-        kind: HTTPRoute
-        hostnames: ["teamarr.${NEW_DOMAIN}"]
-        rules:
-          - matches:
-              - path:
-                  type: PathPrefix
-                  value: /
-            backendRefs:
-              - name: *app
-                port: *teamarrPort
-        parentRefs:
-          - name: envoy-internal
-            namespace: kube-system
-            sectionName: https
 
     persistence:
       data:
         existingClaim: *app
-        advancedMounts:
-          dispatcharr:
-            app:
-              - path: /data
-            teamarr:
-              - path: /app/data
-                subPath: teamarr
+        globalMounts:
+          - path: /data
