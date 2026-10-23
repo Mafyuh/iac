@@ -18,6 +18,8 @@ spec:
       cli-proxy-api:
         enabled: true
         type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
 
         replicas: 1
 
