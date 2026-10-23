@@ -40,9 +40,9 @@ This is my homelab infrastructure, defined in code.
 
 This repository contains the IaC ([Infrastructure as Code](https://en.wikipedia.org/wiki/Infrastructure_as_code)) configuration for my homelab.
 
-My homelab runs two infrastructure stacks: Kubernetes and Proxmox VMs running Docker. Legacy VMs are Ubuntu cloned from templates I created with [Packer](https://www.packer.io/), I have been migrating my Ubuntu VM's over to NixOS, see Nix config [here](./nixos) and going forward all VM's will be NixOS. My Kubernetes nodes are all defined as code using [Talos Linux](https://www.talos.dev/) with [talstomize](https://github.com/mirceanton/talstomize).
+Kubernetes is the primary platform. The cluster runs on bare-metal [Talos Linux](https://www.talos.dev/) nodes defined as code with [talstomize](https://github.com/mirceanton/talstomize), and everything in it is managed with **[GitOps](https://en.wikipedia.org/wiki/DevOps) practices**.
 
-Everything is containerized — either managed with Docker Compose or orchestrated through Kubernetes. My long-term goal is to move it all to Kubernetes using **[GitOps](https://en.wikipedia.org/wiki/DevOps) practices**, and the migration is ongoing. Docker Compose sticks around mainly due to hardware limitations; scaling a homelab Kubernetes cluster means buying alot of hardware.
+I don't spin up new VMs anymore. New services go straight into Kubernetes, and the remaining Proxmox VMs running Docker Compose are being migrated over as I go. What's left of the VMs are a mix of legacy Ubuntu (cloned from [Packer](https://www.packer.io/) templates) and [NixOS](./nixos).
 
 To automate infrastructure updates, I use **Github Actions**, which trigger workflows upon changes to this repo. This ensures seamless deployment and maintenance across my homelab:
 
@@ -66,7 +66,7 @@ I use **RackNerd** for their very reasonably priced VPS and deploy Docker servic
 
 I use [**Cloudflare**](https://www.cloudflare.com/) for my DNS provider with [**Cloudflare Tunnels**](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) to expose some of the services to the world. [**Cloudflare Access**](https://www.cloudflare.com/access/) is used as Zero Trust for public websites, this is paired with [**Fail2Ban**](https://www.fail2ban.org/) looking through all my reverse proxy logs for malicious actors who made it through [**Access**](https://www.cloudflare.com/access/) and banning them via [**Cloudflare WAF**](https://www.cloudflare.com/web-application-firewall/).
 
-I also utilize Unifi's IDS/IPS for intrusion detection on my home network, and use **[Wazuh](https://wazuh.com/)** as a SIEM to monitor and generate security alerts across all my hosts.
+I also utilize Unifi's IDS/IPS for intrusion detection on my home network.
 
 ### **📊 Monitoring & Observability**
 
@@ -93,15 +93,15 @@ I use [Bifrost](https://github.com/maximhq/bifrost) as a model gateway for local
 
 Although I try to self-host everything I can, my infra still relies on the cloud for certain services.
 
-| Service                                                                                 | Use                                                                                                             | Cost           |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Proton](https://proton.me/)                                                            | IMAP, SMTP, VPN (Pass once there is Autofill Hotkey)                                                            | ~$120/yr       |
-| [Bitwarden](https://bitwarden.com/)                                                     | Secrets for all tools                                                                                           | Free           |
-| [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage) | Takes backups of Proxmox VM's, Kubernetes PV's (will migrate to Proton Drive once there's proper Linux support) | Free (e5 dev)  |
-| [Cloudflare](https://www.cloudflare.com/)                                               | Domain, DNS, WAF                                                                                                | Free           |
-| [GitHub](https://github.com/)                                                           | Hosting this repo and continuous integration/deployments                                                        | Free           |
-| [RackNerd](https://www.racknerd.com/)                                                   | RackNerd VPS, runs services such as Forgejo                                                                     | ~$60/yr        |
-|                                                                                         |                                                                                                                 | Total: ~$15/mo |
+| Service                                                 | Use                                                      | Cost           |
+| ------------------------------------------------------- | -------------------------------------------------------- | -------------- |
+| [Proton](https://proton.me/)                            | IMAP, SMTP, VPN (Pass once there is Autofill Hotkey)     | ~$120/yr       |
+| [Bitwarden](https://bitwarden.com/)                     | Secrets for all tools                                    | Free           |
+| [Backblaze B2](https://www.backblaze.com/cloud-storage) | Offsite backups                                          | ~$5/mo         |
+| [Cloudflare](https://www.cloudflare.com/)               | Domain, DNS, WAF                                         | Free           |
+| [GitHub](https://github.com/)                           | Hosting this repo and continuous integration/deployments | Free           |
+| [RackNerd](https://www.racknerd.com/)                   | RackNerd VPS, runs services such as Forgejo              | ~$60/yr        |
+|                                                         |                                                          | Total: ~$20/mo |
 
 ## 🧑‍💻 **Getting Started**
 
