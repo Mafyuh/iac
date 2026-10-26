@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/kustomization.json
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - helmrelease.yaml
+  - source.yaml
+configMapGenerator:
+  - name: kubernetes-mcp-config
+    files:
+      - config.toml=./config.toml
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,10 @@
+port = "8080"
+read_only = true
+stateless = true
+list_output = "table"
+toolsets = ["core", "config", "helm"]
+
+[[denied_resources]]
+group = ""
+version = "v1"
+kind = "Secret"

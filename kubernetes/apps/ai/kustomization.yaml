@@ -6,6 +6,7 @@ resources:
   - ai-proxy/ks.yaml
   - bifrost/ks.yaml
   - cli-proxy-api/ks.yaml
+  - kubernetes-mcp/ks.yaml
   - open-webui/ks.yaml
   - mcphub/ks.yaml
   - searxng/ks.yaml
