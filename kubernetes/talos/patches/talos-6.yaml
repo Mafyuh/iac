@@ -5,7 +5,7 @@ machine:
   network:
     interfaces:
       - deviceSelector:
-          hardwareAddr: 98:fa:9b:ef:f4:bd
+          hardwareAddr: 1a:4b:24:ac:41:2c
         dhcp: true
         vip:
           ip: 10.0.0.150
