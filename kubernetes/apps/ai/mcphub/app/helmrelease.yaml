@@ -60,6 +60,12 @@ spec:
               limits:
                 memory: 2Gi
 
+    persistence:
+      data:
+        existingClaim: "{{ .Release.Name }}"
+        globalMounts:
+          - path: /data
+
     service:
       app:
         primary: true

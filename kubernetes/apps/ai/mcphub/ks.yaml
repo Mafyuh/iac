@@ -6,6 +6,8 @@ metadata:
   name: &app mcphub
   namespace: &ns ai
 spec:
+  components:
+    - ../../../../components/volsync
   targetNamespace: *ns
   commonMetadata:
     labels:
@@ -22,3 +24,7 @@ spec:
   postBuild:
     substitute:
       APP: mcphub
+      VOLSYNC_CAPACITY: 2Gi
+      VOLSYNC_SCHEDULE: "45 1 * * *"
+      VOLSYNC_PUID: "0"
+      VOLSYNC_PGID: "0"
