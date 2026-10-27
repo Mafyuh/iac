@@ -26,5 +26,3 @@ spec:
       APP: mcphub
       VOLSYNC_CAPACITY: 2Gi
       VOLSYNC_SCHEDULE: "45 1 * * *"
-      VOLSYNC_PUID: "0"
-      VOLSYNC_PGID: "0"
