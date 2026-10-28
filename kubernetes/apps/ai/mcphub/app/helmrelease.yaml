@@ -47,6 +47,16 @@ spec:
               DB_URL:
                 value: $(PG_URI)?sslmode=no-verify
                 dependsOn: PG_URI
+              BETTER_AUTH_ENABLED: "true"
+              BETTER_AUTH_URL: "https://{{ .Release.Name }}.${NEW_DOMAIN}"
+              BETTER_AUTH_OIDC_ENABLED: "true"
+              BETTER_AUTH_OIDC_DISCOVERY_URL: https://auth.mafyuh.io/application/o/mcphub/.well-known/openid-configuration
+              OIDC_CLIENT_ID: "mcphub"
+              OIDC_CLIENT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: mcphub-secrets
+                    key: OIDC_CLIENT_SECRET
 
             probes:
               liveness:
