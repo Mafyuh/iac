@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/sonarr
-              tag: 5.0.0.2800
+              tag: 5.0.0.2838
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
