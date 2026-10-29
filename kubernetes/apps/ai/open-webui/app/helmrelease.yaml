@@ -30,7 +30,7 @@ spec:
       type: Recreate
     image:
       repository: ghcr.io/open-webui/open-webui
-      tag: v0.12.4
+      tag: v0.12.5
       pullPolicy: "IfNotPresent"
       useSlim: true
     route:
