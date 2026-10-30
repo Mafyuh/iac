@@ -51,6 +51,7 @@
     unityhub
     pkgs-unstable.vscode
     pkgs-unstable.brave
+    pkgs-unstable.firefox
     pkgs-unstable.discord
     pkgs-unstable.termius
     kdePackages.plasma-browser-integration
