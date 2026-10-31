@@ -103,6 +103,6 @@ spec:
               - name: mcphub
                 port: *port
         parentRefs:
-          - name: envoy-external
+          - name: envoy-internal
             namespace: kube-system
             sectionName: https
