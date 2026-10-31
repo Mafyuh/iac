@@ -25,15 +25,6 @@ resource "cloudflare_dns_record" "dev_local" {
   zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
 }
 
-resource "cloudflare_dns_record" "dev_n8n" {
-  content = data.bitwarden-secrets_secret.vps_oci_vm_ip.value
-  name    = "n8n.${var.domains["dev"]}"
-  proxied = true
-  ttl     = 1
-  type    = "A"
-  zone_id = data.bitwarden-secrets_secret.cf_dev_zone_id.value
-}
-
 resource "cloudflare_dns_record" "dev_domainconnect" {
   content = "connect.domains.google.com"
   name    = "_domainconnect.${var.domains["dev"]}"
