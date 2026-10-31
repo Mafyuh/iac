@@ -1,5 +1,7 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+name: arm
+
 x-caddy-site: &caddy-site
   caddy.tls.dns: "cloudflare {env.CLOUDFLARE_API_TOKEN}"
   caddy.log.output: "file /var/log/access.log"
