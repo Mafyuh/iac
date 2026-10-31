@@ -1,7 +1,9 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
-x-caddy-tls: &caddy-tls
+x-caddy-site: &caddy-site
   caddy.tls.dns: "cloudflare {env.CLOUDFLARE_API_TOKEN}"
+  caddy.log.output: "file /var/log/access.log"
+  caddy.log.format: json
 
 services:
   caddy:
@@ -23,6 +25,9 @@ services:
       - CLOUDFLARE_API_TOKEN=$CLOUDFLARE_API_TOKEN
       - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
       - CADDY_DOCKER_CADDYFILE_PATH=/etc/caddy/generated
+    labels:
+      caddy.servers.trusted_proxies: cloudflare
+      caddy.servers.client_ip_headers: Cf-Connecting-IP
     restart: unless-stopped
     networks:
       - racknerd
@@ -42,7 +47,6 @@ services:
       - NET_RAW
     volumes:
       - "/docker/appdata/fail2ban-caddy/data:/data"
-      - "/var/log/auth.log:/var/log/auth.log:ro"
       - "/docker/appdata/caddy/logs:/log/caddy:ro"
       - "/docker/appdata/fail2ban-caddy/f2b-logs:/f2b-logs:rw"
       - "./config/fail2ban-jail.conf:/data/jail.d/caddy.conf:ro"
@@ -105,7 +109,7 @@ services:
       sandbox-api:
         condition: service_started
     labels:
-      <<: *caddy-tls
+      <<: *caddy-site
       caddy: $N8N_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 5678}}"
 
@@ -205,7 +209,7 @@ services:
     networks:
       - racknerd
     labels:
-      <<: *caddy-tls
+      <<: *caddy-site
       caddy: $DATABASUS_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 4005}}"
 
@@ -240,7 +244,7 @@ services:
       postgres:
         condition: service_healthy
     labels:
-      <<: *caddy-tls
+      <<: *caddy-site
       caddy: git.iac.gg
       caddy.reverse_proxy: "{{upstreams 3000}}"
 
@@ -277,7 +281,7 @@ services:
       postgres:
         condition: service_healthy
     labels:
-      <<: *caddy-tls
+      <<: *caddy-site
       caddy: $VW_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 80}}"
 
