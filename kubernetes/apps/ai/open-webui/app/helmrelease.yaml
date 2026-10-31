@@ -17,13 +17,7 @@ spec:
     tika:
       enabled: false
     terminals:
-      enabled: true
-      existingSecret: open-webui-terminals
-      terminalDefaults:
-        persistence:
-          enabled: true
-          size: 1Gi
-          storageClass: ceph-block
+      enabled: false
     workload:
       kind: Deployment
     strategy:

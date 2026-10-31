@@ -1,0 +1,91 @@
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: open-terminal
+spec:
+  interval: 15m
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+  ref:
+    tag: 5.3.0
+  url: oci://ghcr.io/bjw-s-labs/helm/app-template
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app open-terminal
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: open-terminal
+  values:
+    global:
+      fullnameOverride: *app
+      namespace: ai
+
+    controllers:
+      open-terminal:
+        enabled: true
+        type: deployment
+        replicas: 1
+        strategy: Recreate
+        pod:
+          securityContext:
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: ghcr.io/open-webui/open-terminal
+              tag: 0.14.7@sha256:f231354ca43b5ab68e383548f1ed24fc7ce0ac5f6b542ddff0b2421e2b0154ce
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/New_York
+              OPEN_TERMINAL_HOST: 0.0.0.0
+              OPEN_TERMINAL_PORT: &port 8000
+              OPEN_TERMINAL_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: open-webui-terminals
+                    key: api-key
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: *port
+                  initialDelaySeconds: 10
+                  periodSeconds: 15
+                  timeoutSeconds: 2
+                  failureThreshold: 3
+              readiness: *probe
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 2Gi
+
+    service:
+      app:
+        primary: true
+        controller: open-terminal
+        ports:
+          http:
+            port: *port
+
+    persistence:
+      home:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: ceph-block
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        globalMounts:
+          - path: /home/user
