@@ -1,5 +1,8 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+x-caddy-tls: &caddy-tls
+  caddy.tls.dns: "cloudflare {env.CLOUDFLARE_API_TOKEN}"
+
 services:
   caddy:
     image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.10.27
@@ -102,6 +105,7 @@ services:
       sandbox-api:
         condition: service_started
     labels:
+      <<: *caddy-tls
       caddy: $N8N_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 5678}}"
 
@@ -201,6 +205,7 @@ services:
     networks:
       - racknerd
     labels:
+      <<: *caddy-tls
       caddy: $DATABASUS_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 4005}}"
 
@@ -215,6 +220,9 @@ services:
       - GITEA__database__NAME=forgejo
       - GITEA__database__USER=vaultwarden
       - GITEA__database__PASSWD=$POSTGRES_PASSWORD
+      - GITEA__server__DOMAIN=git.iac.gg
+      - GITEA__server__SSH_DOMAIN=git.iac.gg
+      - GITEA__server__ROOT_URL=https://git.iac.gg/
       - GITEA__openid__ENABLE_OPENID_SIGNIN=false
       - GITEA__oauth2_client__ENABLE_AUTO_REGISTRATION=true
       - GITEA__oauth2_client__USERNAME=preferred_username
@@ -232,7 +240,8 @@ services:
       postgres:
         condition: service_healthy
     labels:
-      caddy: git.mafyuh.io
+      <<: *caddy-tls
+      caddy: git.iac.gg
       caddy.reverse_proxy: "{{upstreams 3000}}"
 
   vaultwarden:
@@ -268,9 +277,9 @@ services:
       postgres:
         condition: service_healthy
     labels:
+      <<: *caddy-tls
       caddy: $VW_HOSTNAME
       caddy.reverse_proxy: "{{upstreams 80}}"
-      caddy.tls.dns: "cloudflare {env.CLOUDFLARE_API_TOKEN}"
 
 networks:
   racknerd:
