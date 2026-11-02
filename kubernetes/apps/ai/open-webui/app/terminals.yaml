@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/open-webui/open-terminal
-              tag: 0.14.7@sha256:f231354ca43b5ab68e383548f1ed24fc7ce0ac5f6b542ddff0b2421e2b0154ce
+              tag: 0.15.5@sha256:8785076200b618603e2e176eac724046ab62a1420719263e039cdca297c18c75
               pullPolicy: IfNotPresent
             env:
               TZ: America/New_York
