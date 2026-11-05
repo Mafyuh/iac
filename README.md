@@ -40,9 +40,11 @@ This is my homelab infrastructure, defined in code.
 
 This repository contains the IaC ([Infrastructure as Code](https://en.wikipedia.org/wiki/Infrastructure_as_code)) configuration for my homelab.
 
+My homelab runs two infrastructure stacks: Kubernetes and Proxmox VMs running Docker.
+
 Kubernetes is the primary platform. The cluster runs on bare-metal [Talos Linux](https://www.talos.dev/) nodes defined as code with [talstomize](https://github.com/mirceanton/talstomize), and everything in it is managed with **[GitOps](https://en.wikipedia.org/wiki/DevOps) practices**.
 
-I don't spin up new VMs anymore. New services go straight into Kubernetes, and the remaining Proxmox VMs running Docker Compose are being migrated over as I go. What's left of the VMs are a mix of legacy Ubuntu (cloned from [Packer](https://www.packer.io/) templates) and [NixOS](./nixos).
+Legacy VMs are Ubuntu cloned from templates I created with [Packer](https://www.packer.io/). I have been migrating my Ubuntu VMs over to NixOS (see Nix config [here](./nixos)), and going forward all VMs will be NixOS.
 
 To automate infrastructure updates, I use **Github Actions**, which trigger workflows upon changes to this repo. This ensures seamless deployment and maintenance across my homelab:
 
@@ -51,6 +53,7 @@ To automate infrastructure updates, I use **Github Actions**, which trigger work
 - **[Renovate](https://github.com/renovatebot/renovate)** keeps services updated by opening PRs for new versions.
 - **[Ansible](https://github.com/ansible/ansible)** is used to execute playbooks on all of my VMs, automating management and configurations
 - [**Comin**](https://github.com/nlewo/comin) keeps NixOS flakes in sync with this repo
+- **[tofu-controller](https://github.com/flux-iac/tofu-controller)** GitOpsifies my [Terraform](./terraform) deployments, letting Flux plan and apply from this repo
 
 ### 🔒 **Security & Networking**
 
@@ -81,12 +84,13 @@ I use a combination of **Grafana, fluent-bit, VictoriaLogs and Prometheus** with
 
 I use [Bifrost](https://github.com/maximhq/bifrost) as a model gateway for local and cloud AI providers.
 
-- **Providers:** Ollama, NVIDIA NIM, Opencode ($10/m), Codex ($20/m), and OpenRouter
+- **Providers:** Ollama, NVIDIA NIM, Opencode ($10/m), Claude ($20/m), Codex ($20/m), and OpenRouter
 - **Interfaces:** [Open WebUI](https://github.com/open-webui/open-webui) for chat, [T3Code](https://t3.codes) & [OAI Compatible Provider for Copilot](https://github.com/JohnnyZ93/oai-compatible-copilot)
 - **Infrastructure:**
   - [cli-proxy-api](https://github.com/router-for-me/CLIProxyAPI) exposes subscriptions over API to Bifrost
-  - [mcphub](https://github.com/samanhappy/mcphub) provides one MCP connection to all of my stdio MCP servers
-  - [SearXNG](https://github.com/searxng/searxng) provides web search for AI
+  - [mcphub](https://github.com/samanhappy/mcphub) provides one MCP connection to all of my MCP servers
+  - [SearXNG](https://github.com/searxng/searxng) provides web search
+  - [Langfuse](https://github.com/langfuse/langfuse) provides LLM observability (traces, costs, latency)
   - ai-proxy (custom) backfills `/v1/models` with [models.dev](https://models.dev) metadata so chat and IDE clients actually know each model's capabilities
 
 ### ☁️ **Cloud Dependencies**
