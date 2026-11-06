@@ -57,9 +57,9 @@
       groupName: "Envoy Gateway",
       matchPackageNames: [
         "docker.io/envoyproxy/gateway-helm",
-        "docker.io/envoyproxy/gateway-crds-helm",
+        "envoy-gateway-crds",
       ],
-      matchDatasources: ["docker"],
+      matchDatasources: ["docker", "github-tags"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
