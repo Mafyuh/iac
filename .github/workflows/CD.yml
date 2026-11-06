@@ -73,6 +73,7 @@ jobs:
               omni) host="omni" ;;
               vps) host="racknerd-vps" ;;
               wazuh) host="wazuh" ;;
+              zot) host="zot" ;;
               *) echo "Unknown folder: $f" && exit 1 ;;
             esac
 

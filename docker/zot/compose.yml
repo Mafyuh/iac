@@ -1,0 +1,43 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+# Pull-through cache for docker.io
+services:
+  zot-credentials:
+    image: docker.io/library/busybox:1.37.0
+    container_name: zot-credentials
+    restart: "no"
+    environment:
+      - DOCKERHUB_USERNAME=mafyuh
+      - DOCKERHUB_TOKEN=$DOCKERHUB_TOKEN
+    command:
+      - sh
+      - -c
+      - |
+        umask 077
+        printf '{"registry-1.docker.io":{"username":"%s","password":"%s"}}\n' \
+          "$$DOCKERHUB_USERNAME" "$$DOCKERHUB_TOKEN" > /creds/credentials.json
+    volumes:
+      - zot-credentials:/creds
+
+  zot:
+    image: ghcr.io/project-zot/zot:v2.1.23
+    container_name: zot
+    restart: unless-stopped
+    command: ["serve", "/etc/zot/config.json"]
+    ports:
+      - 5000:5000
+    volumes:
+      - ./config.json:/etc/zot/config.json:ro
+      - zot-credentials:/etc/zot/creds:ro
+      - /docker/appdata/zot:/var/lib/registry
+    depends_on:
+      zot-credentials:
+        condition: service_completed_successfully
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  zot-credentials:

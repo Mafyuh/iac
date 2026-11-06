@@ -1,0 +1,106 @@
+{
+  "distSpecVersion": "1.1.1",
+  "storage": {
+    "rootDirectory": "/var/lib/registry",
+    "dedupe": true,
+    "gc": true,
+    "gcDelay": "1h",
+    "gcInterval": "24h",
+    "retention": {
+      "delay": "24h",
+      "policies": [
+        {
+          "repositories": ["**"],
+          "deleteReferrers": true,
+          "deleteUntagged": true,
+          "keepTags": [
+            {
+              "pulledWithin": "2160h"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "http": {
+    "address": "0.0.0.0",
+    "port": "5000",
+    "externalUrl": "https://mirror.iac.gg",
+    "compat": ["docker2s2"]
+  },
+  "log": {
+    "level": "info"
+  },
+  "extensions": {
+    "sync": {
+      "enable": true,
+      "credentialsFile": "/etc/zot/creds/credentials.json",
+      "registries": [
+        {
+          "urls": ["https://ghcr.io"],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 3,
+          "retryDelay": "10s",
+          "content": [
+            {
+              "prefix": "**",
+              "destination": "/ghcr.io"
+            }
+          ]
+        },
+        {
+          "urls": ["https://quay.io"],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 3,
+          "retryDelay": "10s",
+          "content": [
+            {
+              "prefix": "**",
+              "destination": "/quay.io"
+            }
+          ]
+        },
+        {
+          "urls": ["https://registry.k8s.io"],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 3,
+          "retryDelay": "10s",
+          "content": [
+            {
+              "prefix": "**",
+              "destination": "/registry.k8s.io"
+            }
+          ]
+        },
+        {
+          "urls": ["https://registry-1.docker.io"],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 3,
+          "retryDelay": "10s",
+          "content": [
+            {
+              "prefix": "**",
+              "destination": "/"
+            }
+          ]
+        }
+      ]
+    },
+    "search": {
+      "enable": true
+    },
+    "ui": {
+      "enable": true
+    },
+    "metrics": {
+      "enable": true,
+      "prometheus": {
+        "path": "/metrics"
+      }
+    }
+  }
+}
