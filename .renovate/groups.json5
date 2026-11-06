@@ -53,6 +53,19 @@
       minimumGroupSize: 2,
     },
     {
+      description: "Envoy Gateway Group",
+      groupName: "Envoy Gateway",
+      matchPackageNames: [
+        "docker.io/envoyproxy/gateway-helm",
+        "docker.io/envoyproxy/gateway-crds-helm",
+      ],
+      matchDatasources: ["docker"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
+    {
       description: "n8n Group",
       groupName: "n8n",
       matchPackageNames: ["/n8n-io/"],

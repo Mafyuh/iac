@@ -24,8 +24,6 @@ spec:
             deploy:
               type: GatewayNamespace
     crds:
-      gatewayAPI:
-        safeUpgradePolicy:
-          enabled: false
+      enabled: false
     global:
       imageRegistry: mirror.iac.gg
