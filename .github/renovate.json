@@ -20,7 +20,7 @@
     }
   ],
   "registryAliases": {
-    "mirror.gcr.io": "docker.io"
+    "mirror.iac.gg": "docker.io"
   },
   "nix": {
     "enabled": true

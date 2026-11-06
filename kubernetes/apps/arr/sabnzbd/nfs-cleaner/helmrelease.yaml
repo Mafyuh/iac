@@ -37,7 +37,7 @@ spec:
         containers:
           app:
             image:
-              repository: mirror.gcr.io/library/busybox
+              repository: mirror.iac.gg/library/busybox
               tag: latest
             command: ["/bin/sh"]
             args: ["/scripts/cleanup.sh"]

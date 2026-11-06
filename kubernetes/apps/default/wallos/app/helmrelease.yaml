@@ -15,7 +15,7 @@ spec:
         containers:
           main:
             image:
-              repository: mirror.gcr.io/bellamy/wallos
+              repository: mirror.iac.gg/bellamy/wallos
               tag: 5.10.4
             env:
               TZ: America/New_York

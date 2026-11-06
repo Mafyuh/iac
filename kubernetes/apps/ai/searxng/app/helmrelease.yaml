@@ -22,7 +22,7 @@ spec:
         containers:
           app:
             image:
-              repository: mirror.gcr.io/searxng/searxng
+              repository: mirror.iac.gg/searxng/searxng
               tag: 2026.11.5-adbf160ff@sha256:124830d6d9d048f1e87741e47365e9a224f57af3be2de4c9059ab86964338169
               pullPolicy: IfNotPresent
             env:

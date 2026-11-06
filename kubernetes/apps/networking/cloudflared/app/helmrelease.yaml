@@ -21,7 +21,7 @@ spec:
         containers:
           app:
             image:
-              repository: mirror.gcr.io/cloudflare/cloudflared
+              repository: mirror.iac.gg/cloudflare/cloudflared
               tag: 2026.10.7@sha256:4955524aeaa379e154023d5a027c250f7b35041a2e7e950cf13f144bc9b9c5ba
             args:
               - tunnel

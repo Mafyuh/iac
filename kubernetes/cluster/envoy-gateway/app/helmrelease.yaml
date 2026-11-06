@@ -28,4 +28,4 @@ spec:
         safeUpgradePolicy:
           enabled: false
     global:
-      imageRegistry: mirror.gcr.io
+      imageRegistry: mirror.iac.gg

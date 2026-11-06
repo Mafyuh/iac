@@ -22,45 +22,45 @@
       sourceUrl: "https://github.com/umami-software/umami",
     },
     {
-      matchDepNames: ["mirror.gcr.io/alpine/kubectl"],
+      matchDepNames: ["mirror.iac.gg/alpine/kubectl"],
       sourceUrl: "https://github.com/kubernetes/kubernetes",
     },
     {
-      matchDepNames: ["mirror.gcr.io/couchdb"],
+      matchDepNames: ["mirror.iac.gg/couchdb"],
       sourceUrl: "https://github.com/apache/couchdb",
       changelogUrl: "https://docs.couchdb.org/en/stable/whatsnew/",
     },
     {
-      matchDepNames: ["mirror.gcr.io/eceasy/cli-proxy-api"],
+      matchDepNames: ["mirror.iac.gg/eceasy/cli-proxy-api"],
       sourceUrl: "https://github.com/router-for-me/CLIProxyAPI",
     },
     {
-      matchDepNames: ["mirror.gcr.io/eeacms/postfix"],
+      matchDepNames: ["mirror.iac.gg/eeacms/postfix"],
       sourceUrl: "https://github.com/eea/eea.docker.postfix",
     },
     {
-      matchDepNames: ["mirror.gcr.io/ollama/ollama"],
+      matchDepNames: ["mirror.iac.gg/ollama/ollama"],
       sourceUrl: "https://github.com/ollama/ollama",
     },
     {
-      matchDepNames: ["mirror.gcr.io/postgres"],
+      matchDepNames: ["docker.io/library/postgres"],
       changelogUrl: "https://www.postgresql.org/docs/release/",
     },
     {
-      matchDepNames: ["mirror.gcr.io/prom/graphite-exporter"],
+      matchDepNames: ["mirror.iac.gg/prom/graphite-exporter"],
       sourceUrl: "https://github.com/prometheus/graphite_exporter",
     },
     {
       matchDepNames: [
-        "mirror.gcr.io/wazuh/wazuh-dashboard",
-        "mirror.gcr.io/wazuh/wazuh-indexer",
-        "mirror.gcr.io/wazuh/wazuh-manager",
+        "mirror.iac.gg/wazuh/wazuh-dashboard",
+        "mirror.iac.gg/wazuh/wazuh-indexer",
+        "mirror.iac.gg/wazuh/wazuh-manager",
       ],
       sourceUrl: "https://github.com/wazuh/wazuh",
     },
     {
       matchDepNames: ["quay.io/superq/smokeping-prober"],
       sourceUrl: "https://github.com/SuperQ/smokeping_prober",
-    }
+    },
   ],
 }

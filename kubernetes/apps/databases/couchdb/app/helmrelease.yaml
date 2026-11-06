@@ -36,7 +36,7 @@ spec:
         containers:
           app:
             image:
-              repository: mirror.gcr.io/couchdb
+              repository: mirror.iac.gg/couchdb
               tag: 3.5.3
               pullPolicy: IfNotPresent
             env:

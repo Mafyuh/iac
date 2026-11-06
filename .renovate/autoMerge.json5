@@ -10,7 +10,7 @@
       matchPackageNames: [
         "/home-operations/",
         "ghcr.io/n8n-io/n8n",
-        "mirror.gcr.io/searxng/searxng",
+        "mirror.iac.gg/searxng/searxng",
       ],
       ignoreTests: false,
     },

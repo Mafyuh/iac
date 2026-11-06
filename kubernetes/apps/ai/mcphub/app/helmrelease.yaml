@@ -29,7 +29,7 @@ spec:
         containers:
           app:
             image:
-              repository: mirror.gcr.io/samanhappy/mcphub
+              repository: mirror.iac.gg/samanhappy/mcphub
               tag: 1.2.1
               pullPolicy: IfNotPresent
             env:
