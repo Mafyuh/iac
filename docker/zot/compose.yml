@@ -3,7 +3,7 @@
 # Pull-through cache for docker.io
 services:
   zot-credentials:
-    image: docker.io/library/busybox:1.37.0
+    image: docker.io/library/busybox:1.38.0
     container_name: zot-credentials
     restart: "no"
     environment:
