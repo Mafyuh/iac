@@ -92,7 +92,7 @@ spec:
     k8sServiceHost: localhost
     k8sServicePort: 7445
 ---
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
 metadata:
   name: custom-pool
