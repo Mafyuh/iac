@@ -16,7 +16,7 @@ spec:
           main:
             image:
               repository: mirror.iac.gg/bellamy/wallos
-              tag: 5.10.4
+              tag: 5.11.1
             env:
               TZ: America/New_York
             probes:
