@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/prowlarr
-              tag: 3.0.0.5737
+              tag: 3.0.1.5752
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
