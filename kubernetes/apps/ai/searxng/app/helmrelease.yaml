@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: mirror.iac.gg/searxng/searxng
-              tag: 2026.11.6-ac11e14c5@sha256:c750ee1d859b26d3aeae51c07f6a48c3a0bfbaa9195d71a18b258862d88c4c3c
+              tag: 2026.11.9-57ff753ad@sha256:287af61f1a13e86d02974fcde91a3413a9945788de38b61ffbc491d81a19bcc2
               pullPolicy: IfNotPresent
             env:
               PUID: "1000"
