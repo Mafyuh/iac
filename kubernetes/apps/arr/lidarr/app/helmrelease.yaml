@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/lidarr
-              tag: 3.2.0.5144
+              tag: 3.2.1.5196
               pullPolicy: IfNotPresent
             env:
               TZ: "America/New_York"
