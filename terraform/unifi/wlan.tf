@@ -16,7 +16,7 @@ resource "unifi_wlan" "wifi" {
     enabled = false
     policy  = "allow"
   }
-  group_rekey    = 0
+  group_rekey = 0
 
   network_id = unifi_network.iot.id
   ## TODO Import these resources and remove the hardcoded IDs

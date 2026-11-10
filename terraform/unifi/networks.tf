@@ -11,12 +11,12 @@ resource "unifi_network" "default" {
   subnet = "10.0.0.1/24"
 
   dhcp_server = {
-    enabled            = true
-    conflict_checking  = false
-    start              = "10.0.0.6"
-    stop               = "10.0.0.199"
-    dns_enabled        = true
-    dns_servers        = [
+    enabled           = true
+    conflict_checking = false
+    start             = "10.0.0.6"
+    stop              = "10.0.0.199"
+    dns_enabled       = true
+    dns_servers = [
       "10.20.10.20",
     ]
     boot = {
@@ -45,10 +45,10 @@ resource "unifi_network" "default" {
 
 ## secondary network
 resource "unifi_network" "secondary" {
-  name      = "Secondary"
-  purpose   = "corporate"
-  vlan      = 2
-  enabled   = true
+  name       = "Secondary"
+  purpose    = "corporate"
+  vlan       = 2
+  enabled    = true
   auto_scale = false
   lte_lan    = false
 
