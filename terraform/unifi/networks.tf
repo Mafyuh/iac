@@ -27,10 +27,16 @@ resource "unifi_network" "default" {
   domain_name   = "home.arpa"
   multicast_dns = true
 
-  ipv6_pd_start    = "::2"
-  ipv6_pd_stop     = "::7d1"
-  ipv6_ra          = true
-  ipv6_ra_priority = "high"
+  ipv6 = {
+    pd = {
+      start = "::2"
+      stop  = "::7d1"
+    }
+    ra = {
+      enabled  = true
+      priority = "high"
+    }
+  }
 
   # Advanced
   network_isolation = false
@@ -63,10 +69,16 @@ resource "unifi_network" "secondary" {
   ## Using Auto which uses the DNS servers from the default network
   multicast_dns = true
 
-  ipv6_pd_start    = "::2"
-  ipv6_pd_stop     = "::7d1"
-  ipv6_ra          = true
-  ipv6_ra_priority = "high"
+  ipv6 = {
+    pd = {
+      start = "::2"
+      stop  = "::7d1"
+    }
+    ra = {
+      enabled  = true
+      priority = "high"
+    }
+  }
 
   # Advanced
   network_isolation = false
@@ -101,10 +113,16 @@ resource "unifi_network" "untrusted" {
   ## Using Auto which uses the DNS servers from the default network
   multicast_dns = true
 
-  ipv6_pd_start    = "::2"
-  ipv6_pd_stop     = "::7d1"
-  ipv6_ra          = true
-  ipv6_ra_priority = "high"
+  ipv6 = {
+    pd = {
+      start = "::2"
+      stop  = "::7d1"
+    }
+    ra = {
+      enabled  = true
+      priority = "high"
+    }
+  }
 
   # Advanced
   ## TODO: #343 Add firewall rules to only allow access to NAS, or move NAS to this network
@@ -138,10 +156,16 @@ resource "unifi_network" "iot" {
   ## Using Auto which uses the DNS servers from the default network
   multicast_dns = true
 
-  ipv6_pd_start    = "::2"
-  ipv6_pd_stop     = "::7d1"
-  ipv6_ra          = true
-  ipv6_ra_priority = "high"
+  ipv6 = {
+    pd = {
+      start = "::2"
+      stop  = "::7d1"
+    }
+    ra = {
+      enabled  = true
+      priority = "high"
+    }
+  }
 
   # Advanced
   network_isolation = false
