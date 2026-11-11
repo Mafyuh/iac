@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: mirror.iac.gg/samanhappy/mcphub
-              tag: 1.2.2
+              tag: 1.2.3
               pullPolicy: IfNotPresent
             env:
               TZ: America/New_York
