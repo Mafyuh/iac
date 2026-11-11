@@ -171,7 +171,3 @@ Proof that you don't need expensive new equipment to run infra like mine. Mostly
 ## 📌 **To-Do**
 
 See [Project Board](https://github.com/users/Mafyuh/projects/1)
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/chart?repos=mafyuh/iac&type=date&legend=top-left)](https://www.star-history.com/?repos=mafyuh%2Fiac&type=date&legend=top-left)

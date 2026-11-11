@@ -2,9 +2,9 @@
   "servers": {
     "bifrost": {
       "type": "http",
-      "url": "https://api.mafyuh.xyz/mcp",
+      "url": "https://mcphub.iac.gg/mcp/$smart",
       "headers": {
-        "x-bf-vk": "${env:BIFROST_API_KEY}"
+        "Authorization": "Bearer ${env:MCPHUB_API_KEY}"
       }
     }
   }
