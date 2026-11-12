@@ -9,7 +9,7 @@ x-caddy-site: &caddy-site
 
 services:
   caddy:
-    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.11.03
+    image: ghcr.io/homeall/caddy-reverse-proxy-cloudflare:2026.11.10
     container_name: caddy
     ports:
       - 80:80
