@@ -41,7 +41,8 @@ spec:
       port: 5432
       database: netbox
       username: netbox
-      password: ${NETBOX_ADMIN_PASSWORD}
+      existingSecretName: netbox-secrets
+      existingSecretKey: NETBOX_ADMIN_PASSWORD
 
     valkey:
       enabled: false

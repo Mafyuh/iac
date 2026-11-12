@@ -30,10 +30,10 @@ jobs:
     needs: filter-changes
     if: ${{ needs.filter-changes.outputs.changed-files != '[]' }}
     env:
-      FLATE_PATH: ./kubernetes/flux
+      FLATE_ALLOW_MISSING_KINDS: Secret
     strategy:
       matrix:
-        cluster_path: ["kubernetes"]
+        cluster_path: ["kubernetes/flux"]
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -45,14 +45,13 @@ jobs:
         with:
           cache: true
       - name: Test
-        run: flate test all --allow-missing-secrets --path "${{ matrix.cluster_path }}"
+        run: flate test all --path "${{ matrix.cluster_path }}"
       - name: Diff
         id: diff
         run: |
           flate diff all \
             --path "${{ matrix.cluster_path }}" \
             --base "${{ github.event.pull_request.base.sha }}" \
-            --allow-missing-secrets \
             --no-progress \
             -o github > diff.txt
           {
