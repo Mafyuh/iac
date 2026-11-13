@@ -41,3 +41,15 @@ data "bitwarden-secrets_secret" "ninjacentral_api_key" {
 data "bitwarden-secrets_secret" "althub_api_key" {
   id = "efabe706-78af-4604-a808-b2b7002d15d1"
 }
+
+data "bitwarden-secrets_secret" "drunkenslug_api_key" {
+  id = "baa7267a-5b19-4288-bad3-b501005664b1"
+}
+
+data "bitwarden-secrets_secret" "nzblife_api_key" {
+  id = "38283abd-9ed6-4e6f-882a-b501005664e3"
+}
+
+data "bitwarden-secrets_secret" "usenetcrawler_api_key" {
+  id = "a3ed8eb4-f63b-4d2c-a965-b50100566510"
+}
