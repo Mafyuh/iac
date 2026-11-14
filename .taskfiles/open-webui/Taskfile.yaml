@@ -1,0 +1,8 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+tasks:
+  sync-thinking:
+    desc: Sync Thinking controls on Open WebUI models from models.dev (pass -- --dry-run to preview)
+    cmds:
+      - kubectl -n ai exec -i deploy/open-webui -c open-webui -- env GLOBAL_LOG_LEVEL=ERROR PYTHONPATH=/app/backend sh -c 'cd /app/backend && python3 - {{.CLI_ARGS}}' < {{.TASKFILE_DIR}}/sync_thinking.py

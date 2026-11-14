@@ -9,6 +9,7 @@ includes:
   talos: ".taskfiles/talos/Taskfile.yaml"
   helm: ".taskfiles/helm/Taskfile.yaml"
   postgres: ".taskfiles/postgres/Taskfile.yaml"
+  open-webui: ".taskfiles/open-webui/Taskfile.yaml"
 
 vars:
   TALOSCONFIG: "{{.ROOT_DIR}}/kubernetes/talos/clusterconfig/talosconfig"

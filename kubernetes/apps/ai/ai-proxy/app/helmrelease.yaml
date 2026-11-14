@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/mafyuh/ai-proxy
-              tag: v1.0.1
+              tag: v1.0.2
               pullPolicy: IfNotPresent
             env:
               UPSTREAM_BASE_URL: http://bifrost.ai.svc.cluster.local:8080
