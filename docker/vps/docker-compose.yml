@@ -203,7 +203,7 @@ services:
       - racknerd
 
   databasus:
-    image: docker.io/databasus/databasus:v3.69.0
+    image: docker.io/databasus/databasus:v3.70.0
     container_name: databasus
     volumes:
       - databasus_data:/databasus-data
