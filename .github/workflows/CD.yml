@@ -68,6 +68,7 @@ jobs:
               downloaders) host="truenas" ;;
               exporters) host="Ubu" ;;
               geohub) host="Ubu" ;;
+              hawser) host="zot" ;;
               jellyfin) host="truenas" ;;
               npm) host="Nginx-Proxy-Manager" ;;
               omni) host="omni" ;;

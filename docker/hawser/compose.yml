@@ -1,0 +1,18 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  hawser:
+    image: ghcr.io/finsys/hawser:0.2.53
+    container_name: hawser
+    restart: unless-stopped
+    environment:
+      - DOCKHAND_SERVER_URL=wss://docker.iac.gg/api/hawser/connect
+      - TOKEN_FILE=/run/secrets/hawser-token
+      - STACKS_DIR=/opt/hawser-stacks
+      - AGENT_ID=${HOST:-hawser}
+      - AGENT_NAME=${HOST:-hawser}
+      - TZ=America/New_York
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/hawser-stacks:/opt/hawser-stacks
+      - /etc/hawser/token:/run/secrets/hawser-token:ro

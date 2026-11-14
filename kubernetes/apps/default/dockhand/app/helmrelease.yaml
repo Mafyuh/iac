@@ -1,0 +1,94 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app dockhand
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+  interval: 15m
+  values:
+    controllers:
+      dockhand:
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          main:
+            image:
+              repository: mirror.iac.gg/fnsys/dockhand
+              tag: v1.0.57@sha256:4fd64d32728c99e5caf39b952a17d85448ee0b8ae76e0961f719ba2e19013988
+            env:
+              TZ: America/New_York
+              DATA_DIR: /app/data
+              DOCKHAND_BWS_PATH: /app/data/bin/bws
+              PG_URI:
+                valueFrom:
+                  secretKeyRef:
+                    name: pg-cluster-pguser-dockhand
+                    key: uri
+              DATABASE_URL:
+                value: $(PG_URI)?sslmode=require
+                dependsOn: PG_URI
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: &port 3000
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+              readiness: *probe
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: *port
+                  periodSeconds: 5
+                  failureThreshold: 30
+            resources:
+              requests:
+                cpu: 20m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+
+    route:
+      app:
+        hostnames:
+          - "docker.${NEW_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - identifier: app
+                port: *port
+
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /app/data

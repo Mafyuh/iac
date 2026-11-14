@@ -6,6 +6,7 @@ resources:
   - audiobookshelf/ks.yaml
   - immich/ks.yaml
   - bento-pdf/ks.yaml
+  - dockhand/ks.yaml
   - homepage/ks.yaml
   - wallos/ks.yaml
   - sparkyfitness/ks.yaml
