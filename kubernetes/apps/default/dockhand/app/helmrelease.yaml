@@ -86,6 +86,22 @@ spec:
             backendRefs:
               - identifier: app
                 port: *port
+      webhook:
+        hostnames:
+          - "docker.${NEW_DOMAIN}"
+        parentRefs:
+          - name: envoy-external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - matches:
+              - method: POST
+                path:
+                  type: RegularExpression
+                  value: ^/api/git/stacks/[0-9]+/webhook$
+            backendRefs:
+              - identifier: app
+                port: *port
 
     persistence:
       data:

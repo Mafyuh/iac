@@ -24,7 +24,7 @@ services:
       - /docker/appdata/caddy/logs:/var/log/
     environment:
       - TZ=America/New_York
-      - CLOUDFLARE_API_TOKEN=$CLOUDFLARE_API_TOKEN
+      - CLOUDFLARE_API_TOKEN=$VPS_CLOUDFLARE_API_TOKEN
       - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
       - CADDY_DOCKER_CADDYFILE_PATH=/etc/caddy/generated
     labels:
