@@ -12,6 +12,8 @@ services:
       - AGENT_ID=${HOST:-hawser}
       - AGENT_NAME=${HOST:-hawser}
       - TZ=America/New_York
+    extra_hosts:
+      - docker.iac.gg:10.0.0.218
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/hawser-stacks:/opt/hawser-stacks
