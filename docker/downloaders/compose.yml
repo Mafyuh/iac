@@ -1,31 +1,8 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
-  sabnzbd:
-    image: ghcr.io/linuxserver/sabnzbd:5.1.3
-    container_name: sabnzbd
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=America/New_York
-    volumes:
-      - /docker/appdata/sabnzbd/config:/config:rw
-      ## Fix failed 7za return code 2 errors when unpacking certain nzbs
-      - ./custom-init.sh:/custom-cont-init.d/99-fix-7z.sh
-      - ./7zz-wrapper:/custom-cont-init.d/7zz-wrapper
-      - nas:/data:rw
-    ports:
-      - 8082:8080
-    restart: unless-stopped
-
   qbitty:
-    image: ghcr.io/hotio/qbittorrent:release-5.3.0
-    container_name: qbitty
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
+    container_name: qbitty
     environment:
       - WEBUI_PORT=8080
       - VPN_ENABLED=true
@@ -39,18 +16,33 @@ services:
       - PRIVOXY_ENABLED=false
       - VPN_HEALTHCHECK_ENABLED=false
       - UNBOUND_ENABLED=false
+    image: ghcr.io/hotio/qbittorrent:release-v5.2.0
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/qbitty:/config:rw
-      - nas:/data:rw
+      - /mnt/ssd-appdata/appdata/qbitty:/config:rw
+      - /mnt/thePool/thePoolShare:/data:rw
+  sabnzbd:
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/New_York
+    image: ghcr.io/linuxserver/sabnzbd:5.1.3
     ports:
-      - 8081:8080
+      - "8082:8080"
     restart: unless-stopped
-
+    volumes:
+      - >-
+        /mnt/ssd-appdata/appdata/sabnzbd/config/7zz-wrapper:/custom-cont-init.d/7zz-wrapper
+      - config:/config:rw
+      - /mnt/thePool/thePoolShare:/data:rw
+      - >-
+        /mnt/ssd-appdata/appdata/sabnzbd/config/custom-init.sh:/custom-cont-init.d/99-fix-7z.sh
 volumes:
-  nas:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=nas.lan,vers=4,rw
-      device: ":/mnt/thePool/thePoolShare"
+  config: Null
