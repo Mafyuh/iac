@@ -1,0 +1,19 @@
+services:
+  rustfs:
+    container_name: rustfs
+    environment:
+      - RUSTFS_ADDRESS=:9000
+      - RUSTFS_CONSOLE_ENABLE=true
+      - RUSTFS_ACCESS_KEY=mafyuh
+      - RUSTFS_SECRET_KEY=$RUSTFS_SECRET_KEY
+      - >-
+        RUSTFS_OBS_METRIC_ENDPOINT=https://prometheus.iac.gg/api/v1/otlp/v1/metrics
+      - OTEL_RESOURCE_ATTRIBUTES=rustfs.cluster.id=nas
+    image: mirror.gcr.io/rustfs/rustfs:1.0.5
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    restart: unless-stopped
+    user: "1000:1000"
+    volumes:
+      - /mnt/backups/backup/rustfs:/data:rw
