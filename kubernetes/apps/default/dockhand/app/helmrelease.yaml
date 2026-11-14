@@ -88,7 +88,7 @@ spec:
                 port: *port
       webhook:
         hostnames:
-          - "docker.${NEW_DOMAIN}"
+          - "docker-webhook.${NEW_DOMAIN}"
         parentRefs:
           - name: envoy-external
             namespace: kube-system
