@@ -9,7 +9,7 @@ services:
       - >-
         RUSTFS_OBS_METRIC_ENDPOINT=https://prometheus.iac.gg/api/v1/otlp/v1/metrics
       - OTEL_RESOURCE_ATTRIBUTES=rustfs.cluster.id=nas
-    image: mirror.gcr.io/rustfs/rustfs:1.0.5
+    image: mirror.gcr.io/rustfs/rustfs:1.0.6
     ports:
       - "9000:9000"
       - "9001:9001"
