@@ -185,7 +185,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: docker.io/library/postgres:18.7
+    image: docker.io/library/postgres:19.0
     container_name: postgres
     restart: unless-stopped
     environment:
