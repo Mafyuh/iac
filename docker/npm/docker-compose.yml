@@ -46,7 +46,7 @@ services:
 
   cf-tunnel:
     restart: unless-stopped
-    image: mirror.iac.gg/cloudflare/cloudflared@sha256:b94b96edf2c9c4360f8879c8580cfaa99077f19c849ec595ca2f711b27d4f344
+    image: mirror.iac.gg/cloudflare/cloudflared@sha256:e613aadbc2d9511785d2e67a86b0c8ac18dd63a3f9af0d06faf04cbfdcb35f2d
     command: tunnel --no-autoupdate run --token $CF_TOKEN
     container_name: cloudflared
 
