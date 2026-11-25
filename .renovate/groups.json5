@@ -53,6 +53,19 @@
       minimumGroupSize: 2,
     },
     {
+      description: "Tofu Controller Group",
+      groupName: "Tofu Controller",
+      matchPackageNames: [
+        "ghcr.io/flux-iac/charts/tofu-controller",
+        "ghcr.io/flux-iac/tf-runner",
+      ],
+      matchDatasources: ["docker"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
+    {
       description: "Envoy Gateway Group",
       groupName: "Envoy Gateway",
       matchPackageNames: [
