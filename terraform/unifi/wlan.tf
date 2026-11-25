@@ -1,3 +1,11 @@
+data "unifi_ap_group" "all" {
+  name = "All APs"
+}
+
+data "unifi_client_qos_rate" "default" {
+  name = "Default"
+}
+
 resource "unifi_wlan" "wifi" {
   name       = "BOP"
   security   = "wpapsk"
@@ -18,11 +26,10 @@ resource "unifi_wlan" "wifi" {
   }
   group_rekey = 0
 
-  network_id = unifi_network.iot.id
-  ## TODO Import these resources and remove the hardcoded IDs
-  user_group_id = "68b5307ec8516827c169f8bb"
+  network_id    = unifi_network.iot.id
+  user_group_id = data.unifi_client_qos_rate.default.id
   ap_group = {
-    ids = ["68b5307ec8516827c169f8c0"]
+    ids = [data.unifi_ap_group.all.id]
   }
 
   lifecycle {
