@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 services:
   hawser:
-    image: ghcr.io/finsys/hawser:0.2.53
+    image: ghcr.io/finsys/hawser:0.2.54
     container_name: hawser
     restart: unless-stopped
     environment:
