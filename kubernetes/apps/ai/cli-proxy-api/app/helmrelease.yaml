@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: mirror.iac.gg/eceasy/cli-proxy-api
-              tag: v8.1.4
+              tag: v8.1.8
               pullPolicy: IfNotPresent
             env:
               TZ: America/New_York
