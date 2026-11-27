@@ -17,7 +17,7 @@ terraform {
   required_providers {
     seerr = {
       source  = "registry.opentofu.org/josh-archer/seerr"
-      version = "2.4.7"
+      version = "2.4.9"
     }
     bitwarden-secrets = {
       source  = "registry.terraform.io/bitwarden/bitwarden-secrets"
