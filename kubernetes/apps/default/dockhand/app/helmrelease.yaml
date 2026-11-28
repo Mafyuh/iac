@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: mirror.iac.gg/fnsys/dockhand
-              tag: v1.0.59@sha256:c2b0fc55e3ed299133f6caf63a764deb118ee402ea761548c3f8fd01d04fca06
+              tag: v1.0.60@sha256:b8aed678af7563680d561db297fe513857c9adc263cc39e373c3434f0d1532e2
             env:
               TZ: America/New_York
               DATA_DIR: /app/data
