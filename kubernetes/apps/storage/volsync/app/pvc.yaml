@@ -1,0 +1,33 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.34.1/persistentvolume-v1.json
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: volsync-kopia-repository
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  claimRef:
+    namespace: storage
+    name: kopia-repository
+  nfs:
+    server: 10.0.0.10
+    path: /mnt/backups/backup/kopia
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.34.1/persistentvolumeclaim-v1.json
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kopia-repository
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  volumeName: volsync-kopia-repository
+  resources:
+    requests:
+      storage: 1Ti

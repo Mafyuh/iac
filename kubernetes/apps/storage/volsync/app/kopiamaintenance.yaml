@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://schemas.iac.gg/volsync.backube/kopiamaintenance_v1alpha1.json
+apiVersion: volsync.backube/v1alpha1
+kind: KopiaMaintenance
+metadata:
+  name: kopia
+spec:
+  repository:
+    repository: kopia-maintenance-secret
+    repositoryType: filesystem
+  trigger:
+    schedule: "0 4 * * *"
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+  moverVolumes:
+    - mountPath: repository
+      volumeSource:
+        persistentVolumeClaim:
+          claimName: kopia-repository

@@ -26,5 +26,5 @@ spec:
   postBuild:
     substitute:
       APP: lidarr
-      VOLSYNC_CAPACITY: 2Gi
+      VOLSYNC_CAPACITY: 5Gi
       VOLSYNC_SCHEDULE: "40 0 * * *"
